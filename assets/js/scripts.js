@@ -2,7 +2,7 @@ $(document).ready(function(e) {
 
     $ = jQuery;
     sessionStorage.isTriggered = false;
-    
+
     //Login popup
     $(".toggleLoginPopup").click(function() {
         var chk = $(this).next().css("display");
@@ -59,7 +59,7 @@ $(document).ready(function(e) {
         }
     );
 
-    
+
 
     $('footer .social-icon a').hover(
         function(){
@@ -90,7 +90,7 @@ $(document).ready(function(e) {
         sessionStorage.isTriggered = "true";
         modal.close();
     });
-    
+
 
 
 
@@ -106,6 +106,55 @@ $(document).ready(function(e) {
         $(this).addClass('selected');
         return false;
     });
+
+    // Google Map
+    initiateMap();
+    function initiateMap() {
+        // Create an array of styles.
+        var styles = [
+            {
+                stylers: [
+                    { hue: "#FCB7A2" },
+                    { saturation: 40 }
+                ]
+            },{
+                featureType: "road.local",
+                elementType: "geometry",
+                stylers: [
+                    { lightness: 100 },
+                    { visibility: "simplified" }
+                ]
+            },{
+                featureType: "road.local",
+                elementType: "labels",
+                stylers: [
+                    { visibility: "off" }
+                ]
+            }
+        ];
+
+        // Create a new StyledMapType object, passing it the array of styles,
+        // as well as the name to be displayed on the map type control.
+        var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+
+        // Create a map object, and include the MapTypeId to add
+        // to the map type control.
+        var mapOptions = {
+            scrollwheel: false,
+            zoom: 11,
+            center: new google.maps.LatLng(20.284321,85.79442),
+            mapTypeControlOptions: {
+              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+            }
+        };
+        var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+        //Associate the styled map with the MapTypeId and set it to display.
+        map.mapTypes.set('map_style', styledMap);
+        map.setMapTypeId('map_style');
+    }
+    
+
 
 
 });

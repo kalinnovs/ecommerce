@@ -5,7 +5,7 @@ angular.module('eCommerce')
     var linker = function(scope, element, attrs) {
       var menu = element,
         stickyClass = "nav-sticky",
-        hdr = element.position().top;
+        hdr = $(element).position().top;
 
       /* Window Scroll event */
       $(window).scroll(function() {

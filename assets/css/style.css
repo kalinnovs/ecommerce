@@ -187,7 +187,7 @@ header nav ul > li ul li a{display: block; padding: 0}
     *-*-*-* SLIDER *-*-*-*
 ****************************************************************************/
 .slider { position: relative; height: 400px; margin-bottom: 5px; }
-.slider-slides { width: 100%; height: 400px; }
+.slider-slides { width: 100%; height: 400px; box-shadow: 0px 0px 5px rgba(150, 150, 150, 0.7); }
 .slider a  { height: 400px; display: block;}
 .slides  { height: 400px; width: 100%;}
 .slider a img {width: 100%; height: 100%;  }
@@ -258,7 +258,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0004', end
 ****************************************************************************/
 
 .product_wrap { margin-bottom: 20px }
-.tile { border: solid 1px #dedede; position: relative; }
+.tile { border: solid 1px #dedede; position: relative; box-shadow: 0px 0px 5px rgba(150, 150, 150, 0.7); }
 .item-box-layout { margin: 0; }
 .item-box-layout .wrapper {  margin: 0 -5px; }
 .item-box-layout .wrapper .column { padding: 5px; }
@@ -398,6 +398,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0004', end
 .adMessageBox .message h1 { line-height: 45px; color: #fff; font-family: 'Anton'; margin-bottom: 20px; }
 .adMessageBox a { display: inline-block; text-decoration: none; font-size: 16px; color: #333; border-radius: 3px; border: solid 2px #999; padding: 5px 15px; background: #f3f3f3; }
 #overlay .adMessageBox { display: block; }
+
+
+/****************************************************************************
+    *-*-*-* Google Map *-*-*-*
+****************************************************************************/
+#map_canvas { width: 100%; height: 400px }
+
 /****************************************************************************
     *-*-*-* FOOTER *-*-*-*
 ****************************************************************************/

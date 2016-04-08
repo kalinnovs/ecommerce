@@ -1,5 +1,5 @@
 
-angular.module('eCommerce', ['ui.router', 'firebase', 'ngCookies', 'ngSanitize'])
+angular.module('eCommerce', ['ui.router'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
@@ -71,7 +71,7 @@ angular.module('eCommerce', ['ui.router', 'firebase', 'ngCookies', 'ngSanitize']
     ;
     // $locationProvider.html5Mode(true);  
   })
-  .run(function run($rootScope, $location, $cookies, $http) {
+  .run(function run($rootScope, $location, $http) {
       // keep user logged in after page refresh
       // $rootScope.globals = ($cookies.globals) ? JSON.parse($cookies.globals) || {} : {};
       // if ($rootScope.globals.currentUser) {
