@@ -1,0 +1,107 @@
+<div class="details clearfix row">
+	<div class="container">
+		<div class="col-md-6">
+			<div class="product-gallery">
+				<div class="col-md-3">
+					<ul>
+						<li ng-repeat="(key, value) in details.gallery">
+							<a href="javascript:void(0);" ng-click="imageChanger(value.src);">
+								<img src="{{value.thumb.src}}" width="100%" />
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-9">
+					<figure>
+						<a class="zoom prettyPhoto" href="{{details.gallery[0].src}}">popup</a>
+						<img id="zoomable" src="{{details.gallery[0].src}}" width="420" data-zoom-image="{{details.gallery[0].src}}"/>
+					</figure>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="product-details">
+				<div class="title">
+					<span class="product-id">{{details.productID}}</span>
+					<h2>{{details.productName}}</h2>
+					<span class="soldby"></span>
+					<p class="rating">{{details.averageRating}}</p>
+					<div class="ratingBG">
+						<span class="ratingOverlay"></span>
+					</div>
+					<span class="reviews">
+						<a href="javascript:void(0);">XX reviews</a> 
+						<a href="">Write a review</a>
+					</span>
+				</div>
+				<h3 class="price">{{details.currency}} {{details.discountedPrice}} <span class="strikethrough">{{details.price}}</span></h3>
+				<p class="available">{{details.available}}</p>
+				<div class="description">
+					<p>Desciption: </p>
+					<div ng-bind-html="getHtml(htmlDescription)"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- CATEGORIES -->
+<div class="categories-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="categories">
+                    <figure>
+                        <img alt="" src="/assets/images/categories/categories1.jpg">
+                        <div class="cate-overlay">
+                            <a href="javascript:void(0);">Clothing</a>
+                        </div>
+                    </figure>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="categories">
+                    <figure>
+                        <img alt="" src="/assets/images/categories/categories2.jpg">
+                        <div class="cate-overlay">
+                            <a href="javascript:void(0);">Bamboo &amp; Cane</a>
+                        </div>
+                    </figure>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="categories">
+                    <figure>
+                        <img alt="" src="/assets/images/categories/categories3.jpg">
+                        <div class="cate-overlay">
+                            <a href="javascript:void(0);">Bags</a>
+                        </div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- CATEGORIES -->
+<style>
+  .zoomContainer{
+  
+  margin-bottom:5px;
+  border: 1px solid #e8e8e6;
+  }
+  .zoom-gallery-hover{
+  border: 2px solid orange;
+  }
+  </style>
+<script type="text/javascript">
+$(document).ready(function(e) {
+
+    $ = jQuery;
+
+    // Lightbox
+    $("a.zoom").prettyPhoto({
+        social_tools: ''
+    });
+
+    
+
+});
+</script>

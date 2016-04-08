@@ -1,0 +1,8 @@
+{
+	"login": {
+		"users": [
+			{ "password": "admin", "username": "admin" },
+			{ "password": "pdwibedi", "username": "password" }
+		]
+	}
+}

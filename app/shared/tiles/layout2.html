@@ -1,0 +1,17 @@
+<div class="row item-box-layout layout-2">
+    <div class="wrapper">
+        <div ng-repeat="(key, value) in tile.layout.layout2.products">
+            <div class="{{value.className}} column">
+                <div class="tile wide-full-tile {{value.feature}} {{value.imageBackground}}">
+                    <figure>
+                        <a href="javascript:void(0);"><img alt="" src="{{value.image.large.src}}"></a>
+                    </figure>
+                    <div class="detail">
+                        <h4>{{value.productTitle}}</h4>
+                        <span>{{value.currency}} {{value.price}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

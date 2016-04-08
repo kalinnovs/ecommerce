@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html ng-app="eCommerce" lang="en-US">
+<head>
+    <!-- META TAGS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Title -->
+    <title>eCommerce</title>
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <link href="http://fonts.googleapis.com/css?family=Gudea:400normal" rel="stylesheet" type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Anton:400normal" rel="stylesheet" type='text/css'>
+
+    <!-- <link href="assets/css/bootstrap.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="assets/css/tooltipster.css">
+    <link rel="stylesheet" href="assets/css/prettyPhoto.css">
+    <link href="assets/css/style.css" rel="stylesheet">
+    
+</head>
+<body ng-controller="HomeCtrl as home">
+    <div id="page">
+        <!-- HEADER -->
+        <header>
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="logo">
+                                <a href="#/home"><img alt="" src="assets/images/logo.png"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-8 right">
+                            <p class="order-info"><span>Order by Phone:</span> +91 9439186864, Monday - Friday 9AM to 6PM IST</p>
+                            <div class="social-strip">
+                                <ul>
+                                    <li>
+                                        <a href="#/aboutus"><i class="fa fa-home"></i> About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="orderByPhone"><i class="fa fa-phone"></i> Call Us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <sticky-menu>
+                <div class="menu">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="logo">
+                                    <a href="#/home"><img alt="" src="assets/images/logo.png"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-7 noPadding">
+                                <nav class="desktop-nav">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <a href="javascript:void(0);">Wall Hanging</a>
+                                            <ul class="clearfix sub-menu">
+                                                <li class="clearfix">
+                                                    <div class="links">
+                                                        <h3>Wall Hanging</h3>
+                                                        <p>
+                                                            <a href="javascript:void(0);">Chandua</a> 
+                                                            <a href="javascript:void(0);">Pattachitra</a> 
+                                                            <a href="javascript:void(0);">painting</a> 
+                                                            <a href="javascript:void(0);">PaperMache</a> 
+                                                            <a href="javascript:void(0);">Copper Foil</a>
+                                                        </p>
+                                                        <p>
+                                                            <a href="javascript:void(0);">Sea Shell</a> 
+                                                            <a href="javascript:void(0);">Horn Work</a>
+                                                            <a href="javascript:void(0);">Terra Cotta</a> 
+                                                            <a href="javascript:void(0);">Applique</a> 
+                                                        </p>
+                                                    </div>
+                                                    <figure>
+                                                        <img alt="" src="assets/images/nav/nav1.jpg">
+                                                    </figure>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Home &amp; Kitchen</a>
+                                            <ul class="clearfix sub-menu menu-two">
+                                                <li class="clearfix">
+                                                    <div class="links">
+                                                        <h3>Home &amp; Kitchen</h3>
+                                                        <p>
+                                                            <a href="javascript:void(0);">Silver Filigry</a> 
+                                                            <a href="javascript:void(0);">Golden Grass</a> 
+                                                            <a href="javascript:void(0);">Wood Carving</a> 
+                                                            <a href="javascript:void(0);">Teracotta</a> 
+                                                        </p>
+                                                        <p>
+                                                            <a href="javascript:void(0);">Cane and Bamboo</a>
+                                                            <a href="javascript:void(0);">Brass Bell</a> 
+                                                            <a href="javascript:void(0);">Stone Carving</a>
+                                                            <a href="javascript:void(0);">Dhokra Casting</a>
+                                                        </p>
+                                                    </div>
+                                                    <figure>
+                                                        <img alt="" src="assets/images/nav/nav2.jpg">
+                                                    </figure>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Jewellery</a>
+                                            <ul class="clearfix sub-menu menu-three">
+                                                <li class="clearfix">
+                                                    <figure>
+                                                        <img alt="" src="assets/images/nav/nav3.jpg">
+                                                    </figure>
+                                                    <div class="links">
+                                                        <h3>Jewellery</h3>
+                                                        <p>
+                                                            <a href="javascript:void(0);">Necklace</a> 
+                                                            <a href="javascript:void(0);">Silver Filigry</a>
+                                                        </p>
+                                                        <p>
+                                                            <a href="javascript:void(0);">Tribal Jewellery</a> 
+                                                        </p>
+                                                        <p>
+                                                            <a href="javascript:void(0);">Teracotta Jewellery</a> 
+                                                        </p>
+                                                        <p>
+                                                            <a href="javascript:void(0);">Sea Shell</a>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Clothes</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Accessories</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Bags</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Gifts</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="social-strip">
+                                    <ul>
+                                        <li>
+                                            <a href="#/aboutus"><i class="fa fa-home"></i> About Us</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="orderByPhone"><i class="fa fa-phone"></i> Call Us
+                                            <div class="more">
+                                                <h3>Order by Phone</h3>
+                                                <span>
+                                                    <span><i class="fa fa-phone"></i> (office) : +91 6742355456 </span>
+                                                    <span><i class="fa fa-phone"></i> (Mobile) : +91 9439186864 </span>
+                                                    <span><i class="fa fa-reply"></i> info@haastika.com</span>
+                                                    <span><i class="fa fa-calendar-check-o"></i> Mon - Sat 9AM to 6PM</span>
+                                                </span>
+                                            </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </sticky-menu>
+        </header>
+        <!-- HEADER -->
+        
+        <!-- Application view startes here -->
+        <div class="app-wrap">
+            <div ui-view class="content"></div>
+        </div>
+        <!-- Application view ends here -->
+        
+
+        <!-- FOOTER -->
+       <div class="footer-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="footer clearfix">
+                        <div class="col-md-3">
+                            <div class="widget">
+                                <h3>Customer Service</h3>
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);">About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Delivery Information</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Privacy Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Terms & Conditions</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="widget">
+                                <h3>Information</h3>
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);">About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Delivery Information</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Privacy Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Terms & Conditions</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="widget">
+                                <h3>My Account</h3>
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);">My Account</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Order History</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Wish List</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Newsletter</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="widget">
+                                <h3>Contact us</h3>
+                                <ul>
+                                    <li>support@haastika.com</li>
+                                    <li>+91 1866 0000 0000</li>
+                                    <li>Lorem ipsum address street</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <footer class="clearfix">
+                        <div class="col-md-5">
+                            <p>&copy; 2016 Haastika, All Rights Reserved</p>
+                        </div>
+                        <div class="col-md-2 back-top">
+                            <a href="javascript:void(0);"><img alt="" src="assets/images/icons/back.png"></a>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="social-icon">
+                                <a class="rss" href=""></a> 
+                                <a class="twet" href=""></a> 
+                                <a class="fb" href=""></a> 
+                                <a class="google" href=""></a> 
+                                <a class="pin" href=""></a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <!-- FOOTER -->
+
+        <div class="adMessageBox">
+            <div class="message">
+                <h1>GET AN ADDITIONAL 5% DISCOUNT BY REGISTERING NOW !!</h1>
+                <a href="#/register" class="tapToClose">Register Here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery Scripts -->
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0-rc.1/jquery-ui.min.js"></script> 
+    <script src="assets/js/jquery.cycle.all.js"></script> 
+    <script src="assets/js/jquery.elevatezoom.js"></script>
+    <script src="assets/js/jquery.prettyPhoto.js"></script> 
+    <script src="assets/js/overlay.js"></script>
+
+    <!-- Angular Base Scripts -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- AngularJS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+    <script src="https://rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+    <script src="http://code.angularjs.org/1.2.13/angular-cookies.js"></script>
+    <script src="http://code.angularjs.org/1.4.7/angular-sanitize.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="vendor/js/angular-ui-router.min.js"></script>
+    <script src="app/app.routes.js"></script>
+    <script src="app/app.services.js"></script>
+    <script src="app/components/home/homeController.js"></script>
+    <script src="app/components/details/detailController.js"></script>
+    <script src="app/components/home/homeService.js"></script>
+    <script src="app/components/details/detailService.js"></script>
+    <script src="app/components/login/loginController.js"></script>
+    <script src="app/components/admin/adminController.js"></script>
+    <script src="app/shared/tiles/tileController.js"></script>
+
+    <!-- Directive Includes -->
+    <script src="app/directives/sticky/stickyMenu-directive.js"></script>
+
+    <script src="assets/js/scripts.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!-- Dynamic Tile Templates -->
+<div class="tileShuffle">
+    <div ng-include src="layout3"></div>
+    <div ng-include src="layout4"></div>
+    <div ng-include src="layout2"></div>
+    <div ng-include src="layout5"></div>
+    <div ng-include src="layout6"></div>
+</div>
+
+<script>
+// Shuffle layouts
+$(function () {
+    var parent = $(".tileShuffle");
+    var divs = parent.children();
+    while (divs.length) {
+        parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+    }
+});
+</script>

@@ -1,0 +1,70 @@
+<div ui-view="heroBanner"></div>
+<!-- PRODUCT-OFFER -->
+<div class="product_wrap">
+    <div class="container">
+        <div ui-view="tileLayout"></div>
+    </div>
+</div><!-- PRODUCT-OFFER -->
+
+<!-- FOOTER -->
+<div class="shipping-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="shipping">
+                    <p><span>FREE SHIPPING</span> Offered by HAASTIKA - lorem ipsum dolor sit amet mauris accumsan vitate odio tellus</p><a class="button" href="javascript:void(0);">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(e) {
+
+    $ = jQuery;
+
+    // Lightbox
+    $("a.zoom").prettyPhoto({
+        social_tools: ''
+    });
+
+    $(".product figure").hover(function(){
+        $(this).children('.overlay').stop(true, true).fadeIn(700);
+    }, function(){
+        $(this).children('.overlay').stop(true, true).fadeOut(500);
+    });
+
+    $('.product figure .overlay a').hover(
+        function(){
+            $(this).stop().animate(
+                {backgroundPosition: "(0 -41px)"},
+                {duration:500}
+            )
+        },
+        function(){
+            $(this).stop().animate(
+                {backgroundPosition: "(0 0)"},
+                {duration:500}
+            )
+        }
+    );
+
+    $('.detail .icon a').hover(
+        function(){
+            $(this).stop().animate(
+                {backgroundPosition: "(0 -42.3px)"},
+                {duration:500}
+            )
+        },
+        function(){
+            $(this).stop().animate(
+                {backgroundPosition: "(0 0)"},
+                {duration:500}
+            )
+        }
+    );
+
+});    
+
+</script>
