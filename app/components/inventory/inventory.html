@@ -1,0 +1,40 @@
+
+ 
+<div class="table-responsive container">
+<div class="panel panel-primary">
+  <div class="panel-heading"><h1>Product Inventory :</h1>
+      <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Filter: <span class="input-icon">
+                        <input placeholder="Filter products list ..." class="nav-search-input" ng-model="filterProduct" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+    </div>
+
+ <div class="panel-body">
+    <table class="table table-striped">
+	    <tr><th ng-repeat="c in columns" ng-click="order(c.predicate)" >{{c.text}}</th></tr>
+	 
+	    <tr ng-repeat="product in products | filter:filterProduct | orderBy:orderByField:reverseSort" id="{{ product.PartNo }}" animate-on-change='product.Name + product.Description + product.Price + product.Stock' ng-animate=" 'animate'">
+	       <td>{{ product.PartNo }}</td>
+	       <td><edit-on-focus value="product.Name"> </edit-on-focus></td>
+	       <td><edit-on-focus value="product.Description"> </edit-on-focus></td>
+	       <td><edit-on-focus value="product.Stock" class="stock"> </edit-on-focus></td>
+	       <td>Rs. {{ product.Price }}</td>
+	       <td><img src="{{ product.ImageSrc }}" width="50" height="50" /></td>
+	        <td>
+	            <button class="btn" ng-class="{Active:'btn-success', Inactive:''}[product.Status]" ng-click="changeProductStatus(product);">{{product.Status}}</button>
+	        </td>
+	        <td style="width:100px">
+	            <div class="btn-group">
+	              <button type="button" class="btn btn-default fa fa-edit" ng-click="open(product);"></button>
+	              <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deleteProduct(product);"></button>
+	            </div>
+	        </td>
+	    </tr>
+    </table>
+</div>
+</div>
+</div>

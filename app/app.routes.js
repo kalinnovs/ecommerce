@@ -1,5 +1,5 @@
 
-angular.module('eCommerce', ['ui.router'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
@@ -65,6 +65,20 @@ angular.module('eCommerce', ['ui.router'])
             templateUrl: 'app/components/admin/adminView.html',
             controller: 'AdminCtrl',
             controllerAs: 'admin'
+          }
+        }
+      })
+      .state('inventory', {
+        url:'/inventory',
+        views: {
+          '': { 
+            templateUrl: 'app/components/inventory/inventory.html',
+            controller: 'InventoryCtrl',
+            controllerAs: 'InventoryCtrl'
+          },
+          // the child views will be defined here (absolutely named)
+          'heroBanner@home': { 
+            templateUrl: 'app/shared/hero/heroView.html'
           }
         }
       })

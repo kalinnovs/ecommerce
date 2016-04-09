@@ -1,12 +1,26 @@
 [
    {
-      "PartNo" : 111,
-      "Name" : "Necklace",
-      "Description": "asd asd asd asd asd asd asd asd asd",
-      "Price": "200",
-      "Stock": 999,
-      "Status": "Active",
-      "ImageSrc": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_1.jpg"
+      "productName": "Pattachitra",
+      "productAvailablility": "In stock",
+      "productPrice": 210,
+      "currency": "INR",
+      "averageProductRating": 3,
+      "imageGallery": [{
+        "imagePath": "content/images/productimages/1/image1.jpg",
+        "height": "10",
+        "alt": "productImage",
+        "width": "12"
+      }, {
+        "imagePath": "content/images/productimages/1/image2.jpg",
+        "height": "11",
+        "alt": "productImage 2",
+        "width": "17"
+      }],
+      "productPriceOptions": [{
+        "countryName": "India",
+        "currency": "INR",
+        "price": 100.00
+      }]
    },
 	
    {
