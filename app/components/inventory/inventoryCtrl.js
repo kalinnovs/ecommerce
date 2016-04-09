@@ -8,13 +8,13 @@ angular.module('eCommerce')
     });
     
     $scope.columns = [
-                    {text:"Part No",predicate:"PartNo",sortable:true,dataType:"number"},
-                    {text:"Display Name",predicate:"Name",sortable:true},
-                    {text:"Description",predicate:"Description",sortable:true},
-                    {text:"Stock",predicate:"Stock",sortable:true},
-                    {text:"Price",predicate:"Price",sortable:true},
+                    {text:"Part No",predicate:"productPartNo",sortable:true,dataType:"number"},
+                    {text:"Product Name",predicate:"productName",sortable:true},
+                    {text:"Description",predicate:"description",sortable:true},
+                    {text:"Stock",predicate:"productAvailablility",sortable:true},
+                    {text:"Price",predicate:"productPrice",sortable:true},
                     {text:"Thumbnail",predicate:"",sortable:false},
-                    {text:"Status",predicate:"Status",sortable:true},
+                    {text:"Status",predicate:"productStatus",sortable:true},
                     {text:"Action",predicate:"",sortable:false}
                 ];
 
@@ -29,7 +29,7 @@ angular.module('eCommerce')
 
     // Edit Product Status
     $scope.changeProductStatus = function(product){
-        product.Status = (product.Status=="Active" ? "Inactive" : "Active");
+        product.productStatus = (product.productStatus=="Active" ? "Inactive" : "Active");
     };
 
     // Delete Product

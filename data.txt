@@ -1,12 +1,15 @@
 [
    {
+      "productPartNo": 11,
       "productName": "Pattachitra",
-      "productAvailablility": "In stock",
+      "description": "Pattachitra description.",
+      "productAvailablility": 60,
+      "productStatus": "Active",
       "productPrice": 210,
       "currency": "INR",
       "averageProductRating": 3,
       "imageGallery": [{
-        "imagePath": "content/images/productimages/1/image1.jpg",
+        "imagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg",
         "height": "10",
         "alt": "productImage",
         "width": "12"
@@ -22,34 +25,108 @@
         "price": 100.00
       }]
    },
-	
    {
-      "PartNo" : 12,
-      "Name" : "Dhokra Casting Idol",
-      "Description": "aaaaaa aaaaaaaa",
-      "Price": "100",
-      "Stock": 999,
-      "Status": "Active",
-      "ImageSrc": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg"
+      "productPartNo": 12,
+      "productName": "Dhokra Casting Idol",
+      "description": "Dhokra Casting Idol description.",
+      "productAvailablility": 80,
+      "productStatus": "Active",
+      "productPrice": 270,
+      "currency": "INR",
+      "averageProductRating": 3,
+      "imageGallery": [{
+        "imagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_1.jpg",
+        "height": "10",
+        "alt": "productImage",
+        "width": "12"
+      }, {
+        "imagePath": "content/images/productimages/1/image2.jpg",
+        "height": "11",
+        "alt": "productImage 2",
+        "width": "17"
+      }],
+      "productPriceOptions": [{
+        "countryName": "India",
+        "currency": "INR",
+        "price": 100.00
+      }]
    },
-	
    {
-      "PartNo" : 113,
-      "Name" : "Sea Shell Decoratives",
-      "Description": "aaaaaa sadasdasd aaaaaaaa",
-      "Price": "300",
-      "Stock": 999,
-      "Status": "Inactive",
-      "ImageSrc": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_0.jpg"
+      "productPartNo": 13,
+      "productName": "Sea Shell Decoratives",
+      "description": "Sea Shell Decoratives description.",
+      "productAvailablility": 160,
+      "productStatus": "Active",
+      "productPrice": 300,
+      "currency": "INR",
+      "averageProductRating": 3,
+      "imageGallery": [{
+        "imagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_0.jpg",
+        "height": "10",
+        "alt": "productImage",
+        "width": "12"
+      }, {
+        "imagePath": "content/images/productimages/1/image2.jpg",
+        "height": "11",
+        "alt": "productImage 2",
+        "width": "17"
+      }],
+      "productPriceOptions": [{
+        "countryName": "India",
+        "currency": "INR",
+        "price": 100.00
+      }]
    },
-	
    {
-      "PartNo" : 11,
-      "Name" : "Tribal Necklace",
-      "Description": "aaaaaa asdasd asd asd aaaaaaaa",
-      "Price": "200",
-      "Stock": 999,
-      "Status": "Active",
-      "ImageSrc": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_1.jpg"
+      "productPartNo": 16,
+      "productName": "Tribal Necklace",
+      "description": "Tribal Necklace description.",
+      "productAvailablility": 60,
+      "productStatus": "Active",
+      "productPrice": 210,
+      "currency": "INR",
+      "averageProductRating": 3,
+      "imageGallery": [{
+        "imagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_0.jpg",
+        "height": "10",
+        "alt": "productImage",
+        "width": "12"
+      }, {
+        "imagePath": "content/images/productimages/1/image2.jpg",
+        "height": "11",
+        "alt": "productImage 2",
+        "width": "17"
+      }],
+      "productPriceOptions": [{
+        "countryName": "India",
+        "currency": "INR",
+        "price": 100.00
+      }]
+   },
+   {
+      "productPartNo": 15,
+      "productName": "Pattachitra",
+      "description": "Pattachitra description.",
+      "productAvailablility": 60,
+      "productStatus": "InActive",
+      "productPrice": 210,
+      "currency": "INR",
+      "averageProductRating": 3,
+      "imageGallery": [{
+        "imagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg",
+        "height": "10",
+        "alt": "productImage",
+        "width": "12"
+      }, {
+        "imagePath": "content/images/productimages/1/image2.jpg",
+        "height": "11",
+        "alt": "productImage 2",
+        "width": "17"
+      }],
+      "productPriceOptions": [{
+        "countryName": "India",
+        "currency": "INR",
+        "price": 100.00
+      }]
    }
 ]

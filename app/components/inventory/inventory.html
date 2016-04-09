@@ -17,15 +17,15 @@
     <table class="table table-striped">
 	    <tr><th ng-repeat="c in columns" ng-click="order(c.predicate)" >{{c.text}}</th></tr>
 	 
-	    <tr ng-repeat="product in products | filter:filterProduct | orderBy:orderByField:reverseSort" id="{{ product.PartNo }}" animate-on-change='product.Name + product.Description + product.Price + product.Stock' ng-animate=" 'animate'">
-	       <td>{{ product.PartNo }}</td>
-	       <td><edit-on-focus value="product.Name"> </edit-on-focus></td>
-	       <td><edit-on-focus value="product.Description"> </edit-on-focus></td>
-	       <td><edit-on-focus value="product.Stock" class="stock"> </edit-on-focus></td>
-	       <td>Rs. {{ product.Price }}</td>
-	       <td><img src="{{ product.ImageSrc }}" width="50" height="50" /></td>
+	    <tr ng-repeat="product in products | filter:filterProduct | orderBy:orderByField:reverseSort" id="{{ product.productPartNo }}" animate-on-change='product.Name + product.Description + product.Price + product.Stock' ng-animate=" 'animate'">
+	       <td>{{ product.productPartNo }}</td>
+	       <td><edit-on-focus value="product.productName"> </edit-on-focus></td>
+	       <td><edit-on-focus value="product.description"> </edit-on-focus></td>
+	       <td><edit-on-focus value="product.productAvailablility" class="stock"> </edit-on-focus></td>
+	       <td>{{product.currency}} <edit-on-focus value="product.productPrice" class="stock"> </edit-on-focus></td>
+	       <td><img src="{{ product.imageGallery[0].imagePath }}" width="50" height="50" /></td>
 	        <td>
-	            <button class="btn" ng-class="{Active:'btn-success', Inactive:''}[product.Status]" ng-click="changeProductStatus(product);">{{product.Status}}</button>
+	            <button class="btn" ng-class="{Active:'btn-success', Inactive:''}[product.productStatus]" ng-click="changeProductStatus(product);">{{product.productStatus}}</button>
 	        </td>
 	        <td style="width:100px">
 	            <div class="btn-group">
