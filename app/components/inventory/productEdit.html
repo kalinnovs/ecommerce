@@ -5,26 +5,28 @@
     <h3 class="modal-title" style="margin: 15px 25px;">Edit product Part No: {{product.productPartNo}}</h3>
 </div>
 <div class="modal-body">
-    <form name="product_form" class="form-horizontal" role="form" novalidate>
+    <form name="product_form" class="" role="form" novalidate style="margin-left: 30px;">
     	<form-element label="Name" mod="product">
             <input type="text" class="form-control" name="name" placeholder="Product Name" ng-model="product.productName"focus/>
         </form-element>
         <form-element label="Description" mod="product">
         <textarea class="form-control" name="description" placeholder="Description" ng-model="product.Description">{{product.description}}</textarea>
         </form-element>
+        <form-element label="Stock" mod="product">
+            <input type="text" name="stock" class="form-control" placeholder="Stock" ng-model="product.productAvailablility" only-numbers/>
+        </form-element>
+        <form-element label="Status" mod="product">
+           <label>
+              <input type="checkbox" ng-model="product.productStatus"> Active
+            </label>
+        </form-element>
+        <form-element label="Rating" mod="product">
+            <uib-rating ng-model="product.averageProductRating" max="5" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+        </form-element>
+
         <form-element label="Price" mod="product">
             <input type="text" name="price" class="form-control" placeholder="Price" ng-model="product.productPrice"  only-numbers/>
             <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the price.</small>
-        </form-element>
-
-       <form-element label="Stock" mod="product">
-            <input type="text" name="stock" class="form-control" placeholder="Stock" ng-model="product.productAvailablility" only-numbers/>
-            <small class="errorMessage" ng-show="product_form.stock.$dirty && product_form.stock.$invalid"> Enter the available stock.</small>
-        </form-element>
-
-        <form-element label="Status" mod="product">
-            <input type="text" name="packing" class="form-control" placeholder="Status" ng-model="product.Status"/>
-            <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Packing.</small>
         </form-element>
 
 

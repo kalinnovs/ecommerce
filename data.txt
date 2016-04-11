@@ -7,7 +7,7 @@
       "productStatus": "Active",
       "productPrice": 210,
       "currency": "INR",
-      "averageProductRating": 3,
+      "averageProductRating": 4,
       "imageGallery": [{
         "imagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg",
         "height": "10",
@@ -33,7 +33,7 @@
       "productStatus": "Active",
       "productPrice": 270,
       "currency": "INR",
-      "averageProductRating": 3,
+      "averageProductRating": 2,
       "imageGallery": [{
         "imagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_1.jpg",
         "height": "10",
