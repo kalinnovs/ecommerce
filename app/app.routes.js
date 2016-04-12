@@ -75,10 +75,26 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
             templateUrl: 'app/components/inventory/inventory.html',
             controller: 'InventoryCtrl',
             controllerAs: 'InventoryCtrl'
-          },
-          // the child views will be defined here (absolutely named)
-          'heroBanner@home': { 
-            templateUrl: 'app/shared/hero/heroView.html'
+          }
+        }
+      })
+      .state('category', {
+        url:'/category',
+        views: {
+          '': { 
+            templateUrl: 'app/components/category/category.html',
+            controller: 'CategoryCtrl',
+            controllerAs: 'CategoryCtrl'
+          }
+        }
+      })
+      .state('subCategory', {
+        url:'/subCategory',
+        views: {
+          '': { 
+            templateUrl: 'app/components/subCategory/subCategory.html',
+            controller: 'SubCategoryCtrl',
+            controllerAs: 'SubCategoryCtrl'
           }
         }
       })

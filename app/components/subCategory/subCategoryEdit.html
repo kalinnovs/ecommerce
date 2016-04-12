@@ -1,0 +1,45 @@
+<button type="button" class="close" ng-click="cancel();">
+    <i class="fa fa-times fa-2x" style="margin:10px;"></i>
+</button>
+<div class="modal-header">
+    <h3 class="modal-title" style="margin: 15px 25px;">Edit category No: {{category.categoryId}}</h3>
+</div>
+<div class="modal-body">
+    <form name="category_form" class="" role="form" novalidate style="margin-left: 30px;">
+    	<form-element label="Name" mod="category">
+            <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="category.categoryName"focus/>
+        </form-element>
+        <form-element label="Description" mod="category">
+        <textarea class="form-control" name="description" placeholder="Description" ng-model="category.Description">{{category.description}}</textarea>
+        </form-element>
+        <form-element label="Status" mod="category">
+           <label>
+              <input type="checkbox" ng-model="category.categoryStatus" value="category.categoryStatus"> Active
+            </label>
+        </form-element>
+        <form-element label="Menu Image" mod="category">
+            <input type="file" file-model="menuFile"/>
+            <img src="{{ category.menuImagePath }}" width="50" height="50" />
+            <button ng-click="uploadFile()" class="btn btn-default">upload me</button>
+        </form-element>
+        <form-element label="Banner Image" mod="category">
+            <input type="file" file-model="bannerFile"/>
+            <img src="{{ category.bannerImagePath }}" width="50" height="50" />
+            <button ng-click="uploadFile()" class="btn btn-default">upload me</button>
+        </form-element>
+
+    	<div class="modal-footer">
+            <form-element label="">
+                <div class="text-right">
+                    <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
+                    <button ng-click="savecategory(category);"
+                            ng-disabled="category_form.$invalid || enableUpdate"
+                            class="btn btn-sm btn-primary"
+                            type="submit">
+                        <i class="ace-icon fa fa-check"></i>{{buttonText}}
+                    </button>
+                </div>
+            </form-element>
+        </div>
+    </form>
+</div>

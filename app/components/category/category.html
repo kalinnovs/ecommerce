@@ -1,0 +1,38 @@
+<script src="app/components/category/categoryCtrl.js"></script>
+ 
+<div class="table-responsive container">
+<div class="panel panel-primary">
+  <div class="panel-heading"><h1>Category Inventory :</h1>
+      <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Filter: <span class="input-icon">
+                        <input placeholder="Filter categorys list ..." class="nav-search-input" ng-model="filtercategory" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+    </div>
+
+ <div class="panel-body">
+    <table class="table table-striped">
+	    <tr><th ng-repeat="c in columns" ng-click="order(c.predicate)" >{{c.text}}</th></tr>
+	 
+	    <tr ng-repeat="category in categories | filter:filtercategory | orderBy:orderByField:reverseSort" id="{{ category.categoryId }}" animate-on-change='category.categoryName + category.description ' ng-animate=" 'animate'">
+	       <td>{{ category.categoryId }}</td>
+	       <td><edit-on-focus value="category.categoryName"> </edit-on-focus></td>
+	       <td><edit-on-focus value="category.description"> </edit-on-focus></td>
+	       <td><img src="{{ category.menuImagePath }}" width="50" height="50" /></td>
+	        <td>
+	            <button class="btn" ng-class="{Active:'btn-success', Inactive:''}[category.categoryStatus]" ng-click="changecategoryStatus(category);">{{category.categoryStatus}}</button>
+	        </td>
+	        <td style="width:100px">
+	            <div class="btn-group">
+	              <button type="button" class="btn btn-default fa fa-edit" ng-click="open(category);"></button>
+	              <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deletecategory(category);"></button>
+	            </div>
+	        </td>
+	    </tr>
+    </table>
+</div>
+</div>
+</div>

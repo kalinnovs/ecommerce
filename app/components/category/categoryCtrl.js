@@ -1,24 +1,22 @@
 
 angular.module('eCommerce')
-.controller('InventoryCtrl',['$scope', '$http', '$uibModal', function($scope, $http, $uibModal){
-    var url = "assets/json/product.json";
+.controller('CategoryCtrl',['$scope', '$http', '$uibModal', function($scope, $http, $uibModal){
+    var url = "assets/json/category.json";
 
     $http.get(url).success( function(response) {
-        $scope.products = response;
+        $scope.categories = response;
     });
     
     $scope.columns = [
-                    {text:"Part No",predicate:"productPartNo",sortable:true,dataType:"number"},
-                    {text:"Product Name",predicate:"productName",sortable:true},
+                    {text:"Category No",predicate:"categoryId",sortable:true,dataType:"number"},
+                    {text:"Category Name",predicate:"categoryName",sortable:true},
                     {text:"Description",predicate:"description",sortable:true},
-                    {text:"Stock",predicate:"productAvailablility",sortable:true},
-                    {text:"Price",predicate:"productPrice",sortable:true},
                     {text:"Thumbnail",predicate:"",sortable:false},
-                    {text:"Status",predicate:"productStatus",sortable:true},
+                    {text:"Status",predicate:"categoryStatus",sortable:true},
                     {text:"Action",predicate:"",sortable:false}
                 ];
 
-    $scope.orderByField = 'PartNo';
+    $scope.orderByField = 'categoryId';
     $scope.reverseSort = false;
 
     // Sort Product
@@ -42,8 +40,8 @@ angular.module('eCommerce')
     // Open Product Detail
     $scope.open = function (p,size) {
         var modalInstance = $uibModal.open({
-          templateUrl: 'app/components/inventory/productEdit.html',
-          controller: 'productEditCtrl',
+          templateUrl: 'app/components/category/categoryEdit.html',
+          controller: 'categoryEditCtrl',
           size: size,
           resolve: {
             item: function () {
@@ -66,15 +64,15 @@ angular.module('eCommerce')
 }]);
 
 angular.module('eCommerce')
-.controller('productEditCtrl', function ($scope, $uibModalInstance, item) {
+.controller('categoryEditCtrl', function ($scope, $uibModalInstance, item) {
 
-    $scope.product = angular.copy(item);
+    $scope.category = angular.copy(item);
         
     $scope.cancel = function () {
         $uibModalInstance.dismiss('Close');
     };
-    $scope.title = (item.PartNo > 0) ? 'Edit Product' : 'Add Product';
-    $scope.buttonText = (item.PartNo > 0) ? 'Update Product' : 'Add New Product';
+    $scope.title = (item.categoryId > 0) ? 'Edit Product' : 'Add Product';
+    $scope.buttonText = (item.categoryId > 0) ? 'Update Category' : 'Add New Category';
 
     var original = item;
     $scope.isClean = function() {
