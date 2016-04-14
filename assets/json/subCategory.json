@@ -1,0 +1,59 @@
+[
+  {
+    "categoryId": 11,
+    "subCategoryId": 11,
+    "subCategoryName": "Wall Hanging",
+    "description": "Pattachitra description.",
+    "subCategoryStatus": "Active",
+    "menuImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg",
+    "bannerImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg"
+ },
+ {
+    "categoryId": 12,
+    "categoryName": "Home & Kitchen",
+    "description": "Pattachitra description.",
+    "categoryStatus": "Inactive",
+    "menuImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_1.jpg",
+    "bannerImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_1.jpg"
+ },
+ {
+    "categoryId": 13,
+    "categoryName": "Jewellery",
+    "description": "Pattachitra description.",
+    "categoryStatus": "Active",
+    "menuImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_0.jpg",
+    "bannerImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_0.jpg"
+ },
+ {
+    "categoryId": 14,
+    "categoryName": "Clothes",
+    "description": "Pattachitra description.",
+    "categoryStatus": "Active",
+    "menuImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_1.jpg",
+    "bannerImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_1.jpg"
+ },
+ {
+    "categoryId": 15,
+    "categoryName": "Accessories",
+    "description": "Pattachitra description.",
+    "categoryStatus": "Inactive",
+    "menuImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg",
+    "bannerImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg"
+ },
+ {
+    "categoryId": 16,
+    "categoryName": "Bags",
+    "description": "Pattachitra description.",
+    "categoryStatus": "Active",
+    "menuImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg",
+    "bannerImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg"
+ },
+ {
+    "categoryId": 16,
+    "categoryName": "Gifts",
+    "description": "Pattachitra description.",
+    "categoryStatus": "Active",
+    "menuImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg",
+    "bannerImagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg"
+ }
+]

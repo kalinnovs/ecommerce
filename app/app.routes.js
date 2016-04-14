@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 angular.module('eCommerce', ['ui.router', 'ui.bootstrap'])
+=======
+angular.module('eCommerce', ['ui.router','ui.bootstrap'])
+>>>>>>> 4daede29d82e46d4b1a62a38147634538d8c4352
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
@@ -84,6 +88,36 @@ angular.module('eCommerce', ['ui.router', 'ui.bootstrap'])
             templateUrl: 'app/components/admin/adminView.html',
             controller: 'AdminCtrl',
             controllerAs: 'admin'
+          }
+        }
+      })
+      .state('inventory', {
+        url:'/inventory',
+        views: {
+          '': { 
+            templateUrl: 'app/components/inventory/inventory.html',
+            controller: 'InventoryCtrl',
+            controllerAs: 'InventoryCtrl'
+          }
+        }
+      })
+      .state('category', {
+        url:'/category',
+        views: {
+          '': { 
+            templateUrl: 'app/components/category/category.html',
+            controller: 'CategoryCtrl',
+            controllerAs: 'CategoryCtrl'
+          }
+        }
+      })
+      .state('subCategory', {
+        url:'/subCategory',
+        views: {
+          '': { 
+            templateUrl: 'app/components/subCategory/subCategory.html',
+            controller: 'SubCategoryCtrl',
+            controllerAs: 'SubCategoryCtrl'
           }
         }
       })
