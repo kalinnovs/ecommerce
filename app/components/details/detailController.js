@@ -5,29 +5,25 @@ angular.module('eCommerce')
     var details = this;
     
 
-    DetailService.getFromURL( BASE_URI + '/eCommerce/details/' + $stateParams.id + '.json')
+    DetailService.getFromURL( BASE_URI + '/eCommerce/productDetails.json')
         .then(function(data) {
-            $scope.details = data;
-            $scope.htmlDescription = data.details; 
+            $scope.data = data;
+            $scope.navigation = data.Navigation;
+            // $scope.htmlDescription = data.details; 
         })
         .catch(function(error) {
             //
         })
         .finally(function() {
-            //
-            setTimeout(function() { 
-                $("#zoomable").elevateZoom();
-            }, 2000);
+            
             
         });
 
 
     $scope.imageChanger = function(src) {
+        debugger;
         $(".product-gallery figure img").attr("src", src);
         $(".product-gallery figure img").attr("data-zoom-image", src);
-        setTimeout(function() { 
-                $("#zoomable").elevateZoom();
-            }, 2000);
     }
 
 

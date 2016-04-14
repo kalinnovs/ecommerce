@@ -1,10 +1,15 @@
+<!-- HEADER -->
+<div ui-view="nav"></div>
+
+<!-- Content -->
 <div ui-view="heroBanner"></div>
-<!-- PRODUCT-OFFER -->
+<!-- PRODUCT-TILES -->
 <div class="product_wrap">
     <div class="container">
         <div ui-view="tileLayout"></div>
     </div>
-</div><!-- PRODUCT-OFFER -->
+</div>
+<!-- PRODUCT-TILES -->
 
 <!-- FOOTER -->
 <div class="shipping-wrap">
@@ -19,52 +24,99 @@
     </div>
 </div>
 
+<!-- Google Map -->
+<div id="map_canvas"></div>
+
 <script type="text/javascript">
-$(document).ready(function(e) {
+    // Google Map
+    function initiateMap() {
+        // Create an array of styles.
+        var styles = [
+            {
+                stylers: [
+                    
+                    { saturation: -40 }
+                ]
+            },{
+                featureType: "road.arterial",
+                elementType: "geometry",
+                stylers: [
+                    { saturation: 70 }
+                ]
+            },{
+                featureType: "road.local",
+                elementType: "labels",
+                stylers: [
+                    { visibility: "on" },
+                    { saturation: -50 }
+                ]
+            },{
+                featureType: "poi.business",
+                elementType: "labels",
+                stylers: [
+                  { visibility: "on" }
+                ]
+            }
+        ];
 
-    $ = jQuery;
+        // Create a new StyledMapType object, passing it the array of styles,
+        // as well as the name to be displayed on the map type control.
+        var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
 
-    // Lightbox
-    $("a.zoom").prettyPhoto({
-        social_tools: ''
-    });
+        // Create a map object, and include the MapTypeId to add
+        // to the map type control.
+        var mapOptions = {
+            scrollwheel: false,
+            zoom: 18,
+            center: new google.maps.LatLng(20.279900, 85.796626),
+            mapTypeControlOptions: {
+              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+            }
+        };
 
-    $(".product figure").hover(function(){
-        $(this).children('.overlay').stop(true, true).fadeIn(700);
-    }, function(){
-        $(this).children('.overlay').stop(true, true).fadeOut(500);
-    });
+        if($("#map_canvas").length > 0) {
+            var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
-    $('.product figure .overlay a').hover(
-        function(){
-            $(this).stop().animate(
-                {backgroundPosition: "(0 -41px)"},
-                {duration:500}
-            )
-        },
-        function(){
-            $(this).stop().animate(
-                {backgroundPosition: "(0 0)"},
-                {duration:500}
-            )
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(20.279878, 85.796655),
+                map: map,
+                title: 'Haastika'
+            });
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+
+            //Associate the styled map with the MapTypeId and set it to display.
+            map.mapTypes.set('map_style', styledMap);
+            map.setMapTypeId('map_style');
         }
-    );
+    }
+    initiateMap();
 
-    $('.detail .icon a').hover(
-        function(){
-            $(this).stop().animate(
-                {backgroundPosition: "(0 -42.3px)"},
-                {duration:500}
-            )
-        },
-        function(){
-            $(this).stop().animate(
-                {backgroundPosition: "(0 0)"},
-                {duration:500}
-            )
-        }
-    );
-
-});    
-
+    if($("#galleryBanner").length > 0) {
+        $("#galleryBanner").wowSlider({
+            effect:"parallax",
+            prev:"",
+            next:"",
+            duration:20*100,
+            delay:20*100,
+            width:1170,
+            height:260,
+            autoPlay:true,
+            autoPlayVideo:false,
+            playPause:true,
+            stopOnHover:false,
+            loop:false,
+            bullets:1,
+            caption:true,
+            captionEffect:"parallax",
+            controls:true,
+            controlsThumb:false,
+            responsive:1,
+            fullScreen:false,
+            gestures:2,
+            onBeforeStep:0,
+            images:0
+        });
+    }
 </script>

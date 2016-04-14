@@ -2,63 +2,84 @@
     <div class="container">
         <div class="row">
             <!-- SLIDER -->
-            <div class="col-md-12 slider">
-                <div class="slider-slides">
-                    <div class="slides">
-                        <a href="#"><img alt="" src="assets/images/banner/banner-1.jpg"></a>
-                        <div class="overlay">
-                            <h1>Wood Sculptures</h1>
-                        </div>
-                    </div>
-                    <div class="slides">
-                        <a href="#"><img alt="" src="assets/images/banner/banner-2.jpg"></a>
-                        <div class="overlay">
-                            <h1>Paintings</h1>
-                        </div>
-                    </div>
-                    <div class="slides">
-                        <a href="#"><img alt="" src="assets/images/banner/banner-3.jpg"></a>
-                        <div class="overlay">
-                            <h1>Stone Carving</h1>
-                        </div>
-                    </div>
-                    <div class="slides">
-                        <a href="#"><img alt="" src="assets/images/banner/banner-4.jpg"></a>
-                        <div class="overlay">
-                            <h1>Dhokra Casting</h1>
-                        </div>
-                    </div>
-                    <div class="slides">
-                        <a href="#"><img alt="" src="assets/images/banner/banner-5.jpg"></a>
-                        <div class="overlay">
-                            <h1>Chandua</h1>
-                        </div>
+            <div id="galleryBanner">
+                <div class="ws_images">
+                    <ul>
+                        <li>
+                            <img src="assets/images/banner/banner-1.jpg" alt="Wood Sculptures" title="Wood Sculptures" id="wows1_0" />
+                        </li>
+                        <li>
+                            <img src="assets/images/banner/banner-2.jpg" alt="Painting" title="Painting" id="wows1_1" />
+                        </li>
+                        <li>
+                            <img src="assets/images/banner/banner-3.jpg" alt="Stone Carving" title="Stone Carving" id="wows1_2" />
+                        </li>
+                        <li>
+                            <img src="assets/images/banner/banner-4.jpg" alt="Dhokra Casting" title="Dhokra Casting" id="wows1_3" />
+                        </li>
+                        <li>
+                            <img src="assets/images/banner/banner-5.jpg" alt="Chandua" title="Chandua" id="wows1_4" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="ws_bullets">
+                    <div>
+                        <a href="#" title="Wood Sculptures">
+                            <span>
+                                <img src="assets/images/banner/banner-1.jpg" alt="Wood Sculptures"/>
+                            </span>
+                        </a>
+                        <a href="#" title="Painting">
+                            <span>
+                                <img src="assets/images/banner/banner-2.jpg" alt="Painting"/>
+                            </span>
+                        </a>
+                        <a href="#" title="Stone Carving">
+                            <span>
+                                <img src="assets/images/banner/banner-3.jpg" alt="Stone Carving"/>
+                            </span>
+                        </a>
+                        <a href="#" title="Dhokra Casting">
+                            <span>
+                                <img src="assets/images/banner/banner-4.jpg" alt="Dhokra Casting"/>
+                            </span>
+                        </a>
+                        <a href="#" title="Chandua">
+                            <span>
+                                <img src="assets/images/banner/banner-5.jpg" alt="Chandua"/>
+                            </span>
+                        </a>
                     </div>
                 </div>
-                <!-- <a class="prev" href="#"><i class="fa fa-angle-left"></i></a> 
-                <a class="next" href="#"><i class="fa fa-angle-right"></i></a> -->
-                <div class="slider-btn"></div>
-            </div><!-- SLIDER -->
+                <div class="ws_shadow"></div>
+            </div>
+            <!-- SLIDER -->
         </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function(e) {
-
-    $ = jQuery;
-
-    $( ".slider-slides" ).cycle({
-        pager:'.slider-btn',
-        prev: '.prev',
-        next: '.next'
+<script type="text/javascript">
+    $("#galleryBanner").wowSlider({
+        effect:"parallax",
+        prev:"",
+        next:"",
+        duration:20*100,
+        delay:20*100,
+        width:1170,
+        height:260,
+        autoPlay:true,
+        autoPlayVideo:false,
+        playPause:true,
+        stopOnHover:false,
+        loop:false,
+        bullets:1,
+        caption:true,
+        captionEffect:"parallax",
+        controls:true,
+        controlsThumb:false,
+        responsive:1,
+        fullScreen:false,
+        gestures:2,
+        onBeforeStep:0,
+        images:0
     });
-
-    $(".offers figure").hover(function(){
-        $(this).children('.overlay').stop(true, true).slideUp(700);
-    }, function(){
-        $(this).children('.overlay').stop(true, true).slideDown(500);
-    });
-
-});
 </script>

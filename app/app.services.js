@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .service('UserService', function ($http, ENDPOINT_URI) {
+  .service('UserService', function ($http, $rootScope, ENDPOINT_URI) {
     var service = this;
     
     service.GetAll = function(url) {
@@ -31,6 +31,7 @@ angular.module('eCommerce')
     // private functions
  
     service.handleSuccess = function(res) {
+        service.set(res);
         return res.data;
     }
  
@@ -40,5 +41,13 @@ angular.module('eCommerce')
         };
     }
 
+    service.get = function() {
+        return service.data;
+    }
+
+    service.set = function(data_) {
+        service.data = data_;
+        $rootScope.$broadcast('event:data-change');
+    }
 
   });

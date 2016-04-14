@@ -15,13 +15,6 @@ angular.module('eCommerce')
           menu.removeClass(stickyClass);
         }
       });
-
-
-    };
-
-    var controller = function() {
-      var sticky = this;
-      
     };
 
     return {

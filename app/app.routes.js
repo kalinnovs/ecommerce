@@ -1,5 +1,5 @@
 
-angular.module('eCommerce', ['ui.router'])
+angular.module('eCommerce', ['ui.router', 'ui.bootstrap'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
@@ -22,6 +22,9 @@ angular.module('eCommerce', ['ui.router'])
             controllerAs: 'home'
           },
           // the child views will be defined here (absolutely named)
+          'nav@home': { 
+            templateUrl: 'app/shared/navigation/navView.html'
+          },
           'heroBanner@home': { 
             templateUrl: 'app/shared/hero/heroView.html'
           },
@@ -55,6 +58,22 @@ angular.module('eCommerce', ['ui.router'])
             templateUrl: 'app/components/details/detailView.html',
             controller: 'DetailCtrl',
             controllerAs: 'details'
+          },
+          'nav@details': { 
+            templateUrl: 'app/shared/navigation/navView.html'
+          }
+        }
+      })
+      .state('categories', {
+        url:'/categories/{id}',
+        views: {
+          '': { 
+            templateUrl: 'app/components/category/categoryView.html',
+            controller: 'categoryCtrl',
+            controllerAs: 'cat'
+          },
+          'nav@categories': { 
+            templateUrl: 'app/shared/navigation/navView.html'
           }
         }
       })
@@ -69,9 +88,15 @@ angular.module('eCommerce', ['ui.router'])
         }
       })
     ;
-    // $locationProvider.html5Mode(true);  
+
+    if(window.history && window.history.pushState){
+      // $urlRouterProvider.html5Mode(true);
+    }
   })
   .run(function run($rootScope, $location, $http) {
+    $rootScope.$on('$viewContentLoaded',function(){
+        // debugger;
+    });
       // keep user logged in after page refresh
       // $rootScope.globals = ($cookies.globals) ? JSON.parse($cookies.globals) || {} : {};
       // if ($rootScope.globals.currentUser) {

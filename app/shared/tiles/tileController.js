@@ -1,21 +1,14 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('tileCtrl', function ($scope, UserService, BASE_URI) {
+  .controller('tileCtrl', function ($scope, $rootScope, UserService, BASE_URI) {
     var tile = this;
 
-    UserService.GetAll( BASE_URI + '/eCommerce/home.json')
-        .then(function(data) {
-            tile.layout = data.tileLayout;
-            tile.renderTemplate();
-        })
-        .catch(function(error) {
-            //
-        })
-        .finally(function() {
-            //
-        })
-
+    $rootScope.$on('event:data-change', function() {
+      var object = UserService.get();
+      tile.layout = object.data.tileLayout;
+      tile.renderTemplate();
+    });
 
     tile.renderTemplate = function() {
       $.each(tile.layout, function(k, v) {

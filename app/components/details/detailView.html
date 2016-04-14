@@ -1,45 +1,51 @@
-<div class="details clearfix row">
+<!-- HEADER -->
+<div ui-view="nav"></div>
+<!-- Content -->
+<div class="details clearfix">
 	<div class="container">
-		<div class="col-md-6">
+		<div class="col-md-6 noPadding">
 			<div class="product-gallery">
-				<div class="col-md-3">
+				<div class="col-md-3 noPadding zoomable">
 					<ul>
-						<li ng-repeat="(key, value) in details.gallery">
-							<a href="javascript:void(0);" ng-click="imageChanger(value.src);">
-								<img src="{{value.thumb.src}}" width="100%" />
+						<li ng-repeat="(key, value) in data.details.imageGallery" class="zoomable thumbs">
+							<a href="{{value.large.src}}" data-large= "{{value.extraLarge.src}}" data-title="Title 1">
+								<img ng-src="{{value.thumb.src}}" width="100%" />
 							</a>
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-9">
+				<div class="col-md-9 noPadding">
+					<span class="magnify-text"><i class="fa fa-search-plus" aria-hidden="true"></i> Hover to Zoom</span>
 					<figure>
-						<a class="zoom prettyPhoto" href="{{details.gallery[0].src}}">popup</a>
-						<img id="zoomable" src="{{details.gallery[0].src}}" width="420" data-zoom-image="{{details.gallery[0].src}}"/>
+						<div class="targetarea diffheight">
+							<img id="zoomable" alt="zoomable" title="" ng-src="{{data.details.productImage}}"/>
+						</div>
 					</figure>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6 noPadding">
 			<div class="product-details">
 				<div class="title">
-					<span class="product-id">{{details.productID}}</span>
-					<h2>{{details.productName}}</h2>
+					<span class="product-id">{{data.details.productID}}</span>
+					<h2>{{data.details.productName}}</h2>
 					<span class="soldby"></span>
-					<p class="rating">{{details.averageRating}}</p>
+					<p class="rating">{{data.details.averageProductRating}}</p>
 					<div class="ratingBG">
-						<span class="ratingOverlay"></span>
+						<span class="ratingOverlay" style="width: {{data.details.averageProductRating/5*100}}%"></span>
 					</div>
-					<span class="reviews">
-						<a href="javascript:void(0);">XX reviews</a> 
-						<a href="">Write a review</a>
-					</span>
 				</div>
-				<h3 class="price">{{details.currency}} {{details.discountedPrice}} <span class="strikethrough">{{details.price}}</span></h3>
-				<p class="available">{{details.available}}</p>
-				<div class="description">
+				<h3 class="price">{{data.details.productCurrency}} {{data.details.discountedPrice}} <span class="strikethrough">{{data.details.productPrice}}</span></h3>
+				<p class="available">{{data.details.productAvailablility}}</p>
+				<div class="description" ng-if="data.details.productDescription">
 					<p>Desciption: </p>
 					<div ng-bind-html="getHtml(htmlDescription)"></div>
 				</div>
+			</div>
+			<div class="callDetails">
+				<i class="fa fa-cart-plus" aria-hidden="true"></i> <h5>Order by Phone</h5>
+				<span>Cell: +91 9439186864</span>
+				<span>Offc: +91 6742355456</span>
 			</div>
 		</div>
 	</div>
@@ -51,7 +57,6 @@
             <div class="col-md-4">
                 <div class="categories">
                     <figure>
-                        <img alt="" src="/assets/images/categories/categories1.jpg">
                         <div class="cate-overlay">
                             <a href="javascript:void(0);">Clothing</a>
                         </div>
@@ -61,7 +66,6 @@
             <div class="col-md-4">
                 <div class="categories">
                     <figure>
-                        <img alt="" src="/assets/images/categories/categories2.jpg">
                         <div class="cate-overlay">
                             <a href="javascript:void(0);">Bamboo &amp; Cane</a>
                         </div>
@@ -71,7 +75,6 @@
             <div class="col-md-4">
                 <div class="categories">
                     <figure>
-                        <img alt="" src="/assets/images/categories/categories3.jpg">
                         <div class="cate-overlay">
                             <a href="javascript:void(0);">Bags</a>
                         </div>
@@ -81,27 +84,18 @@
         </div>
     </div>
 </div><!-- CATEGORIES -->
-<style>
-  .zoomContainer{
-  
-  margin-bottom:5px;
-  border: 1px solid #e8e8e6;
-  }
-  .zoom-gallery-hover{
-  border: 2px solid orange;
-  }
-  </style>
+
 <script type="text/javascript">
 $(document).ready(function(e) {
 
     $ = jQuery;
 
-    // Lightbox
-    $("a.zoom").prettyPhoto({
-        social_tools: ''
-    });
-
+    // debugger;
+    setTimeout(function() { 
+    	$('#zoomable').addimagezoom();
+    }, 1000);
     
+
 
 });
 </script>
