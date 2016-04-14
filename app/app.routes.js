@@ -1,9 +1,5 @@
 
-<<<<<<< HEAD
-angular.module('eCommerce', ['ui.router', 'ui.bootstrap'])
-=======
 angular.module('eCommerce', ['ui.router','ui.bootstrap'])
->>>>>>> 4daede29d82e46d4b1a62a38147634538d8c4352
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
