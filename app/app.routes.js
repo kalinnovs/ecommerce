@@ -1,5 +1,5 @@
 
-angular.module('eCommerce', ['ui.router','ui.bootstrap'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
@@ -39,7 +39,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
         url:'/register',
         views: {
           '': { 
-            templateUrl: 'app/components/register/registerView.html'
+            templateUrl: 'app/components/register/registerView.html',
+            controller: 'RegisterCtrl',
+            controllerAs: 'register'
+          },
+          'nav@register': { 
+            templateUrl: 'app/shared/navigation/navView.html'
           }
         }
       })
@@ -47,7 +52,13 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
         url:'/aboutus',
         views: {
           '': { 
-            templateUrl: 'app/components/aboutus/aboutusView.html'
+            templateUrl: 'app/components/aboutus/aboutusView.html',
+            controller: 'aboutCtrl',
+            controllerAs: 'about'
+          },
+          // the child views will be defined here (absolutely named)
+          'nav@aboutus': { 
+            templateUrl: 'app/shared/navigation/navView.html'
           }
         }
       })

@@ -9,7 +9,7 @@ angular.module('eCommerce')
         .then(function(data) {
             $scope.data = data;
             $scope.navigation = data.Navigation;
-            // $scope.htmlDescription = data.details; 
+            $scope.htmlDescription = data.details.productDescription; 
         })
         .catch(function(error) {
             //
@@ -18,13 +18,6 @@ angular.module('eCommerce')
             
             
         });
-
-
-    $scope.imageChanger = function(src) {
-        debugger;
-        $(".product-gallery figure img").attr("src", src);
-        $(".product-gallery figure img").attr("data-zoom-image", src);
-    }
 
 
     $scope.getHtml = function(html){

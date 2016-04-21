@@ -1,6 +1,5 @@
 $(document).ready(function(e) {
     $ = jQuery;
-    sessionStorage.isTriggered = false;
 
     setTimeout( function() { 
 
@@ -48,9 +47,10 @@ $(document).ready(function(e) {
 
         // Wait until the DOM has loaded before querying the document
         // debugger;
-        if(sessionStorage.isTriggered == "false") {
+        if((!sessionStorage.isTriggered || sessionStorage.isTriggered == "false")
+             && window.location.hash.match(/register/g) == null) {
             setTimeout(function() {
-                // modal.open(".adMessageBox");
+                modal.open(".adMessageBox");
                 sessionStorage.isTriggered = "true";
             }, 3200);    
         } 
@@ -61,6 +61,6 @@ $(document).ready(function(e) {
         });
     
 
-    }, 1200);
+    }, 1500);
 
 });

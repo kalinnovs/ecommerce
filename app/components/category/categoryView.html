@@ -3,37 +3,54 @@
 <!-- Content -->
 <div class="container">
 	<div class="category">
-		<h1>{{cat.data.categoryTitle}}</h1>
+		<h1>{{cat.data.selectedCategory.categoryName}}</h1>
 		<div class="category-banner tile">
-			<img ng-src="{{cat.data.bannerImage}}" alt="Category" />
+			<img ng-src="{{cat.data.selectedCategory.categoryImagePath}}" alt="Category" />
 		</div>
 		<div class="listing">
-			<div class="filters">
+			<div class="filters view">
+				<a class="fa fa-filter filterIcon" ng-click="showFilter($event);" aria-hidden="true" href="javascript:void(0);"></a>
 				<ul>
 					<li>
-						<a href="javascript:void(0);" class="showList" title="List View">
+						<a href="javascript:void(0);" ng-click="showList($event);" class="showList" title="List View">
 							<i class="fa fa-list-ul"></i>
 						</a>
 					</li>
 					<li>
-						<a href="javascript:void(0);" class="showGrid" title="Grid View">
+						<a href="javascript:void(0);" ng-click="showGrid($event);" class="showGrid" title="Grid View">
 							<i class="fa fa-table"></i>
 						</a>
 					</li>
 				</ul>
 			</div>
 			<div class="result">
+				<div class="categoryTree">
+					<div class="treeView tile">
+						<p class="selected"></p>
+						<ul>
+							<li ng-repeat="(key, value) in cat.data.filterCategories">
+								<a href="{{value.categoryDetailsURL}}">{{value.categoryName}}</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<div class="spacingAdjust">
-					<div class="col-md-3 column" ng-repeat="(key, value) in cat.data.items">
+					<div class="col-md-3 column" ng-repeat="(key, value) in cat.data.productsList">
 						<div class="newRow" ng-if="$index % 4 == 0"></div>
 						<div class="wide-quarter-tile tile">
 			                <figure>
-			                    <a href="{{value.href}}"><img alt="" ng-src="{{value.image[0].medium.src}}"></a>
+			                    <a href="{{value.href}}"><img alt="" ng-src="{{value.productImage}}"></a>
 			                </figure>
 			                <div class="detail">
-			                    <h4>{{value.productTitle}}</h4>
-			                    <span>{{value.currency}} {{value.price}}</span>
-			                    <button class="buyBtn">Buy Now</button>
+			                    <h4>{{value.productName}}</h4>
+			                    <p ng-if="value.productDescription">{{value.productDescription}}</p>
+			                    <div class="gridCol">
+			                    	<div class="ratingBG">
+										<span class="ratingOverlay" style="width: {{value.averageProductRating/5*100}}%"></span>
+									</div>
+			                    	<span class="availability">Availability: <span>{{value.productAvailablility}}</span></span>
+								</div>
+	                    		<span class="price"><i class="fa fa-{{value.productCurrency | lowercase}}"></i> {{value.productPrice}}</span>
 			                </div>
 			            </div>
 			        </div>
