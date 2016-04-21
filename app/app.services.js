@@ -20,7 +20,7 @@ angular.module('eCommerce')
         return $http.post('/api/user/register', user);
     }
  
-    service.Update = function(user) {
+    service.Update = function(url, user) {
         return $http.put('/api/users/' + user.id, user).then(service.handleSuccess, service.handleError('Error updating user'));
     }
  

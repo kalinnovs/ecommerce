@@ -468,5 +468,14 @@ footer .back-top a { position: absolute; top: -30px; left: 45px;}
 .sideSticky a { margin: 2px 10px; width: auto; height: auto }
 .sideSticky a:hover .fa { color: #33adff }
 
+
+/****************************************************************************
+    *-*-*-* Registration *-*-*-*
+****************************************************************************/
+
 .registrationForm { margin-top: 20px; margin-bottom: 20px; }
-.registrationForm h2 { margin-bottom: 10px; }
+.registrationForm h2 { margin-bottom: 10px; border-bottom: solid 1px #dedede; padding-bottom: 4px; }
+.registrationForm .response { line-height: 34px; margin-bottom: 25px; }
+.registrationForm .response > div { padding: 5px; line-height: 24px; }
+.registrationForm .response .fa { margin: 5px 10px; float: left; font-size: 18px }
+.registrationForm .response p { font-size: 14px; margin-left: 35px; }

@@ -40,7 +40,13 @@ angular.module('eCommerce')
             // var url = "http://17.168.50.8:8080/HaastikaDataService/saveNewUserSubscription";
             $http.post(url, register.user).success(function(data, status) {
                 if(data.subscribedSuccesfully) {
-                    register.pushNotification = "Success !!";
+                    register.subscribedSuccesfully = true;
+                    register.subscribedFailed = false;
+                    register.pushNotification = data.subscriptionMessage;
+                } else {
+                    register.subscribedFailed = true;
+                    register.subscribedSuccesfully = false;
+                    register.pushNotification = data.errorMessage;
                 }
             })
 
