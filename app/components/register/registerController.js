@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('RegisterCtrl', function ($scope, $location, UserService, $http, BASE_URI, $firebaseObject) {
+  .controller('RegisterCtrl', function ($scope, $location, UserService, $http, BASE_URI, SERVICE_URL, $firebaseObject) {
         var register = this;
         var scoper = $scope;
 
@@ -19,13 +19,7 @@ angular.module('eCommerce')
             });
         
         this.register = function() {
-            // var ip = JSON.parse(this.get('http://ifconfig.me/all.json'));
-            // var ip2 = UserService.GetAll('http://ifconfig.me/all.json').then(function(data) { debugger; register.form.ip = data; })
-            // debugger;
-            // register.user.ip = "24.6.52.174";
-
-
-
+            
             /* Firebase profile entry code for time being STARTS */
 
             // var ref = new Firebase(BASE_URI+ "/eCommerce/register/registeration");
@@ -36,7 +30,7 @@ angular.module('eCommerce')
             /* Firebase profile entry code for time being ENDS */
 
             /* Real Time Service STARTS */
-            var url = "http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/saveNewUserSubscription";
+            var url = SERVICE_URL+"/saveNewUserSubscription";
             // var url = "http://17.168.50.8:8080/HaastikaDataService/saveNewUserSubscription";
             $http.post(url, register.user).success(function(data, status) {
                 if(data.subscribedSuccesfully) {
