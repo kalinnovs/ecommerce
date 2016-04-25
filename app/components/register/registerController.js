@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('RegisterCtrl', function ($scope, $location, UserService, $http, BASE_URI, SERVICE_URL, $firebaseObject) {
+  .controller('RegisterCtrl', function ($scope, $rootScope, $location, UserService, $http, BASE_URI, SERVICE_URL, $firebaseObject) {
         var register = this;
         var scoper = $scope;
 
@@ -9,7 +9,7 @@ angular.module('eCommerce')
 
         UserService.GetAll( BASE_URI + '/eCommerce/register.json')
             .then(function(data) {
-              scoper.navigation = data.Navigation;
+              $rootScope.navigation = data.Navigation;
             })
             .catch(function(error) {
                 //

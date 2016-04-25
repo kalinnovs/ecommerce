@@ -1,4 +1,4 @@
-var modal = (function(){
+window.modalComponent = (function(){
     var method = {}, $overlay, $modal, $content, $close;
 
     // Center the modal in the viewport

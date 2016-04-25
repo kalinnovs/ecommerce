@@ -243,7 +243,7 @@ jQuery.fn.wowSlider=function(t){function e(t){return I.css({left:-t+"00%"})}func
 				selectEffect(newOptions.effect);
 			}
 			else {
-				wow.get(0).wsStop();
+				// wow.get(0).wsStop();
 				wow = $(bkpCont).replaceAll(wow);
 			}
 			

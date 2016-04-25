@@ -1,0 +1,73 @@
+<div class="contactPage">
+	<div class="form tile">
+		<h1>We'd love to hear from you. {{foo}}</h1>
+		<form class="" name="userForm" ng-submit="submitForm()" novalidate>
+
+	        <div class="formLayout">
+		        <div class="col span_6_of_12">
+		        	<!-- NAME -->
+			        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+			            <label>Name</label>
+			            <input type="text" name="name" class="form-control" ng-model="user.name" required>
+			            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+			        </div>
+
+			        <!-- EMAIL -->
+			        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+			            <label>Email</label>
+			            <input type="email" name="email" class="form-control" ng-model="user.email">
+			            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+			        </div>
+			      
+			        <!-- Company -->
+			        <div class="form-group" ng-class="{ 'has-error' : userForm.company.$invalid && !userForm.company.$pristine }">
+			            <label>Company</label>
+			            <input type="text" name="company" class="form-control" ng-model="user.company" ng-minlength="5" ng-maxlength="25">
+			            <p ng-show="userForm.company.$error.minlength" class="help-block">Company name is too short.</p>
+			            <p ng-show="userForm.company.$error.maxlength" class="help-block">Company name is too long.</p>
+			        </div>
+
+			        <!-- Message -->
+			        <div class="form-group" ng-class="{ 'has-error' : userForm.message.$invalid && !userForm.message.$pristine }">
+			            <label>Message</label>
+			            <textarea ng-model="user.message" class="form-control" name="message" required ng-minlength="15" ng-maxlength="250"></textarea>
+			            <p ng-show="userForm.message.$error.minlength" class="help-block">Message is too short.</p>
+			            <p ng-show="userForm.message.$error.maxlength" class="help-block">Message is too long.</p>
+			        </div>
+
+			        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit</button>
+			    </div>
+			    <div class="col span_6_of_12">
+			    	<div class="officeAddress">
+				    	<h2>Stop on by to get best deals on our handicrafts items.</h2>   
+				    	<div class="col span_6_of_12">
+				    		<i class="fa fa-map-marker" aria-hidden="true"></i>
+				    		<p>
+				    			<span>Haastika Handicraft</span>
+		                        <span>HIG-A/16, H.B Colony</span>
+		                        <span>Baramunda, Bhubaneswar</span>
+		                        <span>Odisha 751003, India</span>
+		                    </p>
+				    	</div>
+				    	<div class="col span_6_of_12">
+				    		<i class="fa fa-envelope" aria-hidden="true"></i>
+				    		<p>Support@haastika.com</p>
+				    		<br/><br/>
+				    		<i class="fa fa-phone" aria-hidden="true"></i>
+				    		<p> 
+				    			<span>Office: +91 6742355456</span> 
+				    			<span>Cell: +91 9439186864 </span>
+				    		</p>
+				    	</div>
+		            </div>
+			    </div>
+			</div>
+	        
+	        
+	        
+	        
+	        
+	        
+	    </form>
+	</div>
+</div>

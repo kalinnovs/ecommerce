@@ -22,10 +22,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
             controller: 'HomeCtrl',
             controllerAs: 'home'
           },
-          // the child views will be defined here (absolutely named)
-          'nav@home': { 
-            templateUrl: 'app/shared/navigation/navView.html'
-          },
           'heroBanner@home': { 
             templateUrl: 'app/shared/hero/heroView.html'
           },
@@ -43,9 +39,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
             templateUrl: 'app/components/register/registerView.html',
             controller: 'RegisterCtrl',
             controllerAs: 'register'
-          },
-          'nav@register': { 
-            templateUrl: 'app/shared/navigation/navView.html'
           }
         }
       })
@@ -56,10 +49,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
             templateUrl: 'app/components/aboutus/aboutusView.html',
             controller: 'aboutCtrl',
             controllerAs: 'about'
-          },
-          // the child views will be defined here (absolutely named)
-          'nav@aboutus': { 
-            templateUrl: 'app/shared/navigation/navView.html'
           }
         }
       })
@@ -70,9 +59,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
             templateUrl: 'app/components/details/detailView.html',
             controller: 'DetailCtrl',
             controllerAs: 'details'
-          },
-          'nav@details': { 
-            templateUrl: 'app/shared/navigation/navView.html'
           }
         }
       })
@@ -83,9 +69,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
             templateUrl: 'app/components/category/categoryView.html',
             controller: 'categoryCtrl',
             controllerAs: 'cat'
-          },
-          'nav@categories': { 
-            templateUrl: 'app/shared/navigation/navView.html'
           }
         }
       })
@@ -126,6 +109,25 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
             templateUrl: 'app/components/subCategory/subCategory.html',
             controller: 'SubCategoryCtrl',
             controllerAs: 'SubCategoryCtrl'
+          }
+        }
+      })
+      .state('subscriber', {
+        url:'/inventory/subscriber',
+        views: {
+          '': { 
+            templateUrl: 'app/components/subscribers/subscriberView.html',
+            controller: 'SubscriberCtrl',
+            controllerAs: 'SubscriberCtrl'
+          }
+        }
+      })
+      .state('contact', {
+        url:'/contact',
+        views: {
+          '': { 
+            templateUrl: 'app/components/contact/contactView.html',
+            controller: 'ContactCtrl'
           }
         }
       })

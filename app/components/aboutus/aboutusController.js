@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('aboutCtrl', function ($scope, $sce, UserService, BASE_URI) {
+  .controller('aboutCtrl', function ($scope, $rootScope, $sce, UserService, BASE_URI) {
     var about = this;
     var scoper = $scope;
 
     UserService.GetAll( BASE_URI + 'eCommerce/aboutUs.json')
         .then(function(data) {
-          scoper.navigation = data.Navigation;
+          $rootScope.navigation = data.Navigation;
           $scope.htmlDescription = data.content;
         })
         .catch(function(error) {

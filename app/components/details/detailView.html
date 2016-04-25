@@ -1,11 +1,9 @@
-<!-- HEADER -->
-<div ui-view="nav"></div>
 <!-- Content -->
-<div class="details clearfix">
-	<div class="container">
-		<div class="col-md-6 noPadding">
+<div class="details clearfix detailsPage">
+	<div class="container row">
+		<div class="col span_6_of_12 noPadding">
 			<div class="product-gallery">
-				<div class="col-md-3 noPadding zoomable">
+				<div class="span_3_of_12 col noPadding zoomable">
 					<ul>
 						<li ng-repeat="(key, value) in data.details.imageGallery" class="zoomable thumbs">
 							<a href="{{value.large.src}}" data-large= "{{value.extraLarge.src}}" data-title="Title 1">
@@ -14,7 +12,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-9 noPadding">
+				<div class="span_9_of_12 col noPadding">
 					<span class="magnify-text"><i class="fa fa-search-plus" aria-hidden="true"></i> Hover to Zoom</span>
 					<figure>
 						<div class="targetarea diffheight">
@@ -24,7 +22,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 noPadding">
+		<div class="col span_6_of_12 noPadding">
 			<div class="product-details">
 				<div class="title">
 					<span class="product-id">{{data.details.productID}}</span>
@@ -35,7 +33,10 @@
 						<span class="ratingOverlay" style="width: {{data.details.averageProductRating/5*100}}%"></span>
 					</div>
 				</div>
-				<h3 class="price">{{data.details.productCurrency}} {{data.details.discountedPrice}} <span class="strikethrough">{{data.details.productPrice}}</span></h3>
+				<h3 class="price">
+					<i class="fa fa-{{data.details.productCurrency | lowercase}}"></i>
+					<span>{{data.details.productPrice}}</span>
+				</h3>
 				<p class="available">{{data.details.productAvailablility}}</p>
 				<div class="description" ng-if="data.details.productDescription">
 					<p>Desciption: </p>
@@ -54,7 +55,7 @@
 <div class="categories-wrap">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col span_4_of_12">
                 <div class="categories">
                     <figure>
                         <div class="cate-overlay">
@@ -63,7 +64,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col span_4_of_12">
                 <div class="categories">
                     <figure>
                         <div class="cate-overlay">
@@ -72,7 +73,7 @@
                     </figure>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col span_4_of_12">
                 <div class="categories">
                     <figure>
                         <div class="cate-overlay">
@@ -92,7 +93,7 @@ $(document).ready(function(e) {
 
     // debugger;
     setTimeout(function() { 
-    	$('#zoomable').addimagezoom();
+    	$('#zoomable').addimagezoom({ rootElement: '.detailsPage'});
     }, 1000);
     
 

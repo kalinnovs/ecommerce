@@ -1,6 +1,3 @@
-<!-- HEADER -->
-<div ui-view="nav"></div>
-
 <!-- Content -->
 <div ui-view="heroBanner"></div>
 <!-- PRODUCT-TILES -->
@@ -28,70 +25,52 @@
 <div id="map_canvas"></div>
 
 <script type="text/javascript">
-    // Google Map
-    function initiateMap() {
-        // Create an array of styles.
-        var styles = [
-            {
-                stylers: [
-                    
-                    { saturation: -40 }
-                ]
-            },{
-                featureType: "road.arterial",
-                elementType: "geometry",
-                stylers: [
-                    { saturation: 70 }
-                ]
-            },{
-                featureType: "road.local",
-                elementType: "labels",
-                stylers: [
-                    { visibility: "on" },
-                    { saturation: -50 }
-                ]
-            },{
-                featureType: "poi.business",
-                elementType: "labels",
-                stylers: [
-                  { visibility: "on" }
-                ]
-            }
-        ];
+    
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(20.285544, 85.795568);
+            var mapOptions = {
+                zoom: 15,
+                scaleControl: false,
+                scrollwheel: false,
+                zoomControl: false,
+                panControl:false,
+                streetViewControl: false,
+                mapTypeControl:false,
+                center: myLatlng,
+                styles: [{featureType:"landscape",stylers:[{saturation:-200},{lightness:155},{visibility:"on"}]},{featureType:"poi",stylers:[{saturation:-100},{lightness:51},{visibility:"simplified"}]},{featureType:"road.highway",stylers:[{saturation:-100},{visibility:"simplified"}]},{featureType:"road.arterial",stylers:[{saturation:-100},{lightness:30},{visibility:"on"}]},{featureType:"road.local",stylers:[{saturation:-100},{lightness:40},{visibility:"on"}]},{featureType:"transit",stylers:[{saturation:-100},{visibility:"simplified"}]},{featureType:"administrative.province",stylers:[{visibility:"off"}]/**/},{featureType:"administrative.locality",stylers:[{visibility:"off"}]},{featureType:"administrative.neighborhood",stylers:[{visibility:"on"}]/**/},{featureType:"water",elementType:"labels",stylers:[{visibility:"on"},{lightness:-25},{saturation:-100}]},{featureType:"water",elementType:"geometry",stylers:[{hue:"#b3d9ff"},{lightness:-25},{saturation:-97}]}]
+            };
 
-        // Create a new StyledMapType object, passing it the array of styles,
-        // as well as the name to be displayed on the map type control.
-        var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
-
-        // Create a map object, and include the MapTypeId to add
-        // to the map type control.
-        var mapOptions = {
-            scrollwheel: false,
-            zoom: 18,
-            center: new google.maps.LatLng(20.285534, 85.795542),
-            mapTypeControlOptions: {
-              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-            }
-        };
-
-        if($("#map_canvas").length > 0) {
-            var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-
+            var mapElement = document.getElementById('map_canvas');
+            var map = new google.maps.Map(mapElement, mapOptions);
+            var image = new google.maps.MarkerImage('/assets/images/map-pin.png');
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(20.285534, 85.795542),
+                position: map.getCenter(),
                 map: map,
-                title: 'Haastika'
-            });
-            marker.addListener('click', function() {
-                infowindow.open(map, marker);
+                icon: image,
+                labelClass: 'pin'
             });
 
-            //Associate the styled map with the MapTypeId and set it to display.
-            map.mapTypes.set('map_style', styledMap);
-            map.setMapTypeId('map_style');
+            var contentString = '<div id="map-bubble"><div id="map-address"><h5>Haastika Handicraft</h5><p>HIG-A/16, H.B Colony, Baramunda, Bhubaneswar, Odisha 751003, India</p><a class="button" href="https://www.google.com/maps/place/Haastika+Handicraft/@20.2855383,85.7933791,17z/data=!4m6!1m3!3m2!1s0x3a19a788107083c1:0xb6bf1b3ad81dbc7b!2sHaastika+Handicraft!3m1!1s0x3a19a788107083c1:0xb6bf1b3ad81dbc7b" target="_blank">driving directions</a></div></div>';
+            var infowindow = new google.maps.InfoWindow({content: contentString});
+            var center;
+
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map,marker);
+            });
+            function calculateCenter() {
+              center = map.getCenter();
+            }
+        
+            google.maps.event.addListenerOnce(map, 'idle', function() {
+                calculateCenter();
+               google.maps.event.trigger(map, 'resize');
+               map.setCenter(center); // var center = new google.maps.LatLng(50,3,10.9);
+            });
+
         }
-    }
-    initiateMap();
+
+    initialize();
 
     if($("#galleryBanner").length > 0) {
         $("#galleryBanner").wowSlider({
@@ -119,4 +98,5 @@
             images:0
         });
     }
+
 </script>

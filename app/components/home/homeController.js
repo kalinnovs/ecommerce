@@ -1,15 +1,14 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('HomeCtrl', function ($scope, UserService, BASE_URI) {
+  .controller('HomeCtrl', function ($scope, $rootScope, UserService, BASE_URI) {
     var home = this;
     var scoper = $scope;
-    $scope.foo = 'bar';
     // debugger;
 
     UserService.GetAll( BASE_URI + '/eCommerce/home.json')
         .then(function(data) {
-          scoper.navigation = data.Navigation;
+          $rootScope.navigation = data.Navigation;
         })
         .catch(function(error) {
             //
