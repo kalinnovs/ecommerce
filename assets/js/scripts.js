@@ -1,13 +1,9 @@
 $(document).ready(function(e) {
-    $ = jQuery;
-    sessionStorage.isTriggered = false;
 
     setTimeout( function() { 
 
         // Loading Finish
         $(".progress").hide();
-
-        // alert('dsaf');
 
         //Login popup
         $(".toggleLoginPopup").click(function() {
@@ -21,23 +17,19 @@ $(document).ready(function(e) {
             }
         });
 
-        $("nav ul li").hover(function(){
-            $(this).find("a").addClass("active");
-            $(this).children('.sub-menu').stop(true, true).fadeIn(300);
-        }, function(){
-            $(this).find("a").removeClass("active");
-            $(this).children('.sub-menu').stop(true, true).fadeOut(400);
-        });
-
-        $(".orderByPhone").click(function() {
-            var elem = $(this).children(".more"),
-                isVisible = elem.css("opacity");
-            if(elem && isVisible == "0") {
-                elem.css("opacity", 1);
-            } else {
-                elem.css("opacity", 0);
+        $(document).on({
+            mouseenter: function () {
+                //stuff to do on mouse enter
+                $(this).find("a").addClass("active");
+                $(this).children('.sub-menu').stop(true, true).fadeIn(300);
+            },
+            mouseleave: function () {
+                //stuff to do on mouse leave
+                $(this).find("a").removeClass("active");
+                $(this).children('.sub-menu').stop(true, true).fadeOut(400);
             }
-        });
+            
+        }, "nav ul li");
 
         $('footer .back-top a').click(function(e){
             e.preventDefault();
@@ -45,12 +37,11 @@ $(document).ready(function(e) {
             return false;
         });
 
-
         // Wait until the DOM has loaded before querying the document
-        // debugger;
-        if(sessionStorage.isTriggered == "false") {
+        if((!sessionStorage.isTriggered || sessionStorage.isTriggered == "false")
+             && window.location.hash.match(/register/g) == null) {
             setTimeout(function() {
-                // modal.open(".adMessageBox");
+                window.modalComponent.open(".adMessageBox");
                 sessionStorage.isTriggered = "true";
             }, 3200);    
         } 
@@ -61,6 +52,6 @@ $(document).ready(function(e) {
         });
     
 
-    }, 1200);
+    }, 1500);
 
 });

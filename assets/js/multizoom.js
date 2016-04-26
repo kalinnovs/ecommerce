@@ -17,7 +17,7 @@
 // Nov 28th, 2012: Version 2.1 w/Multi Zoom, updates - new features and bug fixes
 
 var featuredimagezoomer = { // the two options for Featured Image Zoomer:
-	loadinggif: 'spinningred.gif', // full path or URL to "loading" gif
+	loadinggif: 'assets/images/spinningred.gif', // full path or URL to "loading" gif
 	magnifycursor: 'crosshair' // value for CSS's 'cursor' property when over the zoomable image
 };
 
@@ -222,6 +222,7 @@ var featuredimagezoomer = { // the two options for Featured Image Zoomer:
 		},
 
 		init: function($img, options){
+			var targetWrapper = $(options.rootElement) || document.body;
 			var setting=$.extend({}, this.dsetting, options), w = $img.width(), h = $img.height(), o = $img.offset(),
 			fiz = this, $tracker, $cursorshade, $statusdiv, $magnifier, lastpage = {pageX: 0, pageY: 0},
 			basezindex = setting.zIndex || this.highestzindex($img);
@@ -235,21 +236,21 @@ var featuredimagezoomer = { // the two options for Featured Image Zoomer:
 			setting.largeimage = setting.largeimage || $img.get(0).src;
 			$magnifier=$('<div class="magnifyarea" style="position:absolute;z-index:'+basezindex+';width:'+setting.magnifiersize[0]+'px;height:'+setting.magnifiersize[1]+'px;left:-10000px;top:-10000px;visibility:hidden;overflow:hidden;border:1px solid black;" />')
 				.append('<div style="position:relative;left:0;top:0;z-index:'+basezindex+';" />')
-				.appendTo(document.body) //create magnifier container
+				.appendTo(targetWrapper) //create magnifier container
 			//following lines - create featured image zoomer divs, and absolutely positioned them for placement over the thumbnail and each other:
 			if(setting.cursorshade){
 				$cursorshade = $('<div class="cursorshade" style="visibility:hidden;position:absolute;left:0;top:0;z-index:'+basezindex+';" />')
 					.css({border: setting.cursorshadeborder, opacity: setting.cursorshadeopacity, backgroundColor: setting.cursorshadecolor})
-					.appendTo(document.body);
+					.appendTo(targetWrapper);
 			} else { 
 				$cursorshade = $('<div />'); //dummy shade div to satisfy $tracker.data('specs')
 			}
 			$statusdiv = $('<div class="zoomstatus preloadevt" style="position:absolute;visibility:hidden;left:0;top:0;z-index:'+basezindex+';" />')
 				.html('<img src="'+this.loadinggif+'" />')
-				.appendTo(document.body); //create DIV to show "loading" gif/ "Current Zoom" info
+				.appendTo(targetWrapper); //create DIV to show "loading" gif/ "Current Zoom" info
 			$tracker = $('<div class="zoomtracker" style="cursor:progress;position:absolute;z-index:'+basezindex+';left:'+o.left+'px;top:'+o.top+'px;height:'+h+'px;width:'+w+'px;" />')
 				.css({backgroundImage: (this.isie? 'url(cannotbe)' : 'none')})
-				.appendTo(document.body);
+				.appendTo(targetWrapper);
 			$(window).bind('load resize', function(){ //in case resizing the window repostions the image or description
 					var o = $img.offset(), $parent;
 					$tracker.css({left: o.left, top: o.top});

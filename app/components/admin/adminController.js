@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AdminCtrl', function ($scope, UserService, BASE_URI, $stateParams, $firebaseObject) {
+  .controller('AdminCtrl', function ($scope, $rootScope, UserService, BASE_URI, $stateParams, $firebaseObject) {
     var admin = this;
     
     var ref = new Firebase("https://intense-torch-8839.firebaseio.com");
 
     UserService.GetAll( BASE_URI + '/eCommerce.json')
         .then(function(data) {
+            $rootScope.navigation = data.Navigation;
             $scope.admin = data;
         })
         .catch(function(error) {

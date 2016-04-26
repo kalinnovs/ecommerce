@@ -1,6 +1,7 @@
 
-angular.module('eCommerce', ['ui.router','ui.bootstrap'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
+  .constant('SERVICE_URL', 'http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -21,10 +22,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
             controller: 'HomeCtrl',
             controllerAs: 'home'
           },
-          // the child views will be defined here (absolutely named)
-          'nav@home': { 
-            templateUrl: 'app/shared/navigation/navView.html'
-          },
           'heroBanner@home': { 
             templateUrl: 'app/shared/hero/heroView.html'
           },
@@ -39,7 +36,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
         url:'/register',
         views: {
           '': { 
-            templateUrl: 'app/components/register/registerView.html'
+            templateUrl: 'app/components/register/registerView.html',
+            controller: 'RegisterCtrl',
+            controllerAs: 'register'
           }
         }
       })
@@ -47,7 +46,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
         url:'/aboutus',
         views: {
           '': { 
-            templateUrl: 'app/components/aboutus/aboutusView.html'
+            templateUrl: 'app/components/aboutus/aboutusView.html',
+            controller: 'aboutCtrl',
+            controllerAs: 'about'
           }
         }
       })
@@ -58,9 +59,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
             templateUrl: 'app/components/details/detailView.html',
             controller: 'DetailCtrl',
             controllerAs: 'details'
-          },
-          'nav@details': { 
-            templateUrl: 'app/shared/navigation/navView.html'
           }
         }
       })
@@ -71,9 +69,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
             templateUrl: 'app/components/category/categoryView.html',
             controller: 'categoryCtrl',
             controllerAs: 'cat'
-          },
-          'nav@categories': { 
-            templateUrl: 'app/shared/navigation/navView.html'
           }
         }
       })
@@ -124,6 +119,25 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
             templateUrl: 'app/components/inventory/productTree.html',
             controller: 'productTreeCtrl',
             controllerAs: 'productTreeCtrl'
+          }
+        }
+      })
+      .state('subscriber', {
+        url:'/inventory/subscriber',
+        views: {
+          '': { 
+            templateUrl: 'app/components/subscribers/subscriberView.html',
+            controller: 'SubscriberCtrl',
+            controllerAs: 'SubscriberCtrl'
+          }
+        }
+      })
+      .state('contact', {
+        url:'/contact',
+        views: {
+          '': { 
+            templateUrl: 'app/components/contact/contactView.html',
+            controller: 'ContactCtrl'
           }
         }
       })

@@ -1,0 +1,31 @@
+<div class="container">
+	<div class="wrapper subscribers">
+		<div class="col-md-3 column"></div>
+		<div class="col-md-9 column"></div>
+			<table class="table table-bordered table-striped"> 
+				<thead> 
+					<tr> 
+						<th>#</th> 
+						<th>First Name</th> 
+						<th>Last Name</th> 
+						<th>Email Id's</th> 
+						<th>Mobile</th>  
+						<th>Promo Code</th>
+						<th></th> 
+					</tr> 
+				</thead> 
+				<tbody> 
+					<tr ng-repeat="(key, value) in SubscriberCtrl.data"> 
+						<th scope="row">{{key+1}}</th> 
+						<td>{{value.firstName}}</td>
+						<td>{{value.lastName}}</td> 
+						<td>{{value.emailId}}</td> 
+						<td>{{value.contactNo}}</td> 
+						<td>{{value.promoCode}}</td>
+						<td class="action"><a href="javascript:void(0);" class="fa fa-toggle-off" ng-click="approvePromo($event);" role="button"></a></td>
+					</tr> 
+				</tbody> 
+			</table>
+		</div>
+	</div>
+</div>

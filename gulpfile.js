@@ -13,9 +13,15 @@ var gulp = require('gulp'),
     path = require('path'),
     es = require('event-stream');
 
+
+// Clean build folders
+gulp.task('clean', function() {
+  return del(['dist/build/*']);
+});
+
 // html
 gulp.task("html", function() {
-    gulp.src("./src/**/*.html")
+    gulp.src(".//**/*.html")
     .pipe(gulp.dest("./dist"))
 });
 
@@ -29,16 +35,15 @@ gulp.task('lint', function () {
 
 // Styles
 gulp.task('css', function() {
-  gulp.src('./src/assets/css/edit-feature.css')
-    .pipe(concatCss("edit-feature.css"))
-    .pipe(gulp.dest('dist/build/css'))
-    .pipe(gulp.dest('src/build/css'));
+  gulp.src('./assets/css/feature/*.css')
+    .pipe(concatCss("feature.css"))
+    .pipe(gulp.dest('dist/build/css'));
 });
 
 // Scripts
 gulp.task('js', ['lint'], function(done) {
 
-    glob("./src/assets/scripts/feature/**/*.js", function(err, files){
+    glob("./assets/js/feature/*.js", function(err, files){
         if(err) {
            done(err);
         }
@@ -64,17 +69,12 @@ gulp.task("jsMove", function() {
     .pipe(gulp.dest("./dist/assets/json/"))
 });
 
-// Clean build folders
-gulp.task('clean', function() {
-  return del(['dist/build/*', 'src/build/']);
-});
-
 //Watch
 gulp.task("watch", function(){
-    gulp.watch("./src/**/*.js", ["js"]);
-    gulp.watch("./src/**/*.js", ["jsMove"]);
+    gulp.watch("./assets/js/*.js", ["js"]);
+    gulp.watch("./assets/js/*.js", ["jsMove"]);
     // gulp.watch("./src/**/*.html", ["html"]);
-    gulp.watch("./src/**/*.css", ["css"]);
+    gulp.watch("./assets/css/*.css", ["css"]);
 });
 
 // Connect Server Setup
@@ -85,6 +85,7 @@ gulp.task('connect', function() {
 // Default task
 // gulp.task('default', ['clean', /* 'html',*/ 'js', 'jsMove', 'css', 'connect', 'watch'], function() {
 // gulp.task('default', ['js', 'connect', 'watch'], function() {
-gulp.task('default', ['connect'], function() {
+// gulp.task('default', ['connect'], function() {
+gulp.task('default', ['clean', 'js', 'jsMove', 'css', 'connect', 'watch'], function() {
     console.log("Done");
 });

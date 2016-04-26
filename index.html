@@ -3,7 +3,7 @@
 <head>
     <!-- META TAGS -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Title -->
     <title>eCommerce</title>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -11,13 +11,10 @@
 
     <link href="http://fonts.googleapis.com/css?family=Gudea:400normal" rel="stylesheet" type='text/css'>
     <link href="http://fonts.googleapis.com/css?family=Anton:400normal" rel="stylesheet" type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet" type='text/css'>
 
     <!-- <link href="assets/css/bootstrap.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="assets/css/tooltipster.css">
-    <link rel="stylesheet" href="assets/css/prettyPhoto.css">
-    <link rel="stylesheet" href="assets/css/bannerSlider.css">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/inventory.css" rel="stylesheet">
+    <link rel="stylesheet" href="dist/build/css/feature.css">
     
 </head>
 <body>
@@ -28,108 +25,190 @@
                 <i class="spinner"></i>
             </span>
         </div>
-        <div class="app-wrap">
-        
-            <!-- Application view startes here -->
-            <div ui-view class="content"></div>
-            <!-- Application view ends here -->
-            
-            <!-- FOOTER -->
-            <div class="footer-wrap">
+        <!-- HEADER -->
+        <header>
+            <div class="header-top">
                 <div class="container">
                     <div class="row">
-                        <div class="footer clearfix">
-                            <div class="col-md-4">
-                                <div class="widget">
-                                    <h3>Customer Service</h3>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0);">About Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">Delivery Information</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">Privacy Policy</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">Terms & Conditions</a>
-                                        </li>
-                                    </ul>
+                        <div class="col span_2_of_12">
+                            <div class="logo">
+                                <a href="#/home"><img alt="" src="assets/images/logo.png"></a>
+                            </div>
+                        </div>
+                        <div class="col span_7_of_12">
+                            <p class="order-info"><span>Order by Phone:</span> +91 9439186864 or +91 6742355456,  Monday - Saturday 9AM to 6PM IST</p>
+                        </div>
+                        <div class="col span_3_of_12">
+                            <div class="social-strip">
+                                <ul>
+                                    <li>
+                                        <a href="#/aboutus" class="noDecoration"><i class="fa fa-home"></i> About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/contact" class="noDecoration">
+                                            <i class="fa fa-paper-plane" aria-hidden="true"></i> Call Us
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <sticky-menu>
+                <div class="menu">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col span_2_of_12">
+                                <div class="logo">
+                                    <a href="#/home"><img alt="" src="assets/images/logo.png"></a>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="widget">
-                                    <h3>Information</h3>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0);">About Us</a>
+                            <div class="col span_8_of_12 noPadding">
+                                <nav class="desktop-nav">
+                                    <ul class="clearfix">
+                                        <li ng-repeat="(key, value) in navigation">
+                                            <a href="javascript:void(0);">{{value.categoryName}}</a>
+                                            <div class="sub-menu {{value.navClass}}" ng-if="value.subcategoryList">
+                                                <figure ng-if="value.categoryImagePath">
+                                                    <img ng-src="{{value.categoryImagePath}}" alt="Description" />
+                                                </figure>
+                                                <ul class="clearfix">
+                                                    <li class="clearfix">
+                                                        <div class="links">
+                                                            <h3>{{value.categoryName}}</h3>
+                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="javascript:void(0);">{{innerValue.categoryName}}</a> 
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);">Delivery Information</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">Privacy Policy</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">Terms & Conditions</a>
+                                            <a href="javascript:void(0);">Download Catalog</a>
                                         </li>
                                     </ul>
-                                </div>
+                                </nav>
                             </div>
-                            <div class="col-md-4">
-                                <div class="widget">
-                                    <h3>Contact us</h3>
+                            <div class="col span_2_of_12 noPadding">
+                                <div class="social-strip">
                                     <ul>
-                                        <li>support@haastika.com</li>
                                         <li>
-                                            <p><span>Office: </span>+91 6742355456</p>
-                                            <p><span>Cell: </span>+91 9439186864</p>
+                                            <a href="#/aboutus" class="noDecoration"><i class="fa fa-home"></i>About Us</a>
                                         </li>
-                                        <li>Lorem ipsum address street</li>
+                                        <li>
+                                            <a href="#/contact" class="noDecoration">
+                                                <i class="fa fa-paper-plane" aria-hidden="true"></i>Call Us
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <footer class="clearfix">
-                            <div class="col-md-5">
-                                <p>&copy; 2016 Haastika, All Rights Reserved</p>
+                </div>
+            </sticky-menu> 
+        </header>
+
+        <div class="app-wrap">
+            
+            <!-- Application view startes here -->
+            <div ui-view class="content"></div>
+            <!-- Application view ends here -->
+
+        </div>
+        <!-- FOOTER -->
+        <div class="footer-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="footer clearfix">
+                        <div class="col span_4_of_12">
+                            <div class="widget">
+                                <h3>Customer Service</h3>
+                                <ul>
+                                    <li>
+                                        <a href="#/aboutus">About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Delivery Information</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Privacy Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Terms & Conditions</a>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="col-md-2 back-top">
-                                <a href="javascript:void(0);"><img alt="" src="assets/images/icons/back.png"></a>
+                        </div>
+                        <div class="col span_4_of_12">
+                            <div class="widget">
+                                <h3>Information</h3>
+                                <ul>
+                                    <li>
+                                        <a href="#/aboutus">About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Delivery Information</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Privacy Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">Terms & Conditions</a>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="col-md-5">
-                                <div class="social-icon">
-                                    <a class="rss" href=""></a> 
-                                    <a class="twet" href=""></a> 
-                                    <a class="fb" href=""></a> 
-                                    <a class="google" href=""></a> 
-                                    <a class="pin" href=""></a>
-                                </div>
+                        </div>
+                        <div class="col span_4_of_12">
+                            <div class="widget">
+                                <h3>Contact us</h3>
+                                <ul>
+                                    <li class="address">
+                                        <span>Haastika Handicraft</span>
+                                        <span>HIG-A/16, H.B Colony</span>
+                                        <span>Baramunda, Bhubaneswar</span>
+                                        <span>Odisha 751003, India</span>
+                                    </li>
+                                    <li style="margin-bottom: 5px;"> 
+                                        <i class="fa fa-envelope" aria-hidden="true"></i> support@haastika.com 
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-phone" aria-hidden="true"></i> +91 6742355456 / +91 9439186864
+                                    </li>
+                                </ul>
                             </div>
-                        </footer>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- FOOTER -->
-
-            <!-- Social Media -->
-            <div class="social-icon sideSticky">
-                <a class="rss" href=""></a> 
-                <a class="twet" href=""></a> 
-                <a class="fb" href=""></a> 
-                <a class="google" href=""></a> 
-                <a class="pin" href=""></a>
-            </div>
-            <!-- Social Media -->
-
-            <div class="adMessageBox">
-                <div class="message">
-                    <h1>GET AN ADDITIONAL 5% DISCOUNT BY REGISTERING NOW !!</h1>
-                    <a href="#/register" class="tapToClose">Register Here</a>
+                <div class="row">
+                    <footer class="clearfix">
+                        <div class="col span_5_of_12">
+                            <p><i class="fa fa-copyright" aria-hidden="true"></i> 2016 Haastika, All Rights Reserved</p>
+                        </div>
+                        <div class="col span_2_of_12 back-top">
+                            <a href="javascript:void(0);"><img alt="" src="assets/images/icons/back.png"></a>
+                        </div>
+                    </footer>
                 </div>
+            </div>
+        </div>
+        <!-- FOOTER -->
+
+        <!-- Social Media -->
+        <div class="social-icon sideSticky">
+            <a class="rss" href="javascript:void(0);" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a> 
+            <a class="twet" href="javascript:void(0);" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a> 
+            <a class="fb" href="javascript:void(0);" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a> 
+            <a class="google" href="javascript:void(0);" title="Google Plus"><i class="fa fa-google-plus" aria-hidden="true"></i>
+            </a> 
+            <a class="pin" href="javascript:void(0);" title="Pin Interest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+        </div>
+        <!-- Social Media -->
+
+        <div class="adMessageBox">
+            <div class="message">
+                <h1>GET AN ADDITIONAL 5% DISCOUNT BY REGISTERING NOW !!</h1>
+                <a href="#/register" class="tapToClose">Register Here</a>
             </div>
         </div>
     </div>
@@ -139,34 +218,15 @@
     <!-- jQuery Scripts -->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
-    <script src="assets/js/multizoom.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.1/ui-bootstrap-tpls.min.js"></script>
-    <!-- Google map -->
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="assets/js/parallax.js"></script>
-    <script src="assets/js/wowslider.js"></script>
-    <script src="assets/js/overlay.js"></script>
-    <script src="assets/js/scripts.js"></script>
 
-    <!-- Application Scripts -->
-    <script src="vendor/js/angular-ui-router.min.js"></script>
-    <script src="app/app.routes.js"></script>
-    <script src="app/app.services.js"></script>
-
-    <!-- Home -->
-    <script src="app/components/home/homeController.js"></script>
-    <script src="app/components/home/homeService.js"></script>
-    <script src="app/shared/tiles/tileController.js"></script>
-
-    <!-- Details -->
-    <script src="app/components/details/detailController.js"></script>
-    <script src="app/components/details/detailService.js"></script>
-
-    <!-- Category -->
-    <script src="app/components/category/categoryController.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
 
     <!-- login -->
     <script src="app/components/login/loginController.js"></script>
@@ -179,11 +239,10 @@
     <script src="app/shared/tiles/tileController.js"></script>
     <script src="app/components/inventory/productTreeCtrl.js"></script>
     <script src="app/components/inventory/productTreeService.js"></script>
+    <!-- Google map -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="dist/build/js/feature.js"></script>
 
-    <!-- Directive Includes -->
-    <script src="app/directives/sticky/stickyMenu-directive.js"></script>
-    <script src="app/directives/editOnFocus/editOnFocus-directive.js"></script>
-    <script src="app/directives/formElement/formElement-directive.js"></script>
 
 </body>
 </html>
