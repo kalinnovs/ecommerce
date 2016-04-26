@@ -1,10 +1,10 @@
 
 angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
-  .constant('SERVICE_URL', 'http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/')
+  .constant('SERVICE_URL', 'http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -127,7 +127,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
         views: {
           '': { 
             templateUrl: 'app/components/contact/contactView.html',
-            controller: 'ContactCtrl'
+            controller: 'ContactCtrl',
+            controllerAs: 'contacts'
           }
         }
       })
@@ -136,6 +137,14 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
     if(window.history && window.history.pushState){
       // $urlRouterProvider.html5Mode(true);
     }
+
+    // We need to setup some parameters for http requests
+    // These three lines are all you need for CORS support
+    // $httpProvider.defaults.useXDomain = true;
+    // $httpProvider.defaults.withCredentials = true;
+    // delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    // $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+
   })
   .run(function run($rootScope, $location, $http) {
     $rootScope.$on('$viewContentLoaded',function(){

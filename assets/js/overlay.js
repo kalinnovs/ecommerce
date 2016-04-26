@@ -24,8 +24,8 @@ window.modalComponent = (function(){
             height: 'auto'
         });
 
-        method.center();
-        $(window).bind('resize.modal', method.center);
+        // method.center();
+        // $(window).bind('resize.modal', method.center);
         $modal.show();
         $overlay.show();
     };

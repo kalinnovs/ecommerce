@@ -48,8 +48,13 @@ $(document).ready(function(e) {
 
         $(".tapToClose").click(function() {
             sessionStorage.isTriggered = "true";
-            modal.close();
+            window.modalComponent.close();
         });
+
+        $.ajax({url: "../../../app/app.pageCounter.php", success: function(result){
+            var result = JSON.parse(result);
+            $(".pageCounter").html(result.counter);
+        }});
     
 
     }, 1500);

@@ -1,28 +1,37 @@
 <div class="contactPage">
 	<div class="form tile">
-		<h1>We'd love to hear from you. {{foo}}</h1>
+		<h1>We'd love to hear from you. </h1>
 		<form class="" name="userForm" ng-submit="submitForm()" novalidate>
-
+			<div class="response" ng-if="contacts.feedbackSent">
+				<div class="bg-success" ng-if="contacts.sentSuccesfully">
+					<i class="fa fa-info-circle" aria-hidden="true"></i>
+					<p>{{contacts.pushNotification}}</p>
+				</div>
+				<div class="bg-danger" ng-if="contacts.sentFailed">
+					<i class="fa fa-info-circle" aria-hidden="true"></i>
+					<p>{{contacts.pushNotification}}</p>
+				</div>
+			</div>
 	        <div class="formLayout">
 		        <div class="col span_6_of_12">
 		        	<!-- NAME -->
 			        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
 			            <label>Name</label>
-			            <input type="text" name="name" class="form-control" ng-model="user.name" required>
+			            <input type="text" autocomplete="false" name="name" class="form-control" ng-model="contacts.user.name" required>
 			            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
 			        </div>
 
 			        <!-- EMAIL -->
 			        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
 			            <label>Email</label>
-			            <input type="email" name="email" class="form-control" ng-model="user.email">
+			            <input type="email" autocomplete="false" name="email" class="form-control" ng-model="contacts.user.email">
 			            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
 			        </div>
 			      
 			        <!-- Company -->
 			        <div class="form-group" ng-class="{ 'has-error' : userForm.company.$invalid && !userForm.company.$pristine }">
 			            <label>Company</label>
-			            <input type="text" name="company" class="form-control" ng-model="user.company" ng-minlength="5" ng-maxlength="25">
+			            <input type="text" autocomplete="false" name="company" class="form-control" ng-model="contacts.user.company" ng-minlength="5" ng-maxlength="25">
 			            <p ng-show="userForm.company.$error.minlength" class="help-block">Company name is too short.</p>
 			            <p ng-show="userForm.company.$error.maxlength" class="help-block">Company name is too long.</p>
 			        </div>
@@ -30,7 +39,7 @@
 			        <!-- Message -->
 			        <div class="form-group" ng-class="{ 'has-error' : userForm.message.$invalid && !userForm.message.$pristine }">
 			            <label>Message</label>
-			            <textarea ng-model="user.message" class="form-control" name="message" required ng-minlength="15" ng-maxlength="250"></textarea>
+			            <textarea autocomplete="false" ng-model="contacts.user.message" class="form-control" name="message" required ng-minlength="15" ng-maxlength="1000"></textarea>
 			            <p ng-show="userForm.message.$error.minlength" class="help-block">Message is too short.</p>
 			            <p ng-show="userForm.message.$error.maxlength" class="help-block">Message is too long.</p>
 			        </div>

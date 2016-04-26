@@ -1,6 +1,7 @@
 // Load plugins
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
+    connectPHP = require('gulp-connect-php'),
     minifycss = require('gulp-minify-css'),
     concatCss = require('gulp-concat-css'),
     jshint = require('gulp-jshint'),
@@ -11,7 +12,9 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     glob = require('glob'),
     path = require('path'),
-    es = require('event-stream');
+    es = require('event-stream'),
+    browserSync = require('browser-sync');
+
 
 
 // Clean build folders
@@ -77,15 +80,31 @@ gulp.task("watch", function(){
     gulp.watch("./assets/css/*.css", ["css"]);
 });
 
-// Connect Server Setup
-gulp.task('connect', function() {
-    connect.server();
+
+gulp.task('connect-sync', function() {
+  connectPHP.server({}, function (){
+    browserSync({
+      proxy: '127.0.0.1:8000'
+    });
+  });
+ 
+  gulp.watch('**/*.php').on('change', function () {
+    browserSync.reload();
+  });
+
+  
+
 });
 
+// Connect Server Setup
+gulp.task('connect', function() {
+    // connect.server();
+    // connectPHP.server();
+});
 // Default task
 // gulp.task('default', ['clean', /* 'html',*/ 'js', 'jsMove', 'css', 'connect', 'watch'], function() {
 // gulp.task('default', ['js', 'connect', 'watch'], function() {
 // gulp.task('default', ['connect'], function() {
-gulp.task('default', ['clean', 'js', 'jsMove', 'css', 'connect', 'watch'], function() {
+gulp.task('default', ['clean', 'js', 'jsMove', 'css', 'connect-sync', 'watch'], function() {
     console.log("Done");
 });

@@ -31,20 +31,27 @@ angular.module('eCommerce')
 
             /* Real Time Service STARTS */
             var url = SERVICE_URL+"/saveNewUserSubscription";
+            var mailService = "http://kalinnovs.com/ecommerce/app/app.sendMail.php";
             // var url = "http://17.168.50.8:8080/HaastikaDataService/saveNewUserSubscription";
+
+            // $http.post(mailService, register.user).success(function(data, status) {
+            //     debugger;
+            // });
             $http.post(url, register.user).success(function(data, status) {
                 if(data.subscribedSuccesfully) {
-                    register.subscribedSuccesfully = true;
-                    register.subscribedFailed = false;
                     register.pushNotification = data.subscriptionMessage;
+                    register.subscribedFailed = false;
+                    $http.post(mailService, register.user).success(function(data, status) {
+                        register.subscribedSuccesfully = true;
+                    });
                 } else {
                     register.subscribedFailed = true;
                     register.subscribedSuccesfully = false;
                     register.pushNotification = data.errorMessage;
                 }
-            })
+            });
 
-
+            // register.user = {};
             localStorage.registeredIp = "24.6.52.174";
             // $location.path( "/home" );
         };

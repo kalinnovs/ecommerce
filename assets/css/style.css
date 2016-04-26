@@ -67,6 +67,7 @@ blockquote p {}
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { *zoom: 1; }
+.alignRight { text-align: right; }
 
 .noPadding { padding: 0; margin: 0 }
 .noDecoration { text-decoration: none; }
@@ -425,7 +426,7 @@ header nav ul > li ul li a{display: block; padding: 0}
 
 
 #overlay { position:fixed; z-index: 12; top:0; left:0; width:100%; height:100%; background:#000; opacity:0.5; filter:alpha(opacity=50); }
-#modal { position:fixed; z-index: 13; background:rgba(0,0,0,0.2); border-radius:5px; padding:8px; }
+#modal { position:fixed; z-index: 13; background:rgba(0,0,0,0.2); border-radius:5px; padding:8px; top: 50%; left: 50%; margin-left: -263px; margin-top: -163px; }
 #content { border-radius:5px; background:#fff; padding:5px; }
 #close { position:absolute; background: #666;  display:block; top:-3px; right:-3px; color: #fff; border-radius: 50px; padding: 1px 7px; font-size: 18px;	 }
 
@@ -474,7 +475,7 @@ header nav ul > li ul li a{display: block; padding: 0}
     *-*-*-* Contact Us *-*-*-*
 ****************************************************************************/
 
-.contactPage { position: relative; background: url("../../../assets/images/contact.png") center center repeat; min-height: 750px; background-size: 100% auto; }
+.contactPage { position: relative; background: url("./../../../assets/images/contact.png") center center repeat;  min-height: 750px; background-size: 100% auto; }
 .contactPage:after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; right: 0; background: #fff; opacity: 0.4  }
 .contactPage .form { width: 1024px; border: solid 1px #dedede; top: 95px; margin: 0 auto; background: #fff; padding: 15px; z-index: 3; opacity: 0.9 }
 .contactPage .form .formLayout:after { content: ""; display: table; clear: both }
@@ -487,6 +488,10 @@ header nav ul > li ul li a{display: block; padding: 0}
 .contactPage .officeAddress .fa { min-width: 18px; text-align: right; color: #ffa31a; font-size: 18px; line-height: 24px; display: inline-block; float: left; clear: left; }
 .contactPage .officeAddress p { font-size: 14px; display: inline-block; margin-left: 15px; font-weight: 700; }
 .contactPage .officeAddress p span { display: block }
+.contactPage .response { line-height: 34px; margin-bottom: 25px; }
+.contactPage .response > div { padding: 5px; line-height: 24px; }
+.contactPage .response .fa { margin: 5px 10px; float: left; font-size: 18px }
+.contactPage .response p { font-size: 14px; margin-left: 35px; }
 
 
 /****************************************************************************
@@ -514,11 +519,11 @@ footer p { font-size: 11px; color: #000000;  line-height: 53px; }
 
 .social-icon { float: right; margin-top: 8px; }
 .social-icon a { width: 25px; height: 20px;  display: inline-block; }
-.social-icon a.rss { background-position:0px 0px;background: url("../images/icons/footer-rss.png") no-repeat; }
-.social-icon a.twet { background-position:0px 0px;background: url("../images/icons/footer-twet.png") no-repeat; }
-.social-icon a.fb { background-position:0px 0px;background: url("../images/icons/footer-fb.png") no-repeat; }
-.social-icon a.google { background-position:0px 0px;background: url("../images/icons/footer-google.png") no-repeat; }
-.social-icon a.pin { background-position:0px 0px;background: url("../images/icons/footer-pin.png") no-repeat; }
+.social-icon a.rss { background-position:0px 0px;background: url("../images/icons/footer-rss.png") no-repeat;  }
+.social-icon a.twet { background-position:0px 0px;background: url("../images/icons/footer-twet.png") no-repeat; color: #1da1f2; }
+.social-icon a.fb { background-position:0px 0px;background: url("../images/icons/footer-fb.png") no-repeat; color: #3b5998; }
+.social-icon a.google { background-position:0px 0px;background: url("../images/icons/footer-google.png") no-repeat; color: #dc4e41 }
+.social-icon a.pin { background-position:0px 0px;background: url("../images/icons/footer-pin.png") no-repeat; color: #cb2027; }
 
 footer .back-top { position: relative; }
 footer .back-top a { position: absolute; top: -30px; left: 45px;}
@@ -534,7 +539,7 @@ footer .back-top a { position: absolute; top: -30px; left: 45px;}
     *-*-*-* Registration *-*-*-*
 ****************************************************************************/
 
-.registrationForm { margin-top: 20px; margin-bottom: 20px; }
+.registrationForm { margin: 20px auto 30px; float: none; }
 .registrationForm h2 { margin-bottom: 10px; border-bottom: solid 1px #dedede; padding-bottom: 4px; }
 .registrationForm .response { line-height: 34px; margin-bottom: 25px; }
 .registrationForm .response > div { padding: 5px; line-height: 24px; }
