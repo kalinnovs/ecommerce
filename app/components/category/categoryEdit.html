@@ -2,7 +2,7 @@
     <i class="fa fa-times fa-2x" style="margin:10px;"></i>
 </button>
 <div class="modal-header">
-    <h3 class="modal-title" style="margin: 15px 25px;">Edit category No: {{category.categoryId}}</h3>
+    <h3 class="modal-title" style="margin: 15px 25px;">{{title}} : {{category.categoryId}}</h3>
 </div>
 <div class="modal-body">
     <form name="category_form" class="" role="form" novalidate style="margin-left: 30px;">
@@ -10,11 +10,11 @@
             <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="category.categoryName"focus/>
         </form-element>
         <form-element label="Description" mod="category">
-        <textarea class="form-control" name="description" placeholder="Description" ng-model="category.Description">{{category.description}}</textarea>
+            <textarea class="form-control" name="description" placeholder="Description" ng-model="category.description"></textarea>
         </form-element>
         <form-element label="Status" mod="category">
            <label>
-              <input type="checkbox" ng-model="category.categoryStatus" value="category.categoryStatus"> Active
+              <input name="categoryStatus" type="checkbox" ng-model="category.categoryStatus" ng-checked="category.categoryStatus === 'Active' ? true : false"> Active
             </label>
         </form-element>
         <form-element label="Menu Image" mod="category">
@@ -32,7 +32,7 @@
             <form-element label="">
                 <div class="text-right">
                     <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
-                    <button ng-click="savecategory(category);"
+                    <button ng-click="saveCategory(category);"
                             ng-disabled="category_form.$invalid || enableUpdate"
                             class="btn btn-sm btn-primary"
                             type="submit">

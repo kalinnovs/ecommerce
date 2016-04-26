@@ -1,10 +1,15 @@
 
 angular.module('eCommerce')
-.controller('CategoryCtrl',['$scope', '$http', '$uibModal', function($scope, $http, $uibModal){
-    var url = "assets/json/category.json";
+.controller('CategoryCtrl',['$scope', '$http', 'categoryService', '$uibModal', function($scope, $http, categoryService, $uibModal){
+    var url = "http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/categories?callback=angular.callbacks._0";
+    // var url = "assets/json/category.json";
 
-    $http.get(url).success( function(response) {
-        $scope.categories = response;
+    // $http.jsonp(url).success( function(response) {
+    // $http.get(url).success( function(response) {
+    //     $scope.categories = response;
+    // });
+    categoryService.list().then(function(data){
+        $scope.categories = data.data;
     });
     
     $scope.columns = [
@@ -18,6 +23,7 @@ angular.module('eCommerce')
 
     $scope.orderByField = 'categoryId';
     $scope.reverseSort = false;
+    $scope.category = {};
 
     // Sort Product
     $scope.order = function(predicate) {
@@ -51,13 +57,28 @@ angular.module('eCommerce')
         });
         modalInstance.result.then(function(selectedObject) {
             if(selectedObject.save == "insert"){
-                $scope.products.push(selectedObject);
-                $scope.products = $filter('orderBy')($scope.products, 'id', 'reverse');
+                $scope.categories.push(selectedObject);
+                // $scope.categories = $filter('orderBy')($scope.categories, 'categoryId', 'reverse');
+
+                categoryService.save(selectedObject).then(function(data){
+                    console.log('data saved');
+                    debugger;
+                });
             }else if(selectedObject.save == "update"){
+                p.categoryName = selectedObject.categoryName;
                 p.description = selectedObject.description;
-                p.price = selectedObject.price;
-                p.stock = selectedObject.stock;
-                p.packing = selectedObject.packing;
+                p.categoryStatus = selectedObject.categoryStatus;
+
+                delete selectedObject["save"];
+                categoryService.save(selectedObject).then(function(data){
+                    console.log('data saved');
+                    debugger;
+                });
+
+                // $http.post('http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/updateCategories', {categoryId : selectedObject.categoryId , category: selectedObject})
+                // .success( function(response) {
+                //     debugger;
+                // });
             }
         });
     };
@@ -71,13 +92,26 @@ angular.module('eCommerce')
     $scope.cancel = function () {
         $uibModalInstance.dismiss('Close');
     };
-    $scope.title = (item.categoryId > 0) ? 'Edit Product' : 'Add Product';
+    $scope.title = (item.categoryId > 0) ? 'Edit Category' : 'Add Category';
     $scope.buttonText = (item.categoryId > 0) ? 'Update Category' : 'Add New Category';
 
     var original = item;
     $scope.isClean = function() {
         return angular.equals(original, $scope.product);
-    }
+    };
+
+    $scope.saveCategory = function (category) {
+        if(category.categoryId > 0){
+            var x = angular.copy(category);
+            x.save = 'update';
+            $uibModalInstance.close(x);
+        }else{
+            // product.status = 'Active';
+            var x = angular.copy(category);
+            x.save = 'insert';
+            $uibModalInstance.close(x);
+        }
+    };
 });
 
 

@@ -6,11 +6,17 @@
 </div>
 <div class="modal-body">
     <form name="category_form" class="" role="form" novalidate style="margin-left: 30px;">
-    	<form-element label="Name" mod="category">
-            <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="category.categoryName"focus/>
+    	<form-element label="category" mod="category">
+            <select name="category" id="category" ng-options="option.categoryName for option in category track by option.categoryid" ng-model="selectedCategory"></select>
+            <select name="repeatSelect" id="repeatSelect" ng-model="{{subCategory.categoryId}}">
+              <option ng-repeat="option in category" value="{{option.categoryId}}">{{option.categoryName}}</option>
+            </select>
+        </form-element>
+        <form-element label="Name" mod="category">
+            <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="subCategory.categoryName"focus/>
         </form-element>
         <form-element label="Description" mod="category">
-        <textarea class="form-control" name="description" placeholder="Description" ng-model="category.Description">{{category.description}}</textarea>
+            <textarea class="form-control" name="description" placeholder="Description" ng-model="category.Description">{{category.description}}</textarea>
         </form-element>
         <form-element label="Status" mod="category">
            <label>

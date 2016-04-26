@@ -112,6 +112,16 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
           }
         }
       })
+      .state('productTree', {
+        url:'/productTree',
+        views: {
+          '': {
+            templateUrl: 'app/components/inventory/productTree.html',
+            controller: 'productTreeCtrl',
+            controllerAs: 'productTreeCtrl'
+          }
+        }
+      })
       .state('subscriber', {
         url:'/inventory/subscriber',
         views: {
