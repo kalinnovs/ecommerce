@@ -117,6 +117,16 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap'])
           }
         }
       })
+      .state('productTree', {
+        url:'/productTree',
+        views: {
+          '': {
+            templateUrl: 'app/components/inventory/productTree.html',
+            controller: 'productTreeCtrl',
+            controllerAs: 'productTreeCtrl'
+          }
+        }
+      })
     ;
 
     if(window.history && window.history.pushState){

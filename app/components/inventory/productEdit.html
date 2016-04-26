@@ -6,11 +6,23 @@
 </div>
 <div class="modal-body">
     <form name="product_form" class="" role="form" novalidate style="margin-left: 30px;">
-    	<form-element label="Name" mod="product">
+    	<form-element label="Category" mod="product">
+            <select id="category" ng-model="product.categoryId" ng-init="product.categoryId" class="form-control" ng-change="getSubCategories()">
+                <option ng-repeat="category in categoryList" value="{{category.categoryId}}" category.categoryId>{{category.categoryName}}</option>
+            </select>
+            <!-- <select ng-model="product.categoryId" ng-options="category.categoryId as category.categoryName for category in categoryList" class="form-control">
+            </select> -->
+        </form-element>
+        <form-element label="Sub Category" mod="product">
+            <select id="subCategory" ng-model="product.subCategoryId" ng-init="product.subCategoryId" class="form-control">
+              <option ng-repeat="subCategory in category.subcategoryList" value="{{subCategory.categoryId}}">{{subCategory.categoryName}}</option>
+            </select>
+        </form-element>
+        <form-element label="Name" mod="product">
             <input type="text" class="form-control" name="name" placeholder="Product Name" ng-model="product.productName"focus/>
         </form-element>
         <form-element label="Description" mod="product">
-        <textarea class="form-control" name="description" placeholder="Description" ng-model="product.Description">{{product.description}}</textarea>
+            <textarea class="form-control" name="description" placeholder="Description" ng-model="product.description">{{product.description}}</textarea>
         </form-element>
         <form-element label="Stock" mod="product">
             <input type="text" name="stock" class="form-control" placeholder="Stock" ng-model="product.productAvailablility" only-numbers/>
@@ -29,7 +41,11 @@
             <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the price.</small>
         </form-element>
 
-
+        <form-element label="Product Images" mod="category">
+            <img ng-repeat="imgList in product.imageGallery " src={{imgList.imagePath}} width="50" height="50" />
+            <input type="file" file-model="menuFile"/>
+            <button ng-click="uploadFile()" class="btn btn-default">upload me</button>
+        </form-element>
 
 
     	<div class="modal-footer">

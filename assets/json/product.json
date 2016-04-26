@@ -1,4 +1,63 @@
-[
+{
+  
+    "categoryList": [{
+        "categoryName": "Wall paintings",
+        "categoryImagePath": "content/images/categoryimages/image1",
+        "categoryId": 1,
+        "subcategoryList": [{
+            "categoryName": "Wall Drifts",
+            "categoryImagePath": "content/images/categoryimages/image2",
+            "categoryId": 12,
+            "categoryStatus": "Active",
+            "subcategoryList": null
+        }, {
+            "categoryName": "Wall Hangings",
+            "categoryImagePath": "",
+            "categoryId": 13,
+            "categoryStatus": "Active",
+            "subcategoryList": null
+        }]
+    },
+    {
+        "categoryName": "Wall paintings1",
+        "categoryImagePath": "content/images/categoryimages/image1",
+        "categoryId": 2,
+        "subcategoryList": [{
+            "categoryName": "Wall Drifts",
+            "categoryImagePath": "content/images/categoryimages/image2",
+            "categoryId": 22,
+            "categoryStatus": "Active",
+            "subcategoryList": null
+        }, {
+            "categoryName": "Wall Hangings",
+            "categoryImagePath": "",
+            "categoryId": 23,
+            "categoryStatus": "Active",
+            "subcategoryList": null
+        },
+        {
+            "categoryName": "Wall Hangings",
+            "categoryImagePath": "",
+            "categoryId": 24,
+            "categoryStatus": "InActive",
+            "subcategoryList": null
+        },
+        {
+            "categoryName": "Wall Hangings",
+            "categoryImagePath": "",
+            "categoryId": 25,
+            "categoryStatus": "InActive",
+            "subcategoryList": null
+        }]
+    },
+    {
+        "categoryName": "Wall paintings3",
+        "categoryImagePath": "content/images/categoryimages/image1",
+        "categoryId": 3,
+        "subcategoryList": []
+    }],
+
+  "productList" :[
    {
       "productPartNo": 11,
       "productName": "Pattachitra",
@@ -8,6 +67,8 @@
       "productPrice": 210,
       "currency": "INR",
       "averageProductRating": 4,
+      "categoryId": "1",
+      "subCategoryId": "12",
       "imageGallery": [{
         "imagePath": "http://kalinnovs.com/ecommerce/assets/images/products/dhokracasting0003_2.jpg",
         "height": "10",
@@ -130,3 +191,4 @@
       }]
    }
 ]
+}

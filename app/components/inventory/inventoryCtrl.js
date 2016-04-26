@@ -2,9 +2,10 @@
 angular.module('eCommerce')
 .controller('InventoryCtrl',['$scope', '$http', '$uibModal', function($scope, $http, $uibModal){
     var url = "assets/json/product.json";
-
+debugger;
     $http.get(url).success( function(response) {
-        $scope.products = response;
+        $scope.products = response.productList;
+        $scope.categoryList = response.categoryList;
     });
     
     $scope.columns = [
@@ -48,6 +49,9 @@ angular.module('eCommerce')
           resolve: {
             item: function () {
               return p;
+            },
+            categoryList: function () {
+              return $scope.categoryList;
             }
           }
         });
@@ -66,10 +70,10 @@ angular.module('eCommerce')
 }]);
 
 angular.module('eCommerce')
-.controller('productEditCtrl', function ($scope, $uibModalInstance, item) {
-
+.controller('productEditCtrl', function ($scope) {
+debugger;
     $scope.product = angular.copy(item);
-        
+    $scope.categoryList = angular.copy(categoryList);
     $scope.cancel = function () {
         $uibModalInstance.dismiss('Close');
     };
@@ -79,7 +83,10 @@ angular.module('eCommerce')
     var original = item;
     $scope.isClean = function() {
         return angular.equals(original, $scope.product);
+    };
+
+    $scope.getSubCategories = function(){
+        debugger;
+        console.log($scope.product.categoryId);
     }
 });
-
-
