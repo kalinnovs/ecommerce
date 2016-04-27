@@ -45,3 +45,6 @@ require("../../../app/shared/tiles/tileController.js");
 require("../../../app/directives/sticky/stickyMenu-directive.js");
 require("../../../app/directives/editOnFocus/editOnFocus-directive.js");
 require("../../../app/directives/formElement/formElement-directive.js");
+
+require("../../../app/components/inventory/productTreeCtrl.js");
+require("../../../app/components/inventory/productTreeService.js");
