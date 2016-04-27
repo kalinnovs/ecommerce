@@ -83,36 +83,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
           }
         }
       })
-      .state('inventory', {
-        url:'/inventory',
-        views: {
-          '': { 
-            templateUrl: 'app/components/inventory/inventory.html',
-            controller: 'InventoryCtrl',
-            controllerAs: 'InventoryCtrl'
-          }
-        }
-      })
-      .state('category', {
-        url:'/category',
-        views: {
-          '': { 
-            templateUrl: 'app/components/category/category.html',
-            controller: 'CategoryCtrl',
-            controllerAs: 'CategoryCtrl'
-          }
-        }
-      })
-      .state('subCategory', {
-        url:'/subCategory',
-        views: {
-          '': { 
-            templateUrl: 'app/components/subCategory/subCategory.html',
-            controller: 'SubCategoryCtrl',
-            controllerAs: 'SubCategoryCtrl'
-          }
-        }
-      })
       .state('productTree', {
         url:'/productTree',
         views: {
