@@ -3318,7 +3318,7 @@ header nav ul > li ul li a {
   left: 0;
   top: 0;
   background: #dedede;
-  opacity: 0.3;
+  opacity: 0;
 }
 
 .tile:hover:after {
@@ -3464,12 +3464,19 @@ header nav ul > li ul li a {
 
 .tile.category .detail h4 {
   cursor: pointer;
-  font-family: "Anton";
   text-transform: uppercase;
   color: #fff;
   font-size: 44px;
   line-height: 58px;
-  text-shadow: -3px 2px 5px rgba(150, 150, 150, 1);
+  text-shadow: -3px 2px 5px rgba(0, 0, 0, 1);
+}
+
+.tile.category:hover .detail h4 {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  text-shadow: -3px 2px 5px rgba(0, 0, 0, 1);
 }
 
 .tile.category.whiteBG .detail h4 {
