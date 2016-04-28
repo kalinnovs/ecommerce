@@ -7,7 +7,7 @@ angular.module('eCommerce')
 
         // debugger;
 
-        $rootScope.navigation = UserService.get().data.pageNavigation.categories;
+        // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
         
         this.register = function() {
             
@@ -23,11 +23,7 @@ angular.module('eCommerce')
             /* Real Time Service STARTS */
             var url = SERVICE_URL+"/saveNewUserSubscription";
             var mailService = "http://kalinnovs.com/ecommerce/app/app.sendMail.php";
-            // var url = "http://17.168.50.8:8080/HaastikaDataService/saveNewUserSubscription";
-
-            // $http.post(mailService, register.user).success(function(data, status) {
-            //     debugger;
-            // });
+            
             $http.post(url, register.user).success(function(data, status) {
                 if(data.subscribedSuccesfully) {
                     register.pushNotification = data.subscriptionMessage;
@@ -43,7 +39,8 @@ angular.module('eCommerce')
             });
 
             // register.user = {};
-            localStorage.registeredIp = "24.6.52.174";
+            register.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};
+            $scope.form.$setPristine();
             // $location.path( "/home" );
         };
     

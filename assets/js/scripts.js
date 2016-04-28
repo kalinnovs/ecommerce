@@ -42,16 +42,17 @@ $(document).ready(function(e) {
              && window.location.hash.match(/register/g) == null) {
             setTimeout(function() {
                 window.modalComponent.open(".adMessageBox");
+                $("html, body").animate({ scrollTop: 0 }, 600);
                 sessionStorage.isTriggered = "true";
             }, 3200);    
-        } 
+        }
 
         $(".tapToClose").click(function() {
             sessionStorage.isTriggered = "true";
             window.modalComponent.close();
         });
 
-        $.ajax({url: "../../../app/app.pageCounter.php", success: function(result){
+        $.ajax({url: "http://kalinnovs.com/ecommerce/app/app.pageCounter.php", success: function(result){
             var result = JSON.parse(result);
             $(".pageCounter").html(result.counter);
         }});

@@ -19,10 +19,10 @@ window.modalComponent = (function(){
         $(selector).show();
         $content.empty().append($(selector));
 
-        $modal.css({
-            width: 'auto', 
-            height: 'auto'
-        });
+        // $modal.css({
+        //     width: 'auto', 
+        //     height: 'auto'
+        // });
 
         // method.center();
         // $(window).bind('resize.modal', method.center);
@@ -32,10 +32,15 @@ window.modalComponent = (function(){
 
     // Close the modal
     method.close = function () {
-        $modal.hide();
-        $overlay.hide();
-        $content.empty();
-        $(window).unbind('resize.modal');
+        var pos = $(".subscriptionLink").position();
+        $modal.addClass("minimize");
+        $modal.css({"left":pos.left+8, "top": pos.top+5});
+        setTimeout(function() {
+            $(modal).hide();
+            $(overlay).hide();
+            $(content).empty();
+            // $(window).unbind('resize.modal');    
+        }, 500);
     };
 
     // Generate the HTML and add it to the document

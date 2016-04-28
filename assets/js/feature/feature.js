@@ -16,6 +16,7 @@ require("../../../app/shared/tiles/tileController.js");
 
 
 require("../../../app/components/aboutus/aboutusController.js");
+require("../../../app/components/aboutus/aboutService.js");
 
 require("../../../app/components/contact/contactController.js");
 

@@ -223,10 +223,8 @@ header nav ul > li ul li a{display: block; padding: 0}
 ****************************************************************************/
 .heading { border-bottom: 1px solid #e9e9e9; margin-bottom: 18px; }
 .heading h2 { border-bottom:1px solid #e9e9e9; background: #474747; position: relative; padding: 10px 20px; color: #ffffff; display: inline-block;  }
-
 .product { -webkit-transition:  0.5s; -moz-transition:  0.5s; -o-transition: 0.5s; -ms-transition: 0.5s; }
-.product figure { position: relative;width: 268px; height: 215px; text-align: center;}
-.product figure > a { width: 270px; height: 186px; }
+.product figure { position: relative;width: 272px; height: 215px; text-align: center;}
 .product figure > a > img { width: 100%; height: 100%; }
 
 .product figure .overlay { display: none; padding: 20px 0px; margin-left: -64px; margin-top: -42px;  width: 128px; text-align: center; position: absolute; top: 50%; left: 50%;  background: rgba(237,60,60,0.7); }
@@ -424,10 +422,9 @@ header nav ul > li ul li a{display: block; padding: 0}
 .accordion ul li { display: inline-block; margin-bottom: -2px; }
 .accordion ul li a { padding: 5px 25px 7px; display: inline-block; color: #333; font-weight: 700; font-size: 14px; line-height: 28px; transition: border 0.6s; -webkit-transition: border 0.6s; border-bottom: solid 3px transparent; text-decoration: none; }
 .accordion ul li a:hover, .accordion ul li a.active { border-bottom: solid 3px #008ae6; }
-.accordion .description { padding: 15px 0 }
-.accordion h5 { font-size: 15px; font-weight: 700 }
+.accordion h5 { font-size: 16px; line-height: 24px; font-weight: 700; margin-bottom: 15px; }
 .accordion p { font-size: 14px; line-height: 24px; }
-.accordion .panel div { min-height: 120px }
+.accordion .panels > div { min-height: 120px; padding: 20px 0 }
 
 
 /** Zoom gallery */
@@ -440,12 +437,15 @@ header nav ul > li ul li a{display: block; padding: 0}
 
 
 #overlay { position:fixed; z-index: 12; top:0; left:0; width:100%; height:100%; background:#000; opacity:0.5; filter:alpha(opacity=50); }
-#modal { position:fixed; z-index: 13; background:rgba(0,0,0,0.2); border-radius:5px; padding:8px; top: 50%; left: 50%; margin-left: -263px; margin-top: -163px; }
-#content { border-radius:5px; background:#fff; padding:5px; }
-#close { position:absolute; background: #666;  display:block; top:-3px; right:-3px; color: #fff; border-radius: 50px; padding: 1px 7px; font-size: 18px;	 }
+#modal { position:absolute; z-index: 13; width: 500px; height: 308px; border: solid 5px #fff; background:rgba(0,0,0,0.2); border-radius:5px; top: 50%; left: 50%; margin-left: -263px; margin-top: -163px; transition: all 0.4s; -webkit-transition: all 0.4s; }
+#modal #content {  overflow: hidden; height: 100%; position: relative; }
+#modal.minimize { border: 0; padding: 0; margin: 0; width: 0; height: 0  }
+#modal.minimize #close { display: none }
+#content {  }
+#close { position:absolute; background: #666;  display:block; top:-13px; right:-13px; color: #fff; border-radius: 50px; padding: 1px 7px; font-size: 18px;	 }
 
-.adMessageBox { display: none; background: #000 url("../../../assets/images/advertisementBoard.jpg") left center no-repeat; color: #fff; width: 500px; height: 300px; font-size: 44px; text-align: center; }
-.adMessageBox .message { padding: 40px 100px; }
+.adMessageBox { display: none; position: absolute; left: 50%; top: 50%; margin: -150px 0 0 -250px; width: 500px; height: 300px; padding: 40px 100px; background: #000 url("../../../assets/images/advertisementBoard.jpg") left center no-repeat; color: #fff; font-size: 44px; text-align: center; }
+.adMessageBox .message {  }
 .adMessageBox .message h1 { line-height: 45px; color: #fff; font-family: 'Anton'; margin-bottom: 20px; }
 .adMessageBox a { display: inline-block; text-decoration: none; font-size: 16px; color: #333; border-radius: 3px; border: solid 2px #999; padding: 5px 15px; background: #f3f3f3; }
 #overlay .adMessageBox { display: block; }
@@ -553,7 +553,7 @@ footer .back-top a { position: absolute; top: -30px; left: 45px;}
     *-*-*-* Registration *-*-*-*
 ****************************************************************************/
 
-.registrationForm { margin: 20px auto 30px; float: none; }
+.registrationForm { margin: 20px auto 30px; }
 .registrationForm h2 { margin-bottom: 10px; border-bottom: solid 1px #dedede; padding-bottom: 4px; }
 .registrationForm .response { line-height: 34px; margin-bottom: 25px; }
 .registrationForm .response > div { padding: 5px; line-height: 24px; }
@@ -565,7 +565,22 @@ footer .back-top a { position: absolute; top: -30px; left: 45px;}
     *-*-*-* Subscription List *-*-*-*
 ****************************************************************************/
 
-.subscribers { min-height: 500px }
-.subscribers table .action { padding: 0; text-align: center; }
-.subscribers table .action a { font-size: 24px; padding-top: 5px; color: #5cb85c; text-decoration: none; }
+/****************************************************************************
+    *-*-*-* Registration *-*-*-*
+****************************************************************************/
+
+.subscriptionPage { padding: 50px 0 0 0; }
+.subscriptionPage h1 { width: 900px; font-size: 34px; line-height: 36px; color: #666; font-weight: normal; }
+.subscriptionPage h2 { font-size: 24px; line-height: 32px; color: #666; font-weight: normal; }
+.subscriptionPage .arrowedBubble { position: relative; border: solid 1px #dedede; padding: 35px; margin: 25px 4px 25px 100px; border-radius: 25px; background: #f3f3f3 }
+.subscriptionPage .arrowedBubble .cover { position:absolute; height:100px; top: 60px; left: -50px; width:50px; overflow:hidden; }
+.subscriptionPage .arrowedBubble .arrow-left {  border: solid 1px #d3d3d3; position: relative; width:100px; height:100px; left:20px; background: #f3f3f3; -webkit-transform:rotate(45deg); transform:rotate(45deg); border-radius:10px; }
+.subscriptionPage .arrowedBubble p { margin-bottom: 10px }
+.registrationForm { margin: 60px 0 30px; }
+.registrationForm h3 { margin-bottom: 20px; border-bottom: padding-bottom: 4px; font-size: 24px; font-weight: normal; }
+.registrationForm .response { line-height: 34px; margin-bottom: 25px; }
+.registrationForm .response > div { padding: 5px; line-height: 24px; }
+.registrationForm .response .fa { margin: 5px 10px; float: left; font-size: 18px }
+.registrationForm .response p { font-size: 14px; margin-left: 35px; }
+
 

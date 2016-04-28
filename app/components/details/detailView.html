@@ -6,12 +6,12 @@
 				<div class="span_3_of_12 col noPadding zoomable">
 					<ul>
 						<li ng-repeat="(key, value) in data.imageGallery" class="zoomable thumbs">
-							<!-- <a href="{{value.imagePath}}large/{{value.imageName}}" data-large= "{{value.imagePath}}{{value.imageName}}" data-title="">
+							<a href="{{value.imagePath}}large/{{value.imageName}}" data-large= "{{value.imagePath}}{{value.imageName}}" data-title="">
 								<img ng-src="{{value.imagePath}}thumb/{{value.imageName}}" width="100%" />
 							</a>
- -->						<a href="http://www.dynamicdrive.com/dynamicindex4/angelinasmall.jpg" data-large="http://www.dynamicdrive.com/dynamicindex4/angelina.jpg" data-title="Angelina Jolie">
+ 						<!-- <a href="http://www.dynamicdrive.com/dynamicindex4/angelinasmall.jpg" data-large="http://www.dynamicdrive.com/dynamicindex4/angelina.jpg" data-title="Angelina Jolie">
 			                    <img src="http://www.dynamicdrive.com/dynamicindex4/angelina_tmb.jpg" alt="Angelina" title="">
-			                </a>
+			                </a> -->
 						</li>
 					</ul>
 				</div>
@@ -19,8 +19,8 @@
 					<span class="magnify-text"><i class="fa fa-search-plus" aria-hidden="true"></i> Hover to Zoom</span>
 					<figure>
 						<div class="targetarea diffheight">
-							<!-- <img id="zoomable" alt="zoomable" title="" ng-src="{{data.imageGallery[0].imagePath}}large/{{data.imageGallery[0].imageName}}"/> -->
-							<img id="multizoom2" alt="zoomable" title="" src="http://www.dynamicdrive.com/dynamicindex4/angelinasmall.jpg" style="visibility: visible; width: 325px; height: 243px; opacity: 1;">
+							<img id="zoomable" alt="zoomable" title="" ng-src="{{data.imageGallery[0].imagePath}}large/{{data.imageGallery[0].imageName}}"/>
+							<!-- <img id="multizoom2" alt="zoomable" title="" src="http://www.dynamicdrive.com/dynamicindex4/angelinasmall.jpg" style="visibility: visible; width: 325px; height: 243px; opacity: 1;"> -->
 						</div>
 					</figure>
 				</div>
@@ -68,8 +68,10 @@
 					</div>
 					<div class="specification" style="display: none;">
 						<div ng-if="data.productDescription">
-							<h5>Desciption: </h5>
-							<p>{{data.productDescription}}</p>
+							<h5>Specifications in {{data.dimensionUnit}}: </h5>
+							<p><span>Height: </span>{{data.height}} {{data.dimensionUnit | lowercase}}</p>
+							<p><span>Width: </span>{{data.width}} {{data.dimensionUnit | lowercase}}</p>
+							<p><span>Depth: </span>{{data.depth}} {{data.dimensionUnit | lowercase}}</p>
 						</div>
 					</div>
 				</div>
@@ -87,6 +89,7 @@ $(document).ready(function(e) {
     // debugger;
     setTimeout(function() { 
     	// debugger;
+    	// $('#multizoom2').addimagezoom({ rootElement: 'Page'});
     	$('#multizoom2').addimagezoom({ rootElement: 'Page'});
     	$(".equiHeight").find("div").eq(1).height($(".equiHeight").find("div").eq(0).height());
     }, 2000);
@@ -94,7 +97,7 @@ $(document).ready(function(e) {
     $(".accordion ul a").click(function() { 
     	$(".accordion a").removeClass("active");
     	$(".panels > div").hide();
-    	$(".panels").find($(this).attr("name")).show();
+    	$(".panels").find("."+$(this).attr("name")).show();
     	$(this).addClass("active");
     });
 

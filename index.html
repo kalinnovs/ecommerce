@@ -72,9 +72,9 @@
                                     <ul class="clearfix">
                                         <li ng-repeat="(key, value) in navigation">
                                             <a href="javascript:void(0);">{{value.categoryName}}</a>
-                                            <div class="sub-menu {{value.navClass}}" ng-if="value.subcategoryList">
-                                                <figure ng-if="value.categoryImagePath">
-                                                    <img ng-src="{{value.categoryImagePath}}" alt="Description" />
+                                            <div class="sub-menu {{value.categoryClass}}" ng-if="value.subcategoryList">
+                                                <figure ng-if="value.menuImagePath">
+                                                    <img ng-src="{{value.menuImagePath}}" alt="Description" />
                                                 </figure>
                                                 <ul class="clearfix">
                                                     <li class="clearfix">

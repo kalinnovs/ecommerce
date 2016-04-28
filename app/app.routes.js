@@ -116,10 +116,10 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
 
     // We need to setup some parameters for http requests
     // These three lines are all you need for CORS support
-    // $httpProvider.defaults.useXDomain = true;
-    // $httpProvider.defaults.withCredentials = true;
-    // delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    // $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.withCredentials = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
   })
   .run(function run($rootScope, $location, $http) {
