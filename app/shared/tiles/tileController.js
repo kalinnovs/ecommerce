@@ -6,7 +6,7 @@ angular.module('eCommerce')
 
     $rootScope.$on('event:data-change', function() {
       var object = UserService.get();
-      tile.layout = object.data.tileLayout;
+      tile.layout = object.data.pageLayoutDetails.layouts;
       tile.renderTemplate();
     });
 

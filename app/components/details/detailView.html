@@ -1,14 +1,17 @@
 <!-- Content -->
 <div class="details clearfix detailsPage">
-	<div class="container row">
+	<div class="container row equiHeight">
 		<div class="col span_6_of_12 noPadding">
 			<div class="product-gallery">
 				<div class="span_3_of_12 col noPadding zoomable">
 					<ul>
-						<li ng-repeat="(key, value) in data.details.imageGallery" class="zoomable thumbs">
-							<a href="{{value.large.src}}" data-large= "{{value.extraLarge.src}}" data-title="Title 1">
-								<img ng-src="{{value.thumb.src}}" width="100%" />
+						<li ng-repeat="(key, value) in data.imageGallery" class="zoomable thumbs">
+							<!-- <a href="{{value.imagePath}}large/{{value.imageName}}" data-large= "{{value.imagePath}}{{value.imageName}}" data-title="">
+								<img ng-src="{{value.imagePath}}thumb/{{value.imageName}}" width="100%" />
 							</a>
+ -->						<a href="http://www.dynamicdrive.com/dynamicindex4/angelinasmall.jpg" data-large="http://www.dynamicdrive.com/dynamicindex4/angelina.jpg" data-title="Angelina Jolie">
+			                    <img src="http://www.dynamicdrive.com/dynamicindex4/angelina_tmb.jpg" alt="Angelina" title="">
+			                </a>
 						</li>
 					</ul>
 				</div>
@@ -16,7 +19,8 @@
 					<span class="magnify-text"><i class="fa fa-search-plus" aria-hidden="true"></i> Hover to Zoom</span>
 					<figure>
 						<div class="targetarea diffheight">
-							<img id="zoomable" alt="zoomable" title="" ng-src="{{data.details.productImage}}"/>
+							<!-- <img id="zoomable" alt="zoomable" title="" ng-src="{{data.imageGallery[0].imagePath}}large/{{data.imageGallery[0].imageName}}"/> -->
+							<img id="multizoom2" alt="zoomable" title="" src="http://www.dynamicdrive.com/dynamicindex4/angelinasmall.jpg" style="visibility: visible; width: 325px; height: 243px; opacity: 1;">
 						</div>
 					</figure>
 				</div>
@@ -24,67 +28,56 @@
 		</div>
 		<div class="col span_6_of_12 noPadding">
 			<div class="product-details">
-				<div class="title">
-					<span class="product-id">{{data.details.productID}}</span>
-					<h2>{{data.details.productName}}</h2>
-					<span class="soldby"></span>
-					<p class="rating">{{data.details.averageProductRating}}</p>
-					<div class="ratingBG">
-						<span class="ratingOverlay" style="width: {{data.details.averageProductRating/5*100}}%"></span>
+				<div class="product-card tile noFlash">
+					<div class="title">
+						<span class="product-id">{{data.productID}}</span>
+						<h2>{{data.productName}}</h2>
+						<span class="soldby"></span>
+						<p class="rating">{{data.averageProductRating}}</p>
+						<div class="ratingBG">
+							<span class="ratingOverlay" style="width: {{data.averageProductRating/5*100}}%"></span>
+						</div>
+					</div>
+					<h3 class="price">
+						<i class="fa fa-{{data.productCurrency | lowercase}}"></i>
+						<span>{{data.productPrice}}</span>
+					</h3>
+					<p class="available">{{data.productAvailablility}}</p>
+					
+					<div class="callDetails">
+						<i class="fa fa-cart-plus" aria-hidden="true"></i> <h5>Order by Phone</h5>
+						<span>Cell: +91 9439186864</span>
+						<span>Offc: +91 6742355456</span>
 					</div>
 				</div>
-				<h3 class="price">
-					<i class="fa fa-{{data.details.productCurrency | lowercase}}"></i>
-					<span>{{data.details.productPrice}}</span>
-				</h3>
-				<p class="available">{{data.details.productAvailablility}}</p>
-				<div class="description" ng-if="data.details.productDescription">
-					<p>Desciption: </p>
-					<div ng-bind-html="getHtml(htmlDescription)"></div>
+			</div>	
+		</div>
+
+		<div class="row">
+			<div class="accordion">
+				<ul>
+					<li><a href="javascript:void(0);" name="description" class="active">Description</a></li>
+					<li><a href="javascript:void(0);" name="specification">Specification</a></li>
+				</ul>
+				<div class="panels">
+					<div class="description">
+						<div ng-if="data.productDescription">
+							<h5>Desciption: </h5>
+							<p>{{data.productDescription}}</p>
+						</div>
+					</div>
+					<div class="specification" style="display: none;">
+						<div ng-if="data.productDescription">
+							<h5>Desciption: </h5>
+							<p>{{data.productDescription}}</p>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="callDetails">
-				<i class="fa fa-cart-plus" aria-hidden="true"></i> <h5>Order by Phone</h5>
-				<span>Cell: +91 9439186864</span>
-				<span>Offc: +91 6742355456</span>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- CATEGORIES -->
-<div class="categories-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="col span_4_of_12">
-                <div class="categories">
-                    <figure>
-                        <div class="cate-overlay">
-                            <a href="javascript:void(0);">Clothing</a>
-                        </div>
-                    </figure>
-                </div>
-            </div>
-            <div class="col span_4_of_12">
-                <div class="categories">
-                    <figure>
-                        <div class="cate-overlay">
-                            <a href="javascript:void(0);">Bamboo &amp; Cane</a>
-                        </div>
-                    </figure>
-                </div>
-            </div>
-            <div class="col span_4_of_12">
-                <div class="categories">
-                    <figure>
-                        <div class="cate-overlay">
-                            <a href="javascript:void(0);">Bags</a>
-                        </div>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </div>
-</div><!-- CATEGORIES -->
+
 
 <script type="text/javascript">
 $(document).ready(function(e) {
@@ -93,10 +86,17 @@ $(document).ready(function(e) {
 
     // debugger;
     setTimeout(function() { 
-    	$('#zoomable').addimagezoom({ rootElement: '.detailsPage'});
-    }, 1000);
+    	// debugger;
+    	$('#multizoom2').addimagezoom({ rootElement: 'Page'});
+    	$(".equiHeight").find("div").eq(1).height($(".equiHeight").find("div").eq(0).height());
+    }, 2000);
     
-
+    $(".accordion ul a").click(function() { 
+    	$(".accordion a").removeClass("active");
+    	$(".panels > div").hide();
+    	$(".panels").find($(this).attr("name")).show();
+    	$(this).addClass("active");
+    });
 
 });
 </script>

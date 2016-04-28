@@ -7,16 +7,7 @@ angular.module('eCommerce')
 
         // debugger;
 
-        UserService.GetAll( BASE_URI + '/eCommerce/register.json')
-            .then(function(data) {
-              $rootScope.navigation = data.Navigation;
-            })
-            .catch(function(error) {
-                //
-            })
-            .finally(function() {
-                //
-            });
+        $rootScope.navigation = UserService.get().data.pageNavigation.categories;
         
         this.register = function() {
             

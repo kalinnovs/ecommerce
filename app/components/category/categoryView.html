@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="category">
 		<h1>{{cat.data.selectedCategory.categoryName}}</h1>
-		<div class="category-banner tile">
+		<div class="category-banner tile noFlash">
 			<img ng-src="{{cat.data.selectedCategory.categoryImagePath}}" alt="Category" />
 		</div>
 		<div class="listing">
@@ -26,12 +26,12 @@
 			</div>
 			<div class="result row">
 				<div class="categoryTree">
-					<div class="treeView tile">
+					<div class="treeView tile noFlash">
 						<h2>Simillar Items</h2>
 						<ul>
 							<li ng-repeat="(key, value) in cat.data.filterCategories">
 								<i class="fa fa-angle-double-right" aria-hidden="true"></i>
-								<a href="{{value.categoryDetailsURL}}">{{value.categoryName}}</a>
+								<a href="#/{{value.categoryDetailsURL}}">{{value.categoryName}}</a>
 							</li>
 						</ul>
 					</div>
@@ -39,22 +39,26 @@
 				<div class="spacingAdjust">
 					<div class="span_3_of_12 col" ng-repeat="(key, value) in cat.data.productsList">
 						<div class="newRow" ng-if="$index !=0 && $index % 4 == 0"></div>
-						<div class="wide-quarter-tile tile">
-			                <figure>
-			                    <a href="{{value.productDetailsURL}}"><img alt="" ng-src="{{value.productImage}}"></a>
-			                </figure>
-			                <div class="detail">
-			                    <h4>{{value.productName}}</h4>
-			                    <p ng-if="value.productDescription">{{value.productDescription}}</p>
-			                    <div class="gridCol">
-			                    	<div class="ratingBG">
-										<span class="ratingOverlay" style="width: {{value.averageProductRating/5*100}}%"></span>
+						<a href="#{{value.productDetailsURL}}">
+							<div class="wide-quarter-tile tile">
+				                <figure>
+				                    <img alt="" ng-src="{{value.productImage[0].imagePath}}medium/{{value.productImage[0].imageName}}">
+				                </figure>
+				                <div class="detail">
+				                    <h4>{{value.productName}}</h4>
+				                    <p ng-if="value.productDescription" ng-bind-html="getHtml(value.htmlDescription)"></p>
+				                    <div class="gridCol">
+				                    	<div class="ratingBG">
+											<span class="ratingOverlay" style="width: {{value.averageProductRating/5*100}}%"></span>
+										</div>
+				                    	<span class="availability">Availability: <span>{{value.productAvailablility}}</span></span>
 									</div>
-			                    	<span class="availability">Availability: <span>{{value.productAvailablility}}</span></span>
-								</div>
-	                    		<span class="price"><i class="fa fa-{{value.productCurrency | lowercase}}"></i> {{value.productPrice}}</span>
-			                </div>
-			            </div>
+		                    		<span class="price">
+		                    			<i class="fa fa-{{value.productCurrency | lowercase}}"></i> {{value.productPrice}}
+		                    		</span>
+				                </div>
+				            </div>
+				        </a>
 			        </div>
 			    </div>
 			</div>

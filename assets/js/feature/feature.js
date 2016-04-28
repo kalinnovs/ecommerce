@@ -24,7 +24,7 @@ require("../../../app/components/details/detailService.js");
 
 
 require("../../../app/components/category/categoryController.js");
-
+require("../../../app/components/category/categoryService.js");
 
 require("../../../app/components/login/loginController.js");
 

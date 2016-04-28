@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('categoryCtrl', function ($scope, $rootScope, UserService, BASE_URI) {
+  .controller('categoryCtrl', function ($scope, $rootScope, $sce, CategoryService, UserService, $stateParams, SERVICE_URL, BASE_URI) {
     var cat = this;
     var scoper = $scope;
 
-    UserService.GetAll( BASE_URI + 'eCommerce/categories.json')
+    CategoryService.getFromURL( SERVICE_URL + '/category/'+$stateParams.id)
         .then(function(data) {
           cat.data = data;
-          $rootScope.navigation = data.Navigation;
+          $rootScope.navigation = data.pageNavigation.categories; 
+          // $scope.htmlDescription = data.productDescription; 
         })
         .catch(function(error) {
             //
@@ -38,6 +39,13 @@ angular.module('eCommerce')
       $(elem.target).parents(".listing").find(".spacingAdjust").removeClass("listView");
     };
 
+    $scope.getHtml = function(html){
+        return $sce.trustAsHtml(html);
+    };
 
   })
-;
+  .filter('html', function($sce) {
+    return function(val) {
+        return $sce.trustAsHtml(val);
+    };
+});

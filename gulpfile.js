@@ -92,8 +92,6 @@ gulp.task('connect-sync', function() {
     browserSync.reload();
   });
 
-  
-
 });
 
 // Connect Server Setup

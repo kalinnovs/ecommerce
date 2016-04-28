@@ -30,7 +30,7 @@ body { background: #fff; color: #000; font-size: 13px; font-family: "Gudea"; fon
 
 a { color: #000; text-decoration: none; }
 a:visited { /*color: #551a8b;*/ }
-a:hover { /*color: #06e;text-decoration: underline; */}
+a:hover { text-decoration: none; }
 a:hover, a:active { outline: 0; }
 
 h1, h2, h3, h4, h5, h6 { color: #000; }
@@ -224,8 +224,8 @@ header nav ul > li ul li a{display: block; padding: 0}
 .heading { border-bottom: 1px solid #e9e9e9; margin-bottom: 18px; }
 .heading h2 { border-bottom:1px solid #e9e9e9; background: #474747; position: relative; padding: 10px 20px; color: #ffffff; display: inline-block;  }
 
-.product { margin-bottom: 30px;-webkit-transition:  0.5s; -moz-transition:  0.5s; -o-transition: 0.5s; -ms-transition: 0.5s; }
-.product figure { position: relative;width: 262px; height: 186px;}
+.product { -webkit-transition:  0.5s; -moz-transition:  0.5s; -o-transition: 0.5s; -ms-transition: 0.5s; }
+.product figure { position: relative;width: 268px; height: 215px; text-align: center;}
 .product figure > a { width: 270px; height: 186px; }
 .product figure > a > img { width: 100%; height: 100%; }
 
@@ -259,6 +259,9 @@ header nav ul > li ul li a{display: block; padding: 0}
 
 .product_wrap { margin-bottom: 20px }
 .tile { border: solid 1px #dedede; position: relative; box-shadow: 0px 0px 5px rgba(150, 150, 150, 0.7); transition: all 0.4s; -webkit-transition: all 0.4s; overflow: hidden; }
+.tile:after { content: ""; position: absolute; width: 100%; height: 100%; left: 0; top: 0; background: #dedede; opacity: 0.3; }
+.tile:hover:after { opacity: 0 }
+.tile.noFlash:after { content: none; }
 .tile .ratingBG { background-position: 0 -35px; display: inline-block; height: 15px; width: 84px; background-size: 17px 176px; margin: 4px 10px 0 0; }
 .tile .ratingOverlay { background-position: 0 -92px; background-size: 17px 176px; height: 15px }
 .tile .detail { text-align: left }
@@ -269,14 +272,15 @@ header nav ul > li ul li a{display: block; padding: 0}
 .item-box-layout { margin: 0; }
 .item-box-layout .wrapper .column { padding: 5px; }
 .item-box-layout .wrapper .column.four-square { padding: 0 }
+.item-box-layout a:hover * { text-decoration: none }
 .wide-full-tile { height: 589px; position: relative; }
 .wide-full-tile figure img { width: 563px }
 .wide-half-tile { height: 287px; }
 .wide-half-tile figure img { width: 563px; height: 287px }
 .wide-half-tile.tall { height: 589px; }
 .wide-quarter-tile { height: 287px; min-height: 245px; }
-.wide-partition .wide-half-tile { margin-top: 10px; }
-.wide-partition .wide-half-tile:first-child { margin-top: 0px }
+.wide-partition a { display: inline-block; margin-top: 10px; text-decoration: none; }
+.wide-partition a:first-child { margin-top: 0px }
 .wide-half-tile h4, .wide-tall-tile h4, .wide-full-tile h4 { text-align: center; }
 
 
@@ -292,7 +296,6 @@ header nav ul > li ul li a{display: block; padding: 0}
 .tile.category .detail h4 { cursor: pointer; font-family: "Anton"; text-transform: uppercase; color: #fff; font-size: 44px; line-height: 58px; text-shadow: -3px 2px 5px rgba(150, 150, 150, 1); }
 .tile.category.whiteBG .detail h4 { color: #666; }
 .tile.category .detail span, .tile.category .detail button { display: none; }
-.wide-tall-tile img, .wide-quarter-tile img { width: 275px; }
 
 
 .tileShuffle:after { clear: both }
@@ -325,7 +328,7 @@ header nav ul > li ul li a{display: block; padding: 0}
 .category .filters ul li .fa { font-size: 20px; }
 .category .spacingAdjust .column { padding: 0; }
 .category .spacingAdjust .wide-quarter-tile { margin: 0 0 12px 0; }
-.category .spacingAdjust .wide-quarter-tile img { width: 273px; }
+.category .spacingAdjust .wide-quarter-tile figure { text-align: center; width: 273px; height: 205px;}
 .category .spacingAdjust .newRow + .wide-quarter-tile { margin-left: 0 }
 .category .spacingAdjust > div:nth-of-type(4n+1) { margin-left: 0; }
 
@@ -379,7 +382,7 @@ header nav ul > li ul li a{display: block; padding: 0}
 .detail p { font-size: 13px; color: #737373;margin-bottom: 13px; line-height: 22px; display: none }
 .details { padding-bottom: 50px }
 .product-gallery, .product-details { padding-top: 20px; font-family: 'Arimo' }
-.product-gallery { min-height: 600px; position: relative; }
+.product-gallery { min-height: 550px; position: relative; }
 .product-gallery ul { float: left; }
 .product-gallery ul li { margin-bottom: 10px; }
 .product-gallery ul li a { display: block; width: 110px; border: solid 1px #dedede }
@@ -388,8 +391,9 @@ header nav ul > li ul li a{display: block; padding: 0}
 .product-gallery .magnify-text { position: absolute; right: 25px; top: 25px; z-index: 1; }
 .product-gallery figure a { position: absolute; right: 10px; top: 5px; line-height: 18px; }
 
-.product-details h2 { font-size: 48px; line-height: 64px; font-weight: 400; text-align: center; }
-.product-details .title { margin-top: 20px; }
+.product-details { text-align: center; }
+.product-details .product-card { width: 400px; background: #f4f4f4; display: inline-block; padding: 20px 0; min-height: 500px; }
+.product-details h2 { font-size: 48px; line-height: 64px; font-weight: 400; text-align: center; font-family: 'Anton'; margin: 20px; letter-spacing: 1.2px; }
 .product-details .rating, .product-details .reviews { display: none; font-size: 14px; line-height: 22px; }
 .product-details .reviews a { color: #0088cc }
 .product-details .reviews a:hover { text-decoration: underline; }
@@ -415,12 +419,22 @@ header nav ul > li ul li a{display: block; padding: 0}
 .listView .tile h4 { text-transform: capitalize; font-size: 24px; line-height: 34px; }
 .listView .tile .buyBtn { margin: 5px 0; }
 
+.accordion { margin: 45px 0 }
+.accordion ul { padding-left: 20px; border-bottom: solid 1px #ccc; }
+.accordion ul li { display: inline-block; margin-bottom: -2px; }
+.accordion ul li a { padding: 5px 25px 7px; display: inline-block; color: #333; font-weight: 700; font-size: 14px; line-height: 28px; transition: border 0.6s; -webkit-transition: border 0.6s; border-bottom: solid 3px transparent; text-decoration: none; }
+.accordion ul li a:hover, .accordion ul li a.active { border-bottom: solid 3px #008ae6; }
+.accordion .description { padding: 15px 0 }
+.accordion h5 { font-size: 15px; font-weight: 700 }
+.accordion p { font-size: 14px; line-height: 24px; }
+.accordion .panel div { min-height: 120px }
+
 
 /** Zoom gallery */
 .magnifyarea { box-shadow: 5px 5px 7px #e1e1ea; -webkit-box-shadow: 5px 5px 7px #e1e1ea; -moz-box-shadow: 5px 5px 7px #e1e1ea; filter: progid:DXImageTransform.Microsoft.dropShadow(color=#e1e1ea, offX=5, offY=5, positive=true); background: white; }
 .targetarea img { margin: auto; display: block; position: relative; border-width: 0; width: 418px !important; }
 
-.callDetails { text-align: center; padding: 10px 0; margin: 40px auto 0; width: 250px; border: dashed 1px #d3d3d3  }
+.callDetails { text-align: center; padding: 10px 0; margin: 40px auto 0; width: 250px; border: dashed 1px #d3d3d3; position: absolute; bottom: 35px; left: 74px;  }
 .callDetails .fa, .callDetails h5 { font-size: 16px; font-weight: 700; padding-bottom: 5px; display: inline-block; }
 .callDetails span { display: block; line-height: 20px }
 

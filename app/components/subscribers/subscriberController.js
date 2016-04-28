@@ -6,9 +6,10 @@ angular.module('eCommerce')
     var scoper = $scope;
     // debugger;
 
+    $rootScope.navigation = UserService.get().data.pageNavigation.categories;
+
     UserService.GetAll( SERVICE_URL + 'subscribers')
         .then(function(data) {
-          $rootScope.navigation = data.Navigation;
           subscriber.data = data;
         })
         .catch(function(error) {

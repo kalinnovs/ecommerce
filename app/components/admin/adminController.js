@@ -6,17 +6,7 @@ angular.module('eCommerce')
     
     var ref = new Firebase("https://intense-torch-8839.firebaseio.com");
 
-    UserService.GetAll( BASE_URI + '/eCommerce.json')
-        .then(function(data) {
-            $rootScope.navigation = data.Navigation;
-            $scope.admin = data;
-        })
-        .catch(function(error) {
-            //
-        })
-        .finally(function() {
-            //
-        })
+    $rootScope.navigation = UserService.get().data.pageNavigation.categories;
     
     // download the data into a local object
     var syncObject = $firebaseObject(ref);

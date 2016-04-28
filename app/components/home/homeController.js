@@ -1,14 +1,19 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('HomeCtrl', function ($scope, $rootScope, UserService, BASE_URI) {
+  .controller('HomeCtrl', function ($scope, $rootScope, UserService, SERVICE_URL) {
     var home = this;
     var scoper = $scope;
     // debugger;
 
-    UserService.GetAll( BASE_URI + '/eCommerce/home.json')
+    // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
+    UserService.GetAll( SERVICE_URL + '/home')
         .then(function(data) {
-          $rootScope.navigation = data.Navigation;
+          if(data.success === undefined || data.success) {
+            $rootScope.navigation = data.pageNavigation.categories;  
+          } else {
+            // Else pick local JSON
+          }
         })
         .catch(function(error) {
             //

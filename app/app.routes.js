@@ -1,7 +1,7 @@
 
 angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
-  .constant('SERVICE_URL', 'http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService')
+  .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
@@ -52,8 +52,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
           }
         }
       })
-      .state('details', {
-        url:'/details/{id}',
+      .state('product', {
+        url:'/product/{id}',
         views: {
           '': { 
             templateUrl: 'app/components/details/detailView.html',
@@ -62,8 +62,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
           }
         }
       })
-      .state('categories', {
-        url:'/categories/{id}',
+      .state('category', {
+        url:'/category/{id}',
         views: {
           '': { 
             templateUrl: 'app/components/category/categoryView.html',
@@ -82,13 +82,13 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
           }
         }
       })
-      .state('productTree', {
-        url:'/productTree',
+      .state('inventory', {
+        url:'/inventory',
         views: {
-          '': {
-            templateUrl: 'app/components/inventory/productTree.html',
-            controller: 'productTreeCtrl',
-            controllerAs: 'productTreeCtrl'
+          '': { 
+            templateUrl: 'app/components/inventory/inventory.html',
+            controller: 'InventoryCtrl',
+            controllerAs: 'InventoryCtrl'
           }
         }
       })
@@ -114,10 +114,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
       })
     ;
 
-    if(window.history && window.history.pushState){
-      // $urlRouterProvider.html5Mode(true);
-    }
-
     // We need to setup some parameters for http requests
     // These three lines are all you need for CORS support
     // $httpProvider.defaults.useXDomain = true;
@@ -127,22 +123,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
 
   })
   .run(function run($rootScope, $location, $http) {
-    $rootScope.$on('$viewContentLoaded',function(){
-        // debugger;
+    $rootScope.$on('$stateChangeSuccess',function(){
+      $("html, body").animate({ scrollTop: 0 }, 200);
     });
-      // keep user logged in after page refresh
-      // $rootScope.globals = ($cookies.globals) ? JSON.parse($cookies.globals) || {} : {};
-      // if ($rootScope.globals.currentUser) {
-      //     // $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-      // }
-
-      // $rootScope.$on('$locationChangeStart', function (event, next, current) {
-      //     // redirect to login page if not logged in and trying to access a restricted page
-      //     var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
-      //     var loggedIn = $rootScope.globals.currentUser;
-      //     if (restrictedPage && !loggedIn) {
-      //         $location.path('/login');
-      //     }
-      // });
   })
 ;

@@ -35,12 +35,15 @@
                                 <a href="#/home"><img alt="" src="assets/images/logo.png"></a>
                             </div>
                         </div>
-                        <div class="col span_7_of_12">
+                        <div class="col span_6_of_12">
                             <p class="order-info"><span>Order by Phone:</span> +91 9439186864 or +91 6742355456,  Monday - Saturday 9AM to 6PM IST</p>
                         </div>
-                        <div class="col span_3_of_12">
+                        <div class="col span_4_of_12">
                             <div class="social-strip">
                                 <ul>
+                                    <li>
+                                        <a href="#/register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
+                                    </li>
                                     <li>
                                         <a href="#/aboutus" class="noDecoration"><i class="fa fa-home"></i> About Us</a>
                                     </li>
@@ -112,7 +115,7 @@
         <div class="app-wrap">
             
             <!-- Application view startes here -->
-            <div ui-view class="content"></div>
+            <div ui-view autoclass="content"></div>
             <!-- Application view ends here -->
 
         </div>
@@ -129,13 +132,13 @@
                                         <a href="#/aboutus">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Delivery Information</a>
+                                        <a href="#/delivery">Delivery Information</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Privacy Policy</a>
+                                        <a href="#/privacy">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Terms & Conditions</a>
+                                        <a href="#/terms">Terms & Conditions</a>
                                     </li>
                                 </ul>
                             </div>
@@ -148,13 +151,13 @@
                                         <a href="#/aboutus">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Delivery Information</a>
+                                        <a href="#/delivery">Delivery Information</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Privacy Policy</a>
+                                        <a href="#/privacy">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">Terms & Conditions</a>
+                                        <a href="#/terms">Terms & Conditions</a>
                                     </li>
                                 </ul>
                             </div>
@@ -229,17 +232,6 @@
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
 
-    <!-- login -->
-    <script src="app/components/login/loginController.js"></script>
-
-    <!-- Admin -->
-    <script src="app/components/admin/adminController.js"></script>
-    <script src="app/components/inventory/inventoryCtrl.js"></script>
-    <script src="app/components/category/categoryCtrl.js"></script>
-    <script src="app/components/subCategory/subCategoryCtrl.js"></script>
-    <script src="app/shared/tiles/tileController.js"></script>
-    <script src="app/components/inventory/productTreeCtrl.js"></script>
-    <script src="app/components/inventory/productTreeService.js"></script>
     <!-- Google map -->
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="dist/build/js/feature.js"></script>

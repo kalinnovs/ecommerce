@@ -4,17 +4,8 @@ angular.module('eCommerce')
   .controller('ContactCtrl', function ($scope, $http, $rootScope, UserService, BASE_URI) {
     var contacts = this;
     var original = $scope.user;
-    
-    UserService.GetAll( BASE_URI + '/eCommerce.json')
-        .then(function(data) {
-            $rootScope.navigation = data.Navigation;
-        })
-        .catch(function(error) {
-            //
-        })
-        .finally(function() {
-            //
-        })
+
+    // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
     
     // function to submit the form after all validation has occurred            
     $scope.submitForm = function() {
