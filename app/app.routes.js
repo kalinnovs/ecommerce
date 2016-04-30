@@ -102,6 +102,14 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
           }
         }
       })
+      .state('download', {
+        url:'/download',
+        views: {
+          '': { 
+            templateUrl: 'app/components/download/downloadView.html'
+          }
+        }
+      })
       .state('contact', {
         url:'/contact',
         views: {

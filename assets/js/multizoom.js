@@ -222,7 +222,7 @@ var featuredimagezoomer = { // the two options for Featured Image Zoomer:
 		},
 
 		init: function($img, options){
-			var targetWrapper = $(options.rootElement) || document.body;
+			var targetWrapper = (options.rootElement) ? $(options.rootElement) : document.body;
 			var setting=$.extend({}, this.dsetting, options), w = $img.width(), h = $img.height(), o = $img.offset(),
 			fiz = this, $tracker, $cursorshade, $statusdiv, $magnifier, lastpage = {pageX: 0, pageY: 0},
 			basezindex = setting.zIndex || this.highestzindex($img);

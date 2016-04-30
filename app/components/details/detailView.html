@@ -9,9 +9,6 @@
 							<a href="{{value.imagePath}}large/{{value.imageName}}" data-large= "{{value.imagePath}}{{value.imageName}}" data-title="">
 								<img ng-src="{{value.imagePath}}thumb/{{value.imageName}}" width="100%" />
 							</a>
- 						<!-- <a href="http://www.dynamicdrive.com/dynamicindex4/angelinasmall.jpg" data-large="http://www.dynamicdrive.com/dynamicindex4/angelina.jpg" data-title="Angelina Jolie">
-			                    <img src="http://www.dynamicdrive.com/dynamicindex4/angelina_tmb.jpg" alt="Angelina" title="">
-			                </a> -->
 						</li>
 					</ul>
 				</div>
@@ -20,7 +17,6 @@
 					<figure>
 						<div class="targetarea diffheight">
 							<img id="zoomable" alt="zoomable" title="" ng-src="{{data.imageGallery[0].imagePath}}large/{{data.imageGallery[0].imageName}}"/>
-							<!-- <img id="multizoom2" alt="zoomable" title="" src="http://www.dynamicdrive.com/dynamicindex4/angelinasmall.jpg" style="visibility: visible; width: 325px; height: 243px; opacity: 1;"> -->
 						</div>
 					</figure>
 				</div>
@@ -43,11 +39,17 @@
 						<span>{{data.productPrice}}</span>
 					</h3>
 					<p class="available">{{data.productAvailablility}}</p>
+					<a class="offer" href="#/register">
+						<i class="fa fa-certificate" aria-hidden="true"></i>Check Offer
+					</a>
 					
 					<div class="callDetails">
 						<i class="fa fa-cart-plus" aria-hidden="true"></i> <h5>Order by Phone</h5>
 						<span>Cell: +91 9439186864</span>
 						<span>Offc: +91 6742355456</span>
+						<a href="#/delivery" class="delivery">
+							<i class="fa fa-truck" aria-hidden="true"></i>Check Delivery Options
+						</a>
 					</div>
 				</div>
 			</div>	
@@ -67,7 +69,7 @@
 						</div>
 					</div>
 					<div class="specification" style="display: none;">
-						<div ng-if="data.productDescription">
+						<div>
 							<h5>Specifications in {{data.dimensionUnit}}: </h5>
 							<p><span>Height: </span>{{data.height}} {{data.dimensionUnit | lowercase}}</p>
 							<p><span>Width: </span>{{data.width}} {{data.dimensionUnit | lowercase}}</p>
@@ -88,11 +90,11 @@ $(document).ready(function(e) {
 
     // debugger;
     setTimeout(function() { 
-    	// debugger;
-    	// $('#multizoom2').addimagezoom({ rootElement: 'Page'});
-    	$('#multizoom2').addimagezoom({ rootElement: 'Page'});
-    	$(".equiHeight").find("div").eq(1).height($(".equiHeight").find("div").eq(0).height());
-    }, 2000);
+    	$('#zoomable').addimagezoom({ rootElement: '.detailsPage'});
+    	if(! /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			$(".equiHeight").find("div").eq(1).height($(".equiHeight").find("div").eq(0).height()); 
+		}
+    }, 170);
     
     $(".accordion ul a").click(function() { 
     	$(".accordion a").removeClass("active");

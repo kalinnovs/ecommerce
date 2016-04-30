@@ -1896,7 +1896,7 @@ div.dark_square #pp_full_res .pp_inline {
 }
 
 #galleryBanner  .ws_bullets .ws_bulframe {
-  display: none;
+  display: none !important;
   bottom: 20px;
   margin-left: 4px;
   overflow: visible;
@@ -2190,7 +2190,9 @@ a:visited {
   outline: 0;
 }
 
-a:active .fa {
+a:active .fa,
+a:hover .fa,
+a.active .fa {
   color: #33adff;
 }
 
@@ -2592,6 +2594,10 @@ a.noDecoration:hover {
   display: block;
 }
 
+.social-strip.mobileView {
+  display: none;
+}
+
 .login-popup {
   width: 230px;
   position: absolute;
@@ -2789,6 +2795,14 @@ header .order-info {
   text-align: center;
 }
 
+header .order-info .fa {
+  margin-right: 10px;
+}
+
+header .order-info-mobile {
+  display: none;
+}
+
 header .order-info span {
   font-weight: 700;
 }
@@ -2809,6 +2823,10 @@ header nav ul > li {
   border-right: 1px solid #dedede;
   position: relative;
   padding: 8px 0px;
+}
+
+header nav ul > li .fa {
+  display: none;
 }
 
 header nav ul > li:last-child {
@@ -2844,7 +2862,8 @@ header nav ul > li .sub-menu {
   display: none;
   position: absolute;
   top: 35px;
-  left: 0px;
+  /* left: 0px; */
+  left: -260px;
   background: #f9f9f9;
   z-index: 99999999;
 }
@@ -2872,6 +2891,10 @@ header nav ul > li ul li a {
   top: 66px;
   right: 0;
   transition: top .2s;
+  -o-transition: top .2x;
+  -moz-transition: top .2s;
+  -ms-transition: top .2s;
+  -webkit-transition: top .2s;
 }
 
 .menu .logo {
@@ -2889,6 +2912,10 @@ header nav ul > li ul li a {
   position: absolute;
   top: 66px;
   transition: top .2s;
+  -o-transition: top .2x;
+  -moz-transition: top .2s;
+  -ms-transition: top .2s;
+  -webkit-transition: top .2s;
 }
 
 .menu .logo a img {
@@ -2920,6 +2947,10 @@ header nav ul > li ul li a {
 .desktop-nav {
   text-align: center;
   margin-left: -1px;
+}
+
+.desktop-nav .fa {
+  display: none;
 }
 
 .desktop-nav > ul {
@@ -3080,6 +3111,9 @@ header nav ul > li ul li a {
 .sub-menu.menu-four .our-product div > a {
   transition: all 1s;
   -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  -moz-transition: all 1s;
+  -ms-transition: all 1s;
   float: left;
   width: 70px;
   height: 50px;
@@ -3307,6 +3341,9 @@ header nav ul > li ul li a {
   box-shadow: 0px 0px 5px rgba(150, 150, 150, 0.7);
   transition: all 0.4s;
   -webkit-transition: all 0.4s;
+  -o-transition: all .4x;
+  -moz-transition: all .4s;
+  -ms-transition: all .4s;
   overflow: hidden;
 }
 
@@ -3472,11 +3509,16 @@ header nav ul > li ul li a {
 }
 
 .tile.category:hover .detail h4 {
+  -webkit-transition: all .4s;
+  transition: all .4s;
   -webkit-transform: scale(1.1);
   -moz-transform: scale(1.1);
   -ms-transform: scale(1.1);
   -o-transform: scale(1.1);
   text-shadow: -3px 2px 5px rgba(0, 0, 0, 1);
+  -o-transition: all .4x;
+  -moz-transition: all .4s;
+  -ms-transition: all .4s;
 }
 
 .tile.category.whiteBG .detail h4 {
@@ -3623,6 +3665,9 @@ header nav ul > li ul li a {
   float: left;
   transition: 0.1s width;
   -webkit-transition: 0.1s width;
+  -o-transition: width .1s;
+  -moz-transition: width .1s;
+  -ms-transition: width .1s;
 }
 
 .category .categoryTree.show {
@@ -3848,7 +3893,7 @@ header nav ul > li ul li a {
   font-weight: 400;
   text-align: center;
   font-family: 'Anton';
-  margin: 20px;
+  margin: 10px;
   letter-spacing: 1.2px;
 }
 
@@ -3887,8 +3932,22 @@ header nav ul > li ul li a {
 .product-details .price span {
   display: inline-block;
   vertical-align: top;
-  font-size: 16px;
-  line-height: 16px;
+  font-size: 22px;
+  line-height: 23px;
+}
+
+.product-details .offer {
+  display: inline-block;
+  line-height: 24px;
+  color: #333;
+}
+
+.product-details .offer:hover {
+  text-decoration: underline;
+}
+
+.product-details .offer .fa {
+  margin-right: 5px;
 }
 
 .product-details .strikethrough {
@@ -3996,6 +4055,9 @@ header nav ul > li ul li a {
   line-height: 28px;
   transition: border 0.6s;
   -webkit-transition: border 0.6s;
+  -o-transition: border .6x;
+  -moz-transition: border .6s;
+  -ms-transition: border .6s;
   border-bottom: solid 3px transparent;
   text-decoration: none;
 }
@@ -4047,8 +4109,9 @@ header nav ul > li ul li a {
   width: 250px;
   border: dashed 1px #d3d3d3;
   position: absolute;
-  bottom: 35px;
-  left: 74px;
+  bottom: 55px;
+  left: 50%;
+  margin-left: -125px;
 }
 
 .callDetails .fa,
@@ -4062,6 +4125,22 @@ header nav ul > li ul li a {
 .callDetails span {
   display: block;
   line-height: 20px;
+}
+
+.callDetails .delivery {
+  position: absolute;
+  bottom: -36px;
+  width: 100%;
+  left: 0;
+  font-size: 14px;
+}
+
+.callDetails .delivery:hover {
+  text-decoration: underline;
+}
+
+.callDetails .delivery .fa {
+  margin-right: 10px;
 }
 
 #overlay {
@@ -4090,6 +4169,9 @@ header nav ul > li ul li a {
   margin-top: -163px;
   transition: all 0.4s;
   -webkit-transition: all 0.4s;
+  -o-transition: all .4x;
+  -moz-transition: all .4s;
+  -ms-transition: all .4s;
 }
 
 #modal #content {
@@ -4728,6 +4810,409 @@ footer .back-top a {
 .registrationForm .response p {
   font-size: 14px;
   margin-left: 35px;
+}
+
+@media only screen and (max-device-width: 768px) and (max-width: 736px) {
+  body {
+    width: 100%;
+    min-width: 100%;
+    font-size: 14px;
+  }
+
+  .mobileView {
+    display: block;
+  }
+
+  .row {
+    width: 100%;
+  }
+
+  header .menu {
+    text-align: center;
+  }
+
+  /* Mobile Menu */
+
+  .social-strip.mobileView {
+    display: inline-block;
+  }
+
+  .mobileRendering {
+    padding: 0 15px;
+  }
+
+  header {
+    min-height: 200px;
+  }
+
+  .social-strip {
+    margin-top: 8px;
+  }
+
+  .social-strip ul {
+    text-align: center;
+  }
+
+  .social-strip ul li a {
+    color: #fff;
+  }
+
+  header .order-info {
+    padding-top: 54px;
+  }
+
+  .order-info,
+  .social-icon {
+    display: none;
+  }
+
+  .order-info {
+    padding-top: 54px;
+  }
+
+  .order-info span {
+    display: block;
+  }
+
+  .menu .social-strip ul {
+    position: static;
+  }
+
+  .order-info {
+    display: block;
+    position: absolute;
+    width: 80%;
+    left: 10%;
+  }
+
+  .mobile .nav-sticky .stickyMenu .desktop-nav {
+    position: static;
+    display: none;
+  }
+
+  .mobile .stickyMenu .logo,
+  .mobile .stickyMenu .row .social-strip {
+    display: none;
+  }
+
+  .mobile .desktop-nav .fa {
+    display: block;
+  }
+
+  .mobile .desktop-nav {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+    color: #333;
+  }
+
+  .mobile .desktop-nav > ul {
+    display: none;
+    width: 300px;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    padding: 10px 5px;
+    background: #fff;
+    border: solid 1px #dedede;
+    z-index: 999;
+  }
+
+  .mobile .desktop-nav > ul > li {
+    float: none;
+    padding: 0;
+    display: block;
+    border-right: 0;
+  }
+
+  .mobile .desktop-nav > ul > li .fa {
+    float: right;
+    color: #333;
+    padding: 10px;
+    line-height: 20px;
+    font-size: 14px;
+  }
+
+  .mobile .desktop-nav > ul > li > a {
+    font-weight: bold;
+  }
+
+  .mobile .desktop-nav > ul > li a {
+    padding: 5px 15px;
+    display: block;
+    color: #333;
+    text-align: right;
+    line-height: 30px;
+  }
+
+  .mobile header nav {
+    display: block;
+  }
+
+  /*.mobile header nav ul { display: none; }*/
+
+  .mobile header nav ul > li .sub-menu {
+    position: static;
+    width: auto;
+    border: 0;
+    background: none;
+    padding: 0;
+  }
+
+  .mobile header nav ul > li {
+    padding: 0;
+  }
+
+  .mobile header nav li a {
+    background: none;
+  }
+
+  .mobile .sub-menu h3,
+  .mobile .sub-menu figure {
+    display: none;
+  }
+
+  .mobile .sub-menu a {
+    width: auto;
+    float: none;
+  }
+
+  #galleryBanner {
+    width: 100%;
+    height: 180px;
+  }
+
+  #galleryBanner .ws-title {
+    padding: 10px;
+  }
+
+  .ws_images {
+    width: 100%;
+    max-width: none;
+    min-width: none;
+  }
+
+  #galleryBanner img {
+    height: 180px;
+  }
+
+  #galleryBanner .ws_images > div > img {
+    width: auto;
+    height: 180px;
+  }
+
+  .tall-partition .wide-quarter-tile,
+  .product figure {
+    width: 100%;
+  }
+
+  .tall-partition .col {
+    margin-top: 0;
+  }
+
+  .tile {
+    margin-top: 10px;
+  }
+
+  .tileShuffle .row {
+    margin-top: 0;
+  }
+
+  .item-box-layout .wrapper .tall-partition {
+    height: auto;
+  }
+
+  .layout-6 .row .col:nth-child(5),
+  .layout-6 .row .col:nth-child(6),
+  .tall-partition .col:nth-child(2),
+  .four-square .col:nth-child(3),
+  .four-square .col:nth-child(4) {
+    margin-top: 0;
+  }
+
+  .wide-half-tile figure img,
+  .wide-full-tile figure img {
+    margin-left: -100px;
+  }
+
+  .wide-partition a {
+    display: block;
+  }
+
+  .wide-tall-tile figure,
+  .wide-tall-tile figure {
+    text-align: center;
+  }
+
+  .four-square .wide-partition .wide-quarter-tile {
+    width: auto;
+  }
+
+  #galleryBanner .ws_images .ws_list img {
+    width: auto;
+  }
+
+  .footer .widget li a {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .footer .widget li {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  footer .back-top a {
+    top: -29px;
+    left: 50%;
+    margin-left: -32px;
+  }
+
+  #modal {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    left: 0;
+    top: 0;
+    border: 0;
+    position: fixed;
+  }
+
+  #modal .adMessageBox {
+    position: static;
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat;
+  }
+
+  #modal .adMessageBox .message {
+    position: relative;
+    top: 50%;
+    margin-top: -180px;
+  }
+
+  #close {
+    top: 11px;
+    right: 11px;
+  }
+
+  .category .spacingAdjust .wide-quarter-tile figure {
+    width: 100%;
+  }
+
+  .spacingAdjust {
+    margin: 0 !important;
+  }
+
+  .category .categoryTree.show {
+    width: 100%;
+  }
+
+  .category .categoryTree .treeView {
+    position: static;
+    margin: 0;
+  }
+
+  .magnify-text,
+  .zoomable,
+  .magnifyarea,
+  .zoomstatus,
+  .zoomtracker {
+    display: none;
+  }
+
+  .product-gallery {
+    min-height: auto;
+  }
+
+  .targetarea img {
+    width: auto !important;
+    height: 350px !important;
+    opacity: 1 !important;
+  }
+
+  .product-gallery {
+    min-height: 350px;
+  }
+
+  .product-gallery figure {
+    border: 0;
+    width: auto;
+    display: block;
+    margin: 0 15px;
+  }
+
+  .product-details .product-card {
+    display: block;
+    width: auto;
+    margin: 0 15px;
+    min-height: 440px;
+    position: relative;
+  }
+
+  .accordion {
+    margin: 15px 15px;
+  }
+
+  .accordion p {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .category .filters .layoutTitle,
+  .category .filters ul {
+    display: none;
+  }
+
+  .subscriptionPage h1 {
+    width: 100%;
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .subscriptionPage h2 {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .registrationForm {
+    margin-top: 30px;
+  }
+
+  .subscriptionPage .arrowedBubble {
+    margin: 30px 0;
+  }
+
+  .subscriptionPage .arrowedBubble .cover {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -moz-transform: (90deg);
+    margin-left: -25px;
+    left: 50%;
+    top: -75px;
+  }
+
+  .contactPage .form {
+    width: 100%;
+  }
+
+  .officeAddress {
+    display: none;
+  }
+
+  .aboutus {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 28px;
+  }
 }
 
 body {

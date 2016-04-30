@@ -465,7 +465,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 	background-color:#FFFFFF;
 }
 #galleryBanner  .ws_bullets .ws_bulframe{
-	display:none;
+	display:none !important;
 	bottom:20px;
 	margin-left:4px;
 	overflow:visible;

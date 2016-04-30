@@ -103,6 +103,14 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
           }
         }
       })
+      .state('download', {
+        url:'/download',
+        views: {
+          '': { 
+            templateUrl: 'app/components/download/downloadView.html'
+          }
+        }
+      })
       .state('contact', {
         url:'/contact',
         views: {
@@ -553,7 +561,6 @@ angular.module('eCommerce')
     // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
     DetailService.getFromURL( SERVICE_URL + '/product/'+$stateParams.id)
         .then(function(data) {
-            debugger;
             $scope.data = data.productDetails;
             if(data.pageNavigation) {
                 $rootScope.navigation = data.pageNavigation.categories;     
@@ -561,13 +568,6 @@ angular.module('eCommerce')
                 $rootScope.navigation = UserService.get().data.pageNavigation.categories;
             }
             // $scope.htmlDescription = data.productDescription; 
-        })
-        .catch(function(error) {
-            //
-        })
-        .finally(function() {
-            
-            
         });
 
 
@@ -984,19 +984,19 @@ angular.module('eCommerce')
             var url = SERVICE_URL+"/saveNewUserSubscription";
             var mailService = "http://kalinnovs.com/ecommerce/app/app.sendMail.php";
             
-            $http.post(url, register.user).success(function(data, status) {
-                if(data.subscribedSuccesfully) {
-                    register.pushNotification = data.subscriptionMessage;
-                    register.subscribedFailed = false;
-                    $http.post(mailService, register.user).success(function(data, status) {
-                        register.subscribedSuccesfully = true;
-                    });
-                } else {
-                    register.subscribedFailed = true;
-                    register.subscribedSuccesfully = false;
-                    register.pushNotification = data.errorMessage;
-                }
-            });
+            // $http.post(url, register.user).success(function(data, status) {
+            //     if(data.subscribedSuccesfully) {
+            //         register.pushNotification = data.subscriptionMessage;
+            //         register.subscribedFailed = false;
+            //         $http.post(mailService, register.user).success(function(data, status) {
+            //             register.subscribedSuccesfully = true;
+            //         });
+            //     } else {
+            //         register.subscribedFailed = true;
+            //         register.subscribedSuccesfully = false;
+            //         register.pushNotification = data.errorMessage;
+            //     }
+            // });
 
             // register.user = {};
             register.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};
@@ -1520,7 +1520,7 @@ var featuredimagezoomer = { // the two options for Featured Image Zoomer:
 		},
 
 		init: function($img, options){
-			var targetWrapper = $(options.rootElement) || document.body;
+			var targetWrapper = (options.rootElement) ? $(options.rootElement) : document.body;
 			var setting=$.extend({}, this.dsetting, options), w = $img.width(), h = $img.height(), o = $img.offset(),
 			fiz = this, $tracker, $cursorshade, $statusdiv, $magnifier, lastpage = {pageX: 0, pageY: 0},
 			basezindex = setting.zIndex || this.highestzindex($img);
@@ -1789,6 +1789,10 @@ $(document).ready(function(e) {
             }
         });
 
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            $("body").addClass("mobile");
+        }
+
         $(document).on({
             mouseenter: function () {
                 //stuff to do on mouse enter
@@ -1800,8 +1804,37 @@ $(document).ready(function(e) {
                 $(this).find("a").removeClass("active");
                 $(this).children('.sub-menu').stop(true, true).fadeOut(400);
             }
-            
-        }, "nav ul li");
+        }, "body:not(.mobile) nav ul li");
+
+        $(".mobile nav ul li").on("click", function () {
+            // debugger;
+            if($(this).find("a").eq(0).hasClass("active")) {
+                $(this).find("a").eq(0).removeClass("active");
+                $(this).children('.sub-menu').css("display","none");
+            } else {
+                $(this).find("a").eq(0).addClass("active");
+                $(this).children('.sub-menu').css("display","block");
+            }
+            $(this).siblings().find("> a").each(function() { 
+                $(this).removeClass("active");
+            });
+        });
+
+        $(".mobile nav ul li li a").click(function() {
+            $(this).parent().siblings().find("> a").each(function() { 
+                $(this).removeClass("active");
+            });
+            $(this).next('.sub-menu').css("display","none");
+            $(this).parents(".menuRoot").hide();
+        });
+
+        $(".mobile .desktop-nav .fa").on("click", function(){
+            if($(this).next("ul").css("display") == undefined || $(this).next("ul").css("display") == "none") {
+                $(this).next("ul").show();
+            } else {
+                $(this).next("ul").hide();
+            }
+        });
 
         $('footer .back-top a').click(function(e){
             e.preventDefault();

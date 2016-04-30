@@ -9,7 +9,6 @@ angular.module('eCommerce')
     // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
     DetailService.getFromURL( SERVICE_URL + '/product/'+$stateParams.id)
         .then(function(data) {
-            debugger;
             $scope.data = data.productDetails;
             if(data.pageNavigation) {
                 $rootScope.navigation = data.pageNavigation.categories;     
@@ -17,13 +16,6 @@ angular.module('eCommerce')
                 $rootScope.navigation = UserService.get().data.pageNavigation.categories;
             }
             // $scope.htmlDescription = data.productDescription; 
-        })
-        .catch(function(error) {
-            //
-        })
-        .finally(function() {
-            
-            
         });
 
 

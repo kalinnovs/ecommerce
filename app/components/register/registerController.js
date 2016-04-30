@@ -24,19 +24,19 @@ angular.module('eCommerce')
             var url = SERVICE_URL+"/saveNewUserSubscription";
             var mailService = "http://kalinnovs.com/ecommerce/app/app.sendMail.php";
             
-            $http.post(url, register.user).success(function(data, status) {
-                if(data.subscribedSuccesfully) {
-                    register.pushNotification = data.subscriptionMessage;
-                    register.subscribedFailed = false;
-                    $http.post(mailService, register.user).success(function(data, status) {
-                        register.subscribedSuccesfully = true;
-                    });
-                } else {
-                    register.subscribedFailed = true;
-                    register.subscribedSuccesfully = false;
-                    register.pushNotification = data.errorMessage;
-                }
-            });
+            // $http.post(url, register.user).success(function(data, status) {
+            //     if(data.subscribedSuccesfully) {
+            //         register.pushNotification = data.subscriptionMessage;
+            //         register.subscribedFailed = false;
+            //         $http.post(mailService, register.user).success(function(data, status) {
+            //             register.subscribedSuccesfully = true;
+            //         });
+            //     } else {
+            //         register.subscribedFailed = true;
+            //         register.subscribedSuccesfully = false;
+            //         register.pushNotification = data.errorMessage;
+            //     }
+            // });
 
             // register.user = {};
             register.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};

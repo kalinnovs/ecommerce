@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="col span_6_of_12">
-                            <p class="order-info"><span>Order by Phone:</span> +91 9439186864 or +91 6742355456,  Monday - Saturday 9AM to 6PM IST</p>
+                            <p class="order-info"><span><i class="fa fa-money" aria-hidden="true"></i>Order by Phone:</span> +91 9439186864 / +91 6742355456,  Monday - Saturday 9AM to 6PM IST</p>
                         </div>
                         <div class="col span_4_of_12">
                             <div class="social-strip">
@@ -45,10 +45,10 @@
                                         <a href="#/register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
                                     </li>
                                     <li>
-                                        <a href="#/aboutus" class="noDecoration"><i class="fa fa-home"></i> About Us</a>
+                                        <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-home"></i> About Us</a>
                                     </li>
                                     <li>
-                                        <a href="#/contact" class="noDecoration">
+                                        <a href="#/contact" class="noDecoration contactusLink">
                                             <i class="fa fa-paper-plane" aria-hidden="true"></i> Call Us
                                         </a>
                                     </li>
@@ -61,6 +61,21 @@
             <sticky-menu>
                 <div class="menu">
                     <div class="container">
+                        <div class="social-strip mobileView">
+                            <ul>
+                                <li>
+                                    <a href="#/register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
+                                </li>
+                                <li>
+                                    <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-home"></i> About Us</a>
+                                </li>
+                                <li>
+                                    <a href="#/contact" class="noDecoration contactusLink">
+                                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Call Us
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="row">
                             <div class="col span_2_of_12">
                                 <div class="logo">
@@ -69,8 +84,10 @@
                             </div>
                             <div class="col span_8_of_12 noPadding">
                                 <nav class="desktop-nav">
-                                    <ul class="clearfix">
+                                    <i class="fa fa-bars"></i>
+                                    <ul class="clearfix menuRoot">
                                         <li ng-repeat="(key, value) in navigation">
+                                            <i class="fa fa-plus" aria-hidden="true"></i> 
                                             <a href="javascript:void(0);">{{value.categoryName}}</a>
                                             <div class="sub-menu {{value.categoryClass}}" ng-if="value.subcategoryList">
                                                 <figure ng-if="value.menuImagePath">
@@ -80,7 +97,7 @@
                                                     <li class="clearfix">
                                                         <div class="links">
                                                             <h3>{{value.categoryName}}</h3>
-                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="javascript:void(0);">{{innerValue.categoryName}}</a> 
+                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="#/{{innerValue.categoryDetailsURL}}">{{innerValue.categoryName}}</a> 
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -96,10 +113,10 @@
                                 <div class="social-strip">
                                     <ul>
                                         <li>
-                                            <a href="#/aboutus" class="noDecoration"><i class="fa fa-home"></i>About Us</a>
+                                            <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-home"></i>About Us</a>
                                         </li>
                                         <li>
-                                            <a href="#/contact" class="noDecoration">
+                                            <a href="#/contact" class="noDecoration contactusLink">
                                                 <i class="fa fa-paper-plane" aria-hidden="true"></i>Call Us
                                             </a>
                                         </li>
@@ -132,13 +149,10 @@
                                         <a href="#/aboutus">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="#/delivery">Delivery Information</a>
+                                        <a href="#/contact">Contact Us</a>
                                     </li>
                                     <li>
-                                        <a href="#/privacy">Privacy Policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#/terms">Terms & Conditions</a>
+                                        <a href="#/register">Subscribe Here</a>
                                     </li>
                                 </ul>
                             </div>
@@ -148,7 +162,10 @@
                                 <h3>Information</h3>
                                 <ul>
                                     <li>
-                                        <a href="#/aboutus">About Us</a>
+                                        <a href="#/returns">Return and Refund</a>
+                                    </li>
+                                    <li>
+                                        <a href="#/download">Download Catalogs</a>
                                     </li>
                                     <li>
                                         <a href="#/delivery">Delivery Information</a>
@@ -200,18 +217,17 @@
 
         <!-- Social Media -->
         <div class="social-icon sideSticky">
-            <a class="rss" href="javascript:void(0);" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a> 
-            <a class="twet" href="javascript:void(0);" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a> 
-            <a class="fb" href="javascript:void(0);" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a> 
-            <a class="google" href="javascript:void(0);" title="Google Plus"><i class="fa fa-google-plus" aria-hidden="true"></i>
+            <a class="twet" href="https://twitter.com/Haastika1" target="_blank" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a> 
+            <a class="fb" href="https://www.facebook.com/haastika1" target="_blank" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a> 
+            <a class="google" href="https://plus.google.com/u/0/103421050828978737975" target="_blank" title="Google Plus"><i class="fa fa-google-plus" aria-hidden="true"></i>
             </a> 
-            <a class="pin" href="javascript:void(0);" title="Pin Interest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+            <a class="pin" href="https://in.pinterest.com/haastika/" target="_blank" title="Pin Interest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
         </div>
         <!-- Social Media -->
 
         <div class="adMessageBox">
             <div class="message">
-                <h1>GET AN ADDITIONAL 5% DISCOUNT BY REGISTERING NOW !!</h1>
+                <h1>GET AN ADDITIONAL 15% DISCOUNT BY SUBSCRIBING NOW !!</h1>
                 <a href="#/register" class="tapToClose">Register Here</a>
             </div>
         </div>
