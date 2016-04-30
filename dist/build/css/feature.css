@@ -4790,3 +4790,58 @@ body {
 .editOnFocus.stock input {
   width: 50px;
 }
+
+.policy {
+  color: #08233e;
+  font-family: 'Dosis', sans-serif;
+  margin: 0px auto;
+  border: 3px solid #dedede;
+  font-size: 16px;
+  width: 1140px;
+  padding: 50px 50px 80px 50px;
+}
+
+.policy .header {
+  padding-left: 20px;
+}
+
+.policy .row {
+  width: auto;
+}
+
+.policy .title {
+  font-family: "Dosis",sans-serif;
+  font-size: 40px;
+  font-weight: 300;
+  display: inline-block;
+}
+
+.txt_heading {
+  font-size: 25px;
+  margin: 25px 0 5px 0;
+}
+
+.txt_body {
+  text-indent: 2.5em;
+}
+
+.txt_heading .glyphicon {
+  font-size: 18px;
+}
+
+.policy ul {
+  list-style: square;
+  margin: 5px 0 5px 50px;
+  text-indent: 0;
+}
+
+.policy ol {
+  list-style: decimal;
+  margin: 5px 0 5px 50px;
+  text-indent: 0;
+}
+
+.policy ol li {
+  margin: 0 0 5px 5px;
+  padding-left: 10px;
+}

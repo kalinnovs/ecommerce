@@ -122,6 +122,38 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
           }
         }
       })
+      .state('privacyPolicy', {
+        url:'/privacyPolicy',
+        views: {
+          '': { 
+            templateUrl: 'assets/policies/privacyPolicy.html'
+          }
+        }
+      })
+      .state('deliveryOptions', {
+        url:'/deliveryOptions',
+        views: {
+          '': { 
+            templateUrl: 'assets/policies/deliveryOptions.html'
+          }
+        }
+      })
+      .state('returnPolicy', {
+        url:'/returnPolicy',
+        views: {
+          '': { 
+            templateUrl: 'assets/policies/returnPolicy.html'
+          }
+        }
+      })
+      .state('termsCondition', {
+        url:'/termsCondition',
+        views: {
+          '': { 
+            templateUrl: 'assets/policies/termsCondition.html'
+          }
+        }
+      })
     ;
 
     // We need to setup some parameters for http requests
