@@ -163,6 +163,9 @@ header nav li a:hover, header nav li a.active { background: #f9f9f9; color: #000
 header nav ul > li .sub-menu  { display: none; position: absolute; top:35px; /* left: 0px; */ left: -260px; background:#f9f9f9;z-index: 99999999;}
 header nav ul > li ul li {width: 100%; border: none;}
 header nav ul > li ul li a{display: block; padding: 0}
+header nav ul > li .sub-menu.catalog {width: 151px;left: 0}
+header nav ul > li .sub-menu.catalog .links {padding-left: 10px;}
+
 .menu .social-strip { margin-top: 8px; position: relative; overflow: hidden; height: 28px; opacity: 0; }
 .menu .social-strip ul { position: absolute; top: 66px; right: 0; transition: top .2s;-o-transition: top .2x; -moz-transition: top .2s; -ms-transition: top .2s; -webkit-transition: top .2s;  }
 .menu .logo { opacity: 0; vertical-align: top; position: relative; overflow: hidden; height: 36px; }
