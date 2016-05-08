@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('HomeCtrl', function ($scope, $rootScope, UserService, SERVICE_URL) {
+  .controller('HomeCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL) {
     var home = this;
     var scoper = $scope;
     // debugger;
@@ -11,6 +11,7 @@ angular.module('eCommerce')
         .then(function(data) {
           if(data.success === undefined || data.success) {
             $rootScope.navigation = data.pageNavigation.categories;  
+            $scope.$broadcast('dataloaded');
           } else {
             // Else pick local JSON
           }
@@ -21,6 +22,14 @@ angular.module('eCommerce')
         .finally(function() {
             //
         })
+
+
+    $scope.$on('dataloaded', function() {
+        $timeout(function () { 
+            window.dataLoaded = true;
+        }, 100, false);
+    });
+
 
     this.shuffleTiles = function() {
       var parent = $(".tileShuffle");

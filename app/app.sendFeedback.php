@@ -9,7 +9,8 @@
 	$company = $request->company;
 	$message = $request->message;
 	$subject = "Feedback Received !!";
-	$emailAddr = "pdwibedi@gmail.com";
+	$emailAddr = "support@haastika.com, biswajit.swain@haastika.com";
+	// $emailAddr = "pdwibedi@gmail.com";
 
 	$message = "
 	<html>
@@ -42,7 +43,7 @@
 
 	if(@mail($emailAddr,$subject,$message,$headers)) {
 	  	$mailSentStatus ['status'] = true;
-		$mailSentStatus ['message'] = "Success";
+		$mailSentStatus ['message'] = "Mail sent successfully. Thank you for giving us your feedback.";
 		$mailSentStatus ['sentSuccesfully'] = true;
 	} else {
 	  	$mailSentStatus ['status'] = false;

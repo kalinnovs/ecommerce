@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('RegisterCtrl', function ($scope, $rootScope, $location, UserService, $http, BASE_URI, SERVICE_URL, $firebaseObject) {
+  .controller('RegisterCtrl', function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, SERVICE_URL, $firebaseObject) {
         var register = this;
         var scoper = $scope;
 
@@ -11,37 +11,39 @@ angular.module('eCommerce')
         
         this.register = function() {
             
-            /* Firebase profile entry code for time being STARTS */
-
-            // var ref = new Firebase(BASE_URI+ "/eCommerce/register/registeration");
-            // var newMessageRef = ref.push();
-            //     newMessageRef.set(register.user);
-            // var path = newMessageRef.toString();
-
-            /* Firebase profile entry code for time being ENDS */
-
             /* Real Time Service STARTS */
             var url = SERVICE_URL+"/saveNewUserSubscription";
-            var mailService = "http://kalinnovs.com/ecommerce/app/app.sendMail.php";
+            var mailService = "http://haastika.com/app/app.sendMail.php";
             
-            // $http.post(url, register.user).success(function(data, status) {
-            //     if(data.subscribedSuccesfully) {
-            //         register.pushNotification = data.subscriptionMessage;
-            //         register.subscribedFailed = false;
-            //         $http.post(mailService, register.user).success(function(data, status) {
-            //             register.subscribedSuccesfully = true;
-            //         });
-            //     } else {
-            //         register.subscribedFailed = true;
-            //         register.subscribedSuccesfully = false;
-            //         register.pushNotification = data.errorMessage;
-            //     }
-            // });
-
-            // register.user = {};
-            register.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};
-            $scope.form.$setPristine();
-            // $location.path( "/home" );
+            $http({
+              method: 'POST',
+              url: url,
+              data: register.user,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }).then(function successCallback(data, status) {
+                if(data.data.subscribedSuccessfully) {
+                    register.pushNotification = data.data.subscriptionMessage;
+                    register.subscribedFailed = false;
+                    register.user.promoCode = data.data.promoCode;
+                    // $http.post(mailService, register.user).success(function(data, status) {
+                    //     register.subscribedSuccesfully = true;
+                    //     register.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};
+                    //     $scope.form.$setPristine();
+                    //     $timeout(function() {
+                    //       $location.path( "/home" );
+                    //     }, 3000);
+                    // });
+                } else {
+                    register.subscribedFailed = true;
+                    register.subscribedSuccesfully = false;
+                    register.pushNotification = data.data.errorMessage;
+                }
+              }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+              });
         };
     
     })

@@ -22,10 +22,14 @@
                     </figure>
                     <div class="detail">
                         <h4>{{tile.layout.layout6.tilesList[1].productTileDetails.productName}}</h4>
-                        <span>
-                            <i class="fa fa-{{tile.layout.layout6.tilesList[1].productTileDetails.productCurrency | lowercase}}"></i> 
-                            {{tile.layout.layout6.tilesList[1].productTileDetails.productPrice}}
-                        </span>
+                        <div class="priceChooser">
+                            <div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[1].productTileDetails.productPriceOptions">
+                                <span class="price {{priceValue.currencyCode | lowercase}}">
+                                    <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i> 
+                                    {{priceValue.price}}
+                                </span>
+                            </div>
+                        </div>
                         <span class="availability">Availability: <span>{{tile.layout.layout6.tilesList[1].productTileDetails.productAvailablility}}</span></span>
                     </div>
                 </div>
@@ -39,10 +43,14 @@
                     </figure>
                     <div class="detail">
                         <h4>{{tile.layout.layout6.tilesList[2].productTileDetails.productName}}</h4>
-                        <span>
-                            <i class="fa fa-{{tile.layout.layout6.tilesList[2].productTileDetails.productCurrency | lowercase}}"></i> 
-                            {{tile.layout.layout6.tilesList[2].productTileDetails.productPrice}}
-                        </span>
+                        <div class="priceChooser">
+                            <div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[2].productTileDetails.productPriceOptions">
+                                <span class="price {{priceValue.currencyCode | lowercase}}">
+                                    <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i> 
+                                    {{priceValue.price}}
+                                </span>
+                            </div>
+                        </div>
                         <span class="availability">Availability: <span>{{tile.layout.layout6.tilesList[2].productTileDetails.productAvailablility}}</span></span>
                     </div>
                 </div>
@@ -56,10 +64,14 @@
                     </figure>
                     <div class="detail">
                         <h4>{{tile.layout.layout6.tilesList[3].productTileDetails.productName}}</h4>
-                        <span>
-                            <i class="fa fa-{{tile.layout.layout6.tilesList[3].productTileDetails.productCurrency | lowercase}}"></i> 
-                            {{tile.layout.layout6.tilesList[3].productTileDetails.productPrice}}
-                        </span>
+                        <div class="priceChooser">
+                            <div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[3].productTileDetails.productPriceOptions">
+                                <span class="price {{priceValue.currencyCode | lowercase}}">
+                                    <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i> 
+                                    {{priceValue.price}}
+                                </span>
+                            </div>
+                        </div>
                         <span class="availability">Availability: <span>{{tile.layout.layout6.tilesList[3].productTileDetails.productAvailablility}}</span></span>
                     </div>
                 </div>
@@ -85,10 +97,14 @@
                     </figure>
                     <div class="detail">
                         <h4>{{tile.layout.layout6.tilesList[5].productTileDetails.productName}}</h4>
-                        <span>
-                            <i class="fa fa-{{tile.layout.layout6.tilesList[5].productTileDetails.productCurrency | lowercase}}"></i> 
-                            {{tile.layout.layout6.tilesList[5].productTileDetails.productPrice}}
-                        </span>
+                        <div class="priceChooser">
+                            <div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[5].productTileDetails.productPriceOptions">
+                                <span class="price {{priceValue.currencyCode | lowercase}}">
+                                    <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i> 
+                                    {{priceValue.price}}
+                                </span>
+                            </div>
+                        </div>
                         <span class="availability">Availability: <span>{{tile.layout.layout6.tilesList[5].productTileDetails.productAvailablility}}</span></span>
                     </div>
                 </div>

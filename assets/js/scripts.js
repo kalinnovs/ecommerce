@@ -1,5 +1,6 @@
 $(document).ready(function(e) {
 
+    window.dataLoaded = false;
     setTimeout( function() { 
 
         // Loading Finish
@@ -19,6 +20,8 @@ $(document).ready(function(e) {
 
         if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
             $("body").addClass("mobile");
+        } else {
+            $("body").removeClass("mobile");
         }
 
         $(document).on({
@@ -34,34 +37,49 @@ $(document).ready(function(e) {
             }
         }, "body:not(.mobile) nav ul li");
 
-        $(".mobile nav ul li").on("click", function () {
-            // debugger;
-            if($(this).find("a").eq(0).hasClass("active")) {
-                $(this).find("a").eq(0).removeClass("active");
+        $(document).on("click", ".mobile nav ul li", function (e) {
+            e.preventDefault();
+            if($(this).hasClass("active")) {
+                $(this).removeClass("active");
                 $(this).children('.sub-menu').css("display","none");
+                $(this).find(".fa-minus").hide();
+                $(this).find(".fa-plus").show();
             } else {
-                $(this).find("a").eq(0).addClass("active");
+                $(this).addClass("active");
                 $(this).children('.sub-menu').css("display","block");
+                $(this).find(".fa-minus").show();
+                $(this).find(".fa-plus").hide();
             }
-            $(this).siblings().find("> a").each(function() { 
+            $(this).siblings().each(function() { 
                 $(this).removeClass("active");
             });
         });
 
-        $(".mobile nav ul li li a").click(function() {
+        $(document).on("click", ".mobile nav ul li li a", function(e) {
+            e.preventDefault();
             $(this).parent().siblings().find("> a").each(function() { 
-                $(this).removeClass("active");
+                $(this).parent().removeClass("active");
             });
             $(this).next('.sub-menu').css("display","none");
             $(this).parents(".menuRoot").hide();
         });
 
-        $(".mobile .desktop-nav .fa").on("click", function(){
+        $(document).on("click", ".mobile .desktop-nav a.mobileNavBtn", function(e){
+            e.preventDefault();
             if($(this).next("ul").css("display") == undefined || $(this).next("ul").css("display") == "none") {
                 $(this).next("ul").show();
             } else {
                 $(this).next("ul").hide();
             }
+        });
+
+        $(document).on("click", ".currencyConverter a, .currencyChooser a", function(e){
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+            var selectedCurrency = $(this).attr("rel");
+            $(this).parents(".menuRoot").hide()
+            $(".price.inr, .price.usd, .price.gbp").hide();
+            $(".price."+selectedCurrency).show();
         });
 
         $('footer .back-top a').click(function(e){
@@ -85,12 +103,29 @@ $(document).ready(function(e) {
             window.modalComponent.close();
         });
 
-        $.ajax({url: "http://kalinnovs.com/ecommerce/app/app.pageCounter.php", success: function(result){
-            var result = JSON.parse(result);
-            $(".pageCounter").html(result.counter);
-        }});
-    
+        $.ajax({
+              method: 'POST',
+              url: "http://haastika.com/app/app.pageCounter.php",
+              contentType: "application/json",
+              dataType: 'jsonp'
+            }).then(function successCallback(data, status) {
+                var result = JSON.parse(data.data);
+                $(".pageCounter").html(data.data.counter);
+            }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        });
+
+        // $.ajax({url: "http://haastika.com/app/app.pageCounter.php", success: function(result){
+        //     var result = JSON.parse(result);
+        //     $(".pageCounter").html(result.counter);
+        // }});
+        
 
     }, 1500);
+
+    $(window.dataLoaded).change(function() {
+      alert( "Handler for change called." );
+    });
 
 });

@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html ng-app="eCommerce" lang="en-US">
+<html ng-app="eCommerce" lang="en-IN">
 <head>
-    <!-- META TAGS -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <!-- Title -->
-    <title>eCommerce</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="Description" content="Haastika give the artisans the deserved value to their products at the same time find market for the products they produce. Haastika deals with hand made product, natural products no artificial or chemical used etc" />
+<meta property="og:title" content="Haastika" />
+<meta property="og:description" content="Haastika give the artisans the deserved value to their products at the same time find market for the products they produce." />
+<meta property="og:url" content="http://www.haastika.com/" />
+<meta property="og:locale" content="en_IN" />
+<meta property="og:image" content="http://haastika.com/assets/images/logo.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Haastika" />
 
-    <link href="http://fonts.googleapis.com/css?family=Gudea:400normal" rel="stylesheet" type='text/css'>
-    <link href="http://fonts.googleapis.com/css?family=Anton:400normal" rel="stylesheet" type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Dosis:300normal" rel="stylesheet" type='text/css'>
+<title>Haastika</title>
+<link rel="icon" href="assets/images/favicon.ico" sizes="16x16" type="image/png">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-    <!-- <link href="assets/css/bootstrap.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="dist/build/css/feature.css">
+<link href="http://fonts.googleapis.com/css?family=Gudea:400normal" rel="stylesheet" type='text/css'>
+<link href="http://fonts.googleapis.com/css?family=Anton:400normal" rel="stylesheet" type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Dosis:300normal" rel="stylesheet" type='text/css'>
+
+<link rel="stylesheet" href="dist/build/css/feature.css">
     
 </head>
 <body>
@@ -28,7 +36,20 @@
         <!-- HEADER -->
         <header>
             <div class="header-top">
-                <div class="container">
+                <div class="container1">
+                    <div class="row currencyConverter">
+                        <div class="col span_3_of_12">
+                            <a href="javascript:void(0);" title="Indian Rupee" rel="inr" class="active india">
+                                <i class="fa fa-inr" aria-hidden="true"></i> INR
+                            </a>
+                            <a href="javascript:void(0);" title="American Dollar" rel="usd" class="usd">
+                                <i class="fa fa-usd" aria-hidden="true" class="usd"></i> USD
+                            </a>
+                            <a href="javascript:void(0);" title="European Pounds" rel="gbp" class="euro">
+                                <i class="fa fa-gbp" aria-hidden="true" class="euro"></i> GBP
+                            </a>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col span_2_of_12">
                             <div class="logo">
@@ -36,20 +57,23 @@
                             </div>
                         </div>
                         <div class="col span_6_of_12">
-                            <p class="order-info"><span><i class="fa fa-money" aria-hidden="true"></i>Order by Phone:</span> +91 9439186864 / +91 6742355456,  Monday - Saturday 9AM to 6PM IST</p>
+                            <p class="order-info"><span><i class="fa fa-money" aria-hidden="true"></i>Order by Phone:</span> +91 9438371760 / +91 6742355456 </p>
                         </div>
                         <div class="col span_4_of_12">
                             <div class="social-strip">
                                 <ul>
                                     <li>
+                                        <a href="#/home" class="noDecoration homeLink"><i class="fa fa-home"></i> Home</a>
+                                    </li>
+                                    <li>
                                         <a href="#/register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
                                     </li>
                                     <li>
-                                        <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-home"></i> About Us</a>
+                                        <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-users"></i> About Us</a>
                                     </li>
                                     <li>
                                         <a href="#/contact" class="noDecoration contactusLink">
-                                            <i class="fa fa-paper-plane" aria-hidden="true"></i> Call Us
+                                            <i class="fa fa-paper-plane" aria-hidden="true"></i> Reach Us
                                         </a>
                                     </li>
                                 </ul>
@@ -67,11 +91,11 @@
                                     <a href="#/register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
                                 </li>
                                 <li>
-                                    <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-home"></i> About Us</a>
+                                    <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-users"></i> About Us</a>
                                 </li>
                                 <li>
                                     <a href="#/contact" class="noDecoration contactusLink">
-                                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Call Us
+                                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Reach Us
                                     </a>
                                 </li>
                             </ul>
@@ -84,10 +108,13 @@
                             </div>
                             <div class="col span_8_of_12 noPadding">
                                 <nav class="desktop-nav">
-                                    <i class="fa fa-bars"></i>
+                                    <a href="javascript:void(0);" class="mobileNavBtn fa fa-bars"></a>
                                     <ul class="clearfix menuRoot">
                                         <li ng-repeat="(key, value) in navigation">
-                                            <i class="fa fa-plus" aria-hidden="true"></i> 
+                                            <a href-"javscript:void(0);" class="activator">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                                <i class="fa fa-minus" aria-hidden="true"></i> 
+                                            </a>
                                             <a href="javascript:void(0);">{{value.categoryName}}</a>
                                             <div class="sub-menu {{value.categoryClass}}" ng-if="value.subcategoryList">
                                                 <figure ng-if="value.menuImagePath">
@@ -104,7 +131,10 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <i class="fa fa-plus" aria-hidden="true"></i> 
+                                            <a href-"javscript:void(0);" class="activator">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                                <i class="fa fa-minus" aria-hidden="true"></i> 
+                                            </a>
                                             <a href="javascript:void(0);">Download Catalog</a>
                                             <div class="sub-menu catalog">
                                                 <ul class="clearfix">
@@ -126,6 +156,17 @@
                                                 </ul>
                                             </div>
                                         </li>
+                                        <li class="currencyChooser">
+                                            <a href="javascript:void(0);" title="Indian Rupee" rel="inr" class="active">
+                                                <i class="fa fa-inr" aria-hidden="true"></i> INR
+                                            </a>
+                                            <a href="javascript:void(0);" title="American Dollar" rel="usd">
+                                                <i class="fa fa-usd" aria-hidden="true"></i> USD
+                                            </a>
+                                            <a href="javascript:void(0);" title="European Pound" rel="gbp">
+                                                <i class="fa fa-GBP" aria-hidden="true"></i> GBP
+                                            </a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -133,11 +174,11 @@
                                 <div class="social-strip">
                                     <ul>
                                         <li>
-                                            <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-home"></i>About Us</a>
+                                            <a href="#/home" class="noDecoration homeLink"><i class="fa fa-home"></i>Home</a>
                                         </li>
                                         <li>
                                             <a href="#/contact" class="noDecoration contactusLink">
-                                                <i class="fa fa-paper-plane" aria-hidden="true"></i>Call Us
+                                                <i class="fa fa-paper-plane" aria-hidden="true"></i>Reach Us
                                             </a>
                                         </li>
                                     </ul>
@@ -158,18 +199,18 @@
         </div>
         <!-- FOOTER -->
         <div class="footer-wrap">
-            <div class="container">
+            <div class="container1">
                 <div class="row">
                     <div class="footer clearfix">
                         <div class="col span_4_of_12">
                             <div class="widget">
-                                <h3>Customer Service</h3>
+                                <h3>Sitemap</h3>
                                 <ul>
                                     <li>
                                         <a href="#/aboutus">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="#/contact">Contact Us</a>
+                                        <a href="#/contact">Reach Us</a>
                                     </li>
                                     <li>
                                         <a href="#/register">Subscribe Here</a>
@@ -182,29 +223,26 @@
                                 <h3>Information</h3>
                                 <ul>
                                     <li>
-                                        <a href="#/returns">Return and Refund</a>
+                                        <a href="#/returnPolicy">Return and Refund</a>
                                     </li>
                                     <li>
-                                        <a href="#/download">Download Catalogs</a>
+                                        <a href="#/deliveryOptions">Delivery Information</a>
                                     </li>
                                     <li>
-                                        <a href="#/delivery">Delivery Information</a>
+                                        <a href="#/privacyPolicy">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a href="#/privacy">Privacy Policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#/terms">Terms & Conditions</a>
+                                        <a href="#/termsCondition">Terms & Conditions</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col span_4_of_12">
                             <div class="widget">
-                                <h3>Contact us</h3>
+                                <h3>Reach us</h3>
                                 <ul>
                                     <li class="address">
-                                        <span>Haastika Handicraft</span>
+                                        <span>Haastika</span>
                                         <span>HIG-A/16, H.B Colony</span>
                                         <span>Baramunda, Bhubaneswar</span>
                                         <span>Odisha 751003, India</span>
@@ -213,7 +251,7 @@
                                         <i class="fa fa-envelope" aria-hidden="true"></i> support@haastika.com 
                                     </li>
                                     <li>
-                                        <i class="fa fa-phone" aria-hidden="true"></i> +91 6742355456 / +91 9439186864
+                                        <i class="fa fa-phone" aria-hidden="true"></i> +91 6742355456 / +91 9438371760
                                     </li>
                                 </ul>
                             </div>
@@ -228,7 +266,12 @@
                         <div class="col span_2_of_12 back-top">
                             <a href="javascript:void(0);"><img alt="" src="assets/images/icons/back.png"></a>
                         </div>
-                        <div class="col span_5_of_12 alignRight pageCounter"></div>
+                        <div class="col span_2_of_12 pageCounter"></div>
+                        <div class="col span_5_of_12 alignRight">
+                            <a href="http://www.kalinnovs.com" target="_blank">
+                                Site designed &amp; developed by Kalinnovs.
+                            </a>
+                        </div>
                     </footer>
                 </div>
             </div>

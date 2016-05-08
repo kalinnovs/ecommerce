@@ -3,11 +3,14 @@ require("../parallax.js");
 require("../wowslider.js");
 require("../overlay.js");
 require("../scripts.js");
+require("../jqzoom.js");
+
 
 
 require("../../../vendor/js/angular-ui-router.min.js");
 require("../../../app/app.routes.js");
 require("../../../app/app.services.js");
+require("../../../app/directives/limitCharacterRender/limitCharacterRender-directive.js");
 
 
 require("../../../app/components/home/homeController.js");

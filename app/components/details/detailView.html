@@ -1,7 +1,7 @@
 <!-- Content -->
 <div class="details clearfix detailsPage">
 	<div class="container row equiHeight">
-		<div class="col span_6_of_12 noPadding">
+		<div class="col span_6_of_12 noPadding" style="min-height: 100px">
 			<div class="product-gallery">
 				<div class="span_3_of_12 col noPadding zoomable">
 					<ul>
@@ -21,6 +21,19 @@
 					</figure>
 				</div>
 			</div>
+			<!-- <div class="product-gallery">
+				<div class="bzoom_wrap col span_9_of_12">
+					<div class="span_9_of_12 col noPadding">
+						<span class="magnify-text"><i class="fa fa-search-plus" aria-hidden="true"></i> Hover to Zoom</span>
+				        <ul id="bzoom">
+				        	<li ng-repeat="(key, value) in data.imageGallery" class="zoomable thumbs">
+				        		<img class="bzoom_thumb_image" ng-src="{{value.imagePath}}thumb/{{value.imageName}}"/>
+				        		<img class="bzoom_big_image" ng-src="{{value.imagePath}}{{value.imageName}}"/>
+				        	</li>
+				        </ul>
+			        </div>
+			    </div>
+		    </div> -->
 		</div>
 		<div class="col span_6_of_12 noPadding">
 			<div class="product-details">
@@ -34,20 +47,35 @@
 							<span class="ratingOverlay" style="width: {{data.averageProductRating/5*100}}%"></span>
 						</div>
 					</div>
-					<h3 class="price">
+					<!-- <h3 class="price">
 						<i class="fa fa-{{data.productCurrency | lowercase}}"></i>
 						<span>{{data.productPrice}}</span>
-					</h3>
+					</h3> -->
+					<div class="priceChooser">
+            			<div ng-repeat="(key, priceValue) in data.productPriceOptions">
+            				<h3 class="price {{priceValue.currencyCode | lowercase}}">
+                				<i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i> 
+                				{{priceValue.price}}
+                			</h3>
+                		</div>
+                	</div>
 					<p class="available">{{data.productAvailablility}}</p>
 					<a class="offer" href="#/register">
 						<i class="fa fa-certificate" aria-hidden="true"></i>Check Offer
 					</a>
+					<div class="dimentionCard">
+						<h5>Specifications</h5>
+						<p><span>Height</span><span>{{data.height}} {{data.dimensionUnit | lowercase}}</span></p>
+						<p><span>Width</span><span>{{data.width}} {{data.dimensionUnit | lowercase}}</span></p>
+						<p><span>Depth</span><span>{{data.depth}} {{data.dimensionUnit | lowercase}}</span></p>
+						<p><span>Weight</span><span>{{data.weight}} Gm.</span></p>
+					</div>
 					
 					<div class="callDetails">
 						<i class="fa fa-cart-plus" aria-hidden="true"></i> <h5>Order by Phone</h5>
-						<span>Cell: +91 9439186864</span>
+						<span>Cell: +91 9438371760</span>
 						<span>Offc: +91 6742355456</span>
-						<a href="#/delivery" class="delivery">
+						<a href="#/deliveryOptions" class="delivery">
 							<i class="fa fa-truck" aria-hidden="true"></i>Check Delivery Options
 						</a>
 					</div>
@@ -60,6 +88,7 @@
 				<ul>
 					<li><a href="javascript:void(0);" name="description" class="active">Description</a></li>
 					<li><a href="javascript:void(0);" name="specification">Specification</a></li>
+					<li><a href="javascript:void(0);" name="usage">Usage</a></li>
 				</ul>
 				<div class="panels">
 					<div class="description">
@@ -74,6 +103,12 @@
 							<p><span>Height: </span>{{data.height}} {{data.dimensionUnit | lowercase}}</p>
 							<p><span>Width: </span>{{data.width}} {{data.dimensionUnit | lowercase}}</p>
 							<p><span>Depth: </span>{{data.depth}} {{data.dimensionUnit | lowercase}}</p>
+							<p><span>Weight: </span>{{data.weight}} Gm.</p>
+						</div>
+					</div>
+					<div class="usage" style="display: none;">
+						<div>
+							<h5>{{data.use}}</h5>
 						</div>
 					</div>
 				</div>
@@ -82,19 +117,32 @@
 	</div>
 </div>
 
-
 <script type="text/javascript">
 $(document).ready(function(e) {
 
     $ = jQuery;
 
+    
+
+    // Reset currency icons for Desktop
+    $(".social-strip a").removeClass("active");
+    $(".currencyConverter a, .currencyChooser a").removeClass("active");
+    $(".currencyConverter a[rel='inr']").addClass("active");
+    $(".currencyChooser a[rel='inr']").addClass("active");
+
     // debugger;
     setTimeout(function() { 
-    	$('#zoomable').addimagezoom({ rootElement: '.detailsPage'});
+  //   	$("#bzoom").zoom({
+		// 	zoom_area_width: 300,
+		//     autoplay_interval :3000,
+		//     small_thumbs : 4,
+		//     autoplay : false
+		// });
+    	// $('#zoomable').addimagezoom({ rootElement: '.detailsPage'});
     	if(! /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			$(".equiHeight").find("div").eq(1).height($(".equiHeight").find("div").eq(0).height()); 
 		}
-    }, 170);
+    }, 1700);
     
     $(".accordion ul a").click(function() { 
     	$(".accordion a").removeClass("active");

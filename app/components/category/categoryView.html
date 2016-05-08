@@ -46,16 +46,21 @@
 				                </figure>
 				                <div class="detail">
 				                    <h4>{{value.productName}}</h4>
-				                    <p ng-if="value.productDescription" ng-bind-html="getHtml(value.htmlDescription)"></p>
+				                    <p class="productDescription" limit-character-render char-length="400" model-bind="value.productDescription">{{value.productDescription}}</p>
 				                    <div class="gridCol">
 				                    	<div class="ratingBG">
 											<span class="ratingOverlay" style="width: {{value.averageProductRating/5*100}}%"></span>
 										</div>
 				                    	<span class="availability">Availability: <span>{{value.productAvailablility}}</span></span>
 									</div>
-		                    		<span class="price">
-		                    			<i class="fa fa-{{value.productCurrency | lowercase}}"></i> {{value.productPrice}}
-		                    		</span>
+		                    		<div class="priceChooser">
+		                    			<div ng-repeat="(key, priceValue) in value.productPriceOptions">
+		                    				<span class="price {{priceValue.currencyCode | lowercase}}">
+			                    				<i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i> 
+			                    				{{priceValue.price}}
+			                    			</span>
+			                    		</div>
+			                    	</div>
 				                </div>
 				            </div>
 				        </a>
@@ -65,3 +70,17 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(e) {
+
+    $ = jQuery;
+
+    // Reset currency icons for Desktop
+    $(".social-strip a").removeClass("active");
+    $(".currencyConverter a, .currencyChooser a").removeClass("active");
+    $(".currencyConverter a[rel='inr']").addClass("active");
+    $(".currencyChooser a[rel='inr']").addClass("active");
+
+});
+</script>

@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="shipping">
-                    <p><span>FREE SHIPPING</span> Offered by HAASTIKA</p><a class="button" href="javascript:void(0);">Learn more</a>
+                    <p><span>FREE SHIPPING</span> Offered by HAASTIKA <sup>*</sup></p><a class="button" href="#/deliveryOptions">Learn more</a>
                 </div>
             </div>
         </div>
@@ -33,6 +33,7 @@
                 scaleControl: false,
                 scrollwheel: false,
                 zoomControl: false,
+                draggable: false,
                 panControl:false,
                 streetViewControl: false,
                 mapTypeControl:false,
@@ -42,7 +43,7 @@
 
             var mapElement = document.getElementById('map_canvas');
             var map = new google.maps.Map(mapElement, mapOptions);
-            var image = new google.maps.MarkerImage('http://kalinnovs.com/ecommerce/assets/images/map-pin.png');
+            var image = new google.maps.MarkerImage('http://haastika.com/assets/images/map-pin.png');
             var marker = new google.maps.Marker({
                 position: map.getCenter(),
                 map: map,
@@ -50,7 +51,7 @@
                 labelClass: 'pin'
             });
 
-            var contentString = '<div id="map-bubble"><div id="map-address"><h5>Haastika Handicraft</h5><p>HIG-A/16, H.B Colony, Baramunda, Bhubaneswar, Odisha 751003, India</p><a class="button" href="https://www.google.com/maps/place/Haastika+Handicraft/@20.2855383,85.7933791,17z/data=!4m6!1m3!3m2!1s0x3a19a788107083c1:0xb6bf1b3ad81dbc7b!2sHaastika+Handicraft!3m1!1s0x3a19a788107083c1:0xb6bf1b3ad81dbc7b" target="_blank">driving directions</a></div></div>';
+            var contentString = '<div id="map-bubble"><div id="map-address"><h5>Haastika</h5><p>HIG-A/16, H.B Colony, Baramunda, Bhubaneswar, Odisha 751003, India</p><a class="button" href="https://www.google.com/maps/place/Haastika+Handicraft/@20.2855383,85.7933791,17z/data=!4m6!1m3!3m2!1s0x3a19a788107083c1:0xb6bf1b3ad81dbc7b!2sHaastika+Handicraft!3m1!1s0x3a19a788107083c1:0xb6bf1b3ad81dbc7b" target="_blank">driving directions</a></div></div>';
             var infowindow = new google.maps.InfoWindow({content: contentString});
             var center;
 
@@ -98,5 +99,14 @@
             images:0
         });
     }
+
+    // Reset currency icons for Desktop
+    $(".social-strip a").removeClass("active");
+    $(".currencyConverter a, .currencyChooser a").removeClass("active");
+    $(".currencyConverter a[rel='inr']").addClass("active");
+    $(".currencyChooser a[rel='inr']").addClass("active");
+
+    $(".social-strip .homeLink").addClass("active");
+
 
 </script>

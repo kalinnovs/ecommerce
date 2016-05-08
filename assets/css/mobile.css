@@ -9,33 +9,55 @@
   .mobileRendering { padding: 0 15px; }
 
   header { min-height: 200px }
+  .header-top { height: 75px; }
   .social-strip { margin-top: 8px; }
   .social-strip ul { text-align: center; }
-  .social-strip ul li a { color: #fff }
+  .social-strip ul li a { color: #fff; font-size: 85%; }
   header .order-info { padding-top: 54px; }
   .order-info, .social-icon { display: none }
   .order-info { padding-top: 54px; }
   .order-info span { display: block;  }
   .menu .social-strip ul { position: static; }
   .order-info { display: block; position: absolute; width: 80%; left: 10%; }
+  .shipping { font-size: 15px; }
+  .shipping p { margin-right: 0; padding-left: 25px; display: block; font-size: 100%; }
+  .shipping a { display: none; }
+  .pageCounter { text-align: center; }
+  .footer { padding: 25px 15px 40px; }
+  .dimentionCard {  margin: 20px 20px; }
 
-  .mobile .nav-sticky .stickyMenu .desktop-nav { position: static; display: none }
+  .mobile .nav-sticky .stickyMenu .desktop-nav { display: block; right: 14px; top: 5px; position: absolute; z-index: 2; font-size: 26px; }
   .mobile .stickyMenu .logo, .mobile .stickyMenu .row .social-strip { display: none; }
   .mobile .desktop-nav .fa { display: block }
-  .mobile .desktop-nav { position: absolute; top: 22px; right: 20px; width: 32px; height: 32px; font-size: 32px; color: #333; }
+  .mobile .nav-sticky .desktop-nav .fa { color: #fff }
+  .mobile .desktop-nav .activator .fa-minus { display: none; }
+  .mobile .desktop-nav { position: absolute; top: 22px; right: 14px; width: 32px; height: 32px; font-size: 32px; color: #333; }
   .mobile .desktop-nav > ul { display: none; width: 300px; position: absolute; right: 0; top: 30px; padding: 10px 5px; background: #fff; border: solid 1px #dedede; z-index: 999; }
   .mobile .desktop-nav > ul > li { float: none; padding: 0; display: block; border-right: 0;}
-  .mobile .desktop-nav > ul > li .fa { float: right; color: #333; padding: 10px; line-height: 20px; font-size: 14px; }
+  .mobile .desktop-nav > ul > li .activator { display: block; float: right; color: #333; padding: 10px; line-height: 20px; font-size: 14px; }
+  .mobile .desktop-nav > ul > li .activator .fa { padding-top: 3px }
   .mobile .desktop-nav > ul > li > a { font-weight: bold }
   .mobile .desktop-nav > ul > li a { padding: 5px 15px; display: block; color: #333; text-align: right; line-height: 30px; }
-  .mobile header nav { display: block}
+  .mobile .nav-sticky .desktop-nav .menuRoot .fa { color: #333; }
+  .mobile header nav { display: block }
+  .currencyConverter { display: none }
+  .currencyChooser a { display: inline-block; padding: 0 15px; }
+  .currencyChooser a.active, header .currencyChooser a:hover { background: #e3e3e3; }
+
   /*.mobile header nav ul { display: none; }*/
   .mobile header nav ul > li .sub-menu { position: static; width: auto; border: 0; background: none; padding: 0; }
   .mobile header nav ul > li { padding: 0 }
   .mobile header nav li a { background: none; }
   .mobile .sub-menu h3, .mobile .sub-menu figure { display: none }
+  .mobile .sub-menu .links { width: 290px; }
+  .sub-menu.menu-three ul { width: 100% }
+  .sub-menu.menu-three .links { width: auto; padding: 0px 20px; }
   .mobile .sub-menu a { width: auto; float: none; }
-  .mobile .mobile .desktop-nav > ul > li li a {  }
+  header nav ul > li .sub-menu.catalog .links { width: 100%; }
+  .currencyChooser { display: block }
+  .mobile .desktop-nav > ul > li.currencyChooser a { display: inline-block; }
+  .mobile .desktop-nav > ul > li.currencyChooser .fa { display: inline-block; color: #333; }
+  .mobile .desktop-nav > ul > li.currencyChooser .fa:hover { color: #33adff; }
 
   #galleryBanner { width: 100%; height: 180px }
   #galleryBanner .ws-title { padding: 10px }
@@ -59,7 +81,7 @@
   .footer .widget li { font-size: 16px; line-height: 24px; }
   footer .back-top a { top: -29px; left: 50%; margin-left: -32px }
 
-  #modal { width: 100%; height: 100%; margin: 0; left: 0; top: 0; border: 0; position: fixed; }
+  #modal { width: 100%; height: 100%; margin: 0; left: 0; top: 0; bottom: 0; right: 0; border: 0; position: fixed; }
   #modal .adMessageBox { position: static; margin: 0; display: inline-block; width: 100%; height: 100%; background-repeat: repeat; }
   #modal .adMessageBox .message { position: relative; top: 50%; margin-top: -180px; }
   #close { top: 11px; right: 11px; }
@@ -71,13 +93,14 @@
   .category .categoryTree .treeView { position: static; margin: 0; }
   .magnify-text, .zoomable, .magnifyarea, .zoomstatus, .zoomtracker { display: none; }
   .product-gallery { min-height: auto }
-  .targetarea img { width: auto !important; height: 350px !important; opacity: 1 !important; }
+  .targetarea img { width: 100% !important; height: auto !important; opacity: 1 !important; }
   .product-gallery { min-height: 350px }
   .product-gallery figure { border: 0; width: auto; display: block; margin: 0 15px; }
-  .product-details .product-card { display: block; width: auto; margin: 0 15px; min-height: 440px; position: relative; }
+  .product-details .product-card { display: block; width: auto; margin: 0 15px; min-height: 500px; position: relative; }
   .accordion { margin: 15px 15px; }
   .accordion p { font-size: 16px; line-height: 28px; }
   .category .filters .layoutTitle, .category .filters ul { display: none; }
+  .accordion ul li a { padding: 5px 15px 7px; }
 
   .subscriptionPage h1 { width: 100%; font-size: 28px; line-height: 32px; }
   .subscriptionPage h2 { font-size: 20px; line-height: 32px; }
@@ -88,4 +111,7 @@
   .contactPage .form { width: 100% }
   .officeAddress { display: none }
   .aboutus { width: 100%; margin: 0; padding: 0; line-height: 28px;  }
+
+  footer .back-top a { top: -50px }
+  .policy { width: 100%; padding: 15px; border: 0 }
 }
