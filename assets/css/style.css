@@ -152,21 +152,24 @@ header .order-info .fa { margin-right: 10px }
 header .order-info-mobile { display: none; }
 header .order-info span { font-weight: 700 }
 header .menu {background: rgba(0,0,0,0.8);height: 36px;line-height: 20px;color: #fff;}
-header .currencyConverter { line-height: 28px; text-align: right; overflow: hidden }
+header .currencyTitle { margin-right: 10px; font-weight: 700; display: inline-block; vertical-align: top; line-height: 24px; }
+header .currencyConverter { line-height: 28px; text-align: right; }
 header .currencyConverter .col { float: right; padding: 6px 0; }
 header .currencyConverter a { position: relative; display: block; float: right; padding: 0; margin: 0 5px; width: 31px; height: 23px; line-height: 32px; padding-bottom: 0; box-shadow: -2px 2px 5px rgba(1, 1, 1, 0.7); }
 header .currencyConverter a.active:after { position: absolute; content: ""; background: rgba(192,192,192,0.5); left: 0; right: 0; bottom: 0; top: 0; }
-header .currencyConverter a.active, header .currencyConverter a:hover { color: transparent; text-decoration: none; }
-header .currencyConverter a.active .fa, header .currencyConverter a:active .fa, header .currencyConverter a:hover .fa { color: transparent; }
-header .currencyConverter a.india { background: url("../../../assets/images/India.png") -1px -4px no-repeat; color: transparent; }
-header .currencyConverter a.usd { background: url("../../../assets/images/United States of America (USA).png") -1px -4px no-repeat; color: transparent; }
+header .currencyConverter a.active, header .currencyConverter a:hover { color: #333; text-decoration: none; }
+header .currencyConverter a.active .fa, header .currencyConverter a:active .fa, header .currencyConverter a:hover .fa { color: #333; }
+header .currencyConverter a.india { background: url("../../../assets/images/India.png") -1px -4px no-repeat; color: #333; }
+header .currencyConverter a.usd { background: url("../../../assets/images/United States of America (USA).png") -1px -4px no-repeat; color: #333; }
 header .currencyConverter a.euro { background: url("../../../assets/images/European Union.png") -1px -4px no-repeat; color: transparent; }
+header .currencyConverter a span { display: none }
+header .currencyConverter a:hover span { display: block; position: absolute; left: -10px; top: 22px; width: 50px;  color: #333; z-index: 2; font-weight: 700; text-align: center; font-size: 12px; }
 
 header nav ul { display: inline-block; }
-header nav ul > li {float: left; border-right: 1px solid #dedede; position: relative;padding: 8px 0px;}
+header nav ul > li {float: left; border-right: 1px solid #dedede; position: relative;padding: 0px;}
 header nav ul > li .fa { display: none; }
 header nav ul > li:last-child { border-right: 0 }
-header nav ul > li a {font-size:13px;padding: 10px 15px; text-transform: uppercase;-webkit-transition: 0.4s;-moz-transition: 0.4s;-o-transition: 0.4s;-ms-transition: 0.4s;transition:  0.4s;color: #fff;}
+header nav ul > li a {font-size:13px;padding: 8px 15px; display: inline-block; text-transform: uppercase;-webkit-transition: 0.4s;-moz-transition: 0.4s;-o-transition: 0.4s;-ms-transition: 0.4s;transition:  0.4s;color: #fff;}
 header nav ul > li a:focus  { color: inherit; text-decoration: inherit; background: inherit; }
 header nav li a:hover, header nav li a.active { background: #f9f9f9; color: #000; text-decoration: none }
 
@@ -413,7 +416,7 @@ header nav ul > li .sub-menu.catalog .links {padding-left: 10px; width: 360px; t
 .product-gallery { min-height: 550px; position: relative; }
 .product-gallery ul { float: left; }
 .product-gallery ul li { margin-bottom: 10px; }
-.product-gallery ul li a { display: block; width: 110px; border: solid 1px #dedede }
+.product-gallery ul li a { display: block; width: 110px; border: solid 1px #dedede; min-height: 108px; display: flex; flex-direction: column; justify-content: center; }
 .product-gallery a img { width: 108px; }
 .product-gallery figure { position: relative; width: 420px; margin: 0 -15px 0 -12px; border: solid 1px #dedede;  }
 .product-gallery .magnify-text { position: absolute; right: 25px; top: 25px; z-index: 1; }
@@ -465,7 +468,7 @@ header nav ul > li .sub-menu.catalog .links {padding-left: 10px; width: 360px; t
 .accordion .panels > div { min-height: 120px; padding: 20px 0 }
 
 .priceChooser {  }
-.priceChooser .price.usd, .priceChooser .price.gbp { display: none }
+.priceChooser .price.usd, .priceChooser .price.eur { display: none }
 
 /** Zoom gallery */
 .magnifyarea { box-shadow: 5px 5px 7px #e1e1ea; -webkit-box-shadow: 5px 5px 7px #e1e1ea; -moz-box-shadow: 5px 5px 7px #e1e1ea; filter: progid:DXImageTransform.Microsoft.dropShadow(color=#e1e1ea, offX=5, offY=5, positive=true); background: white; }
@@ -628,6 +631,9 @@ footer .back-top .pageCounter { text-align: center; }
 .registrationForm .response > div { padding: 5px; line-height: 24px; }
 .registrationForm .response .fa { margin: 5px 10px; float: left; font-size: 18px }
 .registrationForm .response p { font-size: 14px; margin-left: 35px; }
+
+.login { position: relative; left: 50%; top: 0px; height:  }
+.login.col { float: none; margin: 100px 0 100px -230px  }
 
 
 @-webkit-keyframes blink {

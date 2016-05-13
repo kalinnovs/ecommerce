@@ -1,7 +1,7 @@
 
-angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
-  .constant('SERVICE_URL', 'http://107.180.73.220/HaastikaWebService')
+  .constant('SERVICE_URL', '/HaastikaWebService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
@@ -172,9 +172,25 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','firebase'])
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
   })
-  .run(function run($rootScope, $location, $http) {
+  .run(function run($rootScope, $location, $http, $cookieStore) {
     $rootScope.$on('$stateChangeSuccess',function(){
       $("html, body").animate({ scrollTop: 0 }, 200);
+    });
+
+    // Assigning Restricted pages list !!
+    var restrictedPage = $.inArray($location.path(), ['/admin', '/productTree', '/inventory']) === 0;
+    //  // keep user logged in after page refresh
+    $rootScope.globals = $cookieStore.get('globals') || {};
+    if ($rootScope.globals.currentUser && restrictedPage) {
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+    }
+
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+        // redirect to login page if not logged in and trying to access a restricted page
+        var loggedIn = $rootScope.globals.currentUser;
+        if (restrictedPage && !loggedIn) {
+            $location.path('/login');
+        }
     });
   })
 ;

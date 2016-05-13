@@ -31,6 +31,7 @@ require("../../../app/components/category/categoryController.js");
 require("../../../app/components/category/categoryService.js");
 
 require("../../../app/components/login/loginController.js");
+require("../../../app/components/login/loginService.js");
 
 
 require("../../../app/components/register/registerController.js");

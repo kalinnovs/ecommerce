@@ -78,7 +78,7 @@ $(document).ready(function(e) {
             $(this).addClass("active");
             var selectedCurrency = $(this).attr("rel");
             $(this).parents(".menuRoot").hide()
-            $(".price.inr, .price.usd, .price.gbp").hide();
+            $(".price.inr, .price.usd, .price.eur").hide();
             $(".price."+selectedCurrency).show();
         });
 
