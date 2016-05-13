@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, UserService, BASE_URI) {
+  .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, SERVICE_URL, UserService, BASE_URI) {
     var contacts = this;
     var original = $scope.user;
 
@@ -10,7 +10,7 @@ angular.module('eCommerce')
     // function to submit the form after all validation has occurred            
     $scope.submitForm = function() {
 
-        var mailService = "http://haastika.com/app/app.sendFeedback.php";
+        var mailService = SERVICE_URL+"/sendfeedback";
         // check to make sure the form is completely valid
         if ($scope.userForm.$valid) {
             $http({
@@ -20,12 +20,12 @@ angular.module('eCommerce')
               headers: {
                 'Content-Type': 'application/json'
               }
-            }).then(function successCallback(data, status) {
-                contacts.feedbackSent = data.data.status;
-                contacts.pushNotification = data.data.message;
-                contacts.sentSuccesfully = data.data.sentSuccesfully;
+            }).then(function successCallback(data, feedbackSuccessful) {
+                contacts.feedbackSent = data.data.feedbackSuccessful;
+                contacts.pushNotification = data.data.feedbackMessage;
+                contacts.sentSuccesfully = data.data.feedbackSuccessful;
                 contacts.sentFailed = data.data.sentFailed;
-                contacts.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};
+                contacts.user={id:null,name:'',company:'',emailId:'',message:''};
                 $scope.userForm.$setPristine();
                 $timeout(function() {
                   $location.path( "/home" );

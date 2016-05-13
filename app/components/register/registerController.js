@@ -27,14 +27,12 @@ angular.module('eCommerce')
                     register.pushNotification = data.data.subscriptionMessage;
                     register.subscribedFailed = false;
                     register.user.promoCode = data.data.promoCode;
-                    // $http.post(mailService, register.user).success(function(data, status) {
-                    //     register.subscribedSuccesfully = true;
-                    //     register.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};
-                    //     $scope.form.$setPristine();
-                    //     $timeout(function() {
-                    //       $location.path( "/home" );
-                    //     }, 3000);
-                    // });
+                    register.subscribedSuccesfully = true;
+                    register.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};
+                    $scope.form.$setPristine();
+                    $timeout(function() {
+                    	$location.path( "/home" );
+                    }, 3000);
                 } else {
                     register.subscribedFailed = true;
                     register.subscribedSuccesfully = false;
