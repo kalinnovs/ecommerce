@@ -1,29 +1,42 @@
 'use strict';
  
 angular.module('eCommerce')
-.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
-    function (Base64, $http, $cookieStore, $rootScope, $timeout) {
+.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', 'SERVICE_URL',
+    function (Base64, $http, $cookieStore, $rootScope, $timeout, SERVICE_URL) {
         var service = {};
 
         service.Login = function (username, password, callback) {
 
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
-            $timeout(function(){
-                var response = { success: username === 'test1' && password === 'test' };
-                if(!response.success) {
-                    response.message = 'Username or password is incorrect';
-                }
-                callback(response);
-            }, 1000);
+            // $timeout(function(){
+            //     var response = { success: username === 'test1' && password === 'test' };
+            //     if(!response.success) {
+            //         response.message = 'Username or password is incorrect';
+            //     }
+            //     callback(response);
+            // }, 1000);
 
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            var url = SERVICE_URL + '/checklogin';
+            var username = username, password = password;
+            $http({
+                  method: 'POST',
+                  url: url,
+                  data: { userName: username, password: password },
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                })
+               .then(function (response) {
+                    var response = response.data;
+                    if(!response.success) {
+                        response.message = 'Username or password is incorrect';
+                    }
+                    callback(response);
+               });
 
         };
  

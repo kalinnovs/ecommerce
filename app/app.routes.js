@@ -72,16 +72,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase']
           }
         }
       })
-      .state('admin', {
-        url:'/admin',
-        views: {
-          '': { 
-            templateUrl: 'app/components/admin/adminView.html',
-            controller: 'AdminCtrl',
-            controllerAs: 'admin'
-          }
-        }
-      })
       .state('inventory', {
         url:'/inventory',
         views: {
@@ -120,8 +110,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase']
           }
         }
       })
-      .state('productTree', {
-        url:'/productTree',
+      .state('admin', {
+        url:'/admin',
         views: {
           '': { 
             templateUrl: 'app/components/inventory/productTree.html',
@@ -177,16 +167,16 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase']
       $("html, body").animate({ scrollTop: 0 }, 200);
     });
 
-    // Assigning Restricted pages list !!
-    var restrictedPage = $.inArray($location.path(), ['/admin', '/productTree', '/inventory']) === 0;
     //  // keep user logged in after page refresh
     $rootScope.globals = $cookieStore.get('globals') || {};
-    if ($rootScope.globals.currentUser && restrictedPage) {
+    if ($rootScope.globals.currentUser) {
         $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
     }
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
         // redirect to login page if not logged in and trying to access a restricted page
+        // Assigning Restricted pages list !!
+        var restrictedPage = $.inArray($location.path(), ['/admin', '/inventory']) != -1;
         var loggedIn = $rootScope.globals.currentUser;
         if (restrictedPage && !loggedIn) {
             $location.path('/login');

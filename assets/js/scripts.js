@@ -27,15 +27,15 @@ $(document).ready(function(e) {
         $(document).on({
             mouseenter: function () {
                 //stuff to do on mouse enter
-                $(this).find("a").addClass("active");
+                $(this).find("a").eq(1).addClass("active");
                 $(this).children('.sub-menu').stop(true, true).fadeIn(300);
             },
             mouseleave: function () {
                 //stuff to do on mouse leave
-                $(this).find("a").removeClass("active");
+                $(this).find("a").eq(1).removeClass("active");
                 $(this).children('.sub-menu').stop(true, true).fadeOut(400);
             }
-        }, "body:not(.mobile) nav ul li");
+        }, "body:not(.mobile) nav ul > li");
 
         $(document).on("click", ".mobile nav ul li", function (e) {
             e.preventDefault();
