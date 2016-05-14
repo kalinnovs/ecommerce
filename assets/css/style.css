@@ -637,8 +637,8 @@ footer .back-top .pageCounter { text-align: center; }
 .registrationForm .response p { font-size: 14px; margin-left: 35px; }
 
 .login { position: relative; left: 50%; top: 0px; height:  }
-.login.col { float: none; margin: 100px 0 100px -230px  }
-
+.login.col { float: none; margin: 100px 0 100px -230px; border: solid 1px #dedede; padding: 30px 40px 30px; border-radius: 10px; background: #f3f3f3;  }
+.login.col h2 { margin-bottom: 20px }
 
 @-webkit-keyframes blink {
     0% {

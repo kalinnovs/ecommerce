@@ -1,8 +1,5 @@
 <div class="col span_4_of_12 login">
-    <div class="alert alert-info">
-        Username: test1<br />
-        Password: test
-    </div>
+    <h2>Login Here</h2>
     <div ng-show="error" class="alert alert-danger">{{error}}</div>
     <form name="form" ng-submit="login.login()" role="form">
         <div class="form-group">
@@ -23,3 +20,7 @@
         </div>
     </form>
 </div>
+<style>
+    header .menu { height: 2px; }
+    header .menu > .container { display: none; }
+</style>
