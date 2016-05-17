@@ -2,11 +2,11 @@
 <div class="container">
 	<div class="category">
 		<h1>{{cat.data.selectedCategory.categoryName}}</h1>
-		<div class="category-banner tile noFlash">
+		<div class="category-banner tile noFlash" ng-hide="cat.data.subCategories.length">
 			<img ng-src="{{cat.data.selectedCategory.bannerImagePath}}" alt="Category" />
 		</div>
 		<div class="listing">
-			<div class="filters view">
+			<div class="filters view" ng-hide="cat.data.subCategories.length">
 				<a class="filterIcon" ng-click="showFilter($event);" aria-hidden="true" href="javascript:void(0);">
 					<i class="fa fa-filter"></i>	
 				</a><span>Filters</span>
@@ -37,34 +37,83 @@
 					</div>
 				</div>
 				<div class="spacingAdjust">
-					<div class="span_3_of_12 col" ng-repeat="(key, value) in cat.data.productsList">
-						<div class="newRow" ng-if="$index !=0 && $index % 4 == 0"></div>
-						<a href="#{{value.productDetailsURL}}">
-							<div class="wide-quarter-tile tile">
-				                <figure>
-				                    <img alt="" ng-src="{{value.productImage[0].imagePath}}medium/{{value.productImage[0].imageName}}">
-				                </figure>
-				                <div class="detail">
-				                    <h4>{{value.productName}}</h4>
-				                    <p class="productDescription" limit-character-render char-length="400" model-bind="value.productDescription">{{value.productDescription}}</p>
-				                    <div class="gridCol">
-				                    	<div class="ratingBG">
-											<span class="ratingOverlay" style="width: {{value.averageProductRating/5*100}}%"></span>
+					<div ng-hide="cat.data.subCategories.length">
+						<div class="span_3_of_12 col" ng-repeat="(key, value) in cat.data.productsList">
+							<div class="newRow" ng-if="$index !=0 && $index % 4 == 0"></div>
+							<a href="#{{value.productDetailsURL}}">
+								<div class="wide-quarter-tile tile">
+					                <figure>
+					                    <img alt="" ng-src="{{value.productImage[0].imagePath}}medium/{{value.productImage[0].imageName}}">
+					                </figure>
+					                <div class="detail">
+					                    <h4>{{value.productName}}</h4>
+					                    <p class="productDescription" limit-character-render char-length="400" model-bind="value.productDescription">{{value.productDescription}}</p>
+					                    <div class="gridCol">
+					                    	<div class="ratingBG">
+												<span class="ratingOverlay" style="width: {{value.averageProductRating/5*100}}%"></span>
+											</div>
+					                    	<span class="availability">Availability: <span>{{value.productAvailablility}}</span></span>
 										</div>
-				                    	<span class="availability">Availability: <span>{{value.productAvailablility}}</span></span>
-									</div>
-		                    		<div class="priceChooser">
-		                    			<div ng-repeat="(key, priceValue) in value.productPriceOptions">
-		                    				<span class="price {{priceValue.currencyCode | lowercase}}">
-			                    				<i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i> 
-			                    				{{priceValue.price}}
-			                    			</span>
-			                    		</div>
-			                    	</div>
-				                </div>
-				            </div>
-				        </a>
-			        </div>
+			                    		<div class="priceChooser">
+			                    			<div ng-repeat="(key, priceValue) in value.productPriceOptions">
+			                    				<span class="price {{priceValue.currencyCode | lowercase}}">
+				                    				<i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i> 
+				                    				{{priceValue.price}}
+				                    			</span>
+				                    		</div>
+				                    	</div>
+					                </div>
+					            </div>
+					        </a>
+				        </div>
+				    </div>
+				    <!-- List of subcategories and their products -->
+				    <div ng-hide="cat.data.productsList.length" class="rootCategory">
+				    	<div class="span_12_of_12 col categoryBlock" ng-repeat="(key, subC) in cat.data.subCategories">
+				    		<div ng-repeat="(key, productItem) in subC.productsList | filter:query | limitTo:iterateThrough">
+							<div class="span_6_of_12 col bigTile" ng-if="$first">
+								<a href="#{{productItem.productDetailsURL}}">
+									<div class="wide-full-tile tile category">
+						                <figure>
+						                    <img alt="" ng-src="{{productItem.productImage[0].imagePath}}large/{{productItem.productImage[0].imageName}}">
+						                </figure>
+						                <div class="detail">
+					                        <h4>{{subC.categoryName}}</h4>
+					                    </div>
+						            </div>
+						        </a>
+							</div>
+							<div class="span_3_of_12 col mediumTile" ng-if="!$first">
+								<a href="#{{productItem.productDetailsURL}}">
+									<div class="wide-quarter-tile tile">
+						                <figure>
+						                    <img alt="" ng-src="{{productItem.productImage[0].imagePath}}medium/{{productItem.productImage[0].imageName}}">
+						                </figure>
+						                <div class="detail">
+						                    <h4>{{productItem.productName}}</h4>
+						                    <p class="productDescription" limit-character-render char-length="400" model-bind="productItem.productDescription">{{productItem.productDescription}}</p>
+						                    <div class="gridCol">
+						                    	<div class="ratingBG">
+													<span class="ratingOverlay" style="width: {{productItem.averageProductRating/5*100}}%"></span>
+												</div>
+						                    	<span class="availability">Availability: <span>{{productItem.productAvailablility}}</span></span>
+											</div>
+				                    		<div class="priceChooser">
+				                    			<div ng-repeat="(key, priceValue) in productItem.priceOptions">
+				                    				<span class="price {{priceValue.currencyCode | lowercase}}">
+					                    				<i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i> 
+					                    				{{priceValue.price}}
+					                    			</span>
+					                    		</div>
+					                    	</div>
+						                </div>
+						            </div>
+						        </a>
+							</div>
+				        </div>
+				    	</div>
+				    </div>
+
 			    </div>
 			</div>
 		</div>

@@ -3,7 +3,10 @@
   .mobileView { display: block }
   .row { width: 100%; }
 
+  header nav a:hover, header nav a:focus { color: #000 }
+
   header .menu { text-align: center; }
+  .logo a { margin-left: 15px; }
   /* Mobile Menu */
   .social-strip.mobileView { display: inline-block; }
   .mobileRendering { padding: 0 15px; }
@@ -32,7 +35,7 @@
   .mobile .nav-sticky .desktop-nav .fa { color: #fff }
   .mobile .desktop-nav .activator .fa-minus { display: none; }
   .mobile .desktop-nav { position: absolute; top: 22px; right: 14px; width: 32px; height: 32px; font-size: 32px; color: #333; }
-  .mobile .desktop-nav > ul { display: none; width: 300px; position: absolute; right: 0; top: 30px; padding: 10px 5px; background: #fff; border: solid 1px #dedede; z-index: 999; }
+  .mobile .desktop-nav > ul { display: none; width: 300px; position: absolute; right: 0; top: 34px; padding: 10px 5px; background: #fff; border: solid 1px #dedede; z-index: 999; }
   .mobile .desktop-nav > ul > li { float: none; padding: 0; display: block; border-right: 0;}
   .mobile .desktop-nav > ul > li .activator { display: block; float: right; color: #333; padding: 10px; line-height: 20px; font-size: 14px; }
   .mobile .desktop-nav > ul > li .activator .fa { padding-top: 3px }
@@ -85,8 +88,11 @@
   #modal .adMessageBox { position: static; margin: 0; display: inline-block; width: 100%; height: 100%; background-repeat: repeat; }
   #modal .adMessageBox .message { position: relative; top: 50%; margin-top: -180px; }
   #close { top: 11px; right: 11px; }
+  .rootCategory .mediumTile { margin: 0 }
+  .rootCategory .tile { margin: 0 0 13px 0; }
 
 
+  .category .spacingAdjust .wide-quarter-tile { margin-bottom: 15px }
   .category .spacingAdjust .wide-quarter-tile figure { width: 100% }
   .spacingAdjust { margin: 0 !important; }
   .category .categoryTree.show { width: 100% }

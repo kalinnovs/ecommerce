@@ -1,10 +1,68 @@
+// object.watch
+if (!Object.prototype.watch) {
+    Object.defineProperty(Object.prototype, "watch", {
+          enumerable: false, 
+          configurable: true, 
+          writable: false, 
+          value: function (prop, handler) {
+            var oldval = this[prop], 
+              newval = oldval, 
+              getter = function () {
+                return newval;
+              }, 
+              setter = function (val) {
+                oldval = newval;
+                return (newval = handler.call(this, prop, oldval, val));
+              };
+            
+            if (delete this[prop]) { // can't watch constants
+                Object.defineProperty(this, prop, {
+                      get: getter, 
+                      set: setter, 
+                      enumerable: true, 
+                      configurable: true
+                });
+            }
+        }
+    });
+}
+
+// object.unwatch
+if (!Object.prototype.unwatch) {
+    Object.defineProperty(Object.prototype, "unwatch", {
+        enumerable: false, 
+        configurable: true, 
+        writable: false, 
+        value: function (prop) {
+            var val = this[prop];
+            delete this[prop]; // remove accessors
+            this[prop] = val;
+        }
+    });
+}
+
+window.dataLoaded = false;
+
+//Watcher for dataLoader 
+window.watch('dataLoaded', function (id, oldval, newval) {
+    if(newval === true) {
+        $(".progress").hide();
+    } else {
+        $(".progress").show();
+    }
+    return newval;
+});
+
+// setTimeout(function(){
+//     window.unwatch('dataLoaded');
+//     // Loading Finish
+//     $(".progress").hide();
+// },16000);
+
+
 $(document).ready(function(e) {
 
-    window.dataLoaded = false;
     setTimeout( function() { 
-
-        // Loading Finish
-        $(".progress").hide();
 
         //Login popup
         $(".toggleLoginPopup").click(function() {
@@ -37,16 +95,16 @@ $(document).ready(function(e) {
             }
         }, "body:not(.mobile) nav ul > li");
 
-        $(document).on("click", ".mobile nav ul li", function (e) {
+        $(document).on("click", ".mobile nav ul > li > a", function (e) {
             e.preventDefault();
             if($(this).hasClass("active")) {
                 $(this).removeClass("active");
-                $(this).children('.sub-menu').css("display","none");
+                $(this).siblings('.sub-menu').css("display","none");
                 $(this).find(".fa-minus").hide();
                 $(this).find(".fa-plus").show();
             } else {
                 $(this).addClass("active");
-                $(this).children('.sub-menu').css("display","block");
+                $(this).siblings('.sub-menu').css("display","block");
                 $(this).find(".fa-minus").show();
                 $(this).find(".fa-plus").hide();
             }
@@ -71,6 +129,10 @@ $(document).ready(function(e) {
             } else {
                 $(this).next("ul").hide();
             }
+        });
+        
+        $(document).on("click", "body:not(.mobile) .menuRoot a", function(e) {
+            window.dataLoaded = false;
         });
 
         $(document).on("click", ".currencyConverter a, .currencyChooser a", function(e){
@@ -123,9 +185,5 @@ $(document).ready(function(e) {
         
 
     }, 1500);
-
-    $(window.dataLoaded).change(function() {
-      alert( "Handler for change called." );
-    });
 
 });

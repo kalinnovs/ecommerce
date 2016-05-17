@@ -77,9 +77,10 @@ a.noDecoration:hover { color: #999 !important; text-decoration: none;  }
 /*  Common Component Styles STARTS */
 
 .progress { position: fixed; width: 100%; height: 100%; background-color: #fff; z-index: 999999; }
-.progress span { display: block; width: 220px; height: 110px; position: absolute; left: 50%; top: 50%; margin: -60px 0 0 -110px; z-index: 2; }
-.progress span img { width: 100% }
-.progress .spinner { position: absolute; left: 20%; bottom: 0; width: 180px; height: 20px;margin-left: -80px; margin-top: -20px; background: url('../../../assets/images/loader.gif') 0 0 no-repeat;  }
+.progress:before { position: absolute; width: 100%; height: 100% }
+.progress span { display: block; width: 300px; height: 165px; position: absolute; left: 50%; top: 50%; margin: -82px 0 0 -110px; z-index: 2; }
+.progress span img { display: none; }
+.progress .spinner { position: absolute; left: 50%; bottom: 0; margin-left: -90px; margin-top: -20px; }
 
 .ratingBG { background: url("../../../assets/images/icons/star.png") 0 -54px repeat-x; background-size: 25px 266px; width: 125px; margin: 0 auto; height: 24px; display:block; vertical-align: top; margin-top: 5px; }
 .ratingOverlay { background: url("../../../assets/images/icons/star.png") 0 -82px repeat-x; background-size: 25px 266px; display: block; height: 24px; width: 70%; }
@@ -176,7 +177,7 @@ header nav li a:hover, header nav ul.menuRoot > li >  a.active { background: #f9
 header nav li a:hover { text-decoration: underline; }
 header nav a:hover, header nav a:focus { color: #fff }
 
-header nav ul > li .sub-menu  { display: none; position: absolute; top:35px; /* left: 0px; */ left: -220px; background:#f9f9f9;z-index: 99999999;}
+header nav ul > li .sub-menu  { display: none; position: absolute; top:35px; /* left: 0px; */ left: -220px; background:#f9f9f9;z-index: 9999;}
 header nav ul > li ul li {width: 100%; border: none;}
 header nav ul > li ul li a{display: block; padding: 0}
 header nav ul > li .sub-menu.catalog {width: 220px;left: 0}
@@ -232,6 +233,7 @@ header nav ul > li .sub-menu.catalog .links {padding-left: 10px; width: 360px; t
 .sub-menu.menu-four .our-product div h4 { font-size: 13px; color: #ffffff}
 .sub-menu.menu-four .our-product div span { color: #f71919; font-size: bold 13px; }
 .currencyChooser { display: none }
+header a.active, header a:focus { text-decoration: none }
 
 .offers { margin-bottom: 30px; }
 .offers figure a{ width: 263px; height: 171px;  display: block; }
@@ -299,7 +301,7 @@ header nav ul > li .sub-menu.catalog .links {padding-left: 10px; width: 360px; t
 .item-box-layout .wrapper .column { padding: 5px; }
 .item-box-layout .wrapper .column.four-square { padding: 0 }
 .item-box-layout a:hover * { text-decoration: none }
-.wide-full-tile { height: 589px; position: relative; }
+.wide-full-tile { height: 589px; position: relative; display: flex; flex-direction: column; justify-content: center; }
 .wide-full-tile figure img { width: 563px }
 .wide-half-tile { height: 287px; }
 .wide-half-tile figure img { width: 563px; height: 287px }
@@ -317,13 +319,11 @@ header nav ul > li .sub-menu.catalog .links {padding-left: 10px; width: 360px; t
 .item-box-layout .wrapper .tall-tile .wide-tall-tile { height: 588px; }
 
 .tile.category a { text-decoration: none; }
-.tile.category .detail { position: relative; margin-top: -325px; }
-.tile.category.wide-half-tile .detail { margin-top: -185px; }
+.tile.category .detail { position: absolute; margin-top: -29px; top: 50%; width: 100%; }
 .tile.category .detail h4 { cursor: pointer; text-transform: uppercase; color: #fff; font-size: 44px; line-height: 58px; text-shadow: -3px 2px 5px rgba(0, 0, 0, 1); font-family: 'Anton'; }
 .tile.category:hover .detail h4 { -webkit-transition: all .4s; transition: all .4s; -webkit-transform: scale(1.1); -moz-transform:scale(1.1);-ms-transform:scale(1.1); -o-transform:scale(1.1); text-shadow: -3px 2px 5px rgba(0, 0, 0, 1); -o-transition: all .4x; -moz-transition: all .4s; -ms-transition: all .4s;}
 .tile.category.whiteBG .detail h4 { color: #666; }
 .tile.category .detail span, .tile.category .detail button { display: none; }
-
 
 .tileShuffle:after { clear: both }
 .tileShuffle .row { margin-top: 12px; }
@@ -362,7 +362,7 @@ header nav ul > li .sub-menu.catalog .links {padding-left: 10px; width: 360px; t
 .category .listView .tile .detail { float: none; display: block; margin-left: 340px; margin-right: 20px; }
 .category .listView .tile .gridCol { width: 100% }
 .category .spacingAdjust .newRow + .wide-quarter-tile { margin-left: 0 }
-.category .spacingAdjust > div:nth-of-type(4n+1) { margin-left: 0; }
+.category .spacingAdjust > div > div:nth-of-type(4n+1) { margin-left: 0; }
 
 .category .categoryTree { overflow: hidden; width: 0; float: left; transition: 0.1s width; -webkit-transition: 0.1s width; -o-transition: width .1s; -moz-transition: width .1s; -ms-transition: width .1s; }
 .category .categoryTree.show { overflow: visible; width: 285px; }
@@ -374,6 +374,10 @@ header nav ul > li .sub-menu.catalog .links {padding-left: 10px; width: 360px; t
 
 .category .treeView h2 { font-weight: 700; margin-bottom: 5px; }
 .category .treeView ul li a { padding: 6px 0 6px 6px; display: inline-block; font-size: 14px; }
+
+.rootCategory > div { margin: 0 }
+.rootCategory .bigTile { margin: 0; }
+.rootCategory .mediumTile { margin: 0 0 2px 13px; }
 
 
 /****************************************************************************
@@ -450,13 +454,13 @@ header nav ul > li .sub-menu.catalog .links {padding-left: 10px; width: 360px; t
 .dimentionCard p span { display: block; font-weight: 700; color: #999 }
 .dimentionCard p span:first-child { color: #666 }
 
-.listView > .col { width: 100%; margin-left: 0 }
-.listView > .col > .tile { margin-left: 0; }
-.listView > .col > .tile > figure { width: 25% }
-.listView > .col > .tile > figure, .listView .tile .detail { float: left; display: inline-block; vertical-align: top; }
-.listView > .col > .tile .detail { text-align: left; padding-right: 25px; width: 70% }
-.listView > .col > .tile .detail * { text-align: left; }
-.listView > .col > .tile .detail .gridCol { width: 100% }
+.listView > div > .col { width: 100%; margin-left: 0 }
+.listView > div > .col > .tile { margin-left: 0; }
+.listView > div > .col > .tile > figure { width: 25% }
+.listView > div > .col > .tile > figure, .listView .tile .detail { float: left; display: inline-block; vertical-align: top; }
+.listView > div > .col > .tile .detail { text-align: left; padding-right: 25px; width: 70% }
+.listView > div > .col > .tile .detail * { text-align: left; }
+.listView > div > .col > .tile .detail .gridCol { width: 100% }
 .listView .tile .detail p { display: block }
 .listView .wide-quarter-tile { height: auto; padding-top: 15px; min-height: 215px; }
 .listView .tile h4 { text-transform: capitalize; font-size: 24px; line-height: 34px; }

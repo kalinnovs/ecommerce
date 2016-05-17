@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('aboutCtrl', function ($scope, $rootScope, $sce, UserService, AboutService, SERVICE_URL, BASE_URI) {
+  .controller('aboutCtrl', function ($scope, $rootScope, $sce, UserService, $timeout, AboutService, SERVICE_URL, BASE_URI) {
     var about = this;
     var scoper = $scope;
 
@@ -11,6 +11,7 @@ angular.module('eCommerce')
         .then(function(data) {
           $rootScope.navigation = data.pageNavigation.categories; 
           $scope.htmlDescription = data.content;
+          $scope.$broadcast('dataloaded');
         })
         .catch(function(error) {
             //
@@ -20,6 +21,12 @@ angular.module('eCommerce')
         })
     // debugger;
 
+    $scope.$on('dataloaded', function() {
+        $timeout(function () { 
+            window.dataLoaded = true;
+        }, 100, false);
+    });
+    
     $scope.getHtml = function(html){
         return $sce.trustAsHtml(html);
     };

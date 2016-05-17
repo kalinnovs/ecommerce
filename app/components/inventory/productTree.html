@@ -67,6 +67,10 @@
     .logindetails { font-size: 14px; font-weight: 700; overflow: hidden; }
     .logindetails span { display: inline-block; vertical-align: top; margin: 10px 0; }
     .logindetails a { float: right; display: inline-block; margin: 10px 0; vertical-align: top;  }
+    .form-group > label, .priceOption .col-sm-4 { margin-top: 8px }
+    .priceOption .col-sm-6 > span { position: absolute; display: inline-block; left: 26px; top: 8px; font-weight: 700; z-index: 2 }
+    .priceOption .col-sm-6 > input { padding-left: 40px; }
+    .ratingWidget .col-sm-7 > span, .statusWidget .col-sm-7 > span { display: inline-block; margin-top: 8px }
     header .menu { height: 2px; }
     header .menu > .container { display: none; }
 </style>
@@ -249,19 +253,19 @@
                     <form-element label="Description" mod="product">
                         <textarea class="form-control" name="description" placeholder="Description" ng-model="node.productDescription">{{node.productDescription}}</textarea>
                     </form-element>
-                    <form-element label="Status" mod="product">
+                    <form-element label="Status" mod="product" class="statusWidget">
                        <label>
                           <input type="checkbox" ng-model="node.enabled" value="node.enabled"> Active
                         </label>
                     </form-element>
-                    <form-element label="Rating" mod="product">
+                    <form-element label="Rating" mod="product" class="ratingWidget">
                         <uib-rating ng-model="node.avgRating" max="5" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
                     </form-element>
                     <form-element label="Price" mod="product">
-                        <div ng-repeat="priceOption in node.priceOptions" class="row">
+                        <div ng-repeat="priceOption in node.priceOptions" class="row priceOption">
                             <span class="col-sm-4">{{priceOption.countryName}}</span>
                             <div class="col-sm-6">
-                                <span style="width: 15px;display: inline-block;">{{priceOption.currencySymbol}}</span>
+                                <span style="width: 15px;display: inline-block;">{{priceOption.currencyCode}}</span>
                                 <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="priceOption.price"  only-numbers/>
                             </div>
                             
@@ -271,7 +275,7 @@
                     </form-element>
 
                     <form-element label="Dimension" mod="product">
-                        <div class="row">
+                        <div class="row priceOption">
                             <span class="col-sm-4">Unit </span>
                             <div class="col-sm-8" ng-model="node.dimensionUnit">
                                 <select class="form-control price" >
@@ -280,19 +284,19 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row priceOption">
                             <span class="col-sm-4">Width </span>
                             <div class="col-sm-8">
                                 <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="node.width"  only-numbers/>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row priceOption">
                             <span class="col-sm-4">Height </span>
                             <div class="col-sm-8">
                                 <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="node.height"  only-numbers/>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row priceOption">
                             <span class="col-sm-4">Depth </span>
                             <div class="col-sm-8">
                                 <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="node.depth"  only-numbers/>
@@ -328,4 +332,3 @@
     </div>
 </div>
 </div>
-

@@ -41,7 +41,6 @@
     <div id="page">
         <div class="progress">
             <span>
-                <img src="assets/images/logo.png">
                 <i class="spinner"></i>
             </span>
         </div>
@@ -128,7 +127,7 @@
                                                 <i class="fa fa-plus" aria-hidden="true"></i> 
                                                 <i class="fa fa-minus" aria-hidden="true"></i> 
                                             </a>
-                                            <a href="javascript:void(0);">{{value.categoryName}}</a>
+                                            <a href="#/{{value.categoryDetailsURL}}">{{value.categoryName}}</a>
                                             <div class="sub-menu {{value.categoryClass}}" ng-if="value.subcategoryList">
                                                 <figure ng-if="value.menuImagePath">
                                                     <img ng-src="{{value.menuImagePath}}" alt="Description" />

@@ -1,14 +1,16 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('categoryCtrl', function ($scope, $rootScope, $sce, CategoryService, UserService, $stateParams, SERVICE_URL, BASE_URI) {
+  .controller('categoryCtrl', function ($scope, $rootScope, $timeout, $sce, CategoryService, UserService, $stateParams, SERVICE_URL, BASE_URI) {
     var cat = this;
     var scoper = $scope;
 
     CategoryService.getFromURL( SERVICE_URL + '/category/'+$stateParams.id)
         .then(function(data) {
           cat.data = data;
+          $scope.iterateThrough = 5;
           $rootScope.navigation = data.pageNavigation.categories; 
+          $scope.$broadcast('dataloaded');
           // $scope.htmlDescription = data.productDescription; 
         })
         .catch(function(error) {
@@ -18,6 +20,13 @@ angular.module('eCommerce')
             //
         })
     // debugger;
+
+    $scope.$on('dataloaded', function() {
+        $timeout(function () { 
+            window.dataLoaded = true;
+            $(".progress").hide();
+        }, 1000, false);
+    });
 
     $scope.showFilter = function(elem) {
       if($(".categoryTree").hasClass("show")) {

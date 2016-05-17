@@ -1,9 +1,17 @@
 
 angular.module('eCommerce')
-.controller('productTreeCtrl', ['$scope', 'productTreeService', function($scope, productTreeService) {
+.controller('productTreeCtrl', ['$scope', 'productTreeService', '$timeout', function($scope, productTreeService, $timeout) {
     productTreeService.list().then(function(data){
         $scope.rootCatogories = data.data.availableRootCatogories;
         $scope.categoryList = data.data.categoryList;
+        $scope.$broadcast('dataloaded');
+    });
+
+
+    $scope.$on('dataloaded', function() {
+        $timeout(function () { 
+            window.dataLoaded = true;
+        }, 100, false);
     });
     
     $scope.collapse = function(event){

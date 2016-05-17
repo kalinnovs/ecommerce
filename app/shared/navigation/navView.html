@@ -37,7 +37,7 @@
                         <nav class="desktop-nav">
                             <ul class="clearfix">
                                 <li ng-repeat="(key, value) in navigation">
-                                    <a href="javascript:void(0);">{{value.categoryName}}</a>
+                                    <a href="{{value.categoryDetailsURL}}">{{value.categoryName}}</a>
                                     <div class="sub-menu {{value.navClass}}" ng-if="value.subcategoryList">
                                         <figure ng-if="value.categoryImagePath">
                                             <img ng-src="{{value.categoryImagePath}}" alt="Description" />
