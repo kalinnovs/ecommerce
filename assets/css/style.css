@@ -453,6 +453,7 @@ header a.active, header a:focus { text-decoration: none }
 .dimentionCard p { width: 20%; display: inline-block; vertical-align: top; font-size: 14px; margin-top: 10px; }
 .dimentionCard p span { display: block; font-weight: 700; color: #999 }
 .dimentionCard p span:first-child { color: #666 }
+.dimentionCard p span+span { color: #000; font-size: 11px; }
 
 .listView > div > .col { width: 100%; margin-left: 0 }
 .listView > div > .col > .tile { margin-left: 0; }

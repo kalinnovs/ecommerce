@@ -4,7 +4,7 @@
             <a href="#/{{tile.layout.layout5.tilesList[0].tileCategory.categoryDetailsURL}}">
                 <div class="tile wide-full-tile {{tile.layout.layout5.tilesList[0].tileType | lowercase}} {{tile.layout.layout5.tilesList[0].imageBackground}}">
                     <figure>
-                        <img alt="" ng-src="{{tile.layout.layout5.tilesList[0].tileCategory.tileImagePath}}">
+                        <img alt="" ng-src="{{tile.layout.layout5.tilesList[0].tileCategory.categoryTileImagePath}}">
                     </figure>
                     <div class="detail">
                         <h4>{{tile.layout.layout5.tilesList[0].tileCategory.categoryName}}</h4>
@@ -18,10 +18,10 @@
                     <a href="#{{tile.layout.layout5.tilesList[1].productTileDetails.productDetailsURL}}">
                         <div class="wide-quarter-tile tile {{tile.layout.layout5.tilesList[1].tileType | lowercase}} {{tile.layout.layout5.tilesList[1].imageBackground}}">
                             <figure>
-                                <img alt="" ng-src="{{tile.layout.layout5.tilesList[1].productTileDetails.productImage[0].imagePath}}medium/{{tile.layout.layout5.tilesList[1].productTileDetails.productImage[0].imageName}}">
+                                <img alt="" ng-src="{{tile.layout.layout5.tilesList[1].productTileDetails.productImage.baseImagePath}}">
                             </figure>
                             <div class="detail">
-                                <h4>{{tile.layout.layout5.tilesList[1].productTileDetails.productName}}</h4>
+                                <h4>{{tile.layout.layout5.tilesList[1].productTileDetails.productDescription}}</h4>
                                 <div class="priceChooser">
                                     <div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[1].productTileDetails.productPriceOptions">
                                         <span class="price {{priceValue.currencyCode | lowercase}}">
@@ -39,10 +39,10 @@
                     <a href="#{{tile.layout.layout5.tilesList[2].productTileDetails.productDetailsURL}}">
                         <div class="wide-quarter-tile tile {{tile.layout.layout5.tilesList[2].tileType | lowercase}} {{tile.layout.layout5.tilesList[2].imageBackground}}">
                             <figure>
-                                <img alt="" ng-src="{{tile.layout.layout5.tilesList[2].productTileDetails.productImage[0].imagePath}}medium/{{tile.layout.layout5.tilesList[2].productTileDetails.productImage[0].imageName}}">
+                                <img alt="" ng-src="{{tile.layout.layout5.tilesList[2].productTileDetails.productImage.baseImagePath}}">
                             </figure>
                             <div class="detail">
-                                <h4>{{tile.layout.layout5.tilesList[2].productTileDetails.productName}}</h4>
+                                <h4>{{tile.layout.layout5.tilesList[2].productTileDetails.productDescription}}</h4>
                                 <div class="priceChooser">
                                     <div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[2].productTileDetails.productPriceOptions">
                                         <span class="price {{priceValue.currencyCode | lowercase}}">
@@ -60,10 +60,10 @@
                     <a href="#{{tile.layout.layout5.tilesList[3].productTileDetails.productDetailsURL}}">
                         <div class="wide-quarter-tile tile {{tile.layout.layout5.tilesList[3].tileType | lowercase}} {{tile.layout.layout5.tilesList[3].imageBackground}}">
                             <figure>
-                                <img alt="" ng-src="{{tile.layout.layout5.tilesList[3].productTileDetails.productImage[0].imagePath}}medium/{{tile.layout.layout5.tilesList[3].productTileDetails.productImage[0].imageName}}">
+                                <img alt="" ng-src="{{tile.layout.layout5.tilesList[3].productTileDetails.productImage.baseImagePath}}">
                             </figure>
                             <div class="detail">
-                                <h4>{{tile.layout.layout5.tilesList[3].productTileDetails.productName}}</h4>
+                                <h4>{{tile.layout.layout5.tilesList[3].productTileDetails.productDescription}}</h4>
                                 <div class="priceChooser">
                                     <div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[3].productTileDetails.productPriceOptions">
                                         <span class="price {{priceValue.currencyCode | lowercase}}">
@@ -81,10 +81,10 @@
                     <a href="#{{tile.layout.layout5.tilesList[4].productTileDetails.productDetailsURL}}">
                         <div class="wide-quarter-tile tile {{tile.layout.layout5.tilesList[4].tileType | lowercase}} {{tile.layout.layout5.tilesList[4].imageBackground}}">
                             <figure>
-                                <img alt="" ng-src="{{tile.layout.layout5.tilesList[4].productTileDetails.productImage[0].imagePath}}medium/{{tile.layout.layout5.tilesList[4].productTileDetails.productImage[0].imageName}}">
+                                <img alt="" ng-src="{{tile.layout.layout5.tilesList[4].productTileDetails.productImage.baseImagePath}}">
                             </figure>
                             <div class="detail">
-                                <h4>{{tile.layout.layout5.tilesList[4].productTileDetails.productName}}</h4>
+                                <h4>{{tile.layout.layout5.tilesList[4].productTileDetails.productDescription}}</h4>
                                 <div class="priceChooser">
                                     <div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[4].productTileDetails.productPriceOptions">
                                         <span class="price {{priceValue.currencyCode | lowercase}}">

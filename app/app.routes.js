@@ -2,7 +2,8 @@
 angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
-  .constant('SERVICE_URL', 'http://107.180.66.21/HaastikaWebService')
+  // .constant('SERVICE_URL', 'http://107.180.66.21/HaastikaWebService')
+  .constant('SERVICE_URL', 'http://107.180.73.220/HaastikaWebService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider) {

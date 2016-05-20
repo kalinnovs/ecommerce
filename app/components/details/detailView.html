@@ -5,9 +5,9 @@
 			<div class="product-gallery">
 				<div class="span_3_of_12 col noPadding zoomable">
 					<ul>
-						<li ng-repeat="(key, value) in data.imageGallery" class="zoomable thumbs">
-							<a href="{{value.imagePath}}large/{{value.imageName}}" data-large= "{{value.imagePath}}{{value.imageName}}" data-title="">
-								<img ng-src="{{value.imagePath}}thumb/{{value.imageName}}" width="100%" />
+						<li ng-repeat="(key, value) in data.productImageGallery" class="zoomable thumbs">
+							<a href="{{value.largeImagePath}}" data-large= "{{value.extraLargeImagePath}}" data-title="">
+								<img ng-src="{{value.thumbImagePath}}" width="100%" />
 							</a>
 						</li>
 					</ul>
@@ -16,7 +16,7 @@
 					<span class="magnify-text"><i class="fa fa-search-plus" aria-hidden="true"></i> Hover to Zoom</span>
 					<figure>
 						<div class="targetarea diffheight">
-							<img id="zoomable" alt="zoomable" title="" ng-src="{{data.imageGallery[0].imagePath}}large/{{data.imageGallery[0].imageName}}"/>
+							<img id="zoomable" alt="zoomable" title="" ng-src="{{data.productImageGallery[0].largeImagePath}}"/>
 						</div>
 					</figure>
 				</div>
@@ -26,7 +26,7 @@
 					<div class="span_9_of_12 col noPadding">
 						<span class="magnify-text"><i class="fa fa-search-plus" aria-hidden="true"></i> Hover to Zoom</span>
 				        <ul id="bzoom">
-				        	<li ng-repeat="(key, value) in data.imageGallery" class="zoomable thumbs">
+				        	<li ng-repeat="(key, value) in data.productImageGallery" class="zoomable thumbs">
 				        		<img class="bzoom_thumb_image" ng-src="{{value.imagePath}}thumb/{{value.imageName}}"/>
 				        		<img class="bzoom_big_image" ng-src="{{value.imagePath}}{{value.imageName}}"/>
 				        	</li>
@@ -40,7 +40,7 @@
 				<div class="product-card tile noFlash">
 					<div class="title">
 						<span class="product-id">{{data.productID}}</span>
-						<h2>{{data.productName}}</h2>
+						<h2>{{data.productPartNumber}}</h2>
 						<span class="soldby"></span>
 						<p class="rating">{{data.averageProductRating}}</p>
 						<div class="ratingBG">
@@ -65,10 +65,10 @@
 					</a>
 					<div class="dimentionCard">
 						<h5>Specifications</h5>
-						<p><span>Height</span><span>{{data.height}} {{data.dimensionUnit | lowercase}}</span></p>
-						<p><span>Width</span><span>{{data.width}} {{data.dimensionUnit | lowercase}}</span></p>
-						<p><span>Depth</span><span>{{data.depth}} {{data.dimensionUnit | lowercase}}</span></p>
-						<p><span>Weight</span><span>{{data.weight}} Gm.</span></p>
+						<p><span>Height</span><span>{{data.productSpecification.height}} {{data.dimensionUnit | lowercase}}</span></p>
+						<p><span>Width</span><span>{{data.productSpecification.width}} {{data.dimensionUnit | lowercase}}</span></p>
+						<p><span>Depth</span><span>{{data.productSpecification.depth}} {{data.dimensionUnit | lowercase}}</span></p>
+						<p><span>Weight</span><span>{{data.productSpecification.weight}} Gm.</span></p>
 					</div>
 					
 					<div class="callDetails">
@@ -100,10 +100,10 @@
 					<div class="specification" style="display: none;">
 						<div>
 							<h5>Specifications in {{data.dimensionUnit}}: </h5>
-							<p><span>Height: </span>{{data.height}} {{data.dimensionUnit | lowercase}}</p>
-							<p><span>Width: </span>{{data.width}} {{data.dimensionUnit | lowercase}}</p>
-							<p><span>Depth: </span>{{data.depth}} {{data.dimensionUnit | lowercase}}</p>
-							<p><span>Weight: </span>{{data.weight}} Gm.</p>
+							<p><span>Height: </span>{{data.productSpecification.height}} {{data.dimensionUnit | lowercase}}</p>
+							<p><span>Width: </span>{{data.productSpecification.width}} {{data.dimensionUnit | lowercase}}</p>
+							<p><span>Depth: </span>{{data.productSpecification.depth}} {{data.dimensionUnit | lowercase}}</p>
+							<p><span>Weight: </span>{{data.productSpecification.weight}} Gm.</p>
 						</div>
 					</div>
 					<div class="usage" style="display: none;">

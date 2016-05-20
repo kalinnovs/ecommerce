@@ -3,7 +3,7 @@
 	<div class="category">
 		<h1>{{cat.data.selectedCategory.categoryName}}</h1>
 		<div class="category-banner tile noFlash" ng-hide="cat.data.subCategories.length">
-			<img ng-src="{{cat.data.selectedCategory.bannerImagePath}}" alt="Category" />
+			<img src="{{cat.data.selectedCategory.bannerImagePath}}" alt="{{cat.data.selectedCategory.categoryName}}" />
 		</div>
 		<div class="listing">
 			<div class="filters view" ng-hide="cat.data.subCategories.length">
@@ -43,10 +43,10 @@
 							<a href="#{{value.productDetailsURL}}">
 								<div class="wide-quarter-tile tile">
 					                <figure>
-					                    <img alt="" ng-src="{{value.productImage[0].imagePath}}medium/{{value.productImage[0].imageName}}">
+					                    <img alt="" ng-src="{{value.productImage.baseImagePath}}">
 					                </figure>
 					                <div class="detail">
-					                    <h4>{{value.productName}}</h4>
+					                    <h4>{{value.productPartNumber}}</h4>
 					                    <p class="productDescription" limit-character-render char-length="400" model-bind="value.productDescription">{{value.productDescription}}</p>
 					                    <div class="gridCol">
 					                    	<div class="ratingBG">
