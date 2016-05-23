@@ -164,7 +164,7 @@ header .currencyConverter a.india { background: url("../../../assets/images/Indi
 header .currencyConverter a.usd { background: url("../../../assets/images/United States of America (USA).png") -1px -4px no-repeat; color: #333; }
 header .currencyConverter a.euro { background: url("../../../assets/images/European Union.png") -1px -4px no-repeat; color: transparent; }
 header .currencyConverter a span { display: none }
-header .currencyConverter a:hover span { display: block; position: absolute; left: -10px; top: 22px; width: 50px;  color: #333; z-index: 2; font-weight: 700; text-align: center; font-size: 12px; }
+header .currencyConverter a.active span, header .currencyConverter a:hover span { display: block; position: absolute; left: -10px; top: 22px; width: 50px;  color: #333; z-index: 2; font-weight: 700; text-align: center; font-size: 12px; }
 
 header nav ul { display: inline-block; }
 header nav ul > li {float: left; border-right: 1px solid #dedede; position: relative;padding: 0px;}
@@ -346,7 +346,6 @@ header a.active, header a:focus { text-decoration: none }
 .category .category-banner { height: 360px; }
 .category .filters { text-align: right; }
 .category .filters .filterIcon { float: left;  padding: 8px 0 5px 10px; line-height: 36px; text-decoration: none; }
-.category .filters .filterIcon + span { float: left; margin-top: 13px }
 .category .filters span { display: inline-block; font-size: 16px; }
 .category .filters .filterIcon .fa { font-size: 20px; margin-right: 10px; }
 .category .filters .layoutTitle { display: inline-block; vertical-align: top; margin-top: 13px; font-size: 16px; }
@@ -356,8 +355,9 @@ header a.active, header a:focus { text-decoration: none }
 .category .filters ul li .fa { font-size: 20px; }
 .category .spacingAdjust .column { padding: 0; }
 .category .spacingAdjust .wide-quarter-tile { margin: 0 0 12px 0; }
-.category .spacingAdjust .wide-quarter-tile figure { text-align: center; width: 273px; height: 205px; float: left;}
-.category .listView .wide-quarter-tile figure { width: 323px; overflow: hidden; }
+.category .spacingAdjust .wide-quarter-tile figure { text-align: center; height: 205px; display: flex; flex-direction: column; justify-content: center;}
+.category .spacingAdjust .wide-quarter-tile figure img { width: 100% }
+.category .listView .wide-quarter-tile figure { width: 323px; overflow: hidden; float: left; height: auto; }
 .category .listView .tile.wide-quarter-tile .detail * { text-align: left; }
 .category .listView .tile .detail { float: none; display: block; margin-left: 340px; margin-right: 20px; }
 .category .listView .tile .gridCol { width: 100% }
@@ -369,7 +369,6 @@ header a.active, header a:focus { text-decoration: none }
 .category .categoryTree .treeView { margin-right: 10px; min-height: 500px; padding: 15px 0 0 15px; }
 .category .categoryTree.show + .spacingAdjust {  }
 .category .categoryTree.show + .spacingAdjust .wide-quarter-tile { /*height: 245px*/ }
-.category .categoryTree.show + .spacingAdjust img { /*width: 100%;*/ margin-left: -35px }
 @keyframes slideRight { from {width: 0px;} to {width: 258px;} }
 
 .category .treeView h2 { font-weight: 700; margin-bottom: 5px; }
