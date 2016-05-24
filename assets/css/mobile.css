@@ -4,7 +4,7 @@
   .row { width: 100%; }
 
   header nav a:hover, header nav a:focus { color: #000 }
-
+  #breadcrumbs { display: none; }
   header .menu { text-align: center; }
   .logo a { margin-left: 15px; }
   /* Mobile Menu */

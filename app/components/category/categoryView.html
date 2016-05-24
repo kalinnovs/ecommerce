@@ -1,5 +1,11 @@
 <!-- Content -->
 <div class="container">
+	<ul id="breadcrumbs">
+	    <li><a href="#/home" class="first">Home</a></li>
+	    <li ng-repeat="(key, value) in cat.data.breadcrumb">
+	    	<a href="#/{{value.linkUrl}}" ng-class="{'current':$last}">{{value.displayText}}</a>
+	    </li>
+	</ul>
 	<div class="category">
 		<h1>{{cat.data.selectedCategory.categoryName}}</h1>
 		<div class="category-banner tile noFlash" ng-hide="cat.data.categoryAttributes">
