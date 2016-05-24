@@ -63,23 +63,20 @@
     .form-control.price {
         display: inline-block;
         margin-bottom: 2px;
+        width: 90%;
     }
-    .logindetails { font-size: 14px; font-weight: 700; overflow: hidden; }
-    .logindetails span { display: inline-block; vertical-align: top; margin: 10px 0; }
-    .logindetails a { float: right; display: inline-block; margin: 10px 0; vertical-align: top;  }
-    .form-group > label, .priceOption .col-sm-4 { margin-top: 8px }
-    .priceOption .col-sm-6 > span { position: absolute; display: inline-block; left: 26px; top: 8px; font-weight: 700; z-index: 2 }
-    .priceOption .col-sm-6 > input { padding-left: 40px; }
-    .ratingWidget .col-sm-7 > span, .statusWidget .col-sm-7 > span { display: inline-block; margin-top: 8px }
-    header .menu { height: 2px; }
-    header .menu > .container { display: none; }
+
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
 </style>
 
 <div class="table-responsive container">
-    <div class="logindetails">
-        <span> Welcome Admin ! </span>
-        <a href="#/login">Logout</a>
-    </div>
 <div class="panel panel-primary">
     <div class="panel-heading"><h1>Product Inventory :</h1>
         <div class="sw-search" >
@@ -97,50 +94,35 @@
 
             <button class="btn btn-default category-expand-all" ng-click="collapseAll('category')"><i class="category fa fa-minus-square" aria-hidden="true" style="margin-right: 5px;color: #008000;"></i> Category all</button>
             <button class="btn btn-default subcategory-expand-all" ng-click="collapseAll('subcategory')"><i class="category fa fa-minus-square" aria-hidden="true" style="margin-right: 5px;color: #008000;"></i> Subcatgory all</button>
-          <ul class="category">
-            <li ng-repeat="category in categoryList | filter:{ rootCategoryId: 0 }" class="category-view">
-                <div class="category-node">
-                    <i class="category fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
-                    <a class="category" ng-click="editNode('category',category)"> {{category.categoryName}} </a> 
-                    <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
-                    <!-- <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editNode('category',category)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a> -->
-                    <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('subCategory',category)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
-                </div>
-                <ul>
-                    <li ng-repeat="directCategory in categoryList | filter:{ rootCategoryId: category.rootCategoryId }" class="product-view" ng-if="directCategory.categoryId === category.categoryId">
-                        <ul>
-                            <li ng-repeat="product in directCategory.productsList" class="product-view">
-                                <div class="product-node">
-                                    {{product.productName}}
-                                    <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
-                                    <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editNode('product', product)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li ng-repeat="subCategory in categoryList | filter:{ rootCategoryId: category.categoryId }" class="subcategory-view" ng-if="subCategory.categoryId !== category.categoryId">
-                        <div class="category-node subcategory-node">
-                            <i class="subcategory fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
-                            <a class="subcategory" ng-click="editNode('subCategory',subCategory)"> {{subCategory.categoryName}} </a>
-                            
-                            <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
-                           <!--  <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editNode('subCategory',subCategory)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a> -->
-                            <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('product',{})" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
-                        </div>
-                        <ul>
-                            <li ng-repeat="product in subCategory.productsList | filter : filterProduct" class="product-view">
-                                <div class="product-node">
-                                    <a class="product" ng-click="editNode('product', product, subCategory.categoryId, subCategory.rootCategoryId)"> {{product.productName}} </a>
-                                    <a class="pull-right btn btn-danger btn-xs" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
-                                    <!-- <a class="pull-right btn btn-success btn-xs" ng-click="editNode('product', product, subCategory.categoryId, subCategory.rootCategoryId)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a> -->
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-          </ul>
+            <ul class="category">
+                <li ng-repeat="category in categoryList" class="category-view">
+                    <div class="category-node">
+                        <i class="category fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
+                        <a class="category" ng-click="editNode('category',category)"> {{category.categoryName}} </a> 
+                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('subCategory',category)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+                    </div>
+                    <ul>
+                        <li ng-repeat="subCategory in category.subCategoryList" class="subcategory-view" ng-if="subCategory.categoryId !== category.categoryId">
+                            <div class="category-node subcategory-node">
+                                <i class="subcategory fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
+                                <a class="subcategory" ng-click="editNode('subCategory',subCategory, category.categoryId)"> {{subCategory.categoryName}} </a>
+                                
+                                <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('product',{})" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+                            </div>
+                            <ul>
+                                <li ng-repeat="product in subCategory.productsList | filter : filterProduct" class="product-view">
+                                    <div class="product-node">
+                                        <a class="product" ng-click="editNode('product', product, subCategory.categoryId, category.categoryId)"> {{product.productName}}</a>
+                                        <a class="pull-right btn btn-danger btn-xs" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+              </ul>
         </div>
 
         <!-- <div ui-view="productEdit" class="col-md-8"></div> -->
@@ -149,42 +131,80 @@
             <div ng-show="nodeType === 'category'" class="node">
                 <div class="node-header">
                     <h3 class="" style="margin: 15px 10px;">
-                        {{node.categoryId ? 'Edit Category : ' : 'Add Category'}} {{node.categoryId}}
-                    </h3>
-                </div>
-                <form name="category_form" class="" role="form" novalidate style="margin-left: 30px;">
-                    <form-element label="Name" mod="category">
-                        <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="node.categoryName"focus/>
-                    </form-element>
-                    <form-element label="Description" mod="category">
-                        <textarea class="form-control" name="description" placeholder="Description" ng-model="node.description"></textarea>
-                    </form-element>
-                    <form-element label="Status" mod="category">
-                       <label>
+                        {{node.categoryId ? 'Edit Category : ' : 'Add Category'}} {{node.categoryPartNumber}}
+                        <label class="pull-right">
                           <input name="categoryStatus" type="checkbox" ng-model="node.enabled"> Active
                         </label>
-                    </form-element>
-                    <form-element label="Menu Image" mod="category">
-                        <img src="{{ node.categoryImagePath }}" width="50" height="50" />
-                        <input type="file" file-model="menuFile"/>
-                        <button ng-click="uploadFile()" class="btn btn-default">upload me</button>
-                    </form-element>
-                    <form-element label="Banner Image" mod="category">
-                        <img src="{{ node.categorybannerImagePath }}" width="50" height="50" />
-                        <input type="file" file-model="bannerFile"/>
-                        <button ng-click="uploadFile()" class="btn btn-default">upload me</button>
-                    </form-element>
+                    </h3>
 
+                </div>
+                <form name="category_form" ng-submit="saveCategory(node)" class="" role="form" novalidate style="margin-left: 30px;">
+                    <form-element label="Name" mod="category">
+                        <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="node.categoryName" required/>
+                        <span ng-show="form.category_form.$dirty && form.name.$error.required" class="help-block">Category name is required</span>
+                    </form-element>
+                    <form-element label="Description" mod="category">
+                        <textarea class="form-control" name="description" placeholder="Description" ng-model="node.categoryDescription"></textarea>
+                    </form-element>
+                    <form-element label="Category Images" mod="category">
+                        <div class="row">
+                            <span class="col-sm-4">Menu </span>
+                            <span class="col-sm-4">Banner </span>
+                            <span class="col-sm-4">Tile </span>
+                        </div>
+                        <div class="row">
+                            <span class="col-sm-4">
+                                <img src="{{ node.categoryMenuImagePath }}" width="50" height="50" /> 
+                            </span>
+                            <span class="col-sm-4">
+                                <img src="{{ node.categoryBannerImagePath }}" width="50" height="50" /> 
+                            </span>
+                            <span class="col-sm-4">
+                                <img src="{{ node.categoryTileImagePath }}" width="50" height="50" /> 
+                            </span>
+                        </div>
+                    </form-element>
+                    <div class="row" style="text-align: center;">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <span class="col-sm-4">
+                                    <img ng-show="categoryMenuImage" ngf-thumbnail="categoryMenuImage" width="50" height="50"> 
+                                </span>
+                                <span class="col-sm-4">
+                                    <img ng-show="categoryBannerImage"  ngf-thumbnail="categoryBannerImage" width="50" height="50">
+                                </span>
+                                <span class="col-sm-4">
+                                    <img ng-show="categoryTileImage" ngf-thumbnail="categoryTileImage" width="50" height="50">
+                                </span>
+                            </div>
+                            <div ng-app="fileUpload" name="form" class="row">
+                                <span class="col-sm-4" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="categoryMenuImage" name="categoryMenuImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                                <span class="col-sm-4" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="categoryBannerImage" name="categoryBannerImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                                <span class="col-sm-4" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="categoryTileImage" name="categoryTileImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                                <div class="row" style="padding: 20px;">
+                                    <button ng-click="uploadCatalogImage('category')" class="btn btn-default byn-lg" ng-disabled="category_form.$invalid || imgLoading" >Upload Images</button>
+                                    <img ng-if="imgLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <form-element label="">
                             <div class="text-right">
                                 <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
-                                <button ng-click="saveCategory(node);"
-                                        ng-disabled="category_form.$invalid || enableUpdate"
+                                <button ng-disabled="category_form.$invalid || dataLoading"
                                         class="btn btn-sm btn-primary"
                                         type="submit">
                                     <i class="ace-icon fa fa-check"></i>Save Category
                                 </button>
+                                <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                             </div>
                         </form-element>
                     </div>
@@ -193,27 +213,74 @@
             <div ng-show="nodeType === 'subCategory'" class="node">
                 <div class="node-header">
                     <h3 class="" style="margin: 15px 10px;">
-                        {{node.categoryId ? 'Edit Sub-Category : ' : 'Add Sub-Category'}} {{node.categoryId}}
+                        {{node.categoryId ? 'Edit Sub-Category : ' : 'Add Sub-Category'}} {{node.categoryPartNumber}}
+                        <label class="pull-right">
+                          <input name="categoryStatus" type="checkbox" ng-model="node.enabled"> Active
+                        </label>
                     </h3>
                 </div>
                 <form name="category_form" class="" role="form" novalidate style="margin-left: 30px;">
+
                     <form-element label="category" mod="category">
-                        <select name="repeatSelect" id="repeatSelect" ng-model="node.rootCategoryId" class="form-control" >
-                            <option ng-repeat="option in categoryList | filter:{ rootCategoryId: 0 }" value="{{option.categoryId}}" >{{option.categoryName}}</option>
+                        <select name="repeatSelect" id="repeatSelect" ng-model="productCategoryId" ng-init="productCategoryId" class="form-control" >
+                            <option ng-repeat="option in categoryList" value="{{option.categoryId}}" >{{option.categoryName}}</option>
                         </select>
-                        <!-- <select name="category" id="category" ng-options="option.categoryName for option in rootCatogories track by option.categoryId" ng-model="node.rootCategoryId"></select> -->
                     </form-element>
                     <form-element label="Name" mod="category">
                         <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="node.categoryName"focus/>
                     </form-element>
                     <form-element label="Description" mod="category">
-                        <textarea class="form-control" name="description" placeholder="Description" ng-model="node.Description">{{node.description}}</textarea>
+                        <textarea class="form-control" name="description" placeholder="Description" ng-model="node.categoryDescription">{{node.categoryDescription}}</textarea>
                     </form-element>
-                    <form-element label="Status" mod="category">
-                       <label>
-                          <input type="checkbox" ng-model="node.enabled" value="category.categoryStatus"> Active
-                        </label>
+                    <form-element label="Sub Category Images" mod="category">
+                        <div class="row">
+                            <span class="col-sm-4">Menu </span>
+                            <span class="col-sm-4">Banner </span>
+                            <span class="col-sm-4">Tile </span>
+                        </div>
+                        <div class="row">
+                            <span class="col-sm-4">
+                                <img src="{{ node.categoryMenuImagePath }}" width="50" height="50" /> 
+                            </span>
+                            <span class="col-sm-4">
+                                <img src="{{ node.categoryBannerImagePath }}" width="50" height="50" /> 
+                            </span>
+                            <span class="col-sm-4">
+                                <img src="{{ node.categoryTileImagePath }}" width="50" height="50" /> 
+                            </span>
+                        </div>
                     </form-element>
+                    <div class="row" style="text-align: center;">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <span class="col-sm-4">
+                                    <img ng-show="categoryMenuImage" ngf-thumbnail="categoryMenuImage" width="50" height="50"> 
+                                </span>
+                                <span class="col-sm-4">
+                                    <img ng-show="categoryBannerImage"  ngf-thumbnail="categoryBannerImage" width="50" height="50">
+                                </span>
+                                <span class="col-sm-4">
+                                    <img ng-show="categoryTileImage" ngf-thumbnail="categoryTileImage" width="50" height="50">
+                                </span>
+                            </div>
+                            <div ng-app="fileUpload" name="form" class="row">
+                                <span class="col-sm-4" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="categoryMenuImage" name="categoryMenuImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                                <span class="col-sm-4" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="categoryBannerImage" name="categoryBannerImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                                <span class="col-sm-4" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="categoryTileImage" name="categoryTileImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                                <div class="row" style="padding: 20px;">
+                                    <button ng-click="uploadCatalogImage('category')" class="btn btn-default byn-lg">Upload Images</button>
+                                    <img ng-if="imgLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="modal-footer">
                         <form-element label="">
@@ -225,6 +292,7 @@
                                         type="submit">
                                     <i class="ace-icon fa fa-check"></i>Save Subcategory
                                 </button>
+                                <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                             </div>
                         </form-element>
                     </div>
@@ -233,19 +301,24 @@
             <div ng-show="nodeType === 'product'" class="node">
                 <div class="node-header">
                     <h3 class="" style="margin: 15px 10px;">
-                        {{node.productId ? 'Edit Product : ' : 'Add Product'}} {{node.productId}}
+                        {{node.productId ? 'Edit Product : ' : 'Add Product'}} {{node.productName}}
+                        <label class="pull-right">
+                            <input name="categoryStatus" type="checkbox" ng-model="node.enabled"> Active
+                        </label>
                     </h3>
                 </div>
                 <form name="product_form" class="" role="form" novalidate style="margin-left: 30px;">
                     <form-element label="Category" mod="product">
-                        <select id="category" ng-model="productRootCategoryId" class="form-control" ng-change="getSubCategories(productRootCategoryId)">
-                            <option ng-repeat="category in categoryList | filter:{ rootCategoryId: 0 }" value="{{category.categoryId}}" category.categoryId>{{category.categoryName}}</option>
+                        <select id="category" ng-model="productRootCategoryId" class="form-control" ng-change="getSubCategories(productRootCategoryId)" ng-init="productRootCategoryId">
+                            <option ng-repeat="category in categoryList" value="{{category.categoryId}}" category.categoryId>{{category.categoryName}}</option>
                         </select>
                     </form-element>
                     <form-element label="Sub Category" mod="product">
-                        <select id="subCategory" ng-model="productCategoryId" class="form-control" ng-init="productCategoryId">
-                            <option ng-repeat="subCategory in categoryList | filter: { rootCategoryId: productRootCategoryId }" value="{{subCategory.categoryId}}">{{subCategory.categoryName}}</option>
+                        
+                        <select id="subCategory" ng-model="productCategoryId" class="form-control" ng-value="productCategoryId" ng-init="productCategoryId">
+                            <option ng-repeat="subcat in subCategoryList" value="{{subcat.categoryId}}">{{subcat.categoryName}}</option>
                         </select>
+                        
                     </form-element>
                     <form-element label="Name" mod="product">
                         <input type="text" class="form-control" name="name" placeholder="Product Name" ng-model="node.productName"focus/>
@@ -253,29 +326,20 @@
                     <form-element label="Description" mod="product">
                         <textarea class="form-control" name="description" placeholder="Description" ng-model="node.productDescription">{{node.productDescription}}</textarea>
                     </form-element>
-                    <form-element label="Status" mod="product" class="statusWidget">
-                       <label>
-                          <input type="checkbox" ng-model="node.enabled" value="node.enabled"> Active
-                        </label>
-                    </form-element>
-                    <form-element label="Rating" mod="product" class="ratingWidget">
-                        <uib-rating ng-model="node.avgRating" max="5" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+                    <form-element label="Usage Detail" mod="product">
+                        <textarea class="form-control" name="usageDetail" placeholder="usageDetail" ng-model="node.productSpecification.usageDetails">{{node.productSpecification.usageDetails}}</textarea>
                     </form-element>
                     <form-element label="Price" mod="product">
-                        <div ng-repeat="priceOption in node.priceOptions" class="row priceOption">
-                            <span class="col-sm-4">{{priceOption.countryName}}</span>
-                            <div class="col-sm-6">
-                                <span style="width: 15px;display: inline-block;">{{priceOption.currencyCode}}</span>
+                        <div ng-repeat="priceOption in node.priceOptions" class="row">
+                            <span class="col-sm-4">{{priceOption.currencySymbol}}</span>
+                            <div class="col-sm-8">
                                 <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="priceOption.price"  only-numbers/>
                             </div>
-                            
-                            
                         </div>
-                        <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the price.</small>
                     </form-element>
 
-                    <form-element label="Dimension" mod="product">
-                        <div class="row priceOption">
+                    <form-element label="Specification" mod="product">
+                        <!-- <div class="row">
                             <span class="col-sm-4">Unit </span>
                             <div class="col-sm-8" ng-model="node.dimensionUnit">
                                 <select class="form-control price" >
@@ -283,33 +347,93 @@
                                     <option value="inch">in Inch</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row priceOption">
+                        </div> -->
+                        <div class="row">
                             <span class="col-sm-4">Width </span>
                             <div class="col-sm-8">
-                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="node.width"  only-numbers/>
+                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Width" ng-model="node.productSpecification.width"  only-numbers/>cm.
                             </div>
                         </div>
-                        <div class="row priceOption">
+                        <div class="row">
                             <span class="col-sm-4">Height </span>
                             <div class="col-sm-8">
-                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="node.height"  only-numbers/>
+                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Height" ng-model="node.productSpecification.height"  only-numbers/>cm.
                             </div>
                         </div>
-                        <div class="row priceOption">
+                        <div class="row">
                             <span class="col-sm-4">Depth </span>
                             <div class="col-sm-8">
-                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="node.depth"  only-numbers/>
+                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Depth" ng-model="node.productSpecification.depth"  only-numbers/>cm.
+                            </div>
+                        </div>
+                        <div class="row">
+                            <span class="col-sm-4">Weight </span>
+                            <div class="col-sm-8">
+                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Weight" ng-model="node.productSpecification.weight"  only-numbers/>Kg.
                             </div>
                         </div>
                         
                     </form-element>
 
                     <form-element label="Product Images" mod="category">
-                        <img ng-repeat="imgList in node.imageGallery " src={{imgList.imagePath}} width="50" height="50" />
-                        <input type="file" file-model="menuFile"/>
-                        <button ng-click="uploadFile()" class="btn btn-default">upload me</button>
+                        <div class="row text-center">
+                            <span class="col-sm-3">Base </span>
+                            <span class="col-sm-3">Thumb </span>
+                            <span class="col-sm-3">Large </span>
+                            <span class="col-sm-3">X Large </span>
+                        </div>
+                        <div class="row text-center" ng-repeat="images in node.productImageGallery">
+                            <span class="col-sm-3">
+                                <img src="{{ images.baseImagePath }}" width="50" height="50" /> 
+                            </span>
+                            <span class="col-sm-3">
+                                <img src="{{ images.thumbImagePath }}" width="50" height="50" /> 
+                            </span>
+                            <span class="col-sm-3">
+                                <img src="{{ images.largeImagePath }}" width="50" height="50" /> 
+                            </span>
+                            <span class="col-sm-3">
+                                <img src="{{ images.extraLargeImagePath }}" width="50" height="50" /> 
+                            </span>
+                        </div>
                     </form-element>
+                    <div class="row" style="text-align: center;">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-7">
+                            <div class="row">
+                                <span class="col-sm-3">
+                                    <img ng-show="baseImage" ngf-thumbnail="baseImage" width="50" height="50"> 
+                                </span>
+                                <span class="col-sm-3">
+                                    <img ng-show="thumbImage"  ngf-thumbnail="thumbImage" width="50" height="50">
+                                </span>
+                                <span class="col-sm-3">
+                                    <img ng-show="largeImage" ngf-thumbnail="largeImage" width="50" height="50">
+                                </span>
+                                <span class="col-sm-3">
+                                    <img ng-show="xlargeImage" ngf-thumbnail="xlargeImage" width="50" height="50">
+                                </span>
+                            </div>
+                            <div ng-app="fileUpload" name="form" class="row">
+                                <span class="col-sm-3" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="baseImage" name="baseImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                                <span class="col-sm-3" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="thumbImage" name="thumbImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                                <span class="col-sm-3" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="largeImage" name="largeImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                                <span class="col-sm-3" style="padding: 0;">
+                                    <div class="btn btn-default" ngf-select ng-model="xlargeImage" name="xlargeImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                </span>
+                            </div>
+                            <div class="row" style="padding: 20px;">
+                                <button ng-click="uploadProductImage('product')" class="btn btn-default byn-lg">Upload Images</button>
+                                <img ng-if="imgLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <div class="modal-footer">
@@ -322,6 +446,7 @@
                                         type="submit">
                                     <i class="ace-icon fa fa-check"></i>Save Product
                                 </button>
+                                <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                             </div>
                         </form-element>
                     </div>
@@ -332,3 +457,4 @@
     </div>
 </div>
 </div>
+

@@ -8,6 +8,8 @@ require("../jqzoom.js");
 
 
 require("../../../vendor/js/angular-ui-router.min.js");
+require("../../../vendor/js/ng-file-upload.js");
+
 require("../../../app/app.routes.js");
 require("../../../app/app.services.js");
 require("../../../app/directives/limitCharacterRender/limitCharacterRender-directive.js");

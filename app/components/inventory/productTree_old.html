@@ -1,0 +1,319 @@
+<style type="text/css">
+	.tree-view {
+		width: 34%;
+        display: inline-block;
+        margin-top: 20px;
+	}
+    .node-content {
+        display: inline-block;
+        vertical-align: top;
+        padding: 30px;
+        width: 65%;
+    }
+    .node-content .row {
+        width: auto;
+    }
+    .node-content .node{
+        border: 2px solid #337ab7;
+        width: 100%;
+    }
+    .node-content .node .node-header {
+        min-height: 16.43px;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        margin-bottom: 30px;
+    }
+	.tree-view .category-view{
+		margin-left: 0px;
+	}
+    .tree-view .subcategory-view{
+        margin-left: 20px;
+    }
+    .tree-view .product-view{
+        margin-left: 20px;
+    }
+	.category-node, 
+    .product-node {
+		border: 1px solid #dae2ea;
+	    background: #f8faff;
+	    color: #337ab7;
+	    margin: 10px;
+	    padding: 10px;
+	    font-size: 17px;
+	    font-weight: 700;
+	}
+    .subcategory-node {
+        font-size: 15px;
+    }
+    .product-node {
+        font-weight: 300;
+        font-size: 14px;
+    }
+    a.product,
+    a.subcategory,
+    a.category {
+        color: #337ab7;
+        cursor: pointer;
+    }
+    .category-node i {
+        margin-right: 10px;
+        color: #008000;
+        cursor: pointer;
+    }
+    .form-control.price {
+        display: inline-block;
+        margin-bottom: 2px;
+    }
+</style>
+
+<div class="table-responsive container">
+<div class="panel panel-primary">
+    <div class="panel-heading"><h1>Product Inventory :</h1>
+        <div class="sw-search" >
+            <div class="nav-search" id="nav-search">
+                    Filter: <span class="input-icon">
+                        <input placeholder="Filter products list ..." class="nav-search-input" ng-model="filterProduct" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <i class="search-icon fa fa-search nav-search-icon"></i>
+                    </span>
+            </div>
+        </div>
+    </div>
+    <div class="panel-content">
+        <div class="tree-view">
+            <a class="btn btn-primary" data-nodrag="" ng-click="addNode('category',category)" style="margin-left: 10px;"><span class="glyphicon glyphicon-plus"> Node</span></a>
+
+            <button class="btn btn-default category-expand-all" ng-click="collapseAll('category')"><i class="category fa fa-minus-square" aria-hidden="true" style="margin-right: 5px;color: #008000;"></i> Category all</button>
+            <button class="btn btn-default subcategory-expand-all" ng-click="collapseAll('subcategory')"><i class="category fa fa-minus-square" aria-hidden="true" style="margin-right: 5px;color: #008000;"></i> Subcatgory all</button>
+          <ul class="category">
+            <li ng-repeat="category in categoryList | filter:{ rootCategoryId: 0 }" class="category-view">
+                <div class="category-node">
+                    <i class="category fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
+                    <a class="category" ng-click="editNode('category',category)"> {{category.categoryName}} </a> 
+                    <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('subCategory',category)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+                </div>
+                <ul>
+                    <li ng-repeat="directCategory in categoryList | filter:{ rootCategoryId: category.rootCategoryId }" class="product-view" ng-if="directCategory.categoryId === category.categoryId">
+                        <ul>
+                            <li ng-repeat="product in directCategory.productsList" class="product-view">
+                                <div class="product-node">
+                                    {{product.productName}}
+                                    <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                    <a class="pull-right btn btn-success btn-xs" data-nodrag="" ng-click="editNode('product', product)" style="margin-right: 8px;"><span class="glyphicon glyphicon-edit"></span></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li ng-repeat="subCategory in categoryList | filter:{ rootCategoryId: category.categoryId }" class="subcategory-view" ng-if="subCategory.categoryId !== category.categoryId">
+                        <div class="category-node subcategory-node">
+                            <i class="subcategory fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
+                            <a class="subcategory" ng-click="editNode('subCategory',subCategory)"> {{subCategory.categoryName}} </a>
+                            
+                            <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('product',{})" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+                        </div>
+                        <ul>
+                            <li ng-repeat="product in subCategory.productsList | filter : filterProduct" class="product-view">
+                                <div class="product-node">
+                                    <a class="product" ng-click="editNode('product', product, subCategory.categoryId, subCategory.rootCategoryId)"> {{product.productName}} </a>
+                                    <a class="pull-right btn btn-danger btn-xs" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+
+        <!-- <div ui-view="productEdit" class="col-md-8"></div> -->
+        <!-- <ng-include src="app/components/inventory/productEdit.html"></ng-include> -->
+        <div class="node-content">
+            <div ng-show="nodeType === 'category'" class="node">
+                <div class="node-header">
+                    <h3 class="" style="margin: 15px 10px;">
+                        {{node.categoryId ? 'Edit Category : ' : 'Add Category'}} {{node.categoryId}}
+                    </h3>
+                </div>
+                <form name="category_form" class="" role="form" novalidate style="margin-left: 30px;">
+                    <form-element label="Name" mod="category">
+                        <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="node.categoryName"focus/>
+                    </form-element>
+                    <form-element label="Description" mod="category">
+                        <textarea class="form-control" name="description" placeholder="Description" ng-model="node.description"></textarea>
+                    </form-element>
+                    <form-element label="Status" mod="category">
+                       <label>
+                          <input name="categoryStatus" type="checkbox" ng-model="node.enabled"> Active
+                        </label>
+                    </form-element>
+                    <form-element label="Menu Image" mod="category">
+                        <img src="{{ node.categoryImagePath }}" width="50" height="50" />
+                        <input type="file" file-model="menuFile"/>
+                        <button ng-click="uploadFile()" class="btn btn-default">upload me</button>
+                    </form-element>
+                    <form-element label="Banner Image" mod="category">
+                        <img src="{{ node.categorybannerImagePath }}" width="50" height="50" />
+                        <input type="file" file-model="bannerFile"/>
+                        <button ng-click="uploadFile()" class="btn btn-default">upload me</button>
+                    </form-element>
+
+                    <div class="modal-footer">
+                        <form-element label="">
+                            <div class="text-right">
+                                <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
+                                <button ng-click="saveCategory(node);"
+                                        ng-disabled="category_form.$invalid || enableUpdate"
+                                        class="btn btn-sm btn-primary"
+                                        type="submit">
+                                    <i class="ace-icon fa fa-check"></i>Save Category
+                                </button>
+                            </div>
+                        </form-element>
+                    </div>
+                </form>
+            </div>
+            <div ng-show="nodeType === 'subCategory'" class="node">
+                <div class="node-header">
+                    <h3 class="" style="margin: 15px 10px;">
+                        {{node.categoryId ? 'Edit Sub-Category : ' : 'Add Sub-Category'}} {{node.categoryId}}
+                    </h3>
+                </div>
+                <form name="category_form" class="" role="form" novalidate style="margin-left: 30px;">
+                    <form-element label="category" mod="category">
+                        <select name="repeatSelect" id="repeatSelect" ng-model="node.rootCategoryId" class="form-control" >
+                            <option ng-repeat="option in categoryList | filter:{ rootCategoryId: 0 }" value="{{option.categoryId}}" >{{option.categoryName}}</option>
+                        </select>
+                        <!-- <select name="category" id="category" ng-options="option.categoryName for option in rootCatogories track by option.categoryId" ng-model="node.rootCategoryId"></select> -->
+                    </form-element>
+                    <form-element label="Name" mod="category">
+                        <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="node.categoryName"focus/>
+                    </form-element>
+                    <form-element label="Description" mod="category">
+                        <textarea class="form-control" name="description" placeholder="Description" ng-model="node.Description">{{node.description}}</textarea>
+                    </form-element>
+                    <form-element label="Status" mod="category">
+                       <label>
+                          <input type="checkbox" ng-model="node.enabled" value="category.categoryStatus"> Active
+                        </label>
+                    </form-element>
+
+                    <div class="modal-footer">
+                        <form-element label="">
+                            <div class="text-right">
+                                <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
+                                <button ng-click="saveCategory(node);"
+                                        ng-disabled="category_form.$invalid || enableUpdate"
+                                        class="btn btn-sm btn-primary"
+                                        type="submit">
+                                    <i class="ace-icon fa fa-check"></i>Save Subcategory
+                                </button>
+                            </div>
+                        </form-element>
+                    </div>
+                </form>
+            </div>
+            <div ng-show="nodeType === 'product'" class="node">
+                <div class="node-header">
+                    <h3 class="" style="margin: 15px 10px;">
+                        {{node.productId ? 'Edit Product : ' : 'Add Product'}} {{node.productId}}
+                    </h3>
+                </div>
+                <form name="product_form" class="" role="form" novalidate style="margin-left: 30px;">
+                    <form-element label="Category" mod="product">
+                        <select id="category" ng-model="productRootCategoryId" class="form-control" ng-change="getSubCategories(productRootCategoryId)">
+                            <option ng-repeat="category in categoryList | filter:{ rootCategoryId: 0 }" value="{{category.categoryId}}" category.categoryId>{{category.categoryName}}</option>
+                        </select>
+                    </form-element>
+                    <form-element label="Sub Category" mod="product">
+                        <select id="subCategory" ng-model="productCategoryId" class="form-control" ng-init="productCategoryId">
+                            <option ng-repeat="subCategory in categoryList | filter: { rootCategoryId: productRootCategoryId }" value="{{subCategory.categoryId}}">{{subCategory.categoryName}}</option>
+                        </select>
+                    </form-element>
+                    <form-element label="Name" mod="product">
+                        <input type="text" class="form-control" name="name" placeholder="Product Name" ng-model="node.productName"focus/>
+                    </form-element>
+                    <form-element label="Description" mod="product">
+                        <textarea class="form-control" name="description" placeholder="Description" ng-model="node.productDescription">{{node.productDescription}}</textarea>
+                    </form-element>
+                    <form-element label="Status" mod="product">
+                       <label>
+                          <input type="checkbox" ng-model="node.enabled" value="node.enabled"> Active
+                        </label>
+                    </form-element>
+                    <form-element label="Rating" mod="product">
+                        <uib-rating ng-model="node.avgRating" max="5" on-leave="overStar = null" aria-labelledby="default-rating"></uib-rating>
+                    </form-element>
+                    <form-element label="Price" mod="product">
+                        <div ng-repeat="priceOption in node.priceOptions" class="row">
+                            <span class="col-sm-4">{{priceOption.countryName}}</span>
+                            <div class="col-sm-6">
+                                <span style="width: 15px;display: inline-block;">{{priceOption.currencySymbol}}</span>
+                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="priceOption.price"  only-numbers/>
+                            </div>
+                            
+                            
+                        </div>
+                        <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the price.</small>
+                    </form-element>
+
+                    <form-element label="Dimension" mod="product">
+                        <div class="row">
+                            <span class="col-sm-4">Unit </span>
+                            <div class="col-sm-8" ng-model="node.dimensionUnit">
+                                <select class="form-control price" >
+                                    <option value="cm">in Cm</option>
+                                    <option value="inch">in Inch</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <span class="col-sm-4">Width </span>
+                            <div class="col-sm-8">
+                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="node.width"  only-numbers/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <span class="col-sm-4">Height </span>
+                            <div class="col-sm-8">
+                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="node.height"  only-numbers/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <span class="col-sm-4">Depth </span>
+                            <div class="col-sm-8">
+                                <input class="form-control price" type="text" name="price" class="form-control" placeholder="Price" ng-model="node.depth"  only-numbers/>
+                            </div>
+                        </div>
+                        
+                    </form-element>
+
+                    <form-element label="Product Images" mod="category">
+                        <img ng-repeat="imgList in node.imageGallery " src={{imgList.imagePath}} width="50" height="50" />
+                        <input type="file" file-model="menuFile"/>
+                        <button ng-click="uploadFile()" class="btn btn-default">upload me</button>
+                    </form-element>
+
+
+                    <div class="modal-footer">
+                        <form-element label="">
+                            <div class="text-right">
+                                <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
+                                <button ng-click="saveProduct(node);"
+                                        ng-disabled="product_form.$invalid || enableUpdate"
+                                        class="btn btn-sm btn-primary"
+                                        type="submit">
+                                    <i class="ace-icon fa fa-check"></i>Save Product
+                                </button>
+                            </div>
+                        </form-element>
+                    </div>
+                </form>
+            </div>    
+        </div>
+        
+    </div>
+</div>
+</div>
+
