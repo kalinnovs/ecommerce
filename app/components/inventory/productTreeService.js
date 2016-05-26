@@ -30,6 +30,21 @@ angular.module('eCommerce')
         });
     }
 
+    service.deleteNode = function (url, callBack) {
+        $http({
+            method: 'POST',
+            url: BASE_URL + url,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data) {
+            debugger;
+            callBack(data);
+        }, function errorCallback(response) {
+            console.log("Error in saving.");
+        });
+    }
+
     service.uploadImage = function(url, imageData, callBack){
         Upload.upload({
             url: BASE_URL + url,

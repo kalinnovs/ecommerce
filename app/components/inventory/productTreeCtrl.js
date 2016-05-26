@@ -106,6 +106,21 @@ angular.module('eCommerce')
         $scope.dataLoading = false;
     }
 
+    $scope.deleteCategory = function(categoryId) {
+        debugger;
+        $scope.dataLoading = true;
+        productTreeService.deleteNode("/deleteCategory/"+categoryId, $scope.deleteNodeSucess);
+    }
+    $scope.deleteProduct = function(productId) {
+        debugger;
+        $scope.dataLoading = true;
+        productTreeService.deleteNode("/deleteProduct/"+productId, $scope.deleteNodeSucess);
+    }
+    $scope.deleteNodeSucess = function(resp) {
+        debugger;
+        $scope.dataLoading = false;
+    }
+
     $scope.uploadCatalogImage = function() {
         var imageData = {};
 

@@ -105,7 +105,7 @@
                     <div class="category-node">
                         <i class="category fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
                         <a class="category" ng-click="editNode('category',category)"> {{category.categoryName}} </a> 
-                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory(category.categoryId)"><span class="glyphicon glyphicon-remove"></span></a>
                         <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('subCategory',category)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
                     </div>
                     <ul>
@@ -114,14 +114,14 @@
                                 <i class="subcategory fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
                                 <a class="subcategory" ng-click="editNode('subCategory',subCategory, category.categoryId)"> {{subCategory.categoryName}} </a>
                                 
-                                <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory(subCategory.categoryId)"><span class="glyphicon glyphicon-remove"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('product',{})" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
                             </div>
                             <ul>
                                 <li ng-repeat="product in subCategory.productsList | filter : filterProduct" class="product-view">
                                     <div class="product-node">
                                         <a class="product" ng-click="editNode('product', product, subCategory.categoryId, category.categoryId)"> {{product.productName}}</a>
-                                        <a class="pull-right btn btn-danger btn-xs" ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+                                        <a class="pull-right btn btn-danger btn-xs" ng-click="deleteProduct(product.productId)"><span class="glyphicon glyphicon-remove"></span></a>
                                     </div>
                                 </li>
                             </ul>
@@ -147,18 +147,18 @@
                 <form name="category_form" ng-submit="saveCategory(node)" class="" role="form" novalidate style="margin-left: 30px;">
                     <form-element label="Name" mod="category">
                         <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="node.categoryName" required/>
-                        <span ng-show="form.category_form.$dirty && form.name.$error.required" class="help-block">Category name is required</span>
+                        <span ng-show="category_form.$dirty && category_form.name.$error.required" class="help-block">Category name required.</span>
                     </form-element>
                     <form-element label="Description" mod="category">
                         <textarea class="form-control" name="description" placeholder="Description" ng-model="node.categoryDescription"></textarea>
                     </form-element>
                     <form-element label="Category Images" mod="category">
-                        <div class="row">
+                        <div class="row text-center">
                             <span class="col-sm-4">Menu </span>
                             <span class="col-sm-4">Banner </span>
                             <span class="col-sm-4">Tile </span>
                         </div>
-                        <div class="row">
+                        <div class="row text-center">
                             <span class="col-sm-4">
                                 <img src="{{ node.categoryMenuImagePath }}" width="50" height="50" /> 
                             </span>
@@ -195,7 +195,7 @@
                                     <div class="btn btn-default" ngf-select ng-model="categoryTileImage" name="categoryTileImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
                                 </span>
                                 <div class="row" style="padding: 20px;">
-                                    <button ng-click="uploadCatalogImage('category')" class="btn btn-default byn-lg" ng-disabled="category_form.$invalid || imgLoading" >Upload Images</button>
+                                    <button ng-click="uploadCatalogImage('category')" class="btn btn-default byn-lg" ng-disabled="category_form.$invalid || imgLoading || (!node.categoryId)" >Upload Images</button>
                                     <img ng-if="imgLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                                 </div>
                             </div>
@@ -225,15 +225,17 @@
                         </label>
                     </h3>
                 </div>
-                <form name="category_form" class="" role="form" novalidate style="margin-left: 30px;">
+                <form name="subcategory_form" class="" role="form" novalidate style="margin-left: 30px;">
 
                     <form-element label="category" mod="category">
-                        <select name="category" id="category" ng-model="productCategoryId" ng-init="productCategoryId" class="form-control" >
+                        <select name="category" id="category" ng-model="productCategoryId" ng-init="productCategoryId" class="form-control" required >
                             <option ng-repeat="option in categoryList" value="{{option.categoryId}}" >{{option.categoryName}}</option>
                         </select>
+                        <span ng-show="subcategory_form.$dirty && subcategory_form.category.$error.required" class="help-block">Category required.</span>
                     </form-element>
                     <form-element label="Name" mod="category">
-                        <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="node.categoryName"focus/>
+                        <input type="text" class="form-control" name="name" placeholder="category Name" ng-model="node.categoryName" required />
+                        <span ng-show="subcategory_form.$dirty && subcategory_form.name.$error.required" class="help-block">Sub-category name required.</span>
                     </form-element>
                     <form-element label="Description" mod="category">
                         <textarea class="form-control" name="description" placeholder="Description" ng-model="node.categoryDescription">{{node.categoryDescription}}</textarea>
@@ -281,7 +283,7 @@
                                     <div class="btn btn-default" ngf-select ng-model="categoryTileImage" name="categoryTileImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
                                 </span>
                                 <div class="row" style="padding: 20px;">
-                                    <button ng-click="uploadCatalogImage('category')" class="btn btn-default byn-lg">Upload Images</button>
+                                    <button ng-click="uploadCatalogImage('category')" class="btn btn-default byn-lg" ng-disabled="subcategory_form.$invalid || imgLoading || (!node.categoryId)">Upload Images</button>
                                     <img ng-if="imgLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                                 </div>
                             </div>
@@ -293,7 +295,7 @@
                             <div class="text-right">
                                 <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
                                 <button ng-click="saveCategory(node);"
-                                        ng-disabled="category_form.$invalid || enableUpdate"
+                                        ng-disabled="subcategory_form.$invalid"
                                         class="btn btn-sm btn-primary"
                                         type="submit">
                                     <i class="ace-icon fa fa-check"></i>Save Subcategory
@@ -315,9 +317,10 @@
                 </div>
                 <form name="product_form" class="" role="form" novalidate style="margin-left: 30px;">
                     <form-element label="Category" mod="product">
-                        <select id="category" ng-model="productRootCategoryId" class="form-control" ng-change="getSubCategories(productRootCategoryId)" ng-init="productRootCategoryId">
+                        <select id="category" name="category" ng-model="productRootCategoryId" class="form-control" ng-change="getSubCategories(productRootCategoryId)" ng-init="productRootCategoryId" required >
                             <option ng-repeat="category in categoryList" value="{{category.categoryId}}" category.categoryId>{{category.categoryName}}</option>
                         </select>
+                        <span ng-show="product_form.$dirty && product_form.category.$error.required" class="help-block">Category required.</span>
                     </form-element>
                     <form-element label="Sub Category" mod="product">
                         
@@ -327,7 +330,8 @@
                         
                     </form-element>
                     <form-element label="Name" mod="product">
-                        <input type="text" class="form-control" name="name" placeholder="Product Name" ng-model="node.productName"focus/>
+                        <input type="text" class="form-control" name="name" placeholder="Product Name" ng-model="node.productName" required />
+                        <span ng-show="product_form.$dirty && product_form.name.$error.required" class="help-block">Product name required.</span>
                     </form-element>
                     <form-element label="Description" mod="product">
                         <textarea class="form-control" name="description" placeholder="Description" ng-model="node.productDescription">{{node.productDescription}}</textarea>
@@ -435,19 +439,18 @@
                                 </span>
                             </div>
                             <div class="row" style="padding: 20px;">
-                                <button ng-click="uploadProductImage('product')" class="btn btn-default byn-lg">Upload Images</button>
+                                <button ng-click="uploadProductImage('product')" class="btn btn-default byn-lg" ng-disabled="product_form.$invalid || imgLoading || (!node.productId)">Upload Images</button>
                                 <img ng-if="imgLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                             </div>
                         </div>
                     </div>
-
 
                     <div class="modal-footer">
                         <form-element label="">
                             <div class="text-right">
                                 <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
                                 <button ng-click="saveProduct(node);"
-                                        ng-disabled="product_form.$invalid || enableUpdate"
+                                        ng-disabled="product_form.$invalid"
                                         class="btn btn-sm btn-primary"
                                         type="submit">
                                     <i class="ace-icon fa fa-check"></i>Save Product
