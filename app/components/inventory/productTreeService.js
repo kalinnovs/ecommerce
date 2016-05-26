@@ -7,7 +7,7 @@ angular.module('eCommerce')
     // var BASE_URL = "http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/admin";
     var BASE_URL = "http://107.180.73.220/HaastikaWebService/admin";
     // var BASE_URL = "assets/json/productTree.json";
-    // var BASE_URL = 'http://127.0.0.1:8081';
+    // var BASE_URL = 'http://17.115.77.140:8080/HaastikaWebService/admin';
 
     //simply returns the category list
     service.list = function () {
@@ -28,26 +28,7 @@ angular.module('eCommerce')
         }, function errorCallback(response) {
             console.log("Error in saving.");
         });
-
-        // return $http.post("http://107.180.73.220/HaastikaWebService/admin" + "/saveCategory", JSON.stringify(category));
     }
-
-    // service.saveProduct = function (product) {
-    //     $http({
-    //         method: 'POST',
-    //         url: "http://107.180.73.220/HaastikaWebService/admin/saveProduct",
-    //         data: JSON.stringify(product),
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }).then(function successCallback(data, status) {
-    //         console.log("Product Saved.");
-    //     }, function errorCallback(response) {
-    //     // called asynchronously if an error occurs
-    //     // or server returns response with an error status.
-    //     });
-    //     // return $http.post(BASE_URL + "/saveProduct", JSON.stringify(product));
-    // }
 
     service.uploadImage = function(url, imageData, callBack){
         Upload.upload({

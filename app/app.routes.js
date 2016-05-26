@@ -112,8 +112,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           }
         }
       })
-      .state('admin', {
-        url:'/admin',
+      .state('productTree', {
+        url:'/productTree',
         views: {
           '': { 
             templateUrl: 'app/components/inventory/productTree.html',

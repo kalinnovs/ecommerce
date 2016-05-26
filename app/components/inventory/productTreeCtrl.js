@@ -47,10 +47,31 @@ angular.module('eCommerce')
     $scope.addNode = function(nodeType,node, productCategoryId, productRootCategoryId){
         $scope.nodeType = nodeType;
         $scope.node = {};
-    };
-
-    $scope.populateSubCategory = function(productRootCategoryId){
-        console.log("hi"+productRootCategoryId);
+        
+        if(nodeType === 'product'){
+            $scope.node.priceOptions = [];
+            $scope.node.priceOptions.push({
+                "countryName": "India",
+                "currencyCode": "INR",
+                "currencyId": 1,
+                "currencySymbol": "INR",
+                "price": 0
+            });
+            $scope.node.priceOptions.push({
+                "countryName": "United States",
+                "currencyCode": "USD",
+                "currencyId": 2,
+                "currencySymbol": "$",
+                "price": 0
+            });
+            $scope.node.priceOptions.push({
+                "countryName": "United Kingdom",
+                "currencyCode": "EUR",
+                "currencyId": 3,
+                "currencySymbol": "GBP",
+                "price": 0
+            });
+        }
     };
 
     $scope.saveCategory = function(category){
@@ -58,12 +79,19 @@ angular.module('eCommerce')
         categoryObj = angular.copy(category);
         delete categoryObj["subCategoryList"];
         delete categoryObj["productsList"];
+
+        if($('#category').val()){
+            categoryObj.rootCategory = {'categoryId': parseInt($('#category').val())};
+        }
+
         productTreeService.saveNode('/saveCategory', categoryObj, $scope.saveCategorySucess);
     }
 
     $scope.saveProduct = function(product){
         $scope.dataLoading = true;
+        debugger;
         productObj = angular.copy(product);
+        productObj.productCategory = {'categoryId': parseInt($('#subCategory').val() ? $('#subCategory').val() : $('#category').val())};
         productTreeService.saveNode('/saveProduct', productObj, $scope.saveProductSucess);
     }
 
@@ -81,23 +109,28 @@ angular.module('eCommerce')
     $scope.uploadCatalogImage = function() {
         var imageData = {};
 
-        imageData.categoryId = $scope.node.categoryId;
-        imageData.categoryPartNumber = $scope.node.categoryPartNumber;
-        if($scope.categoryMenuImage){
-            imageData.categoryMenuImage = $scope.categoryMenuImage;
-        }
-        if($scope.categoryBannerImage){
-            imageData.categoryBannerImage = $scope.categoryBannerImage;
-        }
-        if($scope.categoryTileImage){
-            imageData.categoryTileImage = $scope.categoryTileImage;
-        }
+        if($scope.categoryMenuImage || $scope.categoryBannerImage || $scope.categoryTileImage){
+            imageData.categoryId = $scope.node.categoryId;
+            imageData.categoryPartNumber = $scope.node.categoryPartNumber;
+            if($scope.categoryMenuImage){
+                imageData.categoryMenuImage = $scope.categoryMenuImage;
+            }
+            if($scope.categoryBannerImage){
+                imageData.categoryBannerImage = $scope.categoryBannerImage;
+            }
+            if($scope.categoryTileImage){
+                imageData.categoryTileImage = $scope.categoryTileImage;
+            }
 
-        productTreeService.uploadImage('/saveCategoryImages', imageData, $scope.categoryImageUploadSucess);
+            productTreeService.uploadImage('/saveCategoryImages', imageData, $scope.categoryImageUploadSucess);
+        }
     };
 
     $scope.categoryImageUploadSucess = function(resp) {
         debugger;
+        $scope.categoryMenuImage = null;
+        $scope.categoryBannerImage = null;
+        $scope.categoryTileImage = null;
     }
 
     $scope.uploadProductImage = function() {
@@ -117,76 +150,18 @@ angular.module('eCommerce')
         }
         imageData.productId = $scope.node.productId;
         // imageData.imageName = null;
-        imageData.currentImageFolderId = 2;
+        // imageData.currentImageFolderId = 2;
 
         productTreeService.uploadImage('/saveProductImages', imageData, $scope.productImageUploadSucess);
     };
 
     $scope.productImageUploadSucess = function(resp) {
         debugger;
+        $scope.baseImage = null;
+        $scope.thumbImage = null;
+        $scope.largeImage = null;
+        $scope.xlargeImage = null;
     }
-
-//     $scope.uploadFile = function (file) {
-//         $scope.imgLoading = true;
-//         var imageData = {};
-
-//         // imageData.categoryId = $scope.node.categoryId;
-//         // imageData.categoryPartNumber = $scope.node.categoryPartNumber;
-//         if($scope.categoryMenuImage){
-//             imageData.categoryMenuImage = $scope.categoryMenuImage;
-//         }
-//         if($scope.categoryBannerImage){
-//             imageData.categoryBannerImage = $scope.categoryBannerImage;
-//         }
-//         if($scope.categoryTileImage){
-//             imageData.categoryTileImage = $scope.categoryTileImage;
-//         }
-
-
-//         if($scope.baseImage){
-//             imageData.mediumImage = $scope.baseImage;
-//         }
-//         if($scope.thumbImage){
-//             imageData.thumbImage = $scope.thumbImage;
-//         }
-//         if($scope.largeImage){
-//             imageData.largeImage = $scope.largeImage;
-//         }
-//         if($scope.xlargeImage){
-//             imageData.extraLargeImage = $scope.xlargeImage;
-//         }
-//         imageData.productId = $scope.node.productId;
-//         // imageData.imageName = null;
-//         imageData.currentImageFolderId = 2;
-        
-
-
-// // saveProductImages saveCategoryImages
-//         Upload.upload({
-//             url: 'http://17.114.31.185:8080/HaastikaDataService/admin/saveProductImages',
-//             data: imageData
-//         }).then(function (resp) {
-//             // console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-//             $scope.categoryMenuImage = null;
-//             $scope.categoryBannerImage = null;
-//             $scope.categoryTileImage = null;
-//             $scope.imgLoading = false;
-
-//             $scope.node.categoryBannerImagePath = resp.data.bannerImageUploadStatus.uplodedImagePath;
-//             $scope.node.categoryMenuImagePath = resp.data.menuImageUploadStatus.uplodedImagePath;
-//             $scope.node.categoryTileImagePath = resp.data.tileImageUploadStatus.uplodedImagePath;
-
-//             $scope.saveCategory($scope.node);
-
-//         }, function (resp) {
-//             console.log('Error status: ' + resp);
-//         }, function (evt) {
-//             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-//             // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-//         });
-//     };
-    
-    
 
 }]);
 
