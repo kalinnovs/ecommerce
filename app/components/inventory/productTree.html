@@ -42,6 +42,10 @@
 	    font-size: 17px;
 	    font-weight: 700;
 	}
+    .product-node.bg-danger, .category-node.bg-danger { background-color: #f2dede; }
+    .product-node.bg-danger a { color: #333 }
+    .category-node.bg-danger + ul > li .product-node { background-color: #f2dede }
+    .category-node.bg-danger + ul > li .product-node > a { color: #333 }
     .subcategory-node {
         font-size: 15px;
     }
@@ -74,10 +78,31 @@
         position: absolute;
         z-index: -1;
     }
-    
+    .productImage .form-group > div { width: 460px; }
+    .productImage + .row .col-sm-7 { width: 460px; }
+    .productImageUpload .col-sm-3 { padding: 0; margin-right: 15px; width: 92px }
+    .productImage .form-group > div .col-sm-4 {  }
+    .productImage .form-group > div .col-sm-3 { padding: 0 }
+
+    .logindetails { font-size: 14px; font-weight: 700; overflow: hidden; }
+    .logindetails span { display: inline-block; vertical-align: top; margin: 10px 0; }
+    .logindetails a { float: right; display: inline-block; margin: 10px 0; vertical-align: top;  }
+    .form-group > label, .priceOption .col-sm-4 { margin-top: 8px }
+    .priceOption .col-sm-6 > span { position: absolute; display: inline-block; left: 26px; top: 8px; font-weight: 700; z-index: 2 }
+    .priceOption .col-sm-6 > input { padding-left: 40px; }
+    .ratingWidget .col-sm-7 > span, .statusWidget .col-sm-7 > span { display: inline-block; margin-top: 8px }
+    header .menu { height: 2px; }
+    header .menu > .container { display: none; }
+    .message { width: 400px; height: 120px; background: #fff; border: solid 1px red; position: fixed; left: 50%; top: 50%; margin: -60px 0 0 -200px; border-radius: 20px; }
+    .message:before { }
+    .message span { justify-content: center; margin-top: 42px; display: block; }
 </style>
 
 <div class="table-responsive container">
+<div class="logindetails">
+        <span> Welcome Admin ! </span>
+        <a href="#/login">Logout</a>
+    </div>
 <div class="panel panel-primary">
     <div class="panel-heading"><h1>Product Inventory :</h1>
         <div class="sw-search" >
@@ -103,7 +128,7 @@
             </div>
             <ul class="category">
                 <li ng-repeat="category in categoryList" class="category-view">
-                    <div class="category-node">
+                    <div class="category-node" ng-class="!category.enabled ? 'bg-danger' : 'text-primary' ">
                         <i class="category fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
                         <a class="category" ng-class="!category.enabled ? 'text-danger' : 'text-primary' " ng-click="editNode('category',category)"> {{category.categoryName}} </a> 
                         <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory(category)"><span class="glyphicon glyphicon-remove"></span></a>
@@ -111,7 +136,7 @@
                     </div>
                     <ul>
                         <li ng-repeat="subCategory in category.subCategoryList" class="subcategory-view" ng-if="subCategory.categoryId !== category.categoryId">
-                            <div class="category-node subcategory-node">
+                            <div class="category-node subcategory-node" ng-class="!subCategory.enabled ? 'bg-danger' : 'text-primary'">
                                 <i class="subcategory fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
                                 <a class="subcategory" ng-class="!subCategory.enabled ? 'text-danger' : 'text-primary' " ng-click="editNode('subCategory',subCategory, category.categoryId)"> {{subCategory.categoryName}} </a>
                                 
@@ -120,8 +145,8 @@
                             </div>
                             <ul>
                                 <li ng-repeat="product in subCategory.productsList | filter : filterProduct" class="product-view">
-                                    <div class="product-node">
-                                        <a class="product" ng-class="!product.enabled ? 'text-danger' : 'text-primary' "  ng-click="editNode('product', product, subCategory.categoryId, category.categoryId)"> {{product.productName}}</a>
+                                    <div class="product-node" ng-class="!product.enabled ? 'bg-danger' : 'text'">
+                                        <a class="product"  ng-class="!product.enabled ? 'text-danger' : 'text-primary'" ng-click="editNode('product', product, subCategory.categoryId, category.categoryId)"> {{product.productName}}</a>
                                         <a class="pull-right btn btn-danger btn-xs" ng-click="deleteProduct(product)"><span class="glyphicon glyphicon-remove"></span></a>
                                     </div>
                                 </li>
@@ -153,7 +178,7 @@
                     <form-element label="Description" mod="category">
                         <textarea class="form-control" name="description" placeholder="Description" ng-model="node.categoryDescription"></textarea>
                     </form-element>
-                    <form-element label="Category Images" mod="category">
+                    <form-element label="Category Images" mod="category" class="productImage">
                         <div class="row text-center">
                             <span class="col-sm-4">Menu </span>
                             <span class="col-sm-4">Banner </span>
@@ -161,13 +186,13 @@
                         </div>
                         <div class="row text-center">
                             <span class="col-sm-4">
-                                <img src="{{ node.categoryMenuImagePath }}" width="50" height="50" /> 
+                                <img ng-src="{{ node.categoryMenuImagePath }}" width="100%" /> 
                             </span>
                             <span class="col-sm-4">
-                                <img src="{{ node.categoryBannerImagePath }}" width="50" height="50" /> 
+                                <img ng-src="{{ node.categoryBannerImagePath }}" width="100%" /> 
                             </span>
                             <span class="col-sm-4">
-                                <img src="{{ node.categoryTileImagePath }}" width="50" height="50" /> 
+                                <img ng-src="{{ node.categoryTileImagePath }}" width="100%" /> 
                             </span>
                         </div>
                     </form-element>
@@ -176,24 +201,24 @@
                         <div class="col-sm-7">
                             <div class="row">
                                 <span class="col-sm-4">
-                                    <img ng-show="categoryMenuImage" ngf-thumbnail="categoryMenuImage" width="50" height="50"> 
+                                    <img ng-show="categoryMenuImage" ngf-thumbnail="categoryMenuImage" width="100%"> 
                                 </span>
                                 <span class="col-sm-4">
-                                    <img ng-show="categoryBannerImage"  ngf-thumbnail="categoryBannerImage" width="50" height="50">
+                                    <img ng-show="categoryBannerImage"  ngf-thumbnail="categoryBannerImage" width="100%">
                                 </span>
                                 <span class="col-sm-4">
-                                    <img ng-show="categoryTileImage" ngf-thumbnail="categoryTileImage" width="50" height="50">
+                                    <img ng-show="categoryTileImage" ngf-thumbnail="categoryTileImage" width="100%">
                                 </span>
                             </div>
                             <div ng-app="fileUpload" name="form" class="row">
                                 <span class="col-sm-4" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="categoryMenuImage" name="categoryMenuImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="categoryMenuImage" name="categoryMenuImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                                 <span class="col-sm-4" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="categoryBannerImage" name="categoryBannerImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="categoryBannerImage" name="categoryBannerImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                                 <span class="col-sm-4" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="categoryTileImage" name="categoryTileImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="categoryTileImage" name="categoryTileImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                                 <div class="row" style="padding: 20px;">
                                     <button ng-click="uploadCatalogImage('category')" class="btn btn-default byn-lg" ng-disabled="category_form.$invalid || imgLoading || (!node.categoryId)" >Upload Images</button>
@@ -241,7 +266,7 @@
                     <form-element label="Description" mod="category">
                         <textarea class="form-control" name="description" placeholder="Description" ng-model="node.categoryDescription">{{node.categoryDescription}}</textarea>
                     </form-element>
-                    <form-element label="Sub Category Images" mod="category">
+                    <form-element label="Sub Category Images" mod="category" class="productImage">
                         <div class="row">
                             <span class="col-sm-4">Menu </span>
                             <span class="col-sm-4">Banner </span>
@@ -249,13 +274,13 @@
                         </div>
                         <div class="row">
                             <span class="col-sm-4">
-                                <img src="{{ node.categoryMenuImagePath }}" width="50" height="50" /> 
+                                <img src="{{ node.categoryMenuImagePath }}" width="100%" /> 
                             </span>
                             <span class="col-sm-4">
-                                <img src="{{ node.categoryBannerImagePath }}" width="50" height="50" /> 
+                                <img src="{{ node.categoryBannerImagePath }}" width="100%" /> 
                             </span>
                             <span class="col-sm-4">
-                                <img src="{{ node.categoryTileImagePath }}" width="50" height="50" /> 
+                                <img src="{{ node.categoryTileImagePath }}" width="100%" /> 
                             </span>
                         </div>
                     </form-element>
@@ -264,24 +289,24 @@
                         <div class="col-sm-7">
                             <div class="row">
                                 <span class="col-sm-4">
-                                    <img ng-show="categoryMenuImage" ngf-thumbnail="categoryMenuImage" width="50" height="50"> 
+                                    <img ng-show="categoryMenuImage" ngf-thumbnail="categoryMenuImage" width="100%"> 
                                 </span>
                                 <span class="col-sm-4">
-                                    <img ng-show="categoryBannerImage"  ngf-thumbnail="categoryBannerImage" width="50" height="50">
+                                    <img ng-show="categoryBannerImage"  ngf-thumbnail="categoryBannerImage" width="100%">
                                 </span>
                                 <span class="col-sm-4">
-                                    <img ng-show="categoryTileImage" ngf-thumbnail="categoryTileImage" width="50" height="50">
+                                    <img ng-show="categoryTileImage" ngf-thumbnail="categoryTileImage" width="100%">
                                 </span>
                             </div>
                             <div ng-app="fileUpload" name="form" class="row">
                                 <span class="col-sm-4" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="categoryMenuImage" name="categoryMenuImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="categoryMenuImage" name="categoryMenuImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                                 <span class="col-sm-4" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="categoryBannerImage" name="categoryBannerImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="categoryBannerImage" name="categoryBannerImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                                 <span class="col-sm-4" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="categoryTileImage" name="categoryTileImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="categoryTileImage" name="categoryTileImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                                 <div class="row" style="padding: 20px;">
                                     <button ng-click="uploadCatalogImage('category')" class="btn btn-default byn-lg" ng-disabled="subcategory_form.$invalid || imgLoading || (!node.categoryId)">Upload Images</button>
@@ -386,7 +411,7 @@
                         
                     </form-element>
 
-                    <form-element label="Product Images" mod="category">
+                    <form-element label="Product Images" mod="category" class="productImage">
                         <div class="row text-center">
                             <span class="col-sm-3">Base </span>
                             <span class="col-sm-3">Thumb </span>
@@ -395,16 +420,16 @@
                         </div>
                         <div class="row text-center" ng-repeat="images in node.productImageGallery">
                             <span class="col-sm-3">
-                                <img src="{{ images.baseImagePath }}" width="50" height="50" /> 
+                                <img src="{{ images.baseImagePath }}" width="100%" /> 
                             </span>
                             <span class="col-sm-3">
-                                <img src="{{ images.thumbImagePath }}" width="50" height="50" /> 
+                                <img src="{{ images.thumbImagePath }}" width="100%" /> 
                             </span>
                             <span class="col-sm-3">
-                                <img src="{{ images.largeImagePath }}" width="50" height="50" /> 
+                                <img src="{{ images.largeImagePath }}" width="100%" /> 
                             </span>
                             <span class="col-sm-3">
-                                <img src="{{ images.extraLargeImagePath }}" width="50" height="50" /> 
+                                <img src="{{ images.extraLargeImagePath }}" width="100%" /> 
                             </span>
                         </div>
                     </form-element>
@@ -427,16 +452,16 @@
                             </div>
                             <div ng-app="fileUpload" name="form" class="row">
                                 <span class="col-sm-3" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="baseImage" name="baseImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="baseImage" name="baseImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                                 <span class="col-sm-3" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="thumbImage" name="thumbImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="thumbImage" name="thumbImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                                 <span class="col-sm-3" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="largeImage" name="largeImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="largeImage" name="largeImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                                 <span class="col-sm-3" style="padding: 0;">
-                                    <div class="btn btn-default" ngf-select ng-model="xlargeImage" name="xlargeImage" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select File</div>
+                                    <div class="btn btn-default fa fa-upload" ngf-select ng-model="xlargeImage" name="xlargeImage" ngf-pattern="'image/*'" ngf-accept="'image/*'"></div>
                                 </span>
                             </div>
                             <div class="row" style="padding: 20px;">
@@ -463,7 +488,7 @@
                 </form>
             </div>
             <div class="message text-success text-center h3" style="display:none;">
-                Saved Successfully...
+                <span>Saved Successfully...</span>
             </div>
         </div>
         

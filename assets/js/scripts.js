@@ -164,24 +164,6 @@ $(document).ready(function(e) {
             sessionStorage.isTriggered = "true";
             window.modalComponent.close();
         });
-
-        $.ajax({
-              method: 'POST',
-              url: "http://haastika.com/app/app.pageCounter.php",
-              contentType: "application/json",
-              dataType: 'jsonp'
-            }).then(function successCallback(data, status) {
-                var result = JSON.parse(data.data);
-                $(".pageCounter").html(data.data.counter);
-            }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
-
-        // $.ajax({url: "http://haastika.com/app/app.pageCounter.php", success: function(result){
-        //     var result = JSON.parse(result);
-        //     $(".pageCounter").html(result.counter);
-        // }});
         
 
     }, 1500);
