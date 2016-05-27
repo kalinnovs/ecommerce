@@ -2,7 +2,7 @@
 angular.module('eCommerce')
 .controller('productTreeCtrl', ['$scope', 'Upload', 'productTreeService', function($scope, Upload, productTreeService) {
     productTreeService.list().then(function(data){
-        // debugger;
+        // 
         $scope.categoryMetaData = data.data.categoryMetaData;
         $scope.categoryList = data.data.categoryList;
 
@@ -89,35 +89,35 @@ angular.module('eCommerce')
 
     $scope.saveProduct = function(product){
         $scope.dataLoading = true;
-        debugger;
+        
         productObj = angular.copy(product);
         productObj.productCategory = {'categoryId': parseInt($('#subCategory').val() ? $('#subCategory').val() : $('#category').val())};
         productTreeService.saveNode('/saveProduct', productObj, $scope.saveProductSucess);
     }
 
     $scope.saveCategorySucess = function(resp) {
-        debugger;
+        
         $scope.node.categoryId = resp.data.id;
         $scope.dataLoading = false;
+        $('.message').fadeIn(500).fadeOut(3000);
     }
 
     $scope.saveProductSucess = function(resp) {
-        debugger;
+        
         $scope.dataLoading = false;
+        $('.message').fadeIn(500).fadeOut(3000);
     }
 
-    $scope.deleteCategory = function(categoryId) {
-        debugger;
-        $scope.dataLoading = true;
-        productTreeService.deleteNode("/deleteCategory/"+categoryId, $scope.deleteNodeSucess);
+    $scope.deleteCategory = function(category) {
+        category.enabled = false;
+        $scope.saveCategory(category);
     }
-    $scope.deleteProduct = function(productId) {
-        debugger;
-        $scope.dataLoading = true;
-        productTreeService.deleteNode("/deleteProduct/"+productId, $scope.deleteNodeSucess);
+    $scope.deleteProduct = function(product) {
+        product.enabled = false;
+        $scope.saveProduct(product);   
     }
     $scope.deleteNodeSucess = function(resp) {
-        debugger;
+        
         $scope.dataLoading = false;
     }
 
@@ -142,7 +142,7 @@ angular.module('eCommerce')
     };
 
     $scope.categoryImageUploadSucess = function(resp) {
-        debugger;
+        
         $scope.categoryMenuImage = null;
         $scope.categoryBannerImage = null;
         $scope.categoryTileImage = null;
@@ -171,7 +171,7 @@ angular.module('eCommerce')
     };
 
     $scope.productImageUploadSucess = function(resp) {
-        debugger;
+        
         $scope.baseImage = null;
         $scope.thumbImage = null;
         $scope.largeImage = null;

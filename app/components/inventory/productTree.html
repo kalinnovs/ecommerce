@@ -52,7 +52,7 @@
     a.product,
     a.subcategory,
     a.category {
-        color: #337ab7;
+        /*color: #337ab7;*/
         cursor: pointer;
     }
     .category-node i {
@@ -74,6 +74,7 @@
         position: absolute;
         z-index: -1;
     }
+    
 </style>
 
 <div class="table-responsive container">
@@ -104,24 +105,24 @@
                 <li ng-repeat="category in categoryList" class="category-view">
                     <div class="category-node">
                         <i class="category fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
-                        <a class="category" ng-click="editNode('category',category)"> {{category.categoryName}} </a> 
-                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory(category.categoryId)"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a class="category" ng-class="!category.enabled ? 'text-danger' : 'text-primary' " ng-click="editNode('category',category)"> {{category.categoryName}} </a> 
+                        <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory(category)"><span class="glyphicon glyphicon-remove"></span></a>
                         <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('subCategory',category)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
                     </div>
                     <ul>
                         <li ng-repeat="subCategory in category.subCategoryList" class="subcategory-view" ng-if="subCategory.categoryId !== category.categoryId">
                             <div class="category-node subcategory-node">
                                 <i class="subcategory fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
-                                <a class="subcategory" ng-click="editNode('subCategory',subCategory, category.categoryId)"> {{subCategory.categoryName}} </a>
+                                <a class="subcategory" ng-class="!subCategory.enabled ? 'text-danger' : 'text-primary' " ng-click="editNode('subCategory',subCategory, category.categoryId)"> {{subCategory.categoryName}} </a>
                                 
-                                <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory(subCategory.categoryId)"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory(subCategory)"><span class="glyphicon glyphicon-remove"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('product',{})" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
                             </div>
                             <ul>
                                 <li ng-repeat="product in subCategory.productsList | filter : filterProduct" class="product-view">
                                     <div class="product-node">
-                                        <a class="product" ng-click="editNode('product', product, subCategory.categoryId, category.categoryId)"> {{product.productName}}</a>
-                                        <a class="pull-right btn btn-danger btn-xs" ng-click="deleteProduct(product.productId)"><span class="glyphicon glyphicon-remove"></span></a>
+                                        <a class="product" ng-class="!product.enabled ? 'text-danger' : 'text-primary' "  ng-click="editNode('product', product, subCategory.categoryId, category.categoryId)"> {{product.productName}}</a>
+                                        <a class="pull-right btn btn-danger btn-xs" ng-click="deleteProduct(product)"><span class="glyphicon glyphicon-remove"></span></a>
                                     </div>
                                 </li>
                             </ul>
@@ -460,7 +461,10 @@
                         </form-element>
                     </div>
                 </form>
-            </div>    
+            </div>
+            <div class="message text-success text-center h3" style="display:none;">
+                Saved Successfully...
+            </div>
         </div>
         
     </div>
