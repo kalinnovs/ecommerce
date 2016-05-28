@@ -96,6 +96,11 @@
     .message { width: 400px; height: 120px; background: #fff; border: solid 1px red; position: fixed; left: 50%; top: 50%; margin: -60px 0 0 -200px; border-radius: 20px; }
     .message:before { }
     .message span { justify-content: center; margin-top: 42px; display: block; }
+    .btn-sm .fa { margin-right: 6px; }
+    .fa-upload { border-radius: 50%; padding: 6px 10px; }
+    .imageSpecification span { font-weight: 700; }
+    .imageSpecification span span { display: block; }
+    .activa { border: solid 1px red }
 </style>
 
 <div class="table-responsive container">
@@ -344,16 +349,16 @@
                 <form name="product_form" class="" role="form" novalidate style="margin-left: 30px;">
                     <form-element label="Category" mod="product">
                         <select id="category" name="category" ng-model="productRootCategoryId" class="form-control" ng-change="getSubCategories(productRootCategoryId)" ng-init="productRootCategoryId" required >
-                            <option ng-repeat="category in categoryList" value="{{category.categoryId}}" category.categoryId>{{category.categoryName}}</option>
+                            <option ng-repeat="category in categoryList" value="{{category.categoryId}}">{{category.categoryName}}</option>
                         </select>
+
                         <span ng-show="product_form.$dirty && product_form.category.$error.required" class="help-block">Category required.</span>
                     </form-element>
                     <form-element label="Sub Category" mod="product">
-                        
                         <select id="subCategory" ng-model="productCategoryId" class="form-control" ng-value="node.productCategory.categoryId" ng-init="productCategoryId">
-                            <option ng-repeat="subcat in subCategoryList" value="{{subcat.categoryId}}">{{subcat.categoryName}}</option>
+                            <option ng-repeat="subcat in subCategoryList" value="{{subcat.categoryId}}"
+                            ng-selected="{{(subcat.categoryId == productCategoryId) ? 'selected' : false}}" >{{subcat.categoryName}}</option>
                         </select>
-                        
                     </form-element>
                     <form-element label="Name" mod="product">
                         <input type="text" class="form-control" name="name" placeholder="Product Name" ng-model="node.productName" required />
@@ -412,11 +417,11 @@
                     </form-element>
 
                     <form-element label="Product Images" mod="category" class="productImage">
-                        <div class="row text-center">
-                            <span class="col-sm-3">Base </span>
-                            <span class="col-sm-3">Thumb </span>
-                            <span class="col-sm-3">Large </span>
-                            <span class="col-sm-3">X Large </span>
+                        <div class="row text-center imageSpecification">
+                            <span class="col-sm-3">Base <span>(284 X height)</span></span>
+                            <span class="col-sm-3">Thumb <span>(108 X height)</span></span>
+                            <span class="col-sm-3">Large <span>(420 X height)</span></span>
+                            <span class="col-sm-3">X Large</span>
                         </div>
                         <div class="row text-center" ng-repeat="images in node.productImageGallery">
                             <span class="col-sm-3">

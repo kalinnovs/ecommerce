@@ -8,6 +8,8 @@ angular.module('eCommerce')
 
         $(".progress").hide();
     });
+
+    $scope.selected = true;
     
     $scope.collapse = function(event){
         var el = jQuery(event.currentTarget);
@@ -35,6 +37,7 @@ angular.module('eCommerce')
         $scope.nodeType = "";
     }
     $scope.editNode = function(nodeType,node, productCategoryId, productRootCategoryId){
+        $('html,body').animate({scrollTop: $(".panel-heading").offset().top},'slow');
         $scope.nodeType = nodeType;
         $scope.node = node;
         $scope.productCategoryId = productCategoryId ? productCategoryId.toString() : null;
