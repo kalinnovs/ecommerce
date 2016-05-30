@@ -23,17 +23,18 @@ angular.module('eCommerce')
     $scope.approvePromo = function(elem) {
         var data = {};
         data.emailId = $(event.target).parents("tr").find(".email").html();
-        data.promoUsed = $(event.target).parents("tr").find(".promocode").html();
-        UserService.Update( SERVICE_URL + '/admin/updateSubscriber', data)
-        .then(function(data) {
-          debugger;
-        })
-        .catch(function(error) {
-            //
-        })
-        .finally(function() {
-            //
-        })
+        data.promoCode = $(event.target).parents("tr").find(".promocode").html();
+        data.promoUsed = $(event.target).parents("tr").find(".promoUsed").val();
+        $http({
+              method: 'POST',
+              url: SERVICE_URL + '/admin/updateSubscriber',
+              data: data,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }).then(function successCallback(data, status) {
+                debugger;
+            });
 
         var className = $(elem.target).hasClass("fa-toggle-off");
         if(className) {

@@ -21,7 +21,7 @@ angular.module('eCommerce')
     }
  
     service.Update = function(url, user) {
-        return $http.put(url, user).then(service.handleSuccess, service.handleError('Error updating user'));
+        return $http.post(url, user).then(service.handleSuccess, service.handleError('Error updating user'));
     }
  
     service.Delete = function(id) {

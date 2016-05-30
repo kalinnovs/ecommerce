@@ -25,7 +25,10 @@
 								<td class="email">{{value.emailId}}</td> 
 								<td>{{value.contactNo}}</td> 
 								<td class="promocode">{{value.promoCode}}</td>
-								<td class="action"><a href="javascript:void(0);" class="fa fa-toggle-off" ng-click="approvePromo($event);" role="button"></a></td>
+								<td class="action">
+									<a href="javascript:void(0);" class="fa fa-toggle-off" ng-click="approvePromo($event);" role="button"></a>
+									<input type="hidden" class="promoUsed" value="{{value.promoUsed}}">
+								</td>
 							</tr> 
 						</tbody> 
 					</table>
