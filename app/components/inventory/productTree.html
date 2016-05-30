@@ -83,6 +83,7 @@
     .productImageUpload .col-sm-3 { padding: 0; margin-right: 15px; width: 92px }
     .productImage .form-group > div .col-sm-4 {  }
     .productImage .form-group > div .col-sm-3 { padding: 0 }
+    .delProductImage {position: absolute; right: 0; margin-right: -27px;}
 
     .logindetails { font-size: 14px; font-weight: 700; overflow: hidden; }
     .logindetails span { display: inline-block; vertical-align: top; margin: 10px 0; }
@@ -436,6 +437,7 @@
                             <span class="col-sm-3">
                                 <img src="{{ images.extraLargeImagePath }}" width="100%" /> 
                             </span>
+                            <a class="btn btn-danger btn-xs delProductImage" ng-click="deleteProductImage(images.productImageId)"><span class="glyphicon glyphicon-remove"></span></a>
                         </div>
                     </form-element>
                     <div class="row" style="text-align: center;">

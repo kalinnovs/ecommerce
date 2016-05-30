@@ -5,9 +5,9 @@ angular.module('eCommerce')
     var service = this;
     // var BASE_URL = "http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService/admin";
     // var BASE_URL = "http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/admin";
-    var BASE_URL = "http://107.180.73.220/HaastikaWebService/admin";
+    // var BASE_URL = "http://107.180.73.220/HaastikaWebService/admin";
     // var BASE_URL = "assets/json/productTree.json";
-    // var BASE_URL = 'http://17.115.77.140:8080/HaastikaWebService/admin';
+    var BASE_URL = 'http://107.180.66.21//HaastikaWebService/admin';
 
     //simply returns the category list
     service.list = function () {

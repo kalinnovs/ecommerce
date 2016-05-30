@@ -181,5 +181,12 @@ angular.module('eCommerce')
         $scope.xlargeImage = null;
     }
 
+    $scope.deleteProductImage = function(imageId){
+        productTreeService.deleteNode("/deleteProductImage/"+imageId, $scope.productImageDeleteSucess)
+    }
+
+    $scope.productImageDeleteSucess = function() {
+        $('.message').fadeIn(500).fadeOut(3000);
+    }
 }]);
 
