@@ -1,11 +1,22 @@
-<h1>Hi {{vm.user.firstName}}!</h1>
-<p>You're logged in!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li ng-repeat="user in vm.allUsers">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a href="#" ng-click="vm.deleteUser(user.id)">Delete</a>
-    </li>
-</ul>
-<p>&nbsp;</p>
-<p><a href="#/login" class="btn btn-primary">Logout</a></p>
+<div class="container adminPage">
+	<div class="logindetails">
+        <span> Welcome Admin ! </span>
+        <a href="#/login">Logout</a>
+    </div>
+	<ul class="adminMenu" ng-click="chooseTemplate($event)">
+		<li>
+			<label id="inventory" class="active">Inventory</label>
+		</li>
+		<li>
+			<label id="subscriber">Subscribers</label>
+		</li>
+		<li>
+			<label id="banner">Banners</label>
+		</li>
+	</ul>
+	<div class="tabbedPane">
+		<div class="inventory paneContent" ui-view="productTree"></div>
+		<div class="subscriber paneContent " ui-view="subscribers">Subscribers</div>
+		<div class="banner paneContent " ui-view="banners">Banners</div>
+	</div>
+</div>
