@@ -7,7 +7,7 @@ angular.module('eCommerce')
     // debugger;
     window.dataLoaded = false;
 
-    UserService.GetAll( SERVICE_URL + '/subscribers')
+    UserService.GetAll( SERVICE_URL + '/admin/subscribers')
         .then(function(data) {
           // debugger;
           subscriber.data = data;
