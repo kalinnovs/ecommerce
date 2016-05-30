@@ -1,16 +1,17 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('SubscriberCtrl', function ($scope, $rootScope, $location, UserService, $http, SERVICE_URL) {
+  .controller('SubscriberCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, SERVICE_URL) {
     var subscriber = this;
     var scoper = $scope;
     // debugger;
+    window.dataLoaded = false;
 
-    $rootScope.navigation = UserService.get().data.pageNavigation.categories;
-
-    UserService.GetAll( SERVICE_URL + 'subscribers')
+    UserService.GetAll( SERVICE_URL + '/admin/subscribers')
         .then(function(data) {
+          // debugger;
           subscriber.data = data;
+          // $scope.$broadcast('dataloaded');
         })
         .catch(function(error) {
             //
@@ -20,6 +21,21 @@ angular.module('eCommerce')
         })
 
     $scope.approvePromo = function(elem) {
+        var data = {};
+        data.emailId = $(event.target).parents("tr").find(".email").html();
+        data.promoCode = $(event.target).parents("tr").find(".promocode").html();
+        data.promoUsed = $(event.target).parents("tr").find(".promoUsed").val();
+        $http({
+              method: 'POST',
+              url: SERVICE_URL + '/admin/updateSubscriber',
+              data: data,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }).then(function successCallback(data, status) {
+                debugger;
+            });
+
         var className = $(elem.target).hasClass("fa-toggle-off");
         if(className) {
             $(elem.target).removeClass("fa-toggle-off").addClass("fa-toggle-on");

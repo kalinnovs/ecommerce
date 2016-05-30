@@ -1,15 +1,21 @@
 
 angular.module('eCommerce')
-.controller('productTreeCtrl', ['$scope', 'Upload', 'productTreeService', function($scope, Upload, productTreeService) {
+.controller('productTreeCtrl', ['$scope', 'Upload', 'productTreeService', '$timeout', function($scope, Upload, productTreeService, $timeout) {
     productTreeService.list().then(function(data){
         // 
+        $scope.$broadcast('dataloaded');
         $scope.categoryMetaData = data.data.categoryMetaData;
         $scope.categoryList = data.data.categoryList;
-
-        $(".progress").hide();
     });
 
     $scope.selected = true;
+
+    $scope.$on('dataloaded', function() {
+        $scope.collapseAll();
+        $timeout(function () { 
+            window.dataLoaded = true;
+        }, 100, false);
+    });
     
     $scope.collapse = function(event){
         var el = jQuery(event.currentTarget);

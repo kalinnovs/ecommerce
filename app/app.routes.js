@@ -2,8 +2,8 @@
 angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
-  // .constant('SERVICE_URL', 'http://107.180.66.21/HaastikaWebService')
-  .constant('SERVICE_URL', 'http://107.180.73.220/HaastikaWebService')
+  .constant('SERVICE_URL', 'http://107.180.66.21/HaastikaWebService')
+  // .constant('SERVICE_URL', 'http://107.180.73.220/HaastikaWebService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
@@ -112,10 +112,20 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           }
         }
       })
-      .state('productTree', {
-        url:'/productTree',
+      .state('admin', {
+        url:'/admin',
         views: {
           '': { 
+            templateUrl: 'app/components/admin/adminView.html',
+            controller: 'AdminCtrl',
+            controllerAs: 'admin'
+          },
+          'subscribers@admin': {
+            templateUrl: 'app/components/subscribers/subscriberView.html',
+            controller: 'SubscriberCtrl',
+            controllerAs: 'SubscriberCtrl'
+          },
+          'productTree@admin': { 
             templateUrl: 'app/components/inventory/productTree.html',
             controller: 'productTreeCtrl',
             controllerAs: 'productTreeCtrl'
