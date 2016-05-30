@@ -124,8 +124,8 @@
         <div class="tree-view">
             
             <div style="margin: 0 0 10px 10px;">
-                <button class="btn btn-default category-expand-all" ng-click="collapseAll('category')"><i class="category fa fa-minus-square" aria-hidden="true" style="margin-right: 5px;color: #008000;"></i> Category all</button>
-                <button class="btn btn-default subcategory-expand-all" ng-click="collapseAll('subcategory')"><i class="category fa fa-minus-square" aria-hidden="true" style="margin-right: 5px;color: #008000;"></i> Subcatgory all</button>
+                <button class="btn btn-default category-expand-all" ng-click="collapseAll('category')"><i class="category fa fa-plus-square" aria-hidden="true" style="margin-right: 5px;color: #008000;"></i> Category all</button>
+                <button class="btn btn-default subcategory-expand-all" ng-click="collapseAll('subcategory')"><i class="category fa fa-plus-square" aria-hidden="true" style="margin-right: 5px;color: #008000;"></i> Subcatgory all</button>
             </div>
             <div>
                 <a class="btn btn-primary" data-nodrag="" ng-click="addNode('category',category)" style="margin-left: 10px;"><span class="glyphicon glyphicon-plus"> Category</span></a>
@@ -135,21 +135,21 @@
             <ul class="category">
                 <li ng-repeat="category in categoryList" class="category-view">
                     <div class="category-node" ng-class="!category.enabled ? 'bg-danger' : 'text-primary' ">
-                        <i class="category fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
+                        <i class="category fa fa-plus-square" aria-hidden="true" ng-click="collapse($event)"></i>
                         <a class="category" ng-class="!category.enabled ? 'text-danger' : 'text-primary' " ng-click="editNode('category',category)"> {{category.categoryName}} </a> 
                         <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory(category)"><span class="glyphicon glyphicon-remove"></span></a>
                         <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('subCategory',category)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
                     </div>
-                    <ul>
+                    <ul style="display:none;">
                         <li ng-repeat="subCategory in category.subCategoryList" class="subcategory-view" ng-if="subCategory.categoryId !== category.categoryId">
                             <div class="category-node subcategory-node" ng-class="!subCategory.enabled ? 'bg-danger' : 'text-primary'">
-                                <i class="subcategory fa fa-minus-square" aria-hidden="true" ng-click="collapse($event)"></i>
+                                <i class="subcategory fa fa-plus-square" aria-hidden="true" ng-click="collapse($event)"></i>
                                 <a class="subcategory" ng-class="!subCategory.enabled ? 'text-danger' : 'text-primary' " ng-click="editNode('subCategory',subCategory, category.categoryId)"> {{subCategory.categoryName}} </a>
                                 
                                 <a class="pull-right btn btn-danger btn-xs" data-nodrag="" ng-click="deleteCategory(subCategory)"><span class="glyphicon glyphicon-remove"></span></a>
                                 <a class="pull-right btn btn-primary btn-xs" data-nodrag="" ng-click="addNode('product',{})" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
                             </div>
-                            <ul>
+                            <ul style="display:none;">
                                 <li ng-repeat="product in subCategory.productsList | filter : filterProduct" class="product-view">
                                     <div class="product-node" ng-class="!product.enabled ? 'bg-danger' : 'text'">
                                         <a class="product"  ng-class="!product.enabled ? 'text-danger' : 'text-primary'" ng-click="editNode('product', product, subCategory.categoryId, category.categoryId)"> {{product.productName}}</a>
@@ -260,8 +260,17 @@
                 <form name="subcategory_form" class="" role="form" novalidate style="margin-left: 30px;">
 
                     <form-element label="category" mod="category">
-                        <select name="category" id="category" ng-model="productCategoryId" ng-init="productCategoryId" class="form-control" required >
-                            <option ng-repeat="option in categoryList" value="{{option.categoryId}}" >{{option.categoryName}}</option>
+                        <select 
+                            name="category" 
+                            id="category" 
+                            ng-model="node.rootCategory.categoryId" 
+                            ng-init="productCategoryId" 
+                            class="form-control" 
+                            required >
+                            <option ng-repeat="option in categoryList" 
+                                value="{{option.categoryId}}">
+                                {{option.categoryName}}
+                            </option>
                         </select>
                         <span ng-show="subcategory_form.$dirty && subcategory_form.category.$error.required" class="help-block">Category required.</span>
                     </form-element>

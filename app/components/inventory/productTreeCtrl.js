@@ -14,24 +14,41 @@ angular.module('eCommerce')
     $scope.collapse = function(event){
         var el = jQuery(event.currentTarget);
         if(jQuery(el.parents('li')[0]).find('li').length){
-            jQuery(el.parents('li')[0]).find('ul').toggle();
+            jQuery(el.parents('li')[0]).find('> ul').toggle();
             el.toggleClass('fa-minus-square fa-plus-square');
         }
     }
+
+    $scope.collapsed_cat = true;
+    $scope.collapsed_subcat = true;
     $scope.collapseAll = function(type){
         if(type === 'category'){
-            jQuery('.category-expand-all i').toggleClass('fa-minus-square fa-plus-square');
-            jQuery('.category-view > ul').toggle();
-            jQuery('.category-view i.category').toggleClass('fa-minus-square fa-plus-square');
+            if($scope.collapsed_cat){
+                jQuery('.category-view > ul').show();
+                jQuery('.category-expand-all i').removeClass('fa-plus-square').addClass('fa-minus-square');
+                jQuery('.category-view i.category').removeClass('fa-plus-square').addClass('fa-minus-square');
+            } else {
+                jQuery('.category-view > ul').hide();
+                jQuery('.category-expand-all i').removeClass('fa-minus-square').addClass('fa-plus-square');
+                jQuery('.category-view i.category').removeClass('fa-minus-square').addClass('fa-plus-square');
+            }
+            $scope.collapsed_cat = !$scope.collapsed_cat;
         } else{
-            jQuery('.subcategory-expand-all i').toggleClass('fa-minus-square fa-plus-square');
-            jQuery('.subcategory-view > ul').toggle();
-            jQuery('.subcategory-view i.subcategory').toggleClass('fa-minus-square fa-plus-square');
+            if($scope.collapsed_subcat){
+                jQuery('.subcategory-view > ul').show();
+                jQuery('.subcategory-expand-all i').removeClass('fa-plus-square').addClass('fa-minus-square');
+                jQuery('.subcategory-view i.subcategory').removeClass('fa-plus-square').addClass('fa-minus-square');
+            } else {
+                jQuery('.subcategory-view > ul').hide();
+                jQuery('.subcategory-expand-all i').removeClass('fa-minus-square').addClass('fa-plus-square');
+                jQuery('.subcategory-view i.subcategory').removeClass('fa-minus-square').addClass('fa-plus-square');
+            }
+            $scope.collapsed_subcat = !$scope.collapsed_subcat;
         }
     }
 
     $scope.getSubCategories = function(productRootCategoryId){
-        $scope.subCategoryList = _.where($scope.categoryList,{'categoryId':parseInt(productRootCategoryId)})[0]. subCategoryList;
+        $scope.subCategoryList = _.find($scope.categoryList,{'categoryId':parseInt(productRootCategoryId)}). subCategoryList;
     }
     $scope.cancel =function(){
         $scope.nodeType = "";
@@ -42,6 +59,9 @@ angular.module('eCommerce')
         $scope.node = node;
         $scope.productCategoryId = productCategoryId ? productCategoryId.toString() : null;
         $scope.productRootCategoryId = productRootCategoryId ? productRootCategoryId.toString() : null;
+        if($scope.node.rootCategory) {
+            $scope.node.rootCategory.categoryId = $scope.node.rootCategory.categoryId.toString();
+        }
         if(productRootCategoryId){
             $scope.getSubCategories(productRootCategoryId);
         }
@@ -82,31 +102,50 @@ angular.module('eCommerce')
         categoryObj = angular.copy(category);
         delete categoryObj["subCategoryList"];
         delete categoryObj["productsList"];
-
-        if($('#category').val()){
-            categoryObj.rootCategory = {'categoryId': parseInt($('#category').val())};
-        }
-
         productTreeService.saveNode('/saveCategory', categoryObj, $scope.saveCategorySucess);
     }
 
     $scope.saveProduct = function(product){
         $scope.dataLoading = true;
         
+        product.productCategory = {'categoryId': parseInt($('#subCategory').val() ? $('#subCategory').val() : $('#category').val())};
         productObj = angular.copy(product);
-        productObj.productCategory = {'categoryId': parseInt($('#subCategory').val() ? $('#subCategory').val() : $('#category').val())};
         productTreeService.saveNode('/saveProduct', productObj, $scope.saveProductSucess);
     }
 
     $scope.saveCategorySucess = function(resp) {
-        
-        $scope.node.categoryId = resp.data.id;
+        if(!$scope.node.categoryId){
+            $scope.node.categoryId = resp.data.id;
+            if($scope.node.rootCategory){
+                _.find($scope.categoryList,{'categoryId':parseInt($scope.node.rootCategory.categoryId)}).subCategoryList.push($scope.node);
+            } else {
+                $scope.categoryList.push($scope.node);    
+            }
+        }
         $scope.dataLoading = false;
         $('.message').fadeIn(500).fadeOut(3000);
     }
 
     $scope.saveProductSucess = function(resp) {
-        
+        if(!$scope.node.productId) {
+            $scope.node.productId = resp.data.id;
+            if($scope.node.productCategory){
+                _.find($scope.categoryList, function(obj) {
+                    if(obj.categoryId == $scope.node.productCategory.categoryId){
+                        obj.productsList.push($scope.node);
+                    }
+                    else {
+                        debugger
+                        if(obj.subCategoryList){
+                            var subcat = _.find(obj.subCategoryList, {'categoryId':$scope.node.productCategory.categoryId});
+                            if(subcat){
+                                subcat.productsList.push($scope.node);
+                            }
+                        }
+                    }
+                });
+            }
+        }
         $scope.dataLoading = false;
         $('.message').fadeIn(500).fadeOut(3000);
     }
