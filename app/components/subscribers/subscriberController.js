@@ -24,7 +24,7 @@ angular.module('eCommerce')
         var data = {};
         data.emailId = $(event.target).parents("tr").find(".email").html();
         data.promoCode = $(event.target).parents("tr").find(".promocode").html();
-        data.promoUsed = $(event.target).parents("tr").find(".promoUsed").val();
+        data.promoUsed = !JSON.parse($(event.target).parents("tr").find(".promoUsed").val());
         $http({
               method: 'POST',
               url: SERVICE_URL + '/admin/updateSubscriber',

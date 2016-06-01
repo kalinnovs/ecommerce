@@ -377,7 +377,7 @@ header a.active, header a:focus { text-decoration: none }
 .category .filters ul li .fa { font-size: 20px; }
 .category .spacingAdjust .column { padding: 0; }
 .category .spacingAdjust .wide-quarter-tile { margin: 0 0 12px 0; }
-.category .spacingAdjust .wide-quarter-tile figure { text-align: center; height: 205px; display: flex; flex-direction: column; justify-content: center;}
+.category .spacingAdjust .wide-quarter-tile figure { text-align: center; height: 205px; display: flex; flex-direction: column; justify-content: center; }
 .category .spacingAdjust .wide-quarter-tile figure img { width: 100% }
 .category .listView .wide-quarter-tile figure { width: 323px; overflow: hidden; float: left; height: auto; }
 .category .listView .tile.wide-quarter-tile .detail * { text-align: left; }
@@ -521,7 +521,7 @@ header a.active, header a:focus { text-decoration: none }
 #close { position:absolute; background: #666;  display:block; top:-13px; right:-13px; color: #fff; border-radius: 50px; padding: 1px 7px; font-size: 18px;	 }
 
 .adMessageBox { display: none; position: absolute; left: 50%; top: 50%; margin: -150px 0 0 -250px; width: 500px; height: 300px; padding: 40px 100px; background: #000 url("../../../assets/images/advertisementBoard.jpg") left center no-repeat; color: #fff; font-size: 44px; text-align: center; }
-.adMessageBox .message {  }
+.adMessageBox .message { width: auto; height: auto; background: none; border: none; border-radius: 0; position: static; margin: 0 }
 .adMessageBox .message h1 { line-height: 45px; color: #fff; font-family: 'Anton'; margin-bottom: 20px; }
 .adMessageBox a { display: inline-block; text-decoration: none; font-size: 16px; color: #333; border-radius: 3px; border: solid 2px #999; padding: 5px 15px; background: #f3f3f3; }
 #overlay .adMessageBox { display: block; }
@@ -655,7 +655,9 @@ footer .back-top .pageCounter { text-align: center; }
 .subscriptionPage .arrowedBubble .cover { position:absolute; height:100px; top: 60px; left: -50px; width:50px; overflow:hidden; }
 .subscriptionPage .arrowedBubble .arrow-left {  border: solid 1px #d3d3d3; position: relative; width:100px; height:100px; left:20px; background: #f3f3f3; -webkit-transform:rotate(45deg); transform:rotate(45deg); border-radius:10px; }
 .subscriptionPage .arrowedBubble p { margin-bottom: 10px }
-.subscribers .action a { font-size: 18px; }
+.subscribers td.action { text-align: center; }
+.subscribers .action a { font-size: 24px; }
+.subscribers .action a:focus { text-decoration: none; }
 
 .login { position: relative; left: 50%; top: 0px; height:  }
 .login.col { float: none; margin: 100px 0 100px -230px; border: solid 1px #dedede; padding: 30px 40px 30px; border-radius: 10px; background: #f3f3f3;  }
