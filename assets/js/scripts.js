@@ -157,7 +157,7 @@ $(document).ready(function(e) {
                 window.modalComponent.open(".adMessageBox");
                 $("html, body").animate({ scrollTop: 0 }, 600);
                 sessionStorage.isTriggered = "true";
-            }, 3200);    
+            }, 45000);    
         }
 
         $(".tapToClose").click(function() {
