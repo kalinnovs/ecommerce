@@ -108,7 +108,7 @@ angular.module('eCommerce')
         categoryObj = angular.copy(category);
         delete categoryObj["subCategoryList"];
         delete categoryObj["productsList"];
-        productTreeService.saveNode('/saveCategory', categoryObj, $scope.saveCategorySucess);
+        productTreeService.saveNode('/admin/saveCategory', categoryObj, $scope.saveCategorySucess);
     }
 
     $scope.saveProduct = function(product){
@@ -116,7 +116,7 @@ angular.module('eCommerce')
         
         product.productCategory = {'categoryId': parseInt($('#subCategory').val() ? $('#subCategory').val() : $('#category').val())};
         productObj = angular.copy(product);
-        productTreeService.saveNode('/saveProduct', productObj, $scope.saveProductSucess);
+        productTreeService.saveNode('/admin/saveProduct', productObj, $scope.saveProductSucess);
     }
 
     $scope.saveCategorySucess = function(resp) {
@@ -185,7 +185,7 @@ angular.module('eCommerce')
                 imageData.categoryTileImage = $scope.categoryTileImage;
             }
 
-            productTreeService.uploadImage('/saveCategoryImages', imageData, $scope.categoryImageUploadSucess);
+            productTreeService.uploadImage('/admin/saveCategoryImages', imageData, $scope.categoryImageUploadSucess);
         }
     };
 
@@ -215,7 +215,7 @@ angular.module('eCommerce')
         // imageData.imageName = null;
         // imageData.currentImageFolderId = 2;
 
-        productTreeService.uploadImage('/saveProductImages', imageData, $scope.productImageUploadSucess);
+        productTreeService.uploadImage('/admin/saveProductImages', imageData, $scope.productImageUploadSucess);
     };
 
     $scope.productImageUploadSucess = function(resp) {
@@ -227,7 +227,7 @@ angular.module('eCommerce')
     }
 
     $scope.deleteProductImage = function(imageId){
-        productTreeService.deleteNode("/deleteProductImage/"+imageId, $scope.productImageDeleteSucess)
+        productTreeService.deleteNode("/admin/deleteProductImage/"+imageId, $scope.productImageDeleteSucess)
     }
 
     $scope.productImageDeleteSucess = function() {

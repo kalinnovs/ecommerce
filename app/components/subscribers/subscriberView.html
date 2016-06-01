@@ -26,7 +26,10 @@
 								<td>{{value.contactNo}}</td> 
 								<td class="promocode">{{value.promoCode}}</td>
 								<td class="action">
-									<a href="javascript:void(0);" class="fa fa-toggle-off" ng-click="approvePromo($event);" role="button"></a>
+									<a 
+										href="javascript:void(0);" 
+										ng-class="(value.promoUsed==true) ? 'fa fa-toggle-on' : 'fa fa-toggle-off'"
+										ng-click="approvePromo($event);" role="button"></a>
 									<input type="hidden" class="promoUsed" value="{{value.promoUsed}}">
 								</td>
 							</tr> 
