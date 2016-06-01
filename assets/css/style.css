@@ -656,7 +656,8 @@ footer .back-top .pageCounter { text-align: center; }
 .subscriptionPage .arrowedBubble .arrow-left {  border: solid 1px #d3d3d3; position: relative; width:100px; height:100px; left:20px; background: #f3f3f3; -webkit-transform:rotate(45deg); transform:rotate(45deg); border-radius:10px; }
 .subscriptionPage .arrowedBubble p { margin-bottom: 10px }
 .subscribers td.action { text-align: center; }
-.subscribers .action a { font-size: 24px; }
+.subscribers .action a { font-size: 24px; color: #53c653; }
+.subscribers .action a.fa-toggle-on { color: #ff5050; }
 .subscribers .action a:focus { text-decoration: none; }
 
 .login { position: relative; left: 50%; top: 0px; height:  }
