@@ -31,7 +31,7 @@ angular.module('eCommerce')
 
     service.deleteNode = function (url, callBack) {
         $http({
-            method: 'POST',
+            method: 'GET',
             url: SERVICE_URL + url,
             headers: {
                 'Content-Type': 'application/json'
