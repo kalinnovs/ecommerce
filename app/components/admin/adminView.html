@@ -3,17 +3,19 @@
         <span> Welcome Admin ! </span>
         <a href="#/login">Logout</a>
     </div>
-	<ul class="adminMenu" ng-click="chooseTemplate($event)">
-		<li>
-			<label id="inventory" class="active">Inventory</label>
-		</li>
-		<li>
-			<label id="subscriber">Subscribers</label>
-		</li>
-		<!-- <li>
-			<label id="banner">Banners</label>
-		</li> -->
-	</ul>
+    <div class="adminHeader">
+		<ul class="adminMenu" ng-click="chooseTemplate($event)">
+			<li>
+				<label id="inventory" class="active">Inventory</label>
+			</li>
+			<li>
+				<label id="subscriber">Subscribers</label>
+			</li>
+		</ul>
+		<div class="visitorCount">
+			<span>Unique Count / Total Views : </span> {{admin.uniqueViews}} / {{admin.totalCount}}
+		</div>
+	</div>
 	<div class="tabbedPane">
 		<div class="inventory paneContent" ui-view="productTree"></div>
 		<div class="subscriber paneContent hide" ui-view="subscribers">Subscribers</div>

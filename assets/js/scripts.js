@@ -130,10 +130,6 @@ $(document).ready(function(e) {
                 $(this).next("ul").hide();
             }
         });
-        
-        $(document).on("click", "body:not(.mobile) .menuRoot a", function(e) {
-            window.dataLoaded = false;
-        });
 
         $(document).on("click", ".currencyConverter a, .currencyChooser a", function(e){
             $(this).siblings().removeClass("active");

@@ -8,6 +8,7 @@ angular.module('eCommerce')
     CategoryService.getFromURL( SERVICE_URL + '/category/'+$stateParams.id)
         .then(function(data) {
           cat.data = data.categoryDetails;
+          // $rootScope.navigation.selectedCategory = data.categoryDetails.selectedCategory.partNumber;
           $scope.iterateThrough = 5;
           $rootScope.navigation = data.pageNavigation.categories; 
           $scope.$broadcast('dataloaded');

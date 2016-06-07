@@ -323,7 +323,7 @@ header a.active, header a:focus { text-decoration: none }
 .item-box-layout .wrapper .column { padding: 5px; }
 .item-box-layout .wrapper .column.four-square { padding: 0 }
 .item-box-layout a:hover * { text-decoration: none }
-.wide-full-tile { height: 589px; position: relative; display: flex; flex-direction: column; justify-content: center; }
+.wide-full-tile { height: 589px; position: relative; display: flex; flex-direction: column; justify-content: center; margin-bottom: 13px; }
 .wide-full-tile figure img { width: 563px }
 .wide-half-tile { height: 287px; }
 .wide-half-tile figure img { width: 563px; height: 287px }
@@ -378,7 +378,7 @@ header a.active, header a:focus { text-decoration: none }
 .category .spacingAdjust .column { padding: 0; }
 .category .spacingAdjust .wide-quarter-tile { margin: 0 0 12px 0; }
 .category .spacingAdjust .wide-quarter-tile figure { text-align: center; height: 205px; display: flex; flex-direction: column; justify-content: center; }
-.category .spacingAdjust .wide-quarter-tile figure img { width: 100% }
+.category .spacingAdjust .wide-quarter-tile figure img { width: auto; height: auto; max-height: 203px; max-height: 100% }
 .category .listView .wide-quarter-tile figure { width: 323px; overflow: hidden; float: left; height: auto; }
 .category .listView .tile.wide-quarter-tile .detail * { text-align: left; }
 .category .listView .tile .detail { float: none; display: block; margin-left: 340px; margin-right: 20px; }
@@ -453,7 +453,7 @@ header a.active, header a:focus { text-decoration: none }
 
 .product-details { text-align: center; }
 .product-details .product-card { width: 400px; background: #f4f4f4; display: inline-block; padding: 20px 0; min-height: 500px; }
-.product-details h2 { font-size: 48px; line-height: 64px; font-weight: 400; text-align: center; font-family: 'Anton'; margin: 10px; letter-spacing: 1.2px; }
+.product-details h2 { font-size: 34px; line-height: 44px; font-weight: 400; text-align: center; font-family: 'Anton'; margin: 10px; letter-spacing: 1.2px; }
 .product-details .rating, .product-details .reviews { display: none; font-size: 14px; line-height: 22px; }
 .product-details .reviews a { color: #0088cc }
 .product-details .reviews a:hover { text-decoration: underline; }
@@ -504,7 +504,7 @@ header a.active, header a:focus { text-decoration: none }
 .magnifyarea { box-shadow: 5px 5px 7px #e1e1ea; -webkit-box-shadow: 5px 5px 7px #e1e1ea; -moz-box-shadow: 5px 5px 7px #e1e1ea; filter: progid:DXImageTransform.Microsoft.dropShadow(color=#e1e1ea, offX=5, offY=5, positive=true); background: white; }
 .targetarea img { margin: auto; display: block; position: relative; border-width: 0; width: 418px !important; }
 
-.callDetails { text-align: center; padding: 10px 0; margin: 40px auto 0; width: 250px; border: dashed 1px #d3d3d3; position: absolute; bottom: 50px; left: 50%; margin-left: -125px; -webkit-animation: blinkOrder 1s infinite; -moz-animation: blinkOrder 1s infinite; -ms-animation: blinkOrder 1s infinite; }
+.callDetails { text-align: center; padding: 10px 0; margin: 40px auto 0; width: 250px; border: dashed 1px #d3d3d3; bottom: 50px; left: 50%; -webkit-animation: blinkOrder 1s infinite; -moz-animation: blinkOrder 1s infinite; -ms-animation: blinkOrder 1s infinite; }
 .callDetails .fa, .callDetails h5 { font-size: 16px; font-weight: 700; padding-bottom: 5px; display: inline-block; }
 .callDetails span { display: block; line-height: 20px }
 .callDetails .delivery { position: absolute; bottom: -36px; width: 100%; left: 0; font-size: 14px; }
@@ -669,10 +669,12 @@ footer .back-top .pageCounter { text-align: center; }
     *-*-*-* Admin *-*-*-*
 ****************************************************************************/
 .adminPage .container { margin-left: -15px; }
-.adminPage .adminMenu { margin-bottom: 5px;  position: relative; }
+.adminPage .adminMenu { margin-bottom: 5px;  position: relative; display: inline-block; }
 .adminPage .adminMenu > li { display: inline-block; }
 .adminPage .adminMenu > li label { padding: 10px 15px; display: inline-block; font-weight: 700; background: #ddd; }
 .adminPage .adminMenu > li label:hover, .adminPage .adminMenu > li label.active { background: #999; color: #fff }
+.adminPage .visitorCount { float: right; width: 300px; line-height: 42px; text-align: right; }
+.adminPage .visitorCount span { font-weight: 700; margin-right: 20px; }
 
 
 @-webkit-keyframes blink {

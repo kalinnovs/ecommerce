@@ -57,6 +57,7 @@
   .sub-menu.menu-three .links { width: auto; padding: 0px 20px; }
   .mobile .sub-menu a { width: auto; float: none; }
   header nav ul > li .sub-menu.catalog .links { width: 100%; }
+  .social-strip ul li a.cart { display: none }
   .currencyChooser { display: block }
   .mobile .desktop-nav > ul > li.currencyChooser a { display: inline-block; }
   .mobile .desktop-nav > ul > li.currencyChooser .fa { display: inline-block; color: #333; }
