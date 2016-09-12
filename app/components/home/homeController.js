@@ -4,13 +4,16 @@ angular.module('eCommerce')
   .controller('HomeCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL) {
     var home = this;
     var scoper = $scope;
+
+    // Root scoping cartItem array globally across the application
+    $rootScope.cartItems = (window.localStorage.itemsArray) ? JSON.parse(window.localStorage.itemsArray) : [];
     // debugger;
 
     // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
     UserService.GetAll( SERVICE_URL + '/home')
         .then(function(data) {
           if(data.success === undefined || data.success) {
-            $rootScope.navigation = data.pageNavigation.categories;  
+            $rootScope.navigation = data.pageNavigation.categories;
             $scope.$broadcast('dataloaded');
           } else {
             // Else pick local JSON
@@ -25,7 +28,7 @@ angular.module('eCommerce')
 
 
     $scope.$on('dataloaded', function() {
-        $timeout(function () { 
+        $timeout(function () {
             window.dataLoaded = true;
         }, 100, false);
     });
@@ -44,7 +47,7 @@ angular.module('eCommerce')
       var styles = [
           {
               stylers: [
-                  
+
                   { saturation: -40 }
               ]
           },{
@@ -105,7 +108,7 @@ angular.module('eCommerce')
     //     // $(".progress").hide();
     //     debugger;
     //     shuffleTiles();
-    // };    
+    // };
     $scope.afterPageRendered = function () {
       // debugger;
         $scope.foo = 'newFoo';

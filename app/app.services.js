@@ -3,7 +3,7 @@
 angular.module('eCommerce')
   .service('UserService', function ($http, $rootScope, ENDPOINT_URI) {
     var service = this;
-    
+
     service.GetAll = function(url) {
         return $http.get(url).then(service.handleSuccess, service.handleError('Error getting all users'));
     }
@@ -22,6 +22,10 @@ angular.module('eCommerce')
  
     service.Update = function(url, user) {
         return $http.post(url, user).then(service.handleSuccess, service.handleError('Error updating user'));
+    }
+ 
+    service.Put = function(url, user) {
+        return $http.put(url, user).then(service.handleSuccess, service.handleError('Error updating user'));
     }
  
     service.Delete = function(id) {

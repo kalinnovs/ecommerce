@@ -9,11 +9,19 @@ angular.module('eCommerce')
 
       /* Window Scroll event */
       $(window).scroll(function() {
-        if( $(this).scrollTop() > hdr ) {
-          menu.addClass(stickyClass);
-        } else {
-          menu.removeClass(stickyClass);
-        }
+            var stickyCart = menu.find(".mini-cart-trigger .cart-drawer");
+            var headerCart = $("body .mini-cart-trigger .cart-drawer");
+            if( $(this).scrollTop() > hdr ) {
+                menu.addClass(stickyClass);
+                $("body").addClass('menu-stuck');
+                headerCart.addClass("hide");
+                if(!stickyCart.hasClass("hide")) {
+                    stickyCart.addClass("hide");
+                }
+            } else {
+                menu.removeClass(stickyClass);
+                $("body").removeClass('menu-stuck');
+            }
       });
     };
 

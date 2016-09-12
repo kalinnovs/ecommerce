@@ -19,12 +19,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('home', {
         url:'/home',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/home/homeView.html',
             controller: 'HomeCtrl',
             controllerAs: 'home'
           },
-          'heroBanner@home': { 
+          'heroBanner@home': {
             templateUrl: 'app/shared/hero/heroView.html'
           },
           'tileLayout@home': {
@@ -34,10 +34,20 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           }
         }
       })
+      .state('cart', {
+        url:'/cart',
+        views: {
+          '': {
+            templateUrl: 'app/components/cart/cartView.html',
+            controller: 'CartCtrl',
+            controllerAs: 'cart'
+          }
+        }
+      })
       .state('register', {
         url:'/register',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/register/registerView.html',
             controller: 'RegisterCtrl',
             controllerAs: 'register'
@@ -47,7 +57,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('aboutus', {
         url:'/aboutus',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/aboutus/aboutusView.html',
             controller: 'aboutCtrl',
             controllerAs: 'about'
@@ -57,7 +67,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('product', {
         url:'/product/{id}',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/details/detailView.html',
             controller: 'DetailCtrl',
             controllerAs: 'details'
@@ -67,7 +77,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('category', {
         url:'/category/{id}',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/category/categoryView.html',
             controller: 'categoryCtrl',
             controllerAs: 'cat'
@@ -77,7 +87,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('inventory', {
         url:'/inventory',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/inventory/inventory.html',
             controller: 'InventoryCtrl',
             controllerAs: 'InventoryCtrl'
@@ -87,7 +97,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('subscriber', {
         url:'/inventory/subscriber',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/subscribers/subscriberView.html',
             controller: 'SubscriberCtrl',
             controllerAs: 'SubscriberCtrl'
@@ -97,7 +107,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('download', {
         url:'/download',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/download/downloadView.html'
           }
         }
@@ -105,7 +115,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('contact', {
         url:'/contact',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/contact/contactView.html',
             controller: 'ContactCtrl',
             controllerAs: 'contacts'
@@ -115,7 +125,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('admin', {
         url:'/admin',
         views: {
-          '': { 
+          '': {
             templateUrl: 'app/components/admin/adminView.html',
             controller: 'AdminCtrl',
             controllerAs: 'admin'
@@ -125,7 +135,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
             controller: 'SubscriberCtrl',
             controllerAs: 'SubscriberCtrl'
           },
-          'productTree@admin': { 
+          'productTree@admin': {
             templateUrl: 'app/components/inventory/productTree.html',
             controller: 'productTreeCtrl',
             controllerAs: 'productTreeCtrl'
@@ -135,7 +145,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('privacyPolicy', {
         url:'/privacyPolicy',
         views: {
-          '': { 
+          '': {
             templateUrl: 'assets/policies/privacyPolicy.html'
           }
         }
@@ -143,7 +153,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('deliveryOptions', {
         url:'/deliveryOptions',
         views: {
-          '': { 
+          '': {
             templateUrl: 'assets/policies/deliveryOptions.html'
           }
         }
@@ -151,7 +161,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('returnPolicy', {
         url:'/returnPolicy',
         views: {
-          '': { 
+          '': {
             templateUrl: 'assets/policies/returnPolicy.html'
           }
         }
@@ -159,7 +169,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('termsCondition', {
         url:'/termsCondition',
         views: {
-          '': { 
+          '': {
             templateUrl: 'assets/policies/termsCondition.html'
           }
         }

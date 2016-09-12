@@ -1,51 +1,77 @@
 // object.watch
 if (!Object.prototype.watch) {
     Object.defineProperty(Object.prototype, "watch", {
-          enumerable: false, 
-          configurable: true, 
-          writable: false, 
-          value: function (prop, handler) {
-            var oldval = this[prop], 
-              newval = oldval, 
-              getter = function () {
-                return newval;
-              }, 
-              setter = function (val) {
-                oldval = newval;
-                return (newval = handler.call(this, prop, oldval, val));
-              };
-            
+        enumerable: false,
+        configurable: true,
+        writable: false,
+        value: function(prop, handler) {
+            var oldval = this[prop],
+                newval = oldval,
+                getter = function() {
+                    return newval;
+                },
+                setter = function(val) {
+                    oldval = newval;
+                    return (newval = handler.call(this, prop, oldval, val));
+                };
+
             if (delete this[prop]) { // can't watch constants
                 Object.defineProperty(this, prop, {
-                      get: getter, 
-                      set: setter, 
-                      enumerable: true, 
-                      configurable: true
+                    get: getter,
+                    set: setter,
+                    enumerable: true,
+                    configurable: true
                 });
             }
         }
     });
 }
 
-// object.unwatch
-if (!Object.prototype.unwatch) {
-    Object.defineProperty(Object.prototype, "unwatch", {
-        enumerable: false, 
-        configurable: true, 
-        writable: false, 
-        value: function (prop) {
-            var val = this[prop];
-            delete this[prop]; // remove accessors
-            this[prop] = val;
+// Stores partnumbers to localstorage and data temporarily to minicart in sessionStorage
+window.itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [] || [];
+window.miniCartStorage = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [] || [];
+
+
+// Array Watch
+Object.defineProperty(window.itemsArray, "push", {
+    configurable: false,
+    enumerable: false, // hide from for...in
+    writable: false,
+    value: function() {
+        for (var i = 0, n = this.length, l = arguments.length; i < l; i++, n++) {
+            RaiseMyEvent(this, n, this[n] = arguments[i]); // assign/raise your event
         }
-    });
-}
+        return n;
+    }
+});
+
+
+function RaiseMyEvent(id, oldVal, newVal) {
+    createMiniKart();
+};
+
+function createMiniKart() {
+    if (window.itemsArray.length > 0) {
+        var ul = document.createElement("ul");
+        for (var i = 0; i < window.itemsArray.length; i++) {
+            if(i === 4) {
+                return;
+            }
+            var li = document.createElement("li");
+            li.innerHTML = "<div class='wrapper'><figure><img src='" + window.itemsArray[i].image[0].thumbImagePath + "' /></figure><div class='details'><h3>" + window.itemsArray[i].partNumber + "</h3><span class='price'>" + window.itemsArray[i].price + "</span></div></div>";
+            ul.appendChild(li);
+        }
+        $("#miniKart").html("").append(ul);
+        $("body").find(".cartCount").html(window.itemsArray.length);
+        (window.itemsArray.length > 4) ? $(".manyItems").show() : $(".manyItems").hide();
+    }
+};
 
 window.dataLoaded = false;
 
-//Watcher for dataLoader 
-window.watch('dataLoaded', function (id, oldval, newval) {
-    if(newval === true) {
+//Watcher for dataLoader
+window.watch('dataLoaded', function(id, oldval, newval) {
+    if (newval === true) {
         $(".progress").hide();
     } else {
         $(".progress").show();
@@ -53,21 +79,18 @@ window.watch('dataLoaded', function (id, oldval, newval) {
     return newval;
 });
 
-// setTimeout(function(){
-//     window.unwatch('dataLoaded');
-//     // Loading Finish
-//     $(".progress").hide();
-// },16000);
-
-
 $(document).ready(function(e) {
 
-    setTimeout( function() { 
+    // Set default currency INR to body
+    $("body").attr("data-currency", "INR");
+    $("body").find(".cartCount").html(window.itemsArray.length);
+
+    setTimeout(function() {
 
         //Login popup
         $(".toggleLoginPopup").click(function() {
             var chk = $(this).next().css("display");
-            if(chk == "none") {
+            if (chk == "none") {
                 $(this).next(".login").show();
                 $(this).next().stop(true, true).slideDown();
             } else {
@@ -76,91 +99,108 @@ $(document).ready(function(e) {
             }
         });
 
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             $("body").addClass("mobile");
         } else {
             $("body").removeClass("mobile");
         }
 
         $(document).on({
-            mouseenter: function () {
+            mouseenter: function() {
                 //stuff to do on mouse enter
                 $(this).find("a").eq(1).addClass("active");
                 $(this).children('.sub-menu').stop(true, true).fadeIn(300);
             },
-            mouseleave: function () {
+            mouseleave: function() {
                 //stuff to do on mouse leave
                 $(this).find("a").eq(1).removeClass("active");
                 $(this).children('.sub-menu').stop(true, true).fadeOut(400);
             }
         }, "body:not(.mobile) nav ul > li");
 
-        $(document).on("click", ".mobile nav ul > li > a", function (e) {
+        $(document).on("click", ".mobile nav ul > li > a", function(e) {
             e.preventDefault();
-            if($(this).hasClass("active")) {
+            if ($(this).hasClass("active")) {
                 $(this).removeClass("active");
-                $(this).siblings('.sub-menu').css("display","none");
+                $(this).siblings('.sub-menu').css("display", "none");
                 $(this).find(".fa-minus").hide();
                 $(this).find(".fa-plus").show();
             } else {
                 $(this).addClass("active");
-                $(this).siblings('.sub-menu').css("display","block");
+                $(this).siblings('.sub-menu').css("display", "block");
                 $(this).find(".fa-minus").show();
                 $(this).find(".fa-plus").hide();
             }
-            $(this).siblings().each(function() { 
+            $(this).siblings().each(function() {
                 $(this).removeClass("active");
             });
         });
 
         $(document).on("click", ".mobile nav ul li li a", function(e) {
             e.preventDefault();
-            $(this).parent().siblings().find("> a").each(function() { 
+            $(this).parent().siblings().find("> a").each(function() {
                 $(this).parent().removeClass("active");
             });
-            $(this).next('.sub-menu').css("display","none");
+            $(this).next('.sub-menu').css("display", "none");
             $(this).parents(".menuRoot").hide();
         });
 
-        $(document).on("click", ".mobile .desktop-nav a.mobileNavBtn", function(e){
+        $(document).on("click", ".mobile .desktop-nav a.mobileNavBtn", function(e) {
             e.preventDefault();
-            if($(this).next("ul").css("display") == undefined || $(this).next("ul").css("display") == "none") {
+            if ($(this).next("ul").css("display") == undefined || $(this).next("ul").css("display") == "none") {
                 $(this).next("ul").show();
             } else {
                 $(this).next("ul").hide();
             }
         });
 
-        $(document).on("click", ".currencyConverter a, .currencyChooser a", function(e){
+        $(document).on("click", ".currencyConverter a, .currencyChooser a", function(e) {
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
             var selectedCurrency = $(this).attr("rel");
             $(this).parents(".menuRoot").hide()
             $(".price.inr, .price.usd, .price.eur").hide();
-            $(".price."+selectedCurrency).show();
+            $(".price." + selectedCurrency).show();
+            $("body").attr("data-currency", selectedCurrency);
         });
 
-        $('footer .back-top a').click(function(e){
+        $(document).on("click", ".mini-cart-trigger", function(e) {
+            var drawer = $(this).find(".cart-drawer");
+            if(drawer.html().trim() === "") {
+                drawer.html($("minicart"));
+            }
+            if(drawer.hasClass("hide")) {
+                drawer.removeClass("hide");
+            } else {
+                drawer.addClass("hide");
+            }
+        });
+
+        $('footer .back-top a').click(function(e) {
             e.preventDefault();
-            $("html, body").animate({ scrollTop: 0 }, 600);
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
             return false;
         });
 
         // Wait until the DOM has loaded before querying the document
-        if((!sessionStorage.isTriggered || sessionStorage.isTriggered == "false")
-             && window.location.hash.match(/register/g) == null) {
+        if ((!sessionStorage.isTriggered || sessionStorage.isTriggered == "false") &&
+            window.location.hash.match(/register/g) == null) {
             setTimeout(function() {
                 window.modalComponent.open(".adMessageBox");
-                $("html, body").animate({ scrollTop: 0 }, 600);
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 600);
                 sessionStorage.isTriggered = "true";
-            }, 45000);    
+            }, 45000);
         }
 
         $(".tapToClose").click(function() {
             sessionStorage.isTriggered = "true";
             window.modalComponent.close();
         });
-        
+
 
     }, 1500);
 

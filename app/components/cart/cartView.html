@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="cart-page">
+        <h1>Your Cart Items :</h1>
+        <ul class="list-items">
+            <li ng-repeat="(key, value) in cartItems" class="item" data-index="{{key}}">
+                <div class="item-details">
+                    <figure>
+                        <img src="{{value.image[0].baseImagePath}}" />
+                    </figure>
+                    <div class="part-details">
+                        <h3>{{value.partNumber}}</h3>
+                        <div class="item-price priceChooser">
+                            <div ng-repeat="(key, priceValue) in value.priceArray">
+                                <span class="price {{priceValue.currencyCode | lowercase}}">
+                                    <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>
+                                    {{priceValue.price | number:2}}
+                                </span>
+                            </div>
+                        </div>
+                        <input type="text" class="item-quantity" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" />
+                        <div class="item-calculated-price priceChooser">
+                            <div ng-repeat="(key, priceValue) in value.priceArray">
+                                <span class="price {{priceValue.currencyCode | lowercase}}">
+                                    <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>
+                                    {{priceValue.price * value.quantity | number:2}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="part-desciption">
+                        <p>{{value.description}}</p>
+                        <div class="controls">
+                            <a href="javascript:void(0);" ng-click="removeItem($event)" title="Delete Item">
+                                <span class="fa fa-trash"></span>delete item</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <label>Cart Total: </label>
+                <span><i class="fa fa-{{currency | lowercase}}"></i> {{getTotal() | number:2}}</span>
+            </div>
+            <div class="shipping-charges">
+                <label>Shipping Charges: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{cartConfig.shippingCost | number:2}}</span>
+            </div>
+            <div class="tax">
+                <label>Tax Estimated (%): </label> <span>{{cartConfig.tax | number:2}}</span>
+            </div>
+            <div class="discount">
+                <label>Discount Eligible: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{cartConfig.discount | number:2}}</span>
+            </div>
+            <div class="costToCheckout">
+                <label>Sub Total: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{subTotal() | number:2}}</span>
+            </div>
+        </div>
+        <div class="cart-extra">
+            <div class="extra-links">
+                <ul>
+                    <li><a href="#/home">Continue back for shopping</a></li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-primary">Checkout</button>
+        </div>
+    </div>
+</div>
