@@ -15,6 +15,7 @@ var gulp = require('gulp'),
     es = require('event-stream'),
     browserSync = require('browser-sync');
 
+var nodeService = require('./HaastikaNodeService/service/HaastikaNodeService');
 
 // Clean build folders
 gulp.task('clean', function() {
