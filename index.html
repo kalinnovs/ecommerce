@@ -16,6 +16,7 @@
     <meta property="og:site_name" content="Haastika" />
 
     <title>Haastika - Online store for Odisha Handicrafts, Wall Hangings, Bags, Paintings, Jewellery and more</title>
+    <base href="/index.html">
     <link rel="icon" href="assets/images/favicon.ico" sizes="16x16" type="image/png">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -46,6 +47,11 @@
 </head>
 
 <body>
+    <noscript>
+    	<style type="text/css">
+    		.progress { display:none; }
+    	</style>
+    </noscript>
     <div id="page" class="app-wrap">
         <div class="progress">
             <span>
@@ -73,7 +79,7 @@
                     <div class="row">
                         <div class="col span_2_of_12">
                             <div class="logo">
-                                <a href="#/home"><img alt="" src="assets/images/logo.png"></a>
+                                <a href="/"><img alt="" src="assets/images/logo.png"></a>
                             </div>
                         </div>
                         <div class="col span_5_of_12">
@@ -83,16 +89,16 @@
                             <div class="social-strip">
                                 <ul>
                                     <li>
-                                        <a href="#/home" class="noDecoration homeLink"><i class="fa fa-home"></i> Home</a>
+                                        <a href="/" class="noDecoration homeLink"><i class="fa fa-home"></i> Home</a>
                                     </li>
                                     <li>
-                                        <a href="#/register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
+                                        <a href="register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
                                     </li>
                                     <li>
-                                        <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-users"></i> About Us</a>
+                                        <a href="aboutus" class="noDecoration aboutusLink"><i class="fa fa-users"></i> About Us</a>
                                     </li>
                                     <li>
-                                        <a href="#/contact" class="noDecoration contactusLink">
+                                        <a href="contact" class="noDecoration contactusLink">
                                             <i class="fa fa-paper-plane" aria-hidden="true"></i> Reach Us
                                         </a>
                                     </li>
@@ -115,13 +121,13 @@
                         <div class="social-strip mobileView">
                             <ul>
                                 <li>
-                                    <a href="#/register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
+                                    <a href="register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
                                 </li>
                                 <li>
-                                    <a href="#/aboutus" class="noDecoration aboutusLink"><i class="fa fa-users"></i> About Us</a>
+                                    <a href="aboutus" class="noDecoration aboutusLink"><i class="fa fa-users"></i> About Us</a>
                                 </li>
                                 <li>
-                                    <a href="#/contact" class="noDecoration contactusLink">
+                                    <a href="contact" class="noDecoration contactusLink">
                                         <i class="fa fa-paper-plane" aria-hidden="true"></i> Reach Us
                                     </a>
                                 </li>
@@ -130,19 +136,153 @@
                         <div class="row">
                             <div class="col span_2_of_12">
                                 <div class="logo">
-                                    <a href="#/home"><img alt="" src="assets/images/logo.png"></a>
+                                    <a href="/"><img alt="" src="assets/images/logo.png"></a>
                                 </div>
                             </div>
                             <div class="col span_8_of_12 noPadding">
                                 <nav class="desktop-nav">
                                     <a href="javascript:void(0);" class="mobileNavBtn fa fa-bars"></a>
+                                    <noscript>
+                                    	<ul class="clearfix menuRoot">
+                                        <!-- ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            <a href="javscript:void(0);" class="activator">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                                <i class="fa fa-minus" aria-hidden="true"></i> 
+                                            </a>
+                                            <a href="category/HSCH001" class="">Wall Hanging</a>
+                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu " ng-if="value.subcategoryList" style="display: none;">
+                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                                    <img ng-src="assets/images/nav/nav1.jpg" alt="Description" src="assets/images/nav/nav1.jpg">
+                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                <ul class="clearfix">
+                                                    <li class="clearfix">
+                                                        <div class="links">
+                                                            <h3 class="ng-binding">Wall Hanging</h3>
+                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH005" class="ng-binding ng-scope">Chandua</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH006" class="ng-binding ng-scope">Pattachitra</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH007" class="ng-binding ng-scope">Palm Leaf Work</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH008" class="ng-binding ng-scope">Copper Foil</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH009" class="ng-binding ng-scope">Paintings</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH010" class="ng-binding ng-scope">Straw Craft</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH011" class="ng-binding ng-scope">Paper Mache</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH044" class="ng-binding ng-scope">Watch</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH049" class="ng-binding ng-scope">Ken Bambo Palmleaf Painting</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH050" class="ng-binding ng-scope">Textured Painting</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- end ngIf: value.subcategoryList -->
+                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            <a href-"javscript:void(0);"="" class="activator">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                                <i class="fa fa-minus" aria-hidden="true"></i> 
+                                            </a>
+                                            <a href="category/HSCH002" class="">Home Decor</a>
+                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu menu-two" ng-if="value.subcategoryList" style="display: none;">
+                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                                    <img ng-src="assets/images/nav/nav2.jpg" alt="Description" src="assets/images/nav/nav2.jpg">
+                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                <ul class="clearfix">
+                                                    <li class="clearfix">
+                                                        <div class="links">
+                                                            <h3 class="ng-binding">Home Decor</h3>
+                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH012" class="ng-binding ng-scope">Silver Filigree</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH013" class="ng-binding ng-scope">Golden Grass</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH014" class="ng-binding ng-scope">Teracota</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH015" class="ng-binding ng-scope">Wood Carving</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH016" class="ng-binding ng-scope">Dhokra Casting</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH018" class="ng-binding ng-scope">Paddy craft</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH019" class="ng-binding ng-scope">Cushion</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH045" class="ng-binding ng-scope">Coir Craft</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- end ngIf: value.subcategoryList -->
+                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            <a href-"javscript:void(0);"="" class="activator">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                                <i class="fa fa-minus" aria-hidden="true"></i> 
+                                            </a>
+                                            <a href="category/HSCH003" class="">Bag</a>
+                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu menu-three" ng-if="value.subcategoryList" style="display: none;">
+                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                                    <img ng-src="assets/images/nav/nav3.jpg" alt="Description" src="assets/images/nav/nav3.jpg">
+                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                <ul class="clearfix">
+                                                    <li class="clearfix">
+                                                        <div class="links">
+                                                            <h3 class="ng-binding">Bag</h3>
+                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH020" class="ng-binding ng-scope">Jute</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- end ngIf: value.subcategoryList -->
+                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            <a href-"javscript:void(0);"="" class="activator">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                                <i class="fa fa-minus" aria-hidden="true"></i> 
+                                            </a>
+                                            <a href="category/HSCH004" class="">Jewellery</a>
+                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu menu-two" ng-if="value.subcategoryList" style="display: none;">
+                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                                    <img ng-src="assets/images/categories/jewellery/jewel3/medium/IMG_5429.jpg" alt="Description" src="assets/images/categories/jewellery/jewel3/medium/IMG_5429.jpg">
+                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                <ul class="clearfix">
+                                                    <li class="clearfix">
+                                                        <div class="links">
+                                                            <h3 class="ng-binding">Jewellery</h3>
+                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH021" class="ng-binding ng-scope">Tribal</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- end ngIf: value.subcategoryList -->
+                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            <a href-"javscript:void(0);"="" class="activator">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                                <i class="fa fa-minus" aria-hidden="true"></i> 
+                                            </a>
+                                            <a href="category/HSCH042" class="">Bootie</a>
+                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu " ng-if="value.subcategoryList">
+                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                                    <img ng-src="assets/images/categories/HSCH042/menu/menu.jpg" alt="Description" src="assets/images/categories/HSCH042/menu/menu.jpg">
+                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                <ul class="clearfix">
+                                                    <li class="clearfix">
+                                                        <div class="links">
+                                                            <h3 class="ng-binding">Bootie</h3>
+                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH043" class="ng-binding ng-scope">Baby Booties</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- end ngIf: value.subcategoryList -->
+                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            <a href-"javscript:void(0);"="" class="activator">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                                <i class="fa fa-minus" aria-hidden="true"></i> 
+                                            </a>
+                                            <a href="category/HSCH046" class="">GIFT</a>
+                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu " ng-if="value.subcategoryList" style="display: none;">
+                                                <!-- ngIf: value.categoryMenuImagePath -->
+                                                <ul class="clearfix">
+                                                    <li class="clearfix">
+                                                        <div class="links">
+                                                            <h3 class="ng-binding">GIFT</h3>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- end ngIf: value.subcategoryList -->
+                                        </li><!-- end ngRepeat: (key, value) in navigation -->
+                                        <li>
+                                            <a href-"javscript:void(0);"="" class="activator">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                                <i class="fa fa-minus" aria-hidden="true"></i> 
+                                            </a>
+                                            <a href="assets/catalog/HAASTIKA_Catalouge.pdf" target="_blank" class="">Download Catalog</a>
+                                        </li>
+                                        <li class="currencyChooser">
+                                            <a href="javascript:void(0);" title="Indian Rupee" rel="inr" class="active">
+                                                <i class="fa fa-inr" aria-hidden="true"></i> INR
+                                            </a>
+                                            <a href="javascript:void(0);" title="American Dollar" rel="usd">
+                                                <i class="fa fa-usd" aria-hidden="true"></i> USD
+                                            </a>
+                                            <a href="javascript:void(0);" title="European Pound" rel="eur">
+                                                <i class="fa fa-eur" aria-hidden="true"></i> EUR
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    </noscript>
                                     <ul class="clearfix menuRoot">
                                         <li ng-repeat="(key, value) in navigation">
-                                            <a href- "javscript:void(0);" class="activator">
+                                            <a href="javscript:void(0);" class="activator">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                             </a>
-                                            <a href="#/{{value.categoryDetailsURL}}">{{value.categoryName}}</a>
+                                            <a href="{{value.categoryDetailsURL}}">{{value.categoryName}}</a>
                                             <div class="sub-menu {{value.categoryCSSClass}}" ng-if="value.subcategoryList">
                                                 <figure ng-if="value.categoryMenuImagePath">
                                                     <img ng-src="{{value.categoryMenuImagePath}}" alt="Description" />
@@ -151,14 +291,14 @@
                                                     <li class="clearfix">
                                                         <div class="links">
                                                             <h3>{{value.categoryName}}</h3>
-                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="#/{{innerValue.categoryDetailsURL}}">{{innerValue.categoryName}}</a>
+                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="{{innerValue.categoryDetailsURL}}">{{innerValue.categoryName}}</a>
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </li>
                                         <li>
-                                            <a href- "javscript:void(0);" class="activator">
+                                            <a href="javscript:void(0);" class="activator">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                             </a>
@@ -201,7 +341,7 @@
                                 <div class="social-strip">
                                     <ul>
                                         <li>
-                                            <a href="#/home" class="noDecoration homeLink"><i class="fa fa-home"></i>Home</a>
+                                            <a href="home" class="noDecoration homeLink"><i class="fa fa-home"></i>Home</a>
                                         </li>
                                         <li>
                                             <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger">
@@ -218,13 +358,531 @@
                     </div>
                 </div>
             </sticky-menu>
-            <minicart></minicart>
+            <minicart part-number-map="window.itemsArray"></minicart>
         </header>
 
         <div>
 
             <!-- Application view startes here -->
-            <div ui-view autoclass="content" class="content-container"></div>
+            <div ui-view autoclass="content" class="content-container">
+                <noscript>
+                    <div ui-view="heroBanner" class="ng-scope"><div class="wrapper ng-scope">
+                        <div class="container">
+                            <div class="row">
+                                <!-- SLIDER -->
+                                <div id="galleryBanner" class="ws_gestures" style="font-size: 9.7265px;">
+                                    <div class="ws_images" style="overflow: visible;"><div style="position: relative; width: 100%; font-size: 0px; line-height: 0; max-height: 100%; overflow: hidden;"><img src="assets/images/banner/banner-1.jpg" alt="Patta Chitra" title="Patta Chitra" id="wows1_0" style="width: 100%; visibility: hidden;"></div>
+                                        
+                                    <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; overflow: hidden;"><div class="ws_list" style="position: absolute; top: 0px; height: 100%; transform: translate3d(0px, 0px, 0px); width: 1000%; left: 0%;"><div class="ws_swipe_left" style="position: absolute; top: 0px; height: 100%; overflow: hidden; width: 10%; left: -10%;"><img src="assets/images/banner/banner-5.jpg" alt="Chandua" title="Chandua" id="wows1_4" style="visibility: visible;"></div><ul style="width: 100%;">
+                                            <li style="width: 10%;"><img src="assets/images/banner/banner-1.jpg" alt="Patta Chitra" title="Patta Chitra" id="wows1_0" style="visibility: visible;"></li>
+                                        </ul><div class="ws_swipe_right" style="position: absolute; top: 0px; height: 100%; overflow: hidden; width: 10%; left: 50%;"><img src="assets/images/banner/banner-1.jpg" alt="Patta Chitra" title="Patta Chitra" id="wows1_0" style="visibility: visible;"></div></div></div><div class="ws_cover" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 10; opacity: 0; background: rgb(255, 255, 255);"><a href="#" style="display:none;position:absolute;left:0;top:0;width:100%;height:100%"></a></div><div class="ws_effect ws_parallax" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; opacity: 1; display: block;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; transform: translate3d(452.739px, 0px, 0px);"><img src="assets/images/banner/banner-1.jpg" alt="Patta Chitra" title="Patta Chitra" id="wows1_0" style="visibility: visible; width: 1138px; height: 360px; margin-top: 0px; margin-left: 0px; transform: translate3d(-113.185px, 0px, 0px);"></div><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; transform: translate3d(-685.261px, 0px, 0px);"><img src="assets/images/banner/banner-2.jpg" alt="Painting" title="Painting" id="wows1_1" style="visibility: visible; width: 1138px; height: 360px; margin-top: 0px; margin-left: 0px; transform: translate3d(171.315px, 0px, 0px);"></div></div><div class="ws_controls"><div class="ws_bullets">
+                                        <div>
+                                            <a href="#" title="Wood Sculptures" class="">
+                                                <span>
+                                                    
+                                                </span>
+                                            </a>
+                                        <div class="ws_bulframe"><div><div style="width: 600%;"><img src="assets/images/banner/banner-1.jpg" alt="Wood Sculptures"><img src="assets/images/banner/banner-2.jpg" alt="Painting"><img src="assets/images/banner/banner-3.jpg" alt="Stone Carving"><img src="assets/images/banner/banner-4.jpg" alt="Dhokra Casting"><img src="assets/images/banner/banner-5.jpg" alt="Chandua"></div></div><span></span></div></div>
+                                    </div><a href="#" class="ws_next"><span><i></i><b></b></span></a><a href="#" class="ws_prev"><span><i></i><b></b></span></a><a href="#" class="ws_playpause ws_pause"><span><i></i><b></b></span></a></div><div class="ws-title-wrapper"><div class="ws-title" style=""><span>Painting</span></div><div class="ws-title" style="display:none"></div></div><a href="#" class="ws_fullscreen"></a></div>
+                                    
+                                    <div class="ws_shadow"></div>
+                                </div>
+                                <!-- SLIDER -->
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="product_wrap ng-scope">
+                        <div class="container">
+                            <!-- uiView: tileLayout --><div ui-view="tileLayout" class="ng-scope"><!-- Dynamic Tile Templates -->
+                    <div class="tileShuffle ng-scope">
+                         <div ng-include="" src="layout2" class="ng-scope"><div class="item-box-layout layout-2 ng-scope">
+                        <div class="wrapper row">
+                            <!-- ngRepeat: (key, value) in tile.layout.layout2.tilesList --><div class="span_6_of_12 col ng-scope" ng-repeat="(key, value) in tile.layout.layout2.tilesList">
+                                <a href="category/HSCH016">
+                                    <div class="tile wide-full-tile category ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/tile/IMG_3972.jpg" src="assets/images/products/tile/IMG_3972.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">Dhokra Casting</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div><!-- end ngRepeat: (key, value) in tile.layout.layout2.tilesList --><div class="span_6_of_12 col ng-scope" ng-repeat="(key, value) in tile.layout.layout2.tilesList">
+                                <a href="category/HSCH013">
+                                    <div class="tile wide-full-tile category ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/tile/IMG_3554.jpg" src="assets/images/products/tile/IMG_3554.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">Golden Grass</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div><!-- end ngRepeat: (key, value) in tile.layout.layout2.tilesList -->
+                        </div>
+                    </div></div><!-- ngInclude:  --><div ng-include="" src="layout6" class="ng-scope"><div class="item-box-layout layout-6 ng-scope">
+                        <div class="wrapper row">
+                            <div class="span_3_of_12 col">
+                                <a href="category/HSCH011">
+                                    <div class="tall-tile">
+                                        <div class="wide-tall-tile tile category ">
+                                            <figure>
+                                                <img alt="" ng-src="assets/images/products/tile/papermache.jpg" src="assets/images/products/tile/papermache.jpg">
+                                            </figure>
+                                            <div class="detail">
+                                                <h4 class="ng-binding">Paper Mache</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="span_3_of_12 col">
+                                <a href="/product/HSPP066">
+                                    <div class="wide-quarter-tile tile product ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/66/HSIMG1/medium/medium.jpg" src="assets/images/products/66/HSIMG1/medium/medium.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">Wall hanging Paper mache Mask Male -HSPM019</h4>
+                                            <div class="priceChooser">
+                                                <!-- ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[1].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[1].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price inr">
+                                                        <i class="fa fa-inr"></i> 
+                                                        210
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[1].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[1].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price usd">
+                                                        <i class="fa fa-usd"></i> 
+                                                        3.13
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[1].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[1].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price eur">
+                                                        <i class="fa fa-eur"></i> 
+                                                        2.78
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[1].productTileDetails.productPriceOptions -->
+                                            </div>
+                                            <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="span_3_of_12 col">
+                                <a href="/product/HSPP129">
+                                    <div class="wide-quarter-tile tile product ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/129/HSIMG1/medium/medium.jpg" src="assets/images/products/129/HSIMG1/medium/medium.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">Wood Carving Apu Ganesh-HSWC003</h4>
+                                            <div class="priceChooser">
+                                                <!-- ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[2].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[2].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price inr">
+                                                        <i class="fa fa-inr"></i> 
+                                                        1320
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[2].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[2].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price usd">
+                                                        <i class="fa fa-usd"></i> 
+                                                        19.7
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[2].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[2].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price eur">
+                                                        <i class="fa fa-eur"></i> 
+                                                        17.46
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[2].productTileDetails.productPriceOptions -->
+                                            </div>
+                                            <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="span_3_of_12 col">
+                                <a href="/product/HSPP194">
+                                    <div class="wide-quarter-tile tile product ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/194/HSIMG1/medium/medium.jpg" src="assets/images/products/194/HSIMG1/medium/medium.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">HSCU021</h4>
+                                            <div class="priceChooser">
+                                                <!-- ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[3].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[3].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price inr">
+                                                        <i class="fa fa-inr"></i> 
+                                                        492
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[3].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[3].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price usd">
+                                                        <i class="fa fa-usd"></i> 
+                                                        7.34
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[3].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[3].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price eur">
+                                                        <i class="fa fa-eur"></i> 
+                                                        6.51
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[3].productTileDetails.productPriceOptions -->
+                                            </div>
+                                            <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="span_6_of_12 col">
+                                <a href="category/HSCH006">
+                                    <div class="wide-half-tile tile category ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/tile/IMG_3519.jpg" src="assets/images/products/tile/IMG_3519.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">Pattachitra</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="span_3_of_12 col">
+                                <a href="/product/HSPP054">
+                                    <div class="wide-quarter-tile tile product ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/54/HSIMG2/medium/medium.jpg" src="assets/images/products/54/HSIMG2/medium/medium.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">Wall hanging Paper Mache Tribal painting-HSPM006</h4>
+                                            <div class="priceChooser">
+                                                <!-- ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[5].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[5].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price inr">
+                                                        <i class="fa fa-inr"></i> 
+                                                        710
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[5].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[5].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price usd">
+                                                        <i class="fa fa-usd"></i> 
+                                                        10.6
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[5].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout6.tilesList[5].productTileDetails.productPriceOptions" class="ng-scope">
+                                                    <span class="price eur">
+                                                        <i class="fa fa-eur"></i> 
+                                                        9.39
+                                                    </span>
+                                                </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout6.tilesList[5].productTileDetails.productPriceOptions -->
+                                            </div>
+                                            <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    </div><!-- ngInclude:  --><div ng-include="" src="layout5" class="ng-scope"><div class="item-box-layout layout-5 ng-scope">
+                        <div class="wrapper row">
+                            <div class="span_6_of_12 col">
+                                <a href="category/HSCH018">
+                                    <div class="tile wide-full-tile category ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/tile/IMG_3884.jpg" src="assets/images/products/tile/IMG_3884.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">Paddy craft</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="span_6_of_12 col four-square">
+                                <div class="wide-partition">
+                                    <div class="span_6_of_12 col">
+                                        <a href="/product/HSPP116">
+                                            <div class="wide-quarter-tile tile product ">
+                                                <figure>
+                                                    <img alt="" ng-src="assets/images/products/116/HSIMG1/medium/medium.jpg" src="assets/images/products/116/HSIMG1/medium/medium.jpg">
+                                                </figure>
+                                                <div class="detail">
+                                                    <h4 class="ng-binding">Teracotta Agarbatti stand-HSTC019</h4>
+                                                    <div class="priceChooser">
+                                                        <!-- ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[1].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[1].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price inr">
+                                                                <i class="fa fa-inr"></i> 
+                                                                520
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[1].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[1].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price usd">
+                                                                <i class="fa fa-usd"></i> 
+                                                                7.76
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[1].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[1].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price eur">
+                                                                <i class="fa fa-eur"></i> 
+                                                                6.88
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[1].productTileDetails.productPriceOptions -->
+                                                    </div>
+                                                    <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="span_6_of_12 col">
+                                        <a href="/product/HSPP154">
+                                            <div class="wide-quarter-tile tile product ">
+                                                <figure>
+                                                    <img alt="" ng-src="assets/images/products/154/HSIMG1/medium/medium.jpg" src="assets/images/products/154/HSIMG1/medium/medium.jpg">
+                                                </figure>
+                                                <div class="detail">
+                                                    <h4 class="ng-binding">Dhokra Casting(Black) Rickshawa-HSDC015</h4>
+                                                    <div class="priceChooser">
+                                                        <!-- ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[2].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[2].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price inr">
+                                                                <i class="fa fa-inr"></i> 
+                                                                1520
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[2].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[2].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price usd">
+                                                                <i class="fa fa-usd"></i> 
+                                                                22.69
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[2].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[2].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price eur">
+                                                                <i class="fa fa-eur"></i> 
+                                                                20.11
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[2].productTileDetails.productPriceOptions -->
+                                                    </div>
+                                                    <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="span_6_of_12 col">
+                                        <a href="/product/HSPP171">
+                                            <div class="wide-quarter-tile tile product ">
+                                                <figure>
+                                                    <img alt="" ng-src="assets/images/products/171/HSIMG1/medium/medium.jpg" src="assets/images/products/171/HSIMG1/medium/medium.jpg">
+                                                </figure>
+                                                <div class="detail">
+                                                    <h4 class="ng-binding">Paddy Craft Welcome Jhaller-HSPC010</h4>
+                                                    <div class="priceChooser">
+                                                        <!-- ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[3].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[3].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price inr">
+                                                                <i class="fa fa-inr"></i> 
+                                                                460
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[3].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[3].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price usd">
+                                                                <i class="fa fa-usd"></i> 
+                                                                6.87
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[3].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[3].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price eur">
+                                                                <i class="fa fa-eur"></i> 
+                                                                6.08
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[3].productTileDetails.productPriceOptions -->
+                                                    </div>
+                                                    <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="span_6_of_12 col">
+                                        <a href="/product/HSPP126">
+                                            <div class="wide-quarter-tile tile product ">
+                                                <figure>
+                                                    <img alt="" ng-src="assets/images/products/126/HSIMG1/medium/medium.jpg" src="assets/images/products/126/HSIMG1/medium/medium.jpg">
+                                                </figure>
+                                                <div class="detail">
+                                                    <h4 class="ng-binding">Tracotta Turtel-HSTC029</h4>
+                                                    <div class="priceChooser">
+                                                        <!-- ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[4].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[4].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price inr">
+                                                                <i class="fa fa-inr"></i> 
+                                                                460
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[4].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[4].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price usd">
+                                                                <i class="fa fa-usd"></i> 
+                                                                6.87
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[4].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout5.tilesList[4].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price eur">
+                                                                <i class="fa fa-eur"></i> 
+                                                                6.08
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout5.tilesList[4].productTileDetails.productPriceOptions -->
+                                                    </div>
+                                                    <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div><!-- ngInclude:  --><div ng-include="" src="layout3" class="ng-scope"><div class="item-box-layout layout-3 ng-scope">
+                        <div class="wrapper row">
+                            <div class="span_6_of_12 col">
+                                <a href="category/HSCH007">
+                                    <div class="tile wide-full-tile category ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/tile/IMG_3511.jpg" src="assets/images/products/tile/IMG_3511.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">Palm Leaf Work</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="span_6_of_12 col">
+                                <div class="wide-partition">
+                                    <a href="category/HSCH020">
+                                        <div class="wide-half-tile tile category ">
+                                            <figure>
+                                                <img alt="" ng-src="assets/images/products/tile/IMG_3739.JPG" src="assets/images/products/tile/IMG_3739.JPG">
+                                            </figure>
+                                            <div class="detail">
+                                                <h4 class="ng-binding">Jute</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="category/HSCH019">
+                                        <div class="wide-half-tile tile category ">
+                                            <figure>
+                                                <img alt="" ng-src="assets/images/products/tile/IMG_3443.jpg" src="assets/images/products/tile/IMG_3443.jpg">
+                                            </figure>
+                                            <div class="detail">
+                                                <h4 class="ng-binding">Cushion</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div><!-- ngInclude:  --><div ng-include="" src="layout4" class="ng-scope"><div class="item-box-layout layout-4 ng-scope">
+                        <div class="wrapper row">
+                            <div class="span_6_of_12 col">
+                                <div class="span_6_of_12 col tall-partition">
+                                    <div class="span_12_of_12 col">
+                                        <a href="/product/HSPP201">
+                                            <div class="wide-quarter-tile tile product ">
+                                                <figure>
+                                                    <img alt="" ng-src="assets/images/products/201/HSIMG4/large/large.jpg" src="assets/images/products/201/HSIMG4/large/large.jpg">
+                                                </figure>
+                                                <div class="detail">
+                                                    <h4 class="ng-binding">Small Collage Bag-HSJB004</h4>
+                                                    <div class="priceChooser">
+                                                        <!-- ngRepeat: (key, priceValue) in tile.layout.layout4.tilesList[2].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout4.tilesList[2].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price inr">
+                                                                <i class="fa fa-inr"></i> 
+                                                                230
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout4.tilesList[2].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout4.tilesList[2].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price usd">
+                                                                <i class="fa fa-usd"></i> 
+                                                                3.43
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout4.tilesList[2].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout4.tilesList[2].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price eur">
+                                                                <i class="fa fa-eur"></i> 
+                                                                3.04
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout4.tilesList[2].productTileDetails.productPriceOptions -->
+                                                    </div>
+                                                    <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="span_12_of_12 col">
+                                        <a href="/product/HSPP174">
+                                            <div class="wide-quarter-tile tile product ">
+                                                <figure>
+                                                    <img alt="" ng-src="assets/images/products/174/HSIMG3/large/large.jpg" src="assets/images/products/174/HSIMG3/large/large.jpg">
+                                                </figure>
+                                                <div class="detail">
+                                                    <h4 class="ng-binding">HSCU001</h4>
+                                                    <div class="priceChooser">
+                                                        <!-- ngRepeat: (key, priceValue) in tile.layout.layout4.tilesList[3].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout4.tilesList[3].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price inr">
+                                                                <i class="fa fa-inr"></i> 
+                                                                456
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout4.tilesList[3].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout4.tilesList[3].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price usd">
+                                                                <i class="fa fa-usd"></i> 
+                                                                6.81
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout4.tilesList[3].productTileDetails.productPriceOptions --><div ng-repeat="(key, priceValue) in tile.layout.layout4.tilesList[3].productTileDetails.productPriceOptions" class="ng-scope">
+                                                            <span class="price eur">
+                                                                <i class="fa fa-eur"></i> 
+                                                                6.03
+                                                            </span>
+                                                        </div><!-- end ngRepeat: (key, priceValue) in tile.layout.layout4.tilesList[3].productTileDetails.productPriceOptions -->
+                                                    </div>
+                                                    <span class="availability">Availability: <span class="ng-binding">In stock</span></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="span_6_of_12 col tall-single">
+                                    <div class="tall-tile">
+                                        <a href="category/HSCH014">
+                                            <div class="wide-tall-tile tile category ">
+                                                <figure>
+                                                    <img alt="" ng-src="assets/images/products/tile/IMG_4043.jpg" src="assets/images/products/tile/IMG_4043.jpg">
+                                                </figure>
+                                                <div class="detail">
+                                                    <h4 class="ng-binding">Teracota</h4>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span_6_of_12 col">
+                                <a href="category/HSCH005">
+                                    <div class="tile wide-full-tile category ">
+                                        <figure>
+                                            <img alt="" ng-src="assets/images/products/tile/IMG_3504.jpg" src="assets/images/products/tile/IMG_3504.jpg">
+                                        </figure>
+                                        <div class="detail">
+                                            <h4 class="ng-binding">Chandua</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    </div></div>
+                    <script type="text/javascript" class="ng-scope">
+                    	var parent = $(".tileShuffle");
+                        var divs = parent.children();
+                        while (divs.length) {
+                            parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+                        }
+                    </script></div>
+                        </div>
+                    </div>
+
+                    <div class="shipping-wrap ng-scope">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="shipping">
+                                        <p><i class="fa fa-truck" aria-hidden="true" style="font-size: 1.8em;padding-right: 30px;"></i>
+                                        <span>FREE SHIPPING</span> Offered by HAASTIKA <sup>*</sup></p><a class="button" href="deliveryOptions">Learn more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="map_canvas" style="position: relative; overflow: hidden; background-color: rgb(229, 227, 223);" class="ng-scope"><div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0); will-change: transform;"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; position: absolute; left: 306px; top: 61px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 562px; top: 61px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 562px; top: -195px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 306px; top: -195px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 306px; top: 317px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 562px; top: 317px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 50px; top: 61px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 818px; top: 61px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 50px; top: 317px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 818px; top: -195px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 818px; top: 317px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 50px; top: -195px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 1074px; top: 61px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -206px; top: 61px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -206px; top: 317px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 1074px; top: -195px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -206px; top: -195px;"></div><div style="width: 256px; height: 256px; position: absolute; left: 1074px; top: 317px;"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 306px; top: 61px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 562px; top: 61px;"><canvas draggable="false" height="512" width="512" style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 562px; top: -195px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 306px; top: -195px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 306px; top: 317px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 562px; top: 317px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 50px; top: 61px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 818px; top: 61px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 50px; top: 317px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 818px; top: -195px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 818px; top: 317px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 50px; top: -195px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 1074px; top: 61px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -206px; top: 61px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -206px; top: 317px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 1074px; top: -195px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -206px; top: -195px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 1074px; top: 317px;"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="position: absolute; left: 306px; top: 61px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24192!3i14497!4i256!2m3!1e0!2sm!3i363031225!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=119436" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 562px; top: 61px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24193!3i14497!4i256!2m3!1e0!2sm!3i363031165!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=17111" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 562px; top: -195px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24193!3i14496!4i256!2m3!1e0!2sm!3i363031993!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=114182" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 306px; top: -195px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24192!3i14496!4i256!2m3!1e0!2sm!3i363031225!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=80381" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 306px; top: 317px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24192!3i14498!4i256!2m3!1e0!2sm!3i363032977!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=15331" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 562px; top: 317px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24193!3i14498!4i256!2m3!1e0!2sm!3i363032773!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=62901" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 50px; top: 61px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24191!3i14497!4i256!2m3!1e0!2sm!3i363031225!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=17488" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 818px; top: 61px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24194!3i14497!4i256!2m3!1e0!2sm!3i363031969!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=95994" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 50px; top: 317px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24191!3i14498!4i256!2m3!1e0!2sm!3i363032977!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=44454" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 818px; top: -195px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24194!3i14496!4i256!2m3!1e0!2sm!3i363032809!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=750" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 818px; top: 317px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24194!3i14498!4i256!2m3!1e0!2sm!3i363031225!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=100245" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 50px; top: -195px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24191!3i14496!4i256!2m3!1e0!2sm!3i363031225!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=109504" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 1074px; top: 61px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24195!3i14497!4i256!2m3!1e0!2sm!3i363032894!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=17067" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -206px; top: 61px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24190!3i14497!4i256!2m3!1e0!2sm!3i363032918!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=74508" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -206px; top: 317px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24190!3i14498!4i256!2m3!1e0!2sm!3i363032977!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=73577" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 1074px; top: -195px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24195!3i14496!4i256!2m3!1e0!2sm!3i363032894!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=109083" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: -206px; top: -195px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24190!3i14496!4i256!2m3!1e0!2sm!3i363032918!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=35453" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="position: absolute; left: 1074px; top: 317px; transition: opacity 200ms ease-out;"><img src="https://maps.googleapis.com/maps/vt?pb=!1m5!1m4!1i15!2i24195!3i14498!4i256!2m3!1e0!2sm!3i363031225!3m14!2sen-US!3sUS!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy50OjV8cC5zOi0yMDB8cC5sOjE1NXxwLnY6b24scy50OjJ8cC5zOi0xMDB8cC5sOjUxfHAudjpzaW1wbGlmaWVkLHMudDo0OXxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6NTB8cC5zOi0xMDB8cC5sOjMwfHAudjpvbixzLnQ6NTF8cC5zOi0xMDB8cC5sOjQwfHAudjpvbixzLnQ6NHxwLnM6LTEwMHxwLnY6c2ltcGxpZmllZCxzLnQ6MTh8cC52Om9mZixzLnQ6MTl8cC52Om9mZixzLnQ6MjB8cC52Om9uLHMudDo2fHMuZTpsfHAudjpvbnxwLmw6LTI1fHAuczotMTAwLHMudDo2fHMuZTpnfHAuaDojYjNkOWZmfHAubDotMjV8cC5zOi05Nw!4e0!5m1!5f2&amp;token=71122" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 2; width: 100%; height: 100%; transition-duration: 0.3s; opacity: 0; display: none;" class="gm-style-pbc"><p class="gm-style-pbt">Use two fingers to move the map</p></div><div style="position: absolute; left: 0px; top: 0px; z-index: 3; width: 100%; height: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 4; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps?ll=20.285544,85.795568&amp;z=15&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/google_white5_hdpi.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div><div style="padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 256px; height: 148px; position: absolute; left: 490px; top: 160px; background-color: white;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;">Map data ©2016 Google</div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 162px; bottom: 0px; width: 114px;"><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer; display: none;">Map Data</a><span>Map data ©2016 Google</span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">Map data ©2016 Google</div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; -webkit-user-select: none; height: 14px; line-height: 14px; position: absolute; right: 95px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of Use</a></div></div><div style="width: 25px; height: 25px; overflow: hidden; display: none; margin: 10px 14px; position: absolute; top: 0px; right: 0px;"><img src="https://maps.gstatic.com/mapfiles/api-3/images/sv9.png" draggable="false" class="gm-fullscreen-control" style="position: absolute; left: -52px; top: -86px; width: 164px; height: 175px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_new" title="Report errors in the road map or imagery to Google" href="https://www.google.com/maps/@20.285544,85.795568,15z/data=!10m1!1e1!12b1?source=apiv3&amp;rapsrc=apiv3" style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">Report a map error</a></div></div><div class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom" draggable="false" controlwidth="0" controlheight="0" style="margin: 10px; -webkit-user-select: none; position: absolute; display: none; bottom: 14px; right: 0px;"><div class="gmnoprint" controlwidth="28" controlheight="0" style="display: none; position: absolute;"><div title="Rotate map 90 degrees" style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; cursor: pointer; display: none; background-color: rgb(255, 255, 255);"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl4_hdpi.png" draggable="false" style="position: absolute; left: -141px; top: 6px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gm-tilt" style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; top: 0px; cursor: pointer; background-color: rgb(255, 255, 255);"><img src="https://maps.gstatic.com/mapfiles/api-3/images/tmapctrl4_hdpi.png" draggable="false" style="position: absolute; left: -141px; top: -13px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div></div></div>
+                </noscript>
+            </div>
             <!-- Application view ends here -->
 
         </div>
@@ -238,13 +896,13 @@
                                 <h3>Sitemap</h3>
                                 <ul>
                                     <li>
-                                        <a href="#/aboutus">About Us</a>
+                                        <a href="aboutus">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="#/contact">Reach Us</a>
+                                        <a href="contact">Reach Us</a>
                                     </li>
                                     <li>
-                                        <a href="#/register">Subscribe Here</a>
+                                        <a href="register">Subscribe Here</a>
                                     </li>
                                 </ul>
                             </div>
@@ -254,16 +912,16 @@
                                 <h3>Information</h3>
                                 <ul>
                                     <li>
-                                        <a href="#/returnPolicy">Return and Refund</a>
+                                        <a href="returnPolicy">Return and Refund</a>
                                     </li>
                                     <li>
-                                        <a href="#/deliveryOptions">Delivery Information</a>
+                                        <a href="deliveryOptions">Delivery Information</a>
                                     </li>
                                     <li>
-                                        <a href="#/privacyPolicy">Privacy Policy</a>
+                                        <a href="privacyPolicy">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a href="#/termsCondition">Terms & Conditions</a>
+                                        <a href="termsCondition">Terms & Conditions</a>
                                     </li>
                                 </ul>
                             </div>
@@ -326,7 +984,8 @@
             </div>
         </div>
     </div>
-
+    
+    <div class="screen"></div>
 
 
     <!-- jQuery Scripts -->

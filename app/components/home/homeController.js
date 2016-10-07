@@ -14,6 +14,7 @@ angular.module('eCommerce')
         .then(function(data) {
           if(data.success === undefined || data.success) {
             $rootScope.navigation = data.pageNavigation.categories;
+            window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
             $scope.$broadcast('dataloaded');
           } else {
             // Else pick local JSON

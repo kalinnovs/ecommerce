@@ -5,6 +5,7 @@ angular.module('eCommerce')
     function ($scope, $rootScope, $location, AuthenticationService) {
         // reset login status
         AuthenticationService.ClearCredentials();
+        $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
 
         this.login = function () {
             $scope.dataLoading = true;

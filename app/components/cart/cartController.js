@@ -1,34 +1,32 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CartCtrl', function($scope, $rootScope, $timeout, CartService, UserService, SERVICE_URL, BASE_URI) {
-        var cart = this;
-
-        var data = $.param({
-            json: JSON.stringify({
-                products: [{"productId": 2}]
-            })
-        });
-
-        UserService.Put('http://haastika.com/HaastikaDataService/cart/', data)
-            .then(function(data) {
-                debugger;
-            })
-            .catch(function(error) {
-                //
-            })
-            .finally(function() {
-                //
-            })
-            // debugger;
-
-        // Adding cartItem array to the cart scope
-        var cartArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
-        $.each(cartArray, function(key, val) {
-            val["quantity"] = 1;
-        });
-        $scope.cartItems = cartArray;
-
+    .controller('CartCtrl', function($scope, $http,  $rootScope, $timeout, CartService, UserService, SERVICE_URL, PRODUCTDATA_URL, BASE_URI) {
+        var cart = this,
+        responseData;
+        
+        // Read Cart Array and pass to URL
+        var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
+        var objectToSerialize={'products':cartArray};
+        
+        $http({
+            method: 'POST',
+            url: PRODUCTDATA_URL + '/cart/products',
+            data: JSON.stringify(objectToSerialize),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(response) {
+            responseData = response.data;
+            $.each(responseData, function(key, val) {
+                val["quantity"] = 1;
+            });
+            $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
+            $scope.cartItems = (responseData) ? responseData : [];
+        }, function errorCallback(response) {
+            console.log("Error in saving.");
+        });    
+        
         // Cart Configuration
         $scope.cartConfig = {
             "shippingCost": 0,
@@ -38,9 +36,8 @@ angular.module('eCommerce')
 
         // Injecting Math into cart scope
         $scope.Math = window.Math;
-
         $(document).on("keyup", ".item-quantity", this.getTotal);
-
+        
         $scope.getTotal = function() {
             $scope.currency = $("body").attr("data-currency");
             var cartItems = this.cartItems,
@@ -48,7 +45,7 @@ angular.module('eCommerce')
             priceObj,
             currency = $("body").attr("data-currency");
             $(cartItems).each(function(i, j) {
-                priceObj = j.priceArray.filter(function(key, val) {
+                priceObj = j.productPriceOptions.filter(function(key, val) {
                     return key.currencyCode === currency.toUpperCase();
                 });
                 totalCost += priceObj[0].price * j.quantity;
@@ -83,6 +80,117 @@ angular.module('eCommerce')
             // $scope.cartItems = JSON.stringify(itemList);
             event.preventDefault();
         };
+        
+        $scope.saveCart = function(event) {
+            debugger;
+            // Read Cart Array and pass to URL
+            var cartArray = this.cartItems;
+            $.each(cartArray, function(key, val) {
+                val["unitPrice"] = val["productPriceOptions"][0].price;
+            });
+            var objectToSerialize={'lineItems':cartArray, "currencyId":1};
+            
+            $http({
+                method: 'POST',
+                url: SERVICE_URL + '/cart/save',
+                data: JSON.stringify(objectToSerialize),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function successCallback(response) {
+                debugger;
+                
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+            }); 
+        };
+        
+        $scope.sendCartToMail = function(event) {
+            
+            // Open Overlay
+            // this.openOverlay();
+            // Read Cart Array and pass to URL
+            var cartArray = this.cartItems;
+            var selectedCurrency = cartArray[0].productPriceOptions.filter(function(i, j) {
+                return (i.currencyCode === $("body").data("currency").toUpperCase());
+            });
+            
+            $.each(cartArray, function(key, val) {
+                val["unitPrice"] = selectedCurrency[0].price;
+            });
+            var objectToSerialize={'lineItems':cartArray, "currencyId":selectedCurrency[0].currencyId};
+            objectToSerialize["total"] = this.getTotal();
+            objectToSerialize["shipping"] = this.cartConfig.shippingCost;
+            objectToSerialize["tax"] = this.cartConfig.tax;
+            objectToSerialize["discount"] = this.cartConfig.discount;
+            objectToSerialize["subTotal"] = this.subTotal();
+            objectToSerialize["firstName"] = 'Pritish';
+            objectToSerialize["lastName"] = 'Dwibedi';
+            objectToSerialize["emailId"] = 'pdwibedi@gmail.com';
+            objectToSerialize["contactNo"] = '123423433';
+            
+            $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/cart/reserve',
+                data: JSON.stringify(objectToSerialize),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function successCallback(response) {
+                debugger;
+                
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+            }); 
+        };
+        
+        $scope.updateCart = function(event) {
+            // Read Cart Array and pass to URL
+            var cartArray = this.cartItems;
+            $.each(cartArray, function(key, val) {
+                val["unitPrice"] = val["productPriceOptions"][0].price;
+            });
+            var objectToSerialize={'lineItems':cartArray, "currencyId":1};
+            
+            $http({
+                method: 'POST',
+                url: SERVICE_URL + '/cart/update',
+                data: JSON.stringify(objectToSerialize),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function successCallback(response) {
+                debugger;
+                
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+            }); 
+        };
+        
+        $scope.openOverlay = function() {
+            $(".screen").show();
+            $(".modalComponent").css("top", $(document).scrollTop() + ($(window).height() - $(".modalComponent").outerHeight()) / 2)
+        };
+        
+        $scope.closeOverlay = function() {
+            $(".modalComponent").css("top", "-400px");
+            setTimeout(function(){
+                $(".screen").hide();
+            }, 400);
+        };
+        
+        $(".screen").click(function() {
+            $(".modalComponent").css("top", "-400px");
+            setTimeout(function(){
+                $(".screen").hide();
+            }, 400);
+        });
+        
+        $(window).on("scroll", function() {
+            if(parseInt($(".modalComponent").css("top")) > 0) {
+                $(".modalComponent").css("top", $(document).scrollTop() + ($(window).height() - $(".modalComponent").outerHeight()) / 2);
+            }
+        })
 
         $timeout(function() {
             window.dataLoaded = true;

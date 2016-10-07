@@ -1,34 +1,36 @@
 <div class="container">
     <div class="cart-page">
         <h1>Your Cart Items :</h1>
-        <ul class="list-items">
+        <ul class="list-items" ng-hide="cartItems.length === 0">
             <li ng-repeat="(key, value) in cartItems" class="item" data-index="{{key}}">
                 <div class="item-details">
                     <figure>
-                        <img src="{{value.image[0].baseImagePath}}" />
+                        <img ng-src="{{value.productImage.baseImagePath}}" />
                     </figure>
                     <div class="part-details">
-                        <h3>{{value.partNumber}}</h3>
-                        <div class="item-price priceChooser">
-                            <div ng-repeat="(key, priceValue) in value.priceArray">
-                                <span class="price {{priceValue.currencyCode | lowercase}}">
-                                    <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>
-                                    {{priceValue.price | number:2}}
-                                </span>
+                        <h3>{{value.productName}}</h3>
+                        <div class="alignRight">
+                            <div class="item-price priceChooser">
+                                <div ng-repeat="(key, priceValue) in value.productPriceOptions">
+                                    <span class="price {{priceValue.currencyCode | lowercase}}">
+                                        <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>
+                                        {{priceValue.price | number:2}}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <input type="text" class="item-quantity" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" />
-                        <div class="item-calculated-price priceChooser">
-                            <div ng-repeat="(key, priceValue) in value.priceArray">
-                                <span class="price {{priceValue.currencyCode | lowercase}}">
-                                    <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>
-                                    {{priceValue.price * value.quantity | number:2}}
-                                </span>
+                            <input type="text" class="item-quantity" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" />
+                            <div class="item-calculated-price priceChooser">
+                                <div ng-repeat="(key, priceValue) in value.priceArray">
+                                    <span class="price {{priceValue.currencyCode | lowercase}}">
+                                        <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>
+                                        {{priceValue.price * value.quantity | number:2}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="part-desciption">
-                        <p>{{value.description}}</p>
+                        <p>{{value.productId}}</p>
                         <div class="controls">
                             <a href="javascript:void(0);" ng-click="removeItem($event)" title="Delete Item">
                                 <span class="fa fa-trash"></span>delete item</a>
@@ -37,7 +39,10 @@
                 </div>
             </li>
         </ul>
-        <div class="cart-summary">
+        <div ng-if="cartItems.length === 0">
+            <h2>No items added in your cart !!!</h2>
+        </div>
+        <div class="cart-summary" ng-hide="cartItems.length === 0">
             <div class="cart-total">
                 <label>Cart Total: </label>
                 <span><i class="fa fa-{{currency | lowercase}}"></i> {{getTotal() | number:2}}</span>
@@ -55,13 +60,55 @@
                 <label>Sub Total: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{subTotal() | number:2}}</span>
             </div>
         </div>
-        <div class="cart-extra">
+        <div class="cart-extra" ng-hide="cartItems.length === 0">
             <div class="extra-links">
                 <ul>
                     <li><a href="#/home">Continue back for shopping</a></li>
                 </ul>
             </div>
-            <button type="button" class="btn btn-primary">Checkout</button>
+            <!-- <button type="button" ng-click="saveCart($event)" class="btn btn-primary saveCart">Checkout</button> -->
+            <button type="button" ng-click="sendCartToMail($event)" class="btn btn-primary saveCart">Send Request</button>
         </div>
     </div>
+</div>
+<div class="modalComponent overlay">
+    <a href="javascript:void(0);" class="fa fa-times overlay-close" ng-click="closeOverlay()" title="Close"></a>
+    <div class="response" ng-if="register.subscribedSuccesfully || register.subscribedFailed">
+        <div class="bg-success" ng-if="register.subscribedSuccesfully">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            <p>{{register.pushNotification}}</p>
+        </div>
+        <div class="bg-danger" ng-if="register.subscribedFailed">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            <p>{{register.pushNotification}}</p>
+        </div>
+    </div>
+    <h3>Enter your : </h3>
+    <form name="form" ng-submit="register.register()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+            <label for="Email">First name</label>
+            <input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name" ng-model="register.user.firstName" required />
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+            <label for="username">Last name</label>
+            <input type="text" name="lastName" id="Text1" class="form-control" placeholder="Last Name" ng-model="register.user.lastName" required />
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.Email.$dirty && form.Email.$error.required }">
+            <label for="Email">Email</label>
+            <input type="email" name="Email" id="Email" class="form-control" placeholder="Email Address" ng-model="register.user.emailId" required />
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.Mobile.$dirty && form.Mobile.$error.required }">
+            <label for="Mobile">Mobile</label>
+            <input type="tel" name="Mobile" id="Mobile" class="form-control" placeholder="Cell Number" ng-required="number" ng-model="register.user.contactNo" required />
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || register.dataLoading" class="btn btn-primary">Register</button>
+            <img ng-if="register.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            
+        </div>
+    </form>
 </div>

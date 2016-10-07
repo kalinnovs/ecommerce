@@ -9,7 +9,8 @@ angular.module('eCommerce')
     // AboutService.GetAll( BASE_URI + 'eCommerce/aboutUs.json')
     AboutService.getFromURL( SERVICE_URL + '/aboutus')
         .then(function(data) {
-          $rootScope.navigation = data.pageNavigation.categories; 
+          $rootScope.navigation = data.pageNavigation.categories;
+          window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
           $scope.htmlDescription = data.content;
           $scope.$broadcast('dataloaded');
         })

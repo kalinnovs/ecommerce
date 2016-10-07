@@ -11,6 +11,7 @@ angular.module('eCommerce')
         .then(function(data) {
           // debugger;
           subscriber.data = data;
+          $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
           // $scope.$broadcast('dataloaded');
         })
         .catch(function(error) {

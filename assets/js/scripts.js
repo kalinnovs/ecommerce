@@ -51,14 +51,16 @@ function RaiseMyEvent(id, oldVal, newVal) {
 };
 
 function createMiniKart() {
+    var imagePath;
     if (window.itemsArray.length > 0) {
         var ul = document.createElement("ul");
         for (var i = 0; i < window.itemsArray.length; i++) {
             if(i === 4) {
                 return;
             }
+            imagePath = (window.itemsArray[i].image) ? window.itemsArray[i].image[0].thumbImagePath : '';
             var li = document.createElement("li");
-            li.innerHTML = "<div class='wrapper'><figure><img src='" + window.itemsArray[i].image[0].thumbImagePath + "' /></figure><div class='details'><h3>" + window.itemsArray[i].partNumber + "</h3><span class='price'>" + window.itemsArray[i].price + "</span></div></div>";
+            li.innerHTML = "<div class='wrapper'><figure><img src='" + window.itemsArray[i].image[0].thumbImagePath + "' /></figure><div class='details'><h3>" + window.itemsArray[i].partNumber + "</h3><span class='price'>" + $("body").data("currency") + " " +window.itemsArray[i].price + "</span> <span class='quantity'> x 1</span></div></div>";
             ul.appendChild(li);
         }
         $("#miniKart").html("").append(ul);
@@ -147,10 +149,10 @@ $(document).ready(function(e) {
 
         $(document).on("click", ".mobile .desktop-nav a.mobileNavBtn", function(e) {
             e.preventDefault();
-            if ($(this).next("ul").css("display") == undefined || $(this).next("ul").css("display") == "none") {
-                $(this).next("ul").show();
+            if ($(this).siblings("ul").css("display") == undefined || $(this).siblings("ul").css("display") == "none") {
+                $(this).siblings("ul").show();
             } else {
-                $(this).next("ul").hide();
+                $(this).siblings("ul").hide();
             }
         });
 

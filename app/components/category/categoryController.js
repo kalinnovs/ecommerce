@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('categoryCtrl', function($scope, $rootScope, $timeout, $sce, CategoryService, UserService, $stateParams, SERVICE_URL, BASE_URI) {
+    .controller('categoryCtrl', function($scope, $rootScope, $timeout, $sce, CategoryService, UserService, $stateParams, SERVICE_URL, PRODUCTDATA_URL, BASE_URI) {
         var cat = this;
         var scoper = $scope;
 
@@ -11,6 +11,7 @@ angular.module('eCommerce')
                 // $rootScope.navigation.selectedCategory = data.categoryDetails.selectedCategory.partNumber;
                 $scope.iterateThrough = 5;
                 $rootScope.navigation = data.pageNavigation.categories;
+                window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
                 $scope.$broadcast('dataloaded');
                 // $scope.htmlDescription = data.productDescription;
             })

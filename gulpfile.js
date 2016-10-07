@@ -16,7 +16,6 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync');
 
 
-
 // Clean build folders
 gulp.task('clean', function() {
   return del(['dist/build/*']);
