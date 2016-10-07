@@ -8,7 +8,7 @@ angular.module('eCommerce')
         // debugger;
 
         // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
-        
+        $(".progress").hide();
         this.register = function() {
             
             /* Real Time Service STARTS */

@@ -26,7 +26,11 @@ angular.module('eCommerce')
     }
 
     service.getFromURL = function(url) {
-        return $http.get(url).then(service.extract);
+        // return $http.get(url).then(service.extract);
+        return $http({
+            method: 'GET',
+            url: url
+        }).then(service.extract);
     }
 
 

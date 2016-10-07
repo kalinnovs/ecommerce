@@ -71,6 +71,9 @@ angular.module('eCommerce')
         if(productRootCategoryId){
             $scope.getSubCategories(productRootCategoryId);
         }
+        $scope.categoryMenuImage = null;		
+        $scope.categoryBannerImage = null;		
+        $scope.categoryTileImage = null;
     };
 
     $scope.addNode = function(nodeType,node, productCategoryId, productRootCategoryId){
@@ -171,6 +174,7 @@ angular.module('eCommerce')
 
     $scope.uploadCatalogImage = function() {
         var imageData = {};
+        $scope.imgLoading = true;
 
         if($scope.categoryMenuImage || $scope.categoryBannerImage || $scope.categoryTileImage){
             imageData.categoryId = $scope.node.categoryId;
@@ -190,7 +194,7 @@ angular.module('eCommerce')
     };
 
     $scope.categoryImageUploadSucess = function(resp) {
-        
+        $scope.imgLoading = false;
         $scope.categoryMenuImage = null;
         $scope.categoryBannerImage = null;
         $scope.categoryTileImage = null;
@@ -198,7 +202,7 @@ angular.module('eCommerce')
 
     $scope.uploadProductImage = function() {
         var imageData = {};
-
+        $scope.imgLoading = true;
         if($scope.baseImage){
             imageData.mediumImage = $scope.baseImage;
         }
@@ -219,19 +223,24 @@ angular.module('eCommerce')
     };
 
     $scope.productImageUploadSucess = function(resp) {
-        
+        $scope.node.productImageGallery.push(resp.data);
         $scope.baseImage = null;
         $scope.thumbImage = null;
         $scope.largeImage = null;
         $scope.xlargeImage = null;
+        $scope.imgLoading = false;		
+        $('.message').fadeIn(500).fadeOut(3000);
     }
 
     $scope.deleteProductImage = function(imageId){
         productTreeService.deleteNode("/admin/deleteProductImage/"+imageId, $scope.productImageDeleteSucess)
     }
-
-    $scope.productImageDeleteSucess = function() {
+    
+    $scope.productImageDeleteSucess = function(resp) {
+        var obj = _.find($scope.node.productImageGallery, {
+            'productImageId':resp.data.id
+        });		
+        $scope.node.productImageGallery.splice($scope.node.productImageGallery.indexOf(obj),1);		
         $('.message').fadeIn(500).fadeOut(3000);
     }
 }]);
-

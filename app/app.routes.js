@@ -3,8 +3,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
   // .constant('SERVICE_URL', '/HaastikaWebService')
-  .constant('SERVICE_URL', '/HaastikaWebService')
-  .constant('PRODUCTDATA_URL', '/HaastikaDataService')
+  .constant('SERVICE_URL', 'http://haastika.com:8080/HaastikaWebService')
+  .constant('PRODUCTDATA_URL', 'http://haastika.com:8080/HaastikaDataService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
@@ -183,6 +183,14 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
     $httpProvider.defaults.withCredentials = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    $httpProvider.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript';
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
+//    $httpProvider.defaults.headers.post['Access-Control-Max-Age'] = '1728000';
+//    $httpProvider.defaults.headers.common['Access-Control-Max-Age'] = '1728000';
+//    $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript';
+    $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+    $httpProvider.defaults.useXDomain = true;
 
   })
   .run(function run($rootScope, $location, $http, $cookieStore) {
