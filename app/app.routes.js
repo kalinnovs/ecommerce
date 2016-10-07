@@ -7,7 +7,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
   .constant('PRODUCTDATA_URL', 'http://haastika.com:8080/HaastikaDataService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
-  .config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -191,6 +191,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
 //    $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript';
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
     $httpProvider.defaults.useXDomain = true;
+    
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
 
   })
   .run(function run($rootScope, $location, $http, $cookieStore) {
