@@ -11,7 +11,7 @@ angular.module('eCommerce')
                 '<div id="miniKart"></div>' +
                 '<p class="manyItems">Please go to cart page to check the list</p>' +
                 '<button type="button" class="btn btn-primary checkoutLink">Checkout</button>' +
-                '<p><a href="#/cart" title="View Cart">View Cart</a></p>' +
+                '<p><a href="cart" title="View Cart">View Cart</a></p>' +
                 '<p><a href="javascript:void(0);" title="Orders">Orders</a></p>' +
                 '<p><a href="javascript:void(0);" title="Accounts">Accounts</a></p>' +
                 '<p><a href="javascript:void(0);" title="Sign in">Sign in</a></p>' +
