@@ -11,7 +11,7 @@ angular.module('eCommerce')
                 '<div id="miniKart"></div>' +
                 '<p class="manyItems">Please go to cart page to check the list</p>' +
                 '<button type="button" class="btn btn-primary checkoutLink">Checkout</button>' +
-                '<p><a href="#/cart" title="View Cart">View Cart</a></p>' +
+                '<p><a href="cart" title="View Cart">View Cart</a></p>' +
                 '<p><a href="javascript:void(0);" title="Orders">Orders</a></p>' +
                 '<p><a href="javascript:void(0);" title="Accounts">Accounts</a></p>' +
                 '<p><a href="javascript:void(0);" title="Sign in">Sign in</a></p>' +
@@ -20,7 +20,7 @@ angular.module('eCommerce')
                 attrs.$observe('partNumberMap', function (newValue, oldValue) {
                     if (newValue) {
                         if (window.itemsArray.length > 0) {
-                            var responseData;
+                            var responseData, img;
                             // Read Cart Array and pass to URL
                             var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
                             var jsonData=angular.toJson(cartArray);
@@ -35,7 +35,6 @@ angular.module('eCommerce')
                                     'Content-Type': 'application/json'
                                 }
                             }).then(function successCallback(data) {
-                                debugger;
                                 responseData = data.data;
                             }, function errorCallback(response) {
                                 console.log("Error in saving.");
@@ -46,9 +45,9 @@ angular.module('eCommerce')
                                 if(i === 4) {
                                     return;
                                 }
+                                img = (window.itemsArray[i].image[0]) ? window.itemsArray[i].image[0].thumbImagePath : '';
                                 var li = document.createElement("li");
-                                    li.innerHTML = "<div class='wrapper'><figure><img src='" +
-                                    window.itemsArray[i].image[0].thumbImagePath +
+                                    li.innerHTML = "<div class='wrapper'><figure><img src='" + img +
                                     "' /></figure><div class='details'><h3>" +
                                     window.itemsArray[i].partNumber +
                                     "</h3><span class='price'>INR "+ window.itemsArray[i].price + "</span> <span class='quantity'> x 1</span></div></div>";

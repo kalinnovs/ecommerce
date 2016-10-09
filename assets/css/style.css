@@ -1458,6 +1458,7 @@ header a.active, header a:focus {
     display: inline-block;
     margin-top: 10px;
     text-decoration: none;
+    position: relative;
 }
 .wide-partition a:first-child {
     margin-top: 0px
@@ -1669,17 +1670,17 @@ header a.active, header a:focus {
 .category .categoryTree.show+ .spacingAdjust .wide-quarter-tile {
     /*height: 245px*/
 }
-.category .productItem {
+.productItem {
     display: block;
     position: relative;
 }
-.category .productItem .add-to-cart {
+.add-to-cart {
     display: block;
     position: absolute;
     right: 10px;
     top: 10px;
 }
-.category .productItem .add-to-cart button {
+.add-to-cart button {
     font-size: 24px;
     border: 0;
     background: none;
@@ -1688,7 +1689,7 @@ header a.active, header a:focus {
 .category .productItem:hover .fa, .category .productItem:hover .price {
     color: #f71919;
 }
-.category .productItem:hover .add-to-cart .fa-cart-plus:before {
+.productItem:hover .add-to-cart .fa-cart-plus:before {
     color: #33adff;
 }
 @keyframes slideRight {
@@ -2866,7 +2867,7 @@ footer .back-top .pageCounter {
 }
 .cart-page .cart-extra .extra-links a {
     text-decoration: none;
-    line-height: 32px;
+    line-height: 34px;
     display: inline-block;
 }
 .cart-page .cart-extra .extra-links a:hover {

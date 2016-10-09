@@ -84,19 +84,26 @@ gulp.task("watch", function(){
 gulp.task('connect-sync', function() {
   connectPHP.server({}, function (){
     browserSync({
-      proxy: '127.0.0.1:8000'
+      proxy: '127.0.0.1:8000',
+      ghostMode: false
     });
   });
  
-  gulp.watch('**/*.php').on('change', function () {
-    browserSync.reload();
-  });
-
+  // gulp.watch('**/*.php').on('change', function () {
+  //   browserSync.reload();
+  // });
 });
 
-// Connect Server Setup
+
 gulp.task('connect', function() {
-    // connect.server();
+  connect.server({
+    port: 3033
+  });
+});
+
+
+gulp.task('connect', function() {
+    connect.server();
     // connectPHP.server();
 });
 // Default task

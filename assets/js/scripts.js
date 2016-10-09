@@ -56,7 +56,7 @@ function createMiniKart() {
         var ul = document.createElement("ul");
         for (var i = 0; i < window.itemsArray.length; i++) {
             if(i === 4) {
-                return;
+                break;
             }
             imagePath = (window.itemsArray[i].image) ? window.itemsArray[i].image[0].thumbImagePath : '';
             var li = document.createElement("li");

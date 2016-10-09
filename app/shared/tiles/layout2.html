@@ -1,7 +1,7 @@
 <div class="item-box-layout layout-2">
     <div class="wrapper row">
         <div class="span_6_of_12 col" ng-repeat="(key, value) in tile.layout.layout2.tilesList">
-            <a href="#/{{value.tileCategory.categoryDetailsURL}}">
+            <a href="{{value.tileCategory.categoryDetailsURL}}">
                 <div class="tile wide-full-tile {{value.tileType | lowercase}} {{value.imageBackground}}">
                     <figure>
                         <img alt="" ng-src="{{value.tileCategory.tileImagePath}}">
