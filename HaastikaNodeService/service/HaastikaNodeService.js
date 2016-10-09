@@ -4,6 +4,7 @@ var app = express();
 var session = require('express-session');
 var db = require("../dataaccess/DataConnection");
 var _ = require("underscore");
+var emailProvider = require('../emailService/emailService');
 
 app.use(session({
   secret: 'keyboard cat',
@@ -27,19 +28,32 @@ app.get('/addToCart/:productPartNumber', function(req, res, next){
     res.end( "Product ... " + req.session.products);
 });
 
+var setHeader = function(req, res){
+    var responseSettings = {
+        "AccessControlAllowOrigin": req.headers.origin,
+        "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
+        "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
+        "AccessControlAllowCredentials": true
+    };
+    res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
+    res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
+    res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
+    res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
+};
+
 app.get('/cart', function(req, res, next){
     var sql;
     var cartItems = [];
     var item;
+
+    setHeader(req, res);
 
     if(req.session.products){
         sql = "Select p.PRODUCT_ID, p.PRODUCT_NAME, pc.CURRENCY_ID, cu.CURRENCY_CODE, pc.PRICE, pm.BASE_IMAGE_PATH from product as p " + 
               "join product_price as pc on p.product_id = pc.product_id " +
               "join product_image as pm on p.product_id = pm.product_id " +
               "join currency as cu on cu.currency_id = pc.CURRENCY_ID " +
-              "where p.product_id IN (" + req.session.products + ")";
-
-        // sql = sql + " WHERE PRODUCT_ID IN (" + req.session.products + ")";
+              "where p.product_id in (" + req.session.products + ") " ;
 
         db.query(sql, function(err, rows){
             if(err) throw err;
@@ -73,12 +87,11 @@ app.get('/cart', function(req, res, next){
                 cartItems.push(item);
             });
             
-            // console.log(rows);
-
             res.json({"lineItems" : cartItems});
         });
     } else {
-      res.end('Empty Cart.');
+        res.end('Empty Cart.');
+        // emailProvider.emailProvider.sendMail();
     }
     
 });
