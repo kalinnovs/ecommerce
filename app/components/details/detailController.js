@@ -7,7 +7,7 @@ angular.module('eCommerce')
 
     // DetailService.getFromURL( BASE_URI + '/eCommerce/productDetails.json')
     // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
-    DetailService.getFromURL( PRODUCTDATA_URL + '/product/'+$stateParams.id)
+    DetailService.getFromURL( SERVICE_URL + '/product/'+$stateParams.id)
         .then(function(data) {
             $scope.data = data.productDetails;
             if(data.pageNavigation) {

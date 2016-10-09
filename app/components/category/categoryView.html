@@ -1,9 +1,9 @@
 <!-- Content -->
 <div class="container">
 	<ul id="breadcrumbs">
-		<li><a href="#/home" class="first">Home</a></li>
+		<li><a href="home" class="first">Home</a></li>
 		<li ng-repeat="(key, value) in cat.data.breadcrumb">
-			<a href="#/{{value.linkUrl}}" ng-class="{'current':$last}">{{value.displayText}}</a>
+			<a href="{{value.linkUrl}}" ng-class="{'current':$last}">{{value.displayText}}</a>
 		</li>
 	</ul>
 	<div class="category">
@@ -38,7 +38,7 @@
 						<ul>
 							<li ng-repeat="(key, value) in cat.data.filterCategories">
 								<i class="fa fa-angle-double-right" aria-hidden="true"></i>
-								<a href="#/{{value.categoryDetailsURL}}">{{value.categoryName}}</a>
+								<a href="{{value.categoryDetailsURL}}">{{value.categoryName}}</a>
 							</li>
 						</ul>
 					</div>
@@ -47,7 +47,7 @@
 					<div ng-hide="cat.data.categoryAttributes">
 						<div class="span_3_of_12 col" ng-repeat="(key, value) in cat.data.productsList">
 							<div class="newRow" ng-if="$index !=0 && $index % 4 == 0"></div>
-							<a href="#{{value.productDetailsURL}}" class="productItem">
+							<a href="{{value.productDetailsURL}}" class="productItem">
 								<div class="wide-quarter-tile tile">
 									<figure>
 										<img alt="" ng-src="{{value.productImageGallery[0].baseImagePath}}">
@@ -80,7 +80,7 @@
 						<div class="span_12_of_12 col categoryBlock" ng-repeat="(key, subC) in cat.data.categoryAttributes.subCategoryList">
 							<div ng-repeat="(key, productItem) in subC.productsList | filter:query | limitTo:iterateThrough">
 								<div class="span_6_of_12 col bigTile" ng-if="$first">
-									<a href="#{{productItem.productDetailsURL}}">
+									<a href="{{productItem.productDetailsURL}}">
 										<div class="wide-full-tile tile category">
 											<figure>
 												<img alt="" ng-src="{{productItem.productImageGallery[0].largeImagePath}}">
@@ -92,7 +92,7 @@
 									</a>
 								</div>
 								<div class="span_3_of_12 col mediumTile" ng-if="!$first">
-									<a href="#{{productItem.productDetailsURL}}">
+									<a href="{{productItem.productDetailsURL}}">
 										<div class="wide-quarter-tile tile">
 											<figure>
 												<img alt="" ng-src="{{productItem.productImageGallery[0].baseImagePath}}">
