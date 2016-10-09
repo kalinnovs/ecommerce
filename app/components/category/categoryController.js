@@ -54,39 +54,7 @@ angular.module('eCommerce')
             return $sce.trustAsHtml(html);
         };
 
-        $scope.toggleInBasket = function(event, item) {
-            var obj = {
-                "partNumber": item.productPartNumber,
-                "description": item.productDescription,
-                "price": item.productPrice,
-                "priceArray": item.productPriceOptions,
-                "image": item.productImageGallery
-            }
-
-            var addItem = function(item) {
-                var oldItems = JSON.parse(sessionStorage.getItem('itemsArray')) || [];
-                var repeatedItem = oldItems.filter(function(val, index) {
-                    return (val.partNumber === item.partNumber);
-                });
-                if(repeatedItem.length > 0) {
-                    alert("Item already added to cart !");
-                    return true;
-                }
-                oldItems.push(item);
-
-                window.miniCartStorage.push(item.partNumber);
-                window.sessionStorage.setItem('cartParts', JSON.stringify(window.miniCartStorage));
-                window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
-
-                window.itemsArray.push(item);
-            };
-
-            addItem(obj);
-
-            // window.localStorage.miniCart.items.push(obj);
-            event.preventDefault();
-            return false;
-        };
+        
     })
     .filter('html', function($sce) {
         return function(val) {

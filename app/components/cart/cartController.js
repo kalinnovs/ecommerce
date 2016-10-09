@@ -79,7 +79,6 @@ angular.module('eCommerce')
         };
         
         $scope.saveCart = function(event) {
-            debugger;
             // Read Cart Array and pass to URL
             var cartArray = this.cartItems;
             $.each(cartArray, function(key, val) {
@@ -143,7 +142,7 @@ angular.module('eCommerce')
                 self.closeOverlay();
                 window.sessionStorage.clear();
                 window.location.href = "/";
-            }, 800);
+            }, 1000);
         };
         
         $scope.updateCart = function(event) {
