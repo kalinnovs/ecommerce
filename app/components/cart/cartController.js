@@ -103,47 +103,7 @@ angular.module('eCommerce')
         };
         
         $scope.sendCartToMail = function(event) {
-            
-            // Open Overlay
-            // this.openOverlay();
-            // Read Cart Array and pass to URL
-            var cartArray = this.cartItems;
-            var selectedCurrency = cartArray[0].productPriceOptions.filter(function(i, j) {
-                return (i.currencyCode === $("body").data("currency").toUpperCase());
-            });
-            
-            $.each(cartArray, function(key, val) {
-                val["unitPrice"] = selectedCurrency[0].price;
-            });
-            var objectToSerialize={'lineItems':cartArray, "currencyId":selectedCurrency[0].currencyId};
-            objectToSerialize["total"] = this.getTotal();
-            objectToSerialize["shipping"] = this.cartConfig.shippingCost;
-            objectToSerialize["tax"] = this.cartConfig.tax;
-            objectToSerialize["discount"] = this.cartConfig.discount;
-            objectToSerialize["subTotal"] = this.subTotal();
-            objectToSerialize["firstName"] = 'Pritish';
-            objectToSerialize["lastName"] = 'Dwibedi';
-            objectToSerialize["emailId"] = 'pdwibedi@gmail.com';
-            objectToSerialize["contactNo"] = '123423433';
-            
-            $http({
-                method: 'POST',
-                url: PRODUCTDATA_URL + '/cart/reserve',
-                data: JSON.stringify(objectToSerialize),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(function successCallback(response) {
-                debugger;
-                
-            }, function errorCallback(response) {
-                console.log("Error in saving.");
-            }); 
-        };
-        
-        $scope.sendCartToMails = function(event) {
-            
+            var self = this;
             // Open Overlay
             this.openOverlay();
             // Read Cart Array and pass to URL
@@ -161,10 +121,10 @@ angular.module('eCommerce')
             objectToSerialize["tax"] = this.cartConfig.tax;
             objectToSerialize["discount"] = this.cartConfig.discount;
             objectToSerialize["subTotal"] = this.subTotal();
-            // objectToSerialize["firstName"] = 'Pritish';
-            // objectToSerialize["lastName"] = 'Dwibedi';
-            // objectToSerialize["emailId"] = 'pdwibedi@gmail.com';
-            // objectToSerialize["contactNo"] = '123423433';
+            objectToSerialize["firstName"] = $(event.target).find("input[name=firstName]").val();
+            objectToSerialize["lastName"] = $(event.target).find("input[name=lastName]").val();
+            objectToSerialize["emailId"] = $(event.target).find("input[name=Email]").val();
+            objectToSerialize["contactNo"] = $(event.target).find("input[name=Mobile]").val();
             
             $http({
                 method: 'POST',
@@ -174,10 +134,16 @@ angular.module('eCommerce')
                     'Content-Type': 'application/json'
                 }
             }).then(function successCallback(response) {
-                debugger;
+                self.closeOverlay();
             }, function errorCallback(response) {
                 console.log("Error in saving.");
             }); 
+            
+            setTimeout(function(){
+                self.closeOverlay();
+                window.sessionStorage.clear();
+                window.location.href = "/";
+            }, 800);
         };
         
         $scope.updateCart = function(event) {
