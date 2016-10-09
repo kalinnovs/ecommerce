@@ -142,7 +142,7 @@ angular.module('eCommerce')
                 self.closeOverlay();
                 window.sessionStorage.clear();
                 window.location.href = "/";
-            }, 1000);
+            }, 1300);
         };
         
         $scope.updateCart = function(event) {
