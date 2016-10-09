@@ -53,6 +53,7 @@
     "jshint": "^2.9.1",
     "livereload": "^0.4.1",
     "mysql": "^2.11.1",
+    "nodemailer": "^2.6.4",
     "underscore": "^1.8.3",
     "vinyl-source-stream": "^1.1.0"
   }

@@ -11,7 +11,7 @@ angular.module('eCommerce')
         
         $http({
             method: 'POST',
-            url: PRODUCTDATA_URL + '/cart/products',
+            url: PRODUCTDATA_URL + '/cart/products', //'http://localhost:3002/cart'
             data: JSON.stringify(objectToSerialize)
         }).then(function successCallback(response) {
             responseData = response.data;
