@@ -23,11 +23,12 @@ angular.module('eCommerce')
                 scope.toggleInBasket = function(event) {
                     var item = this.partNumber();
                     var obj = {
-                        "partNumber": item.productPartNumber,
-                        "description": item.productDescription,
-                        "price": item.productPrice,
-                        "priceArray": item.productPriceOptions,
-                        "image": item.productImageGallery
+                        "partNumber": item.productPartNumber || item.productId,
+                        // "description": item.productDescription,
+                        "price": item.productPrice || 0,
+                        "priceArray": item.productPriceOptions || item.priceOptions,
+                        "image": item.productImageGallery[0].thumbImagePath,
+                        "quantity": item.quantity || 1
                     }
 
                     var addItem = function(item) {
@@ -36,7 +37,8 @@ angular.module('eCommerce')
                             return (val.partNumber === item.partNumber);
                         });
                         if(repeatedItem.length > 0) {
-                            alert("Item already added to cart !");
+                            $(".screen").show();
+                            $(".addToCartError").css("top", $(document).scrollTop() + ($(window).height() - $(".addToCartError").outerHeight()) / 2);
                             return true;
                         }
                         oldItems.push(item);
@@ -47,7 +49,14 @@ angular.module('eCommerce')
 
                         window.itemsArray.push(item);
                     };
-
+                    
+                    var closeOverlay = function() {
+                        $(".addToCartError").css("top", "-200px");
+                        setTimeout(function(){
+                            $(".screen").hide();
+                        }, 400);
+                    };
+                    
                     addItem(obj);
 
                     // window.localStorage.miniCart.items.push(obj);

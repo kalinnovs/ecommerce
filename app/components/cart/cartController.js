@@ -7,6 +7,8 @@ angular.module('eCommerce')
         
         // Read Cart Array and pass to URL
         var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
+        var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
+        
         var objectToSerialize={'products':cartArray};
         
         $http({
@@ -16,13 +18,13 @@ angular.module('eCommerce')
         }).then(function successCallback(response) {
             responseData = response.data;
             $.each(responseData, function(key, val) {
-                val["quantity"] = 1;
+                val["quantity"] = cartItems[key].quantity;
             });
             $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
             $scope.cartItems = (responseData) ? responseData : [];
         }, function errorCallback(response) {
             console.log("Error in saving.");
-        });    
+        });
         
         // Cart Configuration
         $scope.cartConfig = {
@@ -33,7 +35,7 @@ angular.module('eCommerce')
 
         // Injecting Math into cart scope
         $scope.Math = window.Math;
-        $(document).on("keyup", ".item-quantity", this.getTotal);
+        // $(document).on("keyup", ".item-quantity", this.getTotal);
         
         $scope.getTotal = function() {
             $scope.currency = $("body").attr("data-currency");
@@ -60,6 +62,30 @@ angular.module('eCommerce')
             totalCostToUser = totalCost - cartConfig.shippingCost + (cartConfig.tax/100*totalCost);
             return totalCostToUser;
         };
+        
+        $scope.manipulatePrice = function(event) {
+            window.sessionStorage.setItem('itemsArray', JSON.stringify(this.cartItems));
+            var items = this.cartItems;
+            var currency = $("body").attr("data-currency");
+            window.itemsArray = [];
+            $.each(items, function(i, item) {
+                var priceObj = item.productPriceOptions.filter(function(key, val) {
+                    return key.currencyCode === currency.toUpperCase();
+                });
+                var obj = {
+                    "partNumber": item.productPartNumber || item.productId,
+                    "price": item.productPrice || priceObj[0].price,
+                    "priceArray": item.productPriceOptions || item.priceOptions,
+                    "image": item.productImage.thumbImagePath,
+                    "quantity": item.quantity || 1
+                }
+                window.itemsArray.push(obj);
+            });
+            this.getTotal();
+            
+            // Broadcast cart update to mini cart
+            $rootScope.$broadcast("updateMiniCart", this.cartItems);
+        };
 
         $scope.removeItem = function(event) {
             var currentIndex = $(event.currentTarget).parents("li").data("index"),
@@ -74,7 +100,6 @@ angular.module('eCommerce')
             // insert the new stringified array into LocalStorage
             window.sessionStorage.itemsArray = JSON.stringify(itemList);
             window.sessionStorage.cartParts = JSON.stringify(itemStore);
-            // $scope.cartItems = JSON.stringify(itemList);
             event.preventDefault();
         };
         
@@ -170,28 +195,16 @@ angular.module('eCommerce')
         
         $scope.openOverlay = function() {
             $(".screen").show();
-            $(".modalComponent").css("top", $(document).scrollTop() + ($(window).height() - $(".modalComponent").outerHeight()) / 2)
+            $(".cartMailForm").css("top", $(document).scrollTop() + ($(window).height() - $(".cartMailForm").outerHeight()) / 2)
         };
         
         $scope.closeOverlay = function() {
-            $(".modalComponent").css("top", "-400px");
+            $(".cartMailForm").css("top", "-400px");
             setTimeout(function(){
                 $(".screen").hide();
             }, 400);
         };
         
-        $(".screen").click(function() {
-            $(".modalComponent").css("top", "-400px");
-            setTimeout(function(){
-                $(".screen").hide();
-            }, 400);
-        });
-        
-        $(window).on("scroll", function() {
-            if(parseInt($(".modalComponent").css("top")) > 0) {
-                $(".modalComponent").css("top", $(document).scrollTop() + ($(window).height() - $(".modalComponent").outerHeight()) / 2);
-            }
-        })
 
         $timeout(function() {
             window.dataLoaded = true;

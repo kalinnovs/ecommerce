@@ -632,6 +632,28 @@ minicart {
     text-align: center;
     overflow: hidden;
 }
+.minicart .miniKart {
+    min-height: 60px
+}
+.minicart .miniKart.loader {
+    position: relative;
+}
+.minicart .miniKart.loader:after {
+    border: 5px solid #f3f3f3;
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    -o-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    border-top: 5px solid #555;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    margin: -20px 0 0 -20px;
+}
 .minicart .checkoutLink {
     margin: 10px auto;
     padding: 6px 55px;
@@ -722,6 +744,7 @@ minicart {
 }
 header {
     min-height: 120px;
+    margin-bottom: 20px;
 }
 header .order-info {
     font-size: 100%;
@@ -950,6 +973,7 @@ header nav ul> li .sub-menu.catalog .links a {
 .desktop-nav {
     text-align: center;
     margin-left: -1px;
+    height: 36px;
 }
 .desktop-nav .fa {
     display: none
@@ -1402,6 +1426,9 @@ header a.active, header a:focus {
 .tile .detail h4 {
     padding-left: 20px;
     line-height: 24px;
+}
+.tile .detail h4 span {
+    color: inherit;
 }
 .tile .gridCol {
     float: left;
@@ -2889,6 +2916,12 @@ footer .back-top .pageCounter {
     background: #000;
     opacity: 0.7;
 }
+.modalComponent.addToCartError {
+    width: 300px;
+    height: 150px;
+    margin-left: -150px;
+    top: -150px;
+}
 .modalComponent {
     position: absolute;
     border-radius: 12px;
@@ -2913,6 +2946,14 @@ footer .back-top .pageCounter {
 }
 .modalComponent h3 {
     margin-bottom: 15px;
+}
+.modalComponent h2 { 
+    font-size: 32px;
+    line-height: 44px;
+}
+.modalComponent p {
+    font-size: 14px;
+    line-height: 18px;
 }
 .modalComponent .form-group {
     padding-bottom: 16px;
@@ -3123,4 +3164,20 @@ footer .back-top .pageCounter {
     -ms-transform: rotate(-70deg);		
     -o-transform: rotate(-70deg);		
     content: '';		
+}
+@-o-keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@-moz-keyframes  spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

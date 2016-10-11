@@ -53,7 +53,7 @@
 										<img alt="" ng-src="{{value.productImageGallery[0].baseImagePath}}">
 									</figure>
 									<div class="detail">
-										<h4>{{value.productPartNumber}}</h4>
+										<h4 limit-character-render char-length="34" model-bind="value.productPartNumber">{{value.productPartNumber}}</h4>
 										<p class="productDescription" limit-character-render char-length="400" model-bind="value.productDescription">{{value.productDescription}}</p>
 										<div class="gridCol">
 											<div class="ratingBG">
@@ -71,7 +71,7 @@
 										</div>
 									</div>
 								</div>
-								<add-to-cart part-number="value" item-click="toggleInBasket(event, item)"></add-to-cart>
+								<add-to-cart part-number="value"></add-to-cart>
 							</a>
 						</div>
 					</div>
@@ -92,13 +92,13 @@
 									</a>
 								</div>
 								<div class="span_3_of_12 col mediumTile" ng-if="!$first">
-									<a href="{{productItem.productDetailsURL}}">
+									<a href="{{productItem.productDetailsURL}}" class="productItem">
 										<div class="wide-quarter-tile tile">
 											<figure>
 												<img alt="" ng-src="{{productItem.productImageGallery[0].baseImagePath}}">
 											</figure>
 											<div class="detail">
-												<h4>{{productItem.productName}}</h4>
+												<h4 limit-character-render char-length="34" model-bind="productItem.productName">{{productItem.productName}}</h4>
 												<p class="productDescription" limit-character-render char-length="400" model-bind="productItem.productDescription">{{productItem.productDescription}}</p>
 												<div class="gridCol">
 													<div class="ratingBG">
@@ -116,6 +116,7 @@
 												</div>
 											</div>
 										</div>
+        								<add-to-cart part-number="productItem"></add-to-cart>
 									</a>
 								</div>
 							</div>

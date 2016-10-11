@@ -103,11 +103,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger">
-                                            <span class="count cartCount">10</span>
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            <div class="cart-drawer arrow_box hide"></div>
-                                        </a>
+                                        <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger" minicart part-number-map="window.itemsArray"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -344,12 +340,7 @@
                                             <a href="home" class="noDecoration homeLink"><i class="fa fa-home"></i>Home</a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger">
-                                                <span class="count cartCount">10</span>
-                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                <div class="cart-drawer arrow_box hide">
-                                                </div>
-                                            </a>
+                                            <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger" minicart part-number-map="window.itemsArray"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -358,7 +349,7 @@
                     </div>
                 </div>
             </sticky-menu>
-            <minicart part-number-map="window.itemsArray"></minicart>
+            <!-- <minicart part-number-map="window.itemsArray"></minicart> -->
         </header>
 
         <div>
@@ -986,7 +977,11 @@
     </div>
     
     <div class="screen"></div>
-
+    <div class="error modalComponent overlay addToCartError">
+        <a href="javascript:void(0);" class="fa fa-times overlay-close" ng-click="closeOverlay()" title="Close"></a>
+        <h2>Error</h2>
+        <p>Item is already added to cart. You can update the quantity in cart directly.</p>
+    </div>
 
     <!-- jQuery Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>

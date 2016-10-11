@@ -53,19 +53,7 @@ function RaiseMyEvent(id, oldVal, newVal) {
 function createMiniKart() {
     var imagePath;
     if (window.itemsArray.length > 0) {
-        var ul = document.createElement("ul");
-        for (var i = 0; i < window.itemsArray.length; i++) {
-            if(i === 4) {
-                break;
-            }
-            imagePath = (window.itemsArray[i].image) ? window.itemsArray[i].image[0].thumbImagePath : '';
-            var li = document.createElement("li");
-            li.innerHTML = "<div class='wrapper'><figure><img src='" + window.itemsArray[i].image[0].thumbImagePath + "' /></figure><div class='details'><h3>" + window.itemsArray[i].partNumber + "</h3><span class='price'>" + $("body").data("currency") + " " +window.itemsArray[i].price + "</span> <span class='quantity'> x 1</span></div></div>";
-            ul.appendChild(li);
-        }
-        $("#miniKart").html("").append(ul);
         $("body").find(".cartCount").html(window.itemsArray.length);
-        (window.itemsArray.length > 4) ? $(".manyItems").show() : $(".manyItems").hide();
     }
 };
 
@@ -166,18 +154,6 @@ $(document).ready(function(e) {
             $("body").attr("data-currency", selectedCurrency);
         });
 
-        $(document).on("click", ".mini-cart-trigger", function(e) {
-            var drawer = $(this).find(".cart-drawer");
-            if(drawer.html().trim() === "") {
-                drawer.html($("minicart"));
-            }
-            if(drawer.hasClass("hide")) {
-                drawer.removeClass("hide");
-            } else {
-                drawer.addClass("hide");
-            }
-        });
-
         $('footer .back-top a').click(function(e) {
             e.preventDefault();
             $("html, body").animate({
@@ -202,6 +178,26 @@ $(document).ready(function(e) {
             sessionStorage.isTriggered = "true";
             window.modalComponent.close();
         });
+        
+        $(".modalComponent .overlay-close").click(function() {
+            $(".modalComponent").css("top", "-400px");
+            setTimeout(function(){
+                $(".screen").hide();
+            }, 400);
+        });
+        
+        $(".screen").click(function() {
+            $(".modalComponent").css("top", "-400px");
+            setTimeout(function(){
+                $(".screen").hide();
+            }, 400);
+        });
+        
+        $(window).on("scroll", function() {
+            if(parseInt($(".modalComponent").css("top")) > 0) {
+                $(".modalComponent").css("top", $(document).scrollTop() + ($(window).height() - $(".modalComponent").outerHeight()) / 2);
+            }
+        })
 
 
     }, 1500);
