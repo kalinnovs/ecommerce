@@ -18,7 +18,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <input type="text" class="item-quantity" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" />
+                            <input type="text" class="item-quantity" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" value="{{value.quantity}}" />
                             <div class="item-calculated-price priceChooser">
                                 <div ng-repeat="(key, priceValue) in value.priceArray">
                                     <span class="price {{priceValue.currencyCode | lowercase}}">
