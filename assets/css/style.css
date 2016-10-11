@@ -982,6 +982,12 @@ header nav ul> li .sub-menu.catalog .links a {
     display: inline-block;
     margin-top: -5px;
 }
+@media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0) 
+{ @media {
+    .desktop-nav> ul { 
+        margin-top: 0;
+    }
+}}
 .desktop-nav .activator {
     display: none
 }
