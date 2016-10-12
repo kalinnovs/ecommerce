@@ -38,7 +38,7 @@ angular.module('eCommerce')
         // $(document).on("keyup", ".item-quantity", this.getTotal);
         
         $scope.getTotal = function() {
-            $scope.currency = $("body").attr("data-currency");
+            $scope.currency = $("body").attr("data-currency").toUpperCase();
             var cartItems = this.cartItems,
             totalCost = 0,
             priceObj,
@@ -158,16 +158,21 @@ angular.module('eCommerce')
                     'Content-Type': 'application/json'
                 }
             }).then(function successCallback(response) {
-                self.closeOverlay();
+                debugger;
             }, function errorCallback(response) {
                 console.log("Error in saving.");
             }); 
             
+        
             setTimeout(function(){
                 self.closeOverlay();
-                window.sessionStorage.clear();
-                window.location.href = "/";
-            }, 1300);
+                setTimeout(function(){
+                    window.sessionStorage.clear();
+                    window.location.href = "/";
+                }, 1500);
+                
+            }, 2300);
+            
         };
         
         $scope.updateCart = function(event) {
@@ -205,6 +210,9 @@ angular.module('eCommerce')
             }, 400);
         };
         
+        $("body").on('currencyChanged', $.proxy(function(e, key){
+            $(".item-quantity").trigger("keyup");
+        }, $scope));
 
         $timeout(function() {
             window.dataLoaded = true;

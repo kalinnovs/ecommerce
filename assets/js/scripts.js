@@ -151,8 +151,12 @@ $(document).ready(function(e) {
             $(this).parents(".menuRoot").hide()
             $(".price.inr, .price.usd, .price.eur").hide();
             $(".price." + selectedCurrency).show();
-            $("body").attr("data-currency", selectedCurrency);
+            $("body").attr("data-currency", selectedCurrency).dataChange('currency', selectedCurrency);
         });
+        
+        $.fn.dataChange = function(key, variable){
+            $(this).data(key, variable).trigger('currencyChanged', key);
+        };
 
         $('footer .back-top a').click(function(e) {
             e.preventDefault();
@@ -194,9 +198,10 @@ $(document).ready(function(e) {
         });
         
         $(window).on("scroll", function() {
-            if(parseInt($(".modalComponent").css("top")) > 0) {
-                $(".modalComponent").css("top", $(document).scrollTop() + ($(window).height() - $(".modalComponent").outerHeight()) / 2);
-            }
+            var modal = $(".modalComponent").filter(function(i, j) {
+                return parseInt($(j).css("top")) > 0;
+            });
+            modal.css("top", $(document).scrollTop() + ($(window).height() - modal.outerHeight()) / 2);
         })
 
 
