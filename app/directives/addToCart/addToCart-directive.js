@@ -62,7 +62,7 @@ angular.module('eCommerce')
 
                     $http({
                         method: 'GET',
-                        url: 'http://localhost:3003/addToCart/' + obj.partNumber.substr(4)
+                        url: 'http://haastika.com/:3003/addToCart/' + obj.partNumber.substr(4)
                     }).then(function successCallback(response) {
                         console.log(response);
                     }, function errorCallback(response) {

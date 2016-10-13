@@ -13,7 +13,7 @@ angular.module('eCommerce')
         debugger;
         $http({
             method: 'GET',
-            url: 'http://localhost:3003/cart' // PRODUCTDATA_URL + '/cart/products', //'http://localhost:3002/cart'
+            url: 'http://haastika.com/:3003/cart' // PRODUCTDATA_URL + '/cart/products', //'http://localhost:3002/cart'
             // data: JSON.stringify(objectToSerialize)
         }).then(function successCallback(response) {
             responseData = response.data;
