@@ -18,6 +18,10 @@ angular.module('eCommerce')
             $scope.$broadcast('dataloaded');
           } else {
             // Else pick local JSON
+            data = window.homejson;
+            $rootScope.navigation = data.pageNavigation.categories;
+            window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
+            $scope.$broadcast('dataloaded');
           }
         })
         .catch(function(error) {

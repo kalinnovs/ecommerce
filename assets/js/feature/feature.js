@@ -59,3 +59,5 @@ require("../../../app/directives/miniCart/miniCart-directive.js");
 
 require("../../../app/components/inventory/productTreeCtrl.js");
 require("../../../app/components/inventory/productTreeService.js");
+
+require("../../json/home.json");

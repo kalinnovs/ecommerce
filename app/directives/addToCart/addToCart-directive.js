@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .directive('addToCart', function() {
+    .directive('addToCart', ['$http', function($http) {
         var def = {
             restrict: 'EA',
             scope: {
@@ -12,7 +12,7 @@ angular.module('eCommerce')
             link: function(scope, element, attrs) {
                 var scope = scope,
                     attrs = attrs;
-
+// console.log($http);
                 scope.storeData = function(event) {
                     scope.itemClick({
                         'item': this.partNumber(),
@@ -56,8 +56,18 @@ angular.module('eCommerce')
                             $(".screen").hide();
                         }, 400);
                     };
-                    
+                    console.log($http);
+
                     addItem(obj);
+
+                    $http({
+                        method: 'GET',
+                        url: 'http://localhost:3003/addToCart/' + obj.partNumber.substr(4);
+                    }).then(function successCallback(response) {
+                        console.log(response);
+                    }, function errorCallback(response) {
+                        console.log("Error in saving.");
+                    });
 
                     // window.localStorage.miniCart.items.push(obj);
                     event.preventDefault();
@@ -66,4 +76,4 @@ angular.module('eCommerce')
             }
         };
         return def;
-    });
+    }]);

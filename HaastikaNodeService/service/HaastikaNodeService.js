@@ -13,7 +13,7 @@ app.use(session({
 }));
 
 
-app.listen(3002);
+app.listen(3003);
 
 var setHeader = function(req, res){
     var responseSettings = {
@@ -29,6 +29,7 @@ var setHeader = function(req, res){
 };
 
 app.get('/addToCart/:partNumber', function(req, res, next){
+    setHeader(req, res);
     if(req.params.partNumber){
         req.session.products = req.session.products || {};
         var partNumber = req.params.partNumber;
@@ -43,11 +44,13 @@ app.get('/addToCart/:partNumber', function(req, res, next){
 });
 
 app.get('/updateCart', function(req, res, next){
+    setHeader(req, res);
     req.session.products[req.query.partNumber] = parseInt(req.query.value);
     res.json( req.session.products );
 });
 
 app.get('/removeCart', function(req, res, next){
+    setHeader(req, res);
     delete req.session.products[req.query.partNumber];
     res.json( req.session.products );
 });

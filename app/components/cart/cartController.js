@@ -10,11 +10,11 @@ angular.module('eCommerce')
         var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
         
         var objectToSerialize={'products':cartArray};
-        
+        debugger;
         $http({
-            method: 'POST',
-            url: PRODUCTDATA_URL + '/cart/products', //'http://localhost:3002/cart'
-            data: JSON.stringify(objectToSerialize)
+            method: 'GET',
+            url: 'http://localhost:3003/cart' // PRODUCTDATA_URL + '/cart/products', //'http://localhost:3002/cart'
+            // data: JSON.stringify(objectToSerialize)
         }).then(function successCallback(response) {
             responseData = response.data;
             $.each(responseData, function(key, val) {
