@@ -143,7 +143,7 @@ $(document).ready(function(e) {
                 $(this).siblings("ul").hide();
             }
         });
-
+        
         $(document).on("click", ".currencyConverter a, .currencyChooser a", function(e) {
             $(this).siblings().removeClass("active");
             $(this).addClass("active");

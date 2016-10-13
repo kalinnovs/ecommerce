@@ -167,11 +167,18 @@ angular.module('eCommerce')
             setTimeout(function(){
                 self.closeOverlay();
                 setTimeout(function(){
+                    $(".screen").show();
+                    $(".cartMailFormSuccess").css("top", $(document).scrollTop() + ($(window).height() - $(".cartMailFormSuccess").outerHeight()) / 2);
+                }, 600);
+                setTimeout(function(){
+                    $(".screen").hide();
+                    $(".cartMailFormSuccess").css("top", "-200px");
+                }, 200);
+                setTimeout(function(){
                     window.sessionStorage.clear();
                     window.location.href = "/";
-                }, 1500);
-                
-            }, 2300);
+                }, 2000);
+            }, 1400);
             
         };
         
