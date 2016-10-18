@@ -113,7 +113,7 @@ gulp.task('webserver', function() {
   gulp.src('./')
     .pipe(webserver({
       fallback: 'index.html',
-      port: 3001,
+      port: 3004,
       host: 'haastika.com'
     }));
 });
