@@ -13,7 +13,8 @@ var gulp = require('gulp'),
     glob = require('glob'),
     path = require('path'),
     es = require('event-stream'),
-    browserSync = require('browser-sync');
+    browserSync = require('browser-sync'),
+    webserver = require('gulp-webserver');
 
 var nodeService = require('./HaastikaNodeService/service/HaastikaNodeService');
 
@@ -107,10 +108,19 @@ gulp.task('connect', function() {
     connect.server();
     // connectPHP.server();
 });
+
+gulp.task('webserver', function() {
+  gulp.src('./')
+    .pipe(webserver({
+      fallback: 'index.html',
+      port: 3000
+    }));
+});
+
 // Default task
 // gulp.task('default', ['clean', /* 'html',*/ 'js', 'jsMove', 'css', 'connect', 'watch'], function() {
 // gulp.task('default', ['js', 'connect', 'watch'], function() {
 // gulp.task('default', ['connect'], function() {
-gulp.task('default', ['clean', 'js', 'jsMove', 'css', 'connect-sync', 'watch'], function() {
+gulp.task('default', ['clean', 'js', 'jsMove', 'css', 'webserver', 'watch'], function() {
     console.log("Done");
 });

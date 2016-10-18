@@ -50,7 +50,6 @@ angular.module('eCommerce')
                         renderHTML(responseData);
                         (responseData.length > 4) ? element.find(".manyItems").show() : element.find(".manyItems").hide();
                         $(".miniKart").parents(".cart").find(".count").html(responseData.length);
-                            debugger;
                         $(".miniKart").removeClass("loader");
                     }, function errorCallback(response) {
                         console.log("Error in saving.");

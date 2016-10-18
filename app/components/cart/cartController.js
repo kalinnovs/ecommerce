@@ -10,18 +10,18 @@ angular.module('eCommerce')
         var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
         
         var objectToSerialize={'products':cartArray};
-        debugger;
+
         $http({
             method: 'GET',
             url: 'http://haastika.com:3003/cart' // PRODUCTDATA_URL + '/cart/products', //'http://localhost:3002/cart'
             // data: JSON.stringify(objectToSerialize)
         }).then(function successCallback(response) {
             responseData = response.data;
-            $.each(responseData, function(key, val) {
-                val["quantity"] = cartItems[key].quantity;
-            });
+            // $.each(responseData, function(key, val) {
+            //     val["quantity"] = cartItems[key].quantity;
+            // });
             $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
-            $scope.cartItems = (responseData) ? responseData : [];
+            $scope.cartItems = (responseData) ? responseData.lineItems : [];
         }, function errorCallback(response) {
             console.log("Error in saving.");
         });
