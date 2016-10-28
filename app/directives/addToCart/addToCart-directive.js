@@ -8,7 +8,8 @@ angular.module('eCommerce')
                 'partNumber': '&',
                 'itemClick': '&'
             },
-            template: "<div class='add-to-cart'><button class='fa fa-cart-plus' ng-click='toggleInBasket($event, item);'></button></div>",
+            transclude: true,
+            template: "<div class='add-to-cart'><button class='fa fa-cart-plus' ng-click='toggleInBasket($event, item);' ng-transclude></button></div>",
             link: function(scope, element, attrs) {
                 var scope = scope,
                     attrs = attrs;
