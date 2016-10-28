@@ -13,7 +13,7 @@ angular.module('eCommerce')
             link: function(scope, element, attrs) {
                 var scope = scope,
                     attrs = attrs;
-// console.log($http);
+                // console.log($http);
                 scope.storeData = function(event) {
                     scope.itemClick({
                         'item': this.partNumber(),
@@ -38,8 +38,14 @@ angular.module('eCommerce')
                             return (val.partNumber === item.partNumber);
                         });
                         if(repeatedItem.length > 0) {
-                            $(".screen").show();
-                            $(".addToCartError").css("top", $(document).scrollTop() + ($(window).height() - $(".addToCartError").outerHeight()) / 2);
+                            debugger;
+                            // repeatedItem[0]["quantity"] += 1
+                            oldItems.map(function(val, index) {
+                                (val.partNumber === repeatedItem[0]["partNumber"]) ? val.quantity += 1 : '';
+                            })
+                            // $(".screen").show();
+                            // $(".addToCartError").css("top", $(document).scrollTop() + ($(window).height() - $(".addToCartError").outerHeight()) / 2);
+                            window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
                             return true;
                         }
                         oldItems.push(item);
