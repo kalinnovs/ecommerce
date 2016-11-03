@@ -1428,7 +1428,7 @@ header a.active, header a:focus {
     line-height: 24px;
 }
 .tile .detail h4 span {
-    color: inherit;
+    color: #333;
 }
 .tile .gridCol {
     float: left;
@@ -1701,11 +1701,15 @@ header a.active, header a:focus {
     display: block;
     position: relative;
 }
-.add-to-cart {
-    display: block;
+add-to-cart {
     position: absolute;
     right: 10px;
     top: 10px;
+    height: 36px;
+    width: 36px;
+}
+.add-to-cart {
+    display: block;
     cursor: pointer;
     background: #fff;
     border-radius: 50%;
@@ -1736,21 +1740,25 @@ header a.active, header a:focus {
 .productItem:hover .add-to-cart {
     border-color: #08c;
 }
-.btn .add-to-cart {
+add-to-cart.btn {
     position: static;
+    width: auto;
+    height: auto;
+}
+add-to-cart.btn .add-to-cart {
     background: none;
     border: none;
     width: auto;
     height: auto;
 }
-.btn .add-to-cart button {
+add-to-cart.btn button {
     color: #fff;
     font-size: 14px;
 }
-.btn .add-to-cart button span {
+add-to-cart.btn button span {
     padding-left: 6px;
 }
-.btn .add-to-cart button:before {
+add-to-cart.btn button:before {
     position: static;
 }
 @keyframes slideRight {

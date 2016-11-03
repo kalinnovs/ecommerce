@@ -98,8 +98,10 @@ angular.module('eCommerce')
             itemList.splice(currentIndex,1);
             itemStore.splice(currentIndex,1);
             // insert the new stringified array into LocalStorage
-            window.sessionStorage.itemsArray = JSON.stringify(itemList);
-            window.sessionStorage.cartParts = JSON.stringify(itemStore);
+            window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
+            window.sessionStorage.setItem('cartParts', JSON.stringify(itemStore));
+            window.miniCartStorage = itemStore;
+            $("body").find(".cartCount").html(itemList.length);
             event.preventDefault();
         };
         

@@ -68,11 +68,12 @@ angular.module('eCommerce')
                             return key.currencyCode === currency.toUpperCase();
                         });
                         img = (responseData[i].productImage) ? responseData[i].productImage.thumbImagePath : '';
+                        var currency = $("body").attr("data-currency").toUpperCase();
                         var li = document.createElement("li");
                             li.innerHTML = "<div class='wrapper'><figure><img src='" + img +
                             "' /></figure><div class='details'><h3>" +
                             (responseData[i].partNumber || responseData[i].productId) +
-                            "</h3><span class='price'>INR "+ (responseData[i].price || priceObj[0].price) + "</span> <span class='quantity'> x "+(responseData[i].quantity || itemList[i].quantity)+"</span></div></div>";
+                            "</h3><span class='price'>"+ currency + " " + (responseData[i].price || priceObj[0].price) + "</span> <span class='quantity'> x "+(responseData[i].quantity || itemList[i].quantity)+"</span></div></div>";
                         ul.appendChild(li);
                     }
                     element.find(".miniKart").html("").append(ul);

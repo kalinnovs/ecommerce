@@ -38,7 +38,6 @@ angular.module('eCommerce')
                             return (val.partNumber === item.partNumber);
                         });
                         if(repeatedItem.length > 0) {
-                            debugger;
                             // repeatedItem[0]["quantity"] += 1
                             oldItems.map(function(val, index) {
                                 (val.partNumber === repeatedItem[0]["partNumber"]) ? val.quantity += 1 : '';
@@ -55,6 +54,8 @@ angular.module('eCommerce')
                         window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
 
                         window.itemsArray.push(item);
+                        $("body").find(".cartCount").html(oldItems.length);
+                        event.preventDefault();
                     };
                     
                     var closeOverlay = function() {
