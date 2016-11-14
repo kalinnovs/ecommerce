@@ -15,7 +15,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Haastika" />
 
-    <title>Haastika - Online store for Odisha Handicrafts, Wall Hangings, Bags, Paintings, Jewellery and more</title>
+    <!-- <title>Haastika - Online store for Odisha Handicrafts, Wall Hangings, Bags, Paintings, Jewellery and more</title> -->
     <base href="/index.html">
     <link rel="icon" href="assets/images/favicon.ico" sizes="16x16" type="image/png">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@
 <body>
     <noscript>
     	<style type="text/css">
-    		.progress { display:none; }
+    		.progress { display:none; background: none; }
     	</style>
     </noscript>
     <div id="page" class="app-wrap">
@@ -140,109 +140,109 @@
                                     <a href="javascript:void(0);" class="mobileNavBtn fa fa-bars"></a>
                                     <noscript>
                                     	<ul class="clearfix menuRoot">
-                                        <!-- ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                        <li ng-repeat="(key, value) in navigation" class="ng-scope">
                                             <a href="javscript:void(0);" class="activator">
                                                 <i class="fa fa-plus" aria-hidden="true"></i> 
                                                 <i class="fa fa-minus" aria-hidden="true"></i> 
                                             </a>
                                             <a href="category/HSCH001" class="">Wall Hanging</a>
-                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu " ng-if="value.subcategoryList" style="display: none;">
-                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                            <div class="sub-menu " ng-if="value.subcategoryList" style="display: none;">
+                                                <figure ng-if="value.categoryMenuImagePath" class="ng-scope">
                                                     <img ng-src="assets/images/nav/nav1.jpg" alt="Description" src="assets/images/nav/nav1.jpg">
-                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                </figure>
                                                 <ul class="clearfix">
                                                     <li class="clearfix">
                                                         <div class="links">
                                                             <h3 class="ng-binding">Wall Hanging</h3>
-                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH005" class="ng-binding ng-scope">Chandua</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH006" class="ng-binding ng-scope">Pattachitra</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH007" class="ng-binding ng-scope">Palm Leaf Work</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH008" class="ng-binding ng-scope">Copper Foil</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH009" class="ng-binding ng-scope">Paintings</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH010" class="ng-binding ng-scope">Straw Craft</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH011" class="ng-binding ng-scope">Paper Mache</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH044" class="ng-binding ng-scope">Watch</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH049" class="ng-binding ng-scope">Ken Bambo Palmleaf Painting</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH050" class="ng-binding ng-scope">Textured Painting</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH005" class="ng-binding ng-scope">Chandua</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH006" class="ng-binding ng-scope">Pattachitra</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH007" class="ng-binding ng-scope">Palm Leaf Work</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH008" class="ng-binding ng-scope">Copper Foil</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH009" class="ng-binding ng-scope">Paintings</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH010" class="ng-binding ng-scope">Straw Craft</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH011" class="ng-binding ng-scope">Paper Mache</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH044" class="ng-binding ng-scope">Watch</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH049" class="ng-binding ng-scope">Ken Bambo Palmleaf Painting</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH050" class="ng-binding ng-scope">Textured Painting</a> 
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </div><!-- end ngIf: value.subcategoryList -->
-                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            </div>
+                                        </li><li ng-repeat="(key, value) in navigation" class="ng-scope">
                                             <a href-"javscript:void(0);"="" class="activator">
                                                 <i class="fa fa-plus" aria-hidden="true"></i> 
                                                 <i class="fa fa-minus" aria-hidden="true"></i> 
                                             </a>
                                             <a href="category/HSCH002" class="">Home Decor</a>
-                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu menu-two" ng-if="value.subcategoryList" style="display: none;">
-                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                            <div class="sub-menu menu-two" ng-if="value.subcategoryList" style="display: none;">
+                                                <figure ng-if="value.categoryMenuImagePath" class="ng-scope">
                                                     <img ng-src="assets/images/nav/nav2.jpg" alt="Description" src="assets/images/nav/nav2.jpg">
-                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                </figure>
                                                 <ul class="clearfix">
                                                     <li class="clearfix">
                                                         <div class="links">
                                                             <h3 class="ng-binding">Home Decor</h3>
-                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH012" class="ng-binding ng-scope">Silver Filigree</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH013" class="ng-binding ng-scope">Golden Grass</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH014" class="ng-binding ng-scope">Teracota</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH015" class="ng-binding ng-scope">Wood Carving</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH016" class="ng-binding ng-scope">Dhokra Casting</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH018" class="ng-binding ng-scope">Paddy craft</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH019" class="ng-binding ng-scope">Cushion</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH045" class="ng-binding ng-scope">Coir Craft</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH012" class="ng-binding ng-scope">Silver Filigree</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH013" class="ng-binding ng-scope">Golden Grass</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH014" class="ng-binding ng-scope">Teracota</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH015" class="ng-binding ng-scope">Wood Carving</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH016" class="ng-binding ng-scope">Dhokra Casting</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH018" class="ng-binding ng-scope">Paddy craft</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH019" class="ng-binding ng-scope">Cushion</a><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH045" class="ng-binding ng-scope">Coir Craft</a> 
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </div><!-- end ngIf: value.subcategoryList -->
-                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            </div>
+                                        </li><li ng-repeat="(key, value) in navigation" class="ng-scope">
                                             <a href-"javscript:void(0);"="" class="activator">
                                                 <i class="fa fa-plus" aria-hidden="true"></i> 
                                                 <i class="fa fa-minus" aria-hidden="true"></i> 
                                             </a>
                                             <a href="category/HSCH003" class="">Bag</a>
-                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu menu-three" ng-if="value.subcategoryList" style="display: none;">
-                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                            <div class="sub-menu menu-three" ng-if="value.subcategoryList" style="display: none;">
+                                                <figure ng-if="value.categoryMenuImagePath" class="ng-scope">
                                                     <img ng-src="assets/images/nav/nav3.jpg" alt="Description" src="assets/images/nav/nav3.jpg">
-                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                </figure>
                                                 <ul class="clearfix">
                                                     <li class="clearfix">
                                                         <div class="links">
                                                             <h3 class="ng-binding">Bag</h3>
-                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH020" class="ng-binding ng-scope">Jute</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH020" class="ng-binding ng-scope">Jute</a>
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </div><!-- end ngIf: value.subcategoryList -->
-                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            </div>
+                                        </li><li ng-repeat="(key, value) in navigation" class="ng-scope">
                                             <a href-"javscript:void(0);"="" class="activator">
                                                 <i class="fa fa-plus" aria-hidden="true"></i> 
                                                 <i class="fa fa-minus" aria-hidden="true"></i> 
                                             </a>
                                             <a href="category/HSCH004" class="">Jewellery</a>
-                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu menu-two" ng-if="value.subcategoryList" style="display: none;">
-                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                            <div class="sub-menu menu-two" ng-if="value.subcategoryList" style="display: none;">
+                                                <figure ng-if="value.categoryMenuImagePath" class="ng-scope">
                                                     <img ng-src="assets/images/categories/jewellery/jewel3/medium/IMG_5429.jpg" alt="Description" src="assets/images/categories/jewellery/jewel3/medium/IMG_5429.jpg">
-                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                </figure>
                                                 <ul class="clearfix">
                                                     <li class="clearfix">
                                                         <div class="links">
                                                             <h3 class="ng-binding">Jewellery</h3>
-                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH021" class="ng-binding ng-scope">Tribal</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH021" class="ng-binding ng-scope">Tribal</a>
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </div><!-- end ngIf: value.subcategoryList -->
-                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            </div>
+                                        </li><li ng-repeat="(key, value) in navigation" class="ng-scope">
                                             <a href-"javscript:void(0);"="" class="activator">
                                                 <i class="fa fa-plus" aria-hidden="true"></i> 
                                                 <i class="fa fa-minus" aria-hidden="true"></i> 
                                             </a>
                                             <a href="category/HSCH042" class="">Bootie</a>
-                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu " ng-if="value.subcategoryList">
-                                                <!-- ngIf: value.categoryMenuImagePath --><figure ng-if="value.categoryMenuImagePath" class="ng-scope">
+                                            <div class="sub-menu " ng-if="value.subcategoryList">
+                                                <figure ng-if="value.categoryMenuImagePath" class="ng-scope">
                                                     <img ng-src="assets/images/categories/HSCH042/menu/menu.jpg" alt="Description" src="assets/images/categories/HSCH042/menu/menu.jpg">
-                                                </figure><!-- end ngIf: value.categoryMenuImagePath -->
+                                                </figure>
                                                 <ul class="clearfix">
                                                     <li class="clearfix">
                                                         <div class="links">
                                                             <h3 class="ng-binding">Bootie</h3>
-                                                            <!-- ngRepeat: (innerKey, innerValue) in value.subcategoryList --><a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH043" class="ng-binding ng-scope">Baby Booties</a><!-- end ngRepeat: (innerKey, innerValue) in value.subcategoryList --> 
+                                                            <a ng-repeat="(innerKey, innerValue) in value.subcategoryList" href="category/HSCH043" class="ng-binding ng-scope">Baby Booties</a>
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </div><!-- end ngIf: value.subcategoryList -->
-                                        </li><!-- end ngRepeat: (key, value) in navigation --><li ng-repeat="(key, value) in navigation" class="ng-scope">
+                                            </div>
+                                        </li><li ng-repeat="(key, value) in navigation" class="ng-scope">
                                             <a href-"javscript:void(0);"="" class="activator">
                                                 <i class="fa fa-plus" aria-hidden="true"></i> 
                                                 <i class="fa fa-minus" aria-hidden="true"></i> 
                                             </a>
                                             <a href="category/HSCH046" class="">GIFT</a>
-                                            <!-- ngIf: value.subcategoryList --><div class="sub-menu " ng-if="value.subcategoryList" style="display: none;">
-                                                <!-- ngIf: value.categoryMenuImagePath -->
+                                            <div class="sub-menu " ng-if="value.subcategoryList" style="display: none;">
+                                                
                                                 <ul class="clearfix">
                                                     <li class="clearfix">
                                                         <div class="links">
@@ -250,8 +250,8 @@
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </div><!-- end ngIf: value.subcategoryList -->
-                                        </li><!-- end ngRepeat: (key, value) in navigation -->
+                                            </div>
+                                        </li>
                                         <li>
                                             <a href-"javscript:void(0);"="" class="activator">
                                                 <i class="fa fa-plus" aria-hidden="true"></i> 
@@ -299,25 +299,6 @@
                                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                             </a>
                                             <a href="javascript:void(0);">Download Catalog</a>
-                                            <div class="sub-menu catalog">
-                                                <ul class="clearfix">
-                                                    <li class="clearfix">
-                                                        <div class="links">
-                                                            <a target="_blank" href="assets/catalog/HAASTIKA Catalogue dollar Price.pdf">Catalog (Dollar)</a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="clearfix">
-                                                        <div class="links">
-                                                            <a target="_blank" href="assets/catalog/HAASTIKA Catalogue with Indian price.pdf">Catalog (Rupee)</a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="clearfix">
-                                                        <div class="links">
-                                                            <a target="_blank" href="assets/catalog/jewelery.pdf">Tribal Jewellery (Rupee)</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
                                         </li>
                                         <li class="currencyChooser">
                                             <a href="javascript:void(0);" title="Indian Rupee" rel="inr" class="active">
@@ -349,7 +330,7 @@
                     </div>
                 </div>
             </sticky-menu>
-            <!-- <minicart part-number-map="window.itemsArray"></minicart> -->
+            <minicart part-number-map="window.itemsArray"></minicart>
         </header>
 
         <div>
@@ -965,7 +946,7 @@
             <a class="google" href="https://plus.google.com/u/0/103421050828978737975" target="_blank" title="Google Plus"><i class="fa fa-google-plus" aria-hidden="true"></i>
             </a>
             <a class="pin" href="https://in.pinterest.com/haastika/" target="_blank" title="Pin Interest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-        </div>
+        </div> 
         <!-- Social Media -->
 
         <div class="adMessageBox">
