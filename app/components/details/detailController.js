@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('DetailCtrl', function ($scope, $rootScope, $sce, $timeout, UserService, DetailService, SERVICE_URL, PRODUCTDATA_URL, BASE_URI, $stateParams) {
+  .controller('DetailCtrl', function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, SERVICE_URL, PRODUCTDATA_URL, BASE_URI, $stateParams) {
     var details = this;
     
 
@@ -9,6 +9,9 @@ angular.module('eCommerce')
     // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
     DetailService.getFromURL( SERVICE_URL + '/product/'+$stateParams.id)
         .then(function(data) {
+            if(jQuery.isEmptyObject(data.productDetails)) {
+                $state.go('home');
+            }
             $scope.data = data.productDetails;
             if(data.pageNavigation) {
                 $rootScope.navigation = data.pageNavigation.categories;
@@ -17,6 +20,12 @@ angular.module('eCommerce')
             }
             $scope.$broadcast('dataloaded');
             // $scope.htmlDescription = data.productDescription; 
+        })
+        .catch(function(error) {
+            //
+        })
+        .finally(function() {
+            //
         });
 
 
