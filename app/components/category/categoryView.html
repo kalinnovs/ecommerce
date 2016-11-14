@@ -56,10 +56,16 @@
 										<h4 limit-character-render char-length="34" model-bind="value.productPartNumber">{{value.productPartNumber}}</h4>
 										<p class="productDescription" limit-character-render char-length="400" model-bind="value.productDescription">{{value.productDescription}}</p>
 										<div class="gridCol">
-											<div class="ratingBG">
-												<span class="ratingOverlay" style="width: {{value.averageProductRating/5*100}}%"></span>
+											<div style="display: inline-flex;">
+												<div id="star-five"></div>
+												<div id="star-five"></div>
+												<div id="star-five"></div>
+												<div id="star-five-nofill"></div>
+												<div id="star-five-nofill"></div>
 											</div>
-											<span class="availability">Availability: <span>{{value.productAvailablility}}</span></span>
+											<span class="availability">Availability: 
+												<span>{{value.productAvailablility}}</span>
+											</span>
 										</div>
 										<div class="priceChooser">
 											<div ng-repeat="(key, priceValue) in value.productPriceOptions">
@@ -101,8 +107,12 @@
 												<h4 limit-character-render char-length="34" model-bind="productItem.productName">{{productItem.productName}}</h4>
 												<p class="productDescription" limit-character-render char-length="400" model-bind="productItem.productDescription">{{productItem.productDescription}}</p>
 												<div class="gridCol">
-													<div class="ratingBG">
-														<span class="ratingOverlay" style="width: {{productItem.averageProductRating/5*100}}%"></span>
+													<div style="display: inline-flex;">
+														<div id="star-five"></div>
+														<div id="star-five"></div>
+														<div id="star-five"></div>
+														<div id="star-five-nofill"></div>
+														<div id="star-five-nofill"></div>
 													</div>
 													<span class="availability">Availability: <span>{{productItem.productAvailablility}}</span></span>
 												</div>

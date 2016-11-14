@@ -794,16 +794,15 @@ header .currencyConverter a {
     height: 23px;
     line-height: 32px;
     padding-bottom: 0;
-    box-shadow: -2px 2px 5px rgba(1, 1, 1, 0.7);
 }
 header .currencyConverter a.active:after {
     position: absolute;
     content: "";
-    background: rgba(192, 192, 192, 0.5);
     left: 0;
     right: 0;
     bottom: 0;
     top: 0;
+    box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.8);
 }
 header .currencyConverter a.active, header .currencyConverter a:hover {
     color: #333;
@@ -1208,7 +1207,6 @@ header a.active, header a:focus {
     float: left;
     text-decoration: none;
     color: #444;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
     position: relative;
 }
 #breadcrumbs a:hover {
@@ -1244,7 +1242,8 @@ header a.active, header a:focus {
 #breadcrumbs a.current {
     background: #999;
     color: #fff;
-    font-weight: 700
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgb(0,0,0);
 }
 #breadcrumbs a.current::before {
     border-color: #999 #999 #999 transparent;
@@ -1320,8 +1319,8 @@ header a.active, header a:focus {
 .detail span {
     cursor: pointer;
     color: #f71919;
-    font-weight: 700;
-    display: block
+    font-weight: normal;
+    display: block;
 }
 .detail span.availability {
     color: #333;
@@ -1335,7 +1334,6 @@ header a.active, header a:focus {
     margin-bottom: 0px;
     font-size: 16px;
     line-height: 18px;
-    font-weight: 700;
 }
 .detail .buyBtn {
     padding: 5px 10px;
@@ -1426,9 +1424,12 @@ header a.active, header a:focus {
 .tile .detail h4 {
     padding-left: 20px;
     line-height: 24px;
+    padding-right: 20px;
 }
-.tile .detail h4 span {
-    color: #333;
+.detail h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .tile .gridCol {
     float: left;
@@ -2430,7 +2431,7 @@ add-to-cart.btn button:before {
 
 .contactPage {
     position: relative;
-    background: url("./../../../assets/images/contact.png") center center repeat;
+    background: url("./../../../assets/images/contabg.png") center center repeat;
     min-height: 750px;
     background-size: 100% auto;
 }
@@ -2535,12 +2536,10 @@ add-to-cart.btn button:before {
 }
 .shipping p {
     font-weight: 300;
-    background: url("./../../../assets/images/icons/shipping.png") left center no-repeat;
     color: #ffffff;
     display: inline-block;
     margin-right: 14px;
-    line-height: 100px;
-    padding-left: 70px;
+    line-height: 65px;
 }
 .shipping p span {
     font-weight: 700;
@@ -2945,6 +2944,8 @@ footer .back-top .pageCounter {
     padding: 2px 5px;
     border-radius: 4px;
     height: 22px;
+    color: initial;
+    line-height: 18px;
     -webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
     box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
@@ -3196,6 +3197,331 @@ footer .back-top .pageCounter {
     }
 }
 
+/****************************************************************************
+    *-*-*-* CHECKOUT *-*-*-*
+****************************************************************************/
+.checkout {
+    
+}
+.checkout .columns {
+    margin: 0;
+}
+.checkout .columns aside {
+
+}
+.checkout .form-group {
+    width: 380px;
+}
+.checkout .columns aside:first-child {
+    margin-right: 175px;
+}
+
+.checkout .checkout-status {
+    width: 270px;
+    margin: 10px auto;
+    display: none;
+}
+.checkout .checkout-status a {
+    display: inline-block;
+    font-size: 15px;
+    margin: 0 10px;
+    text-align: center;
+}
+.checkout .checkout-status a span {
+    display: block;
+    background: aquamarine;
+    border-radius: 100%;
+    width: 24px;
+    height: 24px;
+    line-height: 23px;
+    margin: 0 auto 5px;
+}
+.checkout .checkout-status a.active span {
+    background: gainsboro;
+}
+.checkout .section {
+    margin: 20px 50px;
+    padding: 20px 45px;
+    background: #f3f6f8;
+    position: relative;
+}
+.checkout .section h3 {
+    font-size: 24px;
+}
+.checkout .section .container {
+    width: auto;
+    margin-top: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+}
+.checkout .section .container.active {
+    height: auto;
+}
+.checkout .section .container > div {
+    margin-top: 20px;
+}
+
+.checkout .login-form {
+    width: 300px;
+    text-align: left;
+    margin: 0;
+    padding-top: 10px;
+    border: 0
+}
+.checkout .address-form {
+
+}
+.checkout .address-form .form-group {
+    width: 420px;
+}
+.checkout .address-form .columns aside:first-child {
+    margin-right: 95px;
+}
+.checkout .address-form .info {
+    margin: 20px 0;
+    font-size: 16px;
+}
+.checkout .order-form .columns aside:first-child {
+    margin-right: 60px;
+}
+.checkout .list-header {
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 12px;
+}
+.checkout .list-header ul {
+    width: 100%
+}
+.checkout .list-header li {
+    float: left;
+    line-height: 32px;
+    border-bottom: dotted 1px #999;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.checkout .list-header li.item {
+    width: 60%;
+}
+.checkout .list-header li.quantity {
+    width: 17%;
+    text-align: center;
+}
+.checkout .list-header li.price {
+    width: 23%;
+    text-align: center;
+}
+
+/* Order Common STARTS */
+.checkout .secondCol .order-section {
+    margin-top: 25px;
+    border-top: dotted 1px #999;
+    padding-top: 25px;
+}
+.checkout .secondCol .order-section h4 {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 32px; 
+    font-weight: bold; 
+    font-size: 13px; 
+}
+.checkout .section .modifyBtn, 
+.checkout .secondCol .order-section .modifyBtn {
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 4px 5px;
+}
+.checkout .section .modifyBtn, 
+.checkout .secondCol .order-section button {
+    background: none;
+    border: 0;
+    color: #333;
+    outline: none;
+}
+.checkout .section .modifyBtn .fa,
+.checkout .secondCol .order-section button .fa {
+    margin-right: 5px;
+}
+.checkout .section .modifyBtn {
+    margin-top: -36px;
+}
+.checkout .form-views.active + button.modifyBtn {
+    display: none;
+}
+/* Order Common ENDS */
+
+.checkout .order-list {
+    width: 580px;
+}
+.checkout .order-list li {
+    overflow: hidden;
+    margin: 0 0 15px 0;
+}
+.checkout .order-list figure {
+    width: 70px;
+    float: left;
+}
+.checkout .order-list figure img {
+    max-width: 100%;
+    width: auto;
+}
+.checkout .order-list .part-details,
+.checkout .order-list .part-controls {
+    margin-left: 80px;
+    overflow: hidden;
+}
+.checkout .order-list .part-controls p {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 3px 0 5px;
+}
+.checkout .order-list .part-details h5 {
+    font-size: 16px;
+    width: 220px;
+    line-height: 22px;
+    float: left;
+}
+.checkout .order-list .alignRight {
+    float: left;
+    line-height: 22px;
+    overflow: hidden;
+}
+.checkout .order-list .alignRight input {
+    float: left;
+    width: 30px;
+    text-align: center;
+    margin: 0 80px;
+    line-height: 18px;
+}
+.checkout .order-list .alignRight .item-price {
+    float: right;
+}
+.checkout .order-list .part-controls .fa-trash {
+    margin-right: 5px;
+}
+.checkout .order-address {
+    width: 295px;
+    overflow: hidden;
+}
+.checkout .order-address.order-section {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+.checkout .order-address p {
+    font-size: 14px;
+}
+.checkout .order-address .secondCol > div {
+    border-top: solid 1px red;
+}
+.checkout .order-address .secondCol div:first-child {
+    border-top: 0;
+}
+.checkout .order-summary-price > div {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.checkout .order-summary-price > div > label {
+    display: inline-block;
+}
+.checkout .order-summary-price > div > span {
+    display: inline-block;
+    float: right;
+}
+.checkout .order-voucher .coupon-code {
+    height: 0;
+    overflow: hidden;
+    transition: height .5s;
+    -webkit-transition: height .5s;
+    -ms-transition: height .5s;
+    -moz-transition: height .5s;
+}
+.checkout .order-voucher .coupon-code input {
+    border: 0;
+    background: none;
+    border-bottom: solid 1px #dedede;
+    width: 180px;
+    line-height: 24px;
+    outline: none;
+    text-transform: uppercase;
+}
+.checkout .order-voucher .coupon-code button {
+    color: #666;
+}
+.checkout .order-voucher .coupon-applied {
+    height: 0;
+    overflow: hidden;
+    text-transform: uppercase;
+    transition: height .6s;
+    -webkit-transition: height .6s;
+    -ms-transition: height .6s;
+    -moz-transition: height .6s;
+}
+.checkout .order-voucher .coupon-applied span:first-child {
+    text-transform: capitalize;
+}
+.checkout .order-voucher .coupon-applied.dataExists {
+    height: 24px;
+}
+.checkout .finalize-payment {
+    margin-top: 10px;
+}
+.checkout .payment-types {
+    text-align: center;
+    margin: 40px auto 40px;
+}
+.checkout .payment-types li {
+    display: inline-block;
+    width: 200px;
+}
+.checkout .payment-types li .form-group {
+    width: auto;
+    overflow: hidden;
+    border: solid 1px #999;
+    padding-bottom: 0;
+    margin: 5px;
+    padding: 0px 10px;
+    border-radius: 5px;
+}
+.checkout .payment-types .form-group label {
+    display: block;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+}
+.checkout .payment-types .form-group label .fa {
+    margin-right: 5px;
+    color: #33adff;
+}
+.checkout .payment-types .form-group input {
+    display: none;
+}
+.checkout .payment-types input, 
+.checkout .payment-types .form-control {
+    border: 0;
+    box-shadow: none;
+}
+
+
+/* Validation Rules */
+.form-group .help-block {
+    /*display: none;*/
+    visibility: hidden;
+}
+.form-control.ng-pristine.ng-invalid-required {
+    border: 1px solid #ccc;
+}
+.form-control.ng-pristine.ng-invalid-required + p {
+    visibility: hidden;
+}
+.form-control.ng-invalid-required {
+    border: solid 1px red;
+} 
+.form-control.ng-invalid-required + p {
+    visibility: visible;
+}
+
 /* Added by Devi */
 #star-five-nofill {		
     margin-bottom: 3px;		
@@ -3311,3 +3637,5 @@ footer .back-top .pageCounter {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
