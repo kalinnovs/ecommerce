@@ -1,0 +1,23 @@
+<div class="order-payments">
+	<ul class="payment-types">
+		<li>
+			<div class="form-group">
+				<input type="radio" name="paymentType" id="cashPaymentType" class="form-control" ng-model="co.payment.type" value="cash" checked />
+				<label for="cashPaymentType" ng-click="sendCartToMail($event);"><i class="fa fa-money" aria-hidden="true"></i> Cash On Delivery</label>
+				
+			</div>
+		</li>
+		<li>
+			<div class="form-group">
+				<input type="radio" name="paymentType" id="paypalPaymentType" class="form-control" ng-model="co.payment.type" value="paypal" />
+				<label for="paypalPaymentType"><i class="fa fa-paypal" aria-hidden="true"></i> Paypal</label>
+			</div>
+		</li>
+		<li>
+			<div class="form-group">
+				<input type="radio" name="paymentType" id="ccAvePaymentType" class="form-control" ng-model="co.payment.type" value="ccavenue" />
+				<label for="ccAvePaymentType"><i class="fa fa-credit-card" aria-hidden="true"></i> CCAvenue</label>
+			</div>
+		</li>
+	</ul>
+</div>

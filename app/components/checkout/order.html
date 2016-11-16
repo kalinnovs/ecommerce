@@ -1,0 +1,102 @@
+<div class="order-form">
+	<div class="row columns">
+		<aside class="col">
+			<div class="list-header">
+				<ul>
+					<li class="item"><span>Item</span></li>
+					<li class="quantity"><span>Quantity</span></li>
+					<li class="price"><span>Price</span></li>
+				</ul>
+			</div>
+			<ul class="list-items order-list" ng-hide="orderedItems.length === 0">
+			    <li ng-repeat="(key, value) in orderedItems" class="item" data-index="{{key}}">
+			        <div class="item-details">
+			            <figure>
+			                <img ng-src="{{value.productImage.baseImagePath}}" />
+			            </figure>
+			            <div class="part-details">
+			                <h5>{{value.productName}}</h5>
+			                <div class="alignRight">
+			                	<input type="text" class="item-quantity" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" value="{{value.quantity}}" />
+			                    <div class="item-price priceChooser">
+			                        <div ng-repeat="(key, priceValue) in value.productPriceOptions">
+			                            <span class="price {{priceValue.currencyCode | lowercase}}">
+			                                <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>
+			                                {{priceValue.price | number:2}}
+			                            </span>
+			                        </div>
+			                    </div>
+			                    <div class="item-calculated-price priceChooser">
+			                        <div ng-repeat="(key, priceValue) in value.priceArray">
+			                            <span class="price {{priceValue.currencyCode | lowercase}}">
+			                                <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>
+			                                {{priceValue.price * value.quantity | number:2}}
+			                            </span>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			            <div class="part-controls">
+			                <p>{{value.productId}}</p>
+			                <div class="controls">
+			                    <a href="javascript:void(0);" ng-click="removeItem($event)" title="Delete Item">
+			                        <span class="fa fa-trash"></span>delete item</a>
+			                </div>
+			            </div>
+			        </div>
+			    </li>
+			</ul>
+		</aside>
+		<aside class="col secondCol">
+			<div class="order-address order-section">
+				<h4>ADDRESS</h4>
+				<div class="modifyBtn">
+					<button class="change" ng-click="proceedTo($event, 'address')"><i class="fa fa-pencil" aria-hidden="true"></i><span>Edit</span></button>
+				</div>
+				<p>
+					<span>{{co.address.name}}</span></br>
+					<span>{{co.address.houseNumber}}</span>, <span>{{co.address.street}}</span></br>
+					<span>{{co.address.landmark}}</span></br>
+					<span>Phone: {{co.address.phone}}</span></br>
+					<span>{{co.user.city}}</span>, <span>{{co.user.state}} - {{co.user.pin}}</span>
+				</p>
+			</div>
+			<div class="order-voucher order-section">
+				<h4>GIFT CARDS/VOUCHER</h4>
+				<div class="modifyBtn">
+					<button class="change" ng-click="addCouponCode($event);"><i class="fa fa-plus-circle" aria-hidden="true"></i><span>Add</span></button>
+				</div>
+				<div class="coupon-code">
+					<input type="text" name="couponcode" id="couponcode" ng-model="co.order.couponcode" placeholder="Coupon Code" />
+					<button ng-click="redeemCouponCode($event);"> <span>Redeem</span> </button>
+				</div>
+				<div class="coupon-applied" ng-class="{dataExists: co.order.couponcode !== ''}">
+					<span>Coupon Applied: </span><span> {{co.order.couponcode || "000000000"}} </span>
+				</div>
+			</div>
+			<div class="order-summary-price order-section">
+	            <div class="cart-total">
+	                <label>Cart Total: </label>
+	                <span><i class="fa fa-{{currency | lowercase}}"></i> {{getTotal() | number:2}}</span>
+	            </div>
+	            <div class="shipping-charges">
+	                <label>Shipping Charges: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{cartConfig.shippingCost | number:2}}</span>
+	            </div>
+	            <div class="tax">
+	                <label>Tax Estimated ({{cartConfig.tax}}%): </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{calculateTax() | number:2}}</span>
+	            </div>
+	            <div class="discount">
+	                <label>Discount Eligible: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{co.order.discountPrice || 0}}</span>
+	            </div>
+	            <div class="costToCheckout">
+	                <label>Sub Total: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{subTotal() | number:2}}</span>
+	            </div>
+	        </div>
+		</aside>
+	</div>
+	<div class="form-actions">
+		<button type="submit" ng-click="proceedTo($event, 'payment')" class="btn btn-primary">
+			<span>Proceed to Payment</span>
+		</button>
+	</div>
+</div>

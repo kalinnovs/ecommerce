@@ -635,6 +635,13 @@ minicart {
 .minicart .miniKart {
     min-height: 60px
 }
+.minicart .miniKart.empty-cart {
+    min-height: initial;
+}
+.minicart .miniKart.empty-cart li {
+    text-align: center;
+    color: #333;
+}
 .minicart .miniKart.loader {
     position: relative;
 }
@@ -1573,7 +1580,7 @@ header a.active, header a:focus {
     margin-top: 12px;
 }
 .tall-partition .wide-quarter-tile {
-    width: 270px
+    width: 274px
 }
 .layout-6 .row .col:nth-child(5), .layout-6 .row .col:nth-child(6) {
     margin-top: 12px;
@@ -1954,8 +1961,35 @@ add-to-cart.btn button:before {
     width: 400px;
     background: #f4f4f4;
     display: inline-block;
-    padding: 20px 0;
+    padding: 40px 0 20px;
     min-height: 500px;
+}
+.product-details .product-card h2 {
+    line-height: 28px;
+    width: 80%;
+    margin: 0 auto;
+}
+.product-details .product-card .fb-share-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #4267b2;
+    border: 1px solid #4267b2;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 11px;
+    height: 20px;
+    padding: 1px 0 0 2px;
+}
+.product-details .product-card .fb-share-button svg {
+    height: 16px;
+    width: 16px;
+}
+.product-details .product-card .fb-share-button a {
+    display: inline-block;
+    vertical-align: super;
+    color: #fff;
+    margin: 0 7px 0 2px;
 }
 .product-details h1 {
     font-size: 34px;
@@ -2991,6 +3025,9 @@ footer .back-top .pageCounter {
 .cart-page .list-items li:first-child {
     border-top: 0
 }
+.cart-page .empty-cart {
+    margin-bottom: 220px;
+}
 .cart-page .cart-summary {
     text-align: right;
 }
@@ -3463,6 +3500,10 @@ footer .back-top .pageCounter {
 }
 .checkout .order-voucher .coupon-applied.dataExists {
     height: 24px;
+    line-height: 28px;
+}
+.checkout .order-voucher {
+    height: 82px;
 }
 .checkout .finalize-payment {
     margin-top: 10px;

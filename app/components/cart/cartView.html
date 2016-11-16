@@ -18,7 +18,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <input type="text" class="item-quantity" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" value="{{value.quantity}}" />
+                            <input type="text" class="item-quantity" max-length="3" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" value="{{value.quantity}}" />
                             <div class="item-calculated-price priceChooser">
                                 <div ng-repeat="(key, priceValue) in value.priceArray">
                                     <span class="price {{priceValue.currencyCode | lowercase}}">
@@ -39,7 +39,7 @@
                 </div>
             </li>
         </ul>
-        <div ng-if="cartItems.length === 0">
+        <div ng-if="cartItems.length === 0" class="empty-cart">
             <h2>No items added in your cart !!!</h2>
         </div>
         <div class="cart-summary" ng-hide="cartItems.length === 0">
@@ -51,7 +51,7 @@
                 <label>Shipping Charges: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{cartConfig.shippingCost | number:2}}</span>
             </div>
             <div class="tax">
-                <label>Tax Estimated (%): </label> <span>{{cartConfig.tax | number:2}}</span>
+                <label>Tax Estimated ({{cartConfig.tax}}%): </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{calculateTax() | number:2}}</span>
             </div>
             <div class="discount">
                 <label>Discount Eligible: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{cartConfig.discount | number:2}}</span>
@@ -66,55 +66,8 @@
                     <li><a href="#/home">Continue back for shopping</a></li>
                 </ul>
             </div>
-            <!-- <button type="button" ng-click="saveCart($event)" class="btn btn-primary saveCart">Checkout</button> -->
-            <button type="button" ng-click="openOverlay($event)" class="btn btn-primary saveCart">Send Request</button>
+            <!-- <button type="button" ng-click="saveCart($event)" class="btn btn-primary saveCart">Save Cart</button> -->
+            <button type="button" ui-sref="checkout.login" class="btn btn-primary">Checkout</button>
         </div>
     </div>
-</div>
-<div class="modalComponent overlay cartMailFormSuccess addToCartError">
-    <a href="javascript:void(0);" class="fa fa-times overlay-close" ng-click="closeOverlay()" title="Close"></a>
-    <div>
-        <p>Mail sent successfully</p>
-    </div>
-</div>
-<div class="modalComponent overlay cartMailForm">
-    <a href="javascript:void(0);" class="fa fa-times overlay-close" ng-click="closeOverlay()" title="Close"></a>
-    <div class="response" ng-if="register.subscribedSuccesfully || register.subscribedFailed">
-        <div class="bg-success" ng-if="register.subscribedSuccesfully">
-            <i class="fa fa-info-circle" aria-hidden="true"></i>
-            <p>{{register.pushNotification}}</p>
-        </div>
-        <div class="bg-danger" ng-if="register.subscribedFailed">
-            <i class="fa fa-info-circle" aria-hidden="true"></i>
-            <p>{{register.pushNotification}}</p>
-        </div>
-    </div>
-    <h3>Enter your details here </h3>
-    <form name="form" ng-submit="sendCartToMail($event)" role="form">
-        <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
-            <label for="Email">First name</label>
-            <input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name" ng-model="register.user.firstName" required />
-            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
-            <label for="username">Last name</label>
-            <input type="text" name="lastName" id="Text1" class="form-control" placeholder="Last Name" ng-model="register.user.lastName" required />
-            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': form.Email.$dirty && form.Email.$error.required }">
-            <label for="Email">Email</label>
-            <input type="email" name="Email" id="Email" class="form-control" placeholder="Email Address" ng-model="register.user.emailId" required />
-            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': form.Mobile.$dirty && form.Mobile.$error.required }">
-            <label for="Mobile">Mobile</label>
-            <input type="tel" name="Mobile" id="Mobile" class="form-control" placeholder="Cell Number" ng-required="number" ng-model="register.user.contactNo" required />
-            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
-        </div>
-        <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid || register.dataLoading" class="btn btn-primary">Register</button>
-            <img ng-if="register.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            
-        </div>
-    </form>
 </div>

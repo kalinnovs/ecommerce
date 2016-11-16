@@ -3,6 +3,7 @@
 angular.module('eCommerce')
   .controller('DetailCtrl', function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, SERVICE_URL, PRODUCTDATA_URL, BASE_URI, $stateParams) {
     var details = this;
+    $scope.currentState = $state.params.id;
     
 
     // DetailService.getFromURL( BASE_URI + '/eCommerce/productDetails.json')
@@ -39,6 +40,23 @@ angular.module('eCommerce')
             $('#zoomable').addimagezoom({ rootElement: '.detailsPage'});
         }, 100, false);
     });
+
+    $scope.openModal = function(ev) {
+        debugger;
+        var url = "https://www.facebook.com/dialog/feed?",
+            params = {
+            'app_id' : "1719553531700651",
+            'display': 'popup',
+            'caption': 'http://haastika.com/product/'+this.currentState,
+            'link': 'http://haastika.com/product/'+this.currentState,
+            'picture': 'http://haastika.com/'+this.data.productImageGallery[0].baseImagePath,
+            'description': this.data.productDescription,
+            'name': this.data.productName
+        };
+        window.open(url + $.param(params), "", "width=650,height=500");
+        ev.stopPropagation();
+    };
+
   })
   
 

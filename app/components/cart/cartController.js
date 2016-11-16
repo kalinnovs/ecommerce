@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, CartService, UserService, SERVICE_URL, PRODUCTDATA_URL) {
+    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, $state, CartService, UserService, SERVICE_URL, PRODUCTDATA_URL) {
         var cart = this,
         responseData;
         
@@ -62,6 +62,13 @@ angular.module('eCommerce')
             totalCostToUser = totalCost - cartConfig.shippingCost + (cartConfig.tax/100*totalCost);
             return totalCostToUser;
         };
+
+        $scope.calculateTax = function() {
+            var totalCost = this.getTotal(),
+                cartConfig = this.cartConfig,
+                currency = $("body").attr("data-currency");
+            return (cartConfig.tax/100*totalCost);
+        };
         
         $scope.manipulatePrice = function(event) {
             window.sessionStorage.setItem('itemsArray', JSON.stringify(this.cartItems));
@@ -101,7 +108,16 @@ angular.module('eCommerce')
             window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
             window.sessionStorage.setItem('cartParts', JSON.stringify(itemStore));
             window.miniCartStorage = itemStore;
-            $("body").find(".cartCount").html(itemList.length);
+            
+            // Broadcast cart update to mini cart
+            $rootScope.$broadcast("updateMiniCartCount");
+
+            // If cart goes empty page redirects to home page
+            if(window.miniCartStorage.length === 0) {
+                $timeout(function() {
+                    $state.go("home");
+                }, 1000, false);
+            }
             event.preventDefault();
         };
         
@@ -122,66 +138,9 @@ angular.module('eCommerce')
                 }
             }).then(function successCallback(response) {
                 debugger;
-                
             }, function errorCallback(response) {
                 console.log("Error in saving.");
             }); 
-        };
-        
-        $scope.sendCartToMail = function(event) {
-            var self = this;
-            // Open Overlay
-            this.openOverlay();
-            // Read Cart Array and pass to URL
-            var cartArray = this.cartItems;
-            var selectedCurrency = cartArray[0].productPriceOptions.filter(function(i, j) {
-                return (i.currencyCode === $("body").data("currency").toUpperCase());
-            });
-            
-            $.each(cartArray, function(key, val) {
-                val["unitPrice"] = selectedCurrency[0].price;
-            });
-            var objectToSerialize={'lineItems':cartArray, "currencyId":selectedCurrency[0].currencyId};
-            objectToSerialize["total"] = this.getTotal();
-            objectToSerialize["shipping"] = this.cartConfig.shippingCost;
-            objectToSerialize["tax"] = this.cartConfig.tax;
-            objectToSerialize["discount"] = this.cartConfig.discount;
-            objectToSerialize["subTotal"] = this.subTotal();
-            objectToSerialize["firstName"] = $(event.target).find("input[name=firstName]").val();
-            objectToSerialize["lastName"] = $(event.target).find("input[name=lastName]").val();
-            objectToSerialize["emailId"] = $(event.target).find("input[name=Email]").val();
-            objectToSerialize["contactNo"] = $(event.target).find("input[name=Mobile]").val();
-            
-            $http({
-                method: 'POST',
-                url: PRODUCTDATA_URL + '/cart/reserve',
-                data: JSON.stringify(objectToSerialize),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(function successCallback(response) {
-                debugger;
-            }, function errorCallback(response) {
-                console.log("Error in saving.");
-            }); 
-            
-        
-            setTimeout(function(){
-                self.closeOverlay();
-                setTimeout(function(){
-                    $(".screen").show();
-                    $(".cartMailFormSuccess").css("top", $(document).scrollTop() + ($(window).height() - $(".cartMailFormSuccess").outerHeight()) / 2);
-                }, 600);
-                setTimeout(function(){
-                    $(".screen").hide();
-                    $(".cartMailFormSuccess").css("top", "-200px");
-                }, 200);
-                setTimeout(function(){
-                    window.sessionStorage.clear();
-                    window.location.href = "/";
-                }, 2000);
-            }, 1400);
-            
         };
         
         $scope.updateCart = function(event) {
@@ -200,26 +159,15 @@ angular.module('eCommerce')
                     'Content-Type': 'application/json'
                 }
             }).then(function successCallback(response) {
-                debugger;
+                // Broadcast cart update to mini cart
+                $rootScope.$broadcast("updateMiniCartCount");
                 
             }, function errorCallback(response) {
                 console.log("Error in saving.");
             }); 
         };
         
-        $scope.openOverlay = function() {
-            $(".screen").show();
-            $(".cartMailForm").css("top", $(document).scrollTop() + ($(window).height() - $(".cartMailForm").outerHeight()) / 2)
-        };
-        
-        $scope.closeOverlay = function() {
-            $(".cartMailForm").css("top", "-400px");
-            setTimeout(function(){
-                $(".screen").hide();
-            }, 400);
-        };
-        
-        $("body").on('currencyChanged', $.proxy(function(e, key){
+        $(document).on('data-currency-changed', $.proxy(function(e, key){
             $(".item-quantity").trigger("keyup");
         }, $scope));
 

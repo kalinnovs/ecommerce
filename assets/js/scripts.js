@@ -152,6 +152,7 @@ $(document).ready(function(e) {
             $(".price.inr, .price.usd, .price.eur").hide();
             $(".price." + selectedCurrency).show();
             $("body").attr("data-currency", selectedCurrency);
+            $(document).trigger('data-currency-changed');
         });
 
         $('footer .back-top a').click(function(e) {

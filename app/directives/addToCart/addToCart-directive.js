@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .directive('addToCart', ['$http', function($http) {
+    .directive('addToCart', function($http, $rootScope) {
         var def = {
             restrict: 'EA',
             scope: {
@@ -45,6 +45,9 @@ angular.module('eCommerce')
                             // $(".screen").show();
                             // $(".addToCartError").css("top", $(document).scrollTop() + ($(window).height() - $(".addToCartError").outerHeight()) / 2);
                             window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
+                            
+                            // Broadcast cart update to mini cart
+                            $rootScope.$broadcast("updateMiniCartCount");
                             return true;
                         }
                         oldItems.push(item);
@@ -54,7 +57,9 @@ angular.module('eCommerce')
                         window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
 
                         window.itemsArray.push(item);
-                        $("body").find(".cartCount").html(oldItems.length);
+
+                        // Broadcast cart update to mini cart
+                        $rootScope.$broadcast("updateMiniCartCount");
                         event.preventDefault();
                     };
                     
@@ -84,4 +89,4 @@ angular.module('eCommerce')
             }
         };
         return def;
-    }]);
+    });

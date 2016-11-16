@@ -35,6 +35,9 @@ require("../../../app/components/category/categoryService.js");
 require("../../../app/components/login/loginController.js");
 require("../../../app/components/login/loginService.js");
 
+require("../../../app/components/checkout/checkoutController.js");
+require("../../../app/components/checkout/checkoutService.js");
+
 require("../../../app/components/cart/cartController.js");
 require("../../../app/components/cart/cartService.js");
 
@@ -56,6 +59,6 @@ require("../../../app/directives/editOnFocus/editOnFocus-directive.js");
 require("../../../app/directives/formElement/formElement-directive.js");
 require("../../../app/directives/addToCart/addToCart-directive.js");
 require("../../../app/directives/miniCart/miniCart-directive.js");
-
+require("../../../app/directives/validation/validation-directive.js");
 require("../../../app/components/inventory/productTreeCtrl.js");
 require("../../../app/components/inventory/productTreeService.js");

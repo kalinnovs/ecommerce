@@ -1,0 +1,29 @@
+<div class="login-form">
+	<div class="row columns">
+		<aside class="col">
+			<div class="form-group">
+				<label for="firstName">First name</label>
+				<input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name" ng-model="co.user.firstName" required />
+				<p class="help-block">You name is required.</p>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" class="form-control" placeholder="Password" ng-model="co.user.password" required />
+				<p class="help-block">Enter a valid email.</p>
+			</div>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">Sign In</button>
+			</div>
+		</aside>
+		<aside class="col">
+			<div class="form-group">
+				<label for="emailId">Email ID</label>
+				<input type="email" name="emailId" id="emailId" class="form-control" placeholder="Email ID" ng-model="co.user.emailId" required />
+				<p class="help-block">Enter a valid email.</p>
+			</div>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary" ng-click="proceedTo($event, 'address')">Continue as Guest</button>
+			</div>
+		</aside>
+	
+</div>

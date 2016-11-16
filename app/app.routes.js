@@ -45,6 +45,36 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           }
         }
       })
+      .state('checkout', {
+        url:'/checkout',
+        controller: 'CheckoutCtrl',
+        controllerAs: 'checkout',
+        templateUrl: 'app/components/checkout/checkoutView.html'
+      })
+      .state('checkout.login', {
+        url: '/login',
+        controller: 'CheckoutCtrl',
+        controllerAs: 'checkout',
+        templateUrl: 'app/components/checkout/login.html'
+       })
+      .state('checkout.address', {
+        url: '/address',
+        controller: 'CheckoutCtrl',
+        controllerAs: 'checkout',
+        templateUrl: 'app/components/checkout/address.html'
+      })
+      .state('checkout.order', {
+        url: '/order',
+        controller: 'CheckoutCtrl',
+        controllerAs: 'checkout',
+        templateUrl: 'app/components/checkout/order.html'
+      })
+      .state('checkout.payment', {
+        url: '/payment',
+        controller: 'CheckoutCtrl',
+        controllerAs: 'checkout',
+        templateUrl: 'app/components/checkout/payment.html'
+      })
       .state('register', {
         url:'/register',
         views: {
@@ -182,15 +212,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.withCredentials = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    // $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-    // $httpProvider.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    // $httpProvider.defaults.headers.post['Accept'] = 'application/json, text/javascript';
-    // $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
-    // $httpProvider.defaults.headers.post['Access-Control-Max-Age'] = '1728000';
-    // $httpProvider.defaults.headers.common['Access-Control-Max-Age'] = '1728000';
-    // $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript';
-    // $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
-    // $httpProvider.defaults.useXDomain = true;
     
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
@@ -198,8 +219,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
   })
   .run(function run($rootScope, $location, $http, $cookieStore) {
     $rootScope.$on('$stateChangeSuccess',function(){
-      $("html, body").animate({ scrollTop: 0 }, 200);
-      window.dataLoaded = false;
+      var location = window.location.pathname;
+      if(window.location.pathname.indexOf("checkout/") === -1) {
+        $("html, body").animate({ scrollTop: 0 }, 200);
+        window.dataLoaded = false;
+      }
     });
 
     //  // keep user logged in after page refresh
@@ -215,6 +239,14 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         var loggedIn = $rootScope.globals.currentUser;
         if (restrictedPage && !loggedIn) {
             $location.path('/login');
+        }
+
+        // Checkout redirection on zero cart items
+        if($location.path().indexOf("checkout") !== -1) {
+          var cartlength = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts).length : 0;
+          if(cartlength === 0) {
+            $location.path('/home'); 
+          }  
         }
     });
   })
