@@ -73,10 +73,9 @@ angular.module('eCommerce')
 
                     addItem(obj);
 
-                    var partNumber = (typeof(obj.partNumber) === "number") ? obj.partNumber : obj.partNumber.substr(4);
                     $http({
                         method: 'GET',
-                        url: 'http://haastika.com:3003/addToCart/' + partNumber
+                        url: 'http://haastika.com:3003/addToCart/' + obj.partNumber.substr(4)
                     }).then(function successCallback(response) {
                         console.log(response);
                     }, function errorCallback(response) {
