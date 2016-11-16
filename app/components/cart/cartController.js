@@ -166,6 +166,76 @@ angular.module('eCommerce')
                 console.log("Error in saving.");
             }); 
         };
+
+        
+        // Send mail to raise a request
+        $scope.sendCartToMail = function(event) {
+            var self = this;
+            // Open Overlay
+            this.openOverlay();
+            // Read Cart Array and pass to URL
+            var cartArray = this.cartItems;
+            var selectedCurrency = cartArray[0].productPriceOptions.filter(function(i, j) {
+                return (i.currencyCode === $("body").data("currency").toUpperCase());
+            });
+            
+            $.each(cartArray, function(key, val) {
+                val["unitPrice"] = selectedCurrency[0].price;
+            });
+            var objectToSerialize={'lineItems':cartArray, "currencyId":selectedCurrency[0].currencyId};
+            objectToSerialize["total"] = this.getTotal();
+            objectToSerialize["shipping"] = this.cartConfig.shippingCost;
+            objectToSerialize["tax"] = this.cartConfig.tax;
+            objectToSerialize["discount"] = this.cartConfig.discount;
+            objectToSerialize["subTotal"] = this.subTotal();
+            objectToSerialize["firstName"] = $(event.target).find("input[name=firstName]").val();
+            objectToSerialize["lastName"] = $(event.target).find("input[name=lastName]").val();
+            objectToSerialize["emailId"] = $(event.target).find("input[name=Email]").val();
+            objectToSerialize["contactNo"] = $(event.target).find("input[name=Mobile]").val();
+            
+            $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/cart/reserve',
+                data: JSON.stringify(objectToSerialize),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(function successCallback(response) {
+                debugger;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+            }); 
+            
+        
+            setTimeout(function(){
+                self.closeOverlay();
+                setTimeout(function(){
+                    $(".screen").show();
+                    $(".cartMailFormSuccess").css("top", $(document).scrollTop() + ($(window).height() - $(".cartMailFormSuccess").outerHeight()) / 2);
+                }, 600);
+                setTimeout(function(){
+                    $(".screen").hide();
+                    $(".cartMailFormSuccess").css("top", "-200px");
+                }, 200);
+                setTimeout(function(){
+                    window.sessionStorage.clear();
+                    window.location.href = "/";
+                }, 2000);
+            }, 1400);
+            
+        };
+
+        $scope.openOverlay = function() {
+            $(".screen").show();
+            $(".cartMailForm").css("top", $(document).scrollTop() + ($(window).height() - $(".cartMailForm").outerHeight()) / 2)
+        };
+        
+        $scope.closeOverlay = function() {
+            $(".cartMailForm").css("top", "-400px");
+            setTimeout(function(){
+                $(".screen").hide();
+            }, 400);
+        };
         
         $(document).on('data-currency-changed', $.proxy(function(e, key){
             $(".item-quantity").trigger("keyup");
