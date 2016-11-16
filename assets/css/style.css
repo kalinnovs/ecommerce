@@ -1985,7 +1985,7 @@ add-to-cart.btn button:before {
     height: 16px;
     width: 16px;
 }
-.product-details .product-card .fb-share-button a {
+.product-details .product-card .fb-share-button span {
     display: inline-block;
     vertical-align: super;
     color: #fff;

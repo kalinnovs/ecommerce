@@ -42,18 +42,16 @@ angular.module('eCommerce')
     });
 
     $scope.openModal = function(ev) {
-        debugger;
         var url = "https://www.facebook.com/dialog/feed?",
             params = {
             'app_id' : "1719553531700651",
-            'display': 'popup',
             'caption': 'http://haastika.com/product/'+this.currentState,
             'link': 'http://haastika.com/product/'+this.currentState,
             'picture': 'http://haastika.com/'+this.data.productImageGallery[0].baseImagePath,
             'description': this.data.productDescription,
             'name': this.data.productName
         };
-        window.open(url + $.param(params), "", "width=650,height=500");
+        window.open(url + $.param(params), "", "width=650,height=400");
         ev.stopPropagation();
     };
 
