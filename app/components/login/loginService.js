@@ -60,6 +60,35 @@ angular.module('eCommerce')
             $http.defaults.headers.common.Authorization = 'Basic ';
         };
  
+        service.signUp = function (userObj, callback) {
+            var url = 'http://haastika.com:8080/HaastikaDataService' + '/account/register';
+            $http({
+                  method: 'POST',
+                  url: url,
+                  data: userObj,
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                })
+               .then(function (response) {
+                    callback(response.data);
+               });
+        };
+
+        service.resetPassword = function (emailId, callback) {
+            var url = 'http://haastika.com:8080/HaastikaDataService' + '/account/sendResetlink?emailId=' + emailId;
+            $http({
+                  method: 'GET',
+                  url: url,
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                })
+               .then(function (response) {
+                    callback(response.data);
+               });
+        };
+
         return service;
     }])
  

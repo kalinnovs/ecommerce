@@ -1,6 +1,6 @@
 <div class="login-container">
-    <h1> Login Haastika </h1>
-    <div class="login">
+    <h1> {{login.header}} </h1>
+    <div class="login" ng-show="login.state === 'login'">
         <div id="social-registration-form-container" class="social-registration-form-container">
             <span class="social-button google" href="javascript:void(0)" onclick="" title="Google" alt="Sign in with Google"><i class="fa fa-google-plus" aria-hidden="true"></i></span>
             <span class="social-button facebook" href="javascript:void(0)" onclick="" title="LinkedIn" alt="Sign in with Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></span>
@@ -13,18 +13,89 @@
             <form name="form" ng-submit="login.login()" role="form">
                 <div class="form-group">
                     <input type="text" name="username" id="username" class="form-control" ng-model="username" required placeholder="Enter your email address" />
-                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Email id is required</span>
+                    <span ng-show="form.username.$dirty && form.username.$error.required" class="">Email id is required</span>
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" id="password" class="form-control" ng-model="password" required placeholder="Enter your password" />
-                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                    <span ng-show="form.password.$dirty && form.password.$error.required" class="">Password is required</span>
                 </div>
                 <div class="form-actions">
                     <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary submit">Login</button>
                     <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                 </div>
-                <a class="btn-link" style="float: left">Forgot Password?</a>
-                <a class="btn-link" style="float: right" href="">Create a New Account</a>
+                <a class="btn btn-link" style="float: left" ng-click="login.changeState('resetPwd')">Forgot Password?</a>
+                <a class="btn btn-link" style="float: right" ng-click="login.changeState('signUp')">Create a New Account</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="login" ng-show="login.state === 'signUp'">
+        <div ng-show="signUpError" class="text-danger">{{signUpError}}</div>
+        <div class="signup-form">
+            <form name="signUpForm" ng-submit="login.signUp()" role="form">
+                <div class="form-group">
+                    <input type="email" name="username" id="username" class="form-control" ng-model="user.userName" required placeholder="Email address" />
+                    <span ng-show="signUpForm.username.$dirty && signUpForm.username.$error.required" class="">Email id is required</span>
+                    <span ng-show="signUpForm.username.$dirty && !signUpForm.username.$error.required && signUpForm.username.$invalid" class="">Email id is not valid</span>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" class="form-control" ng-model="user.password" required placeholder="Password" />
+                    <span ng-show="signUpForm.password.$dirty && signUpForm.password.$error.required" class="">Password is required</span>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="user.firstName" required placeholder="First Name" />
+                    <span ng-show="signUpForm.firstName.$dirty && signUpForm.firstName.$error.required" class="">First name is required</span>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="lastName" id="lastName" class="form-control" ng-model="user.lastName" required placeholder="LastName" />
+                    <span ng-show="signUpForm.lastName.$dirty && signUpForm.lastName.$error.required" class="">Last name is required</span>
+                </div>
+                <div class="form-group">
+                    <input 
+                        type="text" name="contactNo" id="contactNo" class="form-control" ng-model="user.contactNo" required placeholder="Contact Number" minlength="10" maxlength="10"onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+                    <span ng-show="signUpForm.contactNo.$dirty && signUpForm.contactNo.$error.required" class="">Contact no is required</span>
+                    <span ng-show="signUpForm.contactNo.$dirty && !signUpForm.contactNo.$error.required && signUpForm.contactNo.$invalid" class="">Contact no is not valid</span>
+                </div>
+                <div class="form-actions">
+                    <!-- ng-disabled="signUpForm.$invalid || dataLoading" -->
+                    <button 
+                        type="submit" 
+                        class="btn btn-primary submit" 
+                        ng-disabled="signUpForm.$invalid || dataLoading">
+                        Create Haastika Account
+                    </button>
+                    <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                </div>
+                <div>
+                    By creating an account, you agree to Haastika's <a class="btn-link">Conditions of Use</a>  and <a class="btn-link">Privacy Notice</a>.
+                </div>
+                <div class="pull-right">
+                    Already have an account? 
+                    <a class="btn btn-link " ng-click="login.changeState('login')">Sign in</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="login" ng-show="login.state === 'resetPwd'">
+        <div ng-show="resetPwdSuccess" class="alert alert-success">{{resetPwdSuccess}}</div>
+        <div ng-show="resetPwdError" class="alert alert-danger">{{resetPwdError}}</div>
+        <div class="resetpwd-form">
+            <form name="resetPwdForm" ng-submit="login.resetPwd()" role="form">
+                <div class="form-group">
+                    <input type="email" name="username" id="username" class="form-control" ng-model="user.emailId" required placeholder="Email address" />
+                    <span ng-show="form.username.$dirty && form.username.$error.required" class="">Email id is required</span>
+                </div>
+                <div class="form-actions">
+                    <!-- ng-disabled="signUpForm.$invalid || dataLoading" -->
+                    <button type="submit" class="btn btn-primary submit">Reset Password</button>
+                    <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                    <div class="pull-right">
+                        Already have an account? 
+                        <a class="btn btn-link " ng-click="login.changeState('login')">Sign in</a>
+                    </div>
+                </div>
+                
             </form>
         </div>
     </div>
