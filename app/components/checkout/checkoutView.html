@@ -6,37 +6,35 @@
             <a ui-sref-active="active" ui-sref=".order"><span>3</span> Order</a>
             <a ui-sref-active="active" ui-sref=".payment"><span>4</span> Payment</a>
         </div>
-        <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
-            <div class="section login-details">
-                <h3>LOGIN</h3>
-                <span>to continue and place order</span>
-                <div class="container form-views login-container" ui-sref-active="active" ui-sref=".login" ui-view></div>
-                <button class="change modifyBtn" ng-class="{done: co.user}" ng-click="skipToPage($event, 'login')">
-                    <i class="fa fa-pencil" aria-hidden="true"></i><span>Edit</span>
-                </button>
-            </div>
-            <div class="section address-details">
-                <h3>ADDRESS DETAILS</h3>
-                <span>provide your address details</span>
-                <div class="container form-views address-container" ui-sref-active="active" ui-sref=".address" ui-view></div>
-                <button class="change modifyBtn" ng-class="{done: co.address}" ng-click="skipToPage($event, 'address')">
-                    <i class="fa fa-pencil" aria-hidden="true"></i><span>Edit</span>
-                </button>
-            </div>
-            <div class="section order-summary">
-                <h3>ORDER SUMMARY</h3>
-                <span>your order details</span>
-                <div class="container form-views order-container" ui-sref-active="active" ui-sref=".order" ui-view></div>
-                <button class="change modifyBtn" ng-class="{done: co.order}" ng-click="skipToPage($event, 'order')">
-                    <i class="fa fa-pencil" aria-hidden="true"></i><span>Edit</span>
-                </button>
-            </div>
-            <div class="section payment">
-                <h3>PAYMENT</h3>
-                <span>choose the mode of payment below</span>
-                <div class="container form-views payments-container" ui-sref-active="active" ui-sref=".payment" ui-view></div>
-            </div>
-        </form>
+        <div class="section login-details login">
+            <h3>LOGIN</h3>
+            <span>to continue and place order</span>
+            <div class="container form-views login-container" ui-sref-active="active" ui-sref=".login" ui-view></div>
+            <button class="change modifyBtn" ng-class="{done: co.user}" ng-click="skipToPage($event, 'login')">
+                <i class="fa fa-pencil" aria-hidden="true"></i><span>Edit</span>
+            </button>
+        </div>
+        <div class="section address-details address">
+            <h3>ADDRESS DETAILS</h3>
+            <span>provide your address details</span>
+            <div class="container form-views address-container" ui-sref-active="active" ui-sref=".address" ui-view></div>
+            <button class="change modifyBtn" ng-class="{done: co.address}" ng-click="skipToPage($event, 'address')">
+                <i class="fa fa-pencil" aria-hidden="true"></i><span>Edit</span>
+            </button>
+        </div>
+        <div class="section order-summary oreder">
+            <h3>ORDER SUMMARY</h3>
+            <span>your order details</span>
+            <div class="container form-views order-container" ui-sref-active="active" ui-sref=".order" ui-view></div>
+            <button class="change modifyBtn" ng-class="{done: co.order}" ng-click="skipToPage($event, 'order')">
+                <i class="fa fa-pencil" aria-hidden="true"></i><span>Edit</span>
+            </button>
+        </div>
+        <div class="section payment">
+            <h3>PAYMENT</h3>
+            <span>choose the mode of payment below</span>
+            <div class="container form-views payments-container" ui-sref-active="active" ui-sref=".payment" ui-view></div>
+        </div>
     </div>
 </div>
 <div class="modalComponent overlay cartMailFormSuccess addToCartError">

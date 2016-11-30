@@ -1,5 +1,5 @@
 
-angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload', 'FacebookProvider'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
   // .constant('SERVICE_URL', '/HaastikaWebService')
@@ -8,6 +8,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
+    // $httpProvider.interceptors.push('httpRequestInterceptor');
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -209,45 +210,73 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
 
     // We need to setup some parameters for http requests
     // These three lines are all you need for CORS support
-    $httpProvider.defaults.useXDomain = true;
-    $httpProvider.defaults.withCredentials = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    // $httpProvider.defaults.useXDomain = true;
+    // $httpProvider.defaults.withCredentials = true;
+    // delete $httpProvider.defaults.headers.common['X-Requested-With'];
     
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
 
   })
-  .run(function run($rootScope, $location, $http, $cookieStore) {
-    $rootScope.$on('$stateChangeSuccess',function(){
-      var location = window.location.pathname;
-      if(window.location.pathname.indexOf("checkout/") === -1) {
-        $("html, body").animate({ scrollTop: 0 }, 200);
-        window.dataLoaded = false;
+  .run(['$rootScope', '$location', '$http', '$cookieStore', 
+    function run($rootScope, $location, $http, $cookieStore) {
+      
+      // var accessToken = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
+      // $http.defaults.headers.common['X-Auth-Token'] = 'Basic' + $rootScope.apiKey;
+      // $http.defaults.headers.common['auth-token'] = 'C3PO R2D2';
+
+
+      $rootScope.$on('$stateChangeSuccess',function(){
+        var location = window.location.pathname;
+        if(window.location.pathname.indexOf("checkout/") === -1) {
+          $("html, body").animate({ scrollTop: 0 }, 200);
+          window.dataLoaded = false;
+        }
+      });
+
+      //  // keep user logged in after page refresh
+      $rootScope.globals = $cookieStore.get('globals') || {};
+      if ($rootScope.globals.currentUser) {
+          $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
       }
-    });
 
-    //  // keep user logged in after page refresh
-    $rootScope.globals = $cookieStore.get('globals') || {};
-    if ($rootScope.globals.currentUser) {
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-    }
+      $rootScope.$on('$locationChangeStart', function (event, next, current) {
+          // redirect to login page if not logged in and trying to access a restricted page
+          // Assigning Restricted pages list !!
+          var restrictedPage = $.inArray($location.path(), ['/admin', '/inventory']) != -1;
+          var loggedIn = $rootScope.globals.currentUser;
+          if (restrictedPage && !loggedIn) {
+              $location.path('/login');
+          }
 
-    $rootScope.$on('$locationChangeStart', function (event, next, current) {
-        // redirect to login page if not logged in and trying to access a restricted page
-        // Assigning Restricted pages list !!
-        var restrictedPage = $.inArray($location.path(), ['/admin', '/inventory']) != -1;
-        var loggedIn = $rootScope.globals.currentUser;
-        if (restrictedPage && !loggedIn) {
-            $location.path('/login');
-        }
+          // Checkout redirection on zero cart items
+          if($location.path().indexOf("checkout") !== -1) {
+            var cartlength = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts).length : 0;
+            if(cartlength === 0) {
+              $location.path('/home'); 
+            }  
+          }
+      });
 
-        // Checkout redirection on zero cart items
-        if($location.path().indexOf("checkout") !== -1) {
-          var cartlength = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts).length : 0;
-          if(cartlength === 0) {
-            $location.path('/home'); 
-          }  
-        }
-    });
-  })
-;
+      // Facebook Authentication
+      window.fbAsyncInit = function () {
+          FB.init({
+              appId:'1719553531700651',
+              status:true,
+              cookie:true,
+              xfbml:true,
+              version: 'v2.8'
+          });
+      };
+  }]);
+
+  angular.module('eCommerce').factory('httpRequestInterceptor', function () {
+    return {
+      request: function (config) {
+        var token = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
+        config.headers['Authorization'] = s;
+
+        return config;
+      }
+    };
+  });

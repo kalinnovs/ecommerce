@@ -1,30 +1,50 @@
 'use strict';
 
 angular.module('eCommerce')
-    .directive('validate', function() {
-        var validate_class = "htka-validate";
+    .directive('ngValidate', function () {
         return {
+            require: 'form',
             restrict: 'A',
-            require: 'ngModel',
-            link: function(scope, element, attrs, ctrl) {
-                ctrl.validate = false;
-            
-                element.bind('focus', function(evt) {
-                    validate();
-                }).bind('blur', function(evt) {
-                    validate();
-                });
+            scope: {
+                ngValidate: '='
+            },
+            link: function (scope, element, attrs, form) {
+                var validator = element.validate(scope.ngValidate);
 
-                function validate() {
-                    if(ctrl.validate && ctrl.$invalid) { // if we focus and the field was invalid, keep the validation
-                        element.addClass(validate_class);
-                        scope.$apply(function() {ctrl.validate = true;});
-                    } else {
-                        element.removeClass(validate_class);
-                        scope.$apply(function() {ctrl.validate = false;});
-                    }
-                }
+                form.validate = function (options) {
+                    var oldSettings = validator.settings;
+
+                    validator.settings = $.extend(true, {}, validator.settings, options);
+
+                    var valid = validator.form();
+
+                    validator.settings = oldSettings; // Reset to old settings
+
+                    return valid;
+                };
+
+                form.numberOfInvalids = function () {
+                    return validator.numberOfInvalids();
+                };
             }
-        }
-    }
-);
+        };
+    })
+
+    .provider('$validator', function () {
+        $.validator.setDefaults({
+            onsubmit: false // to prevent validating twice
+        });
+
+        return {
+            setDefaults: $.validator.setDefaults,
+            addMethod: $.validator.addMethod,
+            setDefaultMessages: function (messages) {
+                angular.extend($.validator.messages, messages);
+            },
+            format: $.validator.format,
+            $get: function () {
+                return {};
+            }
+        };
+    });
+

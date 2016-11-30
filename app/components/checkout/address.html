@@ -1,61 +1,61 @@
 <div class="address-form">
-	<div class="row columns">
-		<aside class="col">
-			<div class="form-group">
-				<label for="name">Name</label>
-				<input type="text" name="name" id="name" class="form-control" placeholder="Name" ng-model="co.address.name" required />
-			</div>
-			<div class="form-group">
-				<label for="houseNumber">Flat / House / Floor / Building</label>
-				<input type="text" name="houseNumber" id="houseNumber" class="form-control" placeholder="First Name" ng-model="co.address.houseNumber" required />
-			</div>
-			<div class="form-group">
-				<label for="street">Colony / Street / Locality</label>
-				<input type="text" name="street" id="street" class="form-control" placeholder="Street Name" ng-model="co.address.street" required />
-			</div>
-			<div class="form-group">
-				<label for="landmark">Landmark</label>
-				<input type="text" name="landmark" id="landmark" class="form-control" placeholder="Landmark" ng-model="co.address.landmark" required />
-			</div>
-			<div class="form-group">
-				<label for="phone">Phone Number</label>
-				<input type="text" name="phone" id="phone" class="form-control" placeholder="Phone Number" ng-model="co.address.phone" required />
-			</div>
-		</aside>
-		<aside class="col">
-			<div class="form-group">
-				<label for="pin">PIN Code</label>
-				<input type="text" name="pin" id="pin" class="form-control" placeholder="PIN Code" ng-model="co.user.pin" required ng-keyup="getCityState($event)" />
-			</div>
-			<div class="form-group">
-				<label for="city">City</label>
-				<input type="text" name="city" id="city" class="form-control" placeholder="City" ng-model="co.user.city" required />
-			</div>
-			<div class="form-group">
-				<label for="state">State</label>
-				<input type="text" name="state" id="state" class="form-control" placeholder="State" ng-model="co.user.state" required />
-			</div>
-		</aside>
-	</div>
+	<form name="addressForm" novalidate>
+		<div class="row columns">
+			<aside class="col">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" class="form-control" placeholder="Name" ng-model="co.address.name" required />
+					<p class="help-block" ng-show="addressForm.name.$invalid && !addressForm.name.$pristine">Enter your name.</p>
+				</div>
+				<div class="form-group">
+					<label for="houseNumber">Flat / House / Floor / Building</label>
+					<input type="text" name="houseNumber" id="houseNumber" class="form-control" placeholder="First Name" ng-model="co.address.houseNumber" required />
+					<p class="help-block" ng-show="addressForm.houseNumber.$invalid && !addressForm.houseNumber.$pristine">House Number.</p>
+				</div>
+				<div class="form-group">
+					<label for="street">Colony / Street / Locality</label>
+					<input type="text" name="street" id="street" class="form-control" placeholder="Street Name" ng-model="co.address.street" required />
+					<p class="help-block" ng-show="addressForm.street.$invalid && !addressForm.street.$pristine">Street name.</p>
+				</div>
+				<div class="form-group">
+					<label for="landmark">Landmark</label>
+					<input type="text" name="landmark" id="landmark" class="form-control" placeholder="Landmark" ng-model="co.address.landmark" required />
+				</div>
+				<div class="form-group">
+					<label for="phone">Phone Number</label>
+					<input type="text" name="phone" id="phone" class="form-control" placeholder="Phone Number" ng-model="co.address.phone" required />
+					<p class="help-block" ng-show="addressForm.phone.$invalid && !addressForm.phone.$pristine">Enter your phone number.</p>
+				</div>
+			</aside>
+			<aside class="col">
+				<div class="form-group">
+					<label for="pin">PIN Code</label>
+					<input type="text" name="pin" id="pin" class="form-control" placeholder="PIN Code" ng-model="co.user.pin" required ng-keyup="getCityState($event)" />
+					<p class="help-block" ng-show="addressForm.pin.$invalid && !addressForm.pin.$pristine">Enter your ZIP code.</p>
+				</div>
+				<div class="form-group">
+					<label for="city">City</label>
+					<input type="text" name="city" id="city" class="form-control" placeholder="City" ng-model="co.user.city" required />
+					<p class="help-block" ng-show="addressForm.city.$invalid && !addressForm.city.$pristine">Enter your city.</p>
+				</div>
+				<div class="form-group">
+					<label for="state">State</label>
+					<input type="text" name="state" id="state" class="form-control" placeholder="State" ng-model="co.user.state" required />
+					<p class="help-block" ng-show="addressForm.state.$invalid && !addressForm.state.$pristine">Enter your state.</p>
+				</div>
+				<p class="info">Order confirmation will be sent to the contact details below.</p>
 
-	<p class="info">Order confirmation will be sent to the contact details below.</p>
-
-	<div class="form-group">
-		<label for="email">Email</label>
-		<input type="text" name="email" id="email" class="form-control" placeholder="Email" ng-model="co.user.emailId" required />
-	</div>
-	<div class="form-group">
-		<label for="name">Name</label>
-		<input type="text" name="name" id="name" class="form-control" placeholder="Name" ng-model="co.user.firstName" required />
-	</div>
-	<div class="form-group">
-		<label for="cell">Phone</label>
-		<input type="text" name="cell" id="cell" class="form-control" placeholder="Cell" ng-model="co.user.cell" required />
-	</div>
-
-	<div class="form-actions">
-		<button type="submit" ng-click="proceedTo($event, 'order')" class="btn btn-primary">
-			<span>Proceed to Order Summary</span>
-		</button>
-	</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="text" name="email" id="email" class="form-control" placeholder="Email" ng-model="co.user.emailId" required />
+				</div>
+			</aside>
+		</div>
+		<div class="form-actions">
+			<button type="submit" ng-click="updateCheckoutStep($event, 'address', 'order');" ng-disabled="addressForm.$invalid || addressLoading" class="btn btn-primary">
+				<span>Proceed to Order Summary</span>
+			</button>
+			<img ng-if="addressLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+		</div>
+	</form>
 </div>

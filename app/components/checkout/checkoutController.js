@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CheckoutCtrl', function($scope, $http, $rootScope, $timeout, $controller, $state, CheckoutService, checkoutStorage, SERVICE_URL, PRODUCTDATA_URL) {
+    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$controller', '$state', 'CheckoutService', 'checkoutStorage', 'SERVICE_URL', 'PRODUCTDATA_URL', function($scope, $http, $rootScope, $timeout, $controller, $state, CheckoutService, checkoutStorage, SERVICE_URL, PRODUCTDATA_URL) {
         var checkout = this,
         responseData;
 
+        $scope.state = $state;
+
         // Retrieves data from storage
-        $scope.co = checkoutStorage.getData();
+        $scope.co = checkoutStorage.getData('storage');
 
         // Steps Config
         $scope.eligibleForDiscount = true;
@@ -17,16 +19,28 @@ angular.module('eCommerce')
             "tax": 6.5,
             "discount": 15
         };
+
+        // Steps store
+        $scope.steps = {
+            "login": true,
+            "address": false,
+            "order": false,
+            "payment": false
+        };
+
+
         // $scope.checkoutCartConfig.discount = ($scope.co && $scope.co.order) ? $scope.co.order.discountPrice : 0;
 
         // Validation Config
-        var coConfig = {
-            "user": {
+        var coValidationConfig = {
+            "loginForm": {
                 "firstName": ["required"],
-                "password": ["required"],
+                "password": ["required"]
+            },
+            "guestLoginForm": {
                 "emailId": ["required"]
             },
-            "address": {
+            "addressForm": {
                 "name":["required"],
                 "houseNumber":["required"],
                 "street":["required"],
@@ -36,10 +50,9 @@ angular.module('eCommerce')
                 "city":["required"],
                 "state":["required"],
                 "emailId":["required"],
-                "firstName":["required"],
                 "cell":["required"]
             },
-            "order": {
+            "orderForm": {
                 "promo": ["required"]
             }
         };
@@ -67,6 +80,8 @@ angular.module('eCommerce')
                     val["quantity"] = cartItems[key].quantity;
                 });
                 $scope.orderedItems = (responseData) ? responseData : [];
+                // Stores the steps completed on page load
+                checkoutStorage.setData($scope.steps, 'steps');
             }, function errorCallback(response) {
                 console.log("Error in saving.");
             });    
@@ -91,7 +106,7 @@ angular.module('eCommerce')
 
         $scope.redeemCouponCode = function(event) {
             var thisVal = $(event.currentTarget).siblings("input").val().toLowerCase();
-            var updatedView = JSON.parse(window.localStorage.storage).order && JSON.parse(window.localStorage.storage).order.couponcode;
+            var updatedView = JSON.parse(window.sessionStorage.storage).order && JSON.parse(window.sessionStorage.storage).order.couponcode;
             if(updatedView && (thisVal === updatedView)) {
                 // updates view with confirmation code
                 $(".coupon-code").height(0);
@@ -113,6 +128,7 @@ angular.module('eCommerce')
         };
         
         $scope.proceedTo = function(event, step) {
+            debugger;
             // updates storage with reference to 'checkout' object from view
             updateStorage(this.co);
             // Updates path
@@ -131,7 +147,7 @@ angular.module('eCommerce')
         };
 
         function updateStorage(obj) {
-            checkoutStorage.setData(obj);
+            checkoutStorage.setData(obj, 'storage');
         };
 
         $scope.getTotal = function() {
@@ -159,7 +175,7 @@ angular.module('eCommerce')
             var itemStore = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
             itemList.splice(currentIndex,1);
             itemStore.splice(currentIndex,1);
-            // insert the new stringified array into LocalStorage
+            // insert the new stringified array into sessionStorage
             window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
             window.sessionStorage.setItem('cartParts', JSON.stringify(itemStore));
             window.miniCartStorage = itemStore;
@@ -208,12 +224,15 @@ angular.module('eCommerce')
         };
 
         
-        // Detect URL state change
-        // $rootScope.$on('$stateChangeStart', 
-        //     function(event, toState, toParams, fromState, fromParams){ 
-        //         scrollTo(toState.name);
-        //     }
-        // );
+        // Detect On DOM loaded change
+        $scope.$on('$viewContentLoaded', function(){
+            //Here your view content is fully loaded !!
+            $(".checkout .section").each(function(i, j) {
+                if(!$(this).find(".container").hasClass("active")) {
+                    $(this).find(".container").remove();
+                }
+            });
+        });
 
         function scrollTo(page) {
             var loginTop = $(".login-details").position().top;
@@ -224,16 +243,16 @@ angular.module('eCommerce')
             $timeout(function() {
                 switch(page) {
                     case "checkout.login":
-                        $('html, body').animate({scrollTop: loginTop - 30}, 700);
+                        $('html, body').animate({scrollTop: loginTop - 30}, 10);
                         break;
                     case "checkout.address":
-                        $('html, body').animate({scrollTop: addressTop - 30}, 700);
+                        $('html, body').animate({scrollTop: addressTop - 30}, 10);
                         break;
                     case "checkout.order":
-                        $('html, body').animate({scrollTop: orderTop - 30}, 700);
+                        $('html, body').animate({scrollTop: orderTop - 30}, 10);
                         break;
                     case "checkout.payments":
-                        $('html, body').animate({scrollTop: paymentTop - 30}, 700);
+                        $('html, body').animate({scrollTop: paymentTop - 30}, 10);
                         break;
                     default:
                         // default code block
@@ -320,11 +339,28 @@ angular.module('eCommerce')
             }
         };
 
+        // function to submit the form after all validation has occurred            
+        $scope.updateCheckoutStep = function(event, from, to, $state) {
+            var self = this;
+            this.steps[to] = true;
+            // Stores the steps completed on page load
+            checkoutStorage.setData(this.steps, 'steps');
+
+            // updates storage with reference to 'checkout' object from view
+            updateStorage(this.co, 'storage');
+            // Updates path
+            $(event.currentTarget).parents(".container.form-views").animate({height: 0 }, 400, function() {
+                // $state.go("checkout."+step);
+                self.state.go("checkout."+to);
+            });
+            
+        };
+
         $(document).on('data-currency-changed', $.proxy(function(e, key){
             $scope.subTotal();
         }, $scope));
 
-    }
+    }]
 );
 
 angular.module('eCommerce')
@@ -335,12 +371,12 @@ angular.module('eCommerce')
             }
         });
         return {
-            setData: function(val) {
-                $window.localStorage && $window.localStorage.setItem('storage', JSON.stringify(val));
+            setData: function(val, into) {
+                $window.sessionStorage && $window.sessionStorage.setItem(into, JSON.stringify(val));
                 return this;
             },
-            getData: function() {
-                return $window.localStorage && JSON.parse($window.localStorage.getItem('storage'));
+            getData: function(val) {
+                return $window.sessionStorage && JSON.parse($window.sessionStorage.getItem(val));
             }
         };
     }

@@ -1,19 +1,20 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('HomeCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL) {
+  .controller('HomeCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL, PRODUCTDATA_URL, $http) {
     var home = this;
     var scoper = $scope;
+    $scope.user = "pritish";
 
     // Root scoping cartItem array globally across the application
     $rootScope.cartItems = (window.localStorage.itemsArray) ? JSON.parse(window.localStorage.itemsArray) : [];
-    // debugger;
-
-    // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
-    UserService.GetAll( SERVICE_URL + '/home')
+    
+    // UserService.GetAll( PRODUCTDATA_URL + '/home')
+    UserService.GetAll( PRODUCTDATA_URL + '/home')
         .then(function(data) {
           if(data.success === undefined || data.success) {
             $rootScope.navigation = data.pageNavigation.categories;
+            window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
             window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
             $scope.$broadcast('dataloaded');
           } else {
@@ -25,7 +26,7 @@ angular.module('eCommerce')
         })
         .finally(function() {
             //
-        })
+        });
 
 
     $scope.$on('dataloaded', function() {

@@ -12,8 +12,11 @@ angular.module('eCommerce')
 
     tile.renderTemplate = function() {
       $.each(tile.layout, function(k, v) {
-          /// do stuff
-          $scope[k] = 'app/shared/tiles/'+k+'.html';
+          if(v.layoutCapacity === 0) {
+            return true;
+          }
+          var layout = "layout"+ v.layoutCapacity;
+          $scope[layout] = 'app/shared/tiles/'+layout+'.html';
       });
     };
 

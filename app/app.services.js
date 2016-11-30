@@ -5,7 +5,9 @@ angular.module('eCommerce')
     var service = this;
 
     service.GetAll = function(url) {
-        return $http.get(url).then(service.handleSuccess, service.handleError('Error getting all users'));
+        // var url = "http://17.168.81.74:8080/HaastikaDataService/home";
+        var token = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
+        return $http.get(url, { headers: {'Authorization': token} }).then(service.handleSuccess, service.handleError('Error getting all users'));
     }
 
     service.GetById = function(id) {

@@ -55,6 +55,11 @@ body {
     font-style: normal;
     font-weight: 400;
     min-width: 1200px;
+    transition: top 2s;
+    -webkit-transition: top 2s;
+    -moz-transition: top 2s;
+    -o-transition: top 2s;
+    -ms-transition: top 2s;
 }
 a {
     color: #000;
@@ -68,6 +73,9 @@ a:hover {
 }
 a:hover, a:active {
     outline: 0;
+}
+.clearfloat {
+    clear: both;
 }
 h1, h2, h3, h4, h5, h6 {
     color: #000;
@@ -3250,7 +3258,7 @@ footer .back-top .pageCounter {
 
 }
 .checkout .form-group {
-    width: 380px;
+    width: 374px;
 }
 .checkout .columns aside:first-child {
     margin-right: 175px;
@@ -3284,6 +3292,7 @@ footer .back-top .pageCounter {
     padding: 20px 45px;
     background: #f3f6f8;
     position: relative;
+    max-width: 100%;
 }
 .checkout .section h3 {
     font-size: 24px;
@@ -3319,7 +3328,7 @@ footer .back-top .pageCounter {
     margin-right: 95px;
 }
 .checkout .address-form .info {
-    margin: 20px 0;
+    margin: 34px 0 20px;
     font-size: 16px;
 }
 .checkout .order-form .columns aside:first-child {
@@ -3384,7 +3393,7 @@ footer .back-top .pageCounter {
     margin-right: 5px;
 }
 .checkout .section .modifyBtn {
-    margin-top: -36px;
+    margin-top: -32px;
 }
 .checkout .form-views.active + button.modifyBtn {
     display: none;

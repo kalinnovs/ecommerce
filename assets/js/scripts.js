@@ -30,7 +30,10 @@ if (!Object.prototype.watch) {
 // Stores partnumbers to localstorage and data temporarily to minicart in sessionStorage
 window.itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [] || [];
 window.miniCartStorage = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [] || [];
+window.userDetails = (window.sessionStorage.userDetails) ? JSON.parse(window.sessionStorage.userDetails) : [] || [];
 
+if(window.userDetails.imageUrl)document.getElementById("profilePicUpdate").innerHTML = window.userDetails.name;
+document.getElementById("userDetailsUpdate").innerHTML = window.userDetails.name;
 
 // Array Watch
 Object.defineProperty(window.itemsArray, "push", {

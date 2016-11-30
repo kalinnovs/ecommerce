@@ -34,6 +34,7 @@ require("../../../app/components/category/categoryService.js");
 
 require("../../../app/components/login/loginController.js");
 require("../../../app/components/login/loginService.js");
+require("../../../app/components/login/facebookAuth.js");
 
 require("../../../app/components/checkout/checkoutController.js");
 require("../../../app/components/checkout/checkoutService.js");

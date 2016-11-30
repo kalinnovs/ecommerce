@@ -1,29 +1,34 @@
 <div class="login-form">
 	<div class="row columns">
 		<aside class="col">
-			<div class="form-group">
-				<label for="firstName">First name</label>
-				<input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name" ng-model="co.user.firstName" required />
-				<p class="help-block">You name is required.</p>
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label>
-				<input type="password" name="password" id="password" class="form-control" placeholder="Password" ng-model="co.user.password" required />
-				<p class="help-block">Enter a valid email.</p>
-			</div>
-			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Sign In</button>
-			</div>
+			<form name="loginForm" ng-submit="submitFormed(userForm.$valid, 'loginForm', 'address')">
+				<div class="form-group">
+					<label for="firstName">First name</label>
+					<input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name" ng-model="co.user.firstName" required />
+					<p class="help-block">You name is required.</p>
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" class="form-control" placeholder="Password" ng-model="co.user.password" required />
+					<p class="help-block">Enter a valid email.</p>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Sign In</button>
+				</div>
+			</form>
 		</aside>
 		<aside class="col">
-			<div class="form-group">
-				<label for="emailId">Email ID</label>
-				<input type="email" name="emailId" id="emailId" class="form-control" placeholder="Email ID" ng-model="co.user.emailId" required />
-				<p class="help-block">Enter a valid email.</p>
-			</div>
-			<div class="form-actions">
-				<button type="submit" class="btn btn-primary" ng-click="proceedTo($event, 'address')">Continue as Guest</button>
-			</div>
+			<form name="guestLoginForm" role="form">
+                <div class="form-group">
+                	<label for="emailId">Email ID</label>
+                    <input type="email" name="emailId" id="emailId" class="form-control" ng-model="emailId" required placeholder="Enter your email address" ng-model="co.user.emailId" />
+                    <p class="help-block" ng-show="guestLoginForm.emailId.$invalid && !guestLoginForm.emailId.$pristine">Enter a valid email.</p>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" ng-click="updateCheckoutStep($event, 'login', 'address');" ng-disabled="guestLoginForm.$invalid || guestDataLoading" class="btn btn-primary">Login as Guest</button>
+                    <img ng-if="guestDataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                </div>
+            </form>
 		</aside>
 	
 </div>
