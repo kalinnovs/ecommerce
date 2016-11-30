@@ -18,6 +18,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         controller: 'LoginCtrl',
         controllerAs: 'login'
       })
+      .state('resetPassword', {
+        url:'/login/:uid',
+        templateUrl: 'app/components/login/loginView.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'login'
+      })
       .state('home', {
         url:'/home',
         views: {

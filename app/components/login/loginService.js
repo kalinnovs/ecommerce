@@ -1,8 +1,8 @@
 'use strict';
  
 angular.module('eCommerce')
-.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', 'SERVICE_URL',
-    function (Base64, $http, $cookieStore, $rootScope, $timeout, SERVICE_URL) {
+.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', 'SERVICE_URL', 'PRODUCTDATA_URL',
+    function (Base64, $http, $cookieStore, $rootScope, $timeout, SERVICE_URL, PRODUCTDATA_URL) {
         var service = {};
 
         service.Login = function (username, password, callback) {
@@ -60,6 +60,64 @@ angular.module('eCommerce')
             $http.defaults.headers.common.Authorization = 'Basic ';
         };
  
+        service.signUp = function (userObj, callback) {
+            var url = PRODUCTDATA_URL + '/account/register';
+            $http({
+                  method: 'POST',
+                  url: url,
+                  data: userObj,
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                })
+               .then(function (response) {
+                    callback(response.data);
+               });
+        };
+
+        service.requestResetPassword = function (emailId, callback) {
+            var url = PRODUCTDATA_URL + '/account/sendResetlink?emailId=' + emailId;
+            $http({
+                  method: 'GET',
+                  url: url,
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                })
+               .then(function (response) {
+                    callback(response.data);
+               });
+        };
+
+        service.resetPassword = function (uid, userObj, callback) {
+            var url = PRODUCTDATA_URL + '/account/reset-password/' + uid;
+            $http({
+                  method: 'POST',
+                  url: url,
+                  data: userObj,
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                })
+               .then(function (response) {
+                    callback(response.data);
+               });
+        };
+
+
+        service.validateUid = function (uid, callback) {
+            var url = PRODUCTDATA_URL + '/account/resetlink/' + uid;
+            $http({
+                  method: 'GET',
+                  url: url,
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                })
+               .then(function (response) {
+                    callback(response.data);
+               });
+        };
         return service;
     }])
  

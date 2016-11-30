@@ -2512,11 +2512,6 @@ add-to-cart.btn button:before {
     margin-bottom: 20px;
     margin-top: 10px;
 }
-.form-group {
-    position: relative;
-    padding-bottom: 25px;
-    margin-bottom: 0
-}
 .help-block {
     font-size: 12px;
     font-weight: 700;
@@ -2833,7 +2828,7 @@ footer .back-top .pageCounter {
 /***************** Login ******************/
 .login-container {
     background-color: #f3f6f8;
-    padding: 70px 0;
+    padding: 20px 0;
     text-align: center;
 }
 .login {
@@ -2845,7 +2840,7 @@ footer .back-top .pageCounter {
     text-align: left;
 }
 .login-container h1 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #1da1f2;
 }
 
@@ -2882,9 +2877,9 @@ footer .back-top .pageCounter {
     content: "Sign in with Google";
 }
 .login-container .login-form {
-    margin-top: 100px;
+    margin-top: 80px;
     border-top: 1px solid #f2f1ef;
-    padding-top: 50px;
+    padding-top: 30px;
     position: relative;
 }
 .login-container .login-form h3 {
@@ -2901,16 +2896,8 @@ footer .back-top .pageCounter {
     display: block;
     width: 190px;
 }
-.login-container .login-form input {
-  height: 40px;
-  background: #f9f9f9;
-  outline: 0;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 300;
-  font-size: 16px;
-}
-.login-container .login-form .submit {
+.login-container .login-form .submit,
+.login-container .signup-form .submit {
     width: 100%;
     height: 42px;
     font-size: 18px;
@@ -2919,6 +2906,8 @@ footer .back-top .pageCounter {
 
 .login-container .form-group {
     margin-bottom: 5px;
+    height: 55px;
+    color: #d05715;
 }
 
 @media only screen and (max-width: 640px) {
@@ -3556,24 +3545,56 @@ footer .back-top .pageCounter {
     box-shadow: none;
 }
 
+/* Form Input Start */
+
+.form-group {
+    margin-bottom: 5px;
+    height: 55px;
+    color: #d05715;
+    font-size: 16px;
+    margin-top: 10px;
+}
+input.form-control {
+    box-shadow: none;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #bfbfbf;
+    border-radius: 0;
+    padding: 10px 0;
+    font-size: 16px;
+}
+input.form-control:focus {
+    border-color: #d05715;
+    box-shadow: none;
+}
+input.form-control:focus + span {
+    display: none;
+}
+input.form-control::-webkit-input-placeholder {
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+input.form-control:focus::-webkit-input-placeholder {
+    color: #d05715;
+    font-size: 0.778em;
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+    visibility: visible;
+}
+
+/* Form Input End */
+
+
 
 /* Validation Rules */
 .form-group .help-block {
     /*display: none;*/
     visibility: hidden;
 }
-.form-control.ng-pristine.ng-invalid-required {
-    border: 1px solid #ccc;
-}
 .form-control.ng-pristine.ng-invalid-required + p {
     visibility: hidden;
 }
-.form-control.ng-invalid-required {
-    border: solid 1px red;
-} 
-.form-control.ng-invalid-required + p {
-    visibility: visible;
-}
+
 
 /* Added by Devi */
 #star-five-nofill {		
