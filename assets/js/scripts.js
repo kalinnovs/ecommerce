@@ -25,15 +25,11 @@ if (!Object.prototype.watch) {
             }
         }
     });
-}
+};
 
 // Stores partnumbers to localstorage and data temporarily to minicart in sessionStorage
 window.itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [] || [];
 window.miniCartStorage = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [] || [];
-window.userDetails = (window.sessionStorage.userDetails) ? JSON.parse(window.sessionStorage.userDetails) : [] || [];
-
-if(window.userDetails.imageUrl)document.getElementById("profilePicUpdate").innerHTML = window.userDetails.name;
-document.getElementById("userDetailsUpdate").innerHTML = window.userDetails.name;
 
 // Array Watch
 Object.defineProperty(window.itemsArray, "push", {
@@ -66,11 +62,26 @@ window.dataLoaded = false;
 window.watch('dataLoaded', function(id, oldval, newval) {
     if (newval === true) {
         $(".progress").hide();
+        updateUser();
     } else {
         $(".progress").show();
+        updateUser();
     }
     return newval;
 });
+
+function updateUser() {
+    var emptyUser = {
+        "name": "Guest",
+        "imageUrl": "" 
+    };
+    window.userDetails = (window.sessionStorage.userDetails) ? JSON.parse(window.sessionStorage.userDetails) : emptyUser || emptyUser;
+    if(window.userDetails.imageUrl !== "") {
+        $(".profilePicUpdate").addClass("loggedIn");
+        $(".profilePicUpdate").find(".profilePic").attr("src", window.userDetails.imageUrl);
+    }
+    $(".userDetailsUpdate").html(window.userDetails.name);
+};
 
 $(document).ready(function(e) {
 

@@ -427,6 +427,30 @@ a.noDecoration:hover {
 .social-strip ul li a .more span span {
     display: block;
 }
+.social-strip .profilePic {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    border-radius: 50%;
+}
+.social-strip .profilePicUpdate {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.social-strip .profilePicUpdate img {
+    display: none;
+}
+.social-strip .profilePicUpdate.loggedIn img {
+    display: block;
+    margin-top: 5px;
+}
+.social-strip .profilePicUpdate .fa {
+    display: block;
+}
+.social-strip .profilePicUpdate.loggedIn .fa {
+    display: none;
+}
 .social-strip.mobileView {
     display: none
 }
