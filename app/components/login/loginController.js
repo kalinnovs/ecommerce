@@ -63,9 +63,9 @@ var LoginCtrl = function ($scope, $rootScope, $timeout, $http, $location, $state
         });
 
         $scope.fblogin = function () {
-            $timeout(function () {
+            // $timeout(function () {
                 Facebook.login();
-            }, 100, false);
+            // }, 100, false);
         };
 
         $scope.logout = function () {
