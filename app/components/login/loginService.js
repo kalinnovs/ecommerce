@@ -2,67 +2,138 @@
  
 angular.module('eCommerce')
 .factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', 'SERVICE_URL',
-    function (Base64, $http, $cookieStore, $rootScope, $timeout, SERVICE_URL) {
-        var service = {};
+  function (Base64, $http, $cookieStore, $rootScope, $timeout, SERVICE_URL) {
+    var service = {};
 
-        service.Login = function (username, password, callback) {
+    service.Login = function (username, password, callback) {
 
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-            // $timeout(function(){
-            //     var response = { success: username === 'test1' && password === 'test' };
-            //     if(!response.success) {
-            //         response.message = 'Username or password is incorrect';
-            //     }
-            //     callback(response);
-            // }, 1000);
-
-
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            var url = SERVICE_URL + '/checklogin';
-            var username = username, password = password;
-            $http({
-                  method: 'POST',
-                  url: url,
-                  data: { userName: username, password: password },
-                  headers: {
-                    'Content-Type': 'application/json'
-                  }
-                })
-               .then(function (response) {
-                    var response = response.data;
-                    if(!response.success) {
-                        response.message = 'Username or password is incorrect';
-                    }
-                    callback(response);
-               });
-
-        };
- 
-        service.SetCredentials = function (username, password) {
-            var authdata = Base64.encode(username + ':' + password);
- 
-            $rootScope.globals = {
-                currentUser: {
-                    username: username,
-                    authdata: authdata
+        /* Use this for real authentication
+         ----------------------------------------------*/
+        var url = SERVICE_URL + '/checklogin';
+        var username = username, password = password;
+        debugger;
+        $http({
+              method: 'POST',
+              url: url,
+              data: { userName: username, password: password },
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+           .then(function (response) {
+                var response = response.data;
+                if(!response.success) {
+                    response.message = 'Username or password is incorrect';
                 }
-            };
- 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $cookieStore.put('globals', $rootScope.globals);
+                debugger;
+                callback(response);
+           });
+
+    };
+
+    service.SetCredentials = function (username, password, imageurl = '') {
+        var authdata = Base64.encode(username + ':' + password);
+
+        $rootScope.globals = {
+            currentUser: {
+                username: username,
+                authdata: authdata,
+                imageURL: imageurl
+            }
         };
- 
-        service.ClearCredentials = function () {
-            $rootScope.globals = {};
-            $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic ';
-        };
- 
-        return service;
-    }])
- 
+
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+        $cookieStore.put('globals', $rootScope.globals);
+    };
+
+    service.ClearCredentials = function () {
+        $rootScope.globals = {};
+        $cookieStore.remove('globals');
+        $http.defaults.headers.common.Authorization = 'Basic ';
+    };
+
+    return service;
+  }]
+)
+.factory('Facebook', ['$rootScope', '$http', '$state', 'AuthenticationService',  
+  function ($rootScope, $http, $state, AuthenticationService) {
+    // return {
+    var facebook = {};
+    facebook.getLoginStatus = function () {
+        FB.getLoginStatus(function (response) {
+            $rootScope.$broadcast("fb_statusChange", {'status':response.status});
+        }, true);
+    };
+    facebook.login = function () {
+        FB.getLoginStatus(function (response) {
+            switch (response.status) {
+                case 'connected':
+                    $rootScope.$broadcast('fb_connected', {facebook_id:response.authResponse.userID});
+                    $http({
+                        method: 'GET',
+                        url: 'http://haastika.com:8080/HaastikaDataService/authenticate/login/facebook',
+                        params: {'token': response.authResponse.accessToken}
+                    }).then(function successCallback(response) {
+                        window.localStorage.setItem("accessToken", response.data.token);
+                        $state.go('home');
+                    }, function errorCallback(response) {
+                        console.log("Error in saving.");
+                    });
+                    break;
+                case 'not_authorized':
+                case 'unknown':
+                    FB.login(function (response) {
+                      debugger;
+                        if (response.authResponse) {
+                            $http({
+                                method: 'GET',
+                                url: 'http://haastika.com:8080/HaastikaDataService/authenticate/login/facebook',
+                                params: {'token': response.authResponse.accessToken}
+                            }).then(function successCallback(response) {
+                                // Stores the access token for 30 sec and then resets automatically
+                                window.localStorage.setItem("accessToken", response.data.token);
+                                // setInterval(function(){
+                                //   window.localStorage.setItem("accessToken", "");
+                                // }, 30 * 1000);
+                                $state.go('home');
+                            }, function errorCallback(response) {
+                                console.log("Error in saving.");
+                            });
+                        } else {
+                            $rootScope.$broadcast('fb_login_failed');
+                        }
+                    }, {scope:'read_stream, publish_stream, email'});
+                    break;
+                default:
+                    FB.login(function (response) {
+                        if (response.authResponse) {
+                            $rootScope.$broadcast('fb_connected', {facebook_id:response.authResponse.userID});
+                            $rootScope.$broadcast('fb_get_login_status');
+                        } else {
+                            $rootScope.$broadcast('fb_login_failed');
+                        }
+                    });
+                    break;
+            }
+        }, true);
+    };
+    facebook.logout = function () {
+        FB.logout(function (response) {
+            if (response) {
+                $rootScope.$broadcast('fb_logout_succeded');
+            } else {
+                $rootScope.$broadcast('fb_logout_failed');
+            }
+        });
+    };
+    facebook.unsubscribe = function () {
+        FB.api("/me/permissions", "DELETE", function (response) {
+            $rootScope.$broadcast('fb_get_login_status');
+        });
+    };
+    return facebook;
+  }]
+) 
 .factory('Base64', function () {
     /* jshint ignore:start */
  
@@ -147,4 +218,4 @@ angular.module('eCommerce')
     };
  
     /* jshint ignore:end */
-});
+})

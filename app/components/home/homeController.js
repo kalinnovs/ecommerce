@@ -5,7 +5,7 @@ angular.module('eCommerce')
     var home = this;
     var scoper = $scope;
     $scope.user = "pritish";
-
+    
     // Root scoping cartItem array globally across the application
     $rootScope.cartItems = (window.localStorage.itemsArray) ? JSON.parse(window.localStorage.itemsArray) : [];
     
@@ -14,8 +14,14 @@ angular.module('eCommerce')
         .then(function(data) {
           if(data.success === undefined || data.success) {
             $rootScope.navigation = data.pageNavigation.categories;
-            window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
-            window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
+            try {
+              window.userDetails = data.loggedUser;
+              window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
+            } catch (e) {
+              if (e == QUOTA_EXCEEDED_ERR) {
+                alert('Quota exceeded!'); //data wasn't successfully saved due to quota exceed so throw an error
+              }
+            }
             $scope.$broadcast('dataloaded');
           } else {
             // Else pick local JSON

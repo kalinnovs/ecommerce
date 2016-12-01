@@ -438,12 +438,14 @@ a.noDecoration:hover {
     width: 20px;
     height: 20px;
 }
+.social-strip .profilePicUpdate.loggedIn {
+    margin-right: 5px;
+}
 .social-strip .profilePicUpdate img {
     display: none;
 }
 .social-strip .profilePicUpdate.loggedIn img {
     display: block;
-    margin-top: 5px;
 }
 .social-strip .profilePicUpdate .fa {
     display: block;
@@ -949,10 +951,14 @@ header nav ul> li .sub-menu.catalog .links a {
     line-height: 32px;
 }
 .menu .social-strip {
-    margin-top: 8px;
+    margin-top: 7px;
+    top: 2px;
     position: relative;
     height: 28px;
     opacity: 0;
+}
+.isSafari .menu .social-strip {
+    margin-top: 10px;
 }
 .menu .social-strip ul {
     position: absolute;
@@ -963,6 +969,10 @@ header nav ul> li .sub-menu.catalog .links a {
     -moz-transition: top .2s;
     -ms-transition: top .2s;
     -webkit-transition: top .2s;
+}
+.social-strip a.profile, .social-strip a.profile + a {
+    display: inline-block;
+    vertical-align: top;
 }
 .menu .logo {
     opacity: 0;
@@ -1019,6 +1029,9 @@ header nav ul> li .sub-menu.catalog .links a {
 .desktop-nav> ul {
     display: inline-block;
     margin-top: -5px;
+}
+.isSafari .desktop-nav> ul {
+    margin-top: 0
 }
 .desktop-nav .activator {
     display: none
@@ -2779,6 +2792,9 @@ footer .back-top .pageCounter {
     font-size: 14px;
     margin-left: 35px;
 }
+.registrationForm label {
+    display: none;
+}
 
 /****************************************************************************
     *-*-*-* Subscription List *-*-*-*
@@ -2947,6 +2963,13 @@ footer .back-top .pageCounter {
 }
 
 /***************** Login ******************/
+
+/***************** Accounts ******************/
+.accounts-container {
+    background-color: #f3f6f8;
+    padding: 20px 0;
+    text-align: center;
+}
 
 /****************************************************************************
     *-*-*-* Cart *-*-*-*
@@ -3586,6 +3609,7 @@ input.form-control {
     border-radius: 0;
     padding: 10px 0;
     font-size: 16px;
+    line-height: 14px;
 }
 input.form-control:focus {
     border-color: #d05715;

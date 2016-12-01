@@ -44,6 +44,7 @@ require("../../../app/components/cart/cartService.js");
 
 require("../../../app/components/register/registerController.js");
 
+require("../../../app/components/accounts/accountsController.js");
 
 require("../../../app/components/subscribers/subscriberController.js");
 
