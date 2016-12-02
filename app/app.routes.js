@@ -1,5 +1,5 @@
 
-angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload', 'FacebookProvider'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
   // .constant('SERVICE_URL', '/HaastikaWebService')
@@ -23,6 +23,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         templateUrl: 'app/components/login/loginView.html',
         controller: 'LoginCtrl',
         controllerAs: 'login'
+      })
+      .state('accounts', {
+        url:'/accounts',
+        templateUrl: 'app/components/accounts/accountView.html',
+        controller: 'AccoutsCtrl',
+        controllerAs: 'accounts'
       })
       .state('home', {
         url:'/home',
@@ -246,6 +252,14 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
       }
 
+      // Checks if an user logged in goes to home or else remains in login page
+      if($location.path().indexOf("login") !== -1) {
+        // debugger;
+          // if(window.localStorage.getItem("accessToken") !== "") {
+          //     $location.path('/home');
+          // }
+      } 
+
       $rootScope.$on('$locationChangeStart', function (event, next, current) {
           // redirect to login page if not logged in and trying to access a restricted page
           // Assigning Restricted pages list !!
@@ -266,13 +280,17 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
 
       // Facebook Authentication
       window.fbAsyncInit = function () {
-          FB.init({
-              appId:'1719553531700651',
-              status:true,
-              cookie:true,
-              xfbml:true,
-              version: 'v2.8'
-          });
+        FB.init({
+            appId:'1719553531700651',
+            status:true,
+            cookie:true,
+            xfbml:true,
+            version: 'v2.8'
+        });
+        
+        FB.Event.subscribe('auth.statusChange', function(response) {
+            $rootScope.$broadcast("fb_statusChange", {'status': response.status});
+        });
       };
   }]);
 

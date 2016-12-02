@@ -75,15 +75,21 @@ function updateUser() {
         "name": "Guest",
         "imageUrl": "" 
     };
-    window.userDetails = (window.sessionStorage.userDetails) ? JSON.parse(window.sessionStorage.userDetails) : emptyUser || emptyUser;
+    window.userDetails = window.userDetails || emptyUser;
     if(window.userDetails.imageUrl !== "") {
         $(".profilePicUpdate").addClass("loggedIn");
         $(".profilePicUpdate").find(".profilePic").attr("src", window.userDetails.imageUrl);
     }
-    $(".userDetailsUpdate").html(window.userDetails.name);
+    $(".userDetailsUpdate").html((window.userDetails.name === "Guest") ? "Login" : window.userDetails.name);
+    $(".userDetailsUpdate").attr("href", (window.userDetails.name === "Guest") ? "/login" : "/accounts");
 };
 
 $(document).ready(function(e) {
+
+    // Adds Safari class to body
+    if(/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+        $("body").addClass("isSafari");
+    }
 
     // Set default currency INR to body
     $("body").attr("data-currency", "INR");

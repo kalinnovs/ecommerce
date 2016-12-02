@@ -43,6 +43,9 @@ var LoginCtrl = function ($scope, $rootScope, $timeout, $http, $location, $state
         $rootScope.$on("fb_statusChange", function (event, args) {
             $rootScope.fb_status = args.status;
             $rootScope.$apply();
+            if(args.status === "connected") {
+                Facebook.login();
+            }
         });
         $rootScope.$on("fb_get_login_status", function () {
             Facebook.getLoginStatus();
@@ -57,15 +60,14 @@ var LoginCtrl = function ($scope, $rootScope, $timeout, $http, $location, $state
         $rootScope.$on("fb_logout_failed", function () {
             console.log("fb_logout_failed!");
         });
-
         $rootScope.$on("fb_connected", function (event, args) {
             
         });
 
         $scope.fblogin = function () {
-            // $timeout(function () {
+            $timeout(function () {
                 Facebook.login();
-            // }, 100, false);
+            }, 100, false);
         };
 
         $scope.logout = function () {
