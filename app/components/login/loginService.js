@@ -55,8 +55,8 @@ angular.module('eCommerce')
     return service;
   }]
 )
-.factory('Facebook', ['$rootScope', '$http', '$state', 'AuthenticationService',  
-  function ($rootScope, $http, $state, AuthenticationService) {
+.factory('Facebook', ['$rootScope', '$http', '$state', 'PRODUCTDATA_URL',  
+  function ($rootScope, $http, $state, PRODUCTDATA_URL) {
     // return {
     var facebook = {};
     facebook.getLoginStatus = function () {
@@ -69,9 +69,13 @@ angular.module('eCommerce')
             switch (response.status) {
                 case 'connected':
                     $rootScope.$broadcast('fb_connected', {facebook_id:response.authResponse.userID});
+                    debugger;
+                    // if(window.localStorage.getItem("accessToken") === "") {
+                    //     return true;    
+                    // }
                     $http({
                         method: 'GET',
-                        url: 'http://haastika.com:8080/HaastikaDataService/authenticate/login/facebook',
+                        url: PRODUCTDATA_URL + '/authenticate/login/facebook',
                         params: {'token': response.authResponse.accessToken}
                     }).then(function successCallback(response) {
                         window.localStorage.setItem("accessToken", response.data.token);
@@ -87,7 +91,7 @@ angular.module('eCommerce')
                         if (response.authResponse) {
                             $http({
                                 method: 'GET',
-                                url: 'http://haastika.com:8080/HaastikaDataService/authenticate/login/facebook',
+                                url: PRODUCTDATA_URL + '/authenticate/login/facebook',
                                 params: {'token': response.authResponse.accessToken}
                             }).then(function successCallback(response) {
                                 // Stores the access token for 30 sec and then resets automatically
@@ -132,6 +136,85 @@ angular.module('eCommerce')
         });
     };
     return facebook;
+  }]
+) 
+.factory('Google', ['$rootScope', '$http', '$state', 'PRODUCTDATA_URL',  
+  function ($rootScope, $http, $state, PRODUCTDATA_URL) {
+    // return {
+    var google = {};
+    google.getLoginStatus = function () {
+        FB.getLoginStatus(function (response) {
+            $rootScope.$broadcast("fb_statusChange", {'status':response.status});
+        }, true);
+    };
+    google.login = function () {
+        FB.getLoginStatus(function (response) {
+            switch (response.status) {
+                case 'connected':
+                    $rootScope.$broadcast('fb_connected', {facebook_id:response.authResponse.userID});
+                    $http({
+                        method: 'GET',
+                        url: PRODUCTDATA_URL + '/authenticate/login/facebook',
+                        params: {'token': response.authResponse.accessToken}
+                    }).then(function successCallback(response) {
+                        window.localStorage.setItem("accessToken", response.data.token);
+                        $state.go('home');
+                    }, function errorCallback(response) {
+                        console.log("Error in saving.");
+                    });
+                    break;
+                case 'not_authorized':
+                case 'unknown':
+                    FB.login(function (response) {
+                      debugger;
+                        if (response.authResponse) {
+                            $http({
+                                method: 'GET',
+                                url: PRODUCTDATA_URL + '/authenticate/login/facebook',
+                                params: {'token': response.authResponse.accessToken}
+                            }).then(function successCallback(response) {
+                                // Stores the access token for 30 sec and then resets automatically
+                                window.localStorage.setItem("accessToken", response.data.token);
+                                // setInterval(function(){
+                                //   window.localStorage.setItem("accessToken", "");
+                                // }, 30 * 1000);
+                                $state.go('home');
+                            }, function errorCallback(response) {
+                                console.log("Error in saving.");
+                            });
+                        } else {
+                            $rootScope.$broadcast('fb_login_failed');
+                        }
+                    }, {scope:'read_stream, publish_stream, email'});
+                    break;
+                default:
+                    FB.login(function (response) {
+                        if (response.authResponse) {
+                            $rootScope.$broadcast('fb_connected', {facebook_id:response.authResponse.userID});
+                            $rootScope.$broadcast('fb_get_login_status');
+                        } else {
+                            $rootScope.$broadcast('fb_login_failed');
+                        }
+                    });
+                    break;
+            }
+        }, true);
+    };
+    google.logout = function () {
+        FB.logout(function (response) {
+            if (response) {
+                $rootScope.$broadcast('fb_logout_succeded');
+            } else {
+                $rootScope.$broadcast('fb_logout_failed');
+            }
+        });
+    };
+    google.unsubscribe = function () {
+        FB.api("/me/permissions", "DELETE", function (response) {
+            $rootScope.$broadcast('fb_get_login_status');
+        });
+    };
+    return google;
   }]
 ) 
 .factory('Base64', function () {

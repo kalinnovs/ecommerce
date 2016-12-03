@@ -89,7 +89,7 @@
 						<p><span>Height</span><span>{{data.productSpecification.height}} {{data.dimensionUnit | lowercase}}</span></p>
 						<p><span>Width</span><span>{{data.productSpecification.width}} {{data.dimensionUnit | lowercase}}</span></p>
 						<p><span>Depth</span><span>{{data.productSpecification.depth}} {{data.dimensionUnit | lowercase}}</span></p>
-						<p><span>Weight</span><span>{{data.productSpecification.weight}} Gm.</span></p>
+						<p><span>Weight</span><span>{{data.productSpecification.weight}}</span></p>
 					</div>
                     <add-to-cart part-number="data" class="btn btn-primary">Add to Cart</add-to-cart>
 					<div class="callDetails">
@@ -124,12 +124,13 @@
 							<p><span>Height: </span>{{data.productSpecification.height}} {{data.dimensionUnit | lowercase}}</p>
 							<p><span>Width: </span>{{data.productSpecification.width}} {{data.dimensionUnit | lowercase}}</p>
 							<p><span>Depth: </span>{{data.productSpecification.depth}} {{data.dimensionUnit | lowercase}}</p>
-							<p><span>Weight: </span>{{data.productSpecification.weight}} Gm.</p>
+							<p><span>Weight: </span>{{data.productSpecification.weight}}</p>
 						</div>
 					</div>
 					<div class="usage" style="display: none;">
 						<div>
-							<h5>{{data.use}}</h5>
+							<h5>Usage: </h5>
+							<p>{{data.productSpecification.usageDetails}}</p>
 						</div>
 					</div>
 				</div>

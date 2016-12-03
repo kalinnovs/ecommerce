@@ -433,8 +433,11 @@ a.noDecoration:hover {
     display: inline-block;
     border-radius: 50%;
 }
-.social-strip .profilePicUpdate {
+.social-strip .profile span {
     display: inline-block;
+    vertical-align: middle;
+}
+.social-strip .profilePicUpdate {
     width: 20px;
     height: 20px;
 }
@@ -452,6 +455,12 @@ a.noDecoration:hover {
 }
 .social-strip .profilePicUpdate.loggedIn .fa {
     display: none;
+}
+.social-strip .profile .logoutText {
+    display: none;
+}
+.minicart .profile .loggedIn + .logoutText {
+    display: inline-block;
 }
 .social-strip.mobileView {
     display: none
@@ -1783,7 +1792,7 @@ add-to-cart {
     height: 100%;
 }
 .add-to-cart button:before {
-    top: 5px;
+    top: 4px;
     position: absolute;
     left: 6px;
 }

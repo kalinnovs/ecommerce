@@ -5,10 +5,7 @@ angular.module('eCommerce')
     var details = this;
     $scope.currentState = $state.params.id;
     
-
-    // DetailService.getFromURL( BASE_URI + '/eCommerce/productDetails.json')
-    // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
-    DetailService.getFromURL( SERVICE_URL + '/product/'+$stateParams.id)
+    DetailService.getFromURL( PRODUCTDATA_URL + '/productData/product/'+$stateParams.id)
         .then(function(data) {
             if(jQuery.isEmptyObject(data.productDetails)) {
                 $state.go('home');

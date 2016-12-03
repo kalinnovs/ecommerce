@@ -8,7 +8,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
-    // $httpProvider.interceptors.push('httpRequestInterceptor');
+    $httpProvider.interceptors.push('httpRequestInterceptor');
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -235,8 +235,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       
       // var accessToken = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
       // $http.defaults.headers.common['X-Auth-Token'] = 'Basic' + $rootScope.apiKey;
-      // $http.defaults.headers.common['auth-token'] = 'C3PO R2D2';
-
 
       $rootScope.$on('$stateChangeSuccess',function(){
         var location = window.location.pathname;
@@ -255,7 +253,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       // Checks if an user logged in goes to home or else remains in login page
       if($location.path().indexOf("login") !== -1) {
         // debugger;
-          // if(window.localStorage.getItem("accessToken") !== "") {
+          // if(window.localStorage.getItem("accessToken")) {
           //     $location.path('/home');
           // }
       } 
@@ -292,14 +290,14 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
             $rootScope.$broadcast("fb_statusChange", {'status': response.status});
         });
       };
-  }]);
 
-  angular.module('eCommerce').factory('httpRequestInterceptor', function () {
+      // Google Authentication
+  }])
+  .factory('httpRequestInterceptor', function () {
     return {
       request: function (config) {
         var token = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
-        config.headers['Authorization'] = s;
-
+        config.headers['Authorization'] = token;
         return config;
       }
     };

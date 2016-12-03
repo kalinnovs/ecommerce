@@ -60,12 +60,14 @@ window.dataLoaded = false;
 
 //Watcher for dataLoader
 window.watch('dataLoaded', function(id, oldval, newval) {
+    if(oldval === newval) {
+        return;
+    }
     if (newval === true) {
         $(".progress").hide();
         updateUser();
     } else {
         $(".progress").show();
-        updateUser();
     }
     return newval;
 });
@@ -76,12 +78,15 @@ function updateUser() {
         "imageUrl": "" 
     };
     window.userDetails = window.userDetails || emptyUser;
+    if(window.userDetails.name === "Guest") {
+        // window.localStorage.setItem("accessToken", "");
+    }
     if(window.userDetails.imageUrl !== "") {
         $(".profilePicUpdate").addClass("loggedIn");
         $(".profilePicUpdate").find(".profilePic").attr("src", window.userDetails.imageUrl);
     }
-    $(".userDetailsUpdate").html((window.userDetails.name === "Guest") ? "Login" : window.userDetails.name);
-    $(".userDetailsUpdate").attr("href", (window.userDetails.name === "Guest") ? "/login" : "/accounts");
+    $(".userDetailsUpdate").text((window.userDetails.name === "Guest") ? "Login" : window.userDetails.name);
+    $(".profile").attr("href", (window.userDetails.name === "Guest") ? "/login" : "/accounts");
 };
 
 $(document).ready(function(e) {
