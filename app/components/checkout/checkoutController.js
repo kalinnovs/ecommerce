@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$controller', '$state', 'CheckoutService', 'checkoutStorage', 'SERVICE_URL', 'PRODUCTDATA_URL', function($scope, $http, $rootScope, $timeout, $controller, $state, CheckoutService, checkoutStorage, SERVICE_URL, PRODUCTDATA_URL) {
+    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$controller', '$state', 'CheckoutService', 'checkoutStorage', 'SERVICE_URL', 'PRODUCTDATA_URL', '$location',  function($scope, $http, $rootScope, $timeout, $controller, $state, CheckoutService, checkoutStorage, SERVICE_URL, PRODUCTDATA_URL, $location) {
         var checkout = this,
         responseData;
 
@@ -128,12 +128,11 @@ angular.module('eCommerce')
         };
         
         $scope.proceedTo = function(event, step) {
-            debugger;
             // updates storage with reference to 'checkout' object from view
             updateStorage(this.co);
             // Updates path
             $(event.currentTarget).parents(".container.form-views").animate({height: 0 }, 400, function() {
-                $state.go("checkout."+step);
+                $rootScope.$broadcast("checkout_uri_changed", {'step': step});
             });
         };
 
@@ -142,7 +141,7 @@ angular.module('eCommerce')
             updateStorage(this.co);
             // Updates path
             $(".form-views.active").animate({height: 0 }, 400, function() {
-                $state.go("checkout."+step);
+                $rootScope.$broadcast("checkout_uri_changed", {'step': to});
             });
         };
 
@@ -225,7 +224,10 @@ angular.module('eCommerce')
 
         
         // Detect On DOM loaded change
+        var currentState = $state.current.name.split("checkout.")[1];
         $scope.$on('$viewContentLoaded', function(){
+            $(".checkout").find("."+currentState).addClass("selected");
+
             //Here your view content is fully loaded !!
             $(".checkout .section").each(function(i, j) {
                 if(!$(this).find(".container").hasClass("active")) {
@@ -340,21 +342,20 @@ angular.module('eCommerce')
         };
 
         // function to submit the form after all validation has occurred            
-        $scope.updateCheckoutStep = function(event, from, to, $state) {
+        $scope.updateCheckoutStep = $.proxy(function(event, from, to) {
             var self = this;
-            this.steps[to] = true;
-            // Stores the steps completed on page load
-            checkoutStorage.setData(this.steps, 'steps');
 
             // updates storage with reference to 'checkout' object from view
             updateStorage(this.co, 'storage');
             // Updates path
             $(event.currentTarget).parents(".container.form-views").animate({height: 0 }, 400, function() {
-                // $state.go("checkout."+step);
-                self.state.go("checkout."+to);
+                var steps = JSON.parse(window.sessionStorage.checkoutState);
+                steps[from] = true;
+                window.sessionStorage.setItem('checkoutState', JSON.stringify(steps));
+                $rootScope.$broadcast("checkout_uri_changed", {'step': to});
             });
             
-        };
+        }, $scope);
 
         $(document).on('data-currency-changed', $.proxy(function(e, key){
             $scope.subTotal();

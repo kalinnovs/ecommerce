@@ -1,15 +1,15 @@
 'use strict';
  
 angular.module('eCommerce')
-.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', 'SERVICE_URL',
-  function (Base64, $http, $cookieStore, $rootScope, $timeout, SERVICE_URL) {
+.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', 'SERVICE_URL', 'PRODUCTDATA_URL',
+  function (Base64, $http, $cookieStore, $rootScope, $timeout, SERVICE_URL, PRODUCTDATA_URL) {
     var service = {};
 
     service.Login = function (username, password, callback) {
 
         /* Use this for real authentication
          ----------------------------------------------*/
-        var url = SERVICE_URL + '/checklogin';
+        var url = PRODUCTDATA_URL + '/authenticate/checklogin';
         var username = username, password = password;
         debugger;
         $http({

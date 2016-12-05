@@ -47,6 +47,7 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
             $scope.state = true;
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
                 if(response.success) {
+                    debugger;
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     $location.path('/admin');
                 } else {
