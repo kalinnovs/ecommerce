@@ -3610,6 +3610,9 @@ footer .back-top .pageCounter {
     border: 0;
     box-shadow: none;
 }
+.cartMailForm label {
+    display: none;
+}
 
 /* Form Input Start */
 
