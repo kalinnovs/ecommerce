@@ -433,8 +433,11 @@ a.noDecoration:hover {
     display: inline-block;
     border-radius: 50%;
 }
-.social-strip .profilePicUpdate {
+.social-strip .profile span {
     display: inline-block;
+    vertical-align: middle;
+}
+.social-strip .profilePicUpdate {
     width: 20px;
     height: 20px;
 }
@@ -452,6 +455,12 @@ a.noDecoration:hover {
 }
 .social-strip .profilePicUpdate.loggedIn .fa {
     display: none;
+}
+.social-strip .profile .logoutText {
+    display: none;
+}
+.minicart .profile .loggedIn + .logoutText {
+    display: inline-block;
 }
 .social-strip.mobileView {
     display: none
@@ -1783,7 +1792,7 @@ add-to-cart {
     height: 100%;
 }
 .add-to-cart button:before {
-    top: 5px;
+    top: 4px;
     position: absolute;
     left: 6px;
 }
@@ -3287,6 +3296,9 @@ footer .back-top .pageCounter {
 .checkout {
     
 }
+.checkout .container label {
+    display: none;
+}
 .checkout .columns {
     margin: 0;
 }
@@ -3329,6 +3341,9 @@ footer .back-top .pageCounter {
     background: #f3f6f8;
     position: relative;
     max-width: 100%;
+}
+.checkout .section.selected ~ .section > button {
+    display: none;
 }
 .checkout .section h3 {
     font-size: 24px;
@@ -3402,6 +3417,7 @@ footer .back-top .pageCounter {
     margin-top: 25px;
     border-top: dotted 1px #999;
     padding-top: 25px;
+    position: relative;
 }
 .checkout .secondCol .order-section h4 {
     display: inline-block;
@@ -3416,6 +3432,7 @@ footer .back-top .pageCounter {
     display: inline-block;
     vertical-align: middle;
     margin: 4px 5px;
+    right: 0;
 }
 .checkout .section .modifyBtn, 
 .checkout .secondCol .order-section button {
@@ -3429,7 +3446,9 @@ footer .back-top .pageCounter {
     margin-right: 5px;
 }
 .checkout .section .modifyBtn {
-    margin-top: -32px;
+    position: absolute;
+    top: 28px;
+    right: 20px;
 }
 .checkout .form-views.active + button.modifyBtn {
     display: none;
@@ -3590,6 +3609,9 @@ footer .back-top .pageCounter {
 .checkout .payment-types .form-control {
     border: 0;
     box-shadow: none;
+}
+.cartMailForm label {
+    display: none;
 }
 
 /* Form Input Start */

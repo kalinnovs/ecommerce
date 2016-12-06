@@ -8,7 +8,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
-    // $httpProvider.interceptors.push('httpRequestInterceptor');
+    $httpProvider.interceptors.push('httpRequestInterceptor');
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -230,13 +230,18 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
     $locationProvider.html5Mode(true);
 
   })
-  .run(['$rootScope', '$location', '$http', '$cookieStore', 
-    function run($rootScope, $location, $http, $cookieStore) {
+  .run(['$rootScope', '$location', '$http', '$cookieStore', '$state', 
+    function run($rootScope, $location, $http, $cookieStore, $state) {
       
       // var accessToken = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
       // $http.defaults.headers.common['X-Auth-Token'] = 'Basic' + $rootScope.apiKey;
-      // $http.defaults.headers.common['auth-token'] = 'C3PO R2D2';
 
+      // Steps store
+      if(!window.sessionStorage.steps) {
+        console.log("clearing");
+        window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');  
+      }
+      
 
       $rootScope.$on('$stateChangeSuccess',function(){
         var location = window.location.pathname;
@@ -246,19 +251,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         }
       });
 
-      //  // keep user logged in after page refresh
+      // keep user logged in after page refresh
       $rootScope.globals = $cookieStore.get('globals') || {};
       if ($rootScope.globals.currentUser) {
           $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
       }
-
-      // Checks if an user logged in goes to home or else remains in login page
-      if($location.path().indexOf("login") !== -1) {
-        // debugger;
-          // if(window.localStorage.getItem("accessToken") !== "") {
-          //     $location.path('/home');
-          // }
-      } 
 
       $rootScope.$on('$locationChangeStart', function (event, next, current) {
           // redirect to login page if not logged in and trying to access a restricted page
@@ -269,13 +266,47 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
               $location.path('/login');
           }
 
+          //Validate Checkout URI states with actual submitted data
+          // If the state is not cleared then it will redirect to beginning of the state.
+          var validateURI = false, validStateIndex = 0,
+          steps = JSON.parse(window.sessionStorage.checkoutState),
+          currentState = $location.path().split("/checkout/")[1];
+          function validateStateUrls() {
+            for(var keys in steps) {
+              if(keys === currentState) {
+                  break;
+              }
+              if(steps[keys]) {
+                  validStateIndex++;
+                  validateURI = true; 
+              } else {
+                  validateURI = false;
+              }
+            }  
+          };
+
+          // $state.go("checkout."+step);
+          $rootScope.$on("checkout_uri_changed", function (step, obj) {
+            $state.go("checkout."+obj.step);
+            $location.path('/checkout/'+obj.step);
+          });
+
+          
           // Checkout redirection on zero cart items
           if($location.path().indexOf("checkout") !== -1) {
             var cartlength = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts).length : 0;
             if(cartlength === 0) {
-              $location.path('/home'); 
+              $location.path('/home');
+            } else {
+              if(validateURI === false) {
+                validStateIndex = 0;
+                validateStateUrls();
+                debugger;
+                $location.path('/checkout/'+ Object.keys(steps)[validStateIndex]);
+              }
             }  
           }
+
       });
 
       // Facebook Authentication
@@ -292,14 +323,14 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
             $rootScope.$broadcast("fb_statusChange", {'status': response.status});
         });
       };
-  }]);
 
-  angular.module('eCommerce').factory('httpRequestInterceptor', function () {
+      // Google Authentication
+  }])
+  .factory('httpRequestInterceptor', function () {
     return {
       request: function (config) {
         var token = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
-        config.headers['Authorization'] = s;
-
+        config.headers['Authorization'] = token;
         return config;
       }
     };

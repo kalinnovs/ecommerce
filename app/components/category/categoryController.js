@@ -5,7 +5,7 @@ angular.module('eCommerce')
         var cat = this;
         var scoper = $scope;
 
-        CategoryService.getFromURL(PRODUCTDATA_URL + '/category/' + $stateParams.id)
+        CategoryService.getFromURL(PRODUCTDATA_URL + '/productData/category/' + $stateParams.id)
             .then(function(data) {
                 cat.data = data.categoryDetails;
                 // $rootScope.navigation.selectedCategory = data.categoryDetails.selectedCategory.partNumber;

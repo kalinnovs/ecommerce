@@ -1,12 +1,30 @@
 'use strict';
  
-var LoginCtrl = function ($scope, $rootScope, $timeout, $http, $location, $stateParams, PRODUCTDATA_URL, AuthenticationService, Facebook) {
+var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location, $stateParams, UserService, PRODUCTDATA_URL, AuthenticationService, Facebook) {
         // reset login status
         AuthenticationService.ClearCredentials();
         $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
         this.state = "login";
         this.header = "Login Haastika";
         var that = this;
+
+        UserService.GetAll( PRODUCTDATA_URL + '/authenticate/validate')
+        .then(function(data) {
+          if(data.success === true) {
+            debugger;
+            $state.go('home');
+          } else {
+            // Else pick local JSON
+            window.userDetails = null;
+            window.dataLoaded = true;
+          }
+        })
+        .catch(function(error) {
+            //
+        })
+        .finally(function() {
+            //
+        });
 
         if ($stateParams.uid) {
             this.uid = $stateParams.uid;
@@ -29,6 +47,7 @@ var LoginCtrl = function ($scope, $rootScope, $timeout, $http, $location, $state
             $scope.state = true;
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
                 if(response.success) {
+                    debugger;
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     $location.path('/admin');
                 } else {
@@ -43,9 +62,9 @@ var LoginCtrl = function ($scope, $rootScope, $timeout, $http, $location, $state
         $rootScope.$on("fb_statusChange", function (event, args) {
             $rootScope.fb_status = args.status;
             $rootScope.$apply();
-            if(args.status === "connected") {
-                Facebook.login();
-            }
+            // if(args.status === "connected") {
+            //     Facebook.login();
+            // }
         });
         $rootScope.$on("fb_get_login_status", function () {
             Facebook.getLoginStatus();
@@ -61,7 +80,7 @@ var LoginCtrl = function ($scope, $rootScope, $timeout, $http, $location, $state
             console.log("fb_logout_failed!");
         });
         $rootScope.$on("fb_connected", function (event, args) {
-            
+            window.fbConnected = true;
         });
 
         $scope.fblogin = function () {
@@ -73,6 +92,8 @@ var LoginCtrl = function ($scope, $rootScope, $timeout, $http, $location, $state
         $scope.logout = function () {
             Facebook.logout();
             $rootScope.session = {};
+            // window.localStorage.setItem("accessToken", "");
+            window.fbConnected = false;
             //make a call to a php page that will erase the session data
             // $http.post("php/logout.php");
         };
@@ -132,5 +153,5 @@ var LoginCtrl = function ($scope, $rootScope, $timeout, $http, $location, $state
         };
     };
 
-LoginCtrl.$inject = ['$scope', '$rootScope', '$timeout', '$http', '$location', '$stateParams', 'PRODUCTDATA_URL', 'AuthenticationService', 'Facebook'];
+LoginCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', '$http', '$location', '$stateParams', 'UserService', 'PRODUCTDATA_URL', 'AuthenticationService', 'Facebook'];
 angular.module('eCommerce').controller('LoginCtrl', LoginCtrl); 
