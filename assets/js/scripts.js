@@ -1,4 +1,4 @@
-// object.watch
+    // object.watch
 if (!Object.prototype.watch) {
     Object.defineProperty(Object.prototype, "watch", {
         enumerable: false,
@@ -44,7 +44,6 @@ Object.defineProperty(window.itemsArray, "push", {
     }
 });
 
-
 function RaiseMyEvent(id, oldVal, newVal) {
     createMiniKart();
 };
@@ -75,16 +74,16 @@ window.watch('dataLoaded', function(id, oldval, newval) {
 function updateUser() {
     var emptyUser = {
         "name": "Guest",
-        "imageUrl": "" 
+        "imageUrl": "",
+        "user": null 
     };
     window.userDetails = window.userDetails || emptyUser;
-    if(window.userDetails.name === "Guest") {
-        // window.localStorage.setItem("accessToken", "");
-    }
     if(window.userDetails.imageUrl !== "") {
         $(".profilePicUpdate").addClass("loggedIn");
-        $(".profilePicUpdate").find(".profilePic").attr("src", window.userDetails.imageUrl);
+    } else {
+        $(".profilePicUpdate").removeClass("loggedIn");
     }
+    $(".profilePicUpdate").find(".profilePic").attr("src", window.userDetails.imageUrl);
     $(".userDetailsUpdate").text((window.userDetails.name === "Guest") ? "Login" : window.userDetails.name);
     $(".profile").attr("href", (window.userDetails.name === "Guest") ? "/login" : "/accounts");
 };

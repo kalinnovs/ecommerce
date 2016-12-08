@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$controller', '$state', 'CheckoutService', 'checkoutStorage', 'SERVICE_URL', 'PRODUCTDATA_URL', '$location',  function($scope, $http, $rootScope, $timeout, $controller, $state, CheckoutService, checkoutStorage, SERVICE_URL, PRODUCTDATA_URL, $location) {
+    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'SERVICE_URL', 'PRODUCTDATA_URL', '$location', 'AuthenticationService', 'Facebook',  function($scope, $http, $rootScope, $timeout, $controller, $state, checkoutStorage, CheckoutService, SERVICE_URL, PRODUCTDATA_URL, $location, AuthenticationService, Facebook) {
         var checkout = this,
         responseData;
 
@@ -19,43 +19,9 @@ angular.module('eCommerce')
             "tax": 6.5,
             "discount": 15
         };
-
-        // Steps store
-        $scope.steps = {
-            "login": true,
-            "address": false,
-            "order": false,
-            "payment": false
-        };
-
-
-        // $scope.checkoutCartConfig.discount = ($scope.co && $scope.co.order) ? $scope.co.order.discountPrice : 0;
-
-        // Validation Config
-        var coValidationConfig = {
-            "loginForm": {
-                "firstName": ["required"],
-                "password": ["required"]
-            },
-            "guestLoginForm": {
-                "emailId": ["required"]
-            },
-            "addressForm": {
-                "name":["required"],
-                "houseNumber":["required"],
-                "street":["required"],
-                "landmark":["required"],
-                "phone":["required"],
-                "pin":["required"],
-                "city":["required"],
-                "state":["required"],
-                "emailId":["required"],
-                "cell":["required"]
-            },
-            "orderForm": {
-                "promo": ["required"]
-            }
-        };
+        
+        // Singleton Variables to restrict repeated service calls
+        window.singleCall = (window.singleCall === undefined) ? { cartDetails: true, authenticateUser: true } : window.singleCall;
 
         // Injecting Math into cart scope
         $scope.Math = window.Math;
@@ -63,6 +29,7 @@ angular.module('eCommerce')
         window.dataLoaded = true;
         scrollTo($state.current.name);
 
+        
         function getCartDetails() {
             // Read Cart Array and pass to URL
             var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
@@ -70,21 +37,26 @@ angular.module('eCommerce')
             
             var objectToSerialize={'products':cartArray};
             
-            $http({
-                method: 'POST',
-                url: PRODUCTDATA_URL + '/cart/products',
-                data: JSON.stringify(objectToSerialize)
-            }).then(function successCallback(response) {
-                responseData = response.data;
-                $.each(responseData, function(key, val) {
-                    val["quantity"] = cartItems[key].quantity;
-                });
-                $scope.orderedItems = (responseData) ? responseData : [];
-                // Stores the steps completed on page load
-                checkoutStorage.setData($scope.steps, 'steps');
-            }, function errorCallback(response) {
-                console.log("Error in saving.");
-            });    
+            if(window.singleCall.cartDetails) {
+                window.singleCall.cartDetails = false;
+                $http({
+                    method: 'POST',
+                    url: PRODUCTDATA_URL + '/cart/products',
+                    data: JSON.stringify(objectToSerialize)
+                }).then(function successCallback(response) {
+                    responseData = response.data;
+                    $.each(responseData, function(key, val) {
+                        val["quantity"] = cartItems[key].quantity;
+                    });
+                    $scope.orderedItems = (responseData) ? responseData : [];
+                    //Resets singleton variable check
+                    window.singleCall.cartdetails = true;
+                    // Stores the steps completed on page load
+                    checkoutStorage.setData($scope.steps, 'steps');
+                }, function errorCallback(response) {
+                    console.log("Error in saving.");
+                }); 
+            }
         }
 
         // Get details from cart
@@ -141,7 +113,7 @@ angular.module('eCommerce')
             updateStorage(this.co);
             // Updates path
             $(".form-views.active").animate({height: 0 }, 400, function() {
-                $rootScope.$broadcast("checkout_uri_changed", {'step': to});
+                $rootScope.$broadcast("checkout_uri_changed", {'step': step});
             });
         };
 
@@ -222,11 +194,44 @@ angular.module('eCommerce')
             $(event.currentTarget.parentNode).next().height(28);
         };
 
+        $scope.checkoutLogin = function () {
+            var user = $scope.co.user;
+            AuthenticationService.Login(user.emailId, user.password, function(response) {
+                if(response.success) {
+                    AuthenticationService.SetCredentials($scope.username, $scope.password);
+                    // $location.path('/admin');
+                    $location.path('/checkout/address');
+                } else {
+                    $scope.error = response.message;
+                }
+            });
+        };
+
         
         // Detect On DOM loaded change
-        var currentState = $state.current.name.split("checkout.")[1];
         $scope.$on('$viewContentLoaded', function(){
+            var currentState = $state.current.name.split("checkout.")[1];
+            $(".checkout").removeClass("selected");
             $(".checkout").find("."+currentState).addClass("selected");
+
+            // Checks for already logged in users
+            if(currentState === "login" && window.singleCall.authenticateUser) {
+                window.singleCall.authenticateUser = false;
+                CheckoutService.GetAll( PRODUCTDATA_URL + '/authenticate/validate')
+                  .then(function(data) {
+                    if(data.success === true) {
+                      $state.go('checkout.address');
+                      $location.path('/checkout/address');
+                      window.singleCall.authenticateUser = true;
+                    }
+                  })
+                  .catch(function(error) {
+                      //
+                  })
+                  .finally(function() {
+                      //
+                  });
+            }
 
             //Here your view content is fully loaded !!
             $(".checkout .section").each(function(i, j) {

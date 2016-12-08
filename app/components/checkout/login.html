@@ -1,10 +1,11 @@
 <div class="login-form">
 	<div class="row columns">
 		<aside class="col">
-			<form name="loginForm" ng-submit="submitFormed(userForm.$valid, 'loginForm', 'address')">
+			<div ng-show="error" class="alert alert-danger">{{error}}</div>
+			<form name="loginForm">
 				<div class="form-group">
 					<label for="firstName">First name</label>
-					<input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name" ng-model="co.user.firstName" required />
+					<input type="text" name="emailId" id="emailId" class="form-control" placeholder="Email Id" ng-model="co.user.emailId" required />
 					<p class="help-block">You name is required.</p>
 				</div>
 				<div class="form-group">
@@ -13,7 +14,7 @@
 					<p class="help-block">Enter a valid email.</p>
 				</div>
 				<div class="form-actions">
-					<button type="submit" class="btn btn-primary">Sign In</button>
+					<button type="submit" class="btn btn-primary" ng-click="checkoutLogin()">Sign In</button>
 				</div>
 			</form>
 		</aside>

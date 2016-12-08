@@ -25,7 +25,7 @@ angular.module('eCommerce')
                 attrs.$observe('partNumberMap', function (newValue, oldValue) {
                     if (newValue) {
                         if (window.itemsArray.length > 0) {
-                            getMiniCart();
+                            // getMiniCart();
                         }
                     } else if (newValue == false) {
                         alert('Not updated');
@@ -124,6 +124,7 @@ angular.module('eCommerce')
                     console.log('logout clicked');
                     if(window.localStorage.getItem("accessToken") !== "") {
                         window.localStorage.setItem("accessToken", "");
+                        window.userDetails.name = "Guest";
                         window.userDetails.imageUrl = "";
                         $state.go('home');
                     } else {

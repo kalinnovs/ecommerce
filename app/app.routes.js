@@ -230,18 +230,16 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
     $locationProvider.html5Mode(true);
 
   })
-  .run(['$rootScope', '$location', '$http', '$cookieStore', '$state', 
-    function run($rootScope, $location, $http, $cookieStore, $state) {
+  .run(['$rootScope', '$location', '$http', '$cookieStore', '$state', 'Google', '$window', 
+    function run($rootScope, $location, $http, $cookieStore, $state, Google, $window) {
       
       // var accessToken = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
       // $http.defaults.headers.common['X-Auth-Token'] = 'Basic' + $rootScope.apiKey;
 
       // Steps store
       if(!window.sessionStorage.steps) {
-        console.log("clearing");
         window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');  
       }
-      
 
       $rootScope.$on('$stateChangeSuccess',function(){
         var location = window.location.pathname;
@@ -271,6 +269,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           var validateURI = false, validStateIndex = 0,
           steps = JSON.parse(window.sessionStorage.checkoutState),
           currentState = $location.path().split("/checkout/")[1];
+
           function validateStateUrls() {
             for(var keys in steps) {
               if(keys === currentState) {
@@ -301,7 +300,6 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
               if(validateURI === false) {
                 validStateIndex = 0;
                 validateStateUrls();
-                debugger;
                 $location.path('/checkout/'+ Object.keys(steps)[validStateIndex]);
               }
             }  
@@ -325,6 +323,10 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       };
 
       // Google Authentication
+      if(window.handleGoogleClientLoad && gapi) {
+        Google.init();
+      };
+
   }])
   .factory('httpRequestInterceptor', function () {
     return {

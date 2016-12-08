@@ -73,14 +73,14 @@ angular.module('eCommerce')
 
                     addItem(obj);
 
-                    $http({
-                        method: 'GET',
-                        url: 'http://haastika.com:3003/addToCart/' + obj.partNumber.substr(4)
-                    }).then(function successCallback(response) {
-                        console.log(response);
-                    }, function errorCallback(response) {
-                        console.log("Error in saving.");
-                    });
+                    // $http({
+                    //     method: 'GET',
+                    //     url: 'http://haastika.com:3003/addToCart/' + obj.partNumber.substr(4)
+                    // }).then(function successCallback(response) {
+                    //     console.log(response);
+                    // }, function errorCallback(response) {
+                    //     console.log("Error in saving.");
+                    // });
 
                     // window.localStorage.miniCart.items.push(obj);
                     event.preventDefault();

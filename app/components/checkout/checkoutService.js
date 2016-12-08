@@ -11,6 +11,9 @@ angular.module('eCommerce')
         return service.contacts;
     }
 
+    service.GetAll = function(url) {
+        return $http.get(url).then(service.extract, service.handleError('Error getting all users'));
+    }
 
     service.extract = function(result) {
     	return result.data;
@@ -27,6 +30,12 @@ angular.module('eCommerce')
 
     service.getFromURL = function(url) {
         return $http.get(url).then(service.extract);
+    }
+
+    service.handleError = function(res) {
+        return function () {
+            return { success: false, message: res.message };
+        };
     }
 
 
