@@ -1,33 +1,24 @@
 'use strict';
  
-var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location, $stateParams, LoginService, PRODUCTDATA_URL, AuthenticationService, Facebook, Google) {
+var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location, $stateParams, LoginService, PRODUCTDATA_URL, AuthenticationService, Facebook, Google, user) {
         // reset login status
         AuthenticationService.ClearCredentials();
         $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
         this.state = "login";
         this.header = "Login Haastika";
-        var that = this;
+        var that = this,
+        loginStatus = user;
 
-        LoginService.GetAll( PRODUCTDATA_URL + '/authenticate/validate')
-        .then(function(data) {
-          if(data.success === true) {
+        // Login Status Check
+        if(loginStatus.success === true) {
+            var emptyUser = {"name": "Guest","imageUrl": "","user": null};
+            debugger;
+            window.userDetails = window.userDetails || emptyUser;
             $state.go('home');
-          } else {
+        } else {
             // Else pick local JSON
-            window.userDetails = {
-                "name": "Guest",
-                "imageUrl": "",
-                "user": null
-            };
-            window.dataLoaded = true;
-          }
-        })
-        .catch(function(error) {
-            //
-        })
-        .finally(function() {
-            //
-        });
+            window.sessionStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
+        }
 
         if ($stateParams.uid) {
             this.uid = $stateParams.uid;
@@ -42,8 +33,6 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
                 }
             }.bind(this));
         }
-
-
 
         this.login = function () {
             $scope.dataLoading = true;
@@ -157,5 +146,5 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
         });
     };
 
-LoginCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', '$http', '$location', '$stateParams', 'LoginService', 'PRODUCTDATA_URL', 'AuthenticationService', 'Facebook', 'Google'];
+LoginCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', '$http', '$location', '$stateParams', 'LoginService', 'PRODUCTDATA_URL', 'AuthenticationService', 'Facebook', 'Google', 'user'];
 angular.module('eCommerce').controller('LoginCtrl', LoginCtrl); 

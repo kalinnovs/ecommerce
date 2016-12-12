@@ -81,7 +81,7 @@
 		                <span><i class="fa fa-{{currency | lowercase}}"></i> {{getTotal() | number:2}}</span>
 		            </div>
 		            <div class="shipping-charges">
-		                <label>Shipping Charges: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{cartConfig.shippingCost | number:2}}</span>
+		                <label>Shipping Charges: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{checkoutCartConfig.shippingCost | number:2}}</span>
 		            </div>
 		            <div class="tax">
 		                <label>Tax Estimated ({{cartConfig.tax}}%): </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{calculateTax() | number:2}}</span>

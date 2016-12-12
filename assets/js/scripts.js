@@ -76,16 +76,16 @@ function updateUser() {
         "name": "Guest",
         "imageUrl": "",
         "user": null 
-    };
-    window.userDetails = window.userDetails || emptyUser;
-    if(window.userDetails.imageUrl !== "") {
+    },
+    userDetails = (window.sessionStorage.userDetails) ? JSON.parse(window.sessionStorage.userDetails) : emptyUser;
+    if(userDetails.imageUrl !== "") {
         $(".profilePicUpdate").addClass("loggedIn");
     } else {
         $(".profilePicUpdate").removeClass("loggedIn");
     }
-    $(".profilePicUpdate").find(".profilePic").attr("src", window.userDetails.imageUrl);
-    $(".userDetailsUpdate").text((window.userDetails.name === "Guest") ? "Login" : window.userDetails.name);
-    $(".profile").attr("href", (window.userDetails.name === "Guest") ? "/login" : "/accounts");
+    $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
+    $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
+    $(".profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
 };
 
 $(document).ready(function(e) {

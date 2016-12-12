@@ -120,12 +120,11 @@ angular.module('eCommerce')
                     }
                 });
 
-                $(".minicart .profile").on("click", function(event) {
-                    console.log('logout clicked');
+                $(".minicart .profile > span").on("click", function(event) {
                     if(window.localStorage.getItem("accessToken") !== "") {
                         window.localStorage.setItem("accessToken", "");
-                        window.userDetails.name = "Guest";
-                        window.userDetails.imageUrl = "";
+                        window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
+                        window.sessionStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
                         $state.go('home');
                     } else {
                         $state.go('login');

@@ -54,6 +54,12 @@ angular.module('eCommerce')
         $http.defaults.headers.common.Authorization = 'Basic ';
     };
 
+    service.validateToken = function() {
+        return $http.get(PRODUCTDATA_URL + '/authenticate/validate').then(function (response) {
+            return response.data;
+        });
+    };
+
     return service;
   }]
 )

@@ -16,7 +16,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/login',
         templateUrl: 'app/components/login/loginView.html',
         controller: 'LoginCtrl',
-        controllerAs: 'login'
+        controllerAs: 'login',
+        resolve: {
+          user: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          }
+        }
       })
       .state('resetPassword', {
         url:'/login/:uid',
@@ -293,13 +298,16 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           
           // Checkout redirection on zero cart items
           if($location.path().indexOf("checkout") !== -1) {
+            var authenticatedUser = (window.singleCall) ? window.singleCall.authenticateUser : false;
             var cartlength = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts).length : 0;
             if(cartlength === 0) {
               $location.path('/home');
             } else {
-              if(validateURI === false) {
+              if(validateURI === false && !authenticatedUser) {
                 validStateIndex = 0;
-                validateStateUrls();
+                if($location.path().split("/checkout/")[1] !== "login") {
+                  validateStateUrls();  
+                }
                 $location.path('/checkout/'+ Object.keys(steps)[validStateIndex]);
               }
             }  

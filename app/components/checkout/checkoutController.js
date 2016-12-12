@@ -6,6 +6,7 @@ angular.module('eCommerce')
         responseData;
 
         $scope.state = $state;
+        $scope.loginService = AuthenticationService;
 
         // Retrieves data from storage
         $scope.co = checkoutStorage.getData('storage');
@@ -21,7 +22,7 @@ angular.module('eCommerce')
         };
         
         // Singleton Variables to restrict repeated service calls
-        window.singleCall = (window.singleCall === undefined) ? { cartDetails: true, authenticateUser: true } : window.singleCall;
+        window.singleCall = (window.singleCall === undefined) ? { cartDetails: true, authenticateUser: false } : window.singleCall;
 
         // Injecting Math into cart scope
         $scope.Math = window.Math;
@@ -168,11 +169,14 @@ angular.module('eCommerce')
             var totalCost = this.getTotal(),
                 checkoutCartConfig = this.checkoutCartConfig,
                 totalCostToUser,
+                totalCostToUserAfterDiscount,
                 priceObj,
-                currency = $("body").attr("data-currency");
+                currency = $("body").attr("data-currency"),
+                discount = (this.co.order && this.co.order.couponcode) ? checkoutCartConfig.discount : 0;
 
-            totalCostToUser = totalCost - checkoutCartConfig.shippingCost + (checkoutCartConfig.tax/100*totalCost) - checkoutCartConfig.discount;
-            return totalCostToUser;
+            totalCostToUser = totalCost - checkoutCartConfig.shippingCost + (checkoutCartConfig.tax/100*totalCost);
+            totalCostToUserAfterDiscount = totalCostToUser - (discount/100*totalCostToUser);
+            return totalCostToUserAfterDiscount;
         };
 
         $scope.calculateTax = function() {
@@ -207,30 +211,32 @@ angular.module('eCommerce')
             });
         };
 
+        $scope.verifyUser = function() {
+            // var validateUser = scope.currentScope.loginService.validateToken();
+            window.singleCall.authenticateUser = true;
+            CheckoutService.GetAll( PRODUCTDATA_URL + '/authenticate/validate')
+              .then(function(data) {
+                if(data.success === true) {
+                    window.singleCall.authenticateUser = true;
+                    $rootScope.$broadcast("checkout_uri_changed", {'step': 'address'});
+                    window.singleCall.authenticateUser = true;
+                } else {
+                    window.singleCall.authenticateUser = false;
+                }
+              }
+            );
+        };
         
         // Detect On DOM loaded change
-        $scope.$on('$viewContentLoaded', function(){
+        $scope.$on('$viewContentLoaded', function(scope){
+            // window.singleCall.authenticateUser = false;
             var currentState = $state.current.name.split("checkout.")[1];
-            $(".checkout").removeClass("selected");
+            $(".checkout > .section").removeClass("selected");
             $(".checkout").find("."+currentState).addClass("selected");
 
             // Checks for already logged in users
-            if(currentState === "login" && window.singleCall.authenticateUser) {
-                window.singleCall.authenticateUser = false;
-                CheckoutService.GetAll( PRODUCTDATA_URL + '/authenticate/validate')
-                  .then(function(data) {
-                    if(data.success === true) {
-                      $state.go('checkout.address');
-                      $location.path('/checkout/address');
-                      window.singleCall.authenticateUser = true;
-                    }
-                  })
-                  .catch(function(error) {
-                      //
-                  })
-                  .finally(function() {
-                      //
-                  });
+            if(currentState === "login" && !window.singleCall.authenticateUser) {
+                scope.currentScope.verifyUser();
             }
 
             //Here your view content is fully loaded !!
