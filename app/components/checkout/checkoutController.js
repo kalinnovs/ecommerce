@@ -200,11 +200,14 @@ angular.module('eCommerce')
 
         $scope.checkoutLogin = function () {
             var user = $scope.co.user;
+            var rootScope = $rootScope;
             AuthenticationService.Login(user.emailId, user.password, function(response) {
                 if(response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     // $location.path('/admin');
-                    $location.path('/checkout/address');
+                    window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
+                    rootScope.$broadcast("checkout_uri_changed", {'step': 'address'});
+                    // $location.path('/checkout/address');
                 } else {
                     $scope.error = response.message;
                 }
