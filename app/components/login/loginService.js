@@ -167,7 +167,12 @@ angular.module('eCommerce')
             },
             login: function () {
                 if(gapi.auth2) {
-                    gapi.auth2.getAuthInstance().signIn();    
+                    var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
+                    if(isSignedIn) {
+                        this.updateSigninStatus(isSignedIn);
+                    } else {
+                        gapi.auth2.getAuthInstance().signIn();    
+                    }
                 } else {
                     this.init();
                 }
