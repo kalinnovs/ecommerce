@@ -23,6 +23,7 @@ angular.module('eCommerce')
                 var response = (response.data === undefined || response.data === "") ? {} : response.data;
                 if(response.token) {
                     response.success = true;
+                    response.userType = response.userType;
                     window.localStorage.setItem("accessToken", response.token);
                 }
                 else {

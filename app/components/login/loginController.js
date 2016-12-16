@@ -12,9 +12,13 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
         // Login Status Check
         if(loginStatus.success === true) {
             var emptyUser = {"name": "Guest","imageUrl": "","user": null};
-            debugger;
             window.userDetails = window.userDetails || emptyUser;
-            $state.go('home');
+            if(loginStatus.userType === "Admin") {
+                $state.go('admin');
+            } else {
+                $state.go('home');    
+            }
+            
         } else {
             // Else pick local JSON
             window.sessionStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
@@ -41,7 +45,12 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
                 if(response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     // $location.path('/admin');
-                    $location.path('/home');
+                    if(response.userType === "Admin") {
+                        $location.path('/admin');
+                    } else {
+                        $location.path('/home');
+                    }
+                    
                 } else {
                     $scope.error = response.message;
                     $scope.dataLoading = false;
