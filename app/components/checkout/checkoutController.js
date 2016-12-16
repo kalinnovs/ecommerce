@@ -205,7 +205,7 @@ angular.module('eCommerce')
                 if(response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
                     // $location.path('/admin');
-                    window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
+                    // window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
                     rootScope.$broadcast("checkout_uri_changed", {'step': 'address'});
                     // $location.path('/checkout/address');
                 } else {
