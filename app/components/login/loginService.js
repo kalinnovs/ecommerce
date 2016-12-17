@@ -23,6 +23,7 @@ angular.module('eCommerce')
                 var response = (response.data === undefined || response.data === "") ? {} : response.data;
                 if(response.token) {
                     response.success = true;
+                    response.userType = response.userType;
                     window.localStorage.setItem("accessToken", response.token);
                 }
                 else {
@@ -165,8 +166,13 @@ angular.module('eCommerce')
                 }
             },
             login: function () {
-                if(gapi.auth2) {
-                    gapi.auth2.getAuthInstance().signIn();    
+                if(gapi.auth2 && gapi.auth2.getAuthInstance()) {
+                    var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
+                    if(isSignedIn) {
+                        this.updateSigninStatus(isSignedIn);
+                    } else {
+                        gapi.auth2.getAuthInstance().signIn();    
+                    }
                 } else {
                     this.init();
                 }
@@ -188,17 +194,27 @@ angular.module('eCommerce')
             },
             initClient: function(scope) {
                 var self = scope;
-                gapi.client.init({
-                    apiKey: self.apiKey,
-                    discoveryDocs: self.discoveryDocs,
-                    clientId: self.clientId,
-                    scope: self.scopes
-                }).then(function () {
-                  // Listen for sign-in state changes.
-                  gapi.auth2.getAuthInstance().isSignedIn.listen(self.updateSigninStatus);
-                  // Handle the initial sign-in state.
-                  self.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-                });    
+                function gapiInit() {
+                    gapi.client.init({
+                        apiKey: self.apiKey,
+                        discoveryDocs: self.discoveryDocs,
+                        clientId: self.clientId,
+                        scope: self.scopes
+                    }).then(function () {
+                      // Listen for sign-in state changes.
+                      gapi.auth2.getAuthInstance().isSignedIn.listen(self.updateSigninStatus);
+                      // Handle the initial sign-in state.
+                      self.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                    });        
+                };
+
+                if(!gapi.client) {
+                    gapi.load('client', function() { 
+                      gapiInit();
+                    });
+                } else {
+                    gapiInit();
+                }
             },
             init: function() {
                 var self = this;

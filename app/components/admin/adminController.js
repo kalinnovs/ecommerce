@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AdminCtrl', function ($scope, $rootScope, $http, $timeout, UserService, $cookieStore, SERVICE_URL) {
+  .controller('AdminCtrl', function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookieStore, SERVICE_URL, AuthenticationService) {
     var admin = this;
     
     // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
@@ -18,6 +18,15 @@ angular.module('eCommerce')
         $(e.target).addClass("active");
         $(".tabbedPane").find("> div").removeClass("show hide").addClass("hide");
         $(".tabbedPane").find("."+$(e.target).attr("id")).removeClass("hide").addClass("show");
+    };
+
+    $scope.logout = function() {
+        // reset login status
+        AuthenticationService.ClearCredentials();
+        window.localStorage.setItem("accessToken", "");
+        window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
+        window.sessionStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
+        $state.go('home');
     };
     
   })

@@ -188,16 +188,16 @@ $(document).ready(function(e) {
         });
 
         // Wait until the DOM has loaded before querying the document
-        if ((!sessionStorage.isTriggered || sessionStorage.isTriggered == "false") &&
-            window.location.hash.match(/register/g) == null) {
-            setTimeout(function() {
-                window.modalComponent.open(".adMessageBox");
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 600);
-                sessionStorage.isTriggered = "true";
-            }, 45000);
-        }
+        // if ((!sessionStorage.isTriggered || sessionStorage.isTriggered == "false") &&
+        //     window.location.hash.match(/register/g) == null) {
+        //     setTimeout(function() {
+        //         window.modalComponent.open(".adMessageBox");
+        //         $("html, body").animate({
+        //             scrollTop: 0
+        //         }, 600);
+        //         sessionStorage.isTriggered = "true";
+        //     }, 45000);
+        // }
 
         $(".tapToClose").click(function() {
             sessionStorage.isTriggered = "true";
