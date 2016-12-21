@@ -7,6 +7,7 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
         this.header = "Login Haastika";
         var that = this,
         loginStatus = user;
+        this.root = $rootScope;
 
         // Login Status Check
         if(loginStatus.success === true) {
@@ -38,12 +39,14 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
         }
 
         this.login = function () {
+            var globals = $scope.$root.globals;
             $scope.dataLoading = true;
             $scope.state = true;
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
                 if(response.success) {
-                    AuthenticationService.SetCredentials($scope.username, $scope.password);
+                    AuthenticationService.SetCredentials($scope.username, $scope.password, response.userType);
                     // $location.path('/admin');
+                    debugger;
                     if(response.userType === "Admin") {
                         $location.path('/admin');
                     } else {

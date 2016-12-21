@@ -1,8 +1,8 @@
 'use strict';
  
 angular.module('eCommerce')
-.factory('AuthenticationService', ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout', 'SERVICE_URL', 'PRODUCTDATA_URL',
-  function (Base64, $http, $cookieStore, $rootScope, $timeout, SERVICE_URL, PRODUCTDATA_URL) {
+.factory('AuthenticationService', ['Base64', '$http', '$rootScope', '$timeout', 'SERVICE_URL', 'PRODUCTDATA_URL',
+  function (Base64, $http, $rootScope, $timeout, SERVICE_URL, PRODUCTDATA_URL) {
     var service = {};
 
     service.Login = function (username, password, callback) {
@@ -34,24 +34,25 @@ angular.module('eCommerce')
 
     };
 
-    service.SetCredentials = function (username, password, imageurl = '') {
+    service.SetCredentials = function (username, password, userType, imageurl = '') {
         var authdata = Base64.encode(username + ':' + password);
 
         $rootScope.globals = {
             currentUser: {
                 username: username,
                 authdata: authdata,
+                userType: userType,
                 imageURL: imageurl
             }
         };
 
+        window.localStorage.setItem('globals', JSON.stringify($rootScope.globals));
         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-        $cookieStore.put('globals', $rootScope.globals);
     };
 
     service.ClearCredentials = function () {
         $rootScope.globals = {};
-        $cookieStore.remove('globals');
+        window.localStorage.removeItem('globals');
         $http.defaults.headers.common.Authorization = 'Basic ';
     };
 

@@ -235,11 +235,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
     $locationProvider.html5Mode(true);
 
   })
-  .run(['$rootScope', '$location', '$http', '$cookieStore', '$state', 'Google', '$window', 
-    function run($rootScope, $location, $http, $cookieStore, $state, Google, $window) {
-      
-      // var accessToken = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
-      // $http.defaults.headers.common['X-Auth-Token'] = 'Basic' + $rootScope.apiKey;
+  .run(['$rootScope', '$location', '$http', '$state', 'Google', '$window', 
+    function run($rootScope, $location, $http, $state, Google, $window) {
 
       // Steps store
       if(!window.sessionStorage.steps) {
@@ -255,7 +252,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       });
 
       // keep user logged in after page refresh
-      $rootScope.globals = $cookieStore.get('globals') || {};
+      $rootScope.globals = (window.localStorage.globals) ? JSON.parse(window.localStorage.globals) : {} || {};
       if ($rootScope.globals.currentUser) {
           $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
       }
@@ -265,9 +262,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           // Assigning Restricted pages list !!
           var restrictedPage = $.inArray($location.path(), ['/admin', '/inventory']) != -1;
           var loggedIn = $rootScope.globals.currentUser;
-          if (restrictedPage && !loggedIn) {
+          if (restrictedPage && loggedIn && loggedIn.userType !== "Admin") {
               $location.path('/login');
-          }
+          } 
 
           //Validate Checkout URI states with actual submitted data
           // If the state is not cleared then it will redirect to beginning of the state.
