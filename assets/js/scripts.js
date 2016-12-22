@@ -85,7 +85,7 @@ function updateUser() {
     }
     $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
     $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
-    $(".profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
+    $(".social-strip ul > li > a.profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
 };
 
 $(document).ready(function(e) {
