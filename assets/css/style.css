@@ -253,45 +253,99 @@ a.noDecoration:hover {
 
 
 /* Flash Section for Updates Styles */
-
-.flash {
-    -moz-animation: flash 1s ease-out;
-    -moz-animation-iteration-count: 1;
-    -webkit-animation: flash 1s ease-out;
+.flasher {
+    position: absolute;
+    right: 10px;
+    width: 28%;
+    top: 156px;
+    opacity: 0;
+    z-index: 9999;
+}
+.flasher.animate {
+    transition: opacity 1s ease-in-out;
+    -webkit-animation: seconds 5s forwards;
     -webkit-animation-iteration-count: 1;
-    -ms-animation: flash 1s ease-out;
+    -webkit-animation-delay: 1s;
+    animation: seconds 5s forwards;
+    animation-iteration-count: 1;
+    animation-delay: 1s;
+    overflow: hidden;
+}
+@-webkit-keyframes seconds {
+  0% {
+    opacity: 0;
+  }
+  25% { /* 3s for fade in */
+    opacity: 1;
+  }
+  85% { /* 3s for fade in */
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes seconds {
+  0% {
+    opacity: 0;
+  }
+  25% { /* 3s for fade out */
+    opacity: 1;
+  }
+  85% { /* 3s for fade in */
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.flash {
+    -moz-animation: flash 2s ease-out;
+    -moz-animation-iteration-count: 1;
+    -webkit-animation: flash 2s ease-out;
+    -webkit-animation-iteration-count: 1;
+    -ms-animation: flash 2s ease-out;
     -ms-animation-iteration-count: 1;
 }
 @-webkit-keyframes flash {
     0% {
+        display: none;
         background-color: none;
     }
     50% {
-        background-color: #fbf8b2;
+        display: block;
+        background-color: inherit;
     }
     100% {
+        display: none;
         background-color: none;
     }
 }
 @-moz-keyframes flash {
     0% {
+        display: none;
         background-color: none;
     }
     50% {
-        background-color: #fbf8b2;
+        display: block;
+        background-color: inherit;
     }
     100% {
+        display: none;
         background-color: none;
     }
 }
 @-ms-keyframes flash {
     0% {
+        display: none;
         background-color: none;
     }
     50% {
-        background-color: #fbf8b2;
+        display: block;
+        background-color: inherit;
     }
     100% {
+        display: none;
         background-color: none;
     }
 }
@@ -3776,6 +3830,15 @@ input.form-control:focus::-webkit-input-placeholder {
 
 /* Form Input End */
 
+/* orderLookup Styles Starts */
+.orderLookup { 
+    width: 300px;
+    text-align: left;
+    margin: 20px auto;
+}
+.orderLookup label {
+    display: none;
+}
 
 
 /* Validation Rules */

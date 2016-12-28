@@ -1,19 +1,19 @@
 <div class="container thankyou">
 	<div class="row columns">
 		<div ng-show="error" class="alert alert-danger">{{error}}</div>
-		<form name="loginForm">
+		<form class="orderLookup" name="orderLookup">
 			<div class="form-group">
-				<label for="firstName">First name</label>
-				<input type="text" name="emailId" id="emailId" class="form-control" placeholder="Email Id" ng-model="co.user.emailId" required />
-				<p class="help-block">You name is required.</p>
+				<label for="orderID">Order ID</label>
+				<input type="text" name="orderID" id="orderID" class="form-control" placeholder="Order Id" required />
+				<p class="help-block">You Order ID is required.</p>
 			</div>
 			<div class="form-group">
-				<label for="password">Password</label>
-				<input type="password" name="password" id="password" class="form-control" placeholder="Password" ng-model="co.user.password" required />
-				<p class="help-block">Enter a valid email.</p>
+				<label for="emailID">Email ID</label>
+				<input type="text" name="emailID" id="emailID" class="form-control" placeholder="Associated email-id" required />
+				<p class="help-block">Enter an associated Email ID.</p>
 			</div>
 			<div class="form-actions">
-				<button type="submit" class="btn btn-primary" ng-click="checkoutLogin()">Sign In</button>
+				<button type="submit" ng-disabled="orderLookup.$invalid" class="btn btn-primary" ng-click="orderLookup()">Search Order</button>
 			</div>
 		</form>
 	</div>
