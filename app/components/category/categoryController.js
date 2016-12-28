@@ -5,15 +5,14 @@ angular.module('eCommerce')
         var cat = this;
         var scoper = $scope;
 
+        // Scoping Navigation
+        $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
+
         CategoryService.getFromURL(PRODUCTDATA_URL + '/productData/category/' + $stateParams.id)
             .then(function(data) {
                 cat.data = data.categoryDetails;
-                // $rootScope.navigation.selectedCategory = data.categoryDetails.selectedCategory.partNumber;
                 $scope.iterateThrough = 5;
-                $rootScope.navigation = data.pageNavigation.categories;
-                window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
                 $scope.$broadcast('dataloaded');
-                // $scope.htmlDescription = data.productDescription;
             })
             .catch(function(error) {
                 $state.go('home');

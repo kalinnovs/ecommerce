@@ -1,69 +1,51 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'SERVICE_URL', 'PRODUCTDATA_URL', '$location', 'AuthenticationService', 'Facebook',  function($scope, $http, $rootScope, $timeout, $controller, $state, checkoutStorage, CheckoutService, SERVICE_URL, PRODUCTDATA_URL, $location, AuthenticationService, Facebook) {
+    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$q', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'SERVICE_URL', 'PRODUCTDATA_URL', '$location', 'cartItems', 'getAddress', 'AuthenticationService', 'Facebook', 'Google',  function($scope, $http, $rootScope, $q, $timeout, $controller, $state, checkoutStorage, CheckoutService, SERVICE_URL, PRODUCTDATA_URL, $location, cartItems, getAddress, AuthenticationService, Facebook, Google) {
         var checkout = this,
-        responseData;
+        responseData,
+        self = $scope;
+        // Scoping Navigation
+        $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
 
         $scope.state = $state;
+        $scope.location = $location;
         $scope.loginService = AuthenticationService;
 
         // Retrieves data from storage
         $scope.co = checkoutStorage.getData('storage');
 
-        // Steps Config
-        $scope.eligibleForDiscount = true;
-
         // Cart Configuration
         $scope.checkoutCartConfig = {
             "shippingCost": 0,
-            "tax": 6.5,
+            "tax": 3,
             "discount": 15
         };
-        
+
         // Singleton Variables to restrict repeated service calls
-        window.singleCall = (window.singleCall === undefined) ? { cartDetails: true, authenticateUser: false } : window.singleCall;
+        window.singleCall = (window.singleCall === undefined) ? { cartDetails: true, authenticateUser: false, authenticateUserAddress: false, authenticateUserOrder: false, authenticateUserPayment: false } : window.singleCall;
+
+        // Checks for pre available address and updates address view selections
+        if(getAddress && getAddress.length > 0) {
+            $scope.hasAddress = true;
+            $scope.addressList = getAddress;
+        } else {
+            $scope.hasAddress = false;
+        }
+
+        // Selets the default step on Page load
+        // and stores the cart items for order page.
+        if(cartItems) {
+            $scope.cartItems = cartItems;
+            // Stores the steps completed on page load
+            checkoutStorage.setData($scope.steps, 'steps');
+        }
 
         // Injecting Math into cart scope
         $scope.Math = window.Math;
 
         window.dataLoaded = true;
         scrollTo($state.current.name);
-
-        
-        function getCartDetails() {
-            // Read Cart Array and pass to URL
-            var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
-            var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
-            
-            var objectToSerialize={'products':cartArray};
-            
-            if(window.singleCall.cartDetails) {
-                window.singleCall.cartDetails = false;
-                $http({
-                    method: 'POST',
-                    url: PRODUCTDATA_URL + '/cart/products',
-                    data: JSON.stringify(objectToSerialize)
-                }).then(function successCallback(response) {
-                    responseData = response.data;
-                    $.each(responseData, function(key, val) {
-                        val["quantity"] = cartItems[key].quantity;
-                    });
-                    $scope.orderedItems = (responseData) ? responseData : [];
-                    //Resets singleton variable check
-                    window.singleCall.cartdetails = true;
-                    // Stores the steps completed on page load
-                    checkoutStorage.setData($scope.steps, 'steps');
-                }, function errorCallback(response) {
-                    console.log("Error in saving.");
-                }); 
-            }
-        }
-
-        // Get details from cart
-        getCartDetails();
-        
-
 
         $scope.getCityState = function(event) {
             var self = this,
@@ -77,27 +59,66 @@ angular.module('eCommerce')
             //     });
         };
 
+        $scope.updateAddressToStorage = function(event, id) {
+            $(event.currentTarget).siblings().removeClass("active");
+            if($scope.co.address) {
+                $(event.currentTarget).addClass("active");
+                $scope.co.user["addressId"] = id;
+            } else {
+                $scope.co["address"] = {};
+                $scope.co.user["addressId"] = id;
+            }
+            updateStorage($scope.co);
+        };
+
+        $scope.toggleAddressForm = function(event) {
+            this.hasAddress = ($scope.hasAddress) ? false : true;
+        };
+
+        $scope.selectAddress = function(event) {
+            // $(event.currentTarget).parents(".section").removeClass("selected");
+            if(this.addressList) {
+                var obj = this.addressList.filter(function(val) {
+                    return val.addressId === self.co.user.addressId;
+                });
+                self.co.address = obj[0];
+            }
+            this.updateCheckoutStep(event, 'address', 'order');
+        };
+
         $scope.redeemCouponCode = function(event) {
-            var thisVal = $(event.currentTarget).siblings("input").val().toLowerCase();
-            var updatedView = JSON.parse(window.sessionStorage.storage).order && JSON.parse(window.sessionStorage.storage).order.couponcode;
-            if(updatedView && (thisVal === updatedView)) {
+            var self = this,
+                thisVal = $(event.currentTarget).siblings("input").val().toLowerCase(),
+                updatedView = this.co.order && this.co.order.couponcode,
+                objectToSerialize={'emailId': this.co.user.emailId, "promoCode": this.co.order.couponcode};
+            
+            // Validate Coupon Code and proceed with below code.
+            function applyDiscount() {
+                self.co.user.eligibleForDiscount = true;
+                self.co.order.discountPrice = self.calculateDiscount();
+                // Saves coupon code to storage
+                updateStorage(self.co);   
+            };
+            
+            var promise = $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/cart/isValidPromo',
+                data: JSON.stringify(objectToSerialize)
+            });
+            promise.then(function(response) {
+                if(response.data) {
+                    applyDiscount(); 
+                } else {
+                    self.co.user.eligibleForDiscount = false;
+                    self.co.order.discountPrice = 0;
+                }
+
                 // updates view with confirmation code
                 $(".coupon-code").height(0);
                 $(".coupon-applied").height(24);
-                return;
-            }
-
-            // Validate Coupon Code and proceed with below code.
-            this.eligibleForDiscount = true;
-
-            this.co.order.discountPrice = this.calculateDiscount();
-            // Saves coupon code to storage
-            updateStorage(this.co);
-
-            // updates view with confirmation code
-            $(".coupon-code").height(0);
-            $(".coupon-applied").height(24);
-            this.subTotal();
+                self.calculateTax();
+                self.subTotal(); 
+            });
         };
         
         $scope.proceedTo = function(event, step) {
@@ -124,7 +145,7 @@ angular.module('eCommerce')
 
         $scope.getTotal = function() {
             $scope.currency = $("body").attr("data-currency").toUpperCase();
-            var cartItems = this.orderedItems,
+            var cartItems = this.cartItems,
             totalCost = 0,
             priceObj,
             currency = $("body").attr("data-currency");
@@ -139,7 +160,7 @@ angular.module('eCommerce')
 
         $scope.removeItem = function(event) {
             var currentIndex = $(event.currentTarget).parents("li").data("index"),
-                cartItems = (typeof(this.orderedItems) === "string") ? JSON.parse(this.orderedItems) : this.orderedItems;
+                cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
             cartItems.splice(currentIndex,1);
 
             // Remove the item from storage
@@ -163,7 +184,6 @@ angular.module('eCommerce')
             }
             event.preventDefault();
         };
-        
 
         $scope.subTotal = function() {
             var totalCost = this.getTotal(),
@@ -172,25 +192,27 @@ angular.module('eCommerce')
                 totalCostToUserAfterDiscount,
                 priceObj,
                 currency = $("body").attr("data-currency"),
-                discount = (this.co.order && this.co.order.couponcode) ? checkoutCartConfig.discount : 0;
+                discount = (this.co.order && this.co.order.couponcode && this.co.user.eligibleForDiscount) ? checkoutCartConfig.discount : 0;
 
-            totalCostToUser = totalCost - checkoutCartConfig.shippingCost + (checkoutCartConfig.tax/100*totalCost);
-            totalCostToUserAfterDiscount = totalCostToUser - (discount/100*totalCostToUser);
-            return totalCostToUserAfterDiscount;
+            totalCostToUserAfterDiscount = totalCost - (discount/100*totalCost);
+            totalCostToUser = totalCostToUserAfterDiscount - checkoutCartConfig.shippingCost + (checkoutCartConfig.tax/100*totalCostToUserAfterDiscount);
+            
+            return totalCostToUser;
         };
 
         $scope.calculateTax = function() {
             var totalCost = this.getTotal(),
                 checkoutCartConfig = this.checkoutCartConfig,
-                currency = $("body").attr("data-currency");
-            return (checkoutCartConfig.tax/100*totalCost);
+                currency = $("body").attr("data-currency"),
+                discount = (this.co.order && this.co.order.couponcode && this.co.user.eligibleForDiscount) ? checkoutCartConfig.discount : 0;
+            return (this.co.user.eligibleForDiscount) ? (checkoutCartConfig.tax/100* (totalCost-discount/100*totalCost)) : (checkoutCartConfig.tax/100*totalCost);
         };
 
         $scope.calculateDiscount = function() {
             var totalCost = this.getTotal(),
                 checkoutCartConfig = this.checkoutCartConfig,
                 currency = $("body").attr("data-currency");
-            return (this.eligibleForDiscount) ? (checkoutCartConfig.discount/100*totalCost) : 0;
+            return (this.co.user.eligibleForDiscount) ? (checkoutCartConfig.discount/100*totalCost) : 0;
         };
 
         $scope.addCouponCode = function(event) {
@@ -198,7 +220,8 @@ angular.module('eCommerce')
             $(event.currentTarget.parentNode).next().height(28);
         };
 
-        $scope.checkoutLogin = function () {
+        $scope.checkoutLoger = function () {
+            debugger;
             var user = $scope.co.user;
             var rootScope = $rootScope;
             AuthenticationService.Login(user.emailId, user.password, function(response) {
@@ -214,13 +237,30 @@ angular.module('eCommerce')
             });
         };
 
+        $scope.updateAddress = function(event) {
+            var self = this;
+            var objectToSerialize = this.co.address;
+            var promise = $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/cart/address/update',
+                data: JSON.stringify(objectToSerialize)
+            });
+            promise.then(function(response) {
+                if(response.operationStatus) {
+                    debugger;
+                } else {
+                    debugger;
+                }
+            });
+            this.updateCheckoutStep(event, 'address', 'order');
+        };
+
         $scope.verifyUser = function() {
             // var validateUser = scope.currentScope.loginService.validateToken();
             window.singleCall.authenticateUser = true;
             CheckoutService.GetAll( PRODUCTDATA_URL + '/authenticate/validate')
               .then(function(data) {
                 if(data.success === true) {
-                    window.singleCall.authenticateUser = true;
                     $rootScope.$broadcast("checkout_uri_changed", {'step': 'address'});
                     window.singleCall.authenticateUser = true;
                 } else {
@@ -231,15 +271,28 @@ angular.module('eCommerce')
         };
         
         // Detect On DOM loaded change
-        $scope.$on('$viewContentLoaded', function(scope){
+        $scope.$on('$viewContentLoaded', function(event){
+            var promise;
+            window.scope = event;
             // window.singleCall.authenticateUser = false;
             var currentState = $state.current.name.split("checkout.")[1];
             $(".checkout > .section").removeClass("selected");
-            $(".checkout").find("."+currentState).addClass("selected");
+            setTimeout(function() {
+                $(".checkout").find("."+currentState).addClass("selected");
+            }, 10);
 
             // Checks for already logged in users
-            if(currentState === "login" && !window.singleCall.authenticateUser) {
-                scope.currentScope.verifyUser();
+            if(!window.singleCall.authenticateUser) {
+                window.singleCall.authenticateUser = true;
+                promise = CheckoutService.validateToken();
+                promise.then(function(payload) { 
+                    if(payload.success === true) {
+                        scope.targetScope.updateCheckoutStep(window.scope, 'login', 'address');
+                        // $rootScope.$broadcast("checkout_uri_changed", {'step': 'address'});
+                    } else {
+                        $rootScope.$broadcast("checkout_uri_changed", {'step': 'login'});
+                    }
+                });
             }
 
             //Here your view content is fully loaded !!
@@ -329,8 +382,7 @@ angular.module('eCommerce')
                     window.sessionStorage.clear();
                     window.location.href = "/";
                 }, 2000);
-            }, 1400);
-            
+            }, 1400);          
         };
 
         $scope.openOverlay = function() {
@@ -345,35 +397,78 @@ angular.module('eCommerce')
             }, 400);
         };
 
+        // Order place
+        $scope.placeOrder = function() {
+            var self = this,
+                lineItems = [],
+                objectToSerialize;
+            $.each(this.cartItems, function(key, val) {
+                lineItems.push({
+                    "productId": val.productId,
+                    "quantity": val.quantity
+                });
+            });
+            objectToSerialize = {"lineItems": lineItems, "address": this.co.address, "currencyId": 1, "emailId": this.co.user.emailId, "promoUsed": this.co.user.eligibleForDiscount};
 
-        // Submits the form
-        $scope.submit = function() {
-            if ($scope.user_form.$valid) {
-                // Submit as normal
-            } else {
-                // don't submit ;-)
-            }
+            var promise = $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/order/createOrder',
+                data: JSON.stringify(objectToSerialize)
+            });
+            promise.then(function(response) {
+                if(response.data.success) {
+                    window.orderNumber = response.data.webOrderNumber;
+                    window.sessionStorage.clear();
+                    window.miniCartStorage = [];
+                    window.itemsArray = [];
+                    window.sessionStorage.setItem('checkoutState', '{"login": false, "address": false, "order": false, "payment": false }');
+                    window.restrictView = false;
+                    self.location.path('/thankyou');
+                }
+            });
         };
 
         // function to submit the form after all validation has occurred            
         $scope.updateCheckoutStep = $.proxy(function(event, from, to) {
-            var self = this;
-
+            var self = this,
+                rootElem = (event.currentTarget) ? event.currentTarget : $(".section."+from).find(".columns");
             // updates storage with reference to 'checkout' object from view
             updateStorage(this.co, 'storage');
+
             // Updates path
-            $(event.currentTarget).parents(".container.form-views").animate({height: 0 }, 400, function() {
+            $(rootElem).parents(".container.form-views").removeClass("active").animate({height: 0 }, 400, function() {
                 var steps = JSON.parse(window.sessionStorage.checkoutState);
                 steps[from] = true;
                 window.sessionStorage.setItem('checkoutState', JSON.stringify(steps));
                 $rootScope.$broadcast("checkout_uri_changed", {'step': to});
             });
-            
         }, $scope);
 
         $(document).on('data-currency-changed', $.proxy(function(e, key){
             $scope.subTotal();
         }, $scope));
+
+
+        /* Facebook Authentication Login code goes here */
+        $scope.fblogin = function () {
+            $timeout(function () {
+                Facebook.login('checkout.address', function() {
+                    window.singleCall.authenticateUser = true;
+                    window.scope.targetScope.co = {"user": {"emailId": "pdwibedi@gmail.com"}};
+                    window.scope.targetScope.updateCheckoutStep(window.scope, 'login', 'address');
+                });
+            }, 100, false);
+        };
+
+        /* Google Authentication code goes here */
+        $scope.googleHandleAuthClick = function() {
+            Google.login(function() {
+                    window.singleCall.authenticateUser = true;
+                    window.scope.targetScope.co = {"user": {"emailId": "pdwibedi@gmail.com"}};
+                    window.scope.targetScope.updateCheckoutStep(window.scope, 'login', 'address');
+                });
+        };
+
 
     }]
 );

@@ -9,8 +9,8 @@
 						<li class="price"><span>Price</span></li>
 					</ul>
 				</div>
-				<ul class="list-items order-list" ng-hide="orderedItems.length === 0">
-				    <li ng-repeat="(key, value) in orderedItems" class="item" data-index="{{key}}">
+				<ul class="list-items order-list" ng-hide="cartItems.length === 0">
+				    <li ng-repeat="(key, value) in cartItems" class="item" data-index="{{key}}">
 				        <div class="item-details">
 				            <figure>
 				                <img ng-src="{{value.productImage.baseImagePath}}" />
@@ -55,11 +55,10 @@
 						<button class="change" ng-click="proceedTo($event, 'address')"><i class="fa fa-pencil" aria-hidden="true"></i><span>Edit</span></button>
 					</div>
 					<p>
-						<span>{{co.address.name}}</span></br>
-						<span>{{co.address.houseNumber}}</span>, <span>{{co.address.street}}</span></br>
-						<span>{{co.address.landmark}}</span></br>
+						<span>{{co.address.firstName}} {{co.address.lastName}}</span></br>
+						<span>{{co.address.addressLine1}}</span>, <span>{{co.address.addressLine2}}</span></br>
 						<span>Phone: {{co.address.phone}}</span></br>
-						<span>{{co.user.city}}</span>, <span>{{co.user.state}} - {{co.user.pin}}</span>
+						<span>{{co.address.city}}</span>, <span>{{co.address.state}} - {{co.address.pin}}</span>
 					</p>
 				</div>
 				<div class="order-voucher order-section">
@@ -87,7 +86,7 @@
 		                <label>Tax Estimated ({{cartConfig.tax}}%): </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{calculateTax() | number:2}}</span>
 		            </div>
 		            <div class="discount">
-		                <label>Discount Eligible: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{co.order.discountPrice || 0}}</span>
+		                <label>Discount Eligible: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{co.order.discountPrice || 0 | number:2}}</span>
 		            </div>
 		            <div class="costToCheckout">
 		                <label>Sub Total: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{subTotal() | number:2}}</span>

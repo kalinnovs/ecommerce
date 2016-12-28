@@ -2,6 +2,7 @@
  
 var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location, $stateParams, LoginService, PRODUCTDATA_URL, AuthenticationService, Facebook, Google, user) {
         
+        // Scoping Navigation
         $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
         this.state = "login";
         this.header = "Login Haastika";
@@ -75,7 +76,7 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
 
         $scope.fblogin = function () {
             $timeout(function () {
-                Facebook.login();
+                Facebook.login('home');
             }, 100, false);
         };
 

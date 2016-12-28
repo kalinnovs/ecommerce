@@ -4,6 +4,8 @@ angular.module('eCommerce')
   .controller('DetailCtrl', function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, SERVICE_URL, PRODUCTDATA_URL, BASE_URI, $stateParams) {
     var details = this;
     $scope.currentState = $state.params.id;
+    // Scoping Navigation
+    $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
     
     DetailService.getFromURL( PRODUCTDATA_URL + '/productData/product/'+$stateParams.id)
         .then(function(data) {
@@ -11,13 +13,7 @@ angular.module('eCommerce')
                 $state.go('home');
             }
             $scope.data = data.productDetails;
-            if(data.pageNavigation) {
-                $rootScope.navigation = data.pageNavigation.categories;
-            } else if ( UserService.get()) {
-                $rootScope.navigation = UserService.get().data.pageNavigation.categories;
-            }
             $scope.$broadcast('dataloaded');
-            // $scope.htmlDescription = data.productDescription; 
         })
         .catch(function(error) {
             //

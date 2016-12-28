@@ -74,7 +74,7 @@ angular.module('eCommerce')
             $rootScope.$broadcast("fb_statusChange", {'status':response.status});
         }, true);
     };
-    facebook.login = function () {
+    facebook.login = function (return_url, onSuccess) {
         FB.getLoginStatus(function (response) {
             switch (response.status) {
                 case 'connected':
@@ -85,7 +85,10 @@ angular.module('eCommerce')
                         params: {'token': response.authResponse.accessToken}
                     }).then(function successCallback(response) {
                         window.localStorage.setItem("accessToken", response.data.token);
-                        $state.go('home');
+                        if(onSuccess) {
+                            onSuccess();
+                        }
+                        $state.go(return_url);
                     }, function errorCallback(response) {
                         console.log("Error in saving.");
                     });
@@ -102,10 +105,10 @@ angular.module('eCommerce')
                             }).then(function successCallback(response) {
                                 // Stores the access token for 30 sec and then resets automatically
                                 window.localStorage.setItem("accessToken", response.data.token);
-                                // setInterval(function(){
-                                //   window.localStorage.setItem("accessToken", "");
-                                // }, 30 * 1000);
-                                $state.go('home');
+                                if(onSuccess) {
+                                    onSuccess();
+                                }
+                                $state.go(return_url);
                             }, function errorCallback(response) {
                                 console.log("Error in saving.");
                             });
@@ -152,6 +155,7 @@ angular.module('eCommerce')
             clientId: '102964097568-l2jpsbqv509crlh401md5h4pmihkd8di.apps.googleusercontent.com',
             scopes: 'profile',
             updateSigninStatus: function (isSignedIn) {
+                var self = this;
                 var accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
                 if(isSignedIn) {
                     $http({
@@ -160,13 +164,18 @@ angular.module('eCommerce')
                         params: {'token': accessToken}
                     }).then(function successCallback(response) {
                         window.localStorage.setItem("accessToken", response.data.token);
-                        $state.go('home');
+                        if(self.onSuccess) {
+                            self.onSuccess();
+                        } else {
+                            $state.go('home');    
+                        }
                     }, function errorCallback(response) {
                         console.log("Error in saving.");
                     });
                 }
             },
-            login: function () {
+            login: function (onSuccess) {
+                if(onSuccess) { this.onSuccess = onSuccess; }
                 if(gapi.auth2 && gapi.auth2.getAuthInstance()) {
                     var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
                     if(isSignedIn) {
