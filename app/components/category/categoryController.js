@@ -8,7 +8,7 @@ angular.module('eCommerce')
         // Scoping Navigation
         $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
 
-        CategoryService.getFromURL(SERVICE_URL + '/category/' + $stateParams.id)
+        CategoryService.getFromURL(PRODUCTDATA_URL + '/productData/category/' + $stateParams.id)
             .then(function(data) {
                 cat.data = data.categoryDetails;
                 $scope.iterateThrough = 5;

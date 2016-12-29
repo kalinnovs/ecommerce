@@ -7,7 +7,7 @@ angular.module('eCommerce')
     // Scoping Navigation
     $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
     
-    DetailService.getFromURL( SERVICE_URL + '/product/'+$stateParams.id)
+    DetailService.getFromURL( PRODUCTDATA_URL + '/productData/product/'+$stateParams.id)
         .then(function(data) {
             if(jQuery.isEmptyObject(data.productDetails)) {
                 $state.go('home');

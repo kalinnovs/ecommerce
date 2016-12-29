@@ -62,7 +62,7 @@ window.watch('dataLoaded', function(id, oldval, newval) {
     if (newval === true) {
         $(".progress").hide();
         updateMiniKartCount();
-        // updateUser();
+        updateUser();
     } else {
         $(".progress").show();
     }
