@@ -6,7 +6,7 @@ angular.module('eCommerce')
   		var str = scope.modelBind,
   		replaceStr = (str === null) ? "" : (str) ? str.substring(0, attrs.charLength - 3) + "..." : "";
 
-  		if((str !== null) && (str.length > attrs.charLength)) {
+  		if((str !== null) && str && (str.length > attrs.charLength)) {
   			scope.modelBind = replaceStr;
   		}
 
