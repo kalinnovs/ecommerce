@@ -44,6 +44,10 @@ require("../../../app/components/cart/cartService.js");
 
 require("../../../app/components/register/registerController.js");
 
+require("../../../app/components/thankyou/thankyouController.js");
+require("../../../app/components/orderlookup/orderlookupService.js");
+require("../../../app/components/orderlookup/orderlookupController.js");
+
 require("../../../app/components/accounts/accountsController.js");
 
 require("../../../app/components/subscribers/subscriberController.js");
@@ -62,5 +66,7 @@ require("../../../app/directives/formElement/formElement-directive.js");
 require("../../../app/directives/addToCart/addToCart-directive.js");
 require("../../../app/directives/miniCart/miniCart-directive.js");
 require("../../../app/directives/validation/validation-directive.js");
+require("../../../app/directives/flasher/flasher-directive.js");
+
 require("../../../app/components/inventory/productTreeCtrl.js");
 require("../../../app/components/inventory/productTreeService.js");

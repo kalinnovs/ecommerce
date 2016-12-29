@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .service('CheckoutService', function ($http, ENDPOINT_URI) {
+  .service('CheckoutService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL, checkoutStorage) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -36,6 +36,55 @@ angular.module('eCommerce')
         return function () {
             return { success: false, message: res.message };
         };
+    }
+
+    service.getServiceData = function(url) {
+        return $http.get(PRODUCTDATA_URL + url);
+    }
+
+    service.validateToken = function() {
+        return $http({
+                method: 'GET',
+                url: PRODUCTDATA_URL + '/authenticate/validate'
+            }).then(function successCallback(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+        }); 
+    } 
+
+    service.getItems = function() {
+        // Read Cart Array and pass to URL
+        var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [],
+            cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+            responseData,
+            objectToSerialize={'products':cartArray};
+        
+        return $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/cart/products',
+                data: JSON.stringify(objectToSerialize)
+            }).then(function successCallback(response) {
+                responseData = response.data;
+                $.each(responseData, function(key, val) {
+                    val["quantity"] = cartItems[key].quantity;
+                });
+                return responseData;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+        }); 
+    } 
+
+    service.getAddress = function() {
+        // Read Cart Array and pass to URL
+        return $http({
+                method: 'GET',
+                url: PRODUCTDATA_URL + '/cart/address'
+            }).then(function successCallback(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+        }); 
     }
 
 

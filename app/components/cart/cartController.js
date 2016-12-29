@@ -1,9 +1,13 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, $state, CartService, UserService, SERVICE_URL, PRODUCTDATA_URL) {
+    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, $state, $location, CartService, UserService, SERVICE_URL, PRODUCTDATA_URL) {
         var cart = this,
-        responseData;
+        responseData;   
+        // Scoping Navigation
+        $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
+
+        $scope.location = $location;
         
         // Read Cart Array and pass to URL
         var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
@@ -70,10 +74,14 @@ angular.module('eCommerce')
             return (cartConfig.tax/100*totalCost);
         };
         
-        $scope.manipulatePrice = function(event) {
+        $scope.manipulatePrice = function(event, call) {
+            var index = $(event.currentTarget).parents(".item").attr("data-index"),
+                items = this.cartItems,
+                currentSize = parseInt(items[index].quantity),
+                currency = $("body").attr("data-currency");
+            items[index].quantity = (call === "add") ? currentSize+=1 : currentSize-=1;
+
             window.sessionStorage.setItem('itemsArray', JSON.stringify(this.cartItems));
-            var items = this.cartItems;
-            var currency = $("body").attr("data-currency");
             window.itemsArray = [];
             $.each(items, function(i, item) {
                 var priceObj = item.productPriceOptions.filter(function(key, val) {
@@ -223,6 +231,10 @@ angular.module('eCommerce')
                 }, 2000);
             }, 1400);
             
+        };
+
+        $scope.gotoCheckout = function() {
+            this.location.path("/checkout");
         };
 
         $scope.openOverlay = function() {

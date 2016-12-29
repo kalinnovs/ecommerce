@@ -1,5 +1,5 @@
 
-angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload', 'ngSanitize'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
   // .constant('SERVICE_URL', '/HaastikaWebService')
@@ -67,7 +67,15 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/checkout',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/checkoutView.html'
+        templateUrl: 'app/components/checkout/checkoutView.html',
+        resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            // return CheckoutService.getItems();
+          },
+          getAddress: function($stateParams, CheckoutService) {
+            // return CheckoutService.getAddress();
+          }
+        }
       })
       .state('checkout.login', {
         url: '/login',
@@ -79,19 +87,42 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url: '/address',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/address.html'
+        templateUrl: 'app/components/checkout/address.html',
+        resolve: {
+          getAddress: function($stateParams, CheckoutService) {
+            return CheckoutService.getAddress();
+          }
+        }
       })
       .state('checkout.order', {
         url: '/order',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/order.html'
+        templateUrl: 'app/components/checkout/order.html',
+        resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            return CheckoutService.getItems();
+          },
+          getAddress: function($stateParams, CheckoutService) {
+            return CheckoutService.getAddress();
+          }
+        }
       })
       .state('checkout.payment', {
         url: '/payment',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
         templateUrl: 'app/components/checkout/payment.html'
+      })
+      .state('thankyou', {
+        url: '/thankyou',
+        controller: 'thankyouCtrl',
+        templateUrl: 'app/components/thankyou/thankyouView.html'
+      })
+      .state('orderLookup', {
+        url: '/orderLookup',
+        controller: 'orderCtrl',
+        templateUrl: 'app/components/orderlookup/orderlookupView.html'
       })
       .state('register', {
         url:'/register',
@@ -224,22 +255,13 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         }
       })
     ;
-
-    // We need to setup some parameters for http requests
-    // These three lines are all you need for CORS support
-    // $httpProvider.defaults.useXDomain = true;
-    // $httpProvider.defaults.withCredentials = true;
-    // delete $httpProvider.defaults.headers.common['X-Requested-With'];
     
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
 
   })
-  .run(['$rootScope', '$location', '$http', '$cookieStore', '$state', 'Google', '$window', 
-    function run($rootScope, $location, $http, $cookieStore, $state, Google, $window) {
-      
-      // var accessToken = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
-      // $http.defaults.headers.common['X-Auth-Token'] = 'Basic' + $rootScope.apiKey;
+  .run(['$rootScope', '$location', '$http', '$state', 'Google', '$window', 
+    function run($rootScope, $location, $http, $state, Google, $window) {
 
       // Steps store
       if(!window.sessionStorage.steps) {
@@ -255,7 +277,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       });
 
       // keep user logged in after page refresh
-      $rootScope.globals = $cookieStore.get('globals') || {};
+      $rootScope.globals = (window.localStorage.globals) ? JSON.parse(window.localStorage.globals) : {} || {};
       if ($rootScope.globals.currentUser) {
           $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
       }
@@ -265,7 +287,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           // Assigning Restricted pages list !!
           var restrictedPage = $.inArray($location.path(), ['/admin', '/inventory']) != -1;
           var loggedIn = $rootScope.globals.currentUser;
-          if (restrictedPage && !loggedIn) {
+          if ((restrictedPage && loggedIn === undefined) || (restrictedPage && loggedIn && loggedIn.userType !== "Admin")) {
               $location.path('/login');
           }
 
@@ -312,6 +334,13 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
               }
             }  
           }
+
+          // Restrict Viewers to thank you page every time.
+          var restrictedPage = $.inArray($location.path(), ['/thankyou']) != -1;
+          var isRestricted = (window.restrictView !== undefined) ? window.restrictView : true;
+          if (restrictedPage && isRestricted) {
+              $location.path('/home');
+          } 
 
       });
 

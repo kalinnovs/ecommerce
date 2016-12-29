@@ -45,14 +45,11 @@ Object.defineProperty(window.itemsArray, "push", {
 });
 
 function RaiseMyEvent(id, oldVal, newVal) {
-    createMiniKart();
+    updateMiniKartCount();
 };
 
-function createMiniKart() {
-    var imagePath;
-    if (window.itemsArray.length > 0) {
-        $("body").find(".cartCount").html(window.itemsArray.length);
-    }
+function updateMiniKartCount() {
+    $("body").find(".cartCount").html(window.itemsArray.length);
 };
 
 window.dataLoaded = false;
@@ -64,6 +61,7 @@ window.watch('dataLoaded', function(id, oldval, newval) {
     }
     if (newval === true) {
         $(".progress").hide();
+        updateMiniKartCount();
         updateUser();
     } else {
         $(".progress").show();
@@ -85,7 +83,7 @@ function updateUser() {
     }
     $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
     $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
-    $(".profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
+    $(".social-strip ul > li > a.profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
 };
 
 $(document).ready(function(e) {
@@ -97,6 +95,7 @@ $(document).ready(function(e) {
 
     // Set default currency INR to body
     $("body").attr("data-currency", "INR");
+    $("body").attr("data-crId", "1");
     $("body").find(".cartCount").html(window.itemsArray.length);
 
     setTimeout(function() {
@@ -169,6 +168,7 @@ $(document).ready(function(e) {
         });
 
         $(document).on("click", ".currencyConverter a, .currencyChooser a", function(e) {
+            var selectedCurrencyId = 1;
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
             var selectedCurrency = $(this).attr("rel");
@@ -176,6 +176,9 @@ $(document).ready(function(e) {
             $(".price.inr, .price.usd, .price.eur").hide();
             $(".price." + selectedCurrency).show();
             $("body").attr("data-currency", selectedCurrency);
+            if(selectedCurrency === "USD") { selectedCurrencyId = 2; }
+            if(selectedCurrency === "EUR") { selectedCurrencyId = 3; }
+            $("body").attr("data-crId", selectedCurrencyId);
             $(document).trigger('data-currency-changed');
         });
 

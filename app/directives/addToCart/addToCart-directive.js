@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .directive('addToCart', function($http, $rootScope) {
+    .directive('addToCart', function($http, $rootScope, PRODUCTDATA_URL) {
         var def = {
             restrict: 'EA',
             scope: {
@@ -25,7 +25,6 @@ angular.module('eCommerce')
                     var item = this.partNumber();
                     var obj = {
                         "partNumber": item.productPartNumber || item.productId,
-                        // "description": item.productDescription,
                         "price": item.productPrice || 0,
                         "priceArray": item.productPriceOptions || item.priceOptions,
                         "image": item.productImageGallery[0].thumbImagePath,
@@ -41,9 +40,7 @@ angular.module('eCommerce')
                             // repeatedItem[0]["quantity"] += 1
                             oldItems.map(function(val, index) {
                                 (val.partNumber === repeatedItem[0]["partNumber"]) ? val.quantity += 1 : '';
-                            })
-                            // $(".screen").show();
-                            // $(".addToCartError").css("top", $(document).scrollTop() + ($(window).height() - $(".addToCartError").outerHeight()) / 2);
+                            });
                             window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
                             
                             // Broadcast cart update to mini cart
@@ -69,7 +66,7 @@ angular.module('eCommerce')
                             $(".screen").hide();
                         }, 400);
                     };
-                    console.log($http);
+                    // console.log($http);
 
                     addItem(obj);
 
@@ -81,6 +78,19 @@ angular.module('eCommerce')
                     // }, function errorCallback(response) {
                     //     console.log("Error in saving.");
                     // });
+
+
+                    // Add to Cart for Logged In user
+                    $http({
+                        method: 'POST',
+                        url: PRODUCTDATA_URL+ '/cart/addToCart',
+                        data: JSON.stringify({"productId": parseInt(obj.partNumber.substr(4))})
+                    }).then(function successCallback(response) {
+                        // console.log(response);
+                    }, function errorCallback(response) {
+                        console.log("Error in saving.");
+                    });
+                    
 
                     // window.localStorage.miniCart.items.push(obj);
                     event.preventDefault();

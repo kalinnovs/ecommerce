@@ -4,9 +4,8 @@ angular.module('eCommerce')
   .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, SERVICE_URL, UserService, BASE_URI) {
     var contacts = this;
     var original = $scope.user;
+    // Scoping Navigation
     $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
-
-    // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
     
     // function to submit the form after all validation has occurred            
     $scope.submitForm = function() {

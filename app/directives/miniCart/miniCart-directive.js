@@ -11,17 +11,19 @@ angular.module('eCommerce')
             '<i class="fa fa-shopping-cart" aria-hidden="true"></i>'+
             '<div class="cart-drawer arrow_box hide">'+
             '<div class="minicart">' +
-                '<div class="miniKart"></div>' +
-                '<p class="manyItems">Please go to cart page to check the list</p>' +
-                '<p><a href="cart" title="View Cart">View Cart</a></p>' +
-                // '<p><a href="checkout/login" title="Checkout">Checkout</a></p>' +
-                // '<p><a href="javascript:void(0);" title="Orders">Orders</a></p>' +
-                // '<p><a href="javascript:void(0);" title="Accounts">Accounts</a></p>' +
-                '<p><a href="profile" class="noDecoration profile"><span class="imageNull profilePicUpdate">'+
-                    '<img src="" class="profilePic" /><i class="fa fa-user" aria-hidden="true"></i></span>'+
-                    '<span class="logoutText">Logout</span> <span class="userDetailsUpdate userLogout"></span></a></p>' +
-                '</div></div>',
+            '<div class="miniKart"></div>' +
+            '<p class="manyItems">Please go to cart page to check the list</p>' +
+            '<p><a href="cart" title="View Cart">View Cart</a></p>' +
+            // '<p><a href="checkout/login" title="Checkout">Checkout</a></p>' +
+            // '<p><a href="javascript:void(0);" title="Orders">Orders</a></p>' +
+            // '<p><a href="javascript:void(0);" title="Accounts">Accounts</a></p>' +
+            '<p><a href="profile" class="noDecoration profile"><span class="imageNull profilePicUpdate">'+
+                '<img src="" class="profilePic" /><i class="fa fa-user" aria-hidden="true"></i></span>'+
+                '<span class="logoutText">Logout</span> <span class="userDetailsUpdate userLogout"></span></a></p>' +
+            '</div></div>',
             link: function(scope, element, attrs) {
+                window.isLoggedIn = false;
+
                 attrs.$observe('partNumberMap', function (newValue, oldValue) {
                     if (newValue) {
                         if (window.itemsArray.length > 0) {
@@ -36,14 +38,13 @@ angular.module('eCommerce')
                     var responseData, img, html, self = this;
                     // Read Cart Array and pass to URL
                     var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
-                    var jsonData=angular.toJson(cartArray);
-                    var objectToSerialize={'products':cartArray};
+                    var jsonData = angular.toJson(cartArray);
+                    var objectToSerialize = {'products':cartArray};
                     var cartCount = cartCounter();
                     
-
                     $http({
                         method: 'POST',
-                        url: PRODUCTDATA_URL + '/cart/products',
+                        url: PRODUCTDATA_URL + '/cart/miniCart',
                         data: JSON.stringify(objectToSerialize),
                         headers: {
                             'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ angular.module('eCommerce')
                             (responseData[i].partNumber || responseData[i].productId) +
                             "</h3><span class='price'>"+ currency + " " + (responseData[i].price || priceObj[0].price) + "</span> <span class='quantity'> x "+(responseData[i].quantity || itemList[i].quantity)+"</span></div></div>";
                         ul.appendChild(li);
-                        element.find(".miniKart").removeClass("empty-cart"); 
+                        element.find(".miniKart").removeClass("empty-cart");
                     }
                     if(responseData.length === 0) {
                         var li = document.createElement("li");
@@ -110,26 +111,32 @@ angular.module('eCommerce')
                 
                 element.on("click", function(event) {
                     var currentTarget = event.currentTarget;
-                    $(this).find(".miniKart").addClass("loader");
-                    var drawer = $(this).find(".cart-drawer");
-                    if(drawer.hasClass("hide")) {
-                        getMiniCart(currentTarget);
-                        drawer.removeClass("hide");
-                    } else {
-                        drawer.addClass("hide");
+                    if(this === currentTarget) {
+                        $(this).find(".miniKart").addClass("loader");
+                        var drawer = $(this).find(".cart-drawer");
+                        if(drawer.hasClass("hide")) {
+                            getMiniCart(currentTarget);
+                            drawer.removeClass("hide");
+                        } else {
+                            drawer.addClass("hide");
+                        }    
                     }
                 });
 
                 $(".minicart .profile > span").on("click", function(event) {
-                    if(window.localStorage.getItem("accessToken") !== "") {
-                        window.localStorage.setItem("accessToken", "");
-                        window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
-                        window.sessionStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
-                        $state.go('home');
-                    } else {
-                        $state.go('login');
-                    }
+                    window.localStorage.setItem("accessToken", "");
+                    window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
+                    window.sessionStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
+                    $state.go('login');
                     event.preventDefault();
+                });
+
+                $("body").on("click", function(ev) {
+                    if($(ev.target).parents(".mini-cart-trigger").length === 0) {
+                        $(".cart-drawer").addClass("hide");
+                    } else {
+                        return;
+                    }
                 });
             }
         };

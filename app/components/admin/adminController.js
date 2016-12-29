@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AdminCtrl', function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookieStore, SERVICE_URL, AuthenticationService) {
+  .controller('AdminCtrl', function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, SERVICE_URL, AuthenticationService) {
     var admin = this;
     
     // UserService.GetAll( BASE_URI + '/eCommerce/home.json')

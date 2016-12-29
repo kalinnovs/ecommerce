@@ -4,10 +4,9 @@ angular.module('eCommerce')
   .controller('RegisterCtrl', function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, SERVICE_URL, $firebaseObject) {
         var register = this;
         var scoper = $scope;
+        // Scoping Navigation
         $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
-        // debugger;
 
-        // $rootScope.navigation = UserService.get().data.pageNavigation.categories;
         $(".progress").hide();
         this.register = function() {
             

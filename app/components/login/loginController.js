@@ -2,11 +2,13 @@
  
 var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location, $stateParams, LoginService, PRODUCTDATA_URL, AuthenticationService, Facebook, Google, user) {
         
+        // Scoping Navigation
         $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
         this.state = "login";
         this.header = "Login Haastika";
         var that = this,
         loginStatus = user;
+        this.root = $rootScope;
 
         // Login Status Check
         if(loginStatus.success === true) {
@@ -38,19 +40,25 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
         }
 
         this.login = function () {
+            var globals = $scope.$root.globals;
             $scope.dataLoading = true;
             $scope.state = true;
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
                 if(response.success) {
-                    AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    // $location.path('/admin');
+                    AuthenticationService.SetCredentials($scope.username, $scope.password, response.userType);
                     if(response.userType === "Admin") {
                         $location.path('/admin');
+                        // Broadcast cart update to mini cart
+                        $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Admin Login Successful !!"});
                     } else {
+                        // Broadcast cart update to mini cart
+                        $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
                         $location.path('/home');
                     }
                     
                 } else {
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateFlash", {"alertType": "warning", "message": "Login Failed !! Please verify your username and password."});
                     $scope.error = response.message;
                     $scope.dataLoading = false;
                 }
@@ -72,7 +80,9 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
 
         $scope.fblogin = function () {
             $timeout(function () {
-                Facebook.login();
+                Facebook.login('home');
+                // Broadcast cart update to mini cart
+                $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
             }, 100, false);
         };
 
@@ -142,6 +152,8 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
         /* Google Authentication code goes here */
         $scope.googleHandleAuthClick = function() {
             Google.login();
+            // Broadcast cart update to mini cart
+            $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
         };
 
         $scope.googleLogout = function() {
