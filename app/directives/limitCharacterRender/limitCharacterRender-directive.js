@@ -4,7 +4,7 @@ angular.module('eCommerce')
 
   	var linker = function(scope, element, attrs) {
   		var str = scope.modelBind,
-  		replaceStr = (str === null) ? "" : str.substring(0, attrs.charLength - 3) + "...";
+  		replaceStr = (str === null) ? "" : (str) ? str.substring(0, attrs.charLength - 3) + "..." : "";
 
   		if((str !== null) && (str.length > attrs.charLength)) {
   			scope.modelBind = replaceStr;

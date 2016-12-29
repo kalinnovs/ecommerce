@@ -10,12 +10,12 @@ angular.module('eCommerce')
     $rootScope.cartItems = (window.localStorage.itemsArray) ? JSON.parse(window.localStorage.itemsArray) : [];
     
     // UserService.GetAll( PRODUCTDATA_URL + '/home')
-    UserService.GetAll( PRODUCTDATA_URL + '/home')
+    UserService.GetAll( SERVICE_URL + '/home')
         .then(function(data) {
           if(data.success === undefined || data.success) {
             $rootScope.navigation = data.pageNavigation.categories;
             try {
-              window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
+              // window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
               window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
             } catch (e) {
               if (e == QUOTA_EXCEEDED_ERR) {

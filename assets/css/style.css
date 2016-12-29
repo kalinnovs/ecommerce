@@ -259,23 +259,23 @@ a.noDecoration:hover {
     width: 28%;
     top: 156px;
     opacity: 0;
-    z-index: 9999;
+    z-index: 12;
 }
 .flasher.animate {
     transition: opacity 1s ease-in-out;
     -webkit-animation: seconds 5s forwards;
     -webkit-animation-iteration-count: 1;
-    -webkit-animation-delay: 1s;
+    -webkit-animation-delay: .1s;
     animation: seconds 5s forwards;
     animation-iteration-count: 1;
-    animation-delay: 1s;
+    animation-delay: .1s;
     overflow: hidden;
 }
 @-webkit-keyframes seconds {
   0% {
     opacity: 0;
   }
-  25% { /* 3s for fade in */
+  12% { /* 3s for fade in */
     opacity: 1;
   }
   85% { /* 3s for fade in */
@@ -289,7 +289,7 @@ a.noDecoration:hover {
   0% {
     opacity: 0;
   }
-  25% { /* 3s for fade out */
+  12% { /* 3s for fade out */
     opacity: 1;
   }
   85% { /* 3s for fade in */
@@ -3050,6 +3050,7 @@ footer .back-top .pageCounter {
     display: block;
     width: 100%;
     overflow: hidden;
+    text-align: left;
 }
 .cart-page .item-details figure {
     width: 25%;
@@ -3831,16 +3832,131 @@ input.form-control:focus::-webkit-input-placeholder {
 /* Form Input End */
 
 /* orderLookup Styles Starts */
+.orderLookupContainer h2 {
+    margin-bottom: 18px;
+    font-size: 16px;
+}
 .orderLookup { 
-    width: 300px;
     text-align: left;
-    margin: 20px auto;
+    margin: 40px 0;
+    padding-bottom: 30px;
+}
+.orderLookup.dataFound {
+    margin: 0; 
+    border-bottom: solid 1px #dedede;
+    transition: margin .3s ease-in-out;
+}
+.orderLookup .form-group,
+.orderLookup .form-actions { 
+    display: inline-block; 
+    margin: 0 25px;
+    height: auto;
+}
+.orderLookup .form-group:first-child {
+    margin-left: 0; 
+}
+.orderLookup .form-group.email .form-control {
+    width: 280px;
 }
 .orderLookup label {
     display: none;
 }
-
-
+.orderLookupList .status {
+    width: 540px;
+    background: #dedede;
+    height: 7px;
+    border-radius: 15px;
+    margin: 60px auto;
+    direction: rtl;
+}
+.orderLookupList .status li {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 135px;
+    text-align: center;
+    box-sizing: border-box;
+    float: left;
+}
+.orderLookupList .status li span {
+    display: inline-block;
+    font-size: 14px;
+    padding: 20px 0 0 0;
+}
+.orderLookupList .status li span:after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: #89b9d6;
+    border-radius: 50%;
+    left: 50%;
+    margin-left: -17px;
+    top: -10px;
+}
+.orderLookupList .status li:after {
+    content: "";
+    position: absolute;
+    background: #89b9d6;
+    height: 5px;
+    width: 52%;
+    right: 0;
+    top: 1px;
+    border-radius: 15px;
+}
+.orderLookupList .status li:before {
+    content: "";
+    position: absolute;
+    background: #89b9d6;
+    height: 5px;
+    width: 50%;
+    left: 0;
+    top: 1px;
+    border-radius: 15px;
+}
+.orderLookupList .status li.complete:after {
+    background: none;
+}
+.orderLookupList .status li.complete ~ li:before,
+.orderLookupList .status li.complete ~ li:after {
+    background: none;
+}
+.orderLookupList .status li span .tick {
+    position: absolute;
+    display: inline-block;
+    width: 22px;
+    height:22px;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+    transform: rotate(45deg);
+    left: 53px;
+    top: -9px;
+    z-index: 2;
+}
+.orderLookupList .status li span .tick:before {
+    content: "";
+    position: absolute;
+    width:3px;
+    height:9px;
+    background-color:#fff;
+    left:11px;
+    top:6px;
+}
+.orderLookupList .status li span .tick:after {
+    content: "";
+    position: absolute;
+    width:3px;
+    height:3px;
+    background-color:#fff;
+    left:8px;
+    top:12px;
+}
+.orderLookupList .status li.complete ~ li span:after, .orderLookupList .status li.complete ~ li span:before {
+    background: #dedede;
+}
+.orderLookupList .status li.complete ~ li .tick {
+    display: none;
+}
 /* Validation Rules */
 .form-group .help-block {
     /*display: none;*/
