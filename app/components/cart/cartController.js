@@ -1,31 +1,40 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, $state, $location, CartService, UserService, SERVICE_URL, PRODUCTDATA_URL) {
+    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, $state, $location, CartService, UserService, SERVICE_URL, PRODUCTDATA_URL, user) {
         var cart = this,
-        responseData;   
+        responseData,
+        loginStatus = user;   
         // Scoping Navigation
         $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
 
         $scope.location = $location;
         
         // Read Cart Array and pass to URL
-        var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
-        var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
-        
-        var objectToSerialize={'products':cartArray};
-        
+        var cartArray,
+            cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+            computedURL =  PRODUCTDATA_URL + ((loginStatus.success === true) ? '/cart/viewCart' : "/cart/products"),
+            objectToSerialize;
+            cartArray = cartItems.map(function(i, j) {
+                        return (i.partNumber || i.productId);
+                    });
+            objectToSerialize={'products':cartArray};
+
         $http({
             method: 'POST',
-            url: PRODUCTDATA_URL + '/cart/products', //'http://localhost:3002/cart'
+            url: computedURL,
             data: JSON.stringify(objectToSerialize)
         }).then(function successCallback(response) {
-            responseData = response.data;
-            $.each(responseData, function(key, val) {
-                val["quantity"] = cartItems[key].quantity;
-            });
-            $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
-            $scope.cartItems = (responseData) ? responseData : [];
+            if(response.data.cartList) {
+                $scope.cartItems = response.data.cartList;
+            } else {
+                responseData = response.data;
+                $.each(responseData, function(key, val) {
+                    val["quantity"] = cartItems[key].quantity;
+                });
+                $scope.cartItems = (responseData) ? responseData : [];
+            }
+            
         }, function errorCallback(response) {
             console.log("Error in saving.");
         });
@@ -78,9 +87,15 @@ angular.module('eCommerce')
             var index = $(event.currentTarget).parents(".item").attr("data-index"),
                 items = this.cartItems,
                 currentSize = parseInt(items[index].quantity),
-                currency = $("body").attr("data-currency");
+                currency = $("body").attr("data-currency"),
+                updateObj = {};
+                if(call === "substract" && currentSize === 1) {
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateFlash", {"alertType": "danger", "message": "You cannot reduce the cart size below zero. Please remove the item."});
+                    return;
+                }
             items[index].quantity = (call === "add") ? currentSize+=1 : currentSize-=1;
-
+            
             window.sessionStorage.setItem('itemsArray', JSON.stringify(this.cartItems));
             window.itemsArray = [];
             $.each(items, function(i, item) {
@@ -89,43 +104,64 @@ angular.module('eCommerce')
                 });
                 var obj = {
                     "partNumber": item.productPartNumber || item.productId,
-                    "price": item.productPrice || priceObj[0].price,
-                    "priceArray": item.productPriceOptions || item.priceOptions,
-                    "image": item.productImage.thumbImagePath,
                     "quantity": item.quantity || 1
                 }
                 window.itemsArray.push(obj);
             });
             this.getTotal();
             
+            updateObj["lineItemId"] = items[index].lineItemId;
+            updateObj["quantity"] = items[index].quantity;
+            var promise = CartService.updateCartLineItem(updateObj);
+            promise.then(function(response) {
+                // Broadcast cart update to mini cart
+                $rootScope.$broadcast("updateMiniCartCount");
+            }); 
             // Broadcast cart update to mini cart
             $rootScope.$broadcast("updateMiniCart", this.cartItems);
+
         };
 
         $scope.removeItem = function(event) {
-            var currentIndex = $(event.currentTarget).parents("li").data("index"),
-                cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
-            cartItems.splice(currentIndex,1);
+            // debugger;
+            var lineItemId = $(event.currentTarget).attr("data-lineId");
+            if(lineItemId === "") {
+                // Removes the line item from Local storage when there is no logged in User.
+                var currentIndex = $(event.currentTarget).parents("li").data("index"),
+                    cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
+                cartItems.splice(currentIndex,1);
 
-            // Remove the item from storage
-            var itemList = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
-            var itemStore = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
-            itemList.splice(currentIndex,1);
-            itemStore.splice(currentIndex,1);
-            // insert the new stringified array into LocalStorage
-            window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
-            window.sessionStorage.setItem('cartParts', JSON.stringify(itemStore));
-            window.miniCartStorage = itemStore;
-            
-            // Broadcast cart update to mini cart
-            $rootScope.$broadcast("updateMiniCartCount");
+                // Remove the item from storage
+                var itemList = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
+                itemList.splice(currentIndex,1);
+                // itemStore.splice(currentIndex,1);
+                // insert the new stringified array into LocalStorage
+                window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
 
-            // If cart goes empty page redirects to home page
-            if(window.miniCartStorage.length === 0) {
-                $timeout(function() {
-                    $state.go("home");
-                }, 1000, false);
+                // If cart goes empty page redirects to home page
+                if(itemList.length === 0) {
+                    $timeout(function() {
+                        $state.go("home");
+                    }, 1000, false);
+                }
+                
+                // Broadcast cart update to mini cart
+                $rootScope.$broadcast("updateMiniCartCount");
+
+            } else {
+                // Removes the line item from data base when there is a logged in User.
+                $http({
+                    method: 'GET',
+                    url: PRODUCTDATA_URL + '/cart/remove/'+ parseInt(lineItemId)
+                }).then(function successCallback(response) {
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateMiniCartCount");
+                    $state.go($state.current, {}, {reload: true});
+                }, function errorCallback(response) {
+                    console.log("Error in saving.");
+                });
             }
+
             event.preventDefault();
         };
         
@@ -175,66 +211,8 @@ angular.module('eCommerce')
             }); 
         };
 
-        
-        // Send mail to raise a request
-        $scope.sendCartToMail = function(event) {
-            var self = this;
-            // Open Overlay
-            this.openOverlay();
-            // Read Cart Array and pass to URL
-            var cartArray = this.cartItems;
-            var selectedCurrency = cartArray[0].productPriceOptions.filter(function(i, j) {
-                return (i.currencyCode === $("body").data("currency").toUpperCase());
-            });
-            
-            $.each(cartArray, function(key, val) {
-                val["unitPrice"] = selectedCurrency[0].price;
-            });
-            var objectToSerialize={'lineItems':cartArray, "currencyId":selectedCurrency[0].currencyId};
-            objectToSerialize["total"] = this.getTotal();
-            objectToSerialize["shipping"] = this.cartConfig.shippingCost;
-            objectToSerialize["tax"] = this.cartConfig.tax;
-            objectToSerialize["discount"] = this.cartConfig.discount;
-            objectToSerialize["subTotal"] = this.subTotal();
-            objectToSerialize["firstName"] = $(event.target).find("input[name=firstName]").val();
-            objectToSerialize["lastName"] = $(event.target).find("input[name=lastName]").val();
-            objectToSerialize["emailId"] = $(event.target).find("input[name=Email]").val();
-            objectToSerialize["contactNo"] = $(event.target).find("input[name=Mobile]").val();
-            
-            $http({
-                method: 'POST',
-                url: PRODUCTDATA_URL + '/cart/reserve',
-                data: JSON.stringify(objectToSerialize),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(function successCallback(response) {
-                debugger;
-            }, function errorCallback(response) {
-                console.log("Error in saving.");
-            }); 
-            
-        
-            setTimeout(function(){
-                self.closeOverlay();
-                setTimeout(function(){
-                    $(".screen").show();
-                    $(".cartMailFormSuccess").css("top", $(document).scrollTop() + ($(window).height() - $(".cartMailFormSuccess").outerHeight()) / 2);
-                }, 600);
-                setTimeout(function(){
-                    $(".screen").hide();
-                    $(".cartMailFormSuccess").css("top", "-200px");
-                }, 200);
-                setTimeout(function(){
-                    window.sessionStorage.clear();
-                    window.location.href = "/";
-                }, 2000);
-            }, 1400);
-            
-        };
-
         $scope.gotoCheckout = function() {
-            this.location.path("/checkout");
+            this.location.path("/checkout/login");
         };
 
         $scope.openOverlay = function() {

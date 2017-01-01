@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .directive('minicart', function($http, PRODUCTDATA_URL, $state) {
+    .directive('minicart', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope) {
         var def = {
             restrict: 'A',
             scope:{
@@ -21,50 +21,74 @@ angular.module('eCommerce')
                 '<img src="" class="profilePic" /><i class="fa fa-user" aria-hidden="true"></i></span>'+
                 '<span class="logoutText">Logout</span> <span class="userDetailsUpdate userLogout"></span></a></p>' +
             '</div></div>',
-            link: function(scope, element, attrs) {
-                window.isLoggedIn = false;
+            controller: function() {
+                if(!window.loadMiniCartOnce) {
+                    var responseData, html, self = this,
+                        itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+                        itemList = itemsArray.map(function(i, j) {
+                            return (i.partNumber || i.productId);
+                        }),
+                        objectToSerialize = {'products':itemList};
 
-                attrs.$observe('partNumberMap', function (newValue, oldValue) {
-                    if (newValue) {
-                        if (window.itemsArray.length > 0) {
-                            // getMiniCart();
-                        }
-                    } else if (newValue == false) {
-                        alert('Not updated');
-                    }
-                });
-                
+                        self.auth = AuthenticationService;
+                        self.auth.validateToken().then(function (result) {
+                        var computedURL =  PRODUCTDATA_URL + ((result.success === true) ? '/cart/miniCart' : "/cart/products");
+                        $http({
+                            method: 'POST',
+                            url: computedURL,
+                            data: JSON.stringify(objectToSerialize)
+                        }).then(function successCallback(results) {
+                            responseData = results.data;
+                            var cartCount = 0;
+                            for(var i=0; i < responseData.length; i++) {
+                                cartCount+= parseInt(responseData[i].quantity || itemsArray[i].quantity);
+                            }
+                            $(".miniKart").parents(".cart").find(".count").html(cartCount);
+                        }); 
+                    }, function (reason) {
+                        self.validateError = reason.data;
+                    });
+                    window.loadMiniCartOnce = true;
+                }
+            },
+            link: function(scope, element, attrs) {
                 function getMiniCart(elem) {
-                    var responseData, img, html, self = this;
-                    // Read Cart Array and pass to URL
-                    var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
-                    var jsonData = angular.toJson(cartArray);
-                    var objectToSerialize = {'products':cartArray};
-                    var cartCount = cartCounter();
-                    
-                    $http({
-                        method: 'POST',
-                        url: PRODUCTDATA_URL + '/cart/miniCart',
-                        data: JSON.stringify(objectToSerialize),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(function successCallback(data) {
-                        responseData = data.data;
-                        renderHTML(responseData);
-                        (responseData.length > 4) ? element.find(".manyItems").show() : element.find(".manyItems").hide();
-                        $(".miniKart").parents(".cart").find(".count").html(cartCount);
-                        $(".miniKart").removeClass("loader");
-                    }, function errorCallback(response) {
-                        console.log("Error in saving.");
-                    }); 
+                    var responseData,
+                        // Read Cart Array and pass to URL
+                        itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+                        itemList = itemsArray.map(function(i, j) {
+                            return (i.partNumber || i.productId);
+                        }),
+                        objectToSerialize = {'products':itemList};
+
+                    scope.auth = AuthenticationService;
+                    scope.auth.validateToken().then(function (result) {
+                        var computedURL =  PRODUCTDATA_URL + ((result.success === true) ? '/cart/miniCart' : "/cart/products"),
+                            cartCount;
+                        $http({
+                            method: 'POST',
+                            url: computedURL,
+                            data: JSON.stringify(objectToSerialize),
+                        }).then(function successCallback(results) {
+                            responseData = results.data;
+                            cartCount = cartCounter(responseData);
+                            renderHTML(responseData);
+                            (responseData.length > 4) ? element.find(".manyItems").show() : element.find(".manyItems").hide();
+                            $(".miniKart").parents(".cart").find(".count").html(cartCount);
+                            $(".miniKart").removeClass("loader");
+                        }, function errorCallback(response) {
+                            console.log("Error in saving.");
+                        }); 
+                    }, function (reason) {
+                        scope.validateError = reason.data;
+                    });
                 };
 
-                function cartCounter() {
-                    var itemList = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
-                    count = 0;
+                function cartCounter(itemList) {
+                    var itemArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+                        count = 0;
                     for(var i=0; i < itemList.length; i++) {
-                        count+= itemList[i].quantity;
+                        count+= itemList[i].quantity || itemArray[i].quantity;
                     }
                     return count;
                 };
@@ -105,8 +129,7 @@ angular.module('eCommerce')
                 });
 
                 scope.$on("updateMiniCartCount", function (event, args) {
-                    var cartCount = cartCounter();
-                    $(".miniKart").parents(".cart").find(".count").html(cartCount);
+                    getMiniCart();
                 });
                 
                 element.on("click", function(event) {
@@ -128,6 +151,9 @@ angular.module('eCommerce')
                     window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
                     window.sessionStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
                     $state.go('login');
+                    window.sessionStorage.removeItem('itemsArray');
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateMiniCartCount");
                     event.preventDefault();
                 });
 

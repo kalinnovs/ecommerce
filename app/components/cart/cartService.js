@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .service('CartService', function ($http, ENDPOINT_URI) {
+  .service('CartService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -29,5 +29,17 @@ angular.module('eCommerce')
         return $http.get(url).then(service.extract);
     }
 
+    service.updateCartLineItem = function(obj) {
+        // Update Cart item in database
+        return $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/cart/updateLineItem',
+                data: JSON.stringify(obj)
+            }).then(function successCallback(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+        }); 
+    }    
 
   });

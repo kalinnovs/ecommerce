@@ -55,7 +55,8 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
                         $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
                         $location.path('/home');
                     }
-                    
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateMiniCartCount");
                 } else {
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateFlash", {"alertType": "warning", "message": "Login Failed !! Please verify your username and password."});
@@ -83,6 +84,8 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
                 Facebook.login('home');
                 // Broadcast cart update to mini cart
                 $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
+                // Broadcast cart update to mini cart
+                $rootScope.$broadcast("updateMiniCartCount");
             }, 100, false);
         };
 
@@ -154,6 +157,8 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
             Google.login();
             // Broadcast cart update to mini cart
             $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
+            // Broadcast cart update to mini cart
+            $rootScope.$broadcast("updateMiniCartCount");
         };
 
         $scope.googleLogout = function() {

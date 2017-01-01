@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$q', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'SERVICE_URL', 'PRODUCTDATA_URL', '$location', 'cartItems', 'getAddress', 'AuthenticationService', 'Facebook', 'Google',  function($scope, $http, $rootScope, $q, $timeout, $controller, $state, checkoutStorage, CheckoutService, SERVICE_URL, PRODUCTDATA_URL, $location, cartItems, getAddress, AuthenticationService, Facebook, Google) {
+    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$q', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'SERVICE_URL', 'PRODUCTDATA_URL', '$location', 'cartItems', 'getAddress', 'getLoginStatus', 'viewCart', 'AuthenticationService', 'Facebook', 'Google',  function($scope, $http, $rootScope, $q, $timeout, $controller, $state, checkoutStorage, CheckoutService, SERVICE_URL, PRODUCTDATA_URL, $location, cartItems, getAddress, getLoginStatus, viewCart, AuthenticationService, Facebook, Google) {
         var checkout = this,
         responseData,
         self = $scope;
@@ -35,11 +35,16 @@ angular.module('eCommerce')
 
         // Selets the default step on Page load
         // and stores the cart items for order page.
-        if(cartItems) {
-            $scope.cartItems = cartItems;
+        if(viewCart && cartItems) {
+            if(getLoginStatus && getLoginStatus.success === true) {
+                $scope.cartItems = viewCart.cartList;
+            } else {
+                $scope.cartItems = cartItems;
+            }
             // Stores the steps completed on page load
             checkoutStorage.setData($scope.steps, 'steps');
         }
+
 
         // Injecting Math into cart scope
         $scope.Math = window.Math;
@@ -90,7 +95,7 @@ angular.module('eCommerce')
             var self = this,
                 thisVal = $(event.currentTarget).siblings("input").val().toLowerCase(),
                 updatedView = this.co.order && this.co.order.couponcode,
-                objectToSerialize={'emailId': this.co.user.emailId, "promoCode": this.co.order.couponcode};
+                objectToSerialize={'emailId': this.co.user.emailId, "promoCode": (this.co.order && this.co.order.couponcode) ? this.co.order.couponcode : 0};
             
             // Validate Coupon Code and proceed with below code.
             function applyDiscount() {
@@ -110,6 +115,9 @@ angular.module('eCommerce')
                     applyDiscount(); 
                 } else {
                     self.co.user.eligibleForDiscount = false;
+                    if(!self.co.order) {
+                        self.co["order"] = {};    
+                    }
                     self.co.order.discountPrice = 0;
                 }
 
@@ -165,19 +173,19 @@ angular.module('eCommerce')
 
             // Remove the item from storage
             var itemList = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
-            var itemStore = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
+            // var itemStore = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
             itemList.splice(currentIndex,1);
-            itemStore.splice(currentIndex,1);
+            // itemStore.splice(currentIndex,1);
             // insert the new stringified array into sessionStorage
             window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
-            window.sessionStorage.setItem('cartParts', JSON.stringify(itemStore));
-            window.miniCartStorage = itemStore;
+            // window.sessionStorage.setItem('cartParts', JSON.stringify(itemStore));
+            window.miniCartStorage = itemList;
             
             // Broadcast cart update to mini cart
             $rootScope.$broadcast("updateMiniCartCount");
 
             // If cart goes empty page redirects to home page
-            if(window.miniCartStorage.length === 0) {
+            if(itemList.length === 0) {
                 $timeout(function() {
                     $state.go("home");
                 }, 1000, false);
@@ -220,17 +228,14 @@ angular.module('eCommerce')
             $(event.currentTarget.parentNode).next().height(28);
         };
 
-        $scope.checkoutLoger = function () {
-            debugger;
+        $scope.checkoutLogin = function () {
             var user = $scope.co.user;
+            updateStorage($scope.co);
             var rootScope = $rootScope;
             AuthenticationService.Login(user.emailId, user.password, function(response) {
                 if(response.success) {
                     AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    // $location.path('/admin');
-                    // window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
                     rootScope.$broadcast("checkout_uri_changed", {'step': 'address'});
-                    // $location.path('/checkout/address');
                 } else {
                     $scope.error = response.message;
                 }
@@ -244,13 +249,6 @@ angular.module('eCommerce')
                 method: 'POST',
                 url: PRODUCTDATA_URL + '/cart/address/update',
                 data: JSON.stringify(objectToSerialize)
-            });
-            promise.then(function(response) {
-                if(response.operationStatus) {
-                    debugger;
-                } else {
-                    debugger;
-                }
             });
             this.updateCheckoutStep(event, 'address', 'order');
         };
@@ -281,18 +279,19 @@ angular.module('eCommerce')
                 $(".checkout").find("."+currentState).addClass("selected");
             }, 10);
 
-            // Checks for already logged in users
-            if(!window.singleCall.authenticateUser) {
+            //Checks if user is already logged in
+            if(!window.singleCall.authenticateUser && location.pathname.indexOf("login") !== -1) {
                 window.singleCall.authenticateUser = true;
-                promise = CheckoutService.validateToken();
-                promise.then(function(payload) { 
-                    if(payload.success === true) {
-                        scope.targetScope.updateCheckoutStep(window.scope, 'login', 'address');
-                        // $rootScope.$broadcast("checkout_uri_changed", {'step': 'address'});
-                    } else {
-                        $rootScope.$broadcast("checkout_uri_changed", {'step': 'login'});
-                    }
-                });
+                if(getLoginStatus && getLoginStatus.success === true) {
+                    scope.targetScope.getLoginStatus = getLoginStatus;
+                    var userDetails = JSON.parse(window.sessionStorage.userDetails);
+                    scope.targetScope.co = {};
+                    scope.targetScope.co["user"] = {};
+                    scope.targetScope.co["user"]["emailId"] = userDetails.emailId;
+                    scope.targetScope.updateCheckoutStep(scope, 'login', 'address');
+                } else {
+                    $rootScope.$broadcast("checkout_uri_changed", {'step': 'login'});
+                }
             }
 
             //Here your view content is fully loaded !!
@@ -327,62 +326,6 @@ angular.module('eCommerce')
                         // default code block
                 }
             }, 1, false); 
-        };
-
-        // Send mail to raise a request
-        $scope.sendCartToMail = function(event) {
-            var self = this;
-            // Open Overlay
-            this.openOverlay();
-            // Read Cart Array and pass to URL
-            var cartArray = this.cartItems;
-            var selectedCurrency = cartArray[0].productPriceOptions.filter(function(i, j) {
-                return (i.currencyCode === $("body").data("currency").toUpperCase());
-            });
-            
-            $.each(cartArray, function(key, val) {
-                val["unitPrice"] = selectedCurrency[0].price;
-            });
-            var objectToSerialize={'lineItems':cartArray, "currencyId":selectedCurrency[0].currencyId};
-            objectToSerialize["total"] = this.getTotal();
-            objectToSerialize["shipping"] = this.checkoutCartConfig.shippingCost;
-            objectToSerialize["tax"] = this.checkoutCartConfig.tax;
-            objectToSerialize["discount"] = this.checkoutCartConfig.discount;
-            objectToSerialize["subTotal"] = this.subTotal();
-            objectToSerialize["firstName"] = $(event.target).find("input[name=firstName]").val();
-            objectToSerialize["lastName"] = $(event.target).find("input[name=lastName]").val();
-            objectToSerialize["emailId"] = $(event.target).find("input[name=Email]").val();
-            objectToSerialize["contactNo"] = $(event.target).find("input[name=Mobile]").val();
-            
-            $http({
-                method: 'POST',
-                url: PRODUCTDATA_URL + '/cart/reserve',
-                data: JSON.stringify(objectToSerialize),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(function successCallback(response) {
-                debugger;
-            }, function errorCallback(response) {
-                console.log("Error in saving.");
-            }); 
-            
-        
-            setTimeout(function(){
-                self.closeOverlay();
-                setTimeout(function(){
-                    $(".screen").show();
-                    $(".cartMailFormSuccess").css("top", $(document).scrollTop() + ($(window).height() - $(".cartMailFormSuccess").outerHeight()) / 2);
-                }, 600);
-                setTimeout(function(){
-                    $(".screen").hide();
-                    $(".cartMailFormSuccess").css("top", "-200px");
-                }, 200);
-                setTimeout(function(){
-                    window.sessionStorage.clear();
-                    window.location.href = "/";
-                }, 2000);
-            }, 1400);          
         };
 
         $scope.openOverlay = function() {
@@ -454,7 +397,7 @@ angular.module('eCommerce')
             $timeout(function () {
                 Facebook.login('checkout.address', function() {
                     window.singleCall.authenticateUser = true;
-                    window.scope.targetScope.co = {"user": {"emailId": "pdwibedi@gmail.com"}};
+                    window.scope.targetScope.co = {"user": {"emailId": ""}};
                     window.scope.targetScope.updateCheckoutStep(window.scope, 'login', 'address');
                 });
             }, 100, false);
@@ -464,11 +407,10 @@ angular.module('eCommerce')
         $scope.googleHandleAuthClick = function() {
             Google.login(function() {
                     window.singleCall.authenticateUser = true;
-                    window.scope.targetScope.co = {"user": {"emailId": "pdwibedi@gmail.com"}};
+                    window.scope.targetScope.co = {"user": {"emailId": ""}};
                     window.scope.targetScope.updateCheckoutStep(window.scope, 'login', 'address');
                 });
         };
-
 
     }]
 );
