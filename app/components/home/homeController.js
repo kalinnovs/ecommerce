@@ -15,7 +15,7 @@ angular.module('eCommerce')
           if(data.success === undefined || data.success) {
             $rootScope.navigation = data.pageNavigation.categories;
             try {
-              window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
+              // window.sessionStorage.setItem('userDetails', JSON.stringify(data.loggedUser));
               window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
             } catch (e) {
               if (e == QUOTA_EXCEEDED_ERR) {

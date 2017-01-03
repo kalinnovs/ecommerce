@@ -25,6 +25,15 @@ angular.module('eCommerce')
                     response.success = true;
                     response.userType = response.userType;
                     window.localStorage.setItem("accessToken", response.token);
+                    // Hardcoded 
+                    response.loggedUser.emailId = "pdwibedi@gmail.com";
+                    window.sessionStorage.setItem('userDetails', JSON.stringify(response.loggedUser));
+                    window.sessionStorage.setItem('cartLength', JSON.stringify(response.cartCount));
+                    var promise = LoginService.updateCartFromLocal();
+                    promise.then(function() {
+                        // Broadcast cart update to mini cart
+                        $rootScope.$broadcast("updateMiniCartCount");
+                    });
                 }
                 else {
                     response.message = 'Username or password is incorrect';
@@ -65,8 +74,8 @@ angular.module('eCommerce')
     return service;
   }]
 )
-.factory('Facebook', ['$rootScope', '$http', '$state', 'PRODUCTDATA_URL',  
-  function ($rootScope, $http, $state, PRODUCTDATA_URL) {
+.factory('Facebook', ['$rootScope', '$http', '$state', 'PRODUCTDATA_URL', 'LoginService',  
+  function ($rootScope, $http, $state, PRODUCTDATA_URL, LoginService) {
     // return {
     var facebook = {};
     facebook.getLoginStatus = function () {
@@ -85,6 +94,15 @@ angular.module('eCommerce')
                         params: {'token': response.authResponse.accessToken}
                     }).then(function successCallback(response) {
                         window.localStorage.setItem("accessToken", response.data.token);
+                        // Hardcoded 
+                        response.data.loggedUser.emailId = "pdwibedi@gmail.com";
+                        window.sessionStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                        window.sessionStorage.setItem('cartLength', JSON.stringify(response.cartCount));
+                        var promise = LoginService.updateCartFromLocal();
+                        promise.then(function() {
+                            // Broadcast cart update to mini cart
+                            $rootScope.$broadcast("updateMiniCartCount");
+                        });
                         if(onSuccess) {
                             onSuccess();
                         }
@@ -96,7 +114,6 @@ angular.module('eCommerce')
                 case 'not_authorized':
                 case 'unknown':
                     FB.login(function (response) {
-                      debugger;
                         if (response.authResponse) {
                             $http({
                                 method: 'GET',
@@ -105,6 +122,15 @@ angular.module('eCommerce')
                             }).then(function successCallback(response) {
                                 // Stores the access token for 30 sec and then resets automatically
                                 window.localStorage.setItem("accessToken", response.data.token);
+                                // Hardcoded 
+                                response.data.loggedUser.emailId = "pdwibedi@gmail.com";
+                                window.sessionStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                                window.sessionStorage.setItem('cartLength', JSON.stringify(response.cartCount));
+                                var promise = LoginService.updateCartFromLocal();
+                                promise.then(function() {
+                                    // Broadcast cart update to mini cart
+                                    $rootScope.$broadcast("updateMiniCartCount");
+                                });
                                 if(onSuccess) {
                                     onSuccess();
                                 }
@@ -148,7 +174,7 @@ angular.module('eCommerce')
   }]
 ) 
 .factory('Google', ['$rootScope', '$http', '$state', 'PRODUCTDATA_URL', 
-    function ($rootScope, $http, $state, PRODUCTDATA_URL) {
+    function ($rootScope, $http, $state, PRODUCTDATA_URL, LoginService) {
         return {
             apiKey: 'AIzaSyDtSivbvsJStXeutrpQrul99gZTCjgP9Os',
             discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
@@ -164,6 +190,15 @@ angular.module('eCommerce')
                         params: {'token': accessToken}
                     }).then(function successCallback(response) {
                         window.localStorage.setItem("accessToken", response.data.token);
+                        // Hardcoded 
+                        response.data.loggedUser.emailId = "pdwibedi@gmail.com";
+                        window.sessionStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                        window.sessionStorage.setItem('cartLength', JSON.stringify(response.cartCount));
+                        var promise = LoginService.updateCartFromLocal();
+                        promise.then(function() {
+                            // Broadcast cart update to mini cart
+                            $rootScope.$broadcast("updateMiniCartCount");
+                        });
                         if(self.onSuccess) {
                             self.onSuccess();
                         } else {
@@ -320,7 +355,7 @@ angular.module('eCommerce')
  
     /* jshint ignore:end */
 })
-.service('LoginService', function ($http, ENDPOINT_URI) {
+.service('LoginService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -355,5 +390,30 @@ angular.module('eCommerce')
         return function () {
             return { success: false, message: res.message };
         };
+    }
+
+    service.updateCartFromLocal = function() {
+        var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+            responseData,
+            objectToSerialize= [];
+        $.each(cartItems, function(i, val) {
+            var obj = {};   
+            obj["productId"] = parseInt((val.partNumber || val.productId).substr(4));
+            obj["quantity"] = val.quantity;        
+            objectToSerialize.push(obj);
+        });
+
+
+        return $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/cart/convertToCart',
+                data: JSON.stringify(objectToSerialize)
+            }).then(function successCallback(response) {
+                // debugger;
+                window.sessionStorage.removeItem('itemsArray');
+                return response.data;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+        }); 
     }
 });

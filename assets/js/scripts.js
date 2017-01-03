@@ -29,7 +29,7 @@ if (!Object.prototype.watch) {
 
 // Stores partnumbers to localstorage and data temporarily to minicart in sessionStorage
 window.itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [] || [];
-window.miniCartStorage = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [] || [];
+// window.miniCartStorage = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [] || [];
 
 // Array Watch
 Object.defineProperty(window.itemsArray, "push", {
@@ -49,7 +49,7 @@ function RaiseMyEvent(id, oldVal, newVal) {
 };
 
 function updateMiniKartCount() {
-    $("body").find(".cartCount").html(window.itemsArray.length);
+    // $("body").find(".cartCount").html(window.itemsArray.length);
 };
 
 window.dataLoaded = false;
@@ -61,7 +61,7 @@ window.watch('dataLoaded', function(id, oldval, newval) {
     }
     if (newval === true) {
         $(".progress").hide();
-        updateMiniKartCount();
+        // updateMiniKartCount();
         updateUser();
     } else {
         $(".progress").show();

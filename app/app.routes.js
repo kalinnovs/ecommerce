@@ -55,11 +55,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('cart', {
         url:'/cart',
-        views: {
-          '': {
-            templateUrl: 'app/components/cart/cartView.html',
-            controller: 'CartCtrl',
-            controllerAs: 'cart'
+        templateUrl: 'app/components/cart/cartView.html',
+        controller: 'CartCtrl',
+        controllerAs: 'cart',
+        resolve: {
+          user: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
           }
         }
       })
@@ -74,6 +75,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           },
           getAddress: function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            // return AuthenticationService.validateToken();
+          },
+          viewCart: function($stateParams, CheckoutService) {
+            // return CheckoutService.viewCart();
           }
         }
       })
@@ -81,7 +88,21 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url: '/login',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/login.html'
+        templateUrl: 'app/components/checkout/login.html',
+        resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            // return CheckoutService.getItems();
+          },
+          getAddress: function($stateParams, CheckoutService) {
+            // return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          },
+          viewCart: function($stateParams, CheckoutService) {
+            // return CheckoutService.viewCart();
+          }
+        }
        })
       .state('checkout.address', {
         url: '/address',
@@ -89,8 +110,17 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         controllerAs: 'checkout',
         templateUrl: 'app/components/checkout/address.html',
         resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            // return CheckoutService.getItems();
+          },
           getAddress: function($stateParams, CheckoutService) {
             return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          },
+          viewCart: function($stateParams, CheckoutService) {
+            // return CheckoutService.viewCart();
           }
         }
       })
@@ -103,8 +133,14 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           cartItems: function($stateParams, CheckoutService) {
             return CheckoutService.getItems();
           },
+          viewCart: function($stateParams, CheckoutService) {
+            return CheckoutService.viewCart();
+          },
           getAddress: function($stateParams, CheckoutService) {
-            return CheckoutService.getAddress();
+            // return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
           }
         }
       })
@@ -321,7 +357,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           // Checkout redirection on zero cart items
           if($location.path().indexOf("checkout") !== -1) {
             var authenticatedUser = (window.singleCall) ? window.singleCall.authenticateUser : false;
-            var cartlength = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts).length : 0;
+            var cartlength = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray).length : 0;
             if(cartlength === 0) {
               $location.path('/home');
             } else {

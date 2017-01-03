@@ -55,10 +55,16 @@ angular.module('eCommerce')
 
     service.getItems = function() {
         // Read Cart Array and pass to URL
-        var cartArray = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [],
-            cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+        var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
             responseData,
+            cartArray,
+            objectToSerialize;
+            cartArray = cartItems.map(function(i, j) {
+                        return (i.partNumber || i.productId);
+                    });
             objectToSerialize={'products':cartArray};
+
+            
         
         return $http({
                 method: 'POST',
@@ -69,6 +75,29 @@ angular.module('eCommerce')
                 $.each(responseData, function(key, val) {
                     val["quantity"] = cartItems[key].quantity;
                 });
+                return responseData;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+        }); 
+    } 
+
+    service.viewCart = function() {
+        // Read Cart Array and pass to URL
+        var cartArray,
+            cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+            responseData,
+            objectToSerialize;
+            cartArray = cartItems.map(function(i, j) {
+                return (i.partNumber || i.productId);
+            });
+            objectToSerialize={'products':cartArray};
+
+        return $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/cart/viewCart',
+                data: JSON.stringify(objectToSerialize)
+            }).then(function successCallback(response) {
+                responseData = response.data;
                 return responseData;
             }, function errorCallback(response) {
                 console.log("Error in saving.");
