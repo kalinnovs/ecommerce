@@ -33,7 +33,15 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/accounts',
         templateUrl: 'app/components/accounts/accountView.html',
         controller: 'AccoutsCtrl',
-        controllerAs: 'accounts'
+        controllerAs: 'accounts',
+        resolve: {
+          orderList: function($stateParams, AccountsService) {
+            return AccountsService.getOrderList();
+          },
+          savedCart: function($stateParams, AccountsService) {
+            return AccountsService.getSavedCart();
+          }
+        }
       })
       .state('home', {
         url:'/home',
