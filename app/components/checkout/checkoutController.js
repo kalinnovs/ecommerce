@@ -361,11 +361,17 @@ angular.module('eCommerce')
             promise.then(function(response) {
                 if(response.data.success) {
                     window.orderNumber = response.data.webOrderNumber;
-                    window.sessionStorage.clear();
                     window.miniCartStorage = [];
                     window.itemsArray = [];
+                    window.sessionStorage.removeItem('itemsArray');
+                    window.sessionStorage.removeItem('storage');
                     window.sessionStorage.setItem('checkoutState', '{"login": false, "address": false, "order": false, "payment": false }');
                     window.restrictView = false;
+                    
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateMiniCartCount");
+
+                    // Redirect to thankyou page
                     self.location.path('/thankyou');
                 }
             });

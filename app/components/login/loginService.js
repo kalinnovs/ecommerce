@@ -28,7 +28,7 @@ angular.module('eCommerce')
                     // Hardcoded 
                     response.loggedUser.emailId = "pdwibedi@gmail.com";
                     window.sessionStorage.setItem('userDetails', JSON.stringify(response.loggedUser));
-                    window.sessionStorage.setItem('cartLength', JSON.stringify(response.cartCount));
+                    
                     var promise = LoginService.updateCartFromLocal();
                     promise.then(function() {
                         // Broadcast cart update to mini cart
@@ -97,7 +97,7 @@ angular.module('eCommerce')
                         // Hardcoded 
                         response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.sessionStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
-                        window.sessionStorage.setItem('cartLength', JSON.stringify(response.cartCount));
+                        
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
                             // Broadcast cart update to mini cart
@@ -125,7 +125,7 @@ angular.module('eCommerce')
                                 // Hardcoded 
                                 response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                                 window.sessionStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
-                                window.sessionStorage.setItem('cartLength', JSON.stringify(response.cartCount));
+                                
                                 var promise = LoginService.updateCartFromLocal();
                                 promise.then(function() {
                                     // Broadcast cart update to mini cart
@@ -193,7 +193,7 @@ angular.module('eCommerce')
                         // Hardcoded 
                         response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.sessionStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
-                        window.sessionStorage.setItem('cartLength', JSON.stringify(response.cartCount));
+                        
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
                             // Broadcast cart update to mini cart

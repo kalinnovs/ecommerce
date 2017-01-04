@@ -49,6 +49,7 @@ require("../../../app/components/orderlookup/orderlookupService.js");
 require("../../../app/components/orderlookup/orderlookupController.js");
 
 require("../../../app/components/accounts/accountsController.js");
+require("../../../app/components/accounts/accountsService.js");
 
 require("../../../app/components/subscribers/subscriberController.js");
 
