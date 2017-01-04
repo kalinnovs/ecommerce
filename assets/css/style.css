@@ -3100,7 +3100,7 @@ footer .back-top .pageCounter {
 .accounts-container .saved-cart .wrapper .details {
     display: table-cell;
     vertical-align: top;
-    padding: 0 0 5px 0;
+    padding: 5px 0;
 }
 .accounts-container .saved-cart .wrapper figure {
     width: 30%;
