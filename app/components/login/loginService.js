@@ -28,6 +28,7 @@ angular.module('eCommerce')
                     // Hardcoded 
                     response.loggedUser.emailId = "pdwibedi@gmail.com";
                     window.localStorage.setItem('userDetails', JSON.stringify(response.loggedUser));
+                    window.sessionStorage.setItem('cartLength', response.cartCount);
                     
                     var promise = LoginService.updateCartFromLocal();
                     promise.then(function() {
@@ -97,6 +98,7 @@ angular.module('eCommerce')
                         // Hardcoded 
                         response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                        window.sessionStorage.setItem('cartLength', response.data.cartCount);
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
@@ -125,6 +127,7 @@ angular.module('eCommerce')
                                 // Hardcoded 
                                 response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                                 window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                                window.sessionStorage.setItem('cartLength', response.data.cartCount);
                                 
                                 var promise = LoginService.updateCartFromLocal();
                                 promise.then(function() {
@@ -193,6 +196,7 @@ angular.module('eCommerce')
                         // Hardcoded 
                         response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                        window.sessionStorage.setItem('cartLength', response.data.cartCount);
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {

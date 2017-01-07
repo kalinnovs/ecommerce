@@ -365,7 +365,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           // Checkout redirection on zero cart items
           if($location.path().indexOf("checkout") !== -1) {
             var authenticatedUser = (window.singleCall) ? window.singleCall.authenticateUser : false;
-            var cartlength = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray).length : 0;
+            var cartlength = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray).length : (window.sessionStorage.cartLength) ? parseInt(JSON.parse(window.sessionStorage.cartLength)) : 0;
             if(cartlength === 0) {
               $location.path('/home');
             } else {

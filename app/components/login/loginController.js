@@ -81,11 +81,12 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
 
         $scope.fblogin = function () {
             $timeout(function () {
-                Facebook.login('home');
-                // Broadcast cart update to mini cart
-                $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
-                // Broadcast cart update to mini cart
-                $rootScope.$broadcast("updateMiniCartCount");
+                Facebook.login('home', function() {
+                	// Broadcast cart update to mini cart
+                	$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
+                	// Broadcast cart update to mini cart
+                	$rootScope.$broadcast("updateMiniCartCount");	
+                });
             }, 100, false);
         };
 
@@ -154,11 +155,12 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
 
         /* Google Authentication code goes here */
         $scope.googleHandleAuthClick = function() {
-            Google.login();
-            // Broadcast cart update to mini cart
-            $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
-            // Broadcast cart update to mini cart
-            $rootScope.$broadcast("updateMiniCartCount");
+            Google.login(function() {
+            	// Broadcast cart update to mini cart
+           		$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
+            	// Broadcast cart update to mini cart
+            	$rootScope.$broadcast("updateMiniCartCount");
+            });
         };
 
         $scope.googleLogout = function() {

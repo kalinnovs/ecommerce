@@ -66,10 +66,14 @@ angular.module('eCommerce')
 
         $scope.updateAddressToStorage = function(event, id) {
             $(event.currentTarget).siblings().removeClass("active");
-            if($scope.co.address) {
+            if($scope.co && $scope.co.address) {
                 $(event.currentTarget).addClass("active");
                 $scope.co.user["addressId"] = id;
             } else {
+                if(!$scope.co) {
+                	$scope.co = {};
+                	$scope.co["user"] = {};
+                }
                 $scope.co["address"] = {};
                 $scope.co.user["addressId"] = id;
             }
