@@ -284,7 +284,7 @@ angular.module('eCommerce')
                 window.singleCall.authenticateUser = true;
                 if(getLoginStatus && getLoginStatus.success === true) {
                     scope.targetScope.getLoginStatus = getLoginStatus;
-                    var userDetails = JSON.parse(window.sessionStorage.userDetails);
+                    var userDetails = JSON.parse(window.localStorage.userDetails);
                     scope.targetScope.co = {};
                     scope.targetScope.co["user"] = {};
                     scope.targetScope.co["user"]["emailId"] = userDetails.emailId;

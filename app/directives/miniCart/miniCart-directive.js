@@ -149,7 +149,7 @@ angular.module('eCommerce')
                 $(".minicart .profile > span").on("click", function(event) {
                     window.localStorage.setItem("accessToken", "");
                     window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
-                    window.sessionStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
+                    window.localStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
                     $state.go('login');
                     window.sessionStorage.removeItem('itemsArray');
                     // Broadcast cart update to mini cart

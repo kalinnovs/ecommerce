@@ -27,7 +27,7 @@ angular.module('eCommerce')
                     window.localStorage.setItem("accessToken", response.token);
                     // Hardcoded 
                     response.loggedUser.emailId = "pdwibedi@gmail.com";
-                    window.sessionStorage.setItem('userDetails', JSON.stringify(response.loggedUser));
+                    window.localStorage.setItem('userDetails', JSON.stringify(response.loggedUser));
                     
                     var promise = LoginService.updateCartFromLocal();
                     promise.then(function() {
@@ -96,7 +96,7 @@ angular.module('eCommerce')
                         window.localStorage.setItem("accessToken", response.data.token);
                         // Hardcoded 
                         response.data.loggedUser.emailId = "pdwibedi@gmail.com";
-                        window.sessionStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                        window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
@@ -124,7 +124,7 @@ angular.module('eCommerce')
                                 window.localStorage.setItem("accessToken", response.data.token);
                                 // Hardcoded 
                                 response.data.loggedUser.emailId = "pdwibedi@gmail.com";
-                                window.sessionStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                                window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
                                 
                                 var promise = LoginService.updateCartFromLocal();
                                 promise.then(function() {
@@ -192,7 +192,7 @@ angular.module('eCommerce')
                         window.localStorage.setItem("accessToken", response.data.token);
                         // Hardcoded 
                         response.data.loggedUser.emailId = "pdwibedi@gmail.com";
-                        window.sessionStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                        window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
