@@ -75,7 +75,7 @@ function updateUser() {
         "imageUrl": "",
         "user": null 
     },
-    userDetails = (window.sessionStorage.userDetails) ? JSON.parse(window.sessionStorage.userDetails) : emptyUser;
+    userDetails = (window.localStorage.userDetails) ? JSON.parse(window.localStorage.userDetails) : emptyUser;
     if(userDetails.imageUrl !== "") {
         $(".profilePicUpdate").addClass("loggedIn");
     } else {

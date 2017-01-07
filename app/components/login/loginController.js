@@ -22,7 +22,7 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
             
         } else {
             // Else pick local JSON
-            window.sessionStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
+            window.localStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
         }
 
         if ($stateParams.uid) {
