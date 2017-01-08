@@ -69,6 +69,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         resolve: {
           user: function($stateParams, AuthenticationService) {
             return AuthenticationService.validateToken();
+          },
+          cartData: function($stateParams, CartService) {
+            return CartService.viewCart();
           }
         }
       })
@@ -156,7 +159,21 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url: '/payment',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/payment.html'
+        templateUrl: 'app/components/checkout/payment.html',
+        resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            return CheckoutService.getItems();
+          },
+          viewCart: function($stateParams, CheckoutService) {
+            return CheckoutService.viewCart();
+          },
+          getAddress: function($stateParams, CheckoutService) {
+            // return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          }
+        }
       })
       .state('thankyou', {
         url: '/thankyou',

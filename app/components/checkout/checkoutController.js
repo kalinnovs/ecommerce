@@ -246,6 +246,110 @@ angular.module('eCommerce')
             });
         };
 
+        $scope.manipulatePrice = function(event, call) {
+            var index = $(event.currentTarget).parents(".item").attr("data-index"),
+                lineItemId = $(event.currentTarget).attr("data-lineId"),
+                items = this.cartItems,
+                currentSize = parseInt(items[index].quantity),
+                currency = $("body").attr("data-currency"),
+                updateObj = {};
+                if(call === "substract" && currentSize === 1) {
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateFlash", {"alertType": "danger", "message": "You cannot reduce the cart size below zero. Please remove the item."});
+                    return;
+                }
+            
+            items[index].quantity = (call === "add") ? currentSize+=1 : currentSize-=1;
+            
+            var itemsArray = [];
+            $.each(items, function(i, item) {
+                var priceObj = item.productPriceOptions.filter(function(key, val) {
+                    return key.currencyCode === currency.toUpperCase();
+                });
+                var obj = {
+                    "partNumber": item.productPartNumber || item.productId,
+                    "quantity": item.quantity || 1
+                }
+                itemsArray.push(obj);
+            });
+            if(lineItemId === "") {
+                window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
+                // Broadcast cart update to mini cart
+                $rootScope.$broadcast("updateMiniCartCount");
+            } else {
+                window.sessionStorage.setItem('cartLength', ((call === "add") ? parseInt(window.sessionStorage.cartLength || 0)+1 : parseInt(window.sessionStorage.cartLength || 0)-1));
+                updateObj["lineItemId"] = items[index].lineItemId;
+                updateObj["quantity"] = items[index].quantity;
+                var promise = CartService.updateCartLineItem(updateObj);
+                promise.then(function(response) {
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateMiniCartCount");
+                });     
+            }
+            this.getTotal();
+            // Broadcast cart update to mini cart
+            $rootScope.$broadcast("updateMiniCart", this.cartItems);
+
+        };
+
+        $scope.removeItem = function(event) {
+            var lineItemId = $(event.currentTarget).attr("data-lineId"),
+                currency = $("body").attr("data-currency"),
+                qty = this.$parent.cartItems.filter(function(i, j) {
+                    return (i.lineItemId === parseInt(lineItemId));
+                });
+
+            if(lineItemId === "") {
+                // Removes the line item from Local storage when there is no logged in User.
+                var currentIndex = $(event.currentTarget).parents("li").data("index"),
+                    cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
+                cartItems.splice(currentIndex,1);
+
+                // Remove the item from storage
+                var itemList = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
+                itemList.splice(currentIndex,1);
+
+                var itemsArray = [];
+                $.each(itemList, function(i, item) {
+                    var obj = {
+                        "partNumber": item.productPartNumber || item.productId,
+                        "quantity": item.quantity || 1
+                    }
+                    itemsArray.push(obj);
+                });
+                
+                // insert the new stringified array into LocalStorage
+                window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
+
+                // If cart goes empty page redirects to home page
+                if(itemList.length === 0) {
+                    $timeout(function() {
+                        $state.go("home");
+                    }, 1000, false);
+                }
+                
+                // Broadcast cart update to mini cart
+                $rootScope.$broadcast("updateMiniCartCount");
+
+            } else {
+                debugger;
+                window.sessionStorage.setItem('cartLength', parseInt(window.sessionStorage.cartLength) - qty[0].quantity);
+                // Removes the line item from data base when there is a logged in User.
+                $http({
+                    method: 'GET',
+                    url: PRODUCTDATA_URL + '/cart/remove/'+ parseInt(lineItemId)
+                }).then(function successCallback(response) {
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateMiniCartCount");
+                    $state.go($state.current, {}, {reload: true});
+                }, function errorCallback(response) {
+                    console.log("Error in saving.");
+                });
+            }
+
+            event.preventDefault();
+        };
+
         $scope.updateAddress = function(event) {
             var self = this;
             var objectToSerialize = this.co.address;

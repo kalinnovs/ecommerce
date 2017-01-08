@@ -3763,6 +3763,8 @@ footer .back-top .pageCounter {
 .checkout .order-list li {
     overflow: hidden;
     margin: 0 0 15px 0;
+    border-bottom: dashed 1px #d3d3d3;
+    padding-bottom: 15px;
 }
 .checkout .order-list figure {
     width: 70px;
@@ -3783,15 +3785,53 @@ footer .back-top .pageCounter {
     margin: 3px 0 5px;
 }
 .checkout .order-list .part-details h5 {
-    font-size: 16px;
-    width: 220px;
-    line-height: 22px;
+    font-size: 14px;
+    width: 260px;
+    line-height: 18px;
     float: left;
 }
 .checkout .order-list .alignRight {
-    float: left;
     line-height: 22px;
     overflow: hidden;
+    margin-left: 290px;
+    margin-right: 25px;
+    text-align: left;
+}
+.checkout .order-list .item-quantity {
+    display: inline-block;
+}
+.checkout .order-list .item-quantity button, 
+.checkout .order-list .item-quantity span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.checkout .order-list .quantityUp,
+.checkout .order-list .quantityDown {
+    background: #f3f3f3;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    line-height: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+}
+.checkout .order-list .part-controls {
+    display: table;
+}
+.checkout .order-list .part-controls p,
+.checkout .order-list .part-controls .control {
+    display: table-cell;
+}
+.checkout .order-list .part-controls p {
+    width: 84%;
+}
+.checkout .order-list .part-controls p .control {
+    width: 17%;
+    display: table-cell;
+    text-align: right;
 }
 .checkout .order-list .alignRight input {
     float: left;
@@ -3799,9 +3839,11 @@ footer .back-top .pageCounter {
     text-align: center;
     margin: 0 80px;
     line-height: 18px;
+    width: 84%;
 }
 .checkout .order-list .alignRight .item-price {
     float: right;
+    width: 65px;
 }
 .checkout .order-list .part-controls .fa-trash {
     margin-right: 5px;

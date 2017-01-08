@@ -84,8 +84,6 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
                 Facebook.login('home', function() {
                 	// Broadcast cart update to mini cart
                 	$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
-                	// Broadcast cart update to mini cart
-                	$rootScope.$broadcast("updateMiniCartCount");	
                 });
             }, 100, false);
         };
@@ -158,8 +156,6 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
             Google.login(function() {
             	// Broadcast cart update to mini cart
            		$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
-            	// Broadcast cart update to mini cart
-            	$rootScope.$broadcast("updateMiniCartCount");
             });
         };
 

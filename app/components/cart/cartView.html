@@ -18,10 +18,14 @@
                                     </span>
                                 </div>
                             </div>
-                            <button class="quantityDown" ng-click="manipulatePrice($event, 'substract')"><span>-</span></button>
+                            <button class="quantityDown" data-lineId="{{value.lineItemId}}" ng-click="manipulatePrice($event, 'substract')">
+                                <span>-</span>
+                            </button>
                             <span>{{value.quantity}}</span>
                             <!-- <input type="text" class="item-quantity" max-length="3" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" value="{{value.quantity}}" /> -->
-                            <button class="quantityUp" ng-click="manipulatePrice($event, 'add')"><span>+</span></button>
+                            <button class="quantityUp" data-lineId="{{value.lineItemId}}" ng-click="manipulatePrice($event, 'add')">
+                                <span>+</span>
+                            </button>
                             <div class="item-calculated-price priceChooser">
                                 <div ng-repeat="(key, priceValue) in value.priceArray">
                                     <span class="price {{priceValue.currencyCode | lowercase}}">

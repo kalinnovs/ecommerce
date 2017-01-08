@@ -18,7 +18,16 @@
 				            <div class="part-details">
 				                <h5>{{value.productName}}</h5>
 				                <div class="alignRight">
-				                	<input type="text" class="item-quantity" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" value="{{value.quantity}}" />
+				                	<div class="item-quantity">
+					                	<button class="quantityDown" data-lineId="{{value.lineItemId}}" ng-click="manipulatePrice($event, 'substract')">
+			                                <span>-</span>
+			                            </button>
+			                            <span>{{value.quantity}}</span>
+			                            <!-- <input type="text" class="item-quantity" max-length="3" ng-model="value.quantity" ng-keyup="manipulatePrice($event)" value="{{value.quantity}}" /> -->
+			                            <button class="quantityUp" data-lineId="{{value.lineItemId}}" ng-click="manipulatePrice($event, 'add')">
+			                                <span>+</span>
+			                            </button>
+			                        </div>
 				                    <div class="item-price priceChooser">
 				                        <div ng-repeat="(key, priceValue) in value.productPriceOptions">
 				                            <span class="price {{priceValue.currencyCode | lowercase}}">
@@ -40,7 +49,7 @@
 				            <div class="part-controls">
 				                <p>{{value.productId}}</p>
 				                <div class="controls">
-				                    <a href="javascript:void(0);" ng-click="removeItem($event)" title="Delete Item">
+				                    <a href="javascript:void(0);" ng-click="removeItem($event)" data-lineId="{{value.lineItemId}}" title="Delete Item">
 				                        <span class="fa fa-trash"></span>delete item</a>
 				                </div>
 				            </div>

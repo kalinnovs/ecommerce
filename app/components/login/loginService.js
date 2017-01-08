@@ -25,10 +25,8 @@ angular.module('eCommerce')
                     response.success = true;
                     response.userType = response.userType;
                     window.localStorage.setItem("accessToken", response.token);
-                    // Hardcoded 
-                    response.loggedUser.emailId = "pdwibedi@gmail.com";
                     window.localStorage.setItem('userDetails', JSON.stringify(response.loggedUser));
-                    window.sessionStorage.setItem('cartLength', response.cartCount);
+                    window.sessionStorage.setItem('cartLength', response.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                     
                     var promise = LoginService.updateCartFromLocal();
                     promise.then(function() {
@@ -96,9 +94,9 @@ angular.module('eCommerce')
                     }).then(function successCallback(response) {
                         window.localStorage.setItem("accessToken", response.data.token);
                         // Hardcoded 
-                        response.data.loggedUser.emailId = "pdwibedi@gmail.com";
+                        // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
-                        window.sessionStorage.setItem('cartLength', response.data.cartCount);
+                        window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
@@ -125,9 +123,9 @@ angular.module('eCommerce')
                                 // Stores the access token for 30 sec and then resets automatically
                                 window.localStorage.setItem("accessToken", response.data.token);
                                 // Hardcoded 
-                                response.data.loggedUser.emailId = "pdwibedi@gmail.com";
+                                // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                                 window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
-                                window.sessionStorage.setItem('cartLength', response.data.cartCount);
+                                window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                                 
                                 var promise = LoginService.updateCartFromLocal();
                                 promise.then(function() {
@@ -194,9 +192,9 @@ angular.module('eCommerce')
                     }).then(function successCallback(response) {
                         window.localStorage.setItem("accessToken", response.data.token);
                         // Hardcoded 
-                        response.data.loggedUser.emailId = "pdwibedi@gmail.com";
+                        // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
-                        window.sessionStorage.setItem('cartLength', response.data.cartCount);
+                        window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
@@ -399,14 +397,17 @@ angular.module('eCommerce')
     service.updateCartFromLocal = function() {
         var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
             responseData,
+            cartCount = 0,
             objectToSerialize= [];
         $.each(cartItems, function(i, val) {
             var obj = {};   
             obj["productId"] = parseInt((val.partNumber || val.productId).substr(4));
-            obj["quantity"] = val.quantity;        
+            obj["quantity"] = val.quantity;    
+            cartCount+= parseInt(val.quantity);
             objectToSerialize.push(obj);
         });
-
+        debugger;
+        window.sessionStorage.setItem('cartLength', cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
 
         return $http({
                 method: 'POST',

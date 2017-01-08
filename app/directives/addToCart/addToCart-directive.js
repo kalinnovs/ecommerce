@@ -19,6 +19,8 @@ angular.module('eCommerce')
                     }
 
                     var addItem = function(item) {
+
+                        // debugger;
                         var oldItems = JSON.parse(sessionStorage.getItem('itemsArray')) || [];
                         var repeatedItem = oldItems.filter(function(val, index) {
                             return (val.partNumber === item.partNumber);

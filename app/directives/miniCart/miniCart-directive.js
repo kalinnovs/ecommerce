@@ -22,7 +22,7 @@ angular.module('eCommerce')
                 '<span class="logoutText">Logout</span> <span class="userDetailsUpdate userLogout"></span></a></p>' +
             '</div></div>',
             controller: function() {
-                if(!window.loadMiniCartOnce) {
+                if(window.loadMiniCartOnce === undefined) {
                     var responseData, html, self = this,
                         itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
                         itemList = itemsArray.map(function(i, j) {
@@ -61,30 +61,26 @@ angular.module('eCommerce')
                         }),
                         objectToSerialize = {'products':itemList};
 
-                    scope.auth = AuthenticationService;
-                    scope.auth.validateToken().then(function (result) {
-                        var computedURL =  PRODUCTDATA_URL + ((result.success === true) ? '/cart/miniCart' : "/cart/products"),
-                            cartCount;
-                        $http({
-                            method: 'POST',
-                            url: computedURL,
-                            data: JSON.stringify(objectToSerialize),
-                        }).then(function successCallback(results) {
-                            responseData = results.data;
-                            cartCount = cartCounter(responseData);
-                            renderHTML(responseData);
-                            (responseData.length > 4) ? element.find(".manyItems").show() : element.find(".manyItems").hide();
-                            $(".miniKart").parents(".cart").find(".count").html(cartCount);
-                            $(".miniKart").removeClass("loader");
-                        }, function errorCallback(response) {
-                            console.log("Error in saving.");
-                        }); 
-                    }, function (reason) {
-                        scope.validateError = reason.data;
-                    });
+                    
+                    var computedURL =  PRODUCTDATA_URL + '/cart/miniCart',
+                        cartCount;
+                    $http({
+                        method: 'POST',
+                        url: computedURL,
+                        data: JSON.stringify(objectToSerialize),
+                    }).then(function successCallback(results) {
+                        responseData = results.data;
+                        cartCount = ListItemCounter(responseData);
+                        renderHTML(responseData);
+                        (responseData.length > 4) ? element.find(".manyItems").show() : element.find(".manyItems").hide();
+                        // $(".miniKart").parents(".cart").find(".count").html(cartCount);
+                        $(".miniKart").removeClass("loader");
+                    }, function errorCallback(response) {
+                        console.log("Error in saving.");
+                    }); 
                 };
 
-                function cartCounter(itemList) {
+                function ListItemCounter(itemList) {
                     var itemArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
                         count = 0;
                     for(var i=0; i < itemList.length; i++) {
@@ -129,8 +125,22 @@ angular.module('eCommerce')
                 });
 
                 scope.$on("updateMiniCartCount", function (event, args) {
-                    getMiniCart();
+                    // getMiniCart();
+                    var count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
+                    var storageItemsCount = quantityCounter();
+                    count += storageItemsCount;
+                    // console.log(count);
+                    $(".miniKart").parents(".cart").find(".count").html(count);
                 });
+
+                function quantityCounter() {
+                    var itemArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+                        count = 0;
+                    for(var i=0; i < itemArray.length; i++) {
+                        count+= parseInt(itemArray[i].quantity);
+                    }
+                    return count;
+                };
                 
                 element.on("click", function(event) {
                     var currentTarget = event.currentTarget;
@@ -152,6 +162,7 @@ angular.module('eCommerce')
                     window.localStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
                     $state.go('login');
                     window.sessionStorage.removeItem('itemsArray');
+                    window.sessionStorage.removeItem('cartLength');
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateMiniCartCount");
                     event.preventDefault();
