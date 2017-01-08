@@ -332,7 +332,6 @@ angular.module('eCommerce')
                 $rootScope.$broadcast("updateMiniCartCount");
 
             } else {
-                debugger;
                 window.sessionStorage.setItem('cartLength', parseInt(window.sessionStorage.cartLength) - qty[0].quantity);
                 // Removes the line item from data base when there is a logged in User.
                 $http({
