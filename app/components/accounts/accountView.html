@@ -18,7 +18,7 @@
 					<li ng-repeat="(key, value) in savedCart" class="item" data-index="{{key}}">
 						<div class='wrapper'>
 							<figure>
-								<img src="{{value.productImage.baseImagePath}}" />
+								<img src="{{value.productImage.baseImagePath}}" width="70px"/>
 							</figure>
 							<div class='details'>
 								<h3>{{value.productName}}</h3>
@@ -52,10 +52,10 @@
 						<span class="ordercontrol">&nbsp;</span>
 					</li>
 					<li ng-repeat="(key, val) in orderList" class="item">
-						<span class="orderid">&nbsp;</span>
+						<span class="orderid">{{val.webOrderNumber}}</span>
 						<span class="orderdate">{{val.orderDateConverted}}</span>
 						<span class="ordershipping">{{val.address.city}}</span>
-						<span class="ordertotal">{{val.total}}</span>
+						<span class="ordertotal">{{val.currency.currencySymbol}}&nbsp;{{val.total}}</span>
 						<span class="orderstatus">{{val.orderState}}</span>
 						<span class="ordercontrol">
 							<a href="javascript:void(0);" ng-click="viewOrder($event, '{{val.orderId}}');">view</a> / 
