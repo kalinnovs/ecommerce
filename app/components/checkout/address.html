@@ -69,17 +69,19 @@
 <div class="address-blocks" ng-show="hasAddress">
 	<div class="addressSelection">
 		<h2>Choose the below address: </h2>
-		<ul>
-			<li ng-repeat="(key, val) in addressList" ng-click="updateAddressToStorage($event, val.addressId);" ng-class="{active: (val.addressId == co.user.addressId)}">
-				<label for="address{{key}}" class="addressList">
-					<span class="name">{{val.firstName}} {{val.lastName}}</span></br>
-					<span>{{val.addressLine1}}</span>, <span>{{val.addressLine2}}</span></br>
-					<span>{{val.city}}</span>,</br>
-					<span>{{val.state}} - {{val.zip}}</span></br>
-					<span>Phone: {{val.phone}}</span></br>
-				</label>
-			</li>
-		</ul>
+		<div class="address-wraper">
+			<ul>
+				<li ng-repeat="(key, val) in addressList" ng-click="updateAddressToStorage($event, val.addressId);" ng-class="{active: (val.addressId == co.user.addressId)}">
+					<label for="address{{key}}" class="addressList">
+						<span class="name">{{val.firstName}} {{val.lastName}}</span></br>
+						<span>{{val.addressLine1}}</span>, <span>{{val.addressLine2}}</span></br>
+						<span>{{val.city}}</span>,</br>
+						<span>{{val.state}} - {{val.zip}}</span></br>
+						<span>Phone: {{val.phone}}</span></br>
+					</label>
+				</li>
+			</ul>
+		</div>
 		<button ng-click="selectAddress($event);" class="btn btn-primary">
 			<span>Save Address to deliver and Proceed</span>
 		</button>

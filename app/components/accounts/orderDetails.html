@@ -1,0 +1,81 @@
+<div class="default recent-orders">
+    <h3>Recent Orders</h3>
+    <ul>
+        <li>
+            <span class="orderid">Order #</span>
+            <span class="orderdate">Date</span>
+            <span class="ordershipping">Ships To</span>
+            <span class="ordertotal">Order Total</span>
+            <span class="orderstatus">Status</span>
+            <span class="ordercontrol">&nbsp;</span>
+        </li>
+        <li ng-repeat="(key, val) in orderList" class="item cart-page">
+            <span class="orderid">{{val.webOrderNumber}}</span>
+            <span class="orderdate">{{val.orderDateConverted}}</span>
+            <span class="ordershipping">{{val.address.city}}</span>
+            <span class="ordertotal">{{val.total}}</span>
+            <span class="orderstatus">{{val.orderState}}</span>
+            <span class="ordercontrol">
+                <a href="javascript:void(0);" data-orderid="{{val.webOrderNumber}}" ng-click="viewOrder($event);">view</a> / 
+                <a href="javascript:void(0);" data-orderid="{{val.webOrderNumber}}" ng-click="cancelOrder($event);">cancel</a>
+            </span>
+            <div class="orderLookupList orderDetailsVisible-{{val.webOrderNumber}}">
+                <div class="wrapper">
+                    <ul class="status">
+                        <li ng-class="{'complete': orderLookupData.orderState === 'CREATED'}">
+                            <span><i class="tick"/> Order Created</span>
+                        </li>
+                        <li ng-class="{'complete': orderLookupData.orderState === 'BEING_PROCESSED'}">
+                            <span><i class="tick"/> Order Reviewed</span>
+                        </li>
+                        <li ng-class="{'complete': orderLookupData.orderState === 'SHIPPED'}">
+                            <span><i class="tick"/> Shipping Initiated</span>
+                        </li>
+                        <li ng-class="{'complete': orderLookupData.orderState === 'DELIVERED'}">
+                            <span><i class="tick"/> Delivered</span>
+                        </li>
+                    </ul>
+                    <ul class="list-items" ng-hide="orderLookupData.lineItems.length === 0">
+                        <li ng-repeat="(key, value) in orderLookupData.lineItems" class="item" data-index="{{key}}">
+                            <div class="item-details">
+                                <figure>
+                                    <img ng-src="{{value.productImage.baseImagePath}}" />
+                                </figure>
+                                <div class="part-details">
+                                    <h3>{{value.productName}}</h3>
+                                    <div class="alignRight">
+                                        <span>* {{value.quantity}}</span>
+                                    </div>
+                                </div>
+                                <div class="part-desciption">
+                                    <p>{{value.productId}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div ng-if="orderLookupData.lineItems.length === 0" class="empty-cart">
+                        <h2>No items added in your cart !!!</h2>
+                    </div>
+                    <div class="cart-summary" ng-hide="orderLookupData.lineItems.length === 0">
+                        <div class="cart-total">
+                            <label>Cart Total: </label>
+                            <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.subTotal}}</span>
+                        </div>
+                        <div class="shipping-charges">
+                            <label>Shipping Charges: </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.deliveryCharge | number:2}}</span>
+                        </div>
+                        <div class="tax">
+                            <label>Tax Estimated : </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.tax | number:2}}</span>
+                        </div>
+                        <div class="discount">
+                            <label>Discount Eligible: </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.discount | number:2}}</span>
+                        </div>
+                        <div class="costToCheckout">
+                            <label>Sub Total: </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.total | number:2}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

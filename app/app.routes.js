@@ -31,15 +31,28 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('accounts', {
         url:'/accounts',
-        templateUrl: 'app/components/accounts/accountView.html',
-        controller: 'AccoutsCtrl',
-        controllerAs: 'accounts',
-        resolve: {
-          orderList: function($stateParams, AccountsService) {
-            return AccountsService.getOrderList();
+        views: {
+          '': {
+            templateUrl: 'app/components/accounts/accountView.html',
+            controller: 'AccoutsCtrl',
+            controllerAs: 'accounts',
+            resolve: {
+              orderList: function($stateParams, AccountsService) {
+                return AccountsService.getOrderList();
+              },
+              savedCart: function($stateParams, AccountsService) {
+                return AccountsService.getSavedCart();
+              },
+              getAddress: function($stateParams, AccountsService) {
+                return AccountsService.getAddress();
+              },
+            }
           },
-          savedCart: function($stateParams, AccountsService) {
-            return AccountsService.getSavedCart();
+          'orderDetails@accounts': {
+            templateUrl: 'app/components/accounts/orderDetails.html'
+          }, 
+          'addressInfo@accounts': {
+            templateUrl: 'app/components/accounts/myAddress.html'
           }
         }
       })

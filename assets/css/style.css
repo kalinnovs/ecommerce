@@ -3057,8 +3057,9 @@ footer .back-top .pageCounter {
     margin: 0;
     float: left;
     padding: 10px;
-    border: solid 1px #999;
     background: #fff;
+    padding-bottom: 20000px;
+    margin-bottom: -20000px;
 }
 .accounts-container .menus h3 {
     font-size: 18px;
@@ -3073,6 +3074,8 @@ footer .back-top .pageCounter {
 .accounts-container .menus li a {
     display: block;
     border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
 }
 .accounts-container .menus li a:hover {
     background: #f9ab5c;
@@ -3105,40 +3108,60 @@ footer .back-top .pageCounter {
 .accounts-container .saved-cart .wrapper figure {
     width: 30%;
 }
-.accounts-container .recent-orders {
+.accounts-container .recent-orders,
+.accounts-container .address-details {
     margin-top: 10px;
 }
-.accounts-container .recent-orders h3 {
+.accounts-container .recent-orders h3,
+.accounts-container .address-details h3 {
     margin-bottom: 12px;
     margin-top: 20px;
     color: #f48516;
 }
-.accounts-container .recent-orders ul {
+.accounts-container .recent-orders > ul {
     border-top: solid 1px #dedede;
     border-left: solid 1px #dedede;
 }
-.accounts-container .recent-orders li {
+.accounts-container .recent-orders > ul > li {
+    border-right: solid 1px #dedede;
+}
+.accounts-container .recent-orders > ul > li.expanded {
     border-bottom: solid 1px #dedede;
 }
-.accounts-container .recent-orders li:nth-child(even) {
+.accounts-container .recent-orders > ul > li:nth-child(even) {
     background: #f3f3f3;
 }
-.accounts-container .recent-orders li:nth-child(odd) {
+.accounts-container .recent-orders > ul > li:nth-child(odd) {
     background: #f6f6f6;
 }
-.accounts-container .recent-orders li:nth-child(1) {
+.accounts-container .recent-orders > ul > li:nth-child(1) {
     background: #b7dce8;
 }
-.accounts-container .recent-orders span {
+.accounts-container .recent-orders > ul > li > span {
     display: inline-block;
     vertical-align: top;
     line-height: 28px;
-    border-right: solid 1px #dedede;
     padding-left: 12px;
     box-sizing: border-box;
+    border-left: solid 1px #dedede;
+    border-bottom: solid 1px #dedede;
+}
+.accounts-container .recent-orders .orderLookupList {
+    display: none;
+    overflow: hidden;
+}
+.accounts-container .recent-orders .orderLookupList .wrapper {
+    padding: 20px;
+    border: solid 3px #d3d3d3;
+    border-style: inset;
+    margin: 10px;
+}
+.accounts-container .recent-orders .cart-total {
+    margin-bottom: 0;
 }
 .accounts-container .recent-orders .orderid {  
     width: 15%;
+    border-left: 0;
 }
 .accounts-container .recent-orders .orderdate {  
     width: 15%;
@@ -3156,8 +3179,22 @@ footer .back-top .pageCounter {
     width: 23%;
     text-align: center;
 }
+.accounts-container .recent-orders .status li span .tick {
+    left: 52px;
+}
 
-
+.accounts-container .address-details .row {
+    clear: none;
+}
+.accounts-container .address-details .columns aside {
+    margin: 0;
+    float: left;
+    margin-left: 70px;
+}
+.accounts-container .address-details .columns aside:first-child {
+    margin-left: 0;
+    margin-right: 0;
+}
 
 /****************************************************************************
     *-*-*-* Cart *-*-*-*
@@ -3269,7 +3306,7 @@ footer .back-top .pageCounter {
 }
 .cart-page .list-items {
     overflow: hidden;
-    clear: left;
+    margin-top: 80px;
 }
 .cart-page .list-items li {
     display: block;;
@@ -3608,29 +3645,50 @@ footer .back-top .pageCounter {
 .checkout .section.selected .container {
     overflow: visible;
 }
-.checkout .address-form .form-group {
+.address-form .form-group {
     width: 400px;
 }
-.checkout .address-form .columns aside:first-child {
+.address-form .form-group label {
+    display: none;
+}
+.address-form .columns aside:first-child {
     margin-right: 95px;
 }
-.checkout .address-form .info {
+.address-form .info {
     margin: 34px 0 20px;
     font-size: 16px;
 }
-.checkout .address-blocks h2 {
-    font-size: 16px;
+.address-blocks .address-wraper {
+    position: relative;
+    overflow: hidden;
 }
-.checkout .address-blocks ul {
+.address-blocks .address-wraper:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(243,246,248, 1) 90%);
+    width: 4em;
+    height: 100%;
+}
+.address-blocks h2 {
+    font-size: 16px;
+    color: inherit;
+}
+.address-blocks ul {
     overflow: hidden;
     list-style: none;
     margin-left: -8px;
     margin-bottom: 25px;
+    width: 2000px;
 }
-.checkout .address-blocks ul li {
+.address-blocks ul li {
     float: left; 
+    min-width: 200px;
 }
-.checkout .address-blocks ul li .addressList {
+.address-blocks ul li .addressList {
     display: block;
     border: dotted 1px #dedede;
     margin: 10px;
@@ -3640,17 +3698,17 @@ footer .back-top .pageCounter {
     box-shadow: 0px 0px 10px 0px rgba(77,75,77,1);
     padding: 10px 15px;
 }
-.checkout .address-blocks ul li.active .addressList {
+.address-blocks ul li.active .addressList {
     border: solid 1px #33adff;
 }
-.checkout .address-blocks ul li span {
+.address-blocks ul li span {
     display: inline-block;
     line-height: 21px;
 }
-.checkout .address-blocks ul li span.name {
+.address-blocks ul li span.name {
     font-weight: 400;
 }
-.checkout .address-blocks ul li input {
+.address-blocks ul li input {
     display: inline-block;
     overflow: hidden;
     clip: rect(0,0,0,0);
@@ -4034,7 +4092,7 @@ input.form-control:focus::-webkit-input-placeholder {
     display: none;
 }
 .orderLookupList .status {
-    width: 540px;
+    width: 542px;
     background: #dedede;
     height: 7px;
     border-radius: 15px;

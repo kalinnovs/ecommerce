@@ -3,66 +3,26 @@
 		<aside class="col menus">
 			<section class="accounts">
 				<h3>My Accounts</h3>
-				<ul>
-					<li><a href="javascript:void(0);" title="Dashboard">Account Dashboard</a></li>
-					<li><a href="javascript:void(0);" title="Information">Account Information</a></li>
-					<li><a href="javascript:void(0);" title="Address">Account Address</a></li>
-					<li><a href="javascript:void(0);" title="Orders">My Orders</a></li>
-					<li><a href="javascript:void(0);" title="Wihlists">My Wihlists</a></li>
-					<li><a href="javascript:void(0);" title="Subscriptions">My Subscriptions</a></li>
+				<ul class="accounts-menu">
+					<li><a href="/accounts" title="Dashboard" data-model="myDashboard">Account Dashboard</a></li>
+					<li><a href="javascript:void(0);" title="Information" data-model="myAccounts">Account Information</a></li>
+					<li><a href="javascript:void(0);" title="Address" data-model="myAddress">Account Address</a></li>
+					<li><a href="javascript:void(0);" title="Orders" data-model="myOrders">My Orders</a></li>
+					<li><a href="javascript:void(0);" title="Wihlists" data-model="myWishlists">My Wihlists</a></li>
+					<li><a href="javascript:void(0);" title="Subscriptions" data-model="mySubscription">My Subscriptions</a></li>
 				</ul>
-			</section>
-			<section class="saved-cart">
-				<h3>My Cart</h3>
-				<ul ng-hide="savedCart.length === 0">
-					<li ng-repeat="(key, value) in savedCart" class="item" data-index="{{key}}">
-						<div class='wrapper'>
-							<figure>
-								<img src="{{value.productImage.baseImagePath}}" />
-							</figure>
-							<div class='details'>
-								<h3>{{value.productName}}</h3>
-								<span class='price'></span>
-								<span class='quantity'> x {{value.quantity}}</span>
-							</div>
-						</div>
-					</li>
-				</ul>
-				<div ng-if="savedCart.length === 0" class="empty-cart">
-		            <p>No items added in your cart !!!</p>
-		        </div>
-			</section>
-			<section>
-				
 			</section>
 		</aside>
 		<aside class="col">
 			<h2>My Dashboard</h2>
 			<p>Hello {{loggedUser.name}}, <br/> From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to vire or edit information.</p>
 
-			<div class="recent-orders">
-				<h3>Recent Orders</h3>
-				<ul>
-					<li>
-						<span class="orderid">Order #</span>
-						<span class="orderdate">Date</span>
-						<span class="ordershipping">Ships To</span>
-						<span class="ordertotal">Order Total</span>
-						<span class="orderstatus">Status</span>
-						<span class="ordercontrol">&nbsp;</span>
-					</li>
-					<li ng-repeat="(key, val) in orderList" class="item">
-						<span class="orderid">&nbsp;</span>
-						<span class="orderdate">{{val.orderDateConverted}}</span>
-						<span class="ordershipping">{{val.address.city}}</span>
-						<span class="ordertotal">{{val.total}}</span>
-						<span class="orderstatus">{{val.orderState}}</span>
-						<span class="ordercontrol">
-							<a href="javascript:void(0);" ng-click="viewOrder($event, '{{val.orderId}}');">view</a> / 
-							<a href="javascript:void(0);" ng-click="cancelOrder($event, '{{val.orderId}}');">cancel</a>
-						</span>
-					</li>
-				</ul>
+			<div ui-view="orderDetails" ng-if="myOrders"></div>
+
+			<div ui-view="addressInfo" ng-if="myAddress"></div>
+
+			<div class="subscriptionInfo" ng-if="mySubscription">
+				<h3>Subscription Information</h3>
 			</div>
 		</aside>
 	</div>

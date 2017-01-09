@@ -82,5 +82,35 @@ angular.module('eCommerce')
         }); 
     }
 
+    service.orderLookup = function(obj) {
+        var deferred = $q.defer();
+        // Read Cart Array and pass to URL
+        var objectToSerialize = {};
+            objectToSerialize[obj[1].name] = obj[1].value;
+
+        return $http({
+                method: 'GET',
+                url: PRODUCTDATA_URL + '/order/guest/' + obj[0].value,
+                params: objectToSerialize
+            }).then(function successCallback(response) {
+                deferred.resolve(response.data)
+                return deferred.promise;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+            }); 
+    }
+
+    service.getAddress = function() {
+        // Read Cart Array and pass to URL
+        return $http({
+                method: 'GET',
+                url: PRODUCTDATA_URL + '/cart/address'
+            }).then(function successCallback(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+        }); 
+    }
+
 
   });
