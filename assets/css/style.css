@@ -1585,7 +1585,7 @@ header a.active, header a:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 13px;
+/*     margin-bottom: 13px; */
 }
 .wide-full-tile figure img {
     width: 563px
@@ -2675,8 +2675,8 @@ add-to-cart.btn button:before {
 
 .shipping-wrap {
     background: rgba(0, 0, 0, 0.8);
-    height: 100px;
-    line-height: 100px;
+    height: 70px;
+    line-height: 70px;
 }
 .shipping p {
     font-weight: 300;
@@ -3118,10 +3118,18 @@ footer .back-top .pageCounter {
     margin-top: 20px;
     color: #f48516;
 }
+<<<<<<< HEAD
 .accounts-container .recent-orders > ul {
+=======
+.accounts-container .recent-orders ul {
+/* 
+>>>>>>> d6f4ca1540f69b14d11029119486b95101efd749
     border-top: solid 1px #dedede;
     border-left: solid 1px #dedede;
+ */
+    text-align:center;
 }
+<<<<<<< HEAD
 .accounts-container .recent-orders > ul > li {
     border-right: solid 1px #dedede;
 }
@@ -3133,14 +3141,31 @@ footer .back-top .pageCounter {
 }
 .accounts-container .recent-orders > ul > li:nth-child(odd) {
     background: #f6f6f6;
+=======
+.accounts-container .recent-orders li {
+/*     border-bottom: soli	d 1px #dedede; */
+}
+.accounts-container .recent-orders li:nth-child(even) {
+/*     background: #f3f3f3; */
+	background: #e2e2e2;
+}
+.accounts-container .recent-orders li:nth-child(odd) {
+/*     background: #f6f6f6; */
+	background: #f3f3f3;
+>>>>>>> d6f4ca1540f69b14d11029119486b95101efd749
 }
 .accounts-container .recent-orders > ul > li:nth-child(1) {
     background: #b7dce8;
+    font-weight: bold;
 }
 .accounts-container .recent-orders > ul > li > span {
     display: inline-block;
     vertical-align: top;
     line-height: 28px;
+<<<<<<< HEAD
+=======
+/*     border-right: solid 1px #dedede; */
+>>>>>>> d6f4ca1540f69b14d11029119486b95101efd749
     padding-left: 12px;
     box-sizing: border-box;
     border-left: solid 1px #dedede;
@@ -3171,6 +3196,7 @@ footer .back-top .pageCounter {
 }
 .accounts-container .recent-orders .ordertotal {  
     width: 15%;
+    text-align:left;
 }
 .accounts-container .recent-orders .orderstatus {  
     width: 15%;
