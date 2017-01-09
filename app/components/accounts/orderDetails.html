@@ -7,13 +7,13 @@
             <span class="ordershipping">Ships To</span>
             <span class="ordertotal">Order Total</span>
             <span class="orderstatus">Status</span>
-            <span class="ordercontrol">&nbsp;</span>
+            <span class="ordercontrol">Action</span>
         </li>
         <li ng-repeat="(key, val) in orderList" class="item cart-page">
             <span class="orderid">{{val.webOrderNumber}}</span>
             <span class="orderdate">{{val.orderDateConverted}}</span>
             <span class="ordershipping">{{val.address.city}}</span>
-            <span class="ordertotal">{{val.total}}</span>
+            <span class="ordertotal">{{val.currency.currencySymbol}}&nbsp;{{val.total}}</span>
             <span class="orderstatus">{{val.orderState}}</span>
             <span class="ordercontrol">
                 <a href="javascript:void(0);" data-orderid="{{val.webOrderNumber}}" ng-click="viewOrder($event);">view</a> / 

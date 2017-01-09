@@ -3122,16 +3122,18 @@ footer .back-top .pageCounter {
 }
 
 .accounts-container .recent-orders > ul > li {
-    border-right: solid 1px #dedede;
+/*     border-right: solid 1px #dedede; */
 }
 .accounts-container .recent-orders > ul > li.expanded {
     border-bottom: solid 1px #dedede;
 }
 .accounts-container .recent-orders > ul > li:nth-child(even) {
-    background: #f3f3f3;
+/*     background: #f3f3f3; */
+    background: #e2e2e2;
 }
 .accounts-container .recent-orders > ul > li:nth-child(odd) {
-    background: #f6f6f6;
+/*     background: #f6f6f6; */
+    background: #f3f3f3
 }
 .accounts-container .recent-orders > ul > li:nth-child(1) {
     background: #b7dce8;
@@ -3143,8 +3145,10 @@ footer .back-top .pageCounter {
     line-height: 28px;
     padding-left: 12px;
     box-sizing: border-box;
+/* 
     border-left: solid 1px #dedede;
     border-bottom: solid 1px #dedede;
+ */
 }
 .accounts-container .recent-orders .orderLookupList {
     display: none;
