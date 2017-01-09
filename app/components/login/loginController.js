@@ -153,7 +153,7 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
 
         /* Google Authentication code goes here */
         $scope.googleHandleAuthClick = function() {
-            Google.login(function() {
+            Google.login('home', function() {
             	// Broadcast cart update to mini cart
            		$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
             });

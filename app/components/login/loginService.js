@@ -174,9 +174,10 @@ angular.module('eCommerce')
     return facebook;
   }]
 ) 
-.factory('Google', ['$rootScope', '$http', '$state', 'PRODUCTDATA_URL', 
+.factory('Google', ['$rootScope', '$http', '$state', 'PRODUCTDATA_URL', 'LoginService', 
     function ($rootScope, $http, $state, PRODUCTDATA_URL, LoginService) {
         return {
+            return_url: "",
             apiKey: 'AIzaSyDtSivbvsJStXeutrpQrul99gZTCjgP9Os',
             discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
             clientId: '102964097568-l2jpsbqv509crlh401md5h4pmihkd8di.apps.googleusercontent.com',
@@ -203,15 +204,15 @@ angular.module('eCommerce')
                         });
                         if(self.onSuccess) {
                             self.onSuccess();
-                        } else {
-                            $state.go('home');    
                         }
+                        $state.go(self.return_url);
                     }, function errorCallback(response) {
                         console.log("Error in saving.");
                     });
                 }
             },
-            login: function (onSuccess) {
+            login: function (return_url, onSuccess) {
+                this.return_url = return_url;
                 if(onSuccess) { this.onSuccess = onSuccess; }
                 if(gapi.auth2 && gapi.auth2.getAuthInstance()) {
                     var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();

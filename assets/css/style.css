@@ -3159,6 +3159,7 @@ footer .back-top .pageCounter {
     border: solid 3px #d3d3d3;
     border-style: inset;
     margin: 10px;
+    background: #fff;
 }
 .accounts-container .recent-orders .cart-total {
     margin-bottom: 0;
