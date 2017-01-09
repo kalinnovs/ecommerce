@@ -3109,27 +3109,18 @@ footer .back-top .pageCounter {
     width: 30%;
 }
 .accounts-container .recent-orders,
-.accounts-container .address-details {
+.accounts-container .address-details,
+.accounts-container .subscription-info {
     margin-top: 10px;
 }
 .accounts-container .recent-orders h3,
-.accounts-container .address-details h3 {
+.accounts-container .address-details h3,
+.accounts-container .subscription-info h3 {
     margin-bottom: 12px;
     margin-top: 20px;
     color: #f48516;
 }
-<<<<<<< HEAD
-.accounts-container .recent-orders > ul {
-=======
-.accounts-container .recent-orders ul {
-/* 
->>>>>>> d6f4ca1540f69b14d11029119486b95101efd749
-    border-top: solid 1px #dedede;
-    border-left: solid 1px #dedede;
- */
-    text-align:center;
-}
-<<<<<<< HEAD
+
 .accounts-container .recent-orders > ul > li {
     border-right: solid 1px #dedede;
 }
@@ -3141,18 +3132,6 @@ footer .back-top .pageCounter {
 }
 .accounts-container .recent-orders > ul > li:nth-child(odd) {
     background: #f6f6f6;
-=======
-.accounts-container .recent-orders li {
-/*     border-bottom: soli	d 1px #dedede; */
-}
-.accounts-container .recent-orders li:nth-child(even) {
-/*     background: #f3f3f3; */
-	background: #e2e2e2;
-}
-.accounts-container .recent-orders li:nth-child(odd) {
-/*     background: #f6f6f6; */
-	background: #f3f3f3;
->>>>>>> d6f4ca1540f69b14d11029119486b95101efd749
 }
 .accounts-container .recent-orders > ul > li:nth-child(1) {
     background: #b7dce8;
@@ -3162,10 +3141,6 @@ footer .back-top .pageCounter {
     display: inline-block;
     vertical-align: top;
     line-height: 28px;
-<<<<<<< HEAD
-=======
-/*     border-right: solid 1px #dedede; */
->>>>>>> d6f4ca1540f69b14d11029119486b95101efd749
     padding-left: 12px;
     box-sizing: border-box;
     border-left: solid 1px #dedede;

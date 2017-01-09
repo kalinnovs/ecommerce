@@ -45,7 +45,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
               },
               getAddress: function($stateParams, AccountsService) {
                 return AccountsService.getAddress();
-              },
+              }
             }
           },
           'orderDetails@accounts': {
@@ -53,6 +53,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           }, 
           'addressInfo@accounts': {
             templateUrl: 'app/components/accounts/myAddress.html'
+          },
+          'subscriptionInfo@accounts': {
+            templateUrl: 'app/components/accounts/mySubscription.html'
           }
         }
       })

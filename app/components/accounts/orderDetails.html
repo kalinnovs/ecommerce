@@ -17,7 +17,7 @@
             <span class="orderstatus">{{val.orderState}}</span>
             <span class="ordercontrol">
                 <a href="javascript:void(0);" data-orderid="{{val.webOrderNumber}}" ng-click="viewOrder($event);">view</a> / 
-                <a href="javascript:void(0);" data-orderid="{{val.webOrderNumber}}" ng-click="cancelOrder($event);">cancel</a>
+                <a href="javascript:void(0);" data-orderid="{{val.webOrderNumber}}" ng-click="cancelOrder($event);">close</a>
             </span>
             <div class="orderLookupList orderDetailsVisible-{{val.webOrderNumber}}">
                 <div class="wrapper">
