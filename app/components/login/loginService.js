@@ -178,6 +178,7 @@ angular.module('eCommerce')
     function ($rootScope, $http, $state, PRODUCTDATA_URL, LoginService) {
         return {
             return_url: "",
+            onSuccess: null,
             apiKey: 'AIzaSyDtSivbvsJStXeutrpQrul99gZTCjgP9Os',
             discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
             clientId: '102964097568-l2jpsbqv509crlh401md5h4pmihkd8di.apps.googleusercontent.com',
@@ -185,6 +186,9 @@ angular.module('eCommerce')
             updateSigninStatus: function (isSignedIn) {
                 var self = this;
                 var accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+                if(!accessToken) {
+                    self.login(self.return_url, self.onSuccess);
+                }
                 if(isSignedIn) {
                     $http({
                         method: 'GET',
@@ -202,7 +206,7 @@ angular.module('eCommerce')
                             // Broadcast cart update to mini cart
                             $rootScope.$broadcast("updateMiniCartCount");
                         });
-                        if(self.onSuccess) {
+                        if(self && self.onSuccess) {
                             self.onSuccess();
                         }
                         $state.go(self.return_url);
@@ -213,6 +217,7 @@ angular.module('eCommerce')
             },
             login: function (return_url, onSuccess) {
                 this.return_url = return_url;
+                this.onSuccess = onSuccess;
                 if(onSuccess) { this.onSuccess = onSuccess; }
                 if(gapi.auth2 && gapi.auth2.getAuthInstance()) {
                     var isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
@@ -407,7 +412,6 @@ angular.module('eCommerce')
             cartCount+= parseInt(val.quantity);
             objectToSerialize.push(obj);
         });
-        debugger;
         window.sessionStorage.setItem('cartLength', cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
 
         return $http({

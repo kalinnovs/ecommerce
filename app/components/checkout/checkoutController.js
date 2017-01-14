@@ -272,6 +272,7 @@ angular.module('eCommerce')
                 }
                 itemsArray.push(obj);
             });
+            
             if(lineItemId === "") {
                 window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
                 // Broadcast cart update to mini cart
@@ -280,7 +281,7 @@ angular.module('eCommerce')
                 window.sessionStorage.setItem('cartLength', ((call === "add") ? parseInt(window.sessionStorage.cartLength || 0)+1 : parseInt(window.sessionStorage.cartLength || 0)-1));
                 updateObj["lineItemId"] = items[index].lineItemId;
                 updateObj["quantity"] = items[index].quantity;
-                var promise = CartService.updateCartLineItem(updateObj);
+                var promise = CheckoutService.updateCartLineItem(updateObj);
                 promise.then(function(response) {
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateMiniCartCount");

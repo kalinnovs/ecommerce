@@ -19,18 +19,20 @@ angular.module('eCommerce')
     $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
 
   	$scope.viewOrder = function(event) {
-        debugger;
         var orderId = $(event.currentTarget).attr("data-orderid");
+        if($(".orderDetailsVisible-"+orderId).css("display") !== "none") {
+            return;
+        }
         var orderLookupData = this.orderList.filter(function(val, key){
             return (val.webOrderNumber === orderId);
         });
         this.orderLookupData = orderLookupData[0];
-
+        $(event.currentTarget).parents("li").siblings("li").removeClass("expanded")
+        $(event.currentTarget).parents("ul").find(".orderLookupList").hide();
         $(".orderDetailsVisible-"+orderId).slideDown().parent().addClass("expanded");
   	};
 
   	$scope.cancelOrder = function(event) {
-  		debugger;
       var orderId = $(event.currentTarget).attr("data-orderid");
       $(".orderDetailsVisible-"+orderId).slideUp().parent().removeClass("expanded")
   	};
@@ -39,8 +41,11 @@ angular.module('eCommerce')
         this.hasAddress = false;
     };
 
+    $scope.cancelAddressEntry = function(event) {
+        this.hasAddress = true;
+    };
+
     $scope.addAddress = function(event) {
-        debugger;
         var self = this;
         var objectToSerialize = this.address;
         var promise = $http({
@@ -48,7 +53,6 @@ angular.module('eCommerce')
             url: PRODUCTDATA_URL + '/cart/address/update',
             data: JSON.stringify(objectToSerialize)
         });
-        
     };
 
     $(".accounts-menu > li a").click(function() {

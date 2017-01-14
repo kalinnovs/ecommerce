@@ -44,6 +44,7 @@
                                 <div class="part-details">
                                     <h3>{{value.productName}}</h3>
                                     <div class="alignRight">
+                                        <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{value.unitPrice}}</span>
                                         <span>* {{value.quantity}}</span>
                                     </div>
                                 </div>
@@ -56,22 +57,33 @@
                     <div ng-if="orderLookupData.lineItems.length === 0" class="empty-cart">
                         <h2>No items added in your cart !!!</h2>
                     </div>
-                    <div class="cart-summary" ng-hide="orderLookupData.lineItems.length === 0">
-                        <div class="cart-total">
-                            <label>Cart Total: </label>
-                            <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.subTotal}}</span>
+                    <div class="order-delivery" ng-hide="orderLookupData.lineItems.length === 0">
+                        <div class="order-address order-section">
+                            <h4>Shipping To:</h4>
+                            <p>
+                                <span>{{orderLookupData.address.firstName}} {{orderLookupData.address.lastName}}</span></br>
+                                <span>{{orderLookupData.address.addressLine1}}</span>, <span>{{orderLookupData.address.addressLine2}}</span></br>
+                                <span>Phone: {{orderLookupData.address.phone}}</span></br>
+                                <span>{{orderLookupData.address.city}}</span>, <span>{{orderLookupData.address.state}} - {{orderLookupData.address.zip}}</span>
+                            </p>
                         </div>
-                        <div class="shipping-charges">
-                            <label>Shipping Charges: </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.deliveryCharge | number:2}}</span>
-                        </div>
-                        <div class="tax">
-                            <label>Tax Estimated : </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.tax | number:2}}</span>
-                        </div>
-                        <div class="discount">
-                            <label>Discount Eligible: </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.discount | number:2}}</span>
-                        </div>
-                        <div class="costToCheckout">
-                            <label>Sub Total: </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.total | number:2}}</span>
+                        <div class="cart-summary">
+                            <div class="cart-total">
+                                <label>Cart Total: </label>
+                                <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.subTotal}}</span>
+                            </div>
+                            <div class="shipping-charges">
+                                <label>Shipping Charges: </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.deliveryCharge | number:2}}</span>
+                            </div>
+                            <div class="tax">
+                                <label>Tax Estimated : </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.tax | number:2}}</span>
+                            </div>
+                            <div class="discount">
+                                <label>Discount Eligible: </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.discount | number:2}}</span>
+                            </div>
+                            <div class="costToCheckout">
+                                <label>Sub Total: </label> <span><i class="fa fa-{{orderLookupData.currency.currencyCode | lowercase}}"></i> {{orderLookupData.total | number:2}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

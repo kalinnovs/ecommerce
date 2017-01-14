@@ -116,5 +116,18 @@ angular.module('eCommerce')
         }); 
     }
 
+    service.updateCartLineItem = function(obj) {
+        // Update Cart item in database
+        return $http({
+                method: 'POST',
+                url: PRODUCTDATA_URL + '/cart/updateLineItem',
+                data: JSON.stringify(obj)
+            }).then(function successCallback(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+        }); 
+    }
+
 
   });

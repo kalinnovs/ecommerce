@@ -3182,7 +3182,7 @@ footer .back-top .pageCounter {
     width: 15%;
 }
 .accounts-container .recent-orders .ordercontrol {  
-    width: 23%;
+    width: 15%;
     text-align: center;
 }
 .accounts-container .recent-orders .status li span .tick {
@@ -3201,7 +3201,53 @@ footer .back-top .pageCounter {
     margin-left: 0;
     margin-right: 0;
 }
-
+.accounts-container .orderLookupList .item-details figure {
+    width: 25%;
+    text-align: left;
+    padding: 0 20px 0 0;
+    overflow: hidden;
+    max-height: 100px;
+}
+.accounts-container .orderLookupList .item-details figure img {
+    height: auto;
+    width: 100%;
+}
+.accounts-container .orderLookupList .item-details .part-details {
+    line-height: 24px;
+    padding: 5px 0;
+}
+.accounts-container .orderLookupList .item-details .part-desciption {
+    line-height: 34px;
+}
+.accounts-container .orderLookupList .cart-summary .cart-total,
+.accounts-container .orderLookupList .cart-summary .discount {
+    margin: 0;
+}
+.accounts-container .orderLookupList .part-details h3 {
+    margin: 0;
+    color: #333;
+}
+.accounts-container .orderLookupList .list-items {
+    margin-bottom: 20px;
+}
+.accounts-container .orderLookupList .cart-summary > div {
+    line-height: 24px;
+}
+.accounts-container .orderLookupList .order-delivery {
+    display: table;
+    width: 100%; 
+}
+.accounts-container .orderLookupList .order-address {
+    display: table-cell;
+    width: 40%;
+}
+.accounts-container .orderLookupList .order-address h4 {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.accounts-container .orderLookupList .cart-summary {
+    text-align: right;
+}
 /****************************************************************************
     *-*-*-* Cart *-*-*-*
 ****************************************************************************/
@@ -3679,6 +3725,46 @@ footer .back-top .pageCounter {
     width: 4em;
     height: 100%;
 }
+.address-blocks .address-wraper:before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to left, rgba(255,255,255,0), rgba(243,246,248, 1) 90%);
+    width: 4em;
+    height: 100%;
+}
+.address-blocks .address-wraper .next {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4em;
+    height: 100%;
+    text-align: center;
+}
+.address-blocks .address-wraper .prev {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4em;
+    height: 100%;
+    text-align: center;
+}
+.address-blocks .address-wraper .fa {
+    font-size: 32px;
+    margin-left: 46px;
+    top: 50%;
+    position: absolute;
+    margin-top: -15px;
+}
+.address-blocks .address-wraper .prev .fa {
+    right: 16px;
+}
+.address-blocks .address-wraper .next .fa {
+    left: 16px;
+}
 .address-blocks h2 {
     font-size: 16px;
     color: inherit;
@@ -3687,7 +3773,6 @@ footer .back-top .pageCounter {
     overflow: hidden;
     list-style: none;
     margin-left: -8px;
-    margin-bottom: 25px;
     width: 2000px;
 }
 .address-blocks ul li {

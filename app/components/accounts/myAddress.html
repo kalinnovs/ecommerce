@@ -61,6 +61,9 @@
 				<button type="submit" ng-click="addAddress($event);" class="btn btn-primary">
 					<span>Submit your new address</span>
 				</button>
+				<button ng-click="cancelAddressEntry($event);" class="btn btn-primary">
+					<span>Cancel</span>
+				</button>
 			</div>
 		</form>
 	</div>
@@ -79,8 +82,14 @@
 						</label>
 					</li>
 				</ul>
+				<a href="javascript:void(0);" class="next" ng-click="nextAddressSlider($event);">
+					<i class="fa fa-chevron-right" aria-hidden="true"></i>
+				</a>
+				<a href="javascript:void(0);" class="prev" ng-click="prevAddressSlider($event);">
+					<i class="fa fa-chevron-left" aria-hidden="true"></i>
+				</a>
 			</div>
-			<button ng-click="enableAddressEntry($event);" class="btn btn-primary">
+			<button ng-disabled="co.user.addressId" ng-click="enableAddressEntry($event);" class="btn btn-primary">
 				<span>or add a new address</span>
 			</button>
 		</div>
