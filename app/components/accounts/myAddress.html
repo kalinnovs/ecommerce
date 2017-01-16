@@ -70,8 +70,8 @@
 	<div class="address-blocks" ng-show="hasAddress">
 		<div class="addressSelection">
 			<h2>Choose the below address: </h2>
-			<div class="address-wraper">
-				<ul>
+			<div class="address-wraper" ng-class="{carouselActive: addressList.length > 4}">
+				<ul class="carouselStrip">
 					<li ng-repeat="(key, val) in addressList" ng-click="updateAddressToStorage($event, val.addressId);" ng-class="{active: (val.addressId == co.user.addressId)}">
 						<label for="address{{key}}" class="addressList">
 							<span class="name">{{val.firstName}} {{val.lastName}}</span></br>

@@ -92,7 +92,13 @@ angular.module('eCommerce')
                 });
                 self.co.address = obj[0];
             }
-            this.updateCheckoutStep(event, 'address', 'order');
+            if($(".address-wraper > ul li.active").length === 0) {
+                // Broadcast cart update to mini cart
+                $rootScope.$broadcast("updateFlash", {"alertType": "warning", "message": "Please select an address before proceeding !!"});
+            } else {
+                this.updateCheckoutStep(event, 'address', 'order');
+            }
+            
         };
 
         $scope.redeemCouponCode = function(event) {
@@ -446,6 +452,44 @@ angular.module('eCommerce')
             setTimeout(function(){
                 $(".screen").hide();
             }, 400);
+        };
+
+        $scope.nextAddressSlider = function(evt) {
+            var carousel = $(evt.currentTarget).siblings(".carouselStrip"),
+                carouselWrapper = $(evt.currentTarget).parent(),
+                eachAddressWidth = carousel.find("li").eq(0).width(),
+                totalStripLength = carousel.find("li").length * eachAddressWidth,
+                carouselLeft = parseInt(carousel.css("left")),
+                calculateLeft = totalStripLength - carouselWrapper.width() - Math.abs(parseInt(carousel.css("left")));
+            
+            if(calculateLeft > 100) {
+                carouselWrapper.addClass("prevActive");
+                carousel.css("left", parseInt(carouselLeft - 100)+"px");
+            } else {
+                carousel.css("left", parseInt(carouselLeft - calculateLeft)+"px");
+                carouselWrapper.addClass("removeNext");
+            }
+        };
+
+        $scope.prevAddressSlider = function(evt) {
+            var carousel = $(evt.currentTarget).siblings(".carouselStrip"),
+                carouselWrapper = $(evt.currentTarget).parent(),
+                eachAddressWidth = carousel.find("li").eq(0).width(),
+                totalStripLength = carousel.find("li").length * eachAddressWidth,
+                carouselLeft = parseInt(carousel.css("left")),
+                calculateLeft = totalStripLength - carouselWrapper.width() - Math.abs(parseInt(carousel.css("left")));
+            
+            if(carouselLeft === 0) {
+                return true;  
+            } 
+            carouselWrapper.removeClass("removeNext");
+            (Math.abs(carouselLeft) === 100) ? carouselWrapper.removeClass("prevActive") : "";
+            if(Math.abs(carouselLeft) >= 100) {
+                carousel.css("left", parseInt(carouselLeft + 100)+"px");
+            } else {
+                carousel.css("left", "-5px");
+                carouselWrapper.removeClass("prevActive");
+            }
         };
 
         // Order place

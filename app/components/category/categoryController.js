@@ -11,6 +11,16 @@ angular.module('eCommerce')
         CategoryService.getFromURL(PRODUCTDATA_URL + '/productData/category/' + $stateParams.id)
             .then(function(data) {
                 cat.data = data.categoryDetails;
+                if(data.pageNavigation) {
+                    $rootScope.navigation = data.pageNavigation.categories;
+                    try {
+                      window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
+                    } catch (e) {
+                      if (e == QUOTA_EXCEEDED_ERR) {
+                        alert('Quota exceeded!'); //data wasn't successfully saved due to quota exceed so throw an error
+                      }
+                    }
+                }
                 $scope.iterateThrough = 5;
                 $scope.$broadcast('dataloaded');
             })

@@ -3004,7 +3004,8 @@ footer .back-top .pageCounter {
     width: 190px;
 }
 .login-container .login-form .submit,
-.login-container .signup-form .submit {
+.login-container .signup-form .submit,
+ {
     width: 100%;
     height: 42px;
     font-size: 18px;
@@ -3673,7 +3674,7 @@ footer .back-top .pageCounter {
     border: 0
 }
 .checkout .login-form .columns aside:first-child + aside {
-    margin-top: 94px;
+    margin-top: 46px;
 }
 .checkout .login-form h2 {
     margin-bottom: 22px;
@@ -3713,8 +3714,15 @@ footer .back-top .pageCounter {
 .address-blocks .address-wraper {
     position: relative;
     overflow: hidden;
+    padding-left: 5px;
+    margin-left: -5px;
+    margin-bottom: 30px;
+    height: 145px;
 }
-.address-blocks .address-wraper:after {
+.address-blocks .carouselActive {
+    
+}
+.address-blocks .address-wraper.carouselActive:after {
     content: "";
     position: absolute;
     z-index: 1;
@@ -3725,7 +3733,7 @@ footer .back-top .pageCounter {
     width: 4em;
     height: 100%;
 }
-.address-blocks .address-wraper:before {
+.address-blocks .address-wraper.carouselActive.prevActive:before {
     content: "";
     position: absolute;
     z-index: 1;
@@ -3736,34 +3744,53 @@ footer .back-top .pageCounter {
     width: 4em;
     height: 100%;
 }
-.address-blocks .address-wraper .next {
+.address-blocks .address-wraper.carouselActive .next {
     position: absolute;
     right: 0;
-    top: 0;
-    width: 4em;
-    height: 100%;
+    top: 50%;
+    margin-top: -30px;
+    width: 3.5em;
+    height: 60px;
     text-align: center;
+    cursor: pointer;
+    display: block;
 }
-.address-blocks .address-wraper .prev {
+.address-blocks .address-wraper.carouselActive.removeNext .next {
+    display: none;
+}
+.address-blocks .address-wraper.carouselActive .next:hover {
+    background: #d3d3d3;
+}
+.address-blocks .address-wraper.carouselActive.prevActive .prev {
     position: absolute;
     left: 0;
-    top: 0;
-    width: 4em;
-    height: 100%;
+    top: 50%;
+    margin-top: -30px;
+    width: 3.5em;
+    height: 60px;
     text-align: center;
+    cursor: pointer;
+    display: block;
+}
+.address-blocks .address-wraper.carouselActive.prevActive .prev:hover {
+    background: #d3d3d3;
+}
+.address-blocks .address-wraper .next,
+.address-blocks .address-wraper .prev {
+    display: none;
 }
 .address-blocks .address-wraper .fa {
     font-size: 32px;
-    margin-left: 46px;
     top: 50%;
     position: absolute;
     margin-top: -15px;
+    z-index: 2;
 }
 .address-blocks .address-wraper .prev .fa {
-    right: 16px;
+    right: 10px;
 }
 .address-blocks .address-wraper .next .fa {
-    left: 16px;
+    left: 10px;
 }
 .address-blocks h2 {
     font-size: 16px;
@@ -3772,8 +3799,11 @@ footer .back-top .pageCounter {
 .address-blocks ul {
     overflow: hidden;
     list-style: none;
-    margin-left: -8px;
     width: 2000px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: left 1s;
 }
 .address-blocks ul li {
     float: left; 
@@ -3788,6 +3818,7 @@ footer .back-top .pageCounter {
     -moz-box-shadow: 0px 0px 10px 0px rgba(77,75,77,1);
     box-shadow: 0px 0px 10px 0px rgba(77,75,77,1);
     padding: 10px 15px;
+    cursor: pointer;
 }
 .address-blocks ul li.active .addressList {
     border: solid 1px #33adff;

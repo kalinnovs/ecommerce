@@ -69,8 +69,8 @@
 <div class="address-blocks" ng-show="hasAddress">
 	<div class="addressSelection">
 		<h2>Choose the below address: </h2>
-		<div class="address-wraper">
-			<ul>
+		<div class="address-wraper" ng-class="{carouselActive: addressList.length > 4}">
+			<ul class="carouselStrip">
 				<li ng-repeat="(key, val) in addressList" ng-click="updateAddressToStorage($event, val.addressId);" ng-class="{active: (val.addressId == co.user.addressId)}">
 					<label for="address{{key}}" class="addressList">
 						<span class="name">{{val.firstName}} {{val.lastName}}</span></br>
@@ -81,6 +81,12 @@
 					</label>
 				</li>
 			</ul>
+			<a href="javascript:void(0);" class="next" ng-click="nextAddressSlider($event);">
+				<i class="fa fa-chevron-right" aria-hidden="true"></i>
+			</a>
+			<a href="javascript:void(0);" class="prev" ng-click="prevAddressSlider($event);">
+				<i class="fa fa-chevron-left" aria-hidden="true"></i>
+			</a>
 		</div>
 		<button ng-click="selectAddress($event);" class="btn btn-primary">
 			<span>Save Address to deliver and Proceed</span>
