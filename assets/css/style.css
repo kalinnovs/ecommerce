@@ -3719,8 +3719,21 @@ footer .back-top .pageCounter {
     margin-bottom: 30px;
     height: 145px;
 }
-.address-blocks .carouselActive {
-    
+.address-blocks .carouselStrip li {
+    position: relative;
+}
+.address-blocks .carouselStrip li a.delete {
+    position: absolute;
+    right: 13px;
+    top: 11px;
+    width: 18px;
+    height: 22px;
+    font-size: 22px;
+}
+.address-blocks .carouselStrip li a.delete .fa {
+    font-size: inherit;
+    top: 0;
+    margin-top: 0;
 }
 .address-blocks .address-wraper.carouselActive:after {
     content: "";

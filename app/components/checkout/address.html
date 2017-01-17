@@ -79,6 +79,9 @@
 						<span>{{val.state}} - {{val.zip}}</span></br>
 						<span>Phone: {{val.phone}}</span></br>
 					</label>
+					<a href="javascript:void(0);" class="delete" ng-click="deleteAddress($event, val.addressId);">
+						<i class="fa fa-times" aria-hidden="true"></i>
+					</a>
 				</li>
 			</ul>
 			<a href="javascript:void(0);" class="next" ng-click="nextAddressSlider($event);">

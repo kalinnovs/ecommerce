@@ -487,10 +487,23 @@ angular.module('eCommerce')
             if(Math.abs(carouselLeft) >= 100) {
                 carousel.css("left", parseInt(carouselLeft + 100)+"px");
             } else {
-                carousel.css("left", "-5px");
+                carousel.css("left", "-3px");
                 carouselWrapper.removeClass("prevActive");
             }
         };
+
+        $scope.deleteAddress = function(event, id) {
+            var id = id;
+            var addressFilterMap = this.addressList.map(function(i, j) {
+                return (i.addressId === id);
+            });
+            var addressFilterIndex = addressFilterMap.indexOf(true);
+            // Remove the item from list
+            this.addressList.splice( addressFilterIndex, 1 );
+            $(event.currentTarget).parents(".carouselStrip").css("left", "-3px");
+            // Broadcast cart update to mini cart
+            $rootScope.$broadcast("updateFlash", {"alertType": "success", "message": "Address removed successfully !!"});
+        };  
 
         // Order place
         $scope.placeOrder = function() {
