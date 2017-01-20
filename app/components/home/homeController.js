@@ -13,14 +13,6 @@ angular.module('eCommerce')
     UserService.GetAll( PRODUCTDATA_URL + '/home')
         .then(function(data) {
           if(data.success === undefined || data.success) {
-            $rootScope.navigation = data.pageNavigation.categories;
-            try {
-              window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
-            } catch (e) {
-              if (e == QUOTA_EXCEEDED_ERR) {
-                alert('Quota exceeded!'); //data wasn't successfully saved due to quota exceed so throw an error
-              }
-            }
             $scope.$broadcast('dataloaded');
           } else {
             // Else pick local JSON

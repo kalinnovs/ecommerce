@@ -4,23 +4,11 @@ angular.module('eCommerce')
   .controller('DetailCtrl', function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, SERVICE_URL, PRODUCTDATA_URL, BASE_URI, $stateParams) {
     var details = this;
     $scope.currentState = $state.params.id;
-    // Scoping Navigation
-    $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
     
     DetailService.getFromURL( PRODUCTDATA_URL + '/productData/product/'+$stateParams.id)
         .then(function(data) {
             if(jQuery.isEmptyObject(data.productDetails)) {
                 $state.go('home');
-            }
-            if(data.pageNavigation) {
-                $rootScope.navigation = data.pageNavigation.categories;
-                try {
-                  window.sessionStorage.setItem('navigation', JSON.stringify(data.pageNavigation.categories));
-                } catch (e) {
-                  if (e == QUOTA_EXCEEDED_ERR) {
-                    alert('Quota exceeded!'); //data wasn't successfully saved due to quota exceed so throw an error
-                  }
-                }
             }
             $scope.data = data.productDetails;
             $scope.$broadcast('dataloaded');

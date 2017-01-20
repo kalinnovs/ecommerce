@@ -6,9 +6,7 @@ angular.module('eCommerce')
         responseData,
         loginStatus = user,
         cartData = cartData;   
-        // Scoping Navigation
-        $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
-
+        
         $scope.location = $location;
         
         // Read Cart Array and pass to URL

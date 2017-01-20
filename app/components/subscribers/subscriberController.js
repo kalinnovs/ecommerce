@@ -4,8 +4,7 @@ angular.module('eCommerce')
   .controller('SubscriberCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, SERVICE_URL) {
     var subscriber = this;
     var scoper = $scope;
-    // Scoping Navigation
-    $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
+    
     window.dataLoaded = false;
 
     UserService.GetAll( SERVICE_URL + '/admin/subscribers')

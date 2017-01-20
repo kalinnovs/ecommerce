@@ -2,8 +2,6 @@
 
 angular.module('eCommerce')
     .controller('orderCtrl', ['$scope', '$http', '$rootScope', 'PRODUCTDATA_URL', 'OrderService',  function($scope, $http, $rootScope, PRODUCTDATA_URL, OrderService) {
-    	// Scoping Navigation
-        $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
     	window.dataLoaded = true;
 
     	// Injecting Math into cart scope

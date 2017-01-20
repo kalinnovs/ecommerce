@@ -5,9 +5,7 @@ angular.module('eCommerce')
         var checkout = this,
         responseData,
         self = $scope;
-        // Scoping Navigation
-        $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
-
+        
         $scope.state = $state;
         $scope.location = $location;
         $scope.loginService = AuthenticationService;
@@ -398,10 +396,10 @@ angular.module('eCommerce')
                 window.singleCall.authenticateUser = true;
                 if(getLoginStatus && getLoginStatus.success === true) {
                     scope.targetScope.getLoginStatus = getLoginStatus;
-                    var userDetails = JSON.parse(window.localStorage.userDetails);
+                    // var userDetails = (window.userDetails) ? JSON.parse(window.userDetails) : {"name": "Guest","imageUrl": "","user": null};
                     scope.targetScope.co = {};
                     scope.targetScope.co["user"] = {};
-                    scope.targetScope.co["user"]["emailId"] = userDetails.emailId;
+                    // scope.targetScope.co["user"]["emailId"] = userDetails.emailId;
                     scope.targetScope.updateCheckoutStep(scope, 'login', 'address');
                 } else {
                     $rootScope.$broadcast("checkout_uri_changed", {'step': 'login'});

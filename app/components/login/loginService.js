@@ -25,7 +25,7 @@ angular.module('eCommerce')
                     response.success = true;
                     response.userType = response.userType;
                     window.localStorage.setItem("accessToken", response.token);
-                    window.localStorage.setItem('userDetails', JSON.stringify(response.loggedUser));
+                    window.userDetails = response.loggedUser;
                     window.sessionStorage.setItem('cartLength', response.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                     
                     var promise = LoginService.updateCartFromLocal();
@@ -95,7 +95,7 @@ angular.module('eCommerce')
                         window.localStorage.setItem("accessToken", response.data.token);
                         // Hardcoded 
                         // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
-                        window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                        window.userDetails = response.data.loggedUser;
                         window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                         
                         var promise = LoginService.updateCartFromLocal();
@@ -124,7 +124,7 @@ angular.module('eCommerce')
                                 window.localStorage.setItem("accessToken", response.data.token);
                                 // Hardcoded 
                                 // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
-                                window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                                window.userDetails = response.data.loggedUser;
                                 window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                                 
                                 var promise = LoginService.updateCartFromLocal();
@@ -198,7 +198,7 @@ angular.module('eCommerce')
                         window.localStorage.setItem("accessToken", response.data.token);
                         // Hardcoded 
                         // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
-                        window.localStorage.setItem('userDetails', JSON.stringify(response.data.loggedUser));
+                        window.userDetails = response.data.loggedUser;
                         window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                         
                         var promise = LoginService.updateCartFromLocal();

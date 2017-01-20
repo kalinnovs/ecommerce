@@ -45,11 +45,7 @@ Object.defineProperty(window.itemsArray, "push", {
 });
 
 function RaiseMyEvent(id, oldVal, newVal) {
-    updateMiniKartCount();
-};
-
-function updateMiniKartCount() {
-    // $("body").find(".cartCount").html(window.itemsArray.length);
+    // updateMiniKartCount();
 };
 
 window.dataLoaded = false;
@@ -75,7 +71,7 @@ function updateUser() {
         "imageUrl": "",
         "user": null 
     },
-    userDetails = (window.localStorage.userDetails) ? JSON.parse(window.localStorage.userDetails) : emptyUser;
+    userDetails = (window.userDetails) ? window.userDetails : emptyUser;
     if(userDetails.imageUrl !== "") {
         $(".profilePicUpdate").addClass("loggedIn");
     } else {

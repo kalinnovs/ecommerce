@@ -2,8 +2,6 @@
  
 var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location, $stateParams, LoginService, PRODUCTDATA_URL, AuthenticationService, Facebook, Google, user) {
         
-        // Scoping Navigation
-        $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
         this.state = "login";
         this.header = "Login Haastika";
         var that = this,
@@ -22,7 +20,7 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
             
         } else {
             // Else pick local JSON
-            window.localStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
+            window.userDetails = {"name": "Guest","imageUrl": "","user": null};
         }
 
         if ($stateParams.uid) {

@@ -4,8 +4,6 @@ angular.module('eCommerce')
   .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, SERVICE_URL, UserService, BASE_URI) {
     var contacts = this;
     var original = $scope.user;
-    // Scoping Navigation
-    $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
     
     // function to submit the form after all validation has occurred            
     $scope.submitForm = function() {
@@ -34,19 +32,6 @@ angular.module('eCommerce')
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-            // $http.post(mailService, contacts.user).success(function(data, status) {
-            //     contacts.feedbackSent = data.status;
-            //     contacts.pushNotification = data.message;
-            //     contacts.sentSuccesfully = data.sentSuccesfully;
-            //     contacts.sentFailed = data.sentFailed;
-            //     contacts.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};
-            //     $scope.userForm.$setPristine();
-            //     $timeout(function() {
-            //       $location.path( "/home" );
-            //     }, 3000);
-            //     // $scope.reset();
-            // });
-            // $scope.reset($scope.userForm);
         }   
 
     };

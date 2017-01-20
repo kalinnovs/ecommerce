@@ -86,7 +86,8 @@ gulp.task('connect-sync', function() {
     browserSync({
       proxy: '127.0.0.1:8000',
       ghostMode: false,
-      notify:false
+      notify:false,
+      browser:'google chrome'
     });
   });
  

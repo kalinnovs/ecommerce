@@ -25,7 +25,7 @@ angular.module('eCommerce')
         AuthenticationService.ClearCredentials();
         window.localStorage.setItem("accessToken", "");
         window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
-        window.localStorage.setItem('userDetails', JSON.stringify({"name": "Guest","imageUrl": "","user": null}));
+        window.userDetails = {"name": "Guest","imageUrl": "","user": null};
         $state.go('home');
     };
     

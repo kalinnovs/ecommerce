@@ -1830,6 +1830,7 @@ add-to-cart {
     top: 10px;
     height: 36px;
     width: 36px;
+    z-index: 3;
 }
 .add-to-cart {
     display: block;

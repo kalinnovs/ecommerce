@@ -15,9 +15,6 @@ angular.module('eCommerce')
     $scope.myOrders = true;
 
 
-  	// Scoping Navigation
-    $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
-
   	$scope.viewOrder = function(event) {
         var orderId = $(event.currentTarget).attr("data-orderid");
         if($(".orderDetailsVisible-"+orderId).css("display") !== "none") {
