@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .service('productTreeService', ['$http', 'Upload', 'SERVICE_URL', function ($http, Upload, SERVICE_URL) {
+  .service('productTreeService', ['$http', 'Upload', 'SERVICE_URL', 'PRODUCTDATA_URL', function ($http, Upload, SERVICE_URL, PRODUCTDATA_URL) {
     var service = this;
     // var BASE_URL = "http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService/admin";
     // var BASE_URL = "http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/admin";
@@ -11,13 +11,13 @@ angular.module('eCommerce')
 
     //simply returns the category list
     service.list = function () {
-        return $http.get(SERVICE_URL + "/admin/category"); // SERVICE_URL + " /category"
+        return $http.get(PRODUCTDATA_URL + "/admin/category"); // SERVICE_URL + " /category"
     }
 
     service.saveNode = function (url, node, callBack) {
         $http({
             method: 'POST',
-            url: SERVICE_URL + url,
+            url: PRODUCTDATA_URL + url,
             data: JSON.stringify(node),
             headers: {
                 'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ angular.module('eCommerce')
     service.deleteNode = function (url, callBack) {
         $http({
             method: 'GET',
-            url: SERVICE_URL + url,
+            url: PRODUCTDATA_URL + url,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -45,7 +45,7 @@ angular.module('eCommerce')
 
     service.uploadImage = function(url, imageData, callBack){
         Upload.upload({
-            url: SERVICE_URL + url,
+            url: PRODUCTDATA_URL + url,
             data: imageData
         }).then(function (resp) {
             callBack(resp);

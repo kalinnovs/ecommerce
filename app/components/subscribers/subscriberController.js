@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('SubscriberCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, SERVICE_URL) {
+  .controller('SubscriberCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, SERVICE_URL, PRODUCTDATA_URL) {
     var subscriber = this;
     var scoper = $scope;
     
     window.dataLoaded = false;
 
-    UserService.GetAll( SERVICE_URL + '/admin/subscribers')
+    UserService.GetAll( PRODUCTDATA_URL + '/admin/subscribers')
         .then(function(data) {
           subscriber.data = data;
         })
@@ -25,7 +25,7 @@ angular.module('eCommerce')
         data.promoUsed = !JSON.parse($(event.target).parents("tr").find(".promoUsed").val());
         $http({
               method: 'POST',
-              url: SERVICE_URL + '/admin/updateSubscriber',
+              url: PRODUCTDATA_URL + '/admin/updateSubscriber',
               data: data,
               headers: {
                 'Content-Type': 'application/json'

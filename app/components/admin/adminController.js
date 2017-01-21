@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AdminCtrl', function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, SERVICE_URL, AuthenticationService) {
+  .controller('AdminCtrl', function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, SERVICE_URL, PRODUCTDATA_URL, AuthenticationService) {
     var admin = this;
     
     // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
-    UserService.GetAll( SERVICE_URL + '/visitors')
+    UserService.GetAll( PRODUCTDATA_URL + '/admin/visitors')
         .then(function(data) {
           if(data.totalUniqueVisitorsCount) {
           	admin.uniqueViews = data.totalUniqueVisitorsCount;

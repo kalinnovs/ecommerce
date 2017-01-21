@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('aboutCtrl', function ($scope, $rootScope, $sce, UserService, $timeout, AboutService, SERVICE_URL, BASE_URI) {
+  .controller('aboutCtrl', function ($scope, $rootScope, $sce, UserService, $timeout, AboutService, SERVICE_URL, PRODUCTDATA_URL, BASE_URI) {
     var about = this;
     var scoper = $scope;
     
-    AboutService.getFromURL( SERVICE_URL + '/aboutus')
+    AboutService.getFromURL( PRODUCTDATA_URL + '/aboutus')
         .then(function(data) {
           $scope.htmlDescription = data.content;
           $scope.$broadcast('dataloaded');
