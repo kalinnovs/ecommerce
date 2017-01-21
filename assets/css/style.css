@@ -253,45 +253,103 @@ a.noDecoration:hover {
 
 
 /* Flash Section for Updates Styles */
-
-.flash {
-    -moz-animation: flash 1s ease-out;
-    -moz-animation-iteration-count: 1;
-    -webkit-animation: flash 1s ease-out;
+.flasher {
+    position: fixed;
+    right: 10px;
+    width: 28%;
+    top: 156px;
+    opacity: 0;
+    z-index: 12;
+    display: none;
+}
+.flasher.animate {
+    display: block;
+    transition: opacity 1s ease-in-out;
+    -webkit-animation: seconds 5s forwards;
     -webkit-animation-iteration-count: 1;
-    -ms-animation: flash 1s ease-out;
+    -webkit-animation-delay: .1s;
+    animation: seconds 5s forwards;
+    animation-iteration-count: 1;
+    animation-delay: .1s;
+    overflow: hidden;
+}
+@-webkit-keyframes seconds {
+  0% {
+    opacity: 0;
+  }
+  12% { /* 3s for fade in */
+    opacity: 1;
+  }
+  85% { /* 3s for fade in */
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+@keyframes seconds {
+  0% {
+    opacity: 0;
+  }
+  12% { /* 3s for fade out */
+    opacity: 1;
+  }
+  85% { /* 3s for fade in */
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+.flash {
+    -moz-animation: flash 2s ease-out;
+    -moz-animation-iteration-count: 1;
+    -webkit-animation: flash 2s ease-out;
+    -webkit-animation-iteration-count: 1;
+    -ms-animation: flash 2s ease-out;
     -ms-animation-iteration-count: 1;
 }
 @-webkit-keyframes flash {
     0% {
+        display: none;
         background-color: none;
     }
     50% {
-        background-color: #fbf8b2;
+        display: block;
+        background-color: inherit;
     }
     100% {
+        display: none;
         background-color: none;
     }
 }
 @-moz-keyframes flash {
     0% {
+        display: none;
         background-color: none;
     }
     50% {
-        background-color: #fbf8b2;
+        display: block;
+        background-color: inherit;
     }
     100% {
+        display: none;
         background-color: none;
     }
 }
 @-ms-keyframes flash {
     0% {
+        display: none;
         background-color: none;
     }
     50% {
-        background-color: #fbf8b2;
+        display: block;
+        background-color: inherit;
     }
     100% {
+        display: none;
         background-color: none;
     }
 }
@@ -1527,7 +1585,7 @@ header a.active, header a:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 13px;
+/*     margin-bottom: 13px; */
 }
 .wide-full-tile figure img {
     width: 563px
@@ -1772,6 +1830,7 @@ add-to-cart {
     top: 10px;
     height: 36px;
     width: 36px;
+    z-index: 3;
 }
 .add-to-cart {
     display: block;
@@ -1800,7 +1859,7 @@ add-to-cart {
     color: #f71919;
 }
 .productItem:hover .add-to-cart .fa-cart-plus:before {
-    color: #b22222;
+    color: inherit;
 }
 .productItem:hover .add-to-cart {
     border-color: #08c;
@@ -2617,8 +2676,8 @@ add-to-cart.btn button:before {
 
 .shipping-wrap {
     background: rgba(0, 0, 0, 0.8);
-    height: 100px;
-    line-height: 100px;
+    height: 70px;
+    line-height: 70px;
 }
 .shipping p {
     font-weight: 300;
@@ -2946,7 +3005,8 @@ footer .back-top .pageCounter {
     width: 190px;
 }
 .login-container .login-form .submit,
-.login-container .signup-form .submit {
+.login-container .signup-form .submit,
+ {
     width: 100%;
     height: 42px;
     font-size: 18px;
@@ -2979,7 +3039,217 @@ footer .back-top .pageCounter {
     padding: 20px 0;
     text-align: center;
 }
+.accounts-container .row {
+    overflow: hidden;
+}
+.accounts-container .col {
+    float: none;
+    margin-left: 265px;
+    text-align: left;
+}
+.accounts-container .col p {
+    font-size: 14px;
+}
+.accounts-container h2 {
+    margin-bottom: 10px;
+    color: #f48516;
+}
+.accounts-container .col.menus {
+    width: 250px;
+    margin: 0;
+    float: left;
+    padding: 10px;
+    background: #fff;
+    padding-bottom: 20000px;
+    margin-bottom: -20000px;
+}
+.accounts-container .menus h3 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    margin-bottom: 10px;
+}
+.accounts-container .menus li {
+    line-height: 24px;
+    border-bottom: solid 1px #dedede;
+}
+.accounts-container .menus li a {
+    display: block;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.accounts-container .menus li a:hover {
+    background: #f9ab5c;
+    padding-left: 5px;
+    transition: padding .25s ease-in-out;
+}
+.accounts-container section {
+    text-align: left;
+    margin-bottom: 20px;
+}
 
+.accounts-container .saved-cart {
+    font-size: 14px;
+}
+.accounts-container .saved-cart .wrapper {
+    display: table;
+}
+.accounts-container .saved-cart .wrapper h3 {
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 22px;
+    margin: 0;
+}
+.accounts-container .saved-cart .wrapper figure,
+.accounts-container .saved-cart .wrapper .details {
+    display: table-cell;
+    vertical-align: top;
+    padding: 5px 0;
+}
+.accounts-container .saved-cart .wrapper figure {
+    width: 30%;
+}
+.accounts-container .recent-orders,
+.accounts-container .address-details,
+.accounts-container .subscription-info {
+    margin-top: 10px;
+}
+.accounts-container .recent-orders h3,
+.accounts-container .address-details h3,
+.accounts-container .subscription-info h3 {
+    margin-bottom: 12px;
+    margin-top: 20px;
+    color: #f48516;
+}
+
+.accounts-container .recent-orders > ul > li {
+/*     border-right: solid 1px #dedede; */
+}
+.accounts-container .recent-orders > ul > li.expanded {
+    border-bottom: solid 1px #dedede;
+}
+.accounts-container .recent-orders > ul > li:nth-child(even) {
+/*     background: #f3f3f3; */
+    background: #e2e2e2;
+}
+.accounts-container .recent-orders > ul > li:nth-child(odd) {
+/*     background: #f6f6f6; */
+    background: #f3f3f3
+}
+.accounts-container .recent-orders > ul > li:nth-child(1) {
+    background: #b7dce8;
+    font-weight: bold;
+}
+.accounts-container .recent-orders > ul > li > span {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 28px;
+    padding-left: 12px;
+    box-sizing: border-box;
+/* 
+    border-left: solid 1px #dedede;
+    border-bottom: solid 1px #dedede;
+ */
+}
+.accounts-container .recent-orders .orderLookupList {
+    display: none;
+    overflow: hidden;
+}
+.accounts-container .recent-orders .orderLookupList .wrapper {
+    padding: 20px;
+    border: solid 3px #d3d3d3;
+    border-style: inset;
+    margin: 10px;
+    background: #fff;
+}
+.accounts-container .recent-orders .cart-total {
+    margin-bottom: 0;
+}
+.accounts-container .recent-orders .orderid {  
+    width: 15%;
+    border-left: 0;
+}
+.accounts-container .recent-orders .orderdate {  
+    width: 15%;
+}
+.accounts-container .recent-orders .ordershipping {  
+    width: 15%;
+}
+.accounts-container .recent-orders .ordertotal {  
+    width: 15%;
+    text-align:left;
+}
+.accounts-container .recent-orders .orderstatus {  
+    width: 15%;
+}
+.accounts-container .recent-orders .ordercontrol {  
+    width: 15%;
+    text-align: center;
+}
+.accounts-container .recent-orders .status li span .tick {
+    left: 52px;
+}
+
+.accounts-container .address-details .row {
+    clear: none;
+}
+.accounts-container .address-details .columns aside {
+    margin: 0;
+    float: left;
+    margin-left: 70px;
+}
+.accounts-container .address-details .columns aside:first-child {
+    margin-left: 0;
+    margin-right: 0;
+}
+.accounts-container .orderLookupList .item-details figure {
+    width: 25%;
+    text-align: left;
+    padding: 0 20px 0 0;
+    overflow: hidden;
+    max-height: 100px;
+}
+.accounts-container .orderLookupList .item-details figure img {
+    height: auto;
+    width: 100%;
+}
+.accounts-container .orderLookupList .item-details .part-details {
+    line-height: 24px;
+    padding: 5px 0;
+}
+.accounts-container .orderLookupList .item-details .part-desciption {
+    line-height: 34px;
+}
+.accounts-container .orderLookupList .cart-summary .cart-total,
+.accounts-container .orderLookupList .cart-summary .discount {
+    margin: 0;
+}
+.accounts-container .orderLookupList .part-details h3 {
+    margin: 0;
+    color: #333;
+}
+.accounts-container .orderLookupList .list-items {
+    margin-bottom: 20px;
+}
+.accounts-container .orderLookupList .cart-summary > div {
+    line-height: 24px;
+}
+.accounts-container .orderLookupList .order-delivery {
+    display: table;
+    width: 100%; 
+}
+.accounts-container .orderLookupList .order-address {
+    display: table-cell;
+    width: 40%;
+}
+.accounts-container .orderLookupList .order-address h4 {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.accounts-container .orderLookupList .cart-summary {
+    text-align: right;
+}
 /****************************************************************************
     *-*-*-* Cart *-*-*-*
 ****************************************************************************/
@@ -2996,6 +3266,7 @@ footer .back-top .pageCounter {
     display: block;
     width: 100%;
     overflow: hidden;
+    text-align: left;
 }
 .cart-page .item-details figure {
     width: 25%;
@@ -3013,6 +3284,24 @@ footer .back-top .pageCounter {
     line-height: 44px;
     overflow: hidden;
 }
+.cart-page .item-details .part-details .quantityUp,
+.cart-page .item-details .part-details .quantityDown {
+    background: #f3f3f3;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    line-height: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+}
+.cart-page .item-details .part-details .quantityDown + span { 
+    display: inline-block; 
+    vertical-align: middle; 
+    padding: 0 5px;
+}
 .cart-page .item-details .part-details .alignRight {
     float: right;
     padding-right: 2px;
@@ -3021,6 +3310,7 @@ footer .back-top .pageCounter {
     display: inline-block;
     width: 50%;
     font-size: 14px;
+    line-height: 22px;
     text-transform: capitalize;
 }
 .cart-page .part-details .item-price {
@@ -3070,7 +3360,7 @@ footer .back-top .pageCounter {
 }
 .cart-page .list-items {
     overflow: hidden;
-    clear: left;
+    margin-top: 80px;
 }
 .cart-page .list-items li {
     display: block;;
@@ -3301,17 +3591,29 @@ footer .back-top .pageCounter {
 }
 .checkout .columns {
     margin: 0;
+    width: 100%;
 }
-.checkout .columns aside {
-
+.checkout .loginForm .columns aside {
+    width: 50%;
+    margin: 0;
+    padding: 60px 0 0 25px;
 }
 .checkout .form-group {
-    width: 374px;
+    width: 448px;
 }
 .checkout .columns aside:first-child {
-    margin-right: 175px;
+    padding: 0 25px 0 0;
 }
-
+.checkout .social-button.google {
+    margin: 0 10px 0 0;
+}
+.checkout .social-button.facebook {
+    margin: 0 0 0 10px;
+}
+.checkout .loginForm {
+    clear: both;
+    margin-top: 70px;
+}
 .checkout .checkout-status {
     width: 270px;
     margin: 10px auto;
@@ -3340,6 +3642,7 @@ footer .back-top .pageCounter {
     padding: 20px 45px;
     background: #f3f6f8;
     position: relative;
+    overflow: hidden;
     max-width: 100%;
 }
 .checkout .section.selected ~ .section > button {
@@ -3354,12 +3657,14 @@ footer .back-top .pageCounter {
     padding: 0;
     height: 0;
     overflow: hidden;
+    position: relative;
 }
-.checkout .section .container.active {
+.checkout .section.selected .container {
     height: auto;
 }
 .checkout .section .container > div {
     margin-top: 20px;
+    width: 100%;
 }
 
 .checkout .login-form {
@@ -3369,21 +3674,186 @@ footer .back-top .pageCounter {
     padding-top: 10px;
     border: 0
 }
-.checkout .address-form {
-
+.checkout .login-form .columns aside:first-child + aside {
+    margin-top: 46px;
 }
-.checkout .address-form .form-group {
-    width: 420px;
+.checkout .login-form h2 {
+    margin-bottom: 22px;
+    font-size: 18px;
 }
-.checkout .address-form .columns aside:first-child {
+.checkout .section.address-details {
+    padding-left: 35px;
+}
+.checkout .section.address-details > h3,
+.checkout .section.address-details > span,
+.checkout .section.address-details .container > div {
+    padding-left: 10px;
+}
+.checkout .editAddress {
+    position: absolute;
+    right: 0;
+    top: -40px;
+    border: solid 1px #d3d3d3;
+    padding: 5px 15px;
+}
+.checkout .section.selected .container {
+    overflow: visible;
+}
+.address-form .form-group {
+    width: 400px;
+}
+.address-form .form-group label {
+    display: none;
+}
+.address-form .columns aside:first-child {
     margin-right: 95px;
 }
-.checkout .address-form .info {
+.address-form .info {
     margin: 34px 0 20px;
     font-size: 16px;
 }
+.address-blocks .address-wraper {
+    position: relative;
+    overflow: hidden;
+    padding-left: 5px;
+    margin-left: -5px;
+    margin-bottom: 30px;
+    height: 145px;
+}
+.address-blocks .carouselStrip li {
+    position: relative;
+}
+.address-blocks .carouselStrip li a.delete {
+    position: absolute;
+    right: 13px;
+    top: 11px;
+    width: 18px;
+    height: 22px;
+    font-size: 22px;
+}
+.address-blocks .carouselStrip li a.delete .fa {
+    font-size: inherit;
+    top: 0;
+    margin-top: 0;
+}
+.address-blocks .address-wraper.carouselActive:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(243,246,248, 1) 90%);
+    width: 4em;
+    height: 100%;
+}
+.address-blocks .address-wraper.carouselActive.prevActive:before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: linear-gradient(to left, rgba(255,255,255,0), rgba(243,246,248, 1) 90%);
+    width: 4em;
+    height: 100%;
+}
+.address-blocks .address-wraper.carouselActive .next {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -30px;
+    width: 3.5em;
+    height: 60px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+}
+.address-blocks .address-wraper.carouselActive.removeNext .next {
+    display: none;
+}
+.address-blocks .address-wraper.carouselActive .next:hover {
+    background: #d3d3d3;
+}
+.address-blocks .address-wraper.carouselActive.prevActive .prev {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -30px;
+    width: 3.5em;
+    height: 60px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+}
+.address-blocks .address-wraper.carouselActive.prevActive .prev:hover {
+    background: #d3d3d3;
+}
+.address-blocks .address-wraper .next,
+.address-blocks .address-wraper .prev {
+    display: none;
+}
+.address-blocks .address-wraper .fa {
+    font-size: 32px;
+    top: 50%;
+    position: absolute;
+    margin-top: -15px;
+    z-index: 2;
+}
+.address-blocks .address-wraper .prev .fa {
+    right: 10px;
+}
+.address-blocks .address-wraper .next .fa {
+    left: 10px;
+}
+.address-blocks h2 {
+    font-size: 16px;
+    color: inherit;
+}
+.address-blocks ul {
+    overflow: hidden;
+    list-style: none;
+    width: 2000px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: left 1s;
+}
+.address-blocks ul li {
+    float: left; 
+    min-width: 200px;
+}
+.address-blocks ul li .addressList {
+    display: block;
+    border: dotted 1px #dedede;
+    margin: 10px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(77,75,77,1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(77,75,77,1);
+    box-shadow: 0px 0px 10px 0px rgba(77,75,77,1);
+    padding: 10px 15px;
+    cursor: pointer;
+}
+.address-blocks ul li.active .addressList {
+    border: solid 1px #33adff;
+}
+.address-blocks ul li span {
+    display: inline-block;
+    line-height: 21px;
+}
+.address-blocks ul li span.name {
+    font-weight: 400;
+}
+.address-blocks ul li input {
+    display: inline-block;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    width: 1px;
+    height: 1px;
+    position: absolute;
+}
 .checkout .order-form .columns aside:first-child {
-    margin-right: 60px;
+    margin-right: 30px;
 }
 .checkout .list-header {
     overflow: hidden;
@@ -3412,6 +3882,26 @@ footer .back-top .pageCounter {
     text-align: center;
 }
 
+/* Thankyou page styles STARTS  */
+.thankyou {
+    padding: 30px 0;
+    text-align: center;
+}
+.thankyou h2 { 
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+.thankyou p { 
+    font-size: 16px;
+    line-height: 26px;
+}
+.thankyou a {
+    font-size: 14px;
+    color: #337ab7;    
+    margin-top: 10px;
+    display: inline-block;
+}
+
 /* Order Common STARTS */
 .checkout .secondCol .order-section {
     margin-top: 25px;
@@ -3434,6 +3924,9 @@ footer .back-top .pageCounter {
     margin: 4px 5px;
     right: 0;
 }
+.checkout .secondCol .order-section .modifyBtn {
+    top: auto;
+}
 .checkout .section .modifyBtn, 
 .checkout .secondCol .order-section button {
     background: none;
@@ -3450,6 +3943,9 @@ footer .back-top .pageCounter {
     top: 28px;
     right: 20px;
 }
+.checkout .section.selected > .modifyBtn {
+    display: none;
+}
 .checkout .form-views.active + button.modifyBtn {
     display: none;
 }
@@ -3461,6 +3957,8 @@ footer .back-top .pageCounter {
 .checkout .order-list li {
     overflow: hidden;
     margin: 0 0 15px 0;
+    border-bottom: dashed 1px #d3d3d3;
+    padding-bottom: 15px;
 }
 .checkout .order-list figure {
     width: 70px;
@@ -3481,15 +3979,53 @@ footer .back-top .pageCounter {
     margin: 3px 0 5px;
 }
 .checkout .order-list .part-details h5 {
-    font-size: 16px;
-    width: 220px;
-    line-height: 22px;
+    font-size: 14px;
+    width: 260px;
+    line-height: 18px;
     float: left;
 }
 .checkout .order-list .alignRight {
-    float: left;
     line-height: 22px;
     overflow: hidden;
+    margin-left: 290px;
+    margin-right: 25px;
+    text-align: left;
+}
+.checkout .order-list .item-quantity {
+    display: inline-block;
+}
+.checkout .order-list .item-quantity button, 
+.checkout .order-list .item-quantity span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.checkout .order-list .quantityUp,
+.checkout .order-list .quantityDown {
+    background: #f3f3f3;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    line-height: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+}
+.checkout .order-list .part-controls {
+    display: table;
+}
+.checkout .order-list .part-controls p,
+.checkout .order-list .part-controls .control {
+    display: table-cell;
+}
+.checkout .order-list .part-controls p {
+    width: 84%;
+}
+.checkout .order-list .part-controls p .control {
+    width: 17%;
+    display: table-cell;
+    text-align: right;
 }
 .checkout .order-list .alignRight input {
     float: left;
@@ -3497,9 +4033,11 @@ footer .back-top .pageCounter {
     text-align: center;
     margin: 0 80px;
     line-height: 18px;
+    width: 84%;
 }
 .checkout .order-list .alignRight .item-price {
     float: right;
+    width: 65px;
 }
 .checkout .order-list .part-controls .fa-trash {
     margin-right: 5px;
@@ -3591,6 +4129,7 @@ footer .back-top .pageCounter {
     margin: 5px;
     padding: 0px 10px;
     border-radius: 5px;
+    height: auto;
 }
 .checkout .payment-types .form-group label {
     display: block;
@@ -3633,6 +4172,10 @@ input.form-control {
     font-size: 16px;
     line-height: 14px;
 }
+input.form-control.half {
+    width: 50%;
+    float: left;
+}
 input.form-control:focus {
     border-color: #d05715;
     box-shadow: none;
@@ -3654,8 +4197,132 @@ input.form-control:focus::-webkit-input-placeholder {
 
 /* Form Input End */
 
-
-
+/* orderLookup Styles Starts */
+.orderLookupContainer h2 {
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+.orderLookup { 
+    text-align: left;
+    margin: 40px 0;
+    padding-bottom: 30px;
+}
+.orderLookup.dataFound {
+    margin: 0; 
+    border-bottom: solid 1px #dedede;
+    transition: margin .3s ease-in-out;
+}
+.orderLookup .form-group,
+.orderLookup .form-actions { 
+    display: inline-block; 
+    margin: 0 25px;
+    height: auto;
+}
+.orderLookup .form-group:first-child {
+    margin-left: 0; 
+}
+.orderLookup .form-group.email .form-control {
+    width: 280px;
+}
+.orderLookup label {
+    display: none;
+}
+.orderLookupList .status {
+    width: 542px;
+    background: #dedede;
+    height: 7px;
+    border-radius: 15px;
+    margin: 60px auto;
+    direction: rtl;
+}
+.orderLookupList .status li {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 135px;
+    text-align: center;
+    box-sizing: border-box;
+    float: left;
+}
+.orderLookupList .status li span {
+    display: inline-block;
+    font-size: 14px;
+    padding: 20px 0 0 0;
+}
+.orderLookupList .status li span:after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: #89b9d6;
+    border-radius: 50%;
+    left: 50%;
+    margin-left: -17px;
+    top: -10px;
+}
+.orderLookupList .status li:after {
+    content: "";
+    position: absolute;
+    background: #89b9d6;
+    height: 5px;
+    width: 52%;
+    right: 0;
+    top: 1px;
+    border-radius: 15px;
+}
+.orderLookupList .status li:before {
+    content: "";
+    position: absolute;
+    background: #89b9d6;
+    height: 5px;
+    width: 50%;
+    left: 0;
+    top: 1px;
+    border-radius: 15px;
+}
+.orderLookupList .status li.complete:after {
+    background: none;
+}
+.orderLookupList .status li.complete ~ li:before,
+.orderLookupList .status li.complete ~ li:after {
+    background: none;
+}
+.orderLookupList .status li span .tick {
+    position: absolute;
+    display: inline-block;
+    width: 22px;
+    height:22px;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+    transform: rotate(45deg);
+    left: 53px;
+    top: -9px;
+    z-index: 2;
+}
+.orderLookupList .status li span .tick:before {
+    content: "";
+    position: absolute;
+    width:3px;
+    height:9px;
+    background-color:#fff;
+    left:11px;
+    top:6px;
+}
+.orderLookupList .status li span .tick:after {
+    content: "";
+    position: absolute;
+    width:3px;
+    height:3px;
+    background-color:#fff;
+    left:8px;
+    top:12px;
+}
+.orderLookupList .status li.complete ~ li span:after, .orderLookupList .status li.complete ~ li span:before {
+    background: #dedede;
+}
+.orderLookupList .status li.complete ~ li .tick {
+    display: none;
+}
 /* Validation Rules */
 .form-group .help-block {
     /*display: none;*/

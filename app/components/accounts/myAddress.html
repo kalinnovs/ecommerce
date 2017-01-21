@@ -1,0 +1,100 @@
+<div class="default address-details">
+    <h3>Address Information</h3>
+    <div class="address-form" ng-hide="hasAddress">
+		<form name="addressForm" novalidate>
+			<div class="row columns">
+				<aside class="col">
+					<div class="form-group">
+						<label for="name">First Name</label>
+						<input type="text" name="name" id="name" class="form-control half" placeholder="First Name" ng-model="address.firstName" required />
+						<p class="help-block" ng-show="addressForm.name.$invalid && !addressForm.name.$pristine">Enter your first name.</p>
+
+						<label for="lastname">Last Name</label>
+						<input type="text" name="lastname" id="lastname" class="form-control half" placeholder="Last Name" ng-model="address.lastName" required />
+						<p class="help-block" ng-show="addressForm.lastname.$invalid && !addressForm.lastname.$pristine">Enter your last name.</p>
+					</div>
+					<div class="form-group">
+						<label for="addressLine1">Flat / House / Floor / Building</label>
+						<input type="text" name="addressLine1" id="addressLine1" class="form-control" placeholder="Flat / House / Floor / Building" ng-model="address.addressLine1" required />
+						<p class="help-block" ng-show="addressForm.addressLine1.$invalid && !addressForm.addressLine1.$pristine">House Number.</p>
+					</div>
+					<div class="form-group">
+						<label for="addressLine2">Colony / Street / Locality</label>
+						<input type="text" name="addressLine2" id="addressLine2" class="form-control" placeholder="Colony / Street / Locality" ng-model="address.addressLine2" required />
+						<p class="help-block" ng-show="addressForm.addressLine2.$invalid && !addressForm.addressLine2.$pristine">Street name.</p>
+					</div>
+					<div class="form-group">
+						<label for="landmark">Landmark</label>
+						<input type="text" name="landmark" id="landmark" class="form-control" placeholder="Landmark" ng-model="address.landmark" required />
+					</div>
+					<div class="form-group">
+						<label for="phone">Phone Number</label>
+						<input type="text" name="phone" id="phone" class="form-control" placeholder="Phone Number" ng-model="address.phone" required />
+						<p class="help-block" ng-show="addressForm.phone.$invalid && !addressForm.phone.$pristine">Enter your phone number.</p>
+					</div>
+				</aside>
+				<aside class="col">
+					<div class="form-group">
+						<label for="zip">PIN Code</label>
+						<input type="text" name="zip" id="zip" class="form-control" placeholder="Zip Code" ng-model="address.zip" required ng-keyup="getCityState($event)" />
+						<p class="help-block" ng-show="addressForm.zip.$invalid && !addressForm.zip.$pristine">Enter your ZIP code.</p>
+					</div>
+					<div class="form-group">
+						<label for="city">City</label>
+						<input type="text" name="city" id="city" class="form-control" placeholder="City" ng-model="address.city" required />
+						<p class="help-block" ng-show="addressForm.city.$invalid && !addressForm.city.$pristine">Enter your city.</p>
+					</div>
+					<div class="form-group">
+						<label for="state">State</label>
+						<input type="text" name="state" id="state" class="form-control" placeholder="State" ng-model="address.state" required />
+						<p class="help-block" ng-show="addressForm.state.$invalid && !addressForm.state.$pristine">Enter your state.</p>
+					</div>
+					<p class="info">Order confirmation will be sent to the contact details below.</p>
+
+					<div class="form-group">
+						<label for="email">Alternate Email</label>
+						<input type="text" name="email" id="email" class="form-control" placeholder="Alternate Email" ng-model="co.user.emailId" required />
+					</div>
+				</aside>
+			</div>
+			<div class="form-actions">
+				<button type="submit" ng-click="addAddress($event);" class="btn btn-primary">
+					<span>Submit your new address</span>
+				</button>
+				<button ng-click="cancelAddressEntry($event);" class="btn btn-primary">
+					<span>Cancel</span>
+				</button>
+			</div>
+		</form>
+	</div>
+	<div class="address-blocks" ng-show="hasAddress">
+		<div class="addressSelection">
+			<h2>Choose the below address: </h2>
+			<div class="address-wraper" ng-class="{carouselActive: addressList.length > 4}">
+				<ul class="carouselStrip">
+					<li ng-repeat="(key, val) in addressList" ng-click="updateAddressToStorage($event, val.addressId);" ng-class="{active: (val.addressId == co.user.addressId)}">
+						<label for="address{{key}}" class="addressList">
+							<span class="name">{{val.firstName}} {{val.lastName}}</span></br>
+							<span>{{val.addressLine1}}</span>, <span>{{val.addressLine2}}</span></br>
+							<span>{{val.city}}</span>,</br>
+							<span>{{val.state}} - {{val.zip}}</span></br>
+							<span>Phone: {{val.phone}}</span></br>
+						</label>
+						<a href="javascript:void(0);" class="delete" ng-click="deleteAddress($event, val.addressId);">
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</a>
+					</li>
+				</ul>
+				<a href="javascript:void(0);" class="next" ng-click="nextAddressSlider($event);">
+					<i class="fa fa-chevron-right" aria-hidden="true"></i>
+				</a>
+				<a href="javascript:void(0);" class="prev" ng-click="prevAddressSlider($event);">
+					<i class="fa fa-chevron-left" aria-hidden="true"></i>
+				</a>
+			</div>
+			<button ng-disabled="co.user.addressId" ng-click="enableAddressEntry($event);" class="btn btn-primary">
+				<span>or add a new address</span>
+			</button>
+		</div>
+	</div>
+</div>

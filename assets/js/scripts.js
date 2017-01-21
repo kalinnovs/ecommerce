@@ -1,4 +1,4 @@
-// object.watch
+    // object.watch
 if (!Object.prototype.watch) {
     Object.defineProperty(Object.prototype, "watch", {
         enumerable: false,
@@ -29,7 +29,7 @@ if (!Object.prototype.watch) {
 
 // Stores partnumbers to localstorage and data temporarily to minicart in sessionStorage
 window.itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [] || [];
-window.miniCartStorage = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [] || [];
+// window.miniCartStorage = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [] || [];
 
 // Array Watch
 Object.defineProperty(window.itemsArray, "push", {
@@ -44,16 +44,8 @@ Object.defineProperty(window.itemsArray, "push", {
     }
 });
 
-
 function RaiseMyEvent(id, oldVal, newVal) {
-    createMiniKart();
-};
-
-function createMiniKart() {
-    var imagePath;
-    if (window.itemsArray.length > 0) {
-        $("body").find(".cartCount").html(window.itemsArray.length);
-    }
+    // updateMiniKartCount();
 };
 
 window.dataLoaded = false;
@@ -65,6 +57,7 @@ window.watch('dataLoaded', function(id, oldval, newval) {
     }
     if (newval === true) {
         $(".progress").hide();
+        // updateMiniKartCount();
         updateUser();
     } else {
         $(".progress").show();
@@ -75,18 +68,18 @@ window.watch('dataLoaded', function(id, oldval, newval) {
 function updateUser() {
     var emptyUser = {
         "name": "Guest",
-        "imageUrl": "" 
-    };
-    window.userDetails = window.userDetails || emptyUser;
-    if(window.userDetails.name === "Guest") {
-        // window.localStorage.setItem("accessToken", "");
-    }
-    if(window.userDetails.imageUrl !== "") {
+        "imageUrl": "",
+        "user": null 
+    },
+    userDetails = (window.userDetails) ? window.userDetails : emptyUser;
+    if(userDetails.imageUrl !== "") {
         $(".profilePicUpdate").addClass("loggedIn");
-        $(".profilePicUpdate").find(".profilePic").attr("src", window.userDetails.imageUrl);
+    } else {
+        $(".profilePicUpdate").removeClass("loggedIn");
     }
-    $(".userDetailsUpdate").text((window.userDetails.name === "Guest") ? "Login" : window.userDetails.name);
-    $(".profile").attr("href", (window.userDetails.name === "Guest") ? "/login" : "/accounts");
+    $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
+    $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
+    $(".social-strip ul > li > a.profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
 };
 
 $(document).ready(function(e) {
@@ -98,6 +91,7 @@ $(document).ready(function(e) {
 
     // Set default currency INR to body
     $("body").attr("data-currency", "INR");
+    $("body").attr("data-crId", "1");
     $("body").find(".cartCount").html(window.itemsArray.length);
 
     setTimeout(function() {
@@ -170,6 +164,7 @@ $(document).ready(function(e) {
         });
 
         $(document).on("click", ".currencyConverter a, .currencyChooser a", function(e) {
+            var selectedCurrencyId = 1;
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
             var selectedCurrency = $(this).attr("rel");
@@ -177,6 +172,9 @@ $(document).ready(function(e) {
             $(".price.inr, .price.usd, .price.eur").hide();
             $(".price." + selectedCurrency).show();
             $("body").attr("data-currency", selectedCurrency);
+            if(selectedCurrency === "USD") { selectedCurrencyId = 2; }
+            if(selectedCurrency === "EUR") { selectedCurrencyId = 3; }
+            $("body").attr("data-crId", selectedCurrencyId);
             $(document).trigger('data-currency-changed');
         });
 
@@ -189,16 +187,16 @@ $(document).ready(function(e) {
         });
 
         // Wait until the DOM has loaded before querying the document
-        if ((!sessionStorage.isTriggered || sessionStorage.isTriggered == "false") &&
-            window.location.hash.match(/register/g) == null) {
-            setTimeout(function() {
-                window.modalComponent.open(".adMessageBox");
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 600);
-                sessionStorage.isTriggered = "true";
-            }, 45000);
-        }
+        // if ((!sessionStorage.isTriggered || sessionStorage.isTriggered == "false") &&
+        //     window.location.hash.match(/register/g) == null) {
+        //     setTimeout(function() {
+        //         window.modalComponent.open(".adMessageBox");
+        //         $("html, body").animate({
+        //             scrollTop: 0
+        //         }, 600);
+        //         sessionStorage.isTriggered = "true";
+        //     }, 45000);
+        // }
 
         $(".tapToClose").click(function() {
             sessionStorage.isTriggered = "true";

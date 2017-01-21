@@ -1,5 +1,5 @@
 
-angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload', 'ngSanitize'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
   // .constant('SERVICE_URL', '/HaastikaWebService')
@@ -16,7 +16,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/login',
         templateUrl: 'app/components/login/loginView.html',
         controller: 'LoginCtrl',
-        controllerAs: 'login'
+        controllerAs: 'login',
+        resolve: {
+          user: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          }
+        }
       })
       .state('resetPassword', {
         url:'/login/:uid',
@@ -26,9 +31,33 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('accounts', {
         url:'/accounts',
-        templateUrl: 'app/components/accounts/accountView.html',
-        controller: 'AccoutsCtrl',
-        controllerAs: 'accounts'
+        views: {
+          '': {
+            templateUrl: 'app/components/accounts/accountView.html',
+            controller: 'AccoutsCtrl',
+            controllerAs: 'accounts',
+            resolve: {
+              orderList: function($stateParams, AccountsService) {
+                return AccountsService.getOrderList();
+              },
+              savedCart: function($stateParams, AccountsService) {
+                return AccountsService.getSavedCart();
+              },
+              getAddress: function($stateParams, AccountsService) {
+                return AccountsService.getAddress();
+              }
+            }
+          },
+          'orderDetails@accounts': {
+            templateUrl: 'app/components/accounts/orderDetails.html'
+          }, 
+          'addressInfo@accounts': {
+            templateUrl: 'app/components/accounts/myAddress.html'
+          },
+          'subscriptionInfo@accounts': {
+            templateUrl: 'app/components/accounts/mySubscription.html'
+          }
+        }
       })
       .state('home', {
         url:'/home',
@@ -50,11 +79,15 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('cart', {
         url:'/cart',
-        views: {
-          '': {
-            templateUrl: 'app/components/cart/cartView.html',
-            controller: 'CartCtrl',
-            controllerAs: 'cart'
+        templateUrl: 'app/components/cart/cartView.html',
+        controller: 'CartCtrl',
+        controllerAs: 'cart',
+        resolve: {
+          user: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          },
+          cartData: function($stateParams, CartService) {
+            return CartService.viewCart();
           }
         }
       })
@@ -62,31 +95,111 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/checkout',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/checkoutView.html'
+        templateUrl: 'app/components/checkout/checkoutView.html',
+        resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            // return CheckoutService.getItems();
+          },
+          getAddress: function($stateParams, CheckoutService) {
+            // return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            // return AuthenticationService.validateToken();
+          },
+          viewCart: function($stateParams, CheckoutService) {
+            // return CheckoutService.viewCart();
+          }
+        }
       })
       .state('checkout.login', {
         url: '/login',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/login.html'
+        templateUrl: 'app/components/checkout/login.html',
+        resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            // return CheckoutService.getItems();
+          },
+          getAddress: function($stateParams, CheckoutService) {
+            // return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          },
+          viewCart: function($stateParams, CheckoutService) {
+            // return CheckoutService.viewCart();
+          }
+        }
        })
       .state('checkout.address', {
         url: '/address',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/address.html'
+        templateUrl: 'app/components/checkout/address.html',
+        resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            // return CheckoutService.getItems();
+          },
+          getAddress: function($stateParams, CheckoutService) {
+            return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          },
+          viewCart: function($stateParams, CheckoutService) {
+            // return CheckoutService.viewCart();
+          }
+        }
       })
       .state('checkout.order', {
         url: '/order',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/order.html'
+        templateUrl: 'app/components/checkout/order.html',
+        resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            return CheckoutService.getItems();
+          },
+          viewCart: function($stateParams, CheckoutService) {
+            return CheckoutService.viewCart();
+          },
+          getAddress: function($stateParams, CheckoutService) {
+            // return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          }
+        }
       })
       .state('checkout.payment', {
         url: '/payment',
         controller: 'CheckoutCtrl',
         controllerAs: 'checkout',
-        templateUrl: 'app/components/checkout/payment.html'
+        templateUrl: 'app/components/checkout/payment.html',
+        resolve: {
+          cartItems: function($stateParams, CheckoutService) {
+            return CheckoutService.getItems();
+          },
+          viewCart: function($stateParams, CheckoutService) {
+            return CheckoutService.viewCart();
+          },
+          getAddress: function($stateParams, CheckoutService) {
+            // return CheckoutService.getAddress();
+          },
+          getLoginStatus: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          }
+        }
+      })
+      .state('thankyou', {
+        url: '/thankyou',
+        controller: 'thankyouCtrl',
+        templateUrl: 'app/components/thankyou/thankyouView.html'
+      })
+      .state('orderLookup', {
+        url: '/orderLookup',
+        controller: 'orderCtrl',
+        templateUrl: 'app/components/orderlookup/orderlookupView.html'
       })
       .state('register', {
         url:'/register',
@@ -219,29 +332,18 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         }
       })
     ;
-
-    // We need to setup some parameters for http requests
-    // These three lines are all you need for CORS support
-    // $httpProvider.defaults.useXDomain = true;
-    // $httpProvider.defaults.withCredentials = true;
-    // delete $httpProvider.defaults.headers.common['X-Requested-With'];
     
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
 
   })
-  .run(['$rootScope', '$location', '$http', '$cookieStore', '$state', 
-    function run($rootScope, $location, $http, $cookieStore, $state) {
-      
-      // var accessToken = (window.localStorage.accessToken) ? window.localStorage.accessToken : "";
-      // $http.defaults.headers.common['X-Auth-Token'] = 'Basic' + $rootScope.apiKey;
+  .run(['$rootScope', '$location', '$http', '$state', 'Google', '$window', 
+    function run($rootScope, $location, $http, $state, Google, $window) {
 
       // Steps store
       if(!window.sessionStorage.steps) {
-        console.log("clearing");
         window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');  
       }
-      
 
       $rootScope.$on('$stateChangeSuccess',function(){
         var location = window.location.pathname;
@@ -252,7 +354,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       });
 
       // keep user logged in after page refresh
-      $rootScope.globals = $cookieStore.get('globals') || {};
+      $rootScope.globals = (window.localStorage.globals) ? JSON.parse(window.localStorage.globals) : {} || {};
       if ($rootScope.globals.currentUser) {
           $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
       }
@@ -262,7 +364,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           // Assigning Restricted pages list !!
           var restrictedPage = $.inArray($location.path(), ['/admin', '/inventory']) != -1;
           var loggedIn = $rootScope.globals.currentUser;
-          if (restrictedPage && !loggedIn) {
+          if ((restrictedPage && loggedIn === undefined) || (restrictedPage && loggedIn && loggedIn.userType !== "Admin")) {
               $location.path('/login');
           }
 
@@ -271,6 +373,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           var validateURI = false, validStateIndex = 0,
           steps = JSON.parse(window.sessionStorage.checkoutState),
           currentState = $location.path().split("/checkout/")[1];
+
           function validateStateUrls() {
             for(var keys in steps) {
               if(keys === currentState) {
@@ -294,18 +397,27 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           
           // Checkout redirection on zero cart items
           if($location.path().indexOf("checkout") !== -1) {
-            var cartlength = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts).length : 0;
+            var authenticatedUser = (window.singleCall) ? window.singleCall.authenticateUser : false;
+            var cartlength = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray).length : (window.sessionStorage.cartLength) ? parseInt(JSON.parse(window.sessionStorage.cartLength)) : 0;
             if(cartlength === 0) {
               $location.path('/home');
             } else {
-              if(validateURI === false) {
+              if(validateURI === false && !authenticatedUser) {
                 validStateIndex = 0;
-                validateStateUrls();
-                debugger;
+                if($location.path().split("/checkout/")[1] !== "login") {
+                  validateStateUrls();  
+                }
                 $location.path('/checkout/'+ Object.keys(steps)[validStateIndex]);
               }
             }  
           }
+
+          // Restrict Viewers to thank you page every time.
+          var restrictedPage = $.inArray($location.path(), ['/thankyou']) != -1;
+          var isRestricted = (window.restrictView !== undefined) ? window.restrictView : true;
+          if (restrictedPage && isRestricted) {
+              $location.path('/home');
+          } 
 
       });
 
@@ -325,6 +437,10 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       };
 
       // Google Authentication
+      if(window.handleGoogleClientLoad && gapi) {
+        Google.init();
+      };
+
   }])
   .factory('httpRequestInterceptor', function () {
     return {

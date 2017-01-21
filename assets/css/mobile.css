@@ -10,8 +10,9 @@
   /* Mobile Menu */
   .social-strip.mobileView { display: inline-block; }
   .mobileRendering { padding: 0 15px; }
+  .isSafari .menu .social-strip { margin-top: 7px; }
 
-  header { min-height: 200px }
+  header { min-height: 160px; }
   .header-top { height: 75px; }
   .social-strip { margin-top: 8px; }
   .social-strip ul { text-align: center; }
@@ -23,11 +24,13 @@
   .menu .social-strip ul { position: static; }
   .order-info { display: block; position: absolute; width: 80%; left: 10%; }
   .shipping { font-size: 15px; }
-  .shipping p { margin-right: 0; padding-left: 25px; display: block; font-size: 100%; }
+  .shipping-wrap { height: 52px; line-height: 52px; }
+  .shipping p { margin-right: 0; padding: 10px 0; display: block; font-size: 100%; line-height: initial; }
   .shipping a { display: none; }
   .pageCounter { text-align: center; }
   .footer { padding: 25px 15px 40px; }
   .dimentionCard {  margin: 20px 20px; }
+  #map_canvas { height: 250px; }
 
   .mobile .nav-sticky .stickyMenu .desktop-nav { display: block; right: 14px; top: 5px; position: absolute; z-index: 2; font-size: 26px; }
   .mobile .stickyMenu .logo, .mobile .stickyMenu .row .social-strip { display: none; }
@@ -57,7 +60,6 @@
   .sub-menu.menu-three .links { width: auto; padding: 0px 20px; }
   .mobile .sub-menu a { width: auto; float: none; }
   header nav ul > li .sub-menu.catalog .links { width: 100%; }
-  .social-strip ul li a.cart { display: none }
   .currencyChooser { display: block }
   .mobile .desktop-nav > ul > li.currencyChooser a { display: inline-block; }
   .mobile .desktop-nav > ul > li.currencyChooser .fa { display: inline-block; color: #333; }
@@ -121,4 +123,13 @@
 
   footer .back-top a { top: -50px }
   .policy { width: 100%; padding: 15px; border: 0 }
+
+  .cart-page .part-details h3 { width: 100%;  }
+  .cart-page .item-details .part-details { line-height: normal; }
+  .cart-page .item-details figure img { height: 110px; }
+  .cart-page .item-details .part-details .alignRight { float: none; text-align: inherit; }
+  .cart-page .part-details .item-price { margin: 10px 0; width: 72%; }
+  .cart-page .cart-summary > div label { width: 220px; }
+  .cart-page .cart-extra .extra-links { width: initial; }
+
 }

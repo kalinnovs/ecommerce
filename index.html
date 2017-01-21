@@ -17,6 +17,10 @@
 
     <title>Haastika - Online store for Odisha Handicrafts, Wall Hangings, Bags, Paintings, Jewellery and more</title>
     <base href="/index.html">
+    <!-- Google API -->
+    <script src="vendor/js/google_api.js" type="text/javascript"></script>
+    <!-- Facebook API -->
+    <script src="vendor/js/fb_all.js"></script>
     <link rel="icon" href="assets/images/favicon.ico" sizes="16x16" type="image/png">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -92,7 +96,7 @@
                                         <a href="/" class="noDecoration homeLink"><i class="fa fa-home"></i> Home</a>
                                     </li>
                                     <li>
-                                        <a href="register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
+                                        <a href="register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscribe</a>
                                     </li>
                                     <li>
                                         <a href="profile" class="noDecoration profile">
@@ -104,7 +108,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger" minicart part-number-map="window.itemsArray"></a>
+                                        <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger" minicart></a>
                                     </li>
                                 </ul>
                             </div>
@@ -118,15 +122,22 @@
                         <div class="social-strip mobileView">
                             <ul>
                                 <li>
-                                    <a href="register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscription</a>
+                                    <a href="/" class="noDecoration homeLink"><i class="fa fa-home"></i> Home</a>
                                 </li>
                                 <li>
-                                    <a href="aboutus" class="noDecoration aboutusLink"><i class="fa fa-users"></i> About Us</a>
+                                    <a href="register" class="noDecoration subscriptionLink"><i class="fa fa-envelope"></i> Subscribe</a>
                                 </li>
                                 <li>
-                                    <a href="contact" class="noDecoration contactusLink">
-                                        <i class="fa fa-paper-plane" aria-hidden="true"></i> Reach Us
+                                    <a href="profile" class="noDecoration profile">
+                                        <span class="imageNull profilePicUpdate">
+                                            <img src="" class="profilePic" />
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="userDetailsUpdate"></span>
                                     </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger" minicart></a>
                                 </li>
                             </ul>
                         </div>
@@ -327,11 +338,11 @@
                                                     <img src="" class="profilePic" />
                                                     <i class="fa fa-user" aria-hidden="true"></i>
                                                 </span>
-                                                <span class="userDetailsUpdate"></span>
+                                                <span class="userDetailsUpdate" style="width: 50px;text-align: left;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger" minicart part-number-map="window.itemsArray"></a>
+                                            <a href="javascript:void(0);" class="noDecoration cart mini-cart-trigger" minicart></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -342,7 +353,7 @@
             </sticky-menu>
             <minicart part-number-map="window.itemsArray"></minicart>
         </header>
-
+        <flasher class="flasher"></flasher>
         <div>
 
             <!-- Application view startes here -->
@@ -854,7 +865,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="shipping">
-                                        <p><i class="fa fa-truck" aria-hidden="true" style="font-size: 1.8em;padding-right: 30px;"></i>
+                                        <p><i class="fa fa-truck" aria-hidden="true" style="font-size: 1.8em;padding-right: 10px;"></i>
                                         <span>FREE SHIPPING</span> Offered by HAASTIKA <sup>*</sup></p><a class="button" href="deliveryOptions">Learn more</a>
                                     </div>
                                 </div>
@@ -979,10 +990,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-cookies.js"></script>
+    <script src="https://code.angularjs.org/snapshot/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.1/ui-bootstrap-tpls.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js"></script>
-
 
     <!-- Firebase -->
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
@@ -996,18 +1007,17 @@
 
     <!-- Facebook Share -->
     <div id="fb-root"></div>
-    <script src="//connect.facebook.net/en_US/all.js"></script>
     <script>
-    // Facebook Authentication
-    FB.init({
-          appId:'1719553531700651',
-          status:true,
-          cookie:true,
-          xfbml:true,
-          version: 'v2.8'
-      });
-
- </script>
+        // window.handleGoogleClientLoad = false;
+        // Facebook Authentication
+        FB.init({
+            appId:'1719553531700651',
+            status:true,
+            cookie:true,
+            xfbml:true,
+            version: 'v2.8'
+        });
+    </script>
 </body>
 
 </html>

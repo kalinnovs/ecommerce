@@ -11,13 +11,7 @@ angular.module('eCommerce')
                 $state.go('home');
             }
             $scope.data = data.productDetails;
-            if(data.pageNavigation) {
-                $rootScope.navigation = data.pageNavigation.categories;
-            } else if ( UserService.get()) {
-                $rootScope.navigation = UserService.get().data.pageNavigation.categories;
-            }
             $scope.$broadcast('dataloaded');
-            // $scope.htmlDescription = data.productDescription; 
         })
         .catch(function(error) {
             //

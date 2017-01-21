@@ -1,24 +1,31 @@
 <div class="login-form">
 	<div class="row columns">
 		<aside class="col">
-			<form name="loginForm" ng-submit="submitFormed(userForm.$valid, 'loginForm', 'address')">
-				<div class="form-group">
-					<label for="firstName">First name</label>
-					<input type="text" name="firstName" id="firstName" class="form-control" placeholder="First Name" ng-model="co.user.firstName" required />
-					<p class="help-block">You name is required.</p>
-				</div>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" name="password" id="password" class="form-control" placeholder="Password" ng-model="co.user.password" required />
-					<p class="help-block">Enter a valid email.</p>
-				</div>
-				<div class="form-actions">
-					<button type="submit" class="btn btn-primary">Sign In</button>
-				</div>
-			</form>
+			<div ng-show="error" class="alert alert-danger">{{error}}</div>
+			<span class="social-button google" href="javascript:void(0)" ng-click="googleHandleAuthClick();" title="Google" alt="Sign in with Google"><i class="fa fa-google-plus" aria-hidden="true"></i></span>
+            <span class="social-button facebook" href="javascript:void(0)" ng-click="fblogin();" title="LinkedIn" alt="Sign in with Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></span>
+
+            <div class="loginForm">
+	            <div ng-show="error" class="alert alert-danger">{{error}}</div>
+	            <form name="chkform" ng-submit="checkoutLogin($event);" role="form">
+	                <div class="form-group">
+	                    <input type="text" name="username" id="username" class="form-control" ng-model="co.user.emailId" required placeholder="Email address" />
+	                    <span ng-show="chkform.username.$dirty && chkform.username.$error.required" class="">Email id is required</span>
+	                </div>
+	                <div class="form-group">
+	                    <input type="password" name="password" id="password" class="form-control" ng-model="co.user.password" required placeholder="Password" />
+	                    <span ng-show="chkform.password.$dirty && chkform.password.$error.required" class="">Password is required</span>
+	                </div>
+	                <div class="form-actions">
+	                    <button type="submit" ng-click="checkoutLogin($event);" ng-disabled="chkform.$invalid || dataLoading" class="btn btn-primary submit">Login</button>
+	                    <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+	                </div>
+	            </form>
+	        </div>
 		</aside>
 		<aside class="col">
-			<form name="guestLoginForm" role="form">
+			<h2>Guest User </h2>
+			<form name="guestLoginForm" role="form" class="loginForm">
                 <div class="form-group">
                 	<label for="emailId">Email ID</label>
                     <input type="email" name="emailId" id="emailId" class="form-control" ng-model="co.user.emailId" required placeholder="Enter your email address" />

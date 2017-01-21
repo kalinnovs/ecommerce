@@ -1,30 +1,27 @@
 'use strict';
  
-var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location, $stateParams, UserService, PRODUCTDATA_URL, AuthenticationService, Facebook) {
-        // reset login status
-        AuthenticationService.ClearCredentials();
-        $rootScope.navigation = (window.sessionStorage.navigation) ? JSON.parse(window.sessionStorage.navigation) : [];
+var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location, $stateParams, LoginService, PRODUCTDATA_URL, AuthenticationService, Facebook, Google, user) {
+        
         this.state = "login";
         this.header = "Login Haastika";
-        var that = this;
+        var that = this,
+        loginStatus = user;
+        this.root = $rootScope;
 
-        UserService.GetAll( PRODUCTDATA_URL + '/authenticate/validate')
-        .then(function(data) {
-          if(data.success === true) {
-            debugger;
-            $state.go('home');
-          } else {
+        // Login Status Check
+        if(loginStatus.success === true) {
+            var emptyUser = {"name": "Guest","imageUrl": "","user": null};
+            window.userDetails = window.userDetails || emptyUser;
+            if(loginStatus.userType === "Admin") {
+                $state.go('admin');
+            } else {
+                $state.go('home');    
+            }
+            
+        } else {
             // Else pick local JSON
-            window.userDetails = null;
-            window.dataLoaded = true;
-          }
-        })
-        .catch(function(error) {
-            //
-        })
-        .finally(function() {
-            //
-        });
+            window.userDetails = {"name": "Guest","imageUrl": "","user": null};
+        }
 
         if ($stateParams.uid) {
             this.uid = $stateParams.uid;
@@ -40,17 +37,27 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
             }.bind(this));
         }
 
-
-
         this.login = function () {
+            var globals = $scope.$root.globals;
             $scope.dataLoading = true;
             $scope.state = true;
             AuthenticationService.Login($scope.username, $scope.password, function(response) {
                 if(response.success) {
-                    debugger;
-                    AuthenticationService.SetCredentials($scope.username, $scope.password);
-                    $location.path('/admin');
+                    AuthenticationService.SetCredentials($scope.username, $scope.password, response.userType);
+                    if(response.userType === "Admin") {
+                        $location.path('/admin');
+                        // Broadcast cart update to mini cart
+                        $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Admin Login Successful !!"});
+                    } else {
+                        // Broadcast cart update to mini cart
+                        $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
+                        $location.path('/home');
+                    }
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateMiniCartCount");
                 } else {
+                    // Broadcast cart update to mini cart
+                    $rootScope.$broadcast("updateFlash", {"alertType": "warning", "message": "Login Failed !! Please verify your username and password."});
                     $scope.error = response.message;
                     $scope.dataLoading = false;
                 }
@@ -62,22 +69,9 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
         $rootScope.$on("fb_statusChange", function (event, args) {
             $rootScope.fb_status = args.status;
             $rootScope.$apply();
-            // if(args.status === "connected") {
-            //     Facebook.login();
-            // }
         });
         $rootScope.$on("fb_get_login_status", function () {
             Facebook.getLoginStatus();
-        });
-        $rootScope.$on("fb_login_failed", function () {
-            console.log("fb_login_failed");
-        });
-        $rootScope.$on("fb_logout_succeded", function () {
-            console.log("fb_logout_succeded");
-            $rootScope.id = "";
-        });
-        $rootScope.$on("fb_logout_failed", function () {
-            console.log("fb_logout_failed!");
         });
         $rootScope.$on("fb_connected", function (event, args) {
             window.fbConnected = true;
@@ -85,7 +79,10 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
 
         $scope.fblogin = function () {
             $timeout(function () {
-                Facebook.login();
+                Facebook.login('home', function() {
+                	// Broadcast cart update to mini cart
+                	$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
+                });
             }, 100, false);
         };
 
@@ -151,7 +148,24 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
                 }
             }.bind(this));
         };
+
+        /* Google Authentication code goes here */
+        $scope.googleHandleAuthClick = function() {
+            Google.login('home', function() {
+            	// Broadcast cart update to mini cart
+           		$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
+            });
+        };
+
+        $scope.googleLogout = function() {
+            Google.logout();
+            $rootScope.session = {};
+        };
+
+        $rootScope.$on("google_statusChange", function (event, args) {
+            debugger;
+        });
     };
 
-LoginCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', '$http', '$location', '$stateParams', 'UserService', 'PRODUCTDATA_URL', 'AuthenticationService', 'Facebook'];
+LoginCtrl.$inject = ['$scope', '$rootScope', '$state', '$timeout', '$http', '$location', '$stateParams', 'LoginService', 'PRODUCTDATA_URL', 'AuthenticationService', 'Facebook', 'Google', 'user'];
 angular.module('eCommerce').controller('LoginCtrl', LoginCtrl); 
