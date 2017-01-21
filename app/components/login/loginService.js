@@ -1,8 +1,8 @@
 'use strict';
  
 angular.module('eCommerce')
-.factory('AuthenticationService', ['Base64', '$http', '$rootScope', '$timeout', 'SERVICE_URL', 'PRODUCTDATA_URL',
-  function (Base64, $http, $rootScope, $timeout, SERVICE_URL, PRODUCTDATA_URL) {
+.factory('AuthenticationService', ['Base64', '$http', '$rootScope', '$timeout', 'SERVICE_URL', 'PRODUCTDATA_URL','LoginService',
+  function (Base64, $http, $rootScope, $timeout, SERVICE_URL, PRODUCTDATA_URL,LoginService) {
     var service = {};
 
     service.Login = function (username, password, callback) {
@@ -68,6 +68,81 @@ angular.module('eCommerce')
         return $http.get(PRODUCTDATA_URL + '/authenticate/validate').then(function (response) {
             return response.data;
         });
+    };
+
+    service.signUp = function (userObj, callback) {
+        var url = PRODUCTDATA_URL + '/account/register';
+        $http({
+              method: 'POST',
+              url: url,
+              data: userObj,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+           .then(function (response) {
+                callback(response.data);
+                if(response.token) {
+                    response.success = true;
+                    response.userType = response.userType;
+                    window.localStorage.setItem("accessToken", response.token);
+                    window.userDetails = response.loggedUser;
+                    window.sessionStorage.setItem('cartLength', response.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                    
+                    var promise = LoginService.updateCartFromLocal();
+                    promise.then(function() {
+                        // Broadcast cart update to mini cart
+                        $rootScope.$broadcast("updateMiniCartCount");
+                    });
+                }
+                else {
+                    response.message = 'Username or password is incorrect';
+                }
+           });
+    };
+
+    service.requestResetPassword = function (emailId, callback) {
+        var url = PRODUCTDATA_URL + '/account/sendResetlink?emailId=' + emailId;
+        $http({
+              method: 'GET',
+              url: url,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+           .then(function (response) {
+                callback(response.data);
+           });
+    };
+
+    service.resetPassword = function (uid, userObj, callback) {
+        var url = PRODUCTDATA_URL + '/account/reset-password/' + uid;
+        $http({
+              method: 'POST',
+              url: url,
+              data: userObj,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+           .then(function (response) {
+                callback(response.data);
+           });
+    };
+
+
+    service.validateUid = function (uid, callback) {
+        var url = PRODUCTDATA_URL + '/account/isValidResetlink/' + uid;
+        $http({
+              method: 'GET',
+              url: url,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+           .then(function (response) {
+                callback(response.data);
+           });
     };
 
     return service;
