@@ -38,7 +38,7 @@ angular.module('eCommerce')
                             url: computedURL,
                             data: JSON.stringify(objectToSerialize)
                         }).then(function successCallback(results) {
-                            responseData = results.data.cartList;
+                            responseData = results.data.cartList || [];
                             $rootScope.navigation = results.data.pageNavigation.categories;
                             window.userDetails = (results.data.loggedUser !== null) ? results.data.loggedUser : {"name": "Guest","imageUrl": "","user": null};
                             // updateUser();
@@ -79,9 +79,9 @@ angular.module('eCommerce')
                         url: computedURL,
                         data: JSON.stringify(objectToSerialize),
                     }).then(function successCallback(results) {
-                        responseData = results.data;
+                        responseData = results.data.cartList || [];
                         cartCount = ListItemCounter(responseData);
-                        renderHTML(responseData.cartList);
+                        renderHTML(responseData);
                         (responseData.length > 4) ? element.find(".manyItems").show() : element.find(".manyItems").hide();
                         // $(".miniKart").parents(".cart").find(".count").html(cartCount);
                         $(".miniKart").removeClass("loader");
