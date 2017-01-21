@@ -411,8 +411,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
                 validStateIndex = 0;
                 if($location.path().split("/checkout/")[1] !== "login") {
                   validateStateUrls();  
-                }
+                } 
                 $location.path('/checkout/'+ Object.keys(steps)[validStateIndex]);
+              } else {
+                if($location.path().split("/checkout/")[1] === "login") {
+                  window.singleCall.authenticateUser = false;
+                }
               }
             }  
           }

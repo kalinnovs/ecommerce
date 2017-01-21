@@ -41,7 +41,7 @@ angular.module('eCommerce')
                             responseData = results.data.cartList;
                             $rootScope.navigation = results.data.pageNavigation.categories;
                             window.userDetails = (results.data.loggedUser !== null) ? results.data.loggedUser : {"name": "Guest","imageUrl": "","user": null};
-                            updateUser();
+                            // updateUser();
                             if(window.localStorage.accessToken !== "" && results.data.loggedUser === null) {
                                 window.localStorage.setItem("accessToken", "");
                                 window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
@@ -54,22 +54,7 @@ angular.module('eCommerce')
                             }
                             $(".miniKart").parents(".cart").find(".count").html(cartCount);
                         }); 
-                        function updateUser() {
-    						var emptyUser = {
-        						"name": "Guest",
-        						"imageUrl": "",
-						        "user": null 
-						    },
-						    userDetails = (window.userDetails) ? window.userDetails : emptyUser;
-						    if(userDetails.imageUrl !== "") {
-						        $(".profilePicUpdate").addClass("loggedIn");
-						    } else {
-						        $(".profilePicUpdate").removeClass("loggedIn");
-						    }
-						    $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
-						    $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
-						    $(".social-strip ul > li > a.profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
-						};
+                        
                     // }, function (reason) {
                     //     self.validateError = reason.data;
                     // });
@@ -87,7 +72,7 @@ angular.module('eCommerce')
                         objectToSerialize = {'products':itemList};
 
                     
-                    var computedURL =  PRODUCTDATA_URL + '/cart/miniCart',
+                    var computedURL =  PRODUCTDATA_URL + '/cart/viewCart',
                         cartCount;
                     $http({
                         method: 'POST',
@@ -96,7 +81,7 @@ angular.module('eCommerce')
                     }).then(function successCallback(results) {
                         responseData = results.data;
                         cartCount = ListItemCounter(responseData);
-                        renderHTML(responseData);
+                        renderHTML(responseData.cartList);
                         (responseData.length > 4) ? element.find(".manyItems").show() : element.find(".manyItems").hide();
                         // $(".miniKart").parents(".cart").find(".count").html(cartCount);
                         $(".miniKart").removeClass("loader");
