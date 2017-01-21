@@ -114,6 +114,8 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
                 $scope.dataLoading = false;
                 if(response.success) {
                     console.info("Login success.");
+                    $location.path('/home');
+                    $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
                 } else {
                     $scope.signUpError = response.message;
                 }

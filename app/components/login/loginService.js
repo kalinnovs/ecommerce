@@ -81,23 +81,14 @@ angular.module('eCommerce')
               }
             })
            .then(function (response) {
-                callback(response.data);
+                response = response.data;
                 if(response.token) {
                     response.success = true;
                     response.userType = response.userType;
                     window.localStorage.setItem("accessToken", response.token);
                     window.userDetails = response.loggedUser;
-                    window.sessionStorage.setItem('cartLength', response.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
-                    
-                    var promise = LoginService.updateCartFromLocal();
-                    promise.then(function() {
-                        // Broadcast cart update to mini cart
-                        $rootScope.$broadcast("updateMiniCartCount");
-                    });
                 }
-                else {
-                    response.message = 'Username or password is incorrect';
-                }
+                callback(response);
            });
     };
 
