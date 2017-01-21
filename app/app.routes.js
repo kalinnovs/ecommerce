@@ -27,7 +27,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/login/:uid',
         templateUrl: 'app/components/login/loginView.html',
         controller: 'LoginCtrl',
-        controllerAs: 'login'
+        controllerAs: 'login',
+        resolve: {
+          user: function($stateParams, AuthenticationService) {
+            return AuthenticationService.validateToken();
+          }
+        }
       })
       .state('accounts', {
         url:'/accounts',
