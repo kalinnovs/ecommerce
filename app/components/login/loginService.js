@@ -275,7 +275,12 @@ angular.module('eCommerce')
                         if(self && self.onSuccess) {
                             self.onSuccess();
                         }
-                        $state.go(self.return_url);
+                        
+                        window.setTimeout(function() {
+                            var return_url = (self !== undefined) ? ((self.return_url) ? self.return_url : 'home') : 'home';
+                            $state.go(return_url);    
+                        }, 100);
+                        
                     }, function errorCallback(response) {
                         console.log("Error in saving.");
                     });

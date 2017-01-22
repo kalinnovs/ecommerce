@@ -530,6 +530,7 @@ angular.module('eCommerce')
                     window.sessionStorage.removeItem('storage');
                     window.sessionStorage.setItem('checkoutState', '{"login": false, "address": false, "order": false, "payment": false }');
                     window.restrictView = false;
+                    window.sessionStorage.cartLength = 0;
                     
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateMiniCartCount");
