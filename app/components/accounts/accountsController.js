@@ -3,7 +3,7 @@
 angular.module('eCommerce')
   .controller('AccoutsCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress) {
 
-  	$scope.loggedUser = orderList.loggedUser;
+  	$scope.loggedUser = window.userDetails;
   	$scope.orderList = orderList.orderList;
     $scope.savedCart = savedCart.cartList;
     $scope.addressList = getAddress;
