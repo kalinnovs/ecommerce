@@ -9,6 +9,9 @@ angular.module('eCommerce')
         
         $scope.location = $location;
         
+        // Currency Update
+        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        
         // Read Cart Array and pass to URL
         var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
         if(cartData.loggedUser !== null) {

@@ -39,11 +39,7 @@ angular.module('eCommerce')
                         responseData = results.data.cartList || [];
                         $rootScope.navigation = results.data.pageNavigation.categories;
                         window.userDetails = (results.data.loggedUser !== null) ? results.data.loggedUser : {"name": "Guest","imageUrl": "","user": null};
-                        // Broadcast currency update
-                        if(results.data.loggedUser !== null) {
-                            $rootScope.$broadcast("updateCurrency", results.data.loggedUser.preferredCurrency);    
-                        }
-
+                        
                         if(window.localStorage.accessToken !== "" && results.data.loggedUser === null) {
                             window.localStorage.setItem("accessToken", "");
                             window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
@@ -79,10 +75,6 @@ angular.module('eCommerce')
                         data: JSON.stringify(objectToSerialize),
                     }).then(function successCallback(results) {
                         responseData = results.data.cartList || [];
-                        // Broadcast currency update
-                        if(results.data.loggedUser !== null) {
-                            $rootScope.$broadcast("updateCurrency", results.data.loggedUser.preferredCurrency);    
-                        }
                         
                         cartCount = ListItemCounter(responseData);
                         renderHTML(responseData);

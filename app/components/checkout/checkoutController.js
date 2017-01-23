@@ -13,6 +13,9 @@ angular.module('eCommerce')
         // Retrieves data from storage
         $scope.co = checkoutStorage.getData('storage');
 
+        // Currency Update
+        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+
         // Cart Configuration
         $scope.checkoutCartConfig = {
             "shippingCost": 0,
