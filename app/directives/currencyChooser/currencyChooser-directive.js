@@ -16,7 +16,7 @@ angular.module('eCommerce')
           window.setTimeout(function() {
             $(".price.inr, .price.usd, .price.eur").hide();
             $(".price." + currencyType.toLowerCase()).show();
-          }, 100);
+          }, 600);
 
           $("body").attr("data-currency", currencyType);          
           $("body").attr("data-crId", currencyId);
