@@ -28,6 +28,7 @@ if (!Object.prototype.watch) {
 };
 
 window.dataLoaded = false;
+window.itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [] || [];
 
 //Watcher for dataLoader
 window.watch('dataLoaded', function(id, oldval, newval) {
