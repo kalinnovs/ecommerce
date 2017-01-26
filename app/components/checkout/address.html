@@ -4,7 +4,7 @@
 <div class="address-form" ng-hide="hasAddress">
 	<form name="addressForm" novalidate>
 		<div class="row columns">
-			<aside class="col">
+			<aside class="col-lg-5">
 				<div class="form-group">
 					<label for="name">First Name</label>
 					<input type="text" name="name" id="name" class="form-control half" placeholder="First Name" ng-model="co.address.firstName" required />
@@ -34,7 +34,7 @@
 					<p class="help-block" ng-show="addressForm.phone.$invalid && !addressForm.phone.$pristine">Enter your phone number.</p>
 				</div>
 			</aside>
-			<aside class="col">
+			<aside class="col-lg-6 col-md-offset-1">
 				<div class="form-group">
 					<label for="zip">PIN Code</label>
 					<input type="text" name="zip" id="zip" class="form-control" placeholder="Zip Code" ng-model="co.address.zip" required ng-keyup="getCityState($event)" />

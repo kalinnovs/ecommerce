@@ -3601,14 +3601,11 @@ footer .back-top .pageCounter {
 .checkout .form-group {
     width: 448px;
 }
-.checkout .columns aside:first-child {
-    padding: 0 25px 0 0;
-}
 .checkout .social-button.google {
-    margin: 0 10px 0 0;
+    margin: 0 10px 15px 0;
 }
 .checkout .social-button.facebook {
-    margin: 0 0 0 10px;
+    margin: 0 0 15px 10px;
 }
 .checkout .loginForm {
     clear: both;
@@ -3645,6 +3642,14 @@ footer .back-top .pageCounter {
     overflow: hidden;
     max-width: 100%;
 }
+
+@media only screen and (max-width: 480px) {
+    .checkout .section {
+        margin: 10px 0;
+        padding: 10px 20px;
+    }
+}
+
 .checkout .section.selected ~ .section > button {
     display: none;
 }
@@ -3681,14 +3686,6 @@ footer .back-top .pageCounter {
     margin-bottom: 22px;
     font-size: 18px;
 }
-.checkout .section.address-details {
-    padding-left: 35px;
-}
-.checkout .section.address-details > h3,
-.checkout .section.address-details > span,
-.checkout .section.address-details .container > div {
-    padding-left: 10px;
-}
 .checkout .editAddress {
     position: absolute;
     right: 0;
@@ -3700,13 +3697,10 @@ footer .back-top .pageCounter {
     overflow: visible;
 }
 .address-form .form-group {
-    width: 400px;
+    width: 100%;
 }
 .address-form .form-group label {
     display: none;
-}
-.address-form .columns aside:first-child {
-    margin-right: 95px;
 }
 .address-form .info {
     margin: 34px 0 20px;
