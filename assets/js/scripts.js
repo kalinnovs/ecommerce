@@ -131,6 +131,7 @@ $(document).ready(function(e) {
 
         $(document).on("click", ".mobile .desktop-nav a.mobileNavBtn", function(e) {
             e.preventDefault();
+            $(this).toggleClass("fa-bars fa-close");
             if ($(this).siblings("ul").css("display") == undefined || $(this).siblings("ul").css("display") == "none") {
                 $(this).siblings("ul").show();
             } else {
