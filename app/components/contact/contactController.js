@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, SERVICE_URL, UserService, BASE_URI) {
+  .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, SERVICE_URL, PRODUCTDATA_URL, UserService, BASE_URI) {
     var contacts = this;
     var original = $scope.user;
     
     // function to submit the form after all validation has occurred            
     $scope.submitForm = function() {
 
-        var mailService = SERVICE_URL+"/sendfeedback";
+        var mailService = PRODUCTDATA_URL+"/sendfeedback";
         // check to make sure the form is completely valid
         if ($scope.userForm.$valid) {
             $http({

@@ -6,8 +6,11 @@ angular.module('eCommerce')
 
     $rootScope.$on('event:data-change', function() {
       var object = UserService.get();
-      tile.layout = object.data.pageLayoutDetails.layouts;
-      tile.renderTemplate();
+      if(object.data.pageLayoutDetails) {
+        tile.layout = object.data.pageLayoutDetails.layouts;
+        tile.renderTemplate();
+      }
+      
     });
 
     tile.renderTemplate = function() {

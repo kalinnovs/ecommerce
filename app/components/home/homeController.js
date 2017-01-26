@@ -14,6 +14,8 @@ angular.module('eCommerce')
         .then(function(data) {
           if(data.success === undefined || data.success) {
             $scope.$broadcast('dataloaded');
+            // Currency Update
+            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
           } else {
             // Else pick local JSON
           }

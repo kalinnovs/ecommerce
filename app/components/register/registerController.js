@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('RegisterCtrl', function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, SERVICE_URL, $firebaseObject) {
+  .controller('RegisterCtrl', function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, SERVICE_URL, PRODUCTDATA_URL, $firebaseObject) {
         var register = this;
         var scoper = $scope;
         
@@ -9,7 +9,7 @@ angular.module('eCommerce')
         this.register = function() {
             
             /* Real Time Service STARTS */
-            var url = SERVICE_URL+"/saveNewUserSubscription";
+            var url = PRODUCTDATA_URL+"/saveNewUserSubscription";
             var mailService = "http://haastika.com/app/app.sendMail.php";
             
             $http({

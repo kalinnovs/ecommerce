@@ -20,6 +20,8 @@ angular.module('eCommerce')
                 }
                 $scope.iterateThrough = 5;
                 $scope.$broadcast('dataloaded');
+                // Currency Update
+                $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
             })
             .catch(function(error) {
                 $state.go('home');

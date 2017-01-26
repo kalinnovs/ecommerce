@@ -27,28 +27,8 @@ if (!Object.prototype.watch) {
     });
 };
 
-// Stores partnumbers to localstorage and data temporarily to minicart in sessionStorage
-window.itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [] || [];
-// window.miniCartStorage = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [] || [];
-
-// Array Watch
-Object.defineProperty(window.itemsArray, "push", {
-    configurable: false,
-    enumerable: false, // hide from for...in
-    writable: false,
-    value: function() {
-        for (var i = 0, n = this.length, l = arguments.length; i < l; i++, n++) {
-            RaiseMyEvent(this, n, this[n] = arguments[i]); // assign/raise your event
-        }
-        return n;
-    }
-});
-
-function RaiseMyEvent(id, oldVal, newVal) {
-    // updateMiniKartCount();
-};
-
 window.dataLoaded = false;
+window.itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [] || [];
 
 //Watcher for dataLoader
 window.watch('dataLoaded', function(id, oldval, newval) {
@@ -88,11 +68,6 @@ $(document).ready(function(e) {
     if(/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
         $("body").addClass("isSafari");
     }
-
-    // Set default currency INR to body
-    $("body").attr("data-currency", "INR");
-    $("body").attr("data-crId", "1");
-    $("body").find(".cartCount").html(window.itemsArray.length);
 
     setTimeout(function() {
 
@@ -163,21 +138,6 @@ $(document).ready(function(e) {
             }
         });
 
-        $(document).on("click", ".currencyConverter a, .currencyChooser a", function(e) {
-            var selectedCurrencyId = 1;
-            $(this).siblings().removeClass("active");
-            $(this).addClass("active");
-            var selectedCurrency = $(this).attr("rel");
-            $(this).parents(".menuRoot").hide()
-            $(".price.inr, .price.usd, .price.eur").hide();
-            $(".price." + selectedCurrency).show();
-            $("body").attr("data-currency", selectedCurrency);
-            if(selectedCurrency === "USD") { selectedCurrencyId = 2; }
-            if(selectedCurrency === "EUR") { selectedCurrencyId = 3; }
-            $("body").attr("data-crId", selectedCurrencyId);
-            $(document).trigger('data-currency-changed');
-        });
-
         $('footer .back-top a').click(function(e) {
             e.preventDefault();
             $("html, body").animate({
@@ -185,18 +145,6 @@ $(document).ready(function(e) {
             }, 600);
             return false;
         });
-
-        // Wait until the DOM has loaded before querying the document
-        // if ((!sessionStorage.isTriggered || sessionStorage.isTriggered == "false") &&
-        //     window.location.hash.match(/register/g) == null) {
-        //     setTimeout(function() {
-        //         window.modalComponent.open(".adMessageBox");
-        //         $("html, body").animate({
-        //             scrollTop: 0
-        //         }, 600);
-        //         sessionStorage.isTriggered = "true";
-        //     }, 45000);
-        // }
 
         $(".tapToClose").click(function() {
             sessionStorage.isTriggered = "true";

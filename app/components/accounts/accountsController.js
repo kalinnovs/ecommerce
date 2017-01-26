@@ -3,7 +3,7 @@
 angular.module('eCommerce')
   .controller('AccoutsCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress) {
 
-  	$scope.loggedUser = orderList.loggedUser;
+  	$scope.loggedUser = window.userDetails;
   	$scope.orderList = orderList.orderList;
     $scope.savedCart = savedCart.cartList;
     $scope.addressList = getAddress;
@@ -13,6 +13,8 @@ angular.module('eCommerce')
     $scope.mySubscription = false;
     $scope.myAddress = false;
     $scope.myOrders = true;
+    // Currency Update
+    $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
 
 
   	$scope.viewOrder = function(event) {

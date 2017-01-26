@@ -2941,7 +2941,7 @@ footer .back-top .pageCounter {
 }
 .login {
     background: #fff;
-    padding: 30px 30px 50px;
+    padding: 30px 30px 10px;
     max-width: 500px;
     border: 1px solid #f2f1ef;
     margin: 0 auto;
@@ -3017,6 +3017,9 @@ footer .back-top .pageCounter {
     margin-bottom: 5px;
     height: 55px;
     color: #d05715;
+}
+.login-container .form-actions {
+    margin: 0 0 25px;
 }
 
 @media only screen and (max-width: 640px) {

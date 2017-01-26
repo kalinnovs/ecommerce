@@ -68,6 +68,7 @@ require("../../../app/directives/addToCart/addToCart-directive.js");
 require("../../../app/directives/miniCart/miniCart-directive.js");
 require("../../../app/directives/validation/validation-directive.js");
 require("../../../app/directives/flasher/flasher-directive.js");
+require("../../../app/directives/currencyChooser/currencyChooser-directive.js");
 
 require("../../../app/components/inventory/productTreeCtrl.js");
 require("../../../app/components/inventory/productTreeService.js");

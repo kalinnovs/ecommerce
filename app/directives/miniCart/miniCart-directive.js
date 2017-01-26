@@ -15,7 +15,7 @@ angular.module('eCommerce')
             '<p class="manyItems">Please go to cart page to check the list</p>' +
             '<p><a href="cart" title="View Cart">View Cart</a></p>' +
             // '<p><a href="checkout/login" title="Checkout">Checkout</a></p>' +
-            // '<p><a href="javascript:void(0);" title="Orders">Orders</a></p>' +
+            '<p><a href="/orderLookup" title="Orders">Find Orders</a></p>' +
             // '<p><a href="javascript:void(0);" title="Accounts">Accounts</a></p>' +
             '<p><a href="profile" class="noDecoration profile"><span class="imageNull profilePicUpdate">'+
                 '<img src="" class="profilePic" /><i class="fa fa-user" aria-hidden="true"></i></span>'+
@@ -28,36 +28,31 @@ angular.module('eCommerce')
                         itemList = itemsArray.map(function(i, j) {
                             return (i.partNumber || i.productId);
                         }),
-                        objectToSerialize = {'products':itemList};
+                        objectToSerialize = {'products':itemList},
+                        computedURL =  PRODUCTDATA_URL + '/cart/viewCart';
 
-                        // self.auth = AuthenticationService;
-                        // self.auth.validateToken().then(function (result) {
-                        var computedURL =  PRODUCTDATA_URL + '/cart/viewCart';
-                        $http({
-                            method: 'POST',
-                            url: computedURL,
-                            data: JSON.stringify(objectToSerialize)
-                        }).then(function successCallback(results) {
-                            responseData = results.data.cartList || [];
-                            $rootScope.navigation = results.data.pageNavigation.categories;
-                            window.userDetails = (results.data.loggedUser !== null) ? results.data.loggedUser : {"name": "Guest","imageUrl": "","user": null};
-                            // updateUser();
-                            if(window.localStorage.accessToken !== "" && results.data.loggedUser === null) {
-                                window.localStorage.setItem("accessToken", "");
-                                window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
-                                window.sessionStorage.removeItem('itemsArray');
-                                window.sessionStorage.removeItem('cartLength');
-                            }
-                            var cartCount = 0;
-                            for(var i=0; i < responseData.length; i++) {
-                                cartCount+= parseInt(responseData[i].quantity || itemsArray[i].quantity);
-                            }
-                            $(".miniKart").parents(".cart").find(".count").html(cartCount);
-                        }); 
+                    $http({
+                        method: 'POST',
+                        url: computedURL,
+                        data: JSON.stringify(objectToSerialize)
+                    }).then(function successCallback(results) {
+                        responseData = results.data.cartList || [];
+                        $rootScope.navigation = results.data.pageNavigation.categories;
+                        window.userDetails = (results.data.loggedUser !== null) ? results.data.loggedUser : {"name": "Guest","imageUrl": "","user": null};
                         
-                    // }, function (reason) {
-                    //     self.validateError = reason.data;
-                    // });
+                        if(window.localStorage.accessToken !== "" && results.data.loggedUser === null) {
+                            window.localStorage.setItem("accessToken", "");
+                            window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
+                            window.sessionStorage.removeItem('itemsArray');
+                            window.sessionStorage.removeItem('cartLength');
+                        }
+                        var cartCount = 0;
+                        for(var i=0; i < responseData.length; i++) {
+                            cartCount+= parseInt(responseData[i].quantity || itemsArray[i].quantity);
+                        }
+                        $(".miniKart").parents(".cart").find(".count").html(cartCount);
+                    }); 
+                        
                     window.loadMiniCartOnce = true;
                 }
             },
@@ -80,6 +75,7 @@ angular.module('eCommerce')
                         data: JSON.stringify(objectToSerialize),
                     }).then(function successCallback(results) {
                         responseData = results.data.cartList || [];
+                        
                         cartCount = ListItemCounter(responseData);
                         renderHTML(responseData);
                         (responseData.length > 4) ? element.find(".manyItems").show() : element.find(".manyItems").hide();
@@ -141,6 +137,11 @@ angular.module('eCommerce')
                     count += storageItemsCount;
                     // console.log(count);
                     $(".miniKart").parents(".cart").find(".count").html(count);
+
+                    // Broadcast currency update
+                    if(window.userDetails !== null) {
+                        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);    
+                    }
                 });
 
                 function quantityCounter() {

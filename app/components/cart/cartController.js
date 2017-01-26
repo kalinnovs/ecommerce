@@ -9,6 +9,9 @@ angular.module('eCommerce')
         
         $scope.location = $location;
         
+        // Currency Update
+        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        
         // Read Cart Array and pass to URL
         var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
         if(cartData.loggedUser !== null) {
@@ -179,7 +182,7 @@ angular.module('eCommerce')
             
             $http({
                 method: 'POST',
-                url: SERVICE_URL + '/cart/save',
+                url: PRODUCTDATA_URL + '/cart/save',
                 data: JSON.stringify(objectToSerialize),
                 headers: {
                     'Content-Type': 'application/json'
@@ -201,7 +204,7 @@ angular.module('eCommerce')
             
             $http({
                 method: 'POST',
-                url: SERVICE_URL + '/cart/update',
+                url: PRODUCTDATA_URL + '/cart/update',
                 data: JSON.stringify(objectToSerialize),
                 headers: {
                     'Content-Type': 'application/json'
