@@ -31,7 +31,7 @@ angular.module('eCommerce')
                 'Content-Type': 'application/json'
               }
             }).then(function successCallback(data, status) {
-                debugger;
+				$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": data.data.errorMessage});
             });
 
         var className = $(elem.target).hasClass("fa-toggle-off");

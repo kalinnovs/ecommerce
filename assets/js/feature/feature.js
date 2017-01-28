@@ -52,7 +52,7 @@ require("../../../app/components/accounts/accountsController.js");
 require("../../../app/components/accounts/accountsService.js");
 
 require("../../../app/components/subscribers/subscriberController.js");
-
+require("../../../app/components/promomailgenerator/promoMailController.js");
 
 require("../../../app/components/admin/adminController.js");
 require("../../../app/components/inventory/inventoryCtrl.js");

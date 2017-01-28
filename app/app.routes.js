@@ -266,6 +266,16 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           }
         }
       })
+      .state('promomailgenerator', {
+        url:'/inventory/promomailgenerator',
+        views: {
+          '': {
+            templateUrl: 'app/components/promomailgenerator/promoMailView.html',
+            controller: 'PromoMailCtrl',
+            controllerAs: 'PromoMailCtrl'
+          }
+        }
+      })
       .state('download', {
         url:'/download',
         views: {
@@ -296,6 +306,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
             templateUrl: 'app/components/subscribers/subscriberView.html',
             controller: 'SubscriberCtrl',
             controllerAs: 'SubscriberCtrl'
+          },
+          'promomailgenerator@admin': {
+            templateUrl: 'app/components/promomailgenerator/promoMailView.html',
+            controller: 'PromoMailCtrl',
+            controllerAs: 'PromoMailCtrl'
           },
           'productTree@admin': {
             templateUrl: 'app/components/inventory/productTree.html',

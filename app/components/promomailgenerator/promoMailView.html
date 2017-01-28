@@ -1,0 +1,33 @@
+<div class="table-responsive container">
+	<div class="panel panel-primary">
+	    <div class="panel-heading"><h1>Edit and Send Promotion Mails</h1></div>
+	    <div class="panel-content">
+			<div class="wrapper subscribers">
+				<div class="col-md-3 column"></div>
+				<div class="col-md-9 column"></div>
+				<form>
+					<div style="padding-top:20px;">
+	                    <input type="text" name="subject" id="subject" class="form-control" ng-model="subject" required placeholder="Mail Subject""/>
+	                    <input type="hidden" name="id" id="id" ng-model="id"/>
+					</div>
+				    <script>
+						// Replace the <textarea id="editor1"> with a CKEditor
+				        // instance, using default configuration.
+				        CKEDITOR.replace( 'haastikaeditor' );
+				        CKEDITOR.config.height = 600;
+				    </script>
+				    <textarea name="haastikaeditor" id="haastikaeditor" rows="40" cols="80">
+				    </textarea>
+				    <div class="form-actions" style="padding: 30px;text-align: center;">
+				    	<button type="submit" ng-click="sendPromoEmail($event);" class="btn btn-primary">Send Mail</button>
+				    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    $(function() { 
+        window.dataLoaded = true;
+    });
+</script>
