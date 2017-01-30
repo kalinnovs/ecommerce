@@ -1,3 +1,33 @@
- <div class="subscription-info">
+<div class="default address-details">
 	<h3>Account Information</h3>
+    <div class="address-form">
+			<div class="row columns" style="height: 200px;">
+				<aside class="col">
+					<div class="form-group">
+						<img src="{{accountDetail.imageUrl}}" style="width:100px;"/>
+					</div>
+				</aside>
+				<aside class="col">
+					<div class="form-group">
+						<table style="font-size:14px;color:#000;">
+							<tr style="height: 30px;">
+								<td style="font-weight:bold;">First Name</td>
+								<td style="padding-left:20px;">{{accountDetail.firstName}}</td>
+							</tr>
+							<tr style="height: 30px;">
+								<td style="font-weight:bold;">Last Name</td>
+								<td style="padding-left:20px;">{{accountDetail.lastName}}</td>
+							</tr>
+							<tr style="height: 30px;">
+								<td style="font-weight:bold;">Email-id</td>
+								<td style="padding-left:20px;">{{accountDetail.emailId}}</td>
+							</tr>
+							<tr style="height: 30px;" ng-if="accountDetail.contactNo">
+								<td style="font-weight:bold;">Contact</td>
+								<td style="padding-left:20px;">{{accountDetail.contactNo}}</td>
+							</tr>
+						</table>
+				</aside>
+			</div>
+	</div>
 </div>

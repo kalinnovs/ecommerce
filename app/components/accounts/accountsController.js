@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AccoutsCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress) {
+  .controller('AccoutsCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress, getAccountDetail) {
 
   	$scope.loggedUser = window.userDetails;
   	$scope.orderList = orderList.orderList;
     $scope.savedCart = savedCart.cartList;
     $scope.addressList = getAddress;
+    $scope.accountDetail = getAccountDetail;
 
     window.dataLoaded = true;
     // View Setters

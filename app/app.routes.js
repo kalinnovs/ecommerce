@@ -48,6 +48,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
               savedCart: function($stateParams, AccountsService) {
                 return AccountsService.getSavedCart();
               },
+              getAccountDetail: function($stateParams, AccountsService) {
+                return AccountsService.getAccountDetail();
+              },
               getAddress: function($stateParams, AccountsService) {
                 return AccountsService.getAddress();
               }

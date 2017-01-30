@@ -59,6 +59,17 @@ angular.module('eCommerce')
         }); 
     } 
 
+    service.getAccountDetail = function() {
+        return $http({
+                method: 'GET',
+                url: PRODUCTDATA_URL + '/account/details'
+            }).then(function successCallback(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log("Error in saving.");
+        }); 
+    } 
+
     service.getSavedCart = function() {
         // Read Cart Array and pass to URL
         var cartArray,
