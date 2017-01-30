@@ -8,7 +8,6 @@
 					<li><a href="javascript:void(0);" title="Information" data-model="myAccounts">Account Information</a></li>
 					<li><a href="javascript:void(0);" title="Address" data-model="myAddress">Account Address</a></li>
 					<li><a href="javascript:void(0);" title="Orders" data-model="myOrders">My Orders</a></li>
-					<li><a href="javascript:void(0);" title="Wihlists" data-model="myWishlists">My Wihlists</a></li>
 					<li><a href="javascript:void(0);" title="Subscriptions" data-model="mySubscription">My Subscriptions</a></li>
 				</ul>
 			</section>
@@ -22,6 +21,9 @@
 			<div ui-view="addressInfo" ng-if="myAddress"></div>
 
 			<div ui-view="subscriptionInfo" ng-if="mySubscription"></div>
+
+			<div ui-view="accountInfo" ng-if="myAccounts"></div>
+			
 		</aside>
 	</div>
 </div>

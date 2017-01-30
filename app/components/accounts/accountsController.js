@@ -51,7 +51,9 @@ angular.module('eCommerce')
             method: 'POST',
             url: PRODUCTDATA_URL + '/cart/address/update',
             data: JSON.stringify(objectToSerialize)
-        });
+        }).then(function successCallback(data, status) {
+				$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Address Saved !!!"});
+            });
     };
 
     $scope.nextAddressSlider = function(evt) {
@@ -100,6 +102,12 @@ angular.module('eCommerce')
         var addressFilterIndex = addressFilterMap.indexOf(true);
         // Remove the item from list
         this.addressList.splice( addressFilterIndex, 1 );
+        $http({
+				method: 'GET',
+              	url: PRODUCTDATA_URL + '/cart/address/delete/'+ id
+            }).then(function successCallback(data, status) {
+				$rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Address Deleted !!!"});
+            });
         $(event.currentTarget).parents(".carouselStrip").css("left", "-3px");
         // Broadcast cart update to mini cart
         $rootScope.$broadcast("updateFlash", {"alertType": "success", "message": "Address removed successfully !!"});

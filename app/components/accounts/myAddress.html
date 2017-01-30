@@ -69,8 +69,8 @@
 	</div>
 	<div class="address-blocks" ng-show="hasAddress">
 		<div class="addressSelection">
-			<h2>Choose the below address: </h2>
-			<div class="address-wraper" ng-class="{carouselActive: addressList.length > 4}">
+			<h2 ng-if="addressList">Choose the below address: </h2>
+			<div class="address-wraper" ng-class="{carouselActive: addressList.length > 4}" ng-if="addressList">
 				<ul class="carouselStrip">
 					<li ng-repeat="(key, val) in addressList" ng-click="updateAddressToStorage($event, val.addressId);" ng-class="{active: (val.addressId == co.user.addressId)}">
 						<label for="address{{key}}" class="addressList">
@@ -93,7 +93,7 @@
 				</a>
 			</div>
 			<button ng-disabled="co.user.addressId" ng-click="enableAddressEntry($event);" class="btn btn-primary">
-				<span>or add a new address</span>
+				<span>Add a new address</span>
 			</button>
 		</div>
 	</div>

@@ -59,6 +59,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           'addressInfo@accounts': {
             templateUrl: 'app/components/accounts/myAddress.html'
           },
+          'accountInfo@accounts': {
+            templateUrl: 'app/components/accounts/myAccount.html'
+          },
           'subscriptionInfo@accounts': {
             templateUrl: 'app/components/accounts/mySubscription.html'
           }
