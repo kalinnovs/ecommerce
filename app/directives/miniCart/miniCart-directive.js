@@ -51,6 +51,7 @@ angular.module('eCommerce')
                             cartCount+= parseInt(responseData[i].quantity || itemsArray[i].quantity);
                         }
                         $(".miniKart").parents(".cart").find(".count").html(cartCount);
+                    	window.sessionStorage.setItem('cartLength', cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                     }); 
                         
                     window.loadMiniCartOnce = true;
