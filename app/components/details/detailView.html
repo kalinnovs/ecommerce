@@ -13,7 +13,7 @@
 					<ul>
 						<li ng-repeat="(key, value) in data.productImageGallery" class="zoomable thumbs">
 							<a href="{{value.largeImagePath}}" data-large= "{{value.extraLargeImagePath}}" data-title="">
-								<img ng-src="{{value.thumbImagePath}}" width="100%" />
+								<img ng-src="{{value.thumbImagePath}}" width="100%" alt="detailsImg{{key}}" />
 							</a>
 						</li>
 					</ul>

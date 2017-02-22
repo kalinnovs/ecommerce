@@ -13,7 +13,7 @@
 				    <li ng-repeat="(key, value) in cartItems" class="item" data-index="{{key}}">
 				        <div class="item-details">
 				            <figure>
-				                <img ng-src="{{value.productImage.baseImagePath}}" />
+				                <img ng-src="{{value.productImage.baseImagePath}}" alt="orderListImg{{key}}" />
 				            </figure>
 				            <div class="part-details">
 				                <h5>{{value.productName}}</h5>
