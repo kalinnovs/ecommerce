@@ -28,7 +28,7 @@ angular.module('eCommerce')
                     register.user={id:null,firstName:'',lastName:'',emailId:'',contactNo:''};
                     $scope.form.$setPristine();
                     $timeout(function() {
-                    	$location.path( "/home" );
+                    	$location.path( "/" );
                     }, 3000);
                 } else {
                     register.subscribedFailed = true;
