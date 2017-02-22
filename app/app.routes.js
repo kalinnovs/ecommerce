@@ -34,6 +34,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           }
         }
       })
+      .state('404', {
+        url:'/404',
+        templateUrl: 'app/components/404/404.html',
+        controller: 'pagenotfoundCtrl'
+      })
       .state('accounts', {
         url:'/accounts',
         views: {
