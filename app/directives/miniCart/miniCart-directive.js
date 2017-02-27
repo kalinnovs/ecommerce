@@ -18,7 +18,7 @@ angular.module('eCommerce')
             '<p><a href="/orderLookup" title="Orders">Find Orders</a></p>' +
             // '<p><a href="javascript:void(0);" title="Accounts">Accounts</a></p>' +
             '<p><a href="profile" class="noDecoration profile"><span class="imageNull profilePicUpdate">'+
-                '<img src="" class="profilePic" /><i class="fa fa-user" aria-hidden="true"></i></span>'+
+                '<img src="" class="profilePic" alt="ProfilePic" /><i class="fa fa-user" aria-hidden="true"></i></span>'+
                 '<span class="logoutText">Logout</span> <span class="userDetailsUpdate userLogout"></span></a></p>' +
             '</div></div>',
             controller: function() {
@@ -51,6 +51,7 @@ angular.module('eCommerce')
                             cartCount+= parseInt(responseData[i].quantity || itemsArray[i].quantity);
                         }
                         $(".miniKart").parents(".cart").find(".count").html(cartCount);
+                    	window.sessionStorage.setItem('cartLength', cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
                     }); 
                         
                     window.loadMiniCartOnce = true;
@@ -110,7 +111,7 @@ angular.module('eCommerce')
                         var currency = $("body").attr("data-currency").toUpperCase();
                         var li = document.createElement("li");
                             li.innerHTML = "<div class='wrapper'><figure><img src='" + img +
-                            "' /></figure><div class='details'><h3>" +
+                            "' alt='currencyFlag' /></figure><div class='details'><h3>" +
                             (responseData[i].partNumber || responseData[i].productId) +
                             "</h3><span class='price'>"+ currency + " " + (responseData[i].price || priceObj[0].price) + "</span> <span class='quantity'> x "+(responseData[i].quantity || itemList[i].quantity)+"</span></div></div>";
                         ul.appendChild(li);

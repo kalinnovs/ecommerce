@@ -54,7 +54,7 @@ angular.module('eCommerce')
             }
         };
 
-        window.localStorage.setItem('globals', JSON.stringify($rootScope.globals));
+        // window.localStorage.setItem('globals', JSON.stringify($rootScope.globals));
         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
     };
 

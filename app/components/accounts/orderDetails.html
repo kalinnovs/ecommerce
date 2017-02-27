@@ -39,7 +39,7 @@
                         <li ng-repeat="(key, value) in orderLookupData.lineItems" class="item" data-index="{{key}}">
                             <div class="item-details">
                                 <figure>
-                                    <img ng-src="{{value.productImage.baseImagePath}}" />
+                                    <img ng-src="{{value.productImage.baseImagePath}}" alt="OrderItemImage{{key}}" />
                                 </figure>
                                 <div class="part-details">
                                     <h3>{{value.productName}}</h3>

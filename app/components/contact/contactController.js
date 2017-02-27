@@ -26,7 +26,7 @@ angular.module('eCommerce')
                 contacts.user={id:null,name:'',company:'',emailId:'',message:''};
                 $scope.userForm.$setPristine();
                 $timeout(function() {
-                  $location.path( "/home" );
+                  $location.path( "/" );
                 }, 3000);
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs

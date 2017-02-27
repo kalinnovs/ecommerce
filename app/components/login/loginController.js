@@ -51,7 +51,7 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
                     } else {
                         // Broadcast cart update to mini cart
                         $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
-                        $location.path('/home');
+                        $location.path('/');
                     }
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateMiniCartCount");
@@ -114,7 +114,7 @@ var LoginCtrl = function ($scope, $rootScope, $state, $timeout, $http, $location
                 $scope.dataLoading = false;
                 if(response.success) {
                     console.info("Login success.");
-                    $location.path('/home');
+                    $location.path('/');
                     $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Login Successful !!"});
                 } else {
                     $scope.signUpError = response.message;

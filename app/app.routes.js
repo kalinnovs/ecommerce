@@ -9,7 +9,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
       .state('login', {
@@ -33,6 +33,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
             return AuthenticationService.validateToken();
           }
         }
+      })
+      .state('404', {
+        url:'/404',
+        templateUrl: 'app/components/404/404.html',
+        controller: 'pagenotfoundCtrl'
       })
       .state('accounts', {
         url:'/accounts',
@@ -71,7 +76,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         }
       })
       .state('home', {
-        url:'/home',
+        url:'/',
         views: {
           '': {
             templateUrl: 'app/components/home/homeView.html',
@@ -431,7 +436,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
             var authenticatedUser = (window.singleCall) ? window.singleCall.authenticateUser : false;
             var cartlength = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray).length : (window.sessionStorage.cartLength) ? parseInt(JSON.parse(window.sessionStorage.cartLength)) : 0;
             if(cartlength === 0) {
-              $location.path('/home');
+              $location.path('/');
             } else {
               if(validateURI === false && !authenticatedUser) {
                 validStateIndex = 0;
@@ -451,7 +456,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           var restrictedPage = $.inArray($location.path(), ['/thankyou']) != -1;
           var isRestricted = (window.restrictView !== undefined) ? window.restrictView : true;
           if (restrictedPage && isRestricted) {
-              $location.path('/home');
+              $location.path('/');
           } 
 
       });

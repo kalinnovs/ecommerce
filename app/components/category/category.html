@@ -21,7 +21,7 @@
 	       <td>{{ category.categoryId }}</td>
 	       <td><edit-on-focus value="category.categoryName"> </edit-on-focus></td>
 	       <td><edit-on-focus value="category.description"> </edit-on-focus></td>
-	       <td><img src="{{ category.menuImagePath }}" width="50" height="50" /></td>
+	       <td><img src="{{ category.menuImagePath }}" width="50" height="50" alt="categoryImg{{key}}" /></td>
 	        <td>
 	            <button class="btn" ng-class="{Active:'btn-success', Inactive:''}[category.categoryStatus]" ng-click="changecategoryStatus(category);">{{category.categoryStatus}}</button>
 	        </td>

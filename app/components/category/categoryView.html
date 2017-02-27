@@ -50,7 +50,7 @@
 							<a href="{{value.productDetailsURL}}" class="productItem">
 								<div class="wide-quarter-tile tile">
 									<figure>
-										<img alt="" ng-src="{{value.productImageGallery[0].baseImagePath}}">
+										<img alt="" ng-src="{{value.productImageGallery[0].baseImagePath}}" alt="categorylargeImg{{key}}">
 									</figure>
 									<div class="detail">
 										<h4 limit-character-render char-length="34" model-bind="value.productName">{{value.productName}}</h4>
@@ -89,7 +89,7 @@
 									<a href="{{productItem.productDetailsURL}}">
 										<div class="wide-full-tile tile category">
 											<figure>
-												<img alt="" ng-src="{{productItem.productImageGallery[0].largeImagePath}}">
+												<img alt="" ng-src="{{productItem.productImageGallery[0].largeImagePath}}" alt="categorylargeImg{{key}}">
 											</figure>
 											<div class="detail">
 												<h4>{{subC.categoryName}}</h4>
@@ -101,7 +101,7 @@
 									<a href="{{productItem.productDetailsURL}}" class="productItem">
 										<div class="wide-quarter-tile tile">
 											<figure>
-												<img alt="" ng-src="{{productItem.productImageGallery[0].baseImagePath}}">
+												<img alt="" ng-src="{{productItem.productImageGallery[0].baseImagePath}}" alt="categoryItemImg{{key}}">
 											</figure>
 											<div class="detail">
 												<h4 limit-character-render char-length="34" model-bind="productItem.productName">{{productItem.productName}}</h4>

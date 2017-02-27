@@ -5,7 +5,7 @@
             <li ng-repeat="(key, value) in cartItems" class="item" data-index="{{key}}">
                 <div class="item-details">
                     <figure>
-                        <img ng-src="{{value.productImage.baseImagePath}}" />
+                        <img ng-src="{{value.productImage.baseImagePath}}" alt="cartImg{{key}}" />
                     </figure>
                     <div class="part-details">
                         <h3>{{value.productName}}</h3>
@@ -70,7 +70,7 @@
         <div class="cart-extra" ng-hide="cartItems.length === 0">
             <div class="extra-links">
                 <ul>
-                    <li><a href="/home">Continue back for shopping</a></li>
+                    <li><a href="/">Continue back for shopping</a></li>
                 </ul>
             </div>
             <!-- <button type="button" ng-click="saveCart($event)" class="btn btn-primary saveCart">Save Cart</button> -->
