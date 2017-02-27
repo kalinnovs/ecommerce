@@ -72,3 +72,6 @@ require("../../../app/directives/currencyChooser/currencyChooser-directive.js");
 
 require("../../../app/components/inventory/productTreeCtrl.js");
 require("../../../app/components/inventory/productTreeService.js");
+
+require("../../../app/components/ordermanagement/orderManagementCtrl.js");
+require("../../../app/components/ordermanagement/orderManagementService.js");

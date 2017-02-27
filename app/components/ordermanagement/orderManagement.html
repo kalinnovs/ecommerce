@@ -1,0 +1,68 @@
+<style type="text/css">
+	.ordersave:before {
+		content: '✓';
+		color: green;
+		font-size: 24px;
+	}
+
+</style>
+<div class="table-responsive container">
+	<div class="panel panel-primary">
+	    <div class="panel-heading"><h1>Order Management</h1></div>
+	    <div class="panel-content">
+			<div class="wrapper subscribers">
+				<div class="col-md-3 column"></div>
+				<div class="col-md-9 column"></div>
+					<form name="orderDetails">
+					<table class="table table-bordered table-striped"> 
+						<thead> 
+							<tr> 
+								<th class="orderid">Order #</th>
+								<th class="orderdate">Date</th>
+								<th class="ordershipping">Ships To</th>
+								<th class="orderemail">Email Id</th>
+								<th class="ordertotal">Order Total</th>
+					 			<th class="orderstatus">Status</th>
+								<th class="ordercontrol">Tracking Id</th>
+								<th class="ordercontrol">Tracking URL</th>
+								<th class="ordersave"></th>
+							</tr> 
+						</thead> 
+						<tbody> 
+							<tr ng-repeat="(key, order) in orderList" ng-form name="form{{key}}"> 
+								<td class="orderid">{{order.webOrderNumber}}</td>
+								<td class="orderdate">{{order.orderDate | date: 'dd/MMM/yyyy'}}</td>
+								<td class="ordershipping">
+									{{order.address.firstName}} {{order.address.lastName}}
+								</td>
+								<td class="orderemail">
+									{{order.emailId}}
+								</td>
+								<td class="ordertotal">{{order.currency.currencySymbol}}&nbsp;{{order.total}}</td>
+								<td class="orderstatus">
+									<select ng-model="order.orderState">
+			                            <option value="CREATED"> Order Created </option>
+			                            <option value="BEING_PROCESSED"> Order Reviewed </option>
+			                            <option value="SHIPPED"> Shipping Initiated </option>
+			                            <option value="DELIVERED"> Delivered </option>
+			                            <option value="CANCELLED"> Cancelled </option>
+			                        </select>
+			                    </td>
+								<td class="ordertrackid">
+									<input type="text" placeholder="Tracking Id" ng-model="order.trackId"/>
+								</td>
+								<td class="ordertrackurl">
+									<textarea placeholder="Tracking URL" ng-model="order.trackURL" name="ordertrackurl_{{key}}"></textarea>
+								</td>
+								<td>
+									<span class="ordersave" ng-click="saveOrder(order)" ng-show="form{{key}}.$dirty"></span>
+								</td>
+							</tr> 
+						</tbody> 
+					</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

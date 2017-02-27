@@ -7,16 +7,18 @@ angular.module('eCommerce')
     
     window.dataLoaded = false;
 
-    UserService.GetAll( PRODUCTDATA_URL + '/admin/subscribers')
-        .then(function(data) {
-          subscriber.data = data;
-        })
-        .catch(function(error) {
-            //
-        })
-        .finally(function() {
-            //
-        })
+    $scope.getSubscribers = function() {
+        UserService.GetAll( PRODUCTDATA_URL + '/admin/subscribers')
+            .then(function(data) {
+              subscriber.data = data;
+            })
+            .catch(function(error) {
+                //
+            })
+            .finally(function() {
+                //
+            })
+    }
 
     $scope.approvePromo = function(elem) {
         var data = {};

@@ -4,7 +4,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
   // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
   // .constant('SERVICE_URL', '/HaastikaWebService')
   .constant('SERVICE_URL', 'http://haastika.com:8080/HaastikaWebService')
-  .constant('PRODUCTDATA_URL', 'http://haastika.com:8080/HaastikaDataService')
+  .constant('PRODUCTDATA_URL', 'https://haastika.com/HaastikaDataService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
@@ -322,6 +322,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
             templateUrl: 'app/components/inventory/productTree.html',
             controller: 'productTreeCtrl',
             controllerAs: 'productTreeCtrl'
+          },
+          'ordermanagement@admin': {
+            templateUrl: 'app/components/ordermanagement/orderManagement.html',
+            controller: 'OrderDetailCtrl',
+            controllerAs: 'OrderDetailCtrl'
           }
         }
       })

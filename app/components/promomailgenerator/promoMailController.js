@@ -7,7 +7,8 @@ angular.module('eCommerce')
     
     window.dataLoaded = false;
 
-    UserService.GetAll( PRODUCTDATA_URL + '/admin/promoMails')
+    $scope.getPromoEmail = function() {
+        UserService.GetAll( PRODUCTDATA_URL + '/admin/promoMails')
         .then(function(data) {
           //subscriber.data = data;
           scoper.subject = data.subject;
@@ -20,6 +21,7 @@ angular.module('eCommerce')
         .finally(function() {
             //
         })
+    }
 
     $scope.savePromoEmail = function(elem) {
         var data = {};

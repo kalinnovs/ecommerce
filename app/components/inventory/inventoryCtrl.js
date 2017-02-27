@@ -71,7 +71,6 @@ debugger;
 
 angular.module('eCommerce')
 .controller('productEditCtrl', function ($scope) {
-debugger;
     $scope.product = angular.copy(item);
     $scope.categoryList = angular.copy(categoryList);
     $scope.cancel = function () {

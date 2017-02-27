@@ -11,7 +11,8 @@ angular.module('eCommerce')
 
     //simply returns the category list
     service.list = function () {
-        return $http.get(PRODUCTDATA_URL + "/admin/category"); // SERVICE_URL + " /category"
+        // return $http.get(PRODUCTDATA_URL + "/admin/category"); // SERVICE_URL + " /category"
+        return $http.get("assets/json/productTree.json");
     }
 
     service.saveNode = function (url, node, callBack) {

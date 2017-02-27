@@ -13,6 +13,9 @@
 			<li>
 				<label id="promomailgenerator">Promo Emails</label>
 			</li>
+			<li>
+				<label id="ordermanagement">Order Management</label>
+			</li>
 		</ul>
 		<div class="visitorCount">
 			<span>Unique Count / Total Views : </span> {{admin.uniqueViews}} / {{admin.totalCount}}
@@ -22,6 +25,7 @@
 		<div class="inventory paneContent" ui-view="productTree"></div>
 		<div class="subscriber paneContent hide" ui-view="subscribers">Subscribers</div>
 		<div class="promomailgenerator paneContent hide" ui-view="promomailgenerator">Promo Emails</div>
+		<div class="ordermanagement paneContent hide" ui-view="ordermanagement">Order Management</div>
 		<div class="banner paneContent hide" ui-view="banners">Banners</div>
 	</div>
 </div>
