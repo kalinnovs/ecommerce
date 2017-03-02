@@ -9,6 +9,7 @@ angular.module('eCommerce')
         $scope.state = $state;
         $scope.location = $location;
         $scope.loginService = AuthenticationService;
+        window.storageFactory = checkoutStorage;
 
         // Retrieves data from storage
         $scope.co = checkoutStorage.getData('storage');
@@ -72,8 +73,8 @@ angular.module('eCommerce')
                 $scope.co.user["addressId"] = id;
             } else {
                 if(!$scope.co) {
-                	$scope.co = {};
-                	$scope.co["user"] = {};
+                    $scope.co = {};
+                    $scope.co["user"] = {};
                 }
                 $scope.co["address"] = {};
                 $scope.co.user["addressId"] = id;
@@ -151,7 +152,7 @@ angular.module('eCommerce')
 
         $scope.skipToPage = function(event, step) {
             // updates storage with reference to 'checkout' object from view
-            updateStorage(this.co);
+            updateStorage(window.storageFactory.getData('storage'));
             // Updates path
             $(".form-views.active").animate({height: 0 }, 400, function() {
                 $rootScope.$broadcast("checkout_uri_changed", {'step': step});
@@ -211,7 +212,7 @@ angular.module('eCommerce')
                 totalCostToUserAfterDiscount,
                 priceObj,
                 currency = $("body").attr("data-currency"),
-                discount = (this.co.order && this.co.order.couponcode && this.co.user.eligibleForDiscount) ? checkoutCartConfig.discount : 0;
+                discount = (this.co && this.co.order && this.co.order.couponcode && this.co.user.eligibleForDiscount) ? checkoutCartConfig.discount : 0;
 
             totalCostToUserAfterDiscount = totalCost - (discount/100*totalCost);
             totalCostToUser = totalCostToUserAfterDiscount - checkoutCartConfig.shippingCost + (checkoutCartConfig.tax/100*totalCostToUserAfterDiscount);
