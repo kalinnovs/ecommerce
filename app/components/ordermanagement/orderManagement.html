@@ -1,8 +1,22 @@
 <style type="text/css">
-	.ordersave:before {
+	.ordersaveth:before, .ordersave:before {
 		content: '✓';
 		color: green;
 		font-size: 24px;
+	}
+	.ordersaveth {
+		width: 45px;
+	    border-left: 0;
+	    border-right: 0;
+	    border-bottom-width: 1px;
+	    text-align: center;
+	}
+	.ordersave {
+		border: 1px #dedede outset;
+	    display: inline-block;
+	    width: 25px;
+	    text-align: center;
+	    margin-top: 5px;
 	}
 
 </style>
@@ -25,7 +39,7 @@
 					 			<th class="orderstatus">Status</th>
 								<th class="ordercontrol">Tracking Id</th>
 								<th class="ordercontrol">Tracking URL</th>
-								<th class="ordersave"></th>
+								<th class="ordersaveth"></th>
 							</tr> 
 						</thead> 
 						<tbody> 

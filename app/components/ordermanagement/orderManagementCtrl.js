@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-	.controller('OrderDetailCtrl', function($scope, OrderDetailService) {
+	.controller('OrderDetailCtrl', function($scope, OrderDetailService, $rootScope) {
 		
 		$scope.getOrderList = function(){
 			OrderDetailService.getOrderList().then(function(data){
@@ -17,9 +17,7 @@ angular.module('eCommerce')
 			orderObj.state = order.orderState;
 
 			OrderDetailService.saveOrder(orderObj).then(function(data){
-				debugger;
 				if(data.operationStatus){
-					$scope
 					$rootScope.$broadcast("updateFlash", {"alertType": "success", "message": "Data savedd successfully."});
 				}
 			});

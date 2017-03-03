@@ -1,5 +1,5 @@
 
-angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload', 'ngSanitize'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
   // .constant('SERVICE_URL', '/HaastikaWebService')
