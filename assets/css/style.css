@@ -4154,7 +4154,7 @@ footer .back-top .pageCounter {
 
 .form-group {
     margin-bottom: 5px;
-    height: 55px;
+    min-height: 55px;
     color: #d05715;
     font-size: 16px;
     margin-top: 10px;

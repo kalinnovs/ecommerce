@@ -16,30 +16,26 @@
 		        <div class="col span_6_of_12">
 		        	<!-- NAME -->
 			        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-			            <label>Name</label>
-			            <input type="text" autocomplete="false" name="name" class="form-control" ng-model="contacts.user.name" required>
+			            <input type="text" placeholder="Name" autocomplete="false" name="name" class="form-control" ng-model="contacts.user.name" required>
 			            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
 			        </div>
 
 			        <!-- EMAIL -->
 			        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
-			            <label>Email</label>
-			            <input type="email" autocomplete="false" name="email" class="form-control" ng-model="contacts.user.emailId">
+			            <input type="email" placeholder="Email" autocomplete="false" name="email" class="form-control" ng-model="contacts.user.emailId">
 			            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
 			        </div>
 			      
 			        <!-- Company -->
 			        <div class="form-group" ng-class="{ 'has-error' : userForm.company.$invalid && !userForm.company.$pristine }">
-			            <label>Company</label>
-			            <input type="text" autocomplete="false" name="company" class="form-control" ng-model="contacts.user.company" ng-minlength="5" ng-maxlength="25">
+			            <input type="text" placeholder="Company" autocomplete="false" name="company" class="form-control" ng-model="contacts.user.company" ng-minlength="5" ng-maxlength="25">
 			            <p ng-show="userForm.company.$error.minlength" class="help-block">Company name is too short.</p>
 			            <p ng-show="userForm.company.$error.maxlength" class="help-block">Company name is too long.</p>
 			        </div>
 
 			        <!-- Message -->
 			        <div class="form-group" ng-class="{ 'has-error' : userForm.message.$invalid && !userForm.message.$pristine }">
-			            <label>Message</label>
-			            <textarea autocomplete="false" ng-model="contacts.user.message" class="form-control" name="message" required ng-minlength="15" ng-maxlength="1000"></textarea>
+			            <textarea autocomplete="false" placeholder="Message" ng-model="contacts.user.message" class="form-control" name="message" required ng-minlength="15" ng-maxlength="1000"></textarea>
 			            <p ng-show="userForm.message.$error.minlength" class="help-block">Message is too short.</p>
 			            <p ng-show="userForm.message.$error.maxlength" class="help-block">Message is too long.</p>
 			        </div>
