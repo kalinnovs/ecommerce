@@ -1,15 +1,12 @@
 
 angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
-  // .constant('SERVICE_URL', 'http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService')
-  // .constant('SERVICE_URL', '/HaastikaWebService')
-  .constant('SERVICE_URL', 'http://haastika.com:8080/HaastikaWebService')
   .constant('PRODUCTDATA_URL', 'https://haastika.com/HaastikaDataService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
   .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/404');
 
     $stateProvider
       .state('login', {
@@ -339,7 +336,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/privacyPolicy',
         views: {
           '': {
-            templateUrl: 'assets/policies/privacyPolicy.html'
+            templateUrl: 'assets/policies/pp.html'
           }
         }
       })
@@ -347,7 +344,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/deliveryOptions',
         views: {
           '': {
-            templateUrl: 'assets/policies/deliveryOptions.html'
+            templateUrl: 'assets/policies/do.html'
           }
         }
       })
@@ -355,7 +352,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/returnPolicy',
         views: {
           '': {
-            templateUrl: 'assets/policies/returnPolicy.html'
+            templateUrl: 'assets/policies/rp.html'
           }
         }
       })
@@ -363,7 +360,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         url:'/termsCondition',
         views: {
           '': {
-            templateUrl: 'assets/policies/termsCondition.html'
+            templateUrl: 'assets/policies/tnc.html'
           }
         }
       })
