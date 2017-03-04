@@ -7116,6 +7116,10 @@ input.form-control:focus {
   box-shadow: none;
 }
 
+.has-error .form-control:focus {
+  box-shadow: none;
+}
+
 input.form-control:focus + span {
   display: none;
 }

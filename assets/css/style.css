@@ -4177,6 +4177,9 @@ input.form-control:focus {
     border-color: #d05715;
     box-shadow: none;
 }
+.has-error .form-control:focus {
+    box-shadow: none;
+}
 input.form-control:focus + span {
     display: none;
 }
