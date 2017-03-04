@@ -924,11 +924,11 @@ header .currencyConverter a.india {
     color: #333;
 }
 header .currencyConverter a.usd {
-    background: url("../../../assets/images/United States of America (USA).png") -1px -4px no-repeat;
+    background: url("../../../assets/images/Usa.png") -1px -4px no-repeat;
     color: #333;
 }
 header .currencyConverter a.euro {
-    background: url("../../../assets/images/European Union.png") -1px -4px no-repeat;
+    background: url("../../../assets/images/Eur.png") -1px -4px no-repeat;
     color: transparent;
 }
 header .currencyConverter a span {
