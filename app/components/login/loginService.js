@@ -1,8 +1,8 @@
 'use strict';
  
 angular.module('eCommerce')
-.factory('AuthenticationService', ['Base64', '$http', '$rootScope', '$timeout', 'SERVICE_URL', 'PRODUCTDATA_URL','LoginService',
-  function (Base64, $http, $rootScope, $timeout, SERVICE_URL, PRODUCTDATA_URL,LoginService) {
+.factory('AuthenticationService', ['Base64', '$http', '$rootScope', '$timeout', 'PRODUCTDATA_URL','LoginService',
+  function (Base64, $http, $rootScope, $timeout, PRODUCTDATA_URL,LoginService) {
     var service = {};
 
     service.Login = function (username, password, callback) {

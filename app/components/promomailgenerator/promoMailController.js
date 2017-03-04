@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('PromoMailCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, SERVICE_URL, PRODUCTDATA_URL) {
+  .controller('PromoMailCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
     var mail = this;
     var scoper = $scope;
     

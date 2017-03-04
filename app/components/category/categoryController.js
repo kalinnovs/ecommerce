@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('categoryCtrl', function($scope, $rootScope, $timeout, $sce, $state, CategoryService, UserService, $stateParams, SERVICE_URL, PRODUCTDATA_URL, BASE_URI) {
+    .controller('categoryCtrl', function($scope, $rootScope, $timeout, $sce, $state, CategoryService, UserService, $stateParams, PRODUCTDATA_URL, BASE_URI) {
         var cat = this;
         var scoper = $scope;
 

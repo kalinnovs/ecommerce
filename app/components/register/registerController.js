@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('RegisterCtrl', function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, SERVICE_URL, PRODUCTDATA_URL, $firebaseObject) {
+  .controller('RegisterCtrl', function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, PRODUCTDATA_URL, $firebaseObject) {
         var register = this;
         var scoper = $scope;
         

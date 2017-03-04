@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .service('productTreeService', ['$http', 'Upload', 'SERVICE_URL', 'PRODUCTDATA_URL', function ($http, Upload, SERVICE_URL, PRODUCTDATA_URL) {
+  .service('productTreeService', ['$http', 'Upload', 'PRODUCTDATA_URL', function ($http, Upload, PRODUCTDATA_URL) {
     var service = this;
     // var BASE_URL = "http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService/admin";
     // var BASE_URL = "http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/admin";
@@ -11,7 +11,6 @@ angular.module('eCommerce')
 
     //simply returns the category list
     service.list = function () {
-        // return $http.get(PRODUCTDATA_URL + "/admin/category"); // SERVICE_URL + " /category"
         return $http.get("assets/json/productTree.json");
     }
 

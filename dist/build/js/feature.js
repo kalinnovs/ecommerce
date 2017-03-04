@@ -646,7 +646,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('aboutCtrl', function ($scope, $rootScope, $sce, UserService, $timeout, AboutService, SERVICE_URL, PRODUCTDATA_URL, BASE_URI) {
+  .controller('aboutCtrl', function ($scope, $rootScope, $sce, UserService, $timeout, AboutService, PRODUCTDATA_URL, BASE_URI) {
     var about = this;
     var scoper = $scope;
     
@@ -683,7 +683,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AccoutsCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress, getAccountDetail) {
+  .controller('AccoutsCtrl', function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress, getAccountDetail) {
 
   	$scope.loggedUser = window.userDetails;
   	$scope.orderList = orderList.orderList;
@@ -961,7 +961,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AdminCtrl', function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, SERVICE_URL, PRODUCTDATA_URL, AuthenticationService, OrderDetailService) {
+  .controller('AdminCtrl', function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, PRODUCTDATA_URL, AuthenticationService, OrderDetailService) {
     var admin = this;
     
     // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
@@ -1014,7 +1014,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, $state, $location, CartService, UserService, SERVICE_URL, PRODUCTDATA_URL, user, cartData) {
+    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, $state, $location, CartService, UserService, PRODUCTDATA_URL, user, cartData) {
         var cart = this,
         responseData,
         loginStatus = user,
@@ -1331,7 +1331,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-    .controller('categoryCtrl', function($scope, $rootScope, $timeout, $sce, $state, CategoryService, UserService, $stateParams, SERVICE_URL, PRODUCTDATA_URL, BASE_URI) {
+    .controller('categoryCtrl', function($scope, $rootScope, $timeout, $sce, $state, CategoryService, UserService, $stateParams, PRODUCTDATA_URL, BASE_URI) {
         var cat = this;
         var scoper = $scope;
 
@@ -1557,7 +1557,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$q', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'SERVICE_URL', 'PRODUCTDATA_URL', '$location', 'cartItems', 'getAddress', 'getLoginStatus', 'viewCart', 'AuthenticationService', 'Facebook', 'Google',  function($scope, $http, $rootScope, $q, $timeout, $controller, $state, checkoutStorage, CheckoutService, SERVICE_URL, PRODUCTDATA_URL, $location, cartItems, getAddress, getLoginStatus, viewCart, AuthenticationService, Facebook, Google) {
+    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$q', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'PRODUCTDATA_URL', '$location', 'cartItems', 'getAddress', 'getLoginStatus', 'viewCart', 'AuthenticationService', 'Facebook', 'Google',  function($scope, $http, $rootScope, $q, $timeout, $controller, $state, checkoutStorage, CheckoutService, PRODUCTDATA_URL, $location, cartItems, getAddress, getLoginStatus, viewCart, AuthenticationService, Facebook, Google) {
         var checkout = this,
         responseData,
         self = $scope;
@@ -2302,7 +2302,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, SERVICE_URL, PRODUCTDATA_URL, UserService, BASE_URI) {
+  .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, PRODUCTDATA_URL, UserService, BASE_URI) {
     var contacts = this;
     var original = $scope.user;
     
@@ -2352,7 +2352,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('DetailCtrl', function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, SERVICE_URL, PRODUCTDATA_URL, BASE_URI, $stateParams) {
+  .controller('DetailCtrl', function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, PRODUCTDATA_URL, BASE_URI, $stateParams) {
     var details = this;
     $scope.currentState = $state.params.id;
     
@@ -2446,7 +2446,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('HomeCtrl', function ($scope, $timeout, $rootScope, UserService, SERVICE_URL, PRODUCTDATA_URL, $http) {
+  .controller('HomeCtrl', function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http) {
     var home = this;
     var scoper = $scope;
     $scope.user = "pritish";
@@ -2940,7 +2940,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .service('productTreeService', ['$http', 'Upload', 'SERVICE_URL', 'PRODUCTDATA_URL', function ($http, Upload, SERVICE_URL, PRODUCTDATA_URL) {
+  .service('productTreeService', ['$http', 'Upload', 'PRODUCTDATA_URL', function ($http, Upload, PRODUCTDATA_URL) {
     var service = this;
     // var BASE_URL = "http://ec2-52-33-88-59.us-west-2.compute.amazonaws.com/HaastikaWebService/admin";
     // var BASE_URL = "http://ec2-52-32-195-43.us-west-2.compute.amazonaws.com/HaastikaWebService/admin";
@@ -2950,7 +2950,6 @@ angular.module('eCommerce')
 
     //simply returns the category list
     service.list = function () {
-        // return $http.get(PRODUCTDATA_URL + "/admin/category"); // SERVICE_URL + " /category"
         return $http.get("assets/json/productTree.json");
     }
 
@@ -3243,8 +3242,8 @@ angular.module('eCommerce').controller('LoginCtrl', LoginCtrl);
 'use strict';
  
 angular.module('eCommerce')
-.factory('AuthenticationService', ['Base64', '$http', '$rootScope', '$timeout', 'SERVICE_URL', 'PRODUCTDATA_URL','LoginService',
-  function (Base64, $http, $rootScope, $timeout, SERVICE_URL, PRODUCTDATA_URL,LoginService) {
+.factory('AuthenticationService', ['Base64', '$http', '$rootScope', '$timeout', 'PRODUCTDATA_URL','LoginService',
+  function (Base64, $http, $rootScope, $timeout, PRODUCTDATA_URL,LoginService) {
     var service = {};
 
     service.Login = function (username, password, callback) {
@@ -3864,7 +3863,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('PromoMailCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, SERVICE_URL, PRODUCTDATA_URL) {
+  .controller('PromoMailCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
     var mail = this;
     var scoper = $scope;
     
@@ -3924,7 +3923,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('RegisterCtrl', function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, SERVICE_URL, PRODUCTDATA_URL, $firebaseObject) {
+  .controller('RegisterCtrl', function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, PRODUCTDATA_URL, $firebaseObject) {
         var register = this;
         var scoper = $scope;
         
@@ -4075,7 +4074,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('SubscriberCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, SERVICE_URL, PRODUCTDATA_URL) {
+  .controller('SubscriberCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
     var subscriber = this;
     var scoper = $scope;
     
