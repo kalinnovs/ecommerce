@@ -1,5 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
 angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   .constant('PRODUCTDATA_URL', 'https://haastika.com/HaastikaDataService')
@@ -15,6 +14,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         templateUrl: 'app/components/login/loginView.html',
         controller: 'LoginCtrl',
         controllerAs: 'login',
+        data: {
+          	pageTitle: 'Haastika - Login'
+        },
         resolve: {
           user: function($stateParams, AuthenticationService) {
             return AuthenticationService.validateToken();
@@ -35,7 +37,10 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('404', {
         url:'/404',
         templateUrl: 'app/components/404/404.html',
-        controller: 'pagenotfoundCtrl'
+        controller: 'pagenotfoundCtrl',
+        data: {
+          	pageTitle: 'Haastika - Page Not Found'
+        },
       })
       .state('accounts', {
         url:'/accounts',
@@ -208,15 +213,24 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       .state('thankyou', {
         url: '/thankyou',
         controller: 'thankyouCtrl',
-        templateUrl: 'app/components/thankyou/thankyouView.html'
+        templateUrl: 'app/components/thankyou/thankyouView.html', 
+        data: {
+          	pageTitle: 'Haastika - Thank you !!'
+        }
       })
       .state('orderLookup', {
         url: '/orderLookup',
         controller: 'orderCtrl',
-        templateUrl: 'app/components/orderlookup/orderlookupView.html'
+        templateUrl: 'app/components/orderlookup/orderlookupView.html',
+        data: {
+          	pageTitle: 'Haastika - Order Lookup'
+        },
       })
       .state('register', {
         url:'/register',
+        data: {
+          	pageTitle: 'Haastika - Subscribe'
+        },
         views: {
           '': {
             templateUrl: 'app/components/register/registerView.html',
@@ -227,6 +241,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('aboutus', {
         url:'/aboutus',
+        data: {
+          	pageTitle: 'Haastika - About Us'
+        },
         views: {
           '': {
             templateUrl: 'app/components/aboutus/aboutusView.html',
@@ -295,6 +312,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('contact', {
         url:'/contact',
+        data: {
+          	pageTitle: 'Haastika - Contact Us'
+        },
         views: {
           '': {
             templateUrl: 'app/components/contact/contactView.html',
@@ -335,7 +355,10 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('privacyPolicy', {
         url:'/privacyPolicy',
-        views: {
+        data: {
+          	pageTitle: 'Haastika - Privacy Policy'
+        },
+		views: {
           '': {
             templateUrl: 'assets/policies/pp.html'
           }
@@ -343,6 +366,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('deliveryOptions', {
         url:'/deliveryOptions',
+        data: {
+          	pageTitle: 'Haastika - Delivery Options'
+        },
         views: {
           '': {
             templateUrl: 'assets/policies/do.html'
@@ -351,6 +377,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('returnPolicy', {
         url:'/returnPolicy',
+        data: {
+          	pageTitle: 'Haastika - Return Policy'
+        },
         views: {
           '': {
             templateUrl: 'assets/policies/rp.html'
@@ -359,6 +388,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
       })
       .state('termsCondition', {
         url:'/termsCondition',
+        data: {
+          	pageTitle: 'Haastika - Terms & Conditions'
+        },
         views: {
           '': {
             templateUrl: 'assets/policies/tnc.html'
@@ -371,9 +403,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
     $locationProvider.html5Mode(true);
 
   })
-  .run(['$rootScope', '$location', '$http', '$state', 'Google', '$window', 
-    function run($rootScope, $location, $http, $state, Google, $window) {
-
+  .run(['$rootScope', '$location', '$http', '$state', 'Google', '$window', '$stateParams', 
+    function run($rootScope, $location, $http, $state, Google, $window, $stateParams) {
+    
       // Steps store
       if(!window.sessionStorage.steps) {
         window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');  
@@ -488,7 +520,27 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         return config;
       }
     };
-  });
+  })
+  .directive('updateTitle', ['$rootScope', '$timeout',
+  function($rootScope, $timeout) {
+    return {
+      link: function(scope, element) {
+
+        var listener = function(event, toState) {
+
+          var title = 'Haastika - Online store for Odisha Handicrafts and more';
+          if (toState.data && toState.data.pageTitle) title = toState.data.pageTitle;
+
+          $timeout(function() {
+            element.text(title);
+          }, 0, false);
+        };
+
+        $rootScope.$on('$stateChangeSuccess', listener);
+      }
+    };
+  }
+]);
 
 },{}],2:[function(require,module,exports){
 'use strict';
