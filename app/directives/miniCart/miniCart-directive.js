@@ -22,6 +22,7 @@ angular.module('eCommerce')
                 '<span class="logoutText">Logout</span> <span class="userDetailsUpdate userLogout"></span></a></p>' +
             '</div></div>',
             controller: function() {
+                (window.sessionStorage.cartLength) ? window.sessionStorage.cartLength = 0 : '';
                 if(window.loadMiniCartOnce === undefined) {
                     var responseData, html, self = this,
                         itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
@@ -175,6 +176,7 @@ angular.module('eCommerce')
                     $state.go('login');
                     window.sessionStorage.removeItem('itemsArray');
                     window.sessionStorage.removeItem('cartLength');
+                    window.localStorage.removeItem('globals');
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateMiniCartCount");
                     event.preventDefault();
