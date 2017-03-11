@@ -47,7 +47,7 @@ angular.module('eCommerce')
             } else {
                 responseData = viewCart.cartList;
                 $.each(responseData, function(key, val) {
-                    val["quantity"] = cartItems[key].quantity;
+                    val["quantity"] = val.quantity;
                 });
                 $scope.cartItems = (responseData) ? responseData : [];
             }
