@@ -15,7 +15,9 @@ angular.module('eCommerce')
         $scope.co = checkoutStorage.getData('storage');
 
         // Currency Update
-        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        if(window.userDetails && window.userDetails.preferredCurrency) {
+            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        }
 
         // Cart Configuration
         $scope.checkoutCartConfig = {
@@ -37,12 +39,24 @@ angular.module('eCommerce')
 
         // Selets the default step on Page load
         // and stores the cart items for order page.
-        if(viewCart && cartItems) {
+        if(viewCart) {
+            var responseData,
+                cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
             if(getLoginStatus && getLoginStatus.success === true) {
                 $scope.cartItems = viewCart.cartList;
             } else {
-                $scope.cartItems = cartItems;
+                responseData = viewCart.cartList;
+                $.each(responseData, function(key, val) {
+                    val["quantity"] = cartItems[key].quantity;
+                });
+                $scope.cartItems = (responseData) ? responseData : [];
             }
+            // if(getLoginStatus && getLoginStatus.success === true) {
+            //     $scope.cartItems = viewCart.cartList;
+            // } else {
+            //     $scope.cartItems = cartItems;
+            // }
+            // $scope.cartItems = viewCart.cartList;
             // Stores the steps completed on page load
             checkoutStorage.setData($scope.steps, 'steps');
         }
@@ -260,7 +274,8 @@ angular.module('eCommerce')
                 items = this.cartItems,
                 currentSize = parseInt(items[index].quantity),
                 currency = $("body").attr("data-currency"),
-                updateObj = {};
+                updateObj = {},
+                finalQuantity = 0;
                 if(call === "substract" && currentSize === 1) {
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateFlash", {"alertType": "danger", "message": "You cannot reduce the cart size below zero. Please remove the item."});
@@ -279,12 +294,13 @@ angular.module('eCommerce')
                     "quantity": item.quantity || 1
                 }
                 itemsArray.push(obj);
+                finalQuantity += item.quantity || 1;
             });
             
             if(lineItemId === "") {
                 window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
                 // Broadcast cart update to mini cart
-                $rootScope.$broadcast("updateMiniCartCount");
+                $rootScope.$broadcast("updateMiniCartCount", finalQuantity);
             } else {
                 window.sessionStorage.setItem('cartLength', ((call === "add") ? parseInt(window.sessionStorage.cartLength || 0)+1 : parseInt(window.sessionStorage.cartLength || 0)-1));
                 updateObj["lineItemId"] = items[index].lineItemId;
@@ -292,7 +308,7 @@ angular.module('eCommerce')
                 var promise = CheckoutService.updateCartLineItem(updateObj);
                 promise.then(function(response) {
                     // Broadcast cart update to mini cart
-                    $rootScope.$broadcast("updateMiniCartCount");
+                    $rootScope.$broadcast("updateMiniCartCount", finalQuantity);
                 });     
             }
             this.getTotal();
@@ -384,10 +400,14 @@ angular.module('eCommerce')
             );
         };
         
-        // Detect On DOM loaded change
+        // // Detect On DOM loaded change
         $scope.$on('$viewContentLoaded', function(event){
             var promise;
             window.scope = event;
+            // Clearing independent calls
+            window.getAddressOnce = false;
+            window.getViewCartOnce = false;
+
             // window.singleCall.authenticateUser = false;
             var currentState = $state.current.name.split("checkout.")[1];
             $(".checkout > .section").removeClass("selected");

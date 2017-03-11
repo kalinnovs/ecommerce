@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .directive('minicart', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope) {
+    .directive('minicart', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
         var def = {
             restrict: 'A',
             scope:{
@@ -22,7 +22,7 @@ angular.module('eCommerce')
                 '<span class="logoutText">Logout</span> <span class="userDetailsUpdate userLogout"></span></a></p>' +
             '</div></div>',
             controller: function() {
-                (window.sessionStorage.cartLength) ? window.sessionStorage.cartLength = 0 : '';
+                // (window.sessionStorage.cartLength) ? (window.sessionStorage.cartLength === "0") ? window.sessionStorage.length : 0 : '';
                 if(window.loadMiniCartOnce === undefined) {
                     var responseData, html, self = this,
                         itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
@@ -134,15 +134,21 @@ angular.module('eCommerce')
 
                 scope.$on("updateMiniCartCount", function (event, args) {
                     // getMiniCart();
-                    var count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
+                    var count;
+                    if(args) {
+                        count = args;
+                        window.sessionStorage.cartLength = args;
+                    } else {
+                        count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
+                    }
                     var storageItemsCount = quantityCounter();
                     count += storageItemsCount;
                     // console.log(count);
                     $(".miniKart").parents(".cart").find(".count").html(count);
 
                     // Broadcast currency update
-                    if(window.userDetails !== null) {
-                        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);    
+                    if(window.userDetails && window.userDetails.preferredCurrency) {
+                        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
                     }
                 });
 

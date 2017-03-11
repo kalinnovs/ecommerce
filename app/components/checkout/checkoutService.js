@@ -43,14 +43,14 @@ angular.module('eCommerce')
     }
 
     service.validateToken = function() {
-        return $http({
-                method: 'GET',
-                url: PRODUCTDATA_URL + '/authenticate/validate'
-            }).then(function successCallback(response) {
-                return response.data;
-            }, function errorCallback(response) {
-                console.log("Error in saving.");
-        }); 
+        if(window.validateOnce && window.validateOnce === true) {
+            return;
+        }
+        
+        return $http.get(PRODUCTDATA_URL + '/authenticate/validate').then(function (response) {
+            window.validateOnce = true;
+            return response.data;
+        });
     } 
 
     service.getItems = function() {
@@ -82,6 +82,10 @@ angular.module('eCommerce')
     } 
 
     service.viewCart = function() {
+        if(window.getViewCartOnce && window.getViewCartOnce === true) {
+            return;
+        }
+        
         // Read Cart Array and pass to URL
         var cartArray,
             cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
@@ -98,18 +102,23 @@ angular.module('eCommerce')
                 data: JSON.stringify(objectToSerialize)
             }).then(function successCallback(response) {
                 responseData = response.data;
+                window.getViewCartOnce = true;
                 return responseData;
             }, function errorCallback(response) {
                 console.log("Error in saving.");
         }); 
     } 
 
-    service.getAddress = function() {
+    service.getAddress = function(obj) {
+        if(window.getAddressOnce && window.getAddressOnce === true) {
+            return;
+        }
         // Read Cart Array and pass to URL
         return $http({
                 method: 'GET',
                 url: PRODUCTDATA_URL + '/cart/address'
             }).then(function successCallback(response) {
+                window.getAddressOnce = true;
                 return response.data;
             }, function errorCallback(response) {
                 console.log("Error in saving.");

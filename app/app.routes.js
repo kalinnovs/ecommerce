@@ -121,8 +121,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            // return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           },
           viewCart: function($stateParams, CheckoutService) {
             // return CheckoutService.viewCart();
@@ -141,8 +141,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           },
           viewCart: function($stateParams, CheckoutService) {
             // return CheckoutService.viewCart();
@@ -161,8 +161,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           },
           viewCart: function($stateParams, CheckoutService) {
             // return CheckoutService.viewCart();
@@ -176,7 +176,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         templateUrl: 'app/components/checkout/order.html',
         resolve: {
           cartItems: function($stateParams, CheckoutService) {
-            return CheckoutService.getItems();
+            // return CheckoutService.getItems();
           },
           viewCart: function($stateParams, CheckoutService) {
             return CheckoutService.viewCart();
@@ -184,8 +184,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           }
         }
       })
@@ -196,7 +196,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         templateUrl: 'app/components/checkout/payment.html',
         resolve: {
           cartItems: function($stateParams, CheckoutService) {
-            return CheckoutService.getItems();
+            // return CheckoutService.getItems();
           },
           viewCart: function($stateParams, CheckoutService) {
             return CheckoutService.viewCart();
@@ -204,8 +204,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           }
         }
       })

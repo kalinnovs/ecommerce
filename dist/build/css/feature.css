@@ -2443,7 +2443,7 @@ a.noDecoration:hover {
 /* Flash Section for Updates Styles */
 
 .flasher {
-  position: fixed;
+  position: absolute;
   right: 10px;
   width: 28%;
   top: 156px;
@@ -2462,6 +2462,11 @@ a.noDecoration:hover {
   animation-iteration-count: 1;
   animation-delay: .1s;
   overflow: hidden;
+}
+
+.menu-stuck .flasher {
+  position: fixed;
+  top: 44px !important;
 }
 
 @-webkit-keyframes seconds {
@@ -2724,6 +2729,7 @@ a.noDecoration:hover {
 .social-strip .profile span {
   display: inline-block;
   vertical-align: middle;
+  margin-top: -2px;
 }
 
 .social-strip .profilePicUpdate {
@@ -2733,6 +2739,7 @@ a.noDecoration:hover {
 
 .social-strip .profilePicUpdate.loggedIn {
   margin-right: 5px;
+  margin-top: -2px;
 }
 
 .social-strip .profilePicUpdate img {
@@ -3120,6 +3127,7 @@ minicart {
   color: #333;
   line-height: 34px;
   display: inline-block;
+  background: none;
 }
 
 .minicart ul li figure img {
@@ -6541,6 +6549,9 @@ footer .back-top .pageCounter {
   top: -40px;
   border: solid 1px #d3d3d3;
   padding: 5px 15px;
+  border-radius: 4px;
+  border-style: outset;
+  text-decoration: none;
 }
 
 .checkout .section.selected .container {
@@ -6674,6 +6685,13 @@ footer .back-top .pageCounter {
   color: inherit;
 }
 
+.address-blocks .noAddress {
+  font-size: 14px;
+  margin: 10px 0 25px;
+  font-style: italic;
+  color: #888;
+}
+
 .address-blocks ul {
   overflow: hidden;
   list-style: none;
@@ -6724,7 +6742,7 @@ footer .back-top .pageCounter {
 }
 
 .checkout .order-form .columns aside:first-child {
-  margin-right: 30px;
+  margin-right: 60px;
 }
 
 .checkout .list-header {
@@ -6838,6 +6856,10 @@ footer .back-top .pageCounter {
 
 .checkout .form-views.active + button.modifyBtn {
   display: none;
+}
+
+.checkout .payment .form-group {
+  min-height: inherit;
 }
 
 /* Order Common ENDS */

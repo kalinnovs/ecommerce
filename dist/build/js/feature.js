@@ -122,8 +122,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            // return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           },
           viewCart: function($stateParams, CheckoutService) {
             // return CheckoutService.viewCart();
@@ -142,8 +142,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           },
           viewCart: function($stateParams, CheckoutService) {
             // return CheckoutService.viewCart();
@@ -162,8 +162,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           },
           viewCart: function($stateParams, CheckoutService) {
             // return CheckoutService.viewCart();
@@ -177,7 +177,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         templateUrl: 'app/components/checkout/order.html',
         resolve: {
           cartItems: function($stateParams, CheckoutService) {
-            return CheckoutService.getItems();
+            // return CheckoutService.getItems();
           },
           viewCart: function($stateParams, CheckoutService) {
             return CheckoutService.viewCart();
@@ -185,8 +185,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           }
         }
       })
@@ -197,7 +197,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
         templateUrl: 'app/components/checkout/payment.html',
         resolve: {
           cartItems: function($stateParams, CheckoutService) {
-            return CheckoutService.getItems();
+            // return CheckoutService.getItems();
           },
           viewCart: function($stateParams, CheckoutService) {
             return CheckoutService.viewCart();
@@ -205,8 +205,8 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
           getAddress: function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
           },
-          getLoginStatus: function($stateParams, AuthenticationService) {
-            return AuthenticationService.validateToken();
+          getLoginStatus: function($stateParams, CheckoutService) {
+            return CheckoutService.validateToken();
           }
         }
       })
@@ -749,7 +749,9 @@ angular.module('eCommerce')
     $scope.myAddress = false;
     $scope.myOrders = true;
     // Currency Update
-    $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+    if(window.userDetails && window.userDetails.preferredCurrency) {
+        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+    }
 
 
   	$scope.viewOrder = function(event) {
@@ -1075,7 +1077,9 @@ angular.module('eCommerce')
         $scope.location = $location;
         
         // Currency Update
-        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        if(window.userDetails && window.userDetails.preferredCurrency) {
+            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);    
+        }
         
         // Read Cart Array and pass to URL
         var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
@@ -1139,7 +1143,8 @@ angular.module('eCommerce')
                 items = this.cartItems,
                 currentSize = parseInt(items[index].quantity),
                 currency = $("body").attr("data-currency"),
-                updateObj = {};
+                updateObj = {},
+                finalQuantity = 0;
                 if(call === "substract" && currentSize === 1) {
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateFlash", {"alertType": "danger", "message": "You cannot reduce the cart size below zero. Please remove the item."});
@@ -1158,11 +1163,12 @@ angular.module('eCommerce')
                     "quantity": item.quantity || 1
                 }
                 itemsArray.push(obj);
+                finalQuantity += item.quantity || 1;
             });
             if(lineItemId === "") {
                 window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
                 // Broadcast cart update to mini cart
-                $rootScope.$broadcast("updateMiniCartCount");
+                $rootScope.$broadcast("updateMiniCartCount", finalQuantity);
             } else {
                 window.sessionStorage.setItem('cartLength', ((call === "add") ? parseInt(window.sessionStorage.cartLength || 0)+1 : parseInt(window.sessionStorage.cartLength || 0)-1));
                 updateObj["lineItemId"] = items[index].lineItemId;
@@ -1170,7 +1176,7 @@ angular.module('eCommerce')
                 var promise = CartService.updateCartLineItem(updateObj);
                 promise.then(function(response) {
                     // Broadcast cart update to mini cart
-                    $rootScope.$broadcast("updateMiniCartCount");
+                    $rootScope.$broadcast("updateMiniCartCount", finalQuantity);
                 });     
             }
             this.getTotal();
@@ -1284,7 +1290,33 @@ angular.module('eCommerce')
         };
 
         $scope.gotoCheckout = function() {
-            this.location.path("/checkout/login");
+            // this.location.path("/checkout/login");
+            //Validate Checkout URI states with actual submitted data
+            // If the state is not cleared then it will redirect to beginning of the state.
+            var validateURI = false, validStateIndex = 0,
+            steps = JSON.parse(window.sessionStorage.checkoutState);
+
+            function validateStateUrls() {
+                for(var keys in steps) {
+                  if(steps[keys]) {
+                      validStateIndex++;
+                      validateURI = true; 
+                  } else {
+                      validateURI = false;
+                  }
+                }  
+            };
+              
+            // Checkout redirection on zero cart items
+            var cartlength = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray).length : (window.sessionStorage.cartLength) ? parseInt(JSON.parse(window.sessionStorage.cartLength)) : 0;
+            if(cartlength === 0) {
+              $location.path('/');
+            } else {
+                validStateIndex = 0;
+                validateStateUrls();
+                $location.path('/checkout/'+ Object.keys(steps)[validStateIndex]);
+            }
+
         };
 
         $scope.openOverlay = function() {
@@ -1403,7 +1435,10 @@ angular.module('eCommerce')
                 $scope.iterateThrough = 5;
                 $scope.$broadcast('dataloaded');
                 // Currency Update
-                $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+                if(window.userDetails && window.userDetails.preferredCurrency) {
+                    $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+                }
+                // $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
             })
             .catch(function(error) {
                 $state.go('home');
@@ -1623,7 +1658,9 @@ angular.module('eCommerce')
         $scope.co = checkoutStorage.getData('storage');
 
         // Currency Update
-        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        if(window.userDetails && window.userDetails.preferredCurrency) {
+            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        }
 
         // Cart Configuration
         $scope.checkoutCartConfig = {
@@ -1645,12 +1682,24 @@ angular.module('eCommerce')
 
         // Selets the default step on Page load
         // and stores the cart items for order page.
-        if(viewCart && cartItems) {
+        if(viewCart) {
+            var responseData,
+                cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
             if(getLoginStatus && getLoginStatus.success === true) {
                 $scope.cartItems = viewCart.cartList;
             } else {
-                $scope.cartItems = cartItems;
+                responseData = viewCart.cartList;
+                $.each(responseData, function(key, val) {
+                    val["quantity"] = cartItems[key].quantity;
+                });
+                $scope.cartItems = (responseData) ? responseData : [];
             }
+            // if(getLoginStatus && getLoginStatus.success === true) {
+            //     $scope.cartItems = viewCart.cartList;
+            // } else {
+            //     $scope.cartItems = cartItems;
+            // }
+            // $scope.cartItems = viewCart.cartList;
             // Stores the steps completed on page load
             checkoutStorage.setData($scope.steps, 'steps');
         }
@@ -1868,7 +1917,8 @@ angular.module('eCommerce')
                 items = this.cartItems,
                 currentSize = parseInt(items[index].quantity),
                 currency = $("body").attr("data-currency"),
-                updateObj = {};
+                updateObj = {},
+                finalQuantity = 0;
                 if(call === "substract" && currentSize === 1) {
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateFlash", {"alertType": "danger", "message": "You cannot reduce the cart size below zero. Please remove the item."});
@@ -1887,12 +1937,13 @@ angular.module('eCommerce')
                     "quantity": item.quantity || 1
                 }
                 itemsArray.push(obj);
+                finalQuantity += item.quantity || 1;
             });
             
             if(lineItemId === "") {
                 window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
                 // Broadcast cart update to mini cart
-                $rootScope.$broadcast("updateMiniCartCount");
+                $rootScope.$broadcast("updateMiniCartCount", finalQuantity);
             } else {
                 window.sessionStorage.setItem('cartLength', ((call === "add") ? parseInt(window.sessionStorage.cartLength || 0)+1 : parseInt(window.sessionStorage.cartLength || 0)-1));
                 updateObj["lineItemId"] = items[index].lineItemId;
@@ -1900,7 +1951,7 @@ angular.module('eCommerce')
                 var promise = CheckoutService.updateCartLineItem(updateObj);
                 promise.then(function(response) {
                     // Broadcast cart update to mini cart
-                    $rootScope.$broadcast("updateMiniCartCount");
+                    $rootScope.$broadcast("updateMiniCartCount", finalQuantity);
                 });     
             }
             this.getTotal();
@@ -1992,10 +2043,14 @@ angular.module('eCommerce')
             );
         };
         
-        // Detect On DOM loaded change
+        // // Detect On DOM loaded change
         $scope.$on('$viewContentLoaded', function(event){
             var promise;
             window.scope = event;
+            // Clearing independent calls
+            window.getAddressOnce = false;
+            window.getViewCartOnce = false;
+
             // window.singleCall.authenticateUser = false;
             var currentState = $state.current.name.split("checkout.")[1];
             $(".checkout > .section").removeClass("selected");
@@ -2261,14 +2316,14 @@ angular.module('eCommerce')
     }
 
     service.validateToken = function() {
-        return $http({
-                method: 'GET',
-                url: PRODUCTDATA_URL + '/authenticate/validate'
-            }).then(function successCallback(response) {
-                return response.data;
-            }, function errorCallback(response) {
-                console.log("Error in saving.");
-        }); 
+        if(window.validateOnce && window.validateOnce === true) {
+            return;
+        }
+        
+        return $http.get(PRODUCTDATA_URL + '/authenticate/validate').then(function (response) {
+            window.validateOnce = true;
+            return response.data;
+        });
     } 
 
     service.getItems = function() {
@@ -2300,6 +2355,10 @@ angular.module('eCommerce')
     } 
 
     service.viewCart = function() {
+        if(window.getViewCartOnce && window.getViewCartOnce === true) {
+            return;
+        }
+        
         // Read Cart Array and pass to URL
         var cartArray,
             cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
@@ -2316,18 +2375,23 @@ angular.module('eCommerce')
                 data: JSON.stringify(objectToSerialize)
             }).then(function successCallback(response) {
                 responseData = response.data;
+                window.getViewCartOnce = true;
                 return responseData;
             }, function errorCallback(response) {
                 console.log("Error in saving.");
         }); 
     } 
 
-    service.getAddress = function() {
+    service.getAddress = function(obj) {
+        if(window.getAddressOnce && window.getAddressOnce === true) {
+            return;
+        }
         // Read Cart Array and pass to URL
         return $http({
                 method: 'GET',
                 url: PRODUCTDATA_URL + '/cart/address'
             }).then(function successCallback(response) {
+                window.getAddressOnce = true;
                 return response.data;
             }, function errorCallback(response) {
                 console.log("Error in saving.");
@@ -2416,7 +2480,9 @@ angular.module('eCommerce')
             $scope.data = data.productDetails;
             $scope.$broadcast('dataloaded');
             // Currency Update
-            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+            if(window.userDetails && window.userDetails.preferredCurrency) {
+                $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+            }
         })
         .catch(function(error) {
             //
@@ -2512,7 +2578,9 @@ angular.module('eCommerce')
           if(data.success === undefined || data.success) {
             $scope.$broadcast('dataloaded');
             // Currency Update
-            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+            if(window.userDetails && window.userDetails.preferredCurrency) {
+              $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+            }
           } else {
             // Else pick local JSON
           }
@@ -3801,7 +3869,9 @@ angular.module('eCommerce')
     	// Injecting Math into cart scope
         $scope.Math = window.Math;
         // Currency Update
-        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        if(window.userDetails && window.userDetails.preferredCurrency) {
+            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        }
 
     	$scope.orderLookupSearch = function(event) {
     		window.order = this;
@@ -4468,7 +4538,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-    .directive('minicart', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope) {
+    .directive('minicart', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
         var def = {
             restrict: 'A',
             scope:{
@@ -4489,7 +4559,7 @@ angular.module('eCommerce')
                 '<span class="logoutText">Logout</span> <span class="userDetailsUpdate userLogout"></span></a></p>' +
             '</div></div>',
             controller: function() {
-                (window.sessionStorage.cartLength) ? window.sessionStorage.cartLength = 0 : '';
+                // (window.sessionStorage.cartLength) ? (window.sessionStorage.cartLength === "0") ? window.sessionStorage.length : 0 : '';
                 if(window.loadMiniCartOnce === undefined) {
                     var responseData, html, self = this,
                         itemsArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
@@ -4601,15 +4671,21 @@ angular.module('eCommerce')
 
                 scope.$on("updateMiniCartCount", function (event, args) {
                     // getMiniCart();
-                    var count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
+                    var count;
+                    if(args) {
+                        count = args;
+                        window.sessionStorage.cartLength = args;
+                    } else {
+                        count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
+                    }
                     var storageItemsCount = quantityCounter();
                     count += storageItemsCount;
                     // console.log(count);
                     $(".miniKart").parents(".cart").find(".count").html(count);
 
                     // Broadcast currency update
-                    if(window.userDetails !== null) {
-                        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);    
+                    if(window.userDetails && window.userDetails.preferredCurrency) {
+                        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
                     }
                 });
 

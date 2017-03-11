@@ -7,7 +7,9 @@ angular.module('eCommerce')
     	// Injecting Math into cart scope
         $scope.Math = window.Math;
         // Currency Update
-        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        if(window.userDetails && window.userDetails.preferredCurrency) {
+            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        }
 
     	$scope.orderLookupSearch = function(event) {
     		window.order = this;

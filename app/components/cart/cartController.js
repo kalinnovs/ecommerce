@@ -10,7 +10,9 @@ angular.module('eCommerce')
         $scope.location = $location;
         
         // Currency Update
-        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+        if(window.userDetails && window.userDetails.preferredCurrency) {
+            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);    
+        }
         
         // Read Cart Array and pass to URL
         var cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
@@ -74,7 +76,8 @@ angular.module('eCommerce')
                 items = this.cartItems,
                 currentSize = parseInt(items[index].quantity),
                 currency = $("body").attr("data-currency"),
-                updateObj = {};
+                updateObj = {},
+                finalQuantity = 0;
                 if(call === "substract" && currentSize === 1) {
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateFlash", {"alertType": "danger", "message": "You cannot reduce the cart size below zero. Please remove the item."});
@@ -93,11 +96,12 @@ angular.module('eCommerce')
                     "quantity": item.quantity || 1
                 }
                 itemsArray.push(obj);
+                finalQuantity += item.quantity || 1;
             });
             if(lineItemId === "") {
                 window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
                 // Broadcast cart update to mini cart
-                $rootScope.$broadcast("updateMiniCartCount");
+                $rootScope.$broadcast("updateMiniCartCount", finalQuantity);
             } else {
                 window.sessionStorage.setItem('cartLength', ((call === "add") ? parseInt(window.sessionStorage.cartLength || 0)+1 : parseInt(window.sessionStorage.cartLength || 0)-1));
                 updateObj["lineItemId"] = items[index].lineItemId;
@@ -105,7 +109,7 @@ angular.module('eCommerce')
                 var promise = CartService.updateCartLineItem(updateObj);
                 promise.then(function(response) {
                     // Broadcast cart update to mini cart
-                    $rootScope.$broadcast("updateMiniCartCount");
+                    $rootScope.$broadcast("updateMiniCartCount", finalQuantity);
                 });     
             }
             this.getTotal();
@@ -219,7 +223,33 @@ angular.module('eCommerce')
         };
 
         $scope.gotoCheckout = function() {
-            this.location.path("/checkout/login");
+            // this.location.path("/checkout/login");
+            //Validate Checkout URI states with actual submitted data
+            // If the state is not cleared then it will redirect to beginning of the state.
+            var validateURI = false, validStateIndex = 0,
+            steps = JSON.parse(window.sessionStorage.checkoutState);
+
+            function validateStateUrls() {
+                for(var keys in steps) {
+                  if(steps[keys]) {
+                      validStateIndex++;
+                      validateURI = true; 
+                  } else {
+                      validateURI = false;
+                  }
+                }  
+            };
+              
+            // Checkout redirection on zero cart items
+            var cartlength = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray).length : (window.sessionStorage.cartLength) ? parseInt(JSON.parse(window.sessionStorage.cartLength)) : 0;
+            if(cartlength === 0) {
+              $location.path('/');
+            } else {
+                validStateIndex = 0;
+                validateStateUrls();
+                $location.path('/checkout/'+ Object.keys(steps)[validStateIndex]);
+            }
+
         };
 
         $scope.openOverlay = function() {

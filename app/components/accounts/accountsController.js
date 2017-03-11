@@ -15,7 +15,9 @@ angular.module('eCommerce')
     $scope.myAddress = false;
     $scope.myOrders = true;
     // Currency Update
-    $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+    if(window.userDetails && window.userDetails.preferredCurrency) {
+        $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+    }
 
 
   	$scope.viewOrder = function(event) {

@@ -13,7 +13,9 @@ angular.module('eCommerce')
             $scope.data = data.productDetails;
             $scope.$broadcast('dataloaded');
             // Currency Update
-            $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+            if(window.userDetails && window.userDetails.preferredCurrency) {
+                $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
+            }
         })
         .catch(function(error) {
             //
