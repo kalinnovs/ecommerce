@@ -4554,7 +4554,7 @@ angular.module('eCommerce')
             // '<p><a href="checkout/login" title="Checkout">Checkout</a></p>' +
             '<p><a href="/orderLookup" title="Orders">Find Orders</a></p>' +
             // '<p><a href="javascript:void(0);" title="Accounts">Accounts</a></p>' +
-            '<p><a href="profile" class="noDecoration profile"><span class="imageNull profilePicUpdate">'+
+            '<p><a href="javascript:void(0);" class="noDecoration profile"><span class="imageNull profilePicUpdate">'+
                 '<img src="" class="profilePic" alt="ProfilePic" /><i class="fa fa-user" aria-hidden="true"></i></span>'+
                 '<span class="logoutText">Logout</span> <span class="userDetailsUpdate userLogout"></span></a></p>' +
             '</div></div>',
