@@ -175,7 +175,7 @@ angular.module('eCommerce')
                     }
                 });
 
-                $(".minicart .profile > span").on("click", function(event) {
+                $(".minicart .profile").on("click", function(event) {
                     window.localStorage.setItem("accessToken", "");
                     window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
                     window.userDetails = {"name": "Guest","imageUrl": "","user": null};
