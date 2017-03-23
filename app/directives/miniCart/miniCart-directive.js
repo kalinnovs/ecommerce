@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .directive('minicart', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
+    .directive('minicart', ['$http', 'PRODUCTDATA_URL', '$state', 'AuthenticationService', '$rootScope', '$location', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
         var def = {
             restrict: 'A',
             scope:{
@@ -11,6 +11,7 @@ angular.module('eCommerce')
             '<i class="fa fa-shopping-cart" aria-hidden="true"></i>'+
             '<div class="cart-drawer arrow_box hide">'+
             '<div class="minicart">' +
+            '<h2>Shopping Cart <a href="javascript:void(0);" class="fa fa-times closeOverlay"></a></h2>'+
             '<div class="miniKart"></div>' +
             '<p class="manyItems">Please go to cart page to check the list</p>' +
             '<p><a href="cart" title="View Cart">View Cart</a></p>' +
@@ -52,7 +53,8 @@ angular.module('eCommerce')
                             cartCount+= parseInt(responseData[i].quantity || itemsArray[i].quantity);
                         }
                         $(".miniKart").parents(".cart").find(".count").html(cartCount);
-                    	window.sessionStorage.setItem('cartLength', cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                    	// window.sessionStorage.setItem('cartLength', cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                        window.sessionStorage.setItem('cartLength', cartCount);
                     }); 
                         
                     window.loadMiniCartOnce = true;
@@ -134,15 +136,17 @@ angular.module('eCommerce')
 
                 scope.$on("updateMiniCartCount", function (event, args) {
                     // getMiniCart();
-                    var count;
+                    var count, storageItemsCount = 0;
                     if(args) {
                         count = args;
                         window.sessionStorage.cartLength = args;
                     } else {
                         count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
+                        // storageItemsCount = quantityCounter();
+                        // if(storageItemsCount > 0 ) {
+                        //     count = count + storageItemsCount;
+                        // }
                     }
-                    var storageItemsCount = quantityCounter();
-                    count += storageItemsCount;
                     // console.log(count);
                     $(".miniKart").parents(".cart").find(".count").html(count);
 
@@ -152,25 +156,30 @@ angular.module('eCommerce')
                     }
                 });
 
-                function quantityCounter() {
-                    var itemArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
-                        count = 0;
-                    for(var i=0; i < itemArray.length; i++) {
-                        count+= parseInt(itemArray[i].quantity);
-                    }
-                    return count;
-                };
+                // function quantityCounter() {
+                //     var itemArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+                //         count = 0;
+                //     for(var i=0; i < itemArray.length; i++) {
+                //         count+= parseInt(itemArray[i].quantity);
+                //     }
+                //     return count;
+                // };
                 
                 element.on("click", function(event) {
                     var currentTarget = event.currentTarget;
                     if(this === currentTarget) {
-                        $(this).find(".miniKart").addClass("loader");
                         var drawer = $(this).find(".cart-drawer");
                         if(drawer.hasClass("hide")) {
+                            $(this).find(".miniKart").addClass("loader");
                             getMiniCart(currentTarget);
                             drawer.removeClass("hide");
+                            if($('body').hasClass('mobile')) {
+                                drawer.css('left', 0);
+                            }
                         } else {
-                            drawer.addClass("hide");
+                            if(!$('body').hasClass('mobile')) {
+                                drawer.addClass("hide");    
+                            }
                         }    
                     }
                 });
@@ -188,8 +197,14 @@ angular.module('eCommerce')
                     event.preventDefault();
                 });
 
+                $(".minicart .closeOverlay").on("click", function(event) {
+                    $(".cart-drawer").addClass('hide').css("left", "-1000px");
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
+
                 $("body").on("click", function(ev) {
-                    if($(ev.target).parents(".mini-cart-trigger").length === 0) {
+                    if($(ev.target).parents(".mini-cart-trigger").length === 0 && !$('body').hasClass('mobile')) {
                         $(".cart-drawer").addClass("hide");
                     } else {
                         return;
@@ -198,4 +213,4 @@ angular.module('eCommerce')
             }
         };
         return def;
-    });
+    }]);

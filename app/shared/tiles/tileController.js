@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('tileCtrl', function ($scope, $rootScope, UserService, BASE_URI) {
+  .controller('tileCtrl', ['$scope', '$rootScope', 'UserService', 'BASE_URI', function ($scope, $rootScope, UserService, BASE_URI) {
     var tile = this;
 
     $rootScope.$on('event:data-change', function() {
@@ -23,5 +23,5 @@ angular.module('eCommerce')
       });
     };
 
-  })
+  }])
 ;

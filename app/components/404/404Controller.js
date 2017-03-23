@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('pagenotfoundCtrl', function ($scope, $rootScope, $sce, $timeout, PRODUCTDATA_URL) {
+  .controller('pagenotfoundCtrl', ['$scope', '$rootScope', '$sce', '$timeout', 'PRODUCTDATA_URL', 
+    function ($scope, $rootScope, $sce, $timeout, PRODUCTDATA_URL) {
     var pagenotfound = this;
     var scoper = $scope;
     
@@ -48,4 +49,5 @@ angular.module('eCommerce')
 
     Application.init();
     
-});
+}]
+);

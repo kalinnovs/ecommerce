@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('DetailCtrl', function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, PRODUCTDATA_URL, BASE_URI, $stateParams) {
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$state', 'UserService', 'DetailService', 'PRODUCTDATA_URL', 'BASE_URI', '$stateParams', 
+    function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, PRODUCTDATA_URL, BASE_URI, $stateParams) {
     var details = this;
     $scope.currentState = $state.params.id;
     
@@ -50,11 +51,11 @@ angular.module('eCommerce')
         ev.stopPropagation();
     };
 
-  })
+  }])
   
 
-.filter('html', function($sce) {
+.filter('html', ['$sce', function($sce) {
     return function(val) {
         return $sce.trustAsHtml(val);
     };
-});
+}]);

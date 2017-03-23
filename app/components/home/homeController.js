@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('HomeCtrl', function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http) {
+  .controller('HomeCtrl', ['$scope', '$timeout', '$rootScope', 'UserService', 'PRODUCTDATA_URL', '$http', 
+    function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http) {
     var home = this;
     var scoper = $scope;
     $scope.user = "pritish";
@@ -116,5 +117,5 @@ angular.module('eCommerce')
       // debugger;
         $scope.foo = 'newFoo';
     }
-  })
+  }])
 ;

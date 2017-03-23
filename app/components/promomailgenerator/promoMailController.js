@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('PromoMailCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
+  .controller('PromoMailCtrl', ['$scope', '$rootScope', '$location', '$timeout', 'UserService', '$http', 'PRODUCTDATA_URL', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
     var mail = this;
     var scoper = $scope;
     
@@ -55,4 +55,4 @@ angular.module('eCommerce')
             });
 
     };
-});
+}]);

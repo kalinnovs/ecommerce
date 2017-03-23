@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$q', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'PRODUCTDATA_URL', '$location', 'cartItems', 'getAddress', 'getLoginStatus', 'viewCart', 'AuthenticationService', 'Facebook', 'Google',  function($scope, $http, $rootScope, $q, $timeout, $controller, $state, checkoutStorage, CheckoutService, PRODUCTDATA_URL, $location, cartItems, getAddress, getLoginStatus, viewCart, AuthenticationService, Facebook, Google) {
+    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$q', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'PRODUCTDATA_URL', '$location', 'cartItems', 'getAddress', 'getLoginStatus', 'viewCart', 'AuthenticationService', 'Facebook', 'Google',  
+        function($scope, $http, $rootScope, $q, $timeout, $controller, $state, checkoutStorage, CheckoutService, PRODUCTDATA_URL, $location, cartItems, getAddress, getLoginStatus, viewCart, AuthenticationService, Facebook, Google) {
         var checkout = this,
         responseData,
         self = $scope;
@@ -43,11 +44,14 @@ angular.module('eCommerce')
             var responseData,
                 cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
             if(getLoginStatus && getLoginStatus.success === true) {
+                if(viewCart.cartList.length === 0) {
+                    
+                }
                 $scope.cartItems = viewCart.cartList;
             } else {
                 responseData = viewCart.cartList;
                 $.each(responseData, function(key, val) {
-                    val["quantity"] = val.quantity;
+                    val["quantity"] = val.quantity || 1;
                 });
                 $scope.cartItems = (responseData) ? responseData : [];
             }
@@ -192,33 +196,6 @@ angular.module('eCommerce')
             return totalCost;
         };
 
-        $scope.removeItem = function(event) {
-            var currentIndex = $(event.currentTarget).parents("li").data("index"),
-                cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
-            cartItems.splice(currentIndex,1);
-
-            // Remove the item from storage
-            var itemList = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
-            // var itemStore = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
-            itemList.splice(currentIndex,1);
-            // itemStore.splice(currentIndex,1);
-            // insert the new stringified array into sessionStorage
-            window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
-            // window.sessionStorage.setItem('cartParts', JSON.stringify(itemStore));
-            window.miniCartStorage = itemList;
-            
-            // Broadcast cart update to mini cart
-            $rootScope.$broadcast("updateMiniCartCount");
-
-            // If cart goes empty page redirects to home page
-            if(itemList.length === 0) {
-                $timeout(function() {
-                    $state.go("home");
-                }, 1000, false);
-            }
-            event.preventDefault();
-        };
-
         $scope.subTotal = function() {
             var totalCost = this.getTotal(),
                 checkoutCartConfig = this.checkoutCartConfig,
@@ -323,11 +300,14 @@ angular.module('eCommerce')
                 qty = this.$parent.cartItems.filter(function(i, j) {
                     return (i.lineItemId === parseInt(lineItemId));
                 });
-
+            var count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
             if(lineItemId === "") {
                 // Removes the line item from Local storage when there is no logged in User.
                 var currentIndex = $(event.currentTarget).parents("li").data("index"),
                     cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
+                // Reduce the cartLength counter
+                window.sessionStorage.setItem('cartLength', count - cartItems[currentIndex].quantity);
+
                 cartItems.splice(currentIndex,1);
 
                 // Remove the item from storage
@@ -337,7 +317,7 @@ angular.module('eCommerce')
                 var itemsArray = [];
                 $.each(itemList, function(i, item) {
                     var obj = {
-                        "partNumber": item.productPartNumber || item.productId,
+                        "partNumber": item.productPartNumber || item.productId || item.partNumber,
                         "quantity": item.quantity || 1
                     }
                     itemsArray.push(obj);
@@ -610,7 +590,7 @@ angular.module('eCommerce')
 );
 
 angular.module('eCommerce')
-    .factory("checkoutStorage", function($window, $rootScope) {
+    .factory("checkoutStorage", ['$window', '$rootScope', function($window, $rootScope) {
         angular.element($window).on('storage', function(event) {
             if (event.key === 'storage') {
                 $rootScope.$apply();
@@ -625,5 +605,5 @@ angular.module('eCommerce')
                 return $window.sessionStorage && JSON.parse($window.sessionStorage.getItem(val));
             }
         };
-    }
+    }]
 );

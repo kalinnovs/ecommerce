@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .service('CartService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
+  .service('CartService', ['$http', 'ENDPOINT_URI', 'PRODUCTDATA_URL', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -64,4 +64,4 @@ angular.module('eCommerce')
         }); 
     }    
 
-  });
+  }]);

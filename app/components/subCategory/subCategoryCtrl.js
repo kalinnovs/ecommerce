@@ -82,7 +82,7 @@ angular.module('eCommerce')
 }]);
 
 angular.module('eCommerce')
-.controller('subCategoryEditCtrl', function ($scope, $uibModalInstance, item, category) {
+.controller('subCategoryEditCtrl', ['$scope', '$uibModalInstance', 'item', 'category', function ($scope, $uibModalInstance, item, category) {
 
     $scope.subCategory = angular.copy(item);
     $scope.category = angular.copy(category);
@@ -97,6 +97,6 @@ angular.module('eCommerce')
     $scope.isClean = function() {
         return angular.equals(original, $scope.product);
     }
-});
+}]);
 
 

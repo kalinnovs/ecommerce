@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-.service('OrderDetailService', function($q, $http, PRODUCTDATA_URL){
+.service('OrderDetailService', ['$q', '$http', 'PRODUCTDATA_URL', function($q, $http, PRODUCTDATA_URL){
 	var service = this;
 	var deferred = $q.defer();
 
@@ -32,4 +32,4 @@ angular.module('eCommerce')
                 console.log("Error in getting order list.");
             }); 
 	}
-});
+}]);

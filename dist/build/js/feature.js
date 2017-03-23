@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUpload'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   .constant('PRODUCTDATA_URL', 'https://haastika.com/HaastikaDataService')
   .constant('ENDPOINT_URI', './')
@@ -546,7 +546,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase',
 'use strict';
 
 angular.module('eCommerce')
-  .service('UserService', function ($http, $rootScope, ENDPOINT_URI) {
+  .service('UserService', ['$http', '$rootScope', 'ENDPOINT_URI', function ($http, $rootScope, ENDPOINT_URI) {
     var service = this;
 
     service.GetAll = function(url) {
@@ -600,13 +600,14 @@ angular.module('eCommerce')
         $rootScope.$broadcast('event:data-change');
     }
 
-  });
+  }]);
 
 },{}],3:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .controller('pagenotfoundCtrl', function ($scope, $rootScope, $sce, $timeout, PRODUCTDATA_URL) {
+  .controller('pagenotfoundCtrl', ['$scope', '$rootScope', '$sce', '$timeout', 'PRODUCTDATA_URL', 
+    function ($scope, $rootScope, $sce, $timeout, PRODUCTDATA_URL) {
     var pagenotfound = this;
     var scoper = $scope;
     
@@ -653,13 +654,14 @@ angular.module('eCommerce')
 
     Application.init();
     
-});
+}]
+);
 
 },{}],4:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .service('AboutService', function ($http, ENDPOINT_URI) {
+  .service('AboutService',['$http', 'ENDPOINT_URI', function ($http, ENDPOINT_URI) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -692,13 +694,14 @@ angular.module('eCommerce')
     }
 
 
-  });
+  }]);
 
 },{}],5:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .controller('aboutCtrl', function ($scope, $rootScope, $sce, UserService, $timeout, AboutService, PRODUCTDATA_URL, BASE_URI) {
+  .controller('aboutCtrl', ['$scope', '$rootScope', '$sce', 'UserService', '$timeout', 'AboutService', 'PRODUCTDATA_URL', 'BASE_URI', 
+    function ($scope, $rootScope, $sce, UserService, $timeout, AboutService, PRODUCTDATA_URL, BASE_URI) {
     var about = this;
     var scoper = $scope;
     
@@ -724,18 +727,19 @@ angular.module('eCommerce')
     $scope.getHtml = function(html){
         return $sce.trustAsHtml(html);
     };
-  })
-.filter('html', function($sce) {
+  }])
+.filter('html', ['$sce', function($sce) {
     return function(val) {
         return $sce.trustAsHtml(val);
     };
-});
+}]);
 
 },{}],6:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AccoutsCtrl', function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress, getAccountDetail) {
+  .controller('AccoutsCtrl', ['$scope', '$timeout', '$rootScope', 'UserService', 'PRODUCTDATA_URL', '$http', 'AccountsService', 'orderList', 'savedCart', 'getAddress', 'getAccountDetail', 
+    function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress, getAccountDetail) {
 
   	$scope.loggedUser = window.userDetails;
   	$scope.orderList = orderList.orderList;
@@ -881,12 +885,13 @@ angular.module('eCommerce')
         // $scope[dataModel] = true;
     });
 
-  });
+  }]);
 },{}],7:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .service('AccountsService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
+  .service('AccountsService', ['$http', 'ENDPOINT_URI', 'PRODUCTDATA_URL',
+    function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -1009,13 +1014,14 @@ angular.module('eCommerce')
     }
 
 
-  });
+  }]);
 
 },{}],8:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AdminCtrl', function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, PRODUCTDATA_URL, AuthenticationService, OrderDetailService) {
+  .controller('AdminCtrl', ['$scope', '$rootScope', '$http', '$state', '$timeout', 'UserService', '$cookies', 'PRODUCTDATA_URL', 'AuthenticationService', 'OrderDetailService', 
+    function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, PRODUCTDATA_URL, AuthenticationService, OrderDetailService) {
     var admin = this;
     
     // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
@@ -1061,14 +1067,15 @@ angular.module('eCommerce')
         $state.go('home');
     };
     
-  })
-;
+  }]
+);
 
 },{}],9:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, $state, $location, CartService, UserService, PRODUCTDATA_URL, user, cartData) {
+    .controller('CartCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$state', '$location', 'CartService', 'UserService', 'PRODUCTDATA_URL', 'user', 'cartData', 
+        function($scope, $http, $rootScope, $timeout, $state, $location, CartService, UserService, PRODUCTDATA_URL, user, cartData) {
         var cart = this,
         responseData,
         loginStatus = user,
@@ -1192,11 +1199,15 @@ angular.module('eCommerce')
                 qty = this.$parent.cartItems.filter(function(i, j) {
                     return (i.lineItemId === parseInt(lineItemId));
                 });
-
+            var count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
             if(lineItemId === "") {
                 // Removes the line item from Local storage when there is no logged in User.
                 var currentIndex = $(event.currentTarget).parents("li").data("index"),
                     cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
+
+                // Reduce the cartLength counter
+                window.sessionStorage.setItem('cartLength', count - cartItems[currentIndex].quantity);
+
                 cartItems.splice(currentIndex,1);
 
                 // Remove the item from storage
@@ -1206,14 +1217,14 @@ angular.module('eCommerce')
                 var itemsArray = [];
                 $.each(itemList, function(i, item) {
                     var obj = {
-                        "partNumber": item.productPartNumber || item.productId,
+                        "partNumber": item.productPartNumber || item.productId || item.partNumber,
                         "quantity": item.quantity || 1
                     }
                     itemsArray.push(obj);
                 });
                 
                 // insert the new stringified array into LocalStorage
-                window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
+                window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
 
                 // If cart goes empty page redirects to home page
                 if(itemList.length === 0) {
@@ -1226,7 +1237,32 @@ angular.module('eCommerce')
                 $rootScope.$broadcast("updateMiniCartCount");
 
             } else {
-                window.sessionStorage.setItem('cartLength', parseInt(window.sessionStorage.cartLength) - qty[0].quantity);
+                // window.sessionStorage.setItem('cartLength', parseInt(window.sessionStorage.cartLength) - qty[0].quantity);
+                var part, itemList, newList, itemsArray, quantity, count;
+                count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
+                part = $(event.currentTarget).data("part");
+                quantity = $(event.currentTarget).data("quantity");
+
+                window.sessionStorage.setItem('cartLength', count - parseInt(quantity));
+
+                itemList = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
+                // Remove the item from storage
+                newList = itemList.filter(function(i) {
+                    return i.partNumber != part;
+                });
+
+                itemsArray = [];
+                $.each(newList, function(i, item) {
+                    var obj = {
+                        "partNumber": item.productPartNumber || item.productId || item.partNumber,
+                        "quantity": item.quantity || 1
+                    }
+                    itemsArray.push(obj);
+                });
+                
+                // insert the new stringified array into LocalStorage
+                window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
+
                 // Removes the line item from data base when there is a logged in User.
                 $http({
                     method: 'GET',
@@ -1339,14 +1375,14 @@ angular.module('eCommerce')
             window.dataLoaded = true;
             $(".progress").hide();
         }, 1000, false);
-    }
+    }]
 );
 
 },{}],10:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .service('CartService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
+  .service('CartService', ['$http', 'ENDPOINT_URI', 'PRODUCTDATA_URL', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -1409,13 +1445,14 @@ angular.module('eCommerce')
         }); 
     }    
 
-  });
+  }]);
 
 },{}],11:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-    .controller('categoryCtrl', function($scope, $rootScope, $timeout, $sce, $state, CategoryService, UserService, $stateParams, PRODUCTDATA_URL, BASE_URI) {
+    .controller('categoryCtrl', ['$scope', '$rootScope', '$timeout', '$sce', '$state', 'CategoryService', 'UserService', '$stateParams', 'PRODUCTDATA_URL', 'BASE_URI', 
+        function($scope, $rootScope, $timeout, $sce, $state, CategoryService, UserService, $stateParams, PRODUCTDATA_URL, BASE_URI) {
         var cat = this;
         var scoper = $scope;
 
@@ -1480,12 +1517,12 @@ angular.module('eCommerce')
         };
 
         
-    })
-    .filter('html', function($sce) {
+    }])
+    .filter('html', ['$sce', function($sce) {
         return function(val) {
             return $sce.trustAsHtml(val);
         };
-    });
+    }]);
 
 },{}],12:[function(require,module,exports){
 
@@ -1575,7 +1612,7 @@ angular.module('eCommerce')
 }]);
 
 angular.module('eCommerce')
-.controller('categoryEditCtrl', function ($scope, $uibModalInstance, item) {
+.controller('categoryEditCtrl', ['$scope', '$uibModalInstance', 'item', function ($scope, $uibModalInstance, item) {
 
     $scope.category = angular.copy(item);
         
@@ -1602,7 +1639,7 @@ angular.module('eCommerce')
             $uibModalInstance.close(x);
         }
     };
-});
+}]);
 
 
 
@@ -1610,7 +1647,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .service('CategoryService', function ($http, ENDPOINT_URI) {
+  .service('CategoryService', ['$http', 'ENDPOINT_URI', function ($http, ENDPOINT_URI) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -1639,12 +1676,13 @@ angular.module('eCommerce')
     }
 
 
-  });
+  }]);
 },{}],14:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$q', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'PRODUCTDATA_URL', '$location', 'cartItems', 'getAddress', 'getLoginStatus', 'viewCart', 'AuthenticationService', 'Facebook', 'Google',  function($scope, $http, $rootScope, $q, $timeout, $controller, $state, checkoutStorage, CheckoutService, PRODUCTDATA_URL, $location, cartItems, getAddress, getLoginStatus, viewCart, AuthenticationService, Facebook, Google) {
+    .controller('CheckoutCtrl', ['$scope', '$http', '$rootScope', '$q', '$timeout', '$controller', '$state', 'checkoutStorage', 'CheckoutService', 'PRODUCTDATA_URL', '$location', 'cartItems', 'getAddress', 'getLoginStatus', 'viewCart', 'AuthenticationService', 'Facebook', 'Google',  
+        function($scope, $http, $rootScope, $q, $timeout, $controller, $state, checkoutStorage, CheckoutService, PRODUCTDATA_URL, $location, cartItems, getAddress, getLoginStatus, viewCart, AuthenticationService, Facebook, Google) {
         var checkout = this,
         responseData,
         self = $scope;
@@ -1686,11 +1724,14 @@ angular.module('eCommerce')
             var responseData,
                 cartItems = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
             if(getLoginStatus && getLoginStatus.success === true) {
+                if(viewCart.cartList.length === 0) {
+                    
+                }
                 $scope.cartItems = viewCart.cartList;
             } else {
                 responseData = viewCart.cartList;
                 $.each(responseData, function(key, val) {
-                    val["quantity"] = val.quantity;
+                    val["quantity"] = val.quantity || 1;
                 });
                 $scope.cartItems = (responseData) ? responseData : [];
             }
@@ -1835,33 +1876,6 @@ angular.module('eCommerce')
             return totalCost;
         };
 
-        $scope.removeItem = function(event) {
-            var currentIndex = $(event.currentTarget).parents("li").data("index"),
-                cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
-            cartItems.splice(currentIndex,1);
-
-            // Remove the item from storage
-            var itemList = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
-            // var itemStore = (window.sessionStorage.cartParts) ? JSON.parse(window.sessionStorage.cartParts) : [];
-            itemList.splice(currentIndex,1);
-            // itemStore.splice(currentIndex,1);
-            // insert the new stringified array into sessionStorage
-            window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
-            // window.sessionStorage.setItem('cartParts', JSON.stringify(itemStore));
-            window.miniCartStorage = itemList;
-            
-            // Broadcast cart update to mini cart
-            $rootScope.$broadcast("updateMiniCartCount");
-
-            // If cart goes empty page redirects to home page
-            if(itemList.length === 0) {
-                $timeout(function() {
-                    $state.go("home");
-                }, 1000, false);
-            }
-            event.preventDefault();
-        };
-
         $scope.subTotal = function() {
             var totalCost = this.getTotal(),
                 checkoutCartConfig = this.checkoutCartConfig,
@@ -1966,11 +1980,14 @@ angular.module('eCommerce')
                 qty = this.$parent.cartItems.filter(function(i, j) {
                     return (i.lineItemId === parseInt(lineItemId));
                 });
-
+            var count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
             if(lineItemId === "") {
                 // Removes the line item from Local storage when there is no logged in User.
                 var currentIndex = $(event.currentTarget).parents("li").data("index"),
                     cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
+                // Reduce the cartLength counter
+                window.sessionStorage.setItem('cartLength', count - cartItems[currentIndex].quantity);
+
                 cartItems.splice(currentIndex,1);
 
                 // Remove the item from storage
@@ -1980,7 +1997,7 @@ angular.module('eCommerce')
                 var itemsArray = [];
                 $.each(itemList, function(i, item) {
                     var obj = {
-                        "partNumber": item.productPartNumber || item.productId,
+                        "partNumber": item.productPartNumber || item.productId || item.partNumber,
                         "quantity": item.quantity || 1
                     }
                     itemsArray.push(obj);
@@ -2253,7 +2270,7 @@ angular.module('eCommerce')
 );
 
 angular.module('eCommerce')
-    .factory("checkoutStorage", function($window, $rootScope) {
+    .factory("checkoutStorage", ['$window', '$rootScope', function($window, $rootScope) {
         angular.element($window).on('storage', function(event) {
             if (event.key === 'storage') {
                 $rootScope.$apply();
@@ -2268,13 +2285,14 @@ angular.module('eCommerce')
                 return $window.sessionStorage && JSON.parse($window.sessionStorage.getItem(val));
             }
         };
-    }
+    }]
 );
 },{}],15:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .service('CheckoutService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL, checkoutStorage) {
+  .service('CheckoutService', ['$http', 'ENDPOINT_URI', 'PRODUCTDATA_URL', 'checkoutStorage', 
+    function ($http, ENDPOINT_URI, PRODUCTDATA_URL, checkoutStorage) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -2412,13 +2430,13 @@ angular.module('eCommerce')
     }
 
 
-  });
+  }]);
 
 },{}],16:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, PRODUCTDATA_URL, UserService, BASE_URI) {
+  .controller('ContactCtrl', ['$scope', '$timeout', '$location', '$http', '$rootScope', 'PRODUCTDATA_URL', 'UserService', 'BASE_URI', function ($scope, $timeout, $location, $http, $rootScope, PRODUCTDATA_URL, UserService, BASE_URI) {
     var contacts = this;
     var original = $scope.user;
     
@@ -2461,14 +2479,15 @@ angular.module('eCommerce')
     };
 
 
-  })
+  }])
 ;
 
 },{}],17:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .controller('DetailCtrl', function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, PRODUCTDATA_URL, BASE_URI, $stateParams) {
+  .controller('DetailCtrl', ['$scope', '$rootScope', '$sce', '$timeout', '$state', 'UserService', 'DetailService', 'PRODUCTDATA_URL', 'BASE_URI', '$stateParams', 
+    function ($scope, $rootScope, $sce, $timeout, $state, UserService, DetailService, PRODUCTDATA_URL, BASE_URI, $stateParams) {
     var details = this;
     $scope.currentState = $state.params.id;
     
@@ -2517,20 +2536,20 @@ angular.module('eCommerce')
         ev.stopPropagation();
     };
 
-  })
+  }])
   
 
-.filter('html', function($sce) {
+.filter('html', ['$sce', function($sce) {
     return function(val) {
         return $sce.trustAsHtml(val);
     };
-});
+}]);
 
 },{}],18:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .service('DetailService', function ($http, ENDPOINT_URI) {
+  .service('DetailService', ['$http', 'ENDPOINT_URI', function ($http, ENDPOINT_URI) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -2559,12 +2578,13 @@ angular.module('eCommerce')
     }
 
 
-  });
+  }]);
 },{}],19:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .controller('HomeCtrl', function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http) {
+  .controller('HomeCtrl', ['$scope', '$timeout', '$rootScope', 'UserService', 'PRODUCTDATA_URL', '$http', 
+    function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http) {
     var home = this;
     var scoper = $scope;
     $scope.user = "pritish";
@@ -2679,14 +2699,14 @@ angular.module('eCommerce')
       // debugger;
         $scope.foo = 'newFoo';
     }
-  })
+  }])
 ;
 
 },{}],20:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .service('HomeService', function ($http, ENDPOINT_URI) {
+  .service('HomeService', ['$http', 'ENDPOINT_URI', function ($http, ENDPOINT_URI) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -2714,13 +2734,13 @@ angular.module('eCommerce')
         return $http.get(url).then(service.extract);
     }
 
-  });
+  }]);
 },{}],21:[function(require,module,exports){
 
 angular.module('eCommerce')
 .controller('InventoryCtrl',['$scope', '$http', '$uibModal', function($scope, $http, $uibModal){
     var url = "assets/json/product.json";
-debugger;
+// debugger;
     $http.get(url).success( function(response) {
         $scope.products = response.productList;
         $scope.categoryList = response.categoryList;
@@ -2788,7 +2808,7 @@ debugger;
 }]);
 
 angular.module('eCommerce')
-.controller('productEditCtrl', function ($scope) {
+.controller('productEditCtrl', ['$scope', function ($scope) {
     $scope.product = angular.copy(item);
     $scope.categoryList = angular.copy(categoryList);
     $scope.cancel = function () {
@@ -2806,7 +2826,7 @@ angular.module('eCommerce')
         debugger;
         console.log($scope.product.categoryId);
     }
-});
+}]);
 
 },{}],22:[function(require,module,exports){
 
@@ -3387,7 +3407,7 @@ angular.module('eCommerce')
                     response.userType = response.userType;
                     window.localStorage.setItem("accessToken", response.token);
                     window.userDetails = response.loggedUser;
-                    window.sessionStorage.setItem('cartLength', response.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                    window.sessionStorage.setItem('cartLength', response.cartCount);
                     
                     var promise = LoginService.updateCartFromLocal();
                     promise.then(function() {
@@ -3523,7 +3543,7 @@ angular.module('eCommerce')
                         // Hardcoded 
                         // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.userDetails = response.data.loggedUser;
-                        window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                        window.sessionStorage.setItem('cartLength', response.data.cartCount);
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
@@ -3552,7 +3572,7 @@ angular.module('eCommerce')
                                 // Hardcoded 
                                 // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                                 window.userDetails = response.data.loggedUser;
-                                window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                                window.sessionStorage.setItem('cartLength', response.data.cartCount);
                                 
                                 var promise = LoginService.updateCartFromLocal();
                                 promise.then(function() {
@@ -3626,7 +3646,7 @@ angular.module('eCommerce')
                         // Hardcoded 
                         // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.userDetails = response.data.loggedUser;
-                        window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                        window.sessionStorage.setItem('cartLength', response.data.cartCount);
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
@@ -3795,7 +3815,7 @@ angular.module('eCommerce')
  
     /* jshint ignore:end */
 })
-.service('LoginService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
+.service('LoginService', ['$http', 'ENDPOINT_URI', 'PRODUCTDATA_URL', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -3858,7 +3878,7 @@ angular.module('eCommerce')
                 console.log("Error in saving.");
         }); 
     }
-});
+}]);
 },{}],27:[function(require,module,exports){
 'use strict';
 
@@ -3894,7 +3914,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .service('OrderService', function ($q, $http, ENDPOINT_URI, PRODUCTDATA_URL, checkoutStorage) {
+  .service('OrderService', ['$q', '$http', 'ENDPOINT_URI', 'PRODUCTDATA_URL', 'checkoutStorage', function ($q, $http, ENDPOINT_URI, PRODUCTDATA_URL, checkoutStorage) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -3917,13 +3937,13 @@ angular.module('eCommerce')
             }); 
     } 
 
-  });
+  }]);
 
 },{}],29:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-	.controller('OrderDetailCtrl', function($scope, OrderDetailService, $rootScope) {
+	.controller('OrderDetailCtrl', ['$scope', 'OrderDetailService', '$rootScope', function($scope, OrderDetailService, $rootScope) {
 		
 		$scope.getOrderList = function(){
 			OrderDetailService.getOrderList().then(function(data){
@@ -3944,12 +3964,12 @@ angular.module('eCommerce')
 				}
 			});
 		}
-	});
+	}]);
 },{}],30:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-.service('OrderDetailService', function($q, $http, PRODUCTDATA_URL){
+.service('OrderDetailService', ['$q', '$http', 'PRODUCTDATA_URL', function($q, $http, PRODUCTDATA_URL){
 	var service = this;
 	var deferred = $q.defer();
 
@@ -3980,12 +4000,12 @@ angular.module('eCommerce')
                 console.log("Error in getting order list.");
             }); 
 	}
-});
+}]);
 },{}],31:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .controller('PromoMailCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
+  .controller('PromoMailCtrl', ['$scope', '$rootScope', '$location', '$timeout', 'UserService', '$http', 'PRODUCTDATA_URL', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
     var mail = this;
     var scoper = $scope;
     
@@ -4039,13 +4059,13 @@ angular.module('eCommerce')
             });
 
     };
-});
+}]);
 
 },{}],32:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .controller('RegisterCtrl', function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, PRODUCTDATA_URL, $firebaseObject) {
+  .controller('RegisterCtrl', ['$scope', '$timeout', '$rootScope', '$location', 'UserService', '$http', 'BASE_URI', 'PRODUCTDATA_URL'], function ($scope, $timeout, $rootScope, $location, UserService, $http, BASE_URI, PRODUCTDATA_URL) {
         var register = this;
         var scoper = $scope;
         
@@ -4173,7 +4193,7 @@ angular.module('eCommerce')
 }]);
 
 angular.module('eCommerce')
-.controller('subCategoryEditCtrl', function ($scope, $uibModalInstance, item, category) {
+.controller('subCategoryEditCtrl', ['$scope', '$uibModalInstance', 'item', 'category', function ($scope, $uibModalInstance, item, category) {
 
     $scope.subCategory = angular.copy(item);
     $scope.category = angular.copy(category);
@@ -4188,7 +4208,7 @@ angular.module('eCommerce')
     $scope.isClean = function() {
         return angular.equals(original, $scope.product);
     }
-});
+}]);
 
 
 
@@ -4196,7 +4216,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('SubscriberCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
+  .controller('SubscriberCtrl', ['$scope', '$rootScope', '$location', '$timeout', 'UserService', '$http', 'PRODUCTDATA_URL', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
     var subscriber = this;
     var scoper = $scope;
     
@@ -4241,11 +4261,8 @@ angular.module('eCommerce')
         }
     };
 
-
-
-})    
-
-;
+}]
+);
 
 },{}],35:[function(require,module,exports){
 'use strict';
@@ -4262,7 +4279,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-    .directive('addToCart', function($http, $rootScope, PRODUCTDATA_URL, AuthenticationService) {
+    .directive('addToCart', ['$http', '$rootScope', 'PRODUCTDATA_URL', 'AuthenticationService', function($http, $rootScope, PRODUCTDATA_URL, AuthenticationService) {
         var def = {
             restrict: 'EA',
             scope: {
@@ -4277,7 +4294,8 @@ angular.module('eCommerce')
                     var obj = {
                         "partNumber": item.productPartNumber || item.productId,
                         "quantity": item.quantity || 1
-                    }
+                    };
+                    var count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
 
                     var addItem = function(item) {
 
@@ -4286,23 +4304,20 @@ angular.module('eCommerce')
                         var repeatedItem = oldItems.filter(function(val, index) {
                             return (val.partNumber === item.partNumber);
                         });
+                        window.sessionStorage.setItem('cartLength', ++count);
                         if(repeatedItem.length > 0) {
                             // repeatedItem[0]["quantity"] += 1
                             oldItems.map(function(val, index) {
                                 (val.partNumber === repeatedItem[0]["partNumber"]) ? val.quantity += 1 : '';
                             });
                             window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
-                            
                             // Broadcast cart update to mini cart
                             $rootScope.$broadcast("updateMiniCartCount");
                             return true;
                         }
                         oldItems.push(item);
 
-                        // window.miniCartStorage.push(item.partNumber);
-                        // window.sessionStorage.setItem('cartParts', JSON.stringify(window.miniCartStorage));
                         window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
-
                         window.itemsArray.push(item);
 
                         // Broadcast cart update to mini cart
@@ -4341,13 +4356,13 @@ angular.module('eCommerce')
             }
         };
         return def;
-    });
+    }]);
 
 },{}],37:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .directive('currencyChooser', function ($http, $compile, PRODUCTDATA_URL, $rootScope) {
+  .directive('currencyChooser', ['$http', '$compile', 'PRODUCTDATA_URL', '$rootScope', function ($http, $compile, PRODUCTDATA_URL, $rootScope) {
     var linker = function(scope, element, attrs) {
         var elem = element;
 
@@ -4426,7 +4441,7 @@ angular.module('eCommerce')
           $("body").attr("data-crId", 1);
         }
     };
-});
+}]);
 
 },{}],38:[function(require,module,exports){
 angular.module('eCommerce')
@@ -4455,7 +4470,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .directive('flasher', function ($compile, DIRECTIVE_URI, $sce) {
+  .directive('flasher', ['$compile', 'DIRECTIVE_URI', '$sce', function ($compile, DIRECTIVE_URI, $sce) {
     var linker = function(scope, element, attrs, $sce) {
         var elem = element,
             alert = {
@@ -4484,7 +4499,7 @@ angular.module('eCommerce')
         link: linker,
         template: '<div class="alert {{className}}"></div>'
     };
-});
+}]);
 
 },{}],40:[function(require,module,exports){
 angular.module('eCommerce')
@@ -4508,7 +4523,7 @@ angular.module('eCommerce')
 
 },{}],41:[function(require,module,exports){
 angular.module('eCommerce')
-  .directive('limitCharacterRender', function ($compile) {
+  .directive('limitCharacterRender', ['$compile', function ($compile) {
   	var template = "{{modelBind}}";
 
   	var linker = function(scope, element, attrs) {
@@ -4531,14 +4546,14 @@ angular.module('eCommerce')
             modelBind:'='
         }
     };
-  })
+  }])
  ;
 
 },{}],42:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-    .directive('minicart', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
+    .directive('minicart', ['$http', 'PRODUCTDATA_URL', '$state', 'AuthenticationService', '$rootScope', '$location', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
         var def = {
             restrict: 'A',
             scope:{
@@ -4548,6 +4563,7 @@ angular.module('eCommerce')
             '<i class="fa fa-shopping-cart" aria-hidden="true"></i>'+
             '<div class="cart-drawer arrow_box hide">'+
             '<div class="minicart">' +
+            '<h2>Shopping Cart <a href="javascript:void(0);" class="fa fa-times closeOverlay"></a></h2>'+
             '<div class="miniKart"></div>' +
             '<p class="manyItems">Please go to cart page to check the list</p>' +
             '<p><a href="cart" title="View Cart">View Cart</a></p>' +
@@ -4589,7 +4605,8 @@ angular.module('eCommerce')
                             cartCount+= parseInt(responseData[i].quantity || itemsArray[i].quantity);
                         }
                         $(".miniKart").parents(".cart").find(".count").html(cartCount);
-                    	window.sessionStorage.setItem('cartLength', cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                    	// window.sessionStorage.setItem('cartLength', cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                        window.sessionStorage.setItem('cartLength', cartCount);
                     }); 
                         
                     window.loadMiniCartOnce = true;
@@ -4671,15 +4688,17 @@ angular.module('eCommerce')
 
                 scope.$on("updateMiniCartCount", function (event, args) {
                     // getMiniCart();
-                    var count;
+                    var count, storageItemsCount = 0;
                     if(args) {
                         count = args;
                         window.sessionStorage.cartLength = args;
                     } else {
                         count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
+                        // storageItemsCount = quantityCounter();
+                        // if(storageItemsCount > 0 ) {
+                        //     count = count + storageItemsCount;
+                        // }
                     }
-                    var storageItemsCount = quantityCounter();
-                    count += storageItemsCount;
                     // console.log(count);
                     $(".miniKart").parents(".cart").find(".count").html(count);
 
@@ -4689,25 +4708,30 @@ angular.module('eCommerce')
                     }
                 });
 
-                function quantityCounter() {
-                    var itemArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
-                        count = 0;
-                    for(var i=0; i < itemArray.length; i++) {
-                        count+= parseInt(itemArray[i].quantity);
-                    }
-                    return count;
-                };
+                // function quantityCounter() {
+                //     var itemArray = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [],
+                //         count = 0;
+                //     for(var i=0; i < itemArray.length; i++) {
+                //         count+= parseInt(itemArray[i].quantity);
+                //     }
+                //     return count;
+                // };
                 
                 element.on("click", function(event) {
                     var currentTarget = event.currentTarget;
                     if(this === currentTarget) {
-                        $(this).find(".miniKart").addClass("loader");
                         var drawer = $(this).find(".cart-drawer");
                         if(drawer.hasClass("hide")) {
+                            $(this).find(".miniKart").addClass("loader");
                             getMiniCart(currentTarget);
                             drawer.removeClass("hide");
+                            if($('body').hasClass('mobile')) {
+                                drawer.css('left', 0);
+                            }
                         } else {
-                            drawer.addClass("hide");
+                            if(!$('body').hasClass('mobile')) {
+                                drawer.addClass("hide");    
+                            }
                         }    
                     }
                 });
@@ -4725,8 +4749,14 @@ angular.module('eCommerce')
                     event.preventDefault();
                 });
 
+                $(".minicart .closeOverlay").on("click", function(event) {
+                    $(".cart-drawer").addClass('hide').css("left", "-1000px");
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
+
                 $("body").on("click", function(ev) {
-                    if($(ev.target).parents(".mini-cart-trigger").length === 0) {
+                    if($(ev.target).parents(".mini-cart-trigger").length === 0 && !$('body').hasClass('mobile')) {
                         $(".cart-drawer").addClass("hide");
                     } else {
                         return;
@@ -4735,13 +4765,13 @@ angular.module('eCommerce')
             }
         };
         return def;
-    });
+    }]);
 
 },{}],43:[function(require,module,exports){
 'use strict';
 
 angular.module('eCommerce')
-  .directive('stickyMenu', function ($compile, DIRECTIVE_URI) {
+  .directive('stickyMenu', ['$compile', 'DIRECTIVE_URI', function ($compile, DIRECTIVE_URI) {
     var linker = function(scope, element, attrs) {
       var menu = element,
         stickyClass = "nav-sticky",
@@ -4754,7 +4784,9 @@ angular.module('eCommerce')
             if( $(this).scrollTop() > hdr ) {
                 menu.addClass(stickyClass);
                 $("body").addClass('menu-stuck');
-                headerCart.addClass("hide");
+                if(!$('body').hasClass('mobile')) {
+                    headerCart.addClass("hide");
+                }
                 if(!stickyCart.hasClass("hide")) {
                     stickyCart.addClass("hide");
                 }
@@ -4771,7 +4803,7 @@ angular.module('eCommerce')
         transclude: true,
         template: '<div class="stickyMenu"><div class="controls" ng-transclude></div></div>'
     };
-});
+}]);
 
 },{}],44:[function(require,module,exports){
 'use strict';
@@ -4829,7 +4861,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('tileCtrl', function ($scope, $rootScope, UserService, BASE_URI) {
+  .controller('tileCtrl', ['$scope', '$rootScope', 'UserService', 'BASE_URI', function ($scope, $rootScope, UserService, BASE_URI) {
     var tile = this;
 
     $rootScope.$on('event:data-change', function() {
@@ -4851,7 +4883,7 @@ angular.module('eCommerce')
       });
     };
 
-  })
+  }])
 ;
 
 },{}],46:[function(require,module,exports){
@@ -5705,7 +5737,7 @@ $(document).ready(function(e) {
             }
         });
 
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             $("body").addClass("mobile");
         } else {
             $("body").removeClass("mobile");
@@ -5748,17 +5780,31 @@ $(document).ready(function(e) {
                 $(this).parent().removeClass("active");
             });
             $(this).next('.sub-menu').css("display", "none");
+            $('a.mobileNavBtn').toggleClass("fa-bars fa-close");
+            $(this).parents(".menuRoot").hide();
+        });
+
+        $(document).on("click", ".mobile nav ul li > a:not('.activator')", function(e) {
+            e.preventDefault();
+            $('a.mobileNavBtn').toggleClass("fa-bars fa-close");
+            $('.activator').next('.sub-menu').css("display", "none");
             $(this).parents(".menuRoot").hide();
         });
 
         $(document).on("click", ".mobile .desktop-nav a.mobileNavBtn", function(e) {
             e.preventDefault();
             $(this).toggleClass("fa-bars fa-close");
-            if ($(this).siblings("ul").css("display") == undefined || $(this).siblings("ul").css("display") == "none") {
-                $(this).siblings("ul").show();
+            if ($(this).siblings(".menuRoot").css("display") == undefined || $(this).siblings(".menuRoot").css("display") == "none") {
+                $(this).siblings(".menuRoot").show();
             } else {
-                $(this).siblings("ul").hide();
+                $(this).siblings(".menuRoot").hide();
             }
+        });
+
+        $(document).on("click", ".mobile .desktop-nav a.closeOverlay", function(e) {
+            e.preventDefault();
+            $('a.mobileNavBtn').toggleClass("fa-bars fa-close");
+            $(this).parents(".menuRoot").hide();
         });
 
         $('footer .back-top a').click(function(e) {

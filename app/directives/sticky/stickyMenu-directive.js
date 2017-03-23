@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .directive('stickyMenu', function ($compile, DIRECTIVE_URI) {
+  .directive('stickyMenu', ['$compile', 'DIRECTIVE_URI', function ($compile, DIRECTIVE_URI) {
     var linker = function(scope, element, attrs) {
       var menu = element,
         stickyClass = "nav-sticky",
@@ -14,7 +14,9 @@ angular.module('eCommerce')
             if( $(this).scrollTop() > hdr ) {
                 menu.addClass(stickyClass);
                 $("body").addClass('menu-stuck');
-                headerCart.addClass("hide");
+                if(!$('body').hasClass('mobile')) {
+                    headerCart.addClass("hide");
+                }
                 if(!stickyCart.hasClass("hide")) {
                     stickyCart.addClass("hide");
                 }
@@ -31,4 +33,4 @@ angular.module('eCommerce')
         transclude: true,
         template: '<div class="stickyMenu"><div class="controls" ng-transclude></div></div>'
     };
-});
+}]);

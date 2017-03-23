@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .service('UserService', function ($http, $rootScope, ENDPOINT_URI) {
+  .service('UserService', ['$http', '$rootScope', 'ENDPOINT_URI', function ($http, $rootScope, ENDPOINT_URI) {
     var service = this;
 
     service.GetAll = function(url) {
@@ -55,4 +55,4 @@ angular.module('eCommerce')
         $rootScope.$broadcast('event:data-change');
     }
 
-  });
+  }]);

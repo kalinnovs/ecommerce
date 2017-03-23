@@ -1,4 +1,4 @@
-angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'firebase', 'ngFileUpload'])
+angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUpload'])
   .constant('BASE_URI', 'https://intense-torch-8839.firebaseio.com/')
   .constant('PRODUCTDATA_URL', 'https://haastika.com/HaastikaDataService')
   .constant('ENDPOINT_URI', './')

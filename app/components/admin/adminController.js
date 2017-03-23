@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AdminCtrl', function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, PRODUCTDATA_URL, AuthenticationService, OrderDetailService) {
+  .controller('AdminCtrl', ['$scope', '$rootScope', '$http', '$state', '$timeout', 'UserService', '$cookies', 'PRODUCTDATA_URL', 'AuthenticationService', 'OrderDetailService', 
+    function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, PRODUCTDATA_URL, AuthenticationService, OrderDetailService) {
     var admin = this;
     
     // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
@@ -47,5 +48,5 @@ angular.module('eCommerce')
         $state.go('home');
     };
     
-  })
-;
+  }]
+);

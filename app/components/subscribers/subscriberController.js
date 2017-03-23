@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('SubscriberCtrl', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
+  .controller('SubscriberCtrl', ['$scope', '$rootScope', '$location', '$timeout', 'UserService', '$http', 'PRODUCTDATA_URL', function ($scope, $rootScope, $location, $timeout, UserService, $http, PRODUCTDATA_URL) {
     var subscriber = this;
     var scoper = $scope;
     
@@ -46,8 +46,5 @@ angular.module('eCommerce')
         }
     };
 
-
-
-})    
-
-;
+}]
+);

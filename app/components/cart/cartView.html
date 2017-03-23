@@ -39,7 +39,7 @@
                     <div class="part-desciption">
                         <p>{{value.productId}}</p>
                         <div class="controls">
-                            <a href="javascript:void(0);" ng-click="removeItem($event)" data-lineId="{{value.lineItemId}}" title="Delete Item">
+                            <a href="javascript:void(0);" ng-click="removeItem($event)" data-quantity="{{value.quantity}}" data-part="{{value.productId}}" data-lineId="{{value.lineItemId}}" title="Delete Item">
                                 <span class="fa fa-trash"></span>delete item</a>
                         </div>
                     </div>
