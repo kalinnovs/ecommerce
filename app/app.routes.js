@@ -3,7 +3,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
   .constant('PRODUCTDATA_URL', 'https://haastika.com/HaastikaDataService')
   .constant('ENDPOINT_URI', './')
   .constant('DIRECTIVE_URI', '/app/directives/')
-  .config(function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
+  .config(['$stateProvider', '$httpProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $httpProvider, $urlRouterProvider, $locationProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
     $urlRouterProvider.otherwise('/404');
 
@@ -401,7 +401,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
 
-  })
+  }])
   .run(['$rootScope', '$location', '$http', '$state', 'Google', '$window', '$stateParams', 
     function run($rootScope, $location, $http, $state, Google, $window, $stateParams) {
     

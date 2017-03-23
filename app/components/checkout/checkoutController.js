@@ -76,12 +76,6 @@ angular.module('eCommerce')
             var self = this,
             val = $(event.target).val(),
             url = 'http://maps.googleapis.com/maps/api/geocode/json?address=94086&sensor=true';
-
-            // $http.jsonp(url)
-            //     .success(function(data){
-            //         debugger;
-            //         console.log(data.found);
-            //     });
         };
 
         $scope.updateAddressToStorage = function(event, id) {

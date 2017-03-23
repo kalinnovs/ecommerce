@@ -120,7 +120,6 @@ angular.module('eCommerce')
         };
 
         $scope.removeItem = function(event) {
-            // debugger;
             var lineItemId = $(event.currentTarget).attr("data-lineId"),
                 currency = $("body").attr("data-currency"),
                 qty = this.$parent.cartItems.filter(function(i, j) {
@@ -131,7 +130,6 @@ angular.module('eCommerce')
                 // Removes the line item from Local storage when there is no logged in User.
                 var currentIndex = $(event.currentTarget).parents("li").data("index"),
                     cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
-
                 // Reduce the cartLength counter
                 window.sessionStorage.setItem('cartLength', count - cartItems[currentIndex].quantity);
 

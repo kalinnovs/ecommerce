@@ -42,7 +42,10 @@ angular.module('eCommerce')
 
     };
 
-    service.SetCredentials = function (username, password, userType, imageurl = '') {
+    service.SetCredentials = function (username, password, userType, imageurl) {
+        if(!imageurl) {
+          imageurl = '';
+        }
         var authdata = Base64.encode(username + ':' + password);
 
         $rootScope.globals = {
