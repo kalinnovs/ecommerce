@@ -15,6 +15,7 @@ angular.module('eCommerce')
     }
 
     service.saveNode = function (url, node, callBack) {
+        var service = this;
         $http({
             method: 'POST',
             url: PRODUCTDATA_URL + url,
@@ -23,6 +24,7 @@ angular.module('eCommerce')
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data) {
+            service.generatejson();
             callBack(data);
         }, function errorCallback(response) {
             console.log("Error in saving.");
@@ -30,6 +32,7 @@ angular.module('eCommerce')
     }
 
     service.deleteNode = function (url, callBack) {
+        var service = this;
         $http({
             method: 'GET',
             url: PRODUCTDATA_URL + url,
@@ -37,6 +40,7 @@ angular.module('eCommerce')
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data) {
+            service.generatejson();
             callBack(data);
         }, function errorCallback(response) {
             console.log("Error in saving.");
@@ -44,10 +48,12 @@ angular.module('eCommerce')
     }
 
     service.uploadImage = function(url, imageData, callBack){
+        var service = this;
         Upload.upload({
             url: PRODUCTDATA_URL + url,
             data: imageData
         }).then(function (resp) {
+            service.generatejson();
             callBack(resp);
         }, function (resp) {
             console.log('Error status: ' + resp);
@@ -57,5 +63,18 @@ angular.module('eCommerce')
         });
     }
 
+    service.generatejson = function(){
+        $http({
+            method: 'GET',
+            url: PRODUCTDATA_URL + '/admin/generatejson',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data) {
+            console.log("New JSON generated.");
+        }, function errorCallback(response) {
+            console.log("Error in saving.");
+        });
+    }
 
 }]);
