@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .directive('currencyChooser', function ($http, $compile, PRODUCTDATA_URL, $rootScope) {
+  .directive('currencyChooser', ['$http', '$compile', 'PRODUCTDATA_URL', '$rootScope', function ($http, $compile, PRODUCTDATA_URL, $rootScope) {
     var linker = function(scope, element, attrs) {
         var elem = element;
 
@@ -80,4 +80,4 @@ angular.module('eCommerce')
           $("body").attr("data-crId", 1);
         }
     };
-});
+}]);

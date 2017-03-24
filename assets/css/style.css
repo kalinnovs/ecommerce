@@ -717,6 +717,9 @@ a.noDecoration:hover {
     border-radius: 4px;
     z-index: 13;
 }
+.cart-drawer h2 {
+    display: none;
+}
 .cart-drawer.hide {
     overflow: hidden;
     height: 0;
@@ -955,12 +958,19 @@ header .currencyConverter a.active span, header .currencyConverter a:hover span 
 }
 header nav ul {
     display: inline-block;
+    margin-top: -5px;
+}
+header .nav-sticky nav ul {
+    margin-top: 0;  
 }
 header nav ul> li {
     float: left;
     border-right: 1px solid #dedede;
     position: relative;
     padding: 0px;
+}
+header nav ul> li.catalogs {
+    border-right: 0;
 }
 header nav ul> li .fa {
     display: none;
@@ -984,13 +994,19 @@ header nav ul> li a:focus {
     text-decoration: inherit;
 }
 header nav ul> li a:visited {}
-header nav li a:hover, header nav ul.menuRoot> li> a.active {
+header nav li a:hover, header nav .menuRoot ul > li> a.active {
     background: #f9f9f9;
     color: #000;
     text-decoration: none
 }
+.menuRoot h2 { 
+    display: none;
+}
 header nav li a:hover {
     text-decoration: underline;
+}
+header nav li > a:hover {
+    text-decoration: none;
 }
 header nav a:hover, header nav a:focus {
     color: #fff
@@ -1436,7 +1452,6 @@ header a.active, header a:focus {
 }
 .tile.wide-quarter-tile .detail * {
     text-align: center;
-    padding: 0
 }
 .detail {
     cursor: pointer;
@@ -1554,6 +1569,7 @@ header a.active, header a:focus {
 }
 .tile .detail h4 span {
     color: #000;
+    text-overflow: ellipsis;
 }
 .detail h4 {
     white-space: nowrap;
@@ -4004,7 +4020,7 @@ footer .back-top .pageCounter {
     line-height: 22px;
     overflow: hidden;
     margin-left: 290px;
-    margin-right: 25px;
+    margin-right: 0;
     text-align: left;
 }
 .checkout .order-list .item-quantity {
@@ -4027,6 +4043,7 @@ footer .back-top .pageCounter {
     font-weight: bold;
     display: inline-block;
     vertical-align: middle;
+    outline: 0;
 }
 .checkout .order-list .part-controls {
     display: table;
@@ -4053,7 +4070,7 @@ footer .back-top .pageCounter {
 }
 .checkout .order-list .alignRight .item-price {
     float: right;
-    width: 65px;
+    width: 90px;
 }
 .checkout .order-list .part-controls .fa-trash {
     margin-right: 5px;

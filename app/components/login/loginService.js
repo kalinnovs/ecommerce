@@ -26,7 +26,7 @@ angular.module('eCommerce')
                     response.userType = response.userType;
                     window.localStorage.setItem("accessToken", response.token);
                     window.userDetails = response.loggedUser;
-                    window.sessionStorage.setItem('cartLength', response.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                    window.sessionStorage.setItem('cartLength', response.cartCount);
                     
                     var promise = LoginService.updateCartFromLocal();
                     promise.then(function() {
@@ -42,7 +42,10 @@ angular.module('eCommerce')
 
     };
 
-    service.SetCredentials = function (username, password, userType, imageurl = '') {
+    service.SetCredentials = function (username, password, userType, imageurl) {
+        if(!imageurl) {
+          imageurl = '';
+        }
         var authdata = Base64.encode(username + ':' + password);
 
         $rootScope.globals = {
@@ -162,7 +165,7 @@ angular.module('eCommerce')
                         // Hardcoded 
                         // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.userDetails = response.data.loggedUser;
-                        window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                        window.sessionStorage.setItem('cartLength', response.data.cartCount);
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
@@ -191,7 +194,7 @@ angular.module('eCommerce')
                                 // Hardcoded 
                                 // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                                 window.userDetails = response.data.loggedUser;
-                                window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                                window.sessionStorage.setItem('cartLength', response.data.cartCount);
                                 
                                 var promise = LoginService.updateCartFromLocal();
                                 promise.then(function() {
@@ -265,7 +268,7 @@ angular.module('eCommerce')
                         // Hardcoded 
                         // response.data.loggedUser.emailId = "pdwibedi@gmail.com";
                         window.userDetails = response.data.loggedUser;
-                        window.sessionStorage.setItem('cartLength', response.data.cartCount + ((window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0));
+                        window.sessionStorage.setItem('cartLength', response.data.cartCount);
                         
                         var promise = LoginService.updateCartFromLocal();
                         promise.then(function() {
@@ -434,7 +437,7 @@ angular.module('eCommerce')
  
     /* jshint ignore:end */
 })
-.service('LoginService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
+.service('LoginService', ['$http', 'ENDPOINT_URI', 'PRODUCTDATA_URL', function ($http, ENDPOINT_URI, PRODUCTDATA_URL) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -497,4 +500,4 @@ angular.module('eCommerce')
                 console.log("Error in saving.");
         }); 
     }
-});
+}]);

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('aboutCtrl', function ($scope, $rootScope, $sce, UserService, $timeout, AboutService, PRODUCTDATA_URL, BASE_URI) {
+  .controller('aboutCtrl', ['$scope', '$rootScope', '$sce', 'UserService', '$timeout', 'AboutService', 'PRODUCTDATA_URL', 'BASE_URI', 
+    function ($scope, $rootScope, $sce, UserService, $timeout, AboutService, PRODUCTDATA_URL, BASE_URI) {
     var about = this;
     var scoper = $scope;
     
@@ -27,9 +28,9 @@ angular.module('eCommerce')
     $scope.getHtml = function(html){
         return $sce.trustAsHtml(html);
     };
-  })
-.filter('html', function($sce) {
+  }])
+.filter('html', ['$sce', function($sce) {
     return function(val) {
         return $sce.trustAsHtml(val);
     };
-});
+}]);

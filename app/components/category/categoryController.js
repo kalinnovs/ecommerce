@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('categoryCtrl', function($scope, $rootScope, $timeout, $sce, $state, CategoryService, UserService, $stateParams, PRODUCTDATA_URL, BASE_URI) {
+    .controller('categoryCtrl', ['$scope', '$rootScope', '$timeout', '$sce', '$state', 'CategoryService', 'UserService', '$stateParams', 'PRODUCTDATA_URL', 'BASE_URI', 
+        function($scope, $rootScope, $timeout, $sce, $state, CategoryService, UserService, $stateParams, PRODUCTDATA_URL, BASE_URI) {
         var cat = this;
         var scoper = $scope;
 
@@ -66,9 +67,9 @@ angular.module('eCommerce')
         };
 
         
-    })
-    .filter('html', function($sce) {
+    }])
+    .filter('html', ['$sce', function($sce) {
         return function(val) {
             return $sce.trustAsHtml(val);
         };
-    });
+    }]);

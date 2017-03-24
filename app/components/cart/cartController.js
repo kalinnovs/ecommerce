@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-    .controller('CartCtrl', function($scope, $http, $rootScope, $timeout, $state, $location, CartService, UserService, PRODUCTDATA_URL, user, cartData) {
+    .controller('CartCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$state', '$location', 'CartService', 'UserService', 'PRODUCTDATA_URL', 'user', 'cartData', 
+        function($scope, $http, $rootScope, $timeout, $state, $location, CartService, UserService, PRODUCTDATA_URL, user, cartData) {
         var cart = this,
         responseData,
         loginStatus = user,
@@ -119,17 +120,19 @@ angular.module('eCommerce')
         };
 
         $scope.removeItem = function(event) {
-            // debugger;
             var lineItemId = $(event.currentTarget).attr("data-lineId"),
                 currency = $("body").attr("data-currency"),
                 qty = this.$parent.cartItems.filter(function(i, j) {
                     return (i.lineItemId === parseInt(lineItemId));
                 });
-
+            var count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
             if(lineItemId === "") {
                 // Removes the line item from Local storage when there is no logged in User.
                 var currentIndex = $(event.currentTarget).parents("li").data("index"),
                     cartItems = (typeof(this.cartItems) === "string") ? JSON.parse(this.cartItems) : this.cartItems;
+                // Reduce the cartLength counter
+                window.sessionStorage.setItem('cartLength', count - cartItems[currentIndex].quantity);
+
                 cartItems.splice(currentIndex,1);
 
                 // Remove the item from storage
@@ -139,14 +142,14 @@ angular.module('eCommerce')
                 var itemsArray = [];
                 $.each(itemList, function(i, item) {
                     var obj = {
-                        "partNumber": item.productPartNumber || item.productId,
+                        "partNumber": item.productPartNumber || item.productId || item.partNumber,
                         "quantity": item.quantity || 1
                     }
                     itemsArray.push(obj);
                 });
                 
                 // insert the new stringified array into LocalStorage
-                window.sessionStorage.setItem('itemsArray', JSON.stringify(itemList));
+                window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
 
                 // If cart goes empty page redirects to home page
                 if(itemList.length === 0) {
@@ -159,7 +162,32 @@ angular.module('eCommerce')
                 $rootScope.$broadcast("updateMiniCartCount");
 
             } else {
-                window.sessionStorage.setItem('cartLength', parseInt(window.sessionStorage.cartLength) - qty[0].quantity);
+                // window.sessionStorage.setItem('cartLength', parseInt(window.sessionStorage.cartLength) - qty[0].quantity);
+                var part, itemList, newList, itemsArray, quantity, count;
+                count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
+                part = $(event.currentTarget).data("part");
+                quantity = $(event.currentTarget).data("quantity");
+
+                window.sessionStorage.setItem('cartLength', count - parseInt(quantity));
+
+                itemList = (window.sessionStorage.itemsArray) ? JSON.parse(window.sessionStorage.itemsArray) : [];
+                // Remove the item from storage
+                newList = itemList.filter(function(i) {
+                    return i.partNumber != part;
+                });
+
+                itemsArray = [];
+                $.each(newList, function(i, item) {
+                    var obj = {
+                        "partNumber": item.productPartNumber || item.productId || item.partNumber,
+                        "quantity": item.quantity || 1
+                    }
+                    itemsArray.push(obj);
+                });
+                
+                // insert the new stringified array into LocalStorage
+                window.sessionStorage.setItem('itemsArray', JSON.stringify(itemsArray));
+
                 // Removes the line item from data base when there is a logged in User.
                 $http({
                     method: 'GET',
@@ -272,5 +300,5 @@ angular.module('eCommerce')
             window.dataLoaded = true;
             $(".progress").hide();
         }, 1000, false);
-    }
+    }]
 );

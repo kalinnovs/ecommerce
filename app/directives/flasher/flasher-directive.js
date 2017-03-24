@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .directive('flasher', function ($compile, DIRECTIVE_URI, $sce) {
+  .directive('flasher', ['$compile', 'DIRECTIVE_URI', '$sce', function ($compile, DIRECTIVE_URI, $sce) {
     var linker = function(scope, element, attrs, $sce) {
         var elem = element,
             alert = {
@@ -30,4 +30,4 @@ angular.module('eCommerce')
         link: linker,
         template: '<div class="alert {{className}}"></div>'
     };
-});
+}]);

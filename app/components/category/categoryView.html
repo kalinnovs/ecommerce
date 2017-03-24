@@ -45,10 +45,10 @@
 				</div>
 				<div class="spacingAdjust">
 					<div ng-hide="cat.data.categoryAttributes">
-						<div class="span_3_of_12 col" ng-repeat="(key, value) in cat.data.productsList">
+						<div class="span_3_of_12 col" ng-repeat="(key, value) in cat.data.productsList" ng-class-odd="'left-tile'">
 							<div class="newRow" ng-if="$index !=0 && $index % 4 == 0"></div>
 							<a href="{{value.productDetailsURL}}" class="productItem">
-								<div class="wide-quarter-tile tile">
+								<div class="wide-quarter-tile tile mobile-tile">
 									<figure>
 										<img alt="" ng-src="{{value.productImageGallery[0].baseImagePath}}" alt="categorylargeImg{{key}}">
 									</figure>
@@ -63,7 +63,8 @@
 												<div id="star-five-nofill"></div>
 												<div id="star-five-nofill"></div>
 											</div>
-											<span class="availability">Availability: 
+											<span class="availability">
+												<span class="label">Availability: </span>
 												<span>{{value.productAvailablility}}</span>
 											</span>
 										</div>
@@ -84,8 +85,8 @@
 					<!-- List of subcategories and their products -->
 					<div ng-hide="cat.data.productsList.length" class="rootCategory">
 						<div class="span_12_of_12 col categoryBlock" ng-repeat="(key, subC) in cat.data.categoryAttributes.subCategoryList">
-							<div ng-repeat="(key, productItem) in subC.productsList | filter:query | limitTo:iterateThrough">
-								<div class="span_6_of_12 col bigTile" ng-if="$first">
+							<div ng-repeat="(key, productItem) in subC.productsList | filter:query | limitTo:iterateThrough"  ng-class-even="'left-tile'">
+								<div class="span_6_of_12 col bigTile mobile-wide-tile" ng-if="$first">
 									<a href="{{productItem.productDetailsURL}}">
 										<div class="wide-full-tile tile category">
 											<figure>
@@ -97,9 +98,9 @@
 										</div>
 									</a>
 								</div>
-								<div class="span_3_of_12 col mediumTile" ng-if="!$first">
+								<div class="span_3_of_12 col mediumTile mobile-tile" ng-if="!$first">
 									<a href="{{productItem.productDetailsURL}}" class="productItem">
-										<div class="wide-quarter-tile tile">
+										<div class="wide-quarter-tile tile mobile-tile">
 											<figure>
 												<img alt="" ng-src="{{productItem.productImageGallery[0].baseImagePath}}" alt="categoryItemImg{{key}}">
 											</figure>

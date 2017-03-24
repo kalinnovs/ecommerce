@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-  .service('CheckoutService', function ($http, ENDPOINT_URI, PRODUCTDATA_URL, checkoutStorage) {
+  .service('CheckoutService', ['$http', 'ENDPOINT_URI', 'PRODUCTDATA_URL', 'checkoutStorage', 
+    function ($http, ENDPOINT_URI, PRODUCTDATA_URL, checkoutStorage) {
     var service = this;
     //to create unique contact id
     var uid = 1;
@@ -139,4 +140,4 @@ angular.module('eCommerce')
     }
 
 
-  });
+  }]);

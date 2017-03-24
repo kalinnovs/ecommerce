@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .directive('addToCart', function($http, $rootScope, PRODUCTDATA_URL, AuthenticationService) {
+    .directive('addToCart', ['$http', '$rootScope', 'PRODUCTDATA_URL', 'AuthenticationService', function($http, $rootScope, PRODUCTDATA_URL, AuthenticationService) {
         var def = {
             restrict: 'EA',
             scope: {
@@ -16,7 +16,8 @@ angular.module('eCommerce')
                     var obj = {
                         "partNumber": item.productPartNumber || item.productId,
                         "quantity": item.quantity || 1
-                    }
+                    };
+                    var count = (window.sessionStorage.cartLength) ? parseInt(window.sessionStorage.cartLength) : 0;
 
                     var addItem = function(item) {
 
@@ -25,23 +26,20 @@ angular.module('eCommerce')
                         var repeatedItem = oldItems.filter(function(val, index) {
                             return (val.partNumber === item.partNumber);
                         });
+                        window.sessionStorage.setItem('cartLength', ++count);
                         if(repeatedItem.length > 0) {
                             // repeatedItem[0]["quantity"] += 1
                             oldItems.map(function(val, index) {
                                 (val.partNumber === repeatedItem[0]["partNumber"]) ? val.quantity += 1 : '';
                             });
                             window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
-                            
                             // Broadcast cart update to mini cart
                             $rootScope.$broadcast("updateMiniCartCount");
                             return true;
                         }
                         oldItems.push(item);
 
-                        // window.miniCartStorage.push(item.partNumber);
-                        // window.sessionStorage.setItem('cartParts', JSON.stringify(window.miniCartStorage));
                         window.sessionStorage.setItem('itemsArray', JSON.stringify(oldItems));
-
                         window.itemsArray.push(item);
 
                         // Broadcast cart update to mini cart
@@ -80,4 +78,4 @@ angular.module('eCommerce')
             }
         };
         return def;
-    });
+    }]);

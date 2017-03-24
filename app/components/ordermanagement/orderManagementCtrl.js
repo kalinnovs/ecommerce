@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-	.controller('OrderDetailCtrl', function($scope, OrderDetailService, $rootScope) {
+	.controller('OrderDetailCtrl', ['$scope', 'OrderDetailService', '$rootScope', function($scope, OrderDetailService, $rootScope) {
 		
 		$scope.getOrderList = function(){
 			OrderDetailService.getOrderList().then(function(data){
@@ -22,4 +22,4 @@ angular.module('eCommerce')
 				}
 			});
 		}
-	});
+	}]);

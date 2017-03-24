@@ -49,13 +49,16 @@
 				            <div class="part-controls">
 				                <p>{{value.productId}}</p>
 				                <div class="controls">
-				                    <a href="javascript:void(0);" ng-click="removeItem($event)" data-lineId="{{value.lineItemId}}" title="Delete Item">
+				                    <a href="javascript:void(0);" ng-click="removeItem($event)" data-quantity="{{value.quantity}}" data-part="{{value.productId}}" data-lineId="{{value.lineItemId}}" title="Delete Item">
 				                        <span class="fa fa-trash"></span>delete item</a>
 				                </div>
 				            </div>
 				        </div>
 				    </li>
 				</ul>
+				<div ng-if="cartItems.length === 0" class="empty-cart" style="width: 580px;">
+		            <h2>No items added in your cart !!!</h2>
+		        </div>
 			</aside>
 			<aside class="col secondCol">
 				<div class="order-address order-section">

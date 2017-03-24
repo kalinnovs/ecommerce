@@ -85,7 +85,7 @@ angular.module('eCommerce')
 }]);
 
 angular.module('eCommerce')
-.controller('categoryEditCtrl', function ($scope, $uibModalInstance, item) {
+.controller('categoryEditCtrl', ['$scope', '$uibModalInstance', 'item', function ($scope, $uibModalInstance, item) {
 
     $scope.category = angular.copy(item);
         
@@ -112,6 +112,6 @@ angular.module('eCommerce')
             $uibModalInstance.close(x);
         }
     };
-});
+}]);
 
 

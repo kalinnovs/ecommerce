@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('ContactCtrl', function ($scope, $timeout, $location, $http, $rootScope, PRODUCTDATA_URL, UserService, BASE_URI) {
+  .controller('ContactCtrl', ['$scope', '$timeout', '$location', '$http', '$rootScope', 'PRODUCTDATA_URL', 'UserService', 'BASE_URI', function ($scope, $timeout, $location, $http, $rootScope, PRODUCTDATA_URL, UserService, BASE_URI) {
     var contacts = this;
     var original = $scope.user;
     
@@ -44,5 +44,5 @@ angular.module('eCommerce')
     };
 
 
-  })
+  }])
 ;

@@ -1,5 +1,5 @@
 angular.module('eCommerce')
-  .directive('limitCharacterRender', function ($compile) {
+  .directive('limitCharacterRender', ['$compile', function ($compile) {
   	var template = "{{modelBind}}";
 
   	var linker = function(scope, element, attrs) {
@@ -22,5 +22,5 @@ angular.module('eCommerce')
             modelBind:'='
         }
     };
-  })
+  }])
  ;

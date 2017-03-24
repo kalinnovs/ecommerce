@@ -2,7 +2,7 @@
 angular.module('eCommerce')
 .controller('InventoryCtrl',['$scope', '$http', '$uibModal', function($scope, $http, $uibModal){
     var url = "assets/json/product.json";
-debugger;
+// debugger;
     $http.get(url).success( function(response) {
         $scope.products = response.productList;
         $scope.categoryList = response.categoryList;
@@ -70,7 +70,7 @@ debugger;
 }]);
 
 angular.module('eCommerce')
-.controller('productEditCtrl', function ($scope) {
+.controller('productEditCtrl', ['$scope', function ($scope) {
     $scope.product = angular.copy(item);
     $scope.categoryList = angular.copy(categoryList);
     $scope.cancel = function () {
@@ -88,4 +88,4 @@ angular.module('eCommerce')
         debugger;
         console.log($scope.product.categoryId);
     }
-});
+}]);
