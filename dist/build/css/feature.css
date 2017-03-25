@@ -8449,6 +8449,7 @@ input.form-control:focus::-webkit-input-placeholder {
   .cart-page .item-details .part-details .alignRight {
     float: none;
     text-align: inherit;
+    padding-right: 0;
   }
 
   .cart-page .part-details .item-price {

@@ -159,7 +159,7 @@
   .cart-page .part-details h3 { width: 100%;  }
   .cart-page .item-details .part-details { line-height: normal; }
   .cart-page .item-details figure img { height: 110px; }
-  .cart-page .item-details .part-details .alignRight { float: none; text-align: inherit; }
+  .cart-page .item-details .part-details .alignRight { float: none; text-align: inherit; padding-right: 0;}
   .cart-page .part-details .item-price { margin: 10px 0; width: 62%; }
   .cart-page .cart-summary > div label { width: 220px; }
   .cart-page .cart-extra .extra-links { width: initial; }
