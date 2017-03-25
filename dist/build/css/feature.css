@@ -8478,14 +8478,6 @@ input.form-control:focus::-webkit-input-placeholder {
     height: 80px;
   }
 
-  .cart-page .item-details .part-details {
-    margin-left: 33%;
-  }
-
-  .cart-page .item-details .part-desciption {
-    margin-left: 33%;
-  }
-
   .cart-page .cart-summary > div label {
     width: auto;
   }
@@ -8537,6 +8529,7 @@ input.form-control:focus::-webkit-input-placeholder {
     width: auto;
     float: none;
     margin-bottom: 10px;
+    padding-right: 15px;
   }
 
   .checkout .order-list .alignRight {

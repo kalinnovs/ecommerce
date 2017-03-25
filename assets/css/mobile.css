@@ -166,8 +166,6 @@
   .cart-page .cart-extra .extra-links { width: initial; }
   .cart-page .list-items { margin-top: 10px }
   .cart-page .item-details figure img { height: 80px; }
-  .cart-page .item-details .part-details { margin-left: 33%; }
-  .cart-page .item-details .part-desciption { margin-left: 33%; }
   .cart-page .cart-summary > div label { width: auto; }
   .cart-page .cart-summary { border-top: solid 1px #d89d9d; text-align: right; padding-top: 10px; margin-top: 10px; }
   .cart-page .cart-extra .extra-links a { color: #337ab7; }
@@ -179,7 +177,7 @@
   .checkout .order-form .columns aside:first-child { margin: 0 }
   .checkout .list-header { display: none; }
   .checkout .order-list { width: auto; }
-  .checkout .order-list .part-details h5 { width: auto; float: none; margin-bottom: 10px; }
+  .checkout .order-list .part-details h5 { width: auto; float: none; margin-bottom: 10px; padding-right: 15px; }
   .checkout .order-list .alignRight { margin: 0; line-height: 32px; }
   .checkout .order-list .part-controls { margin-right: 19px; display: block; }
   .checkout .order-list .part-controls p { width: auto; display: inline-block; }
