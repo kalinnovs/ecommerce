@@ -17,9 +17,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
           	pageTitle: 'Haastika - Login'
         },
         resolve: {
-          user: function($stateParams, AuthenticationService) {
+          user: ['$stateParams', 'AuthenticationService', function($stateParams, AuthenticationService) {
             return AuthenticationService.validateToken();
-          }
+          }]
         }
       })
       .state('resetPassword', {
@@ -28,9 +28,9 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
         controller: 'LoginCtrl',
         controllerAs: 'login',
         resolve: {
-          user: function($stateParams, AuthenticationService) {
+          user: ['$stateParams', 'AuthenticationService', function($stateParams, AuthenticationService) {
             return AuthenticationService.validateToken();
-          }
+          }]
         }
       })
       .state('404', {
@@ -49,18 +49,18 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
             controller: 'AccoutsCtrl',
             controllerAs: 'accounts',
             resolve: {
-              orderList: function($stateParams, AccountsService) {
+              orderList: ['$stateParams', 'AccountsService', function($stateParams, AccountsService) {
                 return AccountsService.getOrderList();
-              },
-              savedCart: function($stateParams, AccountsService) {
+              }],
+              savedCart: ['$stateParams', 'AccountsService', function($stateParams, AccountsService) {
                 return AccountsService.getSavedCart();
-              },
-              getAccountDetail: function($stateParams, AccountsService) {
+              }],
+              getAccountDetail: ['$stateParams', 'AccountsService', function($stateParams, AccountsService) {
                 return AccountsService.getAccountDetail();
-              },
-              getAddress: function($stateParams, AccountsService) {
+              }],
+              getAddress: ['$stateParams', 'AccountsService', function($stateParams, AccountsService) {
                 return AccountsService.getAddress();
-              }
+              }]
             }
           },
           'orderDetails@accounts': {
@@ -101,12 +101,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
         controller: 'CartCtrl',
         controllerAs: 'cart',
         resolve: {
-          user: function($stateParams, AuthenticationService) {
+          user: ['$stateParams', 'AuthenticationService', function($stateParams, AuthenticationService) {
             return AuthenticationService.validateToken();
-          },
-          cartData: function($stateParams, CartService) {
+          }],
+          cartData: ['$stateParams', 'CartService', function($stateParams, CartService) {
             return CartService.viewCart();
-          }
+          }]
         }
       })
       .state('checkout', {
@@ -115,18 +115,18 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
         controllerAs: 'checkout',
         templateUrl: 'app/components/checkout/checkoutView.html',
         resolve: {
-          cartItems: function($stateParams, CheckoutService) {
+          cartItems: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.getItems();
-          },
-          getAddress: function($stateParams, CheckoutService) {
+          }],
+          getAddress: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
-          },
-          getLoginStatus: function($stateParams, CheckoutService) {
+          }],
+          getLoginStatus: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             return CheckoutService.validateToken();
-          },
-          viewCart: function($stateParams, CheckoutService) {
+          }],
+          viewCart: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.viewCart();
-          }
+          }]
         }
       })
       .state('checkout.login', {
@@ -135,18 +135,18 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
         controllerAs: 'checkout',
         templateUrl: 'app/components/checkout/login.html',
         resolve: {
-          cartItems: function($stateParams, CheckoutService) {
+          cartItems: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.getItems();
-          },
-          getAddress: function($stateParams, CheckoutService) {
+          }],
+          getAddress: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
-          },
-          getLoginStatus: function($stateParams, CheckoutService) {
+          }],
+          getLoginStatus: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             return CheckoutService.validateToken();
-          },
-          viewCart: function($stateParams, CheckoutService) {
+          }],
+          viewCart: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.viewCart();
-          }
+          }]
         }
        })
       .state('checkout.address', {
@@ -155,18 +155,18 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
         controllerAs: 'checkout',
         templateUrl: 'app/components/checkout/address.html',
         resolve: {
-          cartItems: function($stateParams, CheckoutService) {
+          cartItems: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.getItems();
-          },
-          getAddress: function($stateParams, CheckoutService) {
+          }],
+          getAddress: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             return CheckoutService.getAddress();
-          },
-          getLoginStatus: function($stateParams, CheckoutService) {
+          }],
+          getLoginStatus: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             return CheckoutService.validateToken();
-          },
-          viewCart: function($stateParams, CheckoutService) {
+          }],
+          viewCart: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.viewCart();
-          }
+          }]
         }
       })
       .state('checkout.order', {
@@ -175,18 +175,18 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
         controllerAs: 'checkout',
         templateUrl: 'app/components/checkout/order.html',
         resolve: {
-          cartItems: function($stateParams, CheckoutService) {
+          cartItems: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.getItems();
-          },
-          viewCart: function($stateParams, CheckoutService) {
+          }],
+          viewCart: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             return CheckoutService.viewCart();
-          },
-          getAddress: function($stateParams, CheckoutService) {
+          }],
+          getAddress: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
-          },
-          getLoginStatus: function($stateParams, CheckoutService) {
+          }],
+          getLoginStatus: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             return CheckoutService.validateToken();
-          }
+          }]
         }
       })
       .state('checkout.payment', {
@@ -195,18 +195,18 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
         controllerAs: 'checkout',
         templateUrl: 'app/components/checkout/payment.html',
         resolve: {
-          cartItems: function($stateParams, CheckoutService) {
+          cartItems: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.getItems();
-          },
-          viewCart: function($stateParams, CheckoutService) {
+          }],
+          viewCart: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             return CheckoutService.viewCart();
-          },
-          getAddress: function($stateParams, CheckoutService) {
+          }],
+          getAddress: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             // return CheckoutService.getAddress();
-          },
-          getLoginStatus: function($stateParams, CheckoutService) {
+          }],
+          getLoginStatus: ['$stateParams', 'CheckoutService', function($stateParams, CheckoutService) {
             return CheckoutService.validateToken();
-          }
+          }]
         }
       })
       .state('thankyou', {
