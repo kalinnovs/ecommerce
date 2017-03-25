@@ -4646,7 +4646,7 @@ angular.module('eCommerce')
             '<p class="manyItems">Please go to cart page to check the list</p>' +
             '<p><a href="cart" title="View Cart">View Cart</a></p>' +
             // '<p><a href="checkout/login" title="Checkout">Checkout</a></p>' +
-            '<p><a href="/orderLookup" title="Orders">Find Orders</a></p>' +
+            '<p><a href="orderLookup" title="Orders">Find Orders</a></p>' +
             // '<p><a href="javascript:void(0);" title="Accounts">Accounts</a></p>' +
             '<p><a href="javascript:void(0);" class="noDecoration profile"><span class="imageNull profilePicUpdate">'+
                 '<img src="" class="profilePic" alt="ProfilePic" /><i class="fa fa-user" aria-hidden="true"></i></span>'+
@@ -4831,6 +4831,14 @@ angular.module('eCommerce')
                     $(".cart-drawer").addClass('hide').css("left", "-1000px");
                     event.preventDefault();
                     event.stopPropagation();
+                });
+
+                $(".minicart p > a").on("click", function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    var href = $(this).attr("href");
+                    $(".cart-drawer").addClass('hide').css("left", "-1000px");
+                    $state.go(href);
                 });
 
                 $("body").on("click", function(ev) {
@@ -5053,7 +5061,7 @@ require("../../../app/components/inventory/productTreeService.js");
 require("../../../app/components/ordermanagement/orderManagementCtrl.js");
 require("../../../app/components/ordermanagement/orderManagementService.js");
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_28896e77.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_820ff2d.js","/")
 },{"+7ZJp0":56,"../../../app/app.routes.js":1,"../../../app/app.services.js":2,"../../../app/components/404/404Controller.js":3,"../../../app/components/aboutus/aboutService.js":4,"../../../app/components/aboutus/aboutusController.js":5,"../../../app/components/accounts/accountsController.js":6,"../../../app/components/accounts/accountsService.js":7,"../../../app/components/admin/adminController.js":8,"../../../app/components/cart/cartController.js":9,"../../../app/components/cart/cartService.js":10,"../../../app/components/category/categoryController.js":11,"../../../app/components/category/categoryCtrl.js":12,"../../../app/components/category/categoryService.js":13,"../../../app/components/checkout/checkoutController.js":14,"../../../app/components/checkout/checkoutService.js":15,"../../../app/components/contact/contactController.js":16,"../../../app/components/details/detailController.js":17,"../../../app/components/details/detailService.js":18,"../../../app/components/home/homeController.js":19,"../../../app/components/home/homeService.js":20,"../../../app/components/inventory/inventoryCtrl.js":21,"../../../app/components/inventory/productTreeCtrl.js":22,"../../../app/components/inventory/productTreeService.js":23,"../../../app/components/login/facebookAuth.js":24,"../../../app/components/login/loginController.js":25,"../../../app/components/login/loginService.js":26,"../../../app/components/orderlookup/orderlookupController.js":27,"../../../app/components/orderlookup/orderlookupService.js":28,"../../../app/components/ordermanagement/orderManagementCtrl.js":29,"../../../app/components/ordermanagement/orderManagementService.js":30,"../../../app/components/promomailgenerator/promoMailController.js":31,"../../../app/components/register/registerController.js":32,"../../../app/components/subCategory/subCategoryCtrl.js":33,"../../../app/components/subscribers/subscriberController.js":34,"../../../app/components/thankyou/thankyouController.js":35,"../../../app/directives/addToCart/addToCart-directive.js":36,"../../../app/directives/currencyChooser/currencyChooser-directive.js":37,"../../../app/directives/editOnFocus/editOnFocus-directive.js":38,"../../../app/directives/flasher/flasher-directive.js":39,"../../../app/directives/formElement/formElement-directive.js":40,"../../../app/directives/limitCharacterRender/limitCharacterRender-directive.js":41,"../../../app/directives/miniCart/miniCart-directive.js":42,"../../../app/directives/sticky/stickyMenu-directive.js":43,"../../../app/directives/validation/validation-directive.js":44,"../../../app/shared/tiles/tileController.js":45,"../../../vendor/js/angular-ui-router.min.js":57,"../../../vendor/js/ng-file-upload.js":58,"../jqzoom.js":47,"../multizoom.js":48,"../overlay.js":49,"../parallax.js":50,"../scripts.js":51,"../wowslider.js":52,"buffer":53}],47:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 ;(function($){

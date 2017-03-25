@@ -16,7 +16,7 @@ angular.module('eCommerce')
             '<p class="manyItems">Please go to cart page to check the list</p>' +
             '<p><a href="cart" title="View Cart">View Cart</a></p>' +
             // '<p><a href="checkout/login" title="Checkout">Checkout</a></p>' +
-            '<p><a href="/orderLookup" title="Orders">Find Orders</a></p>' +
+            '<p><a href="orderLookup" title="Orders">Find Orders</a></p>' +
             // '<p><a href="javascript:void(0);" title="Accounts">Accounts</a></p>' +
             '<p><a href="javascript:void(0);" class="noDecoration profile"><span class="imageNull profilePicUpdate">'+
                 '<img src="" class="profilePic" alt="ProfilePic" /><i class="fa fa-user" aria-hidden="true"></i></span>'+
@@ -201,6 +201,14 @@ angular.module('eCommerce')
                     $(".cart-drawer").addClass('hide').css("left", "-1000px");
                     event.preventDefault();
                     event.stopPropagation();
+                });
+
+                $(".minicart p > a").on("click", function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    var href = $(this).attr("href");
+                    $(".cart-drawer").addClass('hide').css("left", "-1000px");
+                    $state.go(href);
                 });
 
                 $("body").on("click", function(ev) {
