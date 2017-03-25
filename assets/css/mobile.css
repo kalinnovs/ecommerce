@@ -99,7 +99,7 @@
 
   .footer { padding: 25px 15px 10px; }
   .footer .widget h3 { font-size: 14px; margin-bottom: 5px; padding-bottom: 5px; }
-  .footer .widget li, .footer .widget li a { font-size: 12px; margin-bottom: 2px; }
+  .footer .widget li, .footer .widget li a { font-size: 12px; margin-bottom: 6px; }
   footer { height: 86px; padding-top: 20px; }
   footer .back-top a { top: -29px; left: 50%; margin-left: -32px }
   footer p { line-height: 16px; }
