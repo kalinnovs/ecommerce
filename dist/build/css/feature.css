@@ -8577,6 +8577,10 @@ input.form-control:focus::-webkit-input-placeholder {
     width: 75%;
   }
 
+  .cart-page .cart-summary>div span {
+    width: 100px;
+  }
+
   .orderLookup {
     margin: 0;
   }
