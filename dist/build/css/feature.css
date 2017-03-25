@@ -8572,8 +8572,8 @@ input.form-control:focus::-webkit-input-placeholder {
     padding: 0 2px 0 4px;
   }
 
-  .cart-page .item-details .part-details .quantityDown,
-  .cart-page .item-details .part-details .quantityUp {
+  .cart-page .item-details .part-desciption,
+  .cart-page .item-details .part-details {
     width: 75%;
   }
 
