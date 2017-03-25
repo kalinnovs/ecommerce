@@ -185,7 +185,7 @@
   .checkout .order-list .part-controls .controls { float: right; text-align: right; }
   .checkout .order-address { width: auto; }
   .checkout .order-address.order-section, .checkout .order-voucher.order-section, .checkout .order-summary-price.order-section, .checkout .section .container .form-actions { margin: 0 15px 15px; }
-  .checkout .order-list .quantityDown, .checkout .order-list .quantityUp { width: 20px; height: auto; }
+  .checkout .order-list .quantityDown, .checkout .order-list .quantityUp, .cart-page .item-details .part-details .quantityUp { padding: 0 2px 0 4px; }
   .orderLookup { margin: 0 }
   .orderLookup .form-group, .orderLookup .form-actions { margin: 0; }
   .orderLookupContainer h2 { font-weight: bold; }

@@ -8566,9 +8566,9 @@ input.form-control:focus::-webkit-input-placeholder {
   }
 
   .checkout .order-list .quantityDown,
-  .checkout .order-list .quantityUp {
-    width: 20px;
-    height: auto;
+  .checkout .order-list .quantityUp,
+  .cart-page .item-details .part-details .quantityUp {
+    padding: 0 2px 0 4px;
   }
 
   .orderLookup {
