@@ -8589,6 +8589,7 @@ input.form-control:focus::-webkit-input-placeholder {
   .cart-page .item-details .part-desciption,
   .cart-page .item-details .part-details {
     width: 75%;
+    margin-left: 10px;
   }
 
   .cart-page .cart-summary>div span {
