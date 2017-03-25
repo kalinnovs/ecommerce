@@ -8493,6 +8493,22 @@ input.form-control:focus::-webkit-input-placeholder {
     color: #337ab7;
   }
 
+  .orderLookupList .status {
+    width: 100%;
+  }
+
+  .orderLookupList .status li {
+    width: 86px;
+  }
+
+  .orderLookupList .status li span .tick {
+    left: 27px;
+  }
+
+  .orderLookupList .status {
+    margin: 50px auto 80px;
+  }
+
   .checkout .section.selected .container {
     background: #fff;
     margin: 10px -18px 0;
