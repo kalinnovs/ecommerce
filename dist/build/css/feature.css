@@ -5951,8 +5951,16 @@ footer .back-top .pageCounter {
   width: 15%;
 }
 
+.accounts-container .recent-orders .orderdate .fa {
+  display: none;
+}
+
 .accounts-container .recent-orders .ordershipping {
   width: 15%;
+}
+
+.accounts-container .recent-orders .ordershipping .fa {
+  display: none;
 }
 
 .accounts-container .recent-orders .ordertotal {
@@ -7871,6 +7879,12 @@ input.form-control:focus::-webkit-input-placeholder {
     font-size: 28px;
   }
 
+  .desktop-nav,
+  .desktop-nav > .menuRoot,
+  .menu .social-strip {
+    display: none;
+  }
+
   .mobile .nav-sticky .stickyMenu .desktop-nav {
     display: block;
     right: 14px;
@@ -8689,6 +8703,162 @@ input.form-control:focus::-webkit-input-placeholder {
     margin-right: 3%;
     margin-bottom: 4%;
   }
+
+  .minicart>p {
+    padding: 6px 15px;
+    text-align: left;
+  }
+
+  .minicart>p > a {
+    color: #333;
+  }
+
+  .accounts-container .recent-orders>ul>li:nth-child(odd) {
+    background: rgba(233, 233, 245, 0.76);
+  }
+
+  .accounts-container .recent-orders>ul>li:nth-child(even) {
+    background: #efeeee;
+  }
+
+  .accounts-container {
+    padding: 0;
+    background: none;
+  }
+
+  .accounts-container .col {
+    padding: 0 15px;
+    margin: 0;
+  }
+
+  .accounts-container .col.menus {
+    float: none;
+    padding: 0 15px;
+    margin: 0;
+    width: 100%;
+  }
+
+  .accounts-container .recent-orders ul {
+    margin: 0 -15px;
+  }
+
+  .accounts-container .recent-orders ul li:first-child {
+    display: none;
+  }
+
+  .accounts-container .recent-orders ul li {
+    background: #fff;
+    position: relative;
+    padding: 0 15px 0 10px;
+    margin: 10px 0;
+  }
+
+  .accounts-container .recent-orders ul li.created {
+    border-left: 5px solid #dc0000;
+  }
+
+  .accounts-container .recent-orders ul li.being_processed {
+    border-left: 5px solid #dcb000;
+  }
+
+  .accounts-container .recent-orders ul li.shipped {
+    border-left: 5px solid #00dc47;
+  }
+
+  .accounts-container .recent-orders ul li.delivered {
+    border-left: 5px solid #08c;
+  }
+
+  .accounts-container .recent-orders ul li span {
+    width: auto;
+    padding: 0;
+  }
+
+  .accounts-container .recent-orders .ordershipping .fa,
+  .accounts-container .recent-orders .orderdate .fa {
+    display: inline-block;
+  }
+
+  .accounts-container .recent-orders .ordershipping,
+  .accounts-container .recent-orders .orderdate {
+    font-style: italic;
+    width: auto;
+    color: #adadad;
+  }
+
+  .accounts-container .recent-orders .ordershipping .fa {
+    margin: 0 2px;
+  }
+
+  .accounts-container .recent-orders .orderid {
+    font-weight: bold;
+  }
+
+  .accounts-container .recent-orders .orderdate {
+    display: block;
+    width: auto;
+    line-height: 16px;
+    margin-top: 10px;
+  }
+
+  .accounts-container .recent-orders .ordertotal {
+    position: absolute;
+    right: 15px;
+    width: auto;
+    color: #dc143c;
+  }
+
+  .accounts-container .recent-orders .orderstatus {
+    width: auto;
+    position: absolute;
+    right: 15px;
+    top: 0;
+  }
+
+  .accounts-container .recent-orders .ordercontrol {
+    display: none;
+  }
+
+  .address-form > .columns {
+    height: auto !important;
+  }
+
+  .accounts-container .address-details .columns aside {
+    float: none;
+    margin: 0;
+  }
+
+  .address-details .addressSelection {
+    padding-bottom: 10px;
+  }
+
+  .footer-wrap {
+    margin-top: 0;
+  }
+
+  .col-lg-12 {
+    padding: 0;
+  }
+
+  .txt_heading .glyphicon {
+    display: none;
+  }
+
+  #internal-content .panel-body,
+  .txt_body {
+    text-indent: inherit !important;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .txt_heading {
+    font-size: 16px !important;
+  }
+
+  .policy ol,
+  .policy ul {
+    margin-left: 20px;
+  }
 }
 
 @media only screen and (max-device-width: 768px) and (max-width: 736px) and (orientation: landscape) {
@@ -8752,6 +8922,14 @@ input.form-control:focus::-webkit-input-placeholder {
   .layout-5 .mobile-tile .tile,
   .layout-6 .mobile-tile .tile {
     margin-top: 4%;
+  }
+
+  .address-form > .columns {
+    height: auto;
+  }
+
+  .accounts-container .address-details .columns aside {
+    float: left;
   }
 }
 

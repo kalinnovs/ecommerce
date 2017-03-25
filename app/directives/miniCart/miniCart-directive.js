@@ -114,7 +114,7 @@ angular.module('eCommerce')
                         var currency = $("body").attr("data-currency").toUpperCase();
                         var li = document.createElement("li");
                             li.innerHTML = "<div class='wrapper'><figure><img src='" + img +
-                            "' alt='currencyFlag' /></figure><div class='details'><h3>" +
+                            "' alt='cart-image"+i+"' /></figure><div class='details'><h3>" +
                             (responseData[i].partNumber || responseData[i].productId) +
                             "</h3><span class='price'>"+ currency + " " + (responseData[i].price || priceObj[0].price) + "</span> <span class='quantity'> x "+(responseData[i].quantity || itemList[i].quantity)+"</span></div></div>";
                         ul.appendChild(li);

@@ -3199,9 +3199,11 @@ footer .back-top .pageCounter {
 .accounts-container .recent-orders .orderdate {  
     width: 15%;
 }
+.accounts-container .recent-orders .orderdate .fa { display: none; }
 .accounts-container .recent-orders .ordershipping {  
     width: 15%;
 }
+.accounts-container .recent-orders .ordershipping .fa { display: none; }
 .accounts-container .recent-orders .ordertotal {  
     width: 15%;
     text-align:left;
