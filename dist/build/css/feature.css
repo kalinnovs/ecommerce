@@ -8562,7 +8562,13 @@ input.form-control:focus::-webkit-input-placeholder {
   .checkout .order-voucher.order-section,
   .checkout .order-summary-price.order-section,
   .checkout .section .container .form-actions {
-    margin: 0 15px;
+    margin: 0 15px 15px;
+  }
+
+  .checkout .order-list .quantityDown,
+  .checkout .order-list .quantityUp {
+    width: auto;
+    height: auto;
   }
 
   .orderLookup {
