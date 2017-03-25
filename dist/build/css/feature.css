@@ -8434,6 +8434,11 @@ input.form-control:focus::-webkit-input-placeholder {
     margin-top: 15px;
   }
 
+  .cart-page h1 {
+    line-height: 34px;
+    font-size: 18px;
+  }
+
   .cart-page .part-details h3 {
     width: 100%;
   }

@@ -156,6 +156,7 @@
   .category .filters, .category .category-banner { display: none; }
   .category .listing { margin-top: 15px; }
 
+  .cart-page h1 { line-height: 34px; font-size: 18px; }
   .cart-page .part-details h3 { width: 100%;  }
   .cart-page .item-details .part-details { line-height: normal; }
   .cart-page .item-details figure img { height: 110px; }
