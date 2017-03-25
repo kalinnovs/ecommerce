@@ -36,11 +36,12 @@
   .product_wrap { margin-bottom: 10px; }
   .flasher { width: 94% }
   .cart-drawer.slideIn { left: 0; }
-  .cart-drawer { width: 100%; overflow: scroll; display: block !important; position: fixed; left: -1000px; right: 0; border-radius: 0; border: 0; height: 100%; top: 0; transition: left .7s cubic-bezier(0.6, -0.28, 0.74, 0.05); }
+  .cart-drawer { width: 100%; overflow: scroll; display: block !important; position: fixed; left: -1000px; right: 0; border-radius: 0; border: 0; height: 100%; top: 0; transition: left .7s cubic-bezier(0.89, 0.24, 0.35, 0.57); }
   .cart-drawer h2 { border-bottom: solid 2px #e6b7b7; margin: 20px 0 10px; padding-bottom: 20px; display: block; position: relative; }
   .social-strip .cart-drawer h2 a { color: #333; position: absolute; right: 14px; top: -4px; font-size: 28px; }
 
   .desktop-nav, .desktop-nav > .menuRoot, .menu .social-strip { display: none; }
+  .menu-stuck .menu .social-strip { display: block; }
   .mobile .nav-sticky .stickyMenu .desktop-nav { display: block; right: 14px; top: 5px; position: absolute; z-index: 2; font-size: 26px; }
   .mobile .stickyMenu .logo, .mobile .stickyMenu .row .social-strip { display: none; }
   .mobile .desktop-nav .fa { display: block }
@@ -218,10 +219,12 @@
 
   .minicart>p { padding: 6px 15px; text-align: left; }
   .minicart>p > a { color: #333; }
+  .accounts-container .menus li a { line-height: 34px; }
   .accounts-container .recent-orders>ul>li:nth-child(odd) { background: rgba(233, 233, 245, 0.76); }
   .accounts-container .recent-orders>ul>li:nth-child(even) { background: #efeeee; }
   .accounts-container { padding: 0; background: none; }
   .accounts-container .col { padding: 0 15px; margin: 0; }
+  .accounts-container .col .col { padding: 0;  }
   .accounts-container .col.menus { float: none; padding: 0 15px; margin: 0; width: 100%; }
   .accounts-container .recent-orders ul { margin: 0 -15px; }
   .accounts-container .recent-orders ul li:first-child { display: none; }
@@ -243,6 +246,7 @@
   .accounts-container .recent-orders .ordercontrol { display: none; }
   .address-form > .columns { height: auto !important; }
   .accounts-container .address-details .columns aside { float: none; margin: 0; }
+  .accounts-container .address-details .address-form { padding-bottom: 10px; }
   .address-details .addressSelection { padding-bottom: 10px; }
   .footer-wrap { margin-top: 0; }
 

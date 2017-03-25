@@ -7860,7 +7860,7 @@ input.form-control:focus::-webkit-input-placeholder {
     border: 0;
     height: 100%;
     top: 0;
-    transition: left .7s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+    transition: left .7s cubic-bezier(0.89, 0.24, 0.35, 0.57);
   }
 
   .cart-drawer h2 {
@@ -7883,6 +7883,10 @@ input.form-control:focus::-webkit-input-placeholder {
   .desktop-nav > .menuRoot,
   .menu .social-strip {
     display: none;
+  }
+
+  .menu-stuck .menu .social-strip {
+    display: block;
   }
 
   .mobile .nav-sticky .stickyMenu .desktop-nav {
@@ -8713,6 +8717,10 @@ input.form-control:focus::-webkit-input-placeholder {
     color: #333;
   }
 
+  .accounts-container .menus li a {
+    line-height: 34px;
+  }
+
   .accounts-container .recent-orders>ul>li:nth-child(odd) {
     background: rgba(233, 233, 245, 0.76);
   }
@@ -8729,6 +8737,10 @@ input.form-control:focus::-webkit-input-placeholder {
   .accounts-container .col {
     padding: 0 15px;
     margin: 0;
+  }
+
+  .accounts-container .col .col {
+    padding: 0;
   }
 
   .accounts-container .col.menus {
@@ -8826,6 +8838,10 @@ input.form-control:focus::-webkit-input-placeholder {
   .accounts-container .address-details .columns aside {
     float: none;
     margin: 0;
+  }
+
+  .accounts-container .address-details .address-form {
+    padding-bottom: 10px;
   }
 
   .address-details .addressSelection {
