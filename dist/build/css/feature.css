@@ -7750,6 +7750,15 @@ input.form-control:focus::-webkit-input-placeholder {
     margin-top: 0px;
   }
 
+  .social-strip ul li {
+    position: relative;
+  }
+
+  .isSafari .social-strip ul li a.homeLink {
+    position: relative;
+    top: 2px;
+  }
+
   .social-strip ul li a span.count {
     top: -2px;
   }
