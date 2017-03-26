@@ -7754,6 +7754,11 @@ input.form-control:focus::-webkit-input-placeholder {
     top: -2px;
   }
 
+  .social-strip ul li .fa.fa-home {
+    font-size: 20px;
+    vertical-align: text-bottom;
+  }
+
   header {
     min-height: 160px;
   }
