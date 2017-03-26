@@ -7756,7 +7756,7 @@ input.form-control:focus::-webkit-input-placeholder {
 
   .isSafari .social-strip ul li a.homeLink {
     position: relative;
-    top: 2px;
+    top: 1px;
   }
 
   .social-strip ul li a span.count {
