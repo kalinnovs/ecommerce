@@ -11,7 +11,8 @@
   .social-strip.mobileView { display: inline-block; }
   .social-strip .profile span, .social-strip .profilePicUpdate.loggedIn { margin-top: 0; }
   .mobileRendering { padding: 0 15px; }
-  .isSafari .menu .social-strip { margin-top: 7px; }
+  .isSafari .menu .social-strip { margin-top: 0px; }
+  .social-strip ul li a span.count { top: -2px; }
 
   header { min-height: 160px; }
   .header-top { height: 75px; }

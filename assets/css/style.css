@@ -960,6 +960,7 @@ header nav ul {
     display: inline-block;
     margin-top: -5px;
 }
+.isSafari header nav ul { margin-top: 0; }
 header .nav-sticky nav ul {
     margin-top: 0;  
 }

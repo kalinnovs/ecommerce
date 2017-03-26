@@ -3282,6 +3282,10 @@ header nav ul {
   margin-top: -5px;
 }
 
+.isSafari header nav ul {
+  margin-top: 0;
+}
+
 header .nav-sticky nav ul {
   margin-top: 0;
 }
@@ -7743,7 +7747,11 @@ input.form-control:focus::-webkit-input-placeholder {
   }
 
   .isSafari .menu .social-strip {
-    margin-top: 7px;
+    margin-top: 0px;
+  }
+
+  .social-strip ul li a span.count {
+    top: -2px;
   }
 
   header {
