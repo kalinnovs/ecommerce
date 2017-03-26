@@ -15,7 +15,8 @@
 
   header { min-height: 160px; }
   .header-top { height: 75px; }
-  .social-strip { margin-top: 8px; }
+  .social-strip { margin-top: 0; font-size: 16px; line-height: 34px; }
+  .social-strip ul li .fa { vertical-align: inherit; }
   .social-strip ul { text-align: center; }
   .social-strip .subscribeLink { display: none; }
   .social-strip ul li a { color: #fff; font-size: 85%; }
