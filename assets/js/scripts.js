@@ -102,7 +102,7 @@ $(document).ready(function(e) {
             }
         }, "body:not(.mobile) nav ul > li");
 
-        $(document).on("click", ".mobile nav ul > li > a", function(e) {
+        $(document).on("click", ".mobile nav ul > li a:first-child", function(e) {
             e.preventDefault();
             if ($(this).hasClass("active")) {
                 $(this).removeClass("active");
@@ -118,6 +118,13 @@ $(document).ready(function(e) {
             $(this).siblings().each(function() {
                 $(this).removeClass("active");
             });
+        });
+
+        $(document).on("click", ".mobile nav .currencyConverter a", function(e) {
+            e.preventDefault();
+            $(this).next('.sub-menu').css("display", "none");
+            $('a.mobileNavBtn').toggleClass("fa-bars fa-close");
+            $(this).parents(".menuRoot").hide();
         });
 
         $(document).on("click", ".mobile nav ul li li a", function(e) {

@@ -63,10 +63,15 @@
   .mobile .desktop-nav > .menuRoot > ul > li a { padding: 5px 0; display: block; color: #333; text-align: left; line-height: 30px; }
   .mobile .nav-sticky .desktop-nav .menuRoot .fa { color: #333; }
   .mobile header nav .menuRoot ul > li> a.active { background: none; }
+
   .mobile header nav { display: block }
-  .currencyConverter { display: none }
+  .header-top .currencyConverter { display: none }
+  .currencyConverter .currency-chooser { display: block; text-align: center; }
+  .currencyConverter .currency-chooser a { display: inline-block; float: none; }
   .currencyChooser a { display: inline-block; padding: 0 15px; }
   .currencyChooser a.active, header .currencyChooser a:hover { background: #e3e3e3; }
+  .currencyConverter .currencyTitle { font-size: 16px; line-height: 28px; }
+  .currencyConverter a.active .fa { display: inline-block; }
 
   /*.mobile header nav ul { display: none; }*/
   .mobile header nav ul > li .sub-menu { position: static; width: auto; border: 0; background: none; padding: 0; text-align: left; margin-left: 30px; }
@@ -79,9 +84,10 @@
   .mobile .sub-menu a { width: auto; float: none; }
   header nav ul > li .sub-menu.catalog .links { width: 100%; }
   .currencyChooser { display: block }
-  .mobile .desktop-nav > .menuRoot > ul > li.currencyChooser a { display: inline-block; padding: 5px 10px;  }
-  .mobile .desktop-nav > .menuRoot > ul > li.currencyChooser .fa { display: inline-block; color: #333; }
-  .mobile .desktop-nav > .menuRoot > ul > li.currencyChooser .fa:hover { color: #33adff; }
+  .mobile .desktop-nav > .menuRoot .currencyChooser a { display: inline-block; padding: 5px 10px;  }
+  .mobile .desktop-nav > .menuRoot .currencyChooser .fa { display: inline-block; color: #333; }
+  .mobile .desktop-nav > .menuRoot .currencyChooser .fa:hover { color: #33adff; }
+  .mobile header nav .menuRoot .currencyChooser> a.active { background: #dedede; border-radius: 10px; padding: 5px 20px !important; }
 
   #galleryBanner { width: 100%; height: 180px }
   #galleryBanner .ws-title { padding: 10px }

@@ -894,15 +894,15 @@ header .currencyTitle {
     vertical-align: top;
     line-height: 24px;
 }
-header .currencyConverter {
+.currencyConverter {
     line-height: 28px;
     text-align: right;
 }
-header .currencyConverter .col {
+.currencyConverter .col {
     float: right;
     padding: 6px 0;
 }
-header .currencyConverter a {
+.currencyConverter a {
     position: relative;
     display: block;
     float: right;
@@ -913,7 +913,7 @@ header .currencyConverter a {
     line-height: 32px;
     padding-bottom: 0;
 }
-header .currencyConverter a.active:after {
+.currencyConverter a.active:after {
     position: absolute;
     content: "";
     left: 0;
@@ -922,29 +922,29 @@ header .currencyConverter a.active:after {
     top: 0;
     box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.8);
 }
-header .currencyConverter a.active, header .currencyConverter a:hover {
+.currencyConverter a.active, .currencyConverter a:hover {
     color: #333;
     text-decoration: none;
 }
-header .currencyConverter a.active .fa, header .currencyConverter a:active .fa, header .currencyConverter a:hover .fa {
+.currencyConverter a.active .fa, .currencyConverter a:active .fa, .currencyConverter a:hover .fa {
     color: #333;
 }
-header .currencyConverter a.india {
+.currencyConverter a.india {
     background: url("../../../assets/images/India.png") -1px -4px no-repeat;
     color: #333;
 }
-header .currencyConverter a.usd {
+.currencyConverter a.usd {
     background: url("../../../assets/images/Usa.png") -1px -4px no-repeat;
     color: #333;
 }
-header .currencyConverter a.euro {
+.currencyConverter a.euro {
     background: url("../../../assets/images/Eur.png") -1px -4px no-repeat;
     color: transparent;
 }
-header .currencyConverter a span {
+.currencyConverter a span {
     display: none
 }
-header .currencyConverter a.active span, header .currencyConverter a:hover span {
+.currencyConverter a.active span, .currencyConverter a:hover span {
     display: block;
     position: absolute;
     left: -10px;
