@@ -1391,6 +1391,10 @@ div.dark_square #pp_full_res .pp_inline {
   display: inline-block !important;
 }
 
+.ws-title-wrapper {
+  display: none;
+}
+
 #galleryBanner a {
   text-decoration: none;
   outline: none;
