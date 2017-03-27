@@ -124,7 +124,7 @@ $(document).ready(function(e) {
             e.preventDefault();
             $(this).next('.sub-menu').css("display", "none");
             $('a.mobileNavBtn').toggleClass("fa-bars fa-close");
-            $(this).parents(".menuRoot").hide();
+            $(".mobile .menuRoot").hide();
         });
 
         $(document).on("click", ".mobile nav ul li li a", function(e) {
@@ -134,30 +134,30 @@ $(document).ready(function(e) {
             });
             $(this).next('.sub-menu').css("display", "none");
             $('a.mobileNavBtn').toggleClass("fa-bars fa-close");
-            $(this).parents(".menuRoot").hide();
+            $(".mobile .menuRoot").hide();
         });
 
         $(document).on("click", ".mobile nav ul li > a:not('.activator')", function(e) {
             e.preventDefault();
             $('a.mobileNavBtn').toggleClass("fa-bars fa-close");
             $('.activator').next('.sub-menu').css("display", "none");
-            $(this).parents(".menuRoot").hide();
+            $(".mobile .menuRoot").hide();
         });
 
         $(document).on("click", ".mobile .desktop-nav a.mobileNavBtn", function(e) {
             e.preventDefault();
             $(this).toggleClass("fa-bars fa-close");
             if ($(this).siblings(".menuRoot").css("display") == undefined || $(this).siblings(".menuRoot").css("display") == "none") {
-                $(this).siblings(".menuRoot").show();
+                $(".mobile .menuRoot").show();
             } else {
-                $(this).siblings(".menuRoot").hide();
+                $(".mobile .menuRoot").hide();
             }
         });
 
         $(document).on("click", ".mobile .desktop-nav a.closeOverlay", function(e) {
             e.preventDefault();
             $('a.mobileNavBtn').toggleClass("fa-bars fa-close");
-            $(this).parents(".menuRoot").hide();
+            $(".mobile .menuRoot").hide();
         });
 
         $('footer .back-top a').click(function(e) {
