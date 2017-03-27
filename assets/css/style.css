@@ -964,6 +964,10 @@ header nav ul {
 header .nav-sticky nav ul {
     margin-top: 0;  
 }
+.desktop-nav>.menuRoot { display: block !important; }
+.desktop-nav>.menuRoot .currencyConverter {
+    display: none;
+}
 header nav ul> li {
     float: left;
     border-right: 1px solid #dedede;

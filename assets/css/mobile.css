@@ -66,6 +66,7 @@
 
   .mobile header nav { display: block }
   .header-top .currencyConverter { display: none }
+  .mobile .desktop-nav>.menuRoot .currencyConverter { display: block; }
   .currencyConverter .currency-chooser { display: block; text-align: center; }
   .currencyConverter .currency-chooser a { display: inline-block; float: none; }
   .currencyChooser a { display: inline-block; padding: 0 15px; }
