@@ -5080,7 +5080,7 @@ add-to-cart.btn button:before {
   width: 500px;
   height: 300px;
   padding: 40px 100px;
-  background: #000 url("../../../../assets/images/advertisementBoard.jpg") left center no-repeat;
+  /*background: #000 url("../../../assets/images/advertisementBoard.jpg") left center no-repeat;*/
   color: #fff;
   font-size: 44px;
   text-align: center;
