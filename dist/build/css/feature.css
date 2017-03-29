@@ -104,10 +104,6 @@
   display: inline-block !important;
 }
 
-.ws-title-wrapper {
-  display: none;
-}
-
 #galleryBanner a {
   text-decoration: none;
   outline: none;
@@ -449,24 +445,16 @@
   z-index: 50;
   color: #34495E;
   background: none;
-  padding: 30px;
+  padding: 10px 30px 6px;
   bottom: 0px;
   top: auto;
   opacity: 1;
+  display: none;
 }
 
 #galleryBanner .ws-title div,
 #galleryBanner .ws-title span {
   display: inline-block;
-  background: rgba(340,110,304,0.7);
-  background: rgba(340,110,304,0.7);
-  background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(255,255,255,0) 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(255,255,255,0) 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00ffffff',GradientType=1 );
   bottom: 10px;
   left: 10px;
   z-index: 999;
@@ -483,8 +471,11 @@
 }
 
 #galleryBanner .ws-title span {
-  font-size: 1.6em;
-  padding: 8px 20px 10px;
+  font-size: 44px;
+  padding: 11px 30px 10px;
+  font-family: 'Anton';
+  color: #885d3c;
+  display: none;
 }
 
 #galleryBanner .ws_images > ul {
