@@ -6617,6 +6617,18 @@ input.form-control:focus::-webkit-input-placeholder {
     font-size: 28px;
   }
 
+  .subscriptionPage {
+    padding: 0;
+  }
+
+  .subscriptionPage .arrowedBubble p {
+    font-size: 18px;
+  }
+
+  .subscriptionPage .arrowedBubble {
+    padding: 20px;
+  }
+
   .desktop-nav,
   .desktop-nav > .menuRoot,
   .menu .social-strip {
