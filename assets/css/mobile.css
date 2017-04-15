@@ -148,9 +148,12 @@
   .subscriptionPage .arrowedBubble { margin: 30px 0; }
   .subscriptionPage .arrowedBubble .cover { transform: rotate(90deg); -webkit-transform: rotate(90deg); -ms-transform: rotate(90deg); -o-transform: rotate(90deg); -moz-transform: (90deg); margin-left: -25px; left: 50%; top: -75px; }
 
-  .contactPage .form { width: 100% }
+  .contactPage { background: none; min-height: inherit; }
+  .contactPage .form { width: 100%; box-shadow: none; border: 0; top: 0; }
   .officeAddress { display: none }
   .aboutus { width: 100%; margin: 0; padding: 0; line-height: 28px;  }
+  .aboutus p { font-size: 14px; line-height: 24px; }
+  .aboutus .imageSection img { margin: 25px 20px; }
   .pull-right { float: left !important; }
   footer .back-top a { top: -45px; left: auto; }
   .policy { width: 100%; padding: 15px; border: 0 }

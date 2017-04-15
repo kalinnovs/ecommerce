@@ -5082,6 +5082,12 @@ footer .back-top .pageCounter {
   margin-right: 20px;
 }
 
+.updateLayout .item-box-layout {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
 @-webkit-keyframes blink {
   0% {
     color: #000000;
@@ -7115,8 +7121,16 @@ input.form-control:focus::-webkit-input-placeholder {
     top: -75px;
   }
 
+  .contactPage {
+    background: none;
+    min-height: inherit;
+  }
+
   .contactPage .form {
     width: 100%;
+    box-shadow: none;
+    border: 0;
+    top: 0;
   }
 
   .officeAddress {
@@ -7128,6 +7142,15 @@ input.form-control:focus::-webkit-input-placeholder {
     margin: 0;
     padding: 0;
     line-height: 28px;
+  }
+
+  .aboutus p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .aboutus .imageSection img {
+    margin: 25px 20px;
   }
 
   .pull-right {
