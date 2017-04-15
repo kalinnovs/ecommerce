@@ -152,6 +152,7 @@
   .subscriptionPage .arrowedBubble .cover { transform: rotate(90deg); -webkit-transform: rotate(90deg); -ms-transform: rotate(90deg); -o-transform: rotate(90deg); -moz-transform: (90deg); margin-left: -25px; left: 50%; top: -75px; }
 
   .contactPage { background: none; min-height: inherit; }
+  .contactPage h1 { margin: 0; font-size: 18px; }
   .contactPage .form { width: 100%; box-shadow: none; border: 0; top: 0; }
   .officeAddress { display: none }
   .aboutus { width: 100%; margin: 0; padding: 0; line-height: 28px;  }

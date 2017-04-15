@@ -7138,6 +7138,11 @@ input.form-control:focus::-webkit-input-placeholder {
     min-height: inherit;
   }
 
+  .contactPage h1 {
+    margin: 0;
+    font-size: 18px;
+  }
+
   .contactPage .form {
     width: 100%;
     box-shadow: none;
