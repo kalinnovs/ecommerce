@@ -89,4 +89,5 @@ gulp.task('connect-sync', function() {
 });
 
 // Default task
-gulp.task('default', ['clean', 'minify', 'uglify']);
+gulp.task('build', ['clean', 'minify', 'uglify']);
+gulp.task('default', ['clean', 'minify', 'uglify', 'connect-sync', 'watch']);
