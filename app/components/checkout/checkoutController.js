@@ -458,9 +458,9 @@ angular.module('eCommerce')
                 carouselLeft = parseInt(carousel.css("left")),
                 calculateLeft = totalStripLength - carouselWrapper.width() - Math.abs(parseInt(carousel.css("left")));
             
-            if(calculateLeft > 100) {
+            if(calculateLeft > 200) {
                 carouselWrapper.addClass("prevActive");
-                carousel.css("left", parseInt(carouselLeft - 100)+"px");
+                carousel.css("left", parseInt(carouselLeft - 200)+"px");
             } else {
                 carousel.css("left", parseInt(carouselLeft - calculateLeft)+"px");
                 carouselWrapper.addClass("removeNext");
@@ -479,9 +479,9 @@ angular.module('eCommerce')
                 return true;  
             } 
             carouselWrapper.removeClass("removeNext");
-            (Math.abs(carouselLeft) === 100) ? carouselWrapper.removeClass("prevActive") : "";
-            if(Math.abs(carouselLeft) >= 100) {
-                carousel.css("left", parseInt(carouselLeft + 100)+"px");
+            (Math.abs(carouselLeft) === 200) ? carouselWrapper.removeClass("prevActive") : "";
+            if(Math.abs(carouselLeft) >= 200) {
+                carousel.css("left", parseInt(carouselLeft + 200)+"px");
             } else {
                 carousel.css("left", "-3px");
                 carouselWrapper.removeClass("prevActive");

@@ -11,7 +11,7 @@ angular.module('eCommerce')
           }
           elem.siblings().removeClass("active");
           elem.addClass("active");
-          elem.parents(".menuRoot").hide();
+          // elem.parents(".menuRoot").hide();
           
           window.setTimeout(function() {
             $(".price.inr, .price.usd, .price.eur").hide();

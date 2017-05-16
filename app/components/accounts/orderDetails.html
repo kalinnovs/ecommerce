@@ -9,10 +9,10 @@
             <span class="orderstatus">Status</span>
             <span class="ordercontrol">Action</span>
         </li>
-        <li ng-repeat="(key, val) in orderList" class="item cart-page">
+        <li ng-repeat="(key, val) in orderList" class="item cart-page {{val.orderState | lowercase}}">
             <span class="orderid">{{val.webOrderNumber}}</span>
-            <span class="orderdate">{{val.orderDateConverted}}</span>
-            <span class="ordershipping">{{val.address.city}}</span>
+            <span class="orderdate"><i class="fa fa-clock-o" aria-hidden="true"></i> {{val.orderDateConverted}}</span>
+            <span class="ordershipping"><i class="fa fa-map-marker" aria-hidden="true"></i> {{val.address.city}}</span>
             <span class="ordertotal">{{val.currency.currencySymbol}}&nbsp;{{val.total}}</span>
             <span class="orderstatus">{{val.orderState}}</span>
             <span class="ordercontrol">
@@ -31,7 +31,8 @@
                         <li ng-class="{'complete': orderLookupData.orderState === 'SHIPPED'}">
                             <span><i class="tick"/> Shipping Initiated</span>
                         </li>
-                        <li ng-class="{'complete': orderLookupData.orderState === 'DELIVERED'}">
+                        <li ng-class="{'complete': orderLookupData.orderState === '
+                        '}">
                             <span><i class="tick"/> Delivered</span>
                         </li>
                     </ul>

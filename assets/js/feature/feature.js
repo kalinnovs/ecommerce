@@ -1,9 +1,9 @@
 require("../multizoom.js");
-require("../parallax.js");
+// require("../parallax.js");
 require("../wowslider.js");
 require("../overlay.js");
 require("../scripts.js");
-require("../jqzoom.js");
+// require("../jqzoom.js");
 
 
 
