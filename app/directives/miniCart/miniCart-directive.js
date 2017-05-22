@@ -207,7 +207,7 @@ angular.module('eCommerce')
                     event.preventDefault();
                     event.stopPropagation();
                     var href = $(this).attr("href");
-                    $(".cart-drawer").addClass('hide').css("left", "-1000px");
+                    $(".cart-drawer").addClass('hide').css("left", "auto");
                     $state.go(href);
                 });
 
