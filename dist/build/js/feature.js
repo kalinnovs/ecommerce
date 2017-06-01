@@ -351,6 +351,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
             templateUrl: 'app/components/ordermanagement/orderManagement.html',
             controller: 'OrderDetailCtrl',
             controllerAs: 'OrderDetailCtrl'
+          },
+          'updateLayout@admin': {
+            templateUrl: 'app/shared/tiles/tileView.html',
+            controller: 'tileCtrl',
+            controllerAs: 'tile'
           }
         }
       })
@@ -1046,6 +1051,7 @@ angular.module('eCommerce')
           	admin.uniqueViews = data.totalUniqueVisitorsCount;
           	admin.totalCount = data.totalVisitorsCount;
           }
+          $rootScope.$broadcast('event:layoutChange');
         })
     
     $scope.chooseTemplate = function(e) { 
@@ -1070,7 +1076,10 @@ angular.module('eCommerce')
                 CKEDITOR.instances.haastikaeditor.setData(data.content);
             })
         }
+    };
 
+    $scope.chooseLayout = function(e) {
+        debugger;
     };
 
     $scope.logout = function() {
@@ -3131,6 +3140,7 @@ angular.module('eCommerce')
     }
 
     service.saveNode = function (url, node, callBack) {
+        var service = this;
         $http({
             method: 'POST',
             url: PRODUCTDATA_URL + url,
@@ -3139,6 +3149,7 @@ angular.module('eCommerce')
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data) {
+            service.generatejson();
             callBack(data);
         }, function errorCallback(response) {
             console.log("Error in saving.");
@@ -3146,6 +3157,7 @@ angular.module('eCommerce')
     }
 
     service.deleteNode = function (url, callBack) {
+        var service = this;
         $http({
             method: 'GET',
             url: PRODUCTDATA_URL + url,
@@ -3153,6 +3165,7 @@ angular.module('eCommerce')
                 'Content-Type': 'application/json'
             }
         }).then(function successCallback(data) {
+            service.generatejson();
             callBack(data);
         }, function errorCallback(response) {
             console.log("Error in saving.");
@@ -3160,10 +3173,12 @@ angular.module('eCommerce')
     }
 
     service.uploadImage = function(url, imageData, callBack){
+        var service = this;
         Upload.upload({
             url: PRODUCTDATA_URL + url,
             data: imageData
         }).then(function (resp) {
+            service.generatejson();
             callBack(resp);
         }, function (resp) {
             console.log('Error status: ' + resp);
@@ -3173,6 +3188,19 @@ angular.module('eCommerce')
         });
     }
 
+    service.generatejson = function(){
+        $http({
+            method: 'GET',
+            url: PRODUCTDATA_URL + '/admin/generatejson',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data) {
+            console.log("New JSON generated.");
+        }, function errorCallback(response) {
+            console.log("Error in saving.");
+        });
+    }
 
 }]);
 }).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../app/components/inventory/productTreeService.js","/../../../app/components/inventory")
@@ -4449,6 +4477,7 @@ angular.module('eCommerce')
 
           $("body").attr("data-currency", currencyType);          
           $("body").attr("data-crId", currencyId);
+          window.userDetails.preferredCurrency = currencyId;
           
           $(document).trigger('data-currency-changed');
         };
@@ -4494,13 +4523,13 @@ angular.module('eCommerce')
         link: linker,
         template: '<div class="currency-chooser">'+
                     '<span class="currencyTitle">Currency :</span>'+
-                    '<a href="javascript:void(0);" title="American Dollar" data-id="1" rel="usd" class="usd">'+
+                    '<a href="javascript:void(0);" title="American Dollar" data-id="2" rel="usd" class="usd">'+
                       '<span><i class="fa fa-usd" aria-hidden="true" class="usd"></i> USD</span>' +
                         '</a>' +
-                    '<a href="javascript:void(0);" title="European Pounds" data-id="2" rel="eur" class="euro">'+
+                    '<a href="javascript:void(0);" title="European Pounds" data-id="3" rel="eur" class="euro">'+
                         '<span><i class="fa fa-eur" aria-hidden="true" class="euro"></i> EUR</span>'+
                     '</a>'+
-                    '<a href="javascript:void(0);" title="Indian Rupee" data-id="3" rel="inr" class="active india">'+
+                    '<a href="javascript:void(0);" title="Indian Rupee" data-id="1" rel="inr" class="active india">'+
                         '<span><i class="fa fa-inr" aria-hidden="true"></i> INR</span>'+
                     '</a>'+
                   '</div>',
@@ -4741,7 +4770,7 @@ angular.module('eCommerce')
                             return key.currencyCode === currency.toUpperCase();
                         });
                         img = (responseData[i].productImage) ? responseData[i].productImage.thumbImagePath : '';
-                        var currency = $("body").attr("data-currency").toUpperCase();
+                        var currency = currency && currency.toUpperCase();
                         var li = document.createElement("li");
                             li.innerHTML = "<div class='wrapper'><figure><img src='" + img +
                             "' alt='cart-image"+i+"' /></figure><div class='details'><h3>" +
@@ -4837,7 +4866,7 @@ angular.module('eCommerce')
                     event.preventDefault();
                     event.stopPropagation();
                     var href = $(this).attr("href");
-                    $(".cart-drawer").addClass('hide').css("left", "-1000px");
+                    $(".cart-drawer").addClass('hide').css("left", "auto");
                     $state.go(href);
                 });
 
@@ -4953,16 +4982,27 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('tileCtrl', ['$scope', '$rootScope', 'UserService', 'BASE_URI', function ($scope, $rootScope, UserService, BASE_URI) {
-    var tile = this;
+  .controller('tileCtrl', ['$scope', '$rootScope', 'UserService', 'BASE_URI', '$http', function ($scope, $rootScope, UserService, BASE_URI, $http) {
+    var tile = this,
+        object;
 
     $rootScope.$on('event:data-change', function() {
-      var object = UserService.get();
+      object = UserService.get();
       if(object.data.pageLayoutDetails) {
         tile.layout = object.data.pageLayoutDetails.layouts;
         tile.renderTemplate();
       }
-      
+    });
+
+    $rootScope.$on('event:layoutChange', function() {
+      var url = "assets/json/layouts.json";
+      $http.get(url).success( function(response) {
+          if(response.pageLayoutDetails) {
+            console.log("isdide");
+            tile.layout = response.pageLayoutDetails.layouts;
+            tile.renderTemplate();
+          }
+      });
     });
 
     tile.renderTemplate = function() {
@@ -5061,7 +5101,7 @@ require("../../../app/components/inventory/productTreeService.js");
 require("../../../app/components/ordermanagement/orderManagementCtrl.js");
 require("../../../app/components/ordermanagement/orderManagementService.js");
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_52e6403c.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_24b7943a.js","/")
 },{"+7ZJp0":54,"../../../app/app.routes.js":1,"../../../app/app.services.js":2,"../../../app/components/404/404Controller.js":3,"../../../app/components/aboutus/aboutService.js":4,"../../../app/components/aboutus/aboutusController.js":5,"../../../app/components/accounts/accountsController.js":6,"../../../app/components/accounts/accountsService.js":7,"../../../app/components/admin/adminController.js":8,"../../../app/components/cart/cartController.js":9,"../../../app/components/cart/cartService.js":10,"../../../app/components/category/categoryController.js":11,"../../../app/components/category/categoryCtrl.js":12,"../../../app/components/category/categoryService.js":13,"../../../app/components/checkout/checkoutController.js":14,"../../../app/components/checkout/checkoutService.js":15,"../../../app/components/contact/contactController.js":16,"../../../app/components/details/detailController.js":17,"../../../app/components/details/detailService.js":18,"../../../app/components/home/homeController.js":19,"../../../app/components/home/homeService.js":20,"../../../app/components/inventory/inventoryCtrl.js":21,"../../../app/components/inventory/productTreeCtrl.js":22,"../../../app/components/inventory/productTreeService.js":23,"../../../app/components/login/facebookAuth.js":24,"../../../app/components/login/loginController.js":25,"../../../app/components/login/loginService.js":26,"../../../app/components/orderlookup/orderlookupController.js":27,"../../../app/components/orderlookup/orderlookupService.js":28,"../../../app/components/ordermanagement/orderManagementCtrl.js":29,"../../../app/components/ordermanagement/orderManagementService.js":30,"../../../app/components/promomailgenerator/promoMailController.js":31,"../../../app/components/register/registerController.js":32,"../../../app/components/subCategory/subCategoryCtrl.js":33,"../../../app/components/subscribers/subscriberController.js":34,"../../../app/components/thankyou/thankyouController.js":35,"../../../app/directives/addToCart/addToCart-directive.js":36,"../../../app/directives/currencyChooser/currencyChooser-directive.js":37,"../../../app/directives/editOnFocus/editOnFocus-directive.js":38,"../../../app/directives/flasher/flasher-directive.js":39,"../../../app/directives/formElement/formElement-directive.js":40,"../../../app/directives/limitCharacterRender/limitCharacterRender-directive.js":41,"../../../app/directives/miniCart/miniCart-directive.js":42,"../../../app/directives/sticky/stickyMenu-directive.js":43,"../../../app/directives/validation/validation-directive.js":44,"../../../app/shared/tiles/tileController.js":45,"../../../vendor/js/angular-ui-router.min.js":55,"../../../vendor/js/ng-file-upload.js":56,"../multizoom.js":47,"../overlay.js":48,"../scripts.js":49,"../wowslider.js":50,"buffer":51}],47:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 
@@ -5723,7 +5763,13 @@ $(document).ready(function(e) {
             if(parseInt($(".modalComponent").css("top")) > 0) {
                 $(".modalComponent").css("top", $(document).scrollTop() + ($(window).height() - $(".modalComponent").outerHeight()) / 2);
             }
-        })
+        });
+
+        $(".layoutSelector").change(function(e) {
+            $(".item-box-layout").hide();
+            var elSelector = $(e.target).val();
+            $("."+elSelector).show();
+        });
 
 
     }, 1500);

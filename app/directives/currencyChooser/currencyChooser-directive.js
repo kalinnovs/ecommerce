@@ -20,6 +20,7 @@ angular.module('eCommerce')
 
           $("body").attr("data-currency", currencyType);          
           $("body").attr("data-crId", currencyId);
+          window.userDetails.preferredCurrency = currencyId;
           
           $(document).trigger('data-currency-changed');
         };
@@ -65,13 +66,13 @@ angular.module('eCommerce')
         link: linker,
         template: '<div class="currency-chooser">'+
                     '<span class="currencyTitle">Currency :</span>'+
-                    '<a href="javascript:void(0);" title="American Dollar" data-id="1" rel="usd" class="usd">'+
+                    '<a href="javascript:void(0);" title="American Dollar" data-id="2" rel="usd" class="usd">'+
                       '<span><i class="fa fa-usd" aria-hidden="true" class="usd"></i> USD</span>' +
                         '</a>' +
-                    '<a href="javascript:void(0);" title="European Pounds" data-id="2" rel="eur" class="euro">'+
+                    '<a href="javascript:void(0);" title="European Pounds" data-id="3" rel="eur" class="euro">'+
                         '<span><i class="fa fa-eur" aria-hidden="true" class="euro"></i> EUR</span>'+
                     '</a>'+
-                    '<a href="javascript:void(0);" title="Indian Rupee" data-id="3" rel="inr" class="active india">'+
+                    '<a href="javascript:void(0);" title="Indian Rupee" data-id="1" rel="inr" class="active india">'+
                         '<span><i class="fa fa-inr" aria-hidden="true"></i> INR</span>'+
                     '</a>'+
                   '</div>',

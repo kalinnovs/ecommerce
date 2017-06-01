@@ -111,7 +111,7 @@ angular.module('eCommerce')
                             return key.currencyCode === currency.toUpperCase();
                         });
                         img = (responseData[i].productImage) ? responseData[i].productImage.thumbImagePath : '';
-                        var currency = $("body").attr("data-currency").toUpperCase();
+                        var currency = currency && currency.toUpperCase();
                         var li = document.createElement("li");
                             li.innerHTML = "<div class='wrapper'><figure><img src='" + img +
                             "' alt='cart-image"+i+"' /></figure><div class='details'><h3>" +
