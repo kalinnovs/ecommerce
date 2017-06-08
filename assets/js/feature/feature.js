@@ -57,6 +57,8 @@ require("../../../app/components/subscribers/subscriberController.js");
 require("../../../app/components/promomailgenerator/promoMailController.js");
 
 require("../../../app/components/admin/adminController.js");
+require("../../../app/components/admin/AdminService.js");
+
 require("../../../app/components/inventory/inventoryCtrl.js");
 require("../../../app/components/category/categoryCtrl.js");
 require("../../../app/components/subCategory/subCategoryCtrl.js");

@@ -1631,6 +1631,59 @@ header a.active, header a:focus {
     height: 287px;
     min-height: 245px;
 }
+.admin.chooseItem {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    margin: -35px 0 0 -80px;
+}
+.productItem .admin.chooseItem {
+    margin-top: -85px;
+}
+.admin.chooseItem .categoryDropdown {
+    width: 160px;
+    margin-bottom: 10px;
+}
+.admin.chooseItem .subcategoryDropdown {
+    width: 160px;
+}
+.admin.chooseItem .productDropdown {
+    width: 160px;
+    margin-top: 10px;
+}
+.chooseItem .productImageSelector {
+    overflow: hidden;
+    margin-top: 10px;
+    text-align: center;
+}
+.chooseItem .productImageSelector li {
+    display: inline-block;
+    font-size: 0;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    margin-left: 5px;
+}
+.chooseItem .productImageSelector li:first-child {
+    margin-left: 0;
+}
+.chooseItem .productImageSelector li.active button {
+    border: solid 2px red;
+}
+.chooseItem .productImageSelector li button {
+    border: solid 2px #fff;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    background: #fff;
+    width: 50px;
+    height: 50px;
+    outline: none;
+}
+.chooseItem .productImageSelector li button img {
+    width: 100%;
+}
 .wide-partition a {
     display: inline-block;
     margin-top: 10px;
@@ -3544,6 +3597,47 @@ footer .back-top .pageCounter {
 .adminPage .visitorCount span {
     font-weight: 700;
     margin-right: 20px;
+}
+.adminPage .layout-selection {
+    font-size: 14px;
+    margin: 10px;
+    overflow: hidden;
+}
+.adminPage .layout-selection > * {
+    vertical-align: middle;
+    display: inline-block;
+}
+.adminPage .layout-selection > span {
+    line-height: 34px;
+}
+.adminPage .updateLayout {
+    margin: 10px;
+}
+.adminPage .saveChange {
+    float: right;
+}
+.adminPage .item-box-layout {
+    display: none;
+}
+.adminPage .item-box-layout.layout-2 {
+    display: block;
+}
+.adminPage .updateLayout .item-box-layout > .row {
+    width: 100%;
+}
+.adminPage .tile.category:hover .detail h4 {
+    transition: none;
+    transform: none;
+}
+.adminPage .tile:after {
+    opacity: 0.3;
+    background: #000;
+}
+.adminPage .wide-full-tile figure img,
+.adminPage .tile.category .detail h4 {
+    background-color: none;
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
 }
 .updateLayout .item-box-layout { 
     overflow: hidden;

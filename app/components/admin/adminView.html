@@ -17,6 +17,9 @@
 			<li>
 				<label id="ordermanagement">Order Management</label>
 			</li>
+			<li>
+				<label id="updateLayoutWrap">Product Listing</label>
+			</li>
 		</ul>
 		<div class="visitorCount">
 			<span>Unique Count / Total Views : </span> {{admin.uniqueViews}} / {{admin.totalCount}}
@@ -27,6 +30,28 @@
 		<div class="subscriber paneContent hide" ui-view="subscribers">Subscribers</div>
 		<div class="promomailgenerator paneContent hide" ui-view="promomailgenerator">Promo Emails</div>
 		<div class="ordermanagement paneContent hide" ui-view="ordermanagement">Order Management</div>
+		<div class="updateLayoutWrap paneContent hide">
+			<div class="table-responsive container">
+				<div class="panel panel-primary">
+				    <div class="panel-heading"><h1>Admin Layout Updates</h1></div>
+				    <div class="panel-content">
+				    	<div class="layout-selection">
+							<span class="layoutTitle">Choose your layout here to update: </span>
+							<select class="layoutSelector" ng-model="layoutId" ng-change="changeLayout(layoutId)">
+								<option value=""> - Choose Layout - </option>
+								<option value="layout-2">Layout 2</option>
+								<option value="layout-3">Layout 3</option>
+								<option value="layout-4">Layout 4</option>
+								<option value="layout-5">Layout 5</option>
+								<option value="layout-6">Layout 6</option>
+							</select>
+							<button class="btn btn-primary saveChange" ng-click="saveLayoutModel($event)"><span>Save Changes</span></button>
+						</div>
+						<div ui-view="updateLayout" class="updateLayout"></div>
+				    </div>
+				</div>
+			</div>
+		</div>
 		<div class="banner paneContent hide" ui-view="banners">Banners</div>
 	</div>
 </div>

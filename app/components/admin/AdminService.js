@@ -29,5 +29,11 @@ angular.module('eCommerce')
         return $http.get(url).then(service.extract);
     }
 
+    service.getProductTree = function() {
+        return $http.get('assets/json/productTree.json').then(function (response) {
+            return response.data;
+        });
+    }
+
 
   }]);

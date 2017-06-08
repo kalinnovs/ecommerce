@@ -55,4 +55,10 @@ angular.module('eCommerce')
         $rootScope.$broadcast('event:data-change');
     }
 
+    service.getProductTree = function() {
+        return $http.get('assets/json/productTree.json').then(function (response) {
+            return response.data;
+        });
+    }
+
   }]);

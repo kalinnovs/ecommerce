@@ -191,8 +191,7 @@ $(document).ready(function(e) {
             if(parseInt($(".modalComponent").css("top")) > 0) {
                 $(".modalComponent").css("top", $(document).scrollTop() + ($(window).height() - $(".modalComponent").outerHeight()) / 2);
             }
-        })
-
+        });
 
     }, 1500);
 

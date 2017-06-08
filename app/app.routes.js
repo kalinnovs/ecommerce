@@ -349,6 +349,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
             templateUrl: 'app/components/ordermanagement/orderManagement.html',
             controller: 'OrderDetailCtrl',
             controllerAs: 'OrderDetailCtrl'
+          },
+          'updateLayout@admin': {
+            templateUrl: 'app/shared/tiles/tileView.html',
+            controller: 'AdminCtrl',
+            controllerAs: 'admin'
           }
         }
       })

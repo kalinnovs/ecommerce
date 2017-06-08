@@ -1,0 +1,819 @@
+{
+   "pageLayoutDetails": {
+      "pageName": "Home",
+      "layouts": {
+         "layout2": {
+            "layoutCapacity": 2,
+            "layoutName": "2CLayout-2Big",
+            "noOfCategoryTiles": 2,
+            "noOfProductTiles": 0,
+            "tilesList": [{
+               "tileType": "CATEGORY",
+               "tileDimension": "BIG",
+               "tileId": 1,
+               "tileCategory": {
+                  "categoryName": "Dhokra Casting",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/IMG_3972.jpg",
+                  "bannerImagePath": "assets/images/categories/dhokra/Dhokra black and shining.png",
+                  "partNumber": "HSCH016",
+                  "description": "Dhokra (Odia: ଡୋକରା, Bengali: ডোকরা) (also spelt Dokra) is non-ferrous metal casting using the lost-wax casting technique. This sort of metal casting has been used in India for over 4,000 years and is still used. One of the earliest known lost wax artefacts is the dancing girl of Mohenjo-daro.[1] The product of dhokra artisans are in great demand in domestic and foreign markets because of primitive simplicity, enchanting folk motifs and forceful form. Dhokra horses, elephants, peacocks, owls, religious images, measuring bowls, and lamp caskets etc., are highly appreciated.[2] The lost wax technique for casting of copper based alloys has also been found in China, Egypt, Malaysia, Nigeria, Central America and other places.",
+                  "categoryId": 16,
+                  "categoryDetailsURL": "category/dhokra-casting"
+               }
+            }, {
+               "tileType": "CATEGORY",
+               "tileDimension": "BIG",
+               "tileId": 2,
+               "tileCategory": {
+                  "categoryName": "Golden Grass",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/IMG_3554.jpg",
+                  "bannerImagePath": "assets/images/categories/goldenGrass/Golden grass.png",
+                  "partNumber": "HSCH013",
+                  "description": "Golden grass craft is a nature lover's delight. A lot of household and decorative items are made using dried grass which becomes yellow and golden in colour. The grass is made of 'Khus Khus' stem. It is sturdy and can be bent to any shape to be turned into items of household use like baskets, boxes, mats, coasters, pen holders, wall hangings etc.\r\n\r\nDepending on the size and intricacy, each of the handicraft items takes anywhere between a day to a month to complete. Sometimes a little colour is added to the grass to create interest in the design. But generally the natural golden sheen of the dried grass itself makes it look very bright and attractive.\r\n\r\nThis craft was widely practiced in Orissa till about 40-50 years back as a lot of utility stuff was made using this craft. But as is the story everywhere, due to industrialization this craft also became almost extinct within no time. It was then left to the effort of some individuals and NGO's who tried to revive this craft by giving it a wider market. This craft has been saved, but only just. Only a few pockets like Jajanga village near Kendrapada and Jajapur, in Orissa now practice this craft. Though it is still living, but its future is uncertain, so give it a chance to be widly marketed.",
+                  "categoryId": 13,
+                  "categoryDetailsURL": "category/golden-grass"
+               }
+            }]
+         },
+         "layout3": {
+            "layoutCapacity": 3,
+            "layoutName": "3CLayout-1Big+2Wide",
+            "noOfCategoryTiles": 3,
+            "noOfProductTiles": 0,
+            "tilesList": [{
+               "tileType": "CATEGORY",
+               "tileDimension": "BIG",
+               "tileId": 7,
+               "tileCategory": {
+                  "categoryName": "Palm Leaf Work",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/IMG_3511.jpg",
+                  "bannerImagePath": "assets/images/categories/palmLeafWork/Palm leaf work.png",
+                  "partNumber": "HSCH007",
+                  "description": "One of the most ancient crafts of the world, etching and paintings on the palm leaf still thrives in the state of Orissa in India. Called Talapatrachitras there, the art has reached new heights there. Once the palm leaf etchings are treasured decorations of all Indian home.\r\nThe art originated when written communication began. Messages and manuscripts were written on the palm leaf to be disseminated. Gradually the trend to decorate the text with images began and it became an art in itself. The ethnic art were still one of the most respected ones there and is practiced by the artists primarily in Puri and Cuttack.\r\nThe ethnic art form essentially consists of inscribing letters and artistic designs on palm-leaf, mostly cut into standard sizes and held together with two wooden plank covers stringed through a hole in the center. To prepare the palm leaf, the unripe leaves of the palm tree are first cut and semidried. They are then buried in swamps for 4-5 days for seasoning and the dried in shade. These are then stitched or stringed together as per the need. At times they are stitched after the etching is complete. \r\nEtching is done within lines using an iron pen on leaf strips. A paste made of bean leaves, charcoal made of burnt coconut shells, til oil and turmeric is rubbed on the etching that highlights the figures. Colours are hardly used in this area, whatever are used as fillers and in very subdued tones. Vegetable and mineral colors are used for painting.\r\n\r\nThe artists of palm leaf etchings capture the themes of mythological incidents, Gods and Goddesses figures complete with details of hair style and dress, animals, flowers and trees etc. Radha and Krishna, Durga, Ganesha and Saraswati are the most commonly used themes. Stories and incidents of Mahabharat, Ramayana and other epics are also etched. The paintings and drawings also present excellent scenes of nature.\r\n\r\nThe art can be configured basedon customer requirements.\r\n",
+                  "categoryId": 7,
+                  "categoryDetailsURL": "category/palm-leaf-work"
+               }
+            }, {
+               "tileType": "CATEGORY",
+               "tileDimension": "WIDE",
+               "tileId": 8,
+               "tileCategory": {
+                  "categoryName": "Jute",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/IMG_3739.JPG",
+                  "bannerImagePath": "assets/images/categories/jutebags/Jute Bags.png",
+                  "partNumber": "HSCH020",
+                  "description": "Jute",
+                  "categoryId": 20,
+                  "categoryDetailsURL": "category/jute"
+               }
+            }, {
+               "tileType": "CATEGORY",
+               "tileDimension": "WIDE",
+               "tileId": 9,
+               "tileCategory": {
+                  "categoryName": "Cushion",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/IMG_3443.jpg",
+                  "bannerImagePath": "assets/images/categories/cushion/Causion.png",
+                  "partNumber": "HSCH019",
+                  "description": "Designer Cushion",
+                  "categoryId": 19,
+                  "categoryDetailsURL": "category/cushion"
+               }
+            }]
+         },
+         "layout4": {
+            "layoutCapacity": 4,
+            "layoutName": "4CLayout-1Big+1Tall+2Prod",
+            "noOfCategoryTiles": 2,
+            "noOfProductTiles": 2,
+            "tilesList": [{
+               "tileType": "CATEGORY",
+               "tileDimension": "BIG",
+               "tileId": 3,
+               "tileCategory": {
+                  "categoryName": "Chandua",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/IMG_3504.jpg",
+                  "bannerImagePath": "assets/images/categories/chandua/CHANDUA.png",
+                  "partNumber": "HSCH005",
+                  "description": "The Chandua Craft of Pipili Odisha has centuries long history, the development of Chandua is dated back to seventeenth century according to various history books of Odisha. Chandua Crafts were first produced for Lord Jagannath temple Puri to adorn the deities, later these attractive and painstakingly designed crafts used by elites of society. Most of the people in Pipili Village is earning from this work. As its a craft where one cloth is used over another that's why its called applique work.",
+                  "categoryId": 5,
+                  "categoryDetailsURL": "category/chandua"
+               }
+            }, {
+               "tileType": "CATEGORY",
+               "tileDimension": "TALL",
+               "tileId": 4,
+               "tileCategory": {
+                  "categoryName": "Terracotta",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/IMG_4043.jpg",
+                  "bannerImagePath": "assets/images/categories/terracotta/Teracotta.png",
+                  "partNumber": "HSCH014",
+                  "description": "This work is traditionally done by the tribal. They use special type of clay and design to match their skills. Popular items are roof tiles and utensils such as plates, khullars or the earthen tea cups, jars and many other kitchen items. Artists prepare many items most of which they outline and highlight with colours. However, in most cases the finished is left with the natural terracotta colour. Animal figurines of bulls, elephants and horses are also elegantly molded in very natural strong forms.\r\n\r\n \r\nTerracotta is an art form so universal in its identity, yet emblazoned with the distinct imprint of the native soil. The art of kiln burnt pottery wares provides the perfect counterfoil to the amazing legacy of stone sculpture. Terracotta artifacts demand a very high degree of artistic application and motivation. The polish on the final figure conceals an enormous volume of tireless toil and watchful attention. The terracotta products of the State have attracted admiration of art-lovers all over the country. The artisans prepare the head portion and then the body portion and finally join the parts with clean finishing. These are then allowed to dry and the objects are put to fire in the kiln. These products are then polished with specific touch. The products are brown or black in colour. Now a days, some artisans also paint the articles with the chosen colour of the customers.",
+                  "categoryId": 14,
+                  "categoryDetailsURL": "category/terracotta"
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 5,
+               "productTileDetails": {
+                  "productName": "Love Box HSGIFT032",
+                  "productId": 347,
+                  "productPartNumber": "HSPP347",
+                  "productAvailablility": "In stock",
+                  "productPrice": 147.50,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/347/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/347/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/347/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/347/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 1376,
+                     "imageName": "HSIMG3"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP347",
+                  "productDescription": "This is a handmade Craft can be used in gifting corporate or personal.Or you can use it in your home.",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 147.50
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 2.17
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 2.06
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/347/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/347/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/347/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/347/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 1374,
+                     "imageName": "HSIMG1"
+                  }, {
+                     "baseImagePath": "assets/images/products/347/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/347/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/347/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/347/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 1375,
+                     "imageName": "HSIMG2"
+                  }, {
+                     "baseImagePath": "assets/images/products/347/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/347/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/347/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/347/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 1376,
+                     "imageName": "HSIMG3"
+                  }]
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 6,
+               "productTileDetails": {
+                  "productName": "Ken photo palmleaf painting HSGIFT048",
+                  "productId": 364,
+                  "productPartNumber": "HSPP364",
+                  "productAvailablility": "In stock",
+                  "productPrice": 316.25,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/364/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/364/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/364/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/364/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 1395,
+                     "imageName": "HSIMG1"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP364",
+                  "productDescription": "One of the most ancient crafts of the world, etching and paintings on the palm leaf still thrives in the state of Orissa in India. Called Talapatrachitras there, the art has reached new heights there. The palm leaf etchings are treasured decorations of all Indian home. The art originated when written communication began. Messages and manuscripts were written on the palm leaf to be disseminated. Gradually the trend to decorate the text with images began and it became an art in itself. The ethnic art were still one of the most respected ones there and is practiced by the artists primarily in Puri and Cuttack. The ethnic art form essentially consists of inscribing letters and artistic designs on palm-leaf,mostly cut into standard sizes and held together with two wooden plank covers stringed through a hole in the centre. To prepare the palm leaf, the unripe leaves of the palm tree are first cut and semidried. They are then buried in swamps for 4-5 days for seasoning and the dried in shade. These are then stitched or stringed together as per the need. At times they are stitched after the etching is complete. Etching is done within lines using an iron pen on leaf strips. A paste made of bean leaves, charcoal made of burnt coconut shells, til oil and turmeric is rubbed on the etching that highlights the figures. Colours are hardly used in this area, whatever are used as fillers and in very subdued tones. Vegetable and mineral colours are used for painting. The artists of palm leaf etchings capture the themes of mythological incidents, Gods and Goddesses figures complete with details of hair style and dress, animals, flowers and trees etc. Radha and Krishna, Durga, Ganesha and Saraswati are the most commonly used themes. Stories and incidents of Mahabharat, Ramayana and other epics are also etched. The paintings and drawings also present excellent scenes of nature.",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 316.25
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 4.65
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 4.42
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/364/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/364/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/364/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/364/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 1395,
+                     "imageName": "HSIMG1"
+                  }]
+               }
+            }]
+         },
+         "layout5": {
+            "layoutCapacity": 5,
+            "layoutName": "5CLayout-1Big+4Prod",
+            "noOfCategoryTiles": 1,
+            "noOfProductTiles": 4,
+            "tilesList": [{
+               "tileType": "CATEGORY",
+               "tileDimension": "BIG",
+               "tileId": 10,
+               "tileCategory": {
+                  "categoryName": "Paddy craft",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/IMG_3884.jpg",
+                  "bannerImagePath": "assets/images/categories/pedicraft/Pedicraft.png",
+                  "partNumber": "HSCH018",
+                  "description": "The paddy craft of Orissa is a languishing craft which is practised in the district of Koraput, Kalahandi, Balasore and Bolangir. The tribes of Ghond who have been detribalized and have taken to agriculture are the main practitioners of the craft. Rice is a symbol of prosperity and so the goddess Lakshmi is popularly made by the artisans. Other subject includes carts, chariots, elephants and other Gods and Goddess. Most items crafted have an association with religion.",
+                  "categoryId": 18,
+                  "categoryDetailsURL": "category/paddy-craft"
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 11,
+               "productTileDetails": {
+                  "productName": "Teracotta Matka(Larg)-HSTC013",
+                  "productId": 110,
+                  "productPartNumber": "HSPP110",
+                  "productAvailablility": "In stock",
+                  "productPrice": 1600.00,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/110/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/110/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/110/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/110/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 1046,
+                     "imageName": "HSIMG3"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP110",
+                  "productDescription": "Terracotta is an art form so universal in its identity, yet emblazoned with the distinct imprint of the native soil. The art of kiln burnt pottery wares provides the perfect counterfoil to the amazing legacy of stone sculpture. Terracotta artifacts demand a very high degree of artistic application and motivation. The polish on the final figure conceals an enormous volume of tireless toil and watchful attention. The terracotta products of the State have attracted admiration of art-lovers all over the country. The artisans prepare the head portion and then the body portion and finally join the parts with clean finishing. These are then allowed to dry and the objects are put to fire in the kiln. These products are then polished with specific touch. The products are brown or black in colour. Now a days, some artisans also paint the articles with the chosen colour of the customers. Barapalli in Bargarh district, Nuagaon in Khurda district, Batahaladharpur in Keonjhar district, Lunuka in Jagatsinghpur district, Sorispadar in Rayagada, Kusumi in Poraput, Kuibahal-Silati in Subarnpur district, Puintala 7 Baghapalli of Bolangir district are famous for terracotta crafts.",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 1600.00
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 23.55
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 22.38
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/110/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/110/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/110/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/110/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 1044,
+                     "imageName": "HSIMG1"
+                  }, {
+                     "baseImagePath": "assets/images/products/110/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/110/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/110/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/110/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 1045,
+                     "imageName": "HSIMG2"
+                  }, {
+                     "baseImagePath": "assets/images/products/110/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/110/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/110/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/110/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 1046,
+                     "imageName": "HSIMG3"
+                  }]
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 12,
+               "productTileDetails": {
+                  "productName": "Haastika handcrafted dhokra jewellery box showpiece-HSDC02",
+                  "productId": 141,
+                  "productPartNumber": "HSPP141",
+                  "productAvailablility": "In stock",
+                  "productPrice": 1200.00,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/1/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/1/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/1/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/1/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 1027,
+                     "imageName": "HSIMG1"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP141",
+                  "productDescription": "Dhocra is an ancient craft using the lost wax process of metal casting, mostly produced by tribals of orissa. Kondh tribal make images of human beings in action, animals, birds etc. Apart from ritualistic objects they also make boxes, masks, candle stands, door knobs etc. In Dhenkanal & Kandhamala districts of orissa the tribal make metal cast jewellery, hair pins clips, headbands, necklace etc. Dhocra items are widely admired and collected for ethnic beauty and artistic ingenuity.",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 1200.00
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 13.54
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 12.87
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/141/HSIMG4/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/141/HSIMG4/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/141/HSIMG4/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/141/HSIMG4/extraLarge/extraLarge.jpg",
+                     "productImageId": 1584,
+                     "imageName": "HSIMG4"
+                  }, {
+                     "baseImagePath": "assets/images/products/141/HSIMG5/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/141/HSIMG5/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/141/HSIMG5/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/141/HSIMG5/extraLarge/extraLarge.jpg",
+                     "productImageId": 1585,
+                     "imageName": "HSIMG5"
+                  }, {
+                     "baseImagePath": "assets/images/products/141/HSIMG6/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/141/HSIMG6/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/141/HSIMG6/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/141/HSIMG6/extraLarge/extraLarge.jpg",
+                     "productImageId": 1586,
+                     "imageName": "HSIMG6"
+                  }, {
+                     "baseImagePath": "assets/images/products/141/HSIMG7/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/141/HSIMG7/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/141/HSIMG7/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/141/HSIMG7/extraLarge/extraLarge.jpg",
+                     "productImageId": 1587,
+                     "imageName": "HSIMG7"
+                  }, {
+                     "baseImagePath": "assets/images/products/141/HSIMG8/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/141/HSIMG8/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/141/HSIMG8/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/141/HSIMG8/extraLarge/extraLarge.jpg",
+                     "productImageId": 1588,
+                     "imageName": "HSIMG8"
+                  }, {
+                     "baseImagePath": "assets/images/products/141/HSIMG9/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/141/HSIMG9/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/141/HSIMG9/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/141/HSIMG9/extraLarge/extraLarge.jpg",
+                     "productImageId": 1589,
+                     "imageName": "HSIMG9"
+                  }]
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 13,
+               "productTileDetails": {
+                  "productName": "Paddy Craft Ganesh(Green)-HSPC002",
+                  "productId": 163,
+                  "productPartNumber": "HSPP163",
+                  "productAvailablility": "In stock",
+                  "productPrice": 580.00,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/163/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/163/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/163/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/163/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 785,
+                     "imageName": "HSIMG2"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP163",
+                  "productDescription": "The very artistic nature of the people of odisha is evident from the craft items created from any material that comes in their contact. Odisha being an agrarian state and paddy being the main agricultural produce, artisans have also found straw and paddy as material of craft items. Although these crafts are of much recent origin, they have received good acceptance by the craft lovers.",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 580.00
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 8.54
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 8.11
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/163/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/163/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/163/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/163/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 784,
+                     "imageName": "HSIMG1"
+                  }, {
+                     "baseImagePath": "assets/images/products/163/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/163/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/163/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/163/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 785,
+                     "imageName": "HSIMG2"
+                  }]
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 14,
+               "productTileDetails": {
+                  "productName": "Teracotta Small Pot-HSTC002",
+                  "productId": 99,
+                  "productPartNumber": "HSPP099",
+                  "productAvailablility": "In stock",
+                  "productPrice": 760.00,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/99/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/99/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/99/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/99/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 982,
+                     "imageName": "HSIMG3"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP099",
+                  "productDescription": "Terracotta is an art form so universal in its identity, yet emblazoned with the distinct imprint of the native soil. The art of kiln burnt pottery wares provides the perfect counterfoil to the amazing legacy of stone sculpture. Terracotta artifacts demand a very high degree of artistic application and motivation. The polish on the final figure conceals an enormous volume of tireless toil and watchful attention. The terracotta products of the State have attracted admiration of art-lovers all over the country. The artisans prepare the head portion and then the body portion and finally join the parts with clean finishing. These are then allowed to dry and the objects are put to fire in the kiln. These products are then polished with specific touch. The products are brown or black in colour. Now a days, some artisans also paint the articles with the chosen colour of the customers. Barapalli in Bargarh district, Nuagaon in Khurda district, Batahaladharpur in Keonjhar district, Lunuka in Jagatsinghpur district, Sorispadar in Rayagada, Kusumi in Poraput, Kuibahal-Silati in Subarnpur district, Puintala 7 Baghapalli of Bolangir district are famous for terracotta crafts.",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 760.00
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 11.18
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 10.63
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/99/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/99/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/99/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/99/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 979,
+                     "imageName": "HSIMG1"
+                  }, {
+                     "baseImagePath": "assets/images/products/99/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/99/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/99/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/99/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 980,
+                     "imageName": "HSIMG2"
+                  }, {
+                     "baseImagePath": "assets/images/products/99/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/99/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/99/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/99/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 982,
+                     "imageName": "HSIMG3"
+                  }]
+               }
+            }]
+         },
+         "layout6": {
+            "layoutCapacity": 6,
+            "layoutName": "6CLayout-1Tall+1Wide+4Prod",
+            "noOfCategoryTiles": 2,
+            "noOfProductTiles": 4,
+            "tilesList": [{
+               "tileType": "CATEGORY",
+               "tileDimension": "TALL",
+               "tileId": 15,
+               "tileCategory": {
+                  "categoryName": "Paper Mache",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/papermache.jpg",
+                  "bannerImagePath": "assets/images/categories/paperMache/Paper Mache.png",
+                  "partNumber": "HSCH011",
+                  "description": "Made of news paper or books. The news paper or books that are generally of no more use, can be used as home decorations. Very beautiful items are carved from this, some are wall hangings and some for home decorations.",
+                  "categoryId": 11,
+                  "categoryDetailsURL": "category/paper-mache"
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 16,
+               "productTileDetails": {
+                  "productName": "Wall hanging Paper Mache wall hanging-HSPM002",
+                  "productId": 161,
+                  "productPartNumber": "HSPP161",
+                  "productAvailablility": "In stock",
+                  "productPrice": 460.00,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/161/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/161/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/161/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/161/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 1157,
+                     "imageName": "HSIMG3"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP161",
+                  "productDescription": "Paper Mache skill has been creatively practiced by crafts persons from all over Orissa for long. Masks, hand bags, toys are produced out of specially made papers in Orissa that are not only beautiful but strong and durable as well.\nOrissa has a history of folk theatre also known as Jatra in local parlance. The characters of these Jatras are made of wood and vividly painted. They are dressed according to the characters played by them and are controlled by strings. Based on the characterizations, masks are used by the artists. These masks are made of wood, sholapith and papiermache. This has given rise to the art of making masks from special paper. Most artisans for this craft are located in and around Puri.\nAn elaborate procedure is followed to make papers for these items. Paper, waste cloth and different kinds of natural fibers are soaked and beaten into pulp. They are then mixed with a variety of seeds and gums for strength and as protection from termites. Special clays and bio-wastes are added for body and reinforcement. The entire process results in a medium so malleable that it requires skill to be molded into countless forms. Items like masks, toys and caps generate a lot of interest in the market.",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 460.00
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 6.77
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 6.44
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/161/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/161/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/161/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/161/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 1155,
+                     "imageName": "HSIMG1"
+                  }, {
+                     "baseImagePath": "assets/images/products/161/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/161/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/161/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/161/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 1156,
+                     "imageName": "HSIMG2"
+                  }, {
+                     "baseImagePath": "assets/images/products/161/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/161/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/161/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/161/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 1157,
+                     "imageName": "HSIMG3"
+                  }]
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 17,
+               "productTileDetails": {
+                  "productName": "Wood Carving Big Wood Carving Elephent-HSWC009",
+                  "productId": 135,
+                  "productPartNumber": "HSPP135",
+                  "productAvailablility": "In stock",
+                  "productPrice": 24360.00,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/135/HSIMG4/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/135/HSIMG4/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/135/HSIMG4/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/135/HSIMG4/extraLarge/extraLarge.jpg",
+                     "productImageId": 829,
+                     "imageName": "HSIMG4"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP135",
+                  "productDescription": ". Usually light varieties of wood are preferred and vegetable and mineral colours are used. Wood carving is another important handicraft of Orissa. This again can be broadly grouped into three sub-groups-painted wood carvings, plain wood carvings and wood turned items. In the first group we have painted wooden toys of Puri and Bargarh masks, and idols and chariot decorations",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 24360.00
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 358.50
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 340.79
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/135/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/135/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/135/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/135/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 826,
+                     "imageName": "HSIMG1"
+                  }, {
+                     "baseImagePath": "assets/images/products/135/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/135/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/135/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/135/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 827,
+                     "imageName": "HSIMG2"
+                  }, {
+                     "baseImagePath": "assets/images/products/135/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/135/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/135/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/135/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 828,
+                     "imageName": "HSIMG3"
+                  }, {
+                     "baseImagePath": "assets/images/products/135/HSIMG4/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/135/HSIMG4/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/135/HSIMG4/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/135/HSIMG4/extraLarge/extraLarge.jpg",
+                     "productImageId": 829,
+                     "imageName": "HSIMG4"
+                  }]
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 18,
+               "productTileDetails": {
+                  "productName": "Haastika Home Decor Handicrafted horn Craft Mother Bird With Child-HSCH011",
+                  "productId": 411,
+                  "productPartNumber": "HSPP411",
+                  "productAvailablility": "In stock",
+                  "productPrice": 370.00,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/411/HSIMG4/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/411/HSIMG4/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/411/HSIMG4/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/411/HSIMG4/extraLarge/extraLarge.jpg",
+                     "productImageId": 1499,
+                     "imageName": "HSIMG4"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP411",
+                  "productDescription": "Like any other state Orissa also produces wide variety of cane bamboo items. This art is totally derived from nature and are free from chemicals and are environmentally friendly. The high- tensile strength of bamboo and easy to mould in any shape qualities have made it very popular for architectural uses. These artists give shape to many household items such as baskets, rice and vegetable strainers and brooms. Designer items such as furniture, racks are also in vogue. Bamboo has a great specialty\";\" it does not require much of maintenance as once in a year wood polishing is sufficient for its longevity.",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 370.00
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 5.45
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 5.18
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/411/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/411/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/411/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/411/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 1496,
+                     "imageName": "HSIMG1"
+                  }, {
+                     "baseImagePath": "assets/images/products/411/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/411/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/411/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/411/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 1497,
+                     "imageName": "HSIMG2"
+                  }, {
+                     "baseImagePath": "assets/images/products/411/HSIMG3/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/411/HSIMG3/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/411/HSIMG3/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/411/HSIMG3/extraLarge/extraLarge.jpg",
+                     "productImageId": 1498,
+                     "imageName": "HSIMG3"
+                  }, {
+                     "baseImagePath": "assets/images/products/411/HSIMG4/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/411/HSIMG4/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/411/HSIMG4/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/411/HSIMG4/extraLarge/extraLarge.jpg",
+                     "productImageId": 1499,
+                     "imageName": "HSIMG4"
+                  }]
+               }
+            }, {
+               "tileType": "CATEGORY",
+               "tileDimension": "WIDE",
+               "tileId": 19,
+               "tileCategory": {
+                  "categoryName": "Pattachitra",
+                  "menuImagePath": "",
+                  "tileImagePath": "assets/images/products/tile/IMG_3519.jpg",
+                  "bannerImagePath": "assets/images/categories/pattachitra/PataChitra.png",
+                  "partNumber": "HSCH006",
+                  "description": "Pattachitra is a ancient and traditional painting of Odisha, India. The origin of this art is dated back to 5th century BC. These paintings are based on Hindu mythology and specially inspired by Jagannath and Vaishnava. All colors used in the Paintings are natural and paintings are made fully old traditional way by Chitrakaras that is Oriya Painter. Pattachitra style of painting is one of the oldest and most popular art forms of Odisha. The name Pattachitra has evolved from the Sanskrit words patta, meaning canvas, and chitra, meaning picture. Pattachitra is thus a painting done on canvas, and is manifested by rich colorful application, creative motifs and designs, and portrayal of simple themes, mostly mythological in depiction. The traditions of pattachitra paintings are more than thousand years old.\r\n\r\nThese Pattachitras can be configured / designed based on customer requirements.",
+                  "categoryId": 6,
+                  "categoryDetailsURL": "category/pattachitra"
+               }
+            }, {
+               "tileType": "PRODUCT",
+               "tileId": 20,
+               "productTileDetails": {
+                  "productName": "Haastika Handcrafted Horn Craft Pecock-HSBM008",
+                  "productId": 424,
+                  "productPartNumber": "HSPP424",
+                  "productAvailablility": "In stock",
+                  "productPrice": 750.00,
+                  "productImage": {
+                     "baseImagePath": "assets/images/products/424/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/424/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/424/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/424/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 1522,
+                     "imageName": "HSIMG2"
+                  },
+                  "productCurrency": "INR",
+                  "averageProductRating": 3,
+                  "productDetailsURL": "/product/HSPP424",
+                  "productDescription": "Like any other state Orissa also produces wide variety of cane bamboo items. This art is totally derived from nature and are free from chemicals and are environmentally friendly. The high- tensile strength of bamboo and easy to mould in any shape qualities have made it very popular for architectural uses. These artists give shape to many household items such as baskets, rice and vegetable strainers and brooms. Designer items such as furniture, racks are also in vogue. Bamboo has a great specialty\";\" it does not require much of maintenance as once in a year wood polishing is sufficient for its longevity.",
+                  "productPriceOptions": [{
+                     "countryName": "India",
+                     "currencyCode": "INR",
+                     "currencyId": 1,
+                     "currencySymbol": "INR",
+                     "price": 750.00
+                  }, {
+                     "countryName": "United States",
+                     "currencyCode": "USD",
+                     "currencyId": 2,
+                     "currencySymbol": "$",
+                     "price": 11.04
+                  }, {
+                     "countryName": "Europe",
+                     "currencyCode": "EUR",
+                     "currencyId": 3,
+                     "currencySymbol": "GBP",
+                     "price": 10.49
+                  }],
+                  "productImageGallery": [{
+                     "baseImagePath": "assets/images/products/424/HSIMG1/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/424/HSIMG1/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/424/HSIMG1/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/424/HSIMG1/extraLarge/extraLarge.jpg",
+                     "productImageId": 1521,
+                     "imageName": "HSIMG1"
+                  }, {
+                     "baseImagePath": "assets/images/products/424/HSIMG2/medium/medium.jpg",
+                     "thumbImagePath": "assets/images/products/424/HSIMG2/thumb/thumb.jpg",
+                     "largeImagePath": "assets/images/products/424/HSIMG2/large/large.jpg",
+                     "extraLargeImagePath": "assets/images/products/424/HSIMG2/extraLarge/extraLarge.jpg",
+                     "productImageId": 1522,
+                     "imageName": "HSIMG2"
+                  }]
+               }
+            }]
+         }
+      }
+   }
+}

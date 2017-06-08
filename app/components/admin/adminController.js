@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AdminCtrl', ['$scope', '$rootScope', '$http', '$state', '$timeout', 'UserService', '$cookies', 'PRODUCTDATA_URL', 'AuthenticationService', 'OrderDetailService', 
-    function ($scope, $rootScope, $http, $state, $timeout, UserService, $cookies, PRODUCTDATA_URL, AuthenticationService, OrderDetailService) {
+  .controller('AdminCtrl', ['$scope', '$rootScope', '$http', '$state', '$timeout', '$interval', 'UserService', '$cookies', 'PRODUCTDATA_URL', 'AuthenticationService', 'OrderDetailService', 
+    function ($scope, $rootScope, $http, $state, $timeout, $interval, UserService, $cookies, PRODUCTDATA_URL, AuthenticationService, OrderDetailService) {
     var admin = this;
     
     // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
@@ -12,6 +12,7 @@ angular.module('eCommerce')
           	admin.uniqueViews = data.totalUniqueVisitorsCount;
           	admin.totalCount = data.totalVisitorsCount;
           }
+          $rootScope.$broadcast('event:layoutChange');
         })
     
     $scope.chooseTemplate = function(e) { 
@@ -35,8 +36,142 @@ angular.module('eCommerce')
                 $scope.id = data.id;
                 CKEDITOR.instances.haastikaeditor.setData(data.content);
             })
-        }
+        } else if (e.target.id === 'updateLayoutWrap') {
+            // $rootScope.$broadcast('event:layoutChange');
+            var self = this;
+            var url = "assets/json/layouts.json";
+            $http.get(url).success( function(response) {
+                if(response.pageLayoutDetails) {
+                    $scope.layout = response.pageLayoutDetails.layouts;
+                    $scope.renderAdminTemplate();
+                }
+            });
+            $http.get('assets/json/productTree.json').then(function (response) {
+                $scope.productTree = response.data;
+                self.productTree = response.data;
+            });
 
+            $(".layoutSelector").val("layout-2");
+        }
+    };
+
+    $scope.changeLayout = function(elSelector) {
+        $(".item-box-layout").hide();
+        $("."+elSelector).show();
+    };
+
+    $scope.renderAdminTemplate = function() {
+      $.each($scope.layout, function(k, v) {
+          if(v.layoutCapacity === 0) {
+            return true;
+          }
+          var layout = "layout"+ v.layoutCapacity;
+          $scope[layout] = 'app/shared/tiles/'+layout+'-admin.html';
+      });
+    };
+
+    $scope.getSubCategories = function(categoryId, id) {
+        var categoryIndex = $.map(this.productTree.categoryList, function(obj, index) {
+            if(obj.categoryId == categoryId) {
+                return index;
+            }
+        });
+        $scope.subCategoryList = $scope.subCategoryList || {};
+        $scope.subCategoryList[id] = this.productTree.categoryList[categoryIndex].subCategoryList;
+    };
+
+    $scope.getProductList = function(categoryId, subCategoryId, id) {
+        var categoryIndex = $.map(this.productTree.categoryList, function(obj, index) {
+            if(obj.categoryId == categoryId) {
+                return index;
+            }
+        });
+        var subcategoryIndex = $.map(this.productTree.categoryList[categoryIndex].subCategoryList, function(obj, index) {
+            if(obj.categoryId == subCategoryId) {
+                return index;
+            }
+        });
+        $scope.productList = $scope.productList || {};
+        $scope.productList[id] = this.productTree.categoryList[categoryIndex].subCategoryList[subcategoryIndex].productsList;
+    };
+
+    $scope.getSelectedCategory = function(categoryId, subCategoryId, layout, boxId) {
+        // Finds the position of category in JSON
+        var categoryIndex = $.map(this.productTree.categoryList, function(obj, index) {
+            if(obj.categoryId == categoryId) {
+                return index;
+            }
+        });
+
+        // Finds the position of subcategory in JSON
+        var subcategoryIndex = $.map(this.productTree.categoryList[categoryIndex].subCategoryList, function(obj, index) {
+            if(obj.categoryId == subCategoryId) {
+                return index;
+            }
+        });
+
+        // Find which box needs a update
+        var index = $.map(this.layout[layout].tilesList, function(obj, index) {
+            if(obj.tileId == boxId) {
+                return index;
+            }
+        });
+
+        var newObj = this.productTree.categoryList[categoryIndex].subCategoryList[subcategoryIndex];
+        if(!newObj.tileImagePath) {
+            newObj.tileImagePath = newObj.categoryTileImagePath;
+        }
+        // Updates Model
+        $scope.layout[layout].tilesList[index].tileCategory = newObj;
+    };
+
+    $scope.getProductImageList = function(categoryId, subCategoryId, productId, layout, boxId) {
+        // Finds the position of category in JSON
+        var categoryIndex = $.map(this.productTree.categoryList, function(obj, index) {
+            if(obj.categoryId == categoryId) {
+                return index;
+            }
+        });
+
+        // Finds the position of subcategory in JSON
+        var subcategoryIndex = $.map(this.productTree.categoryList[categoryIndex].subCategoryList, function(obj, index) {
+            if(obj.categoryId == subCategoryId) {
+                return index;
+            }
+        });
+
+        // Finds the position of product in JSON
+        var productIndex = $.map(this.productTree.categoryList[categoryIndex].subCategoryList[subcategoryIndex].productsList, function(obj, index) {
+            if(obj.productId == productId) {
+                return index;
+            }
+        });
+
+        // Find which box needs a update
+        var index = $.map(this.layout[layout].tilesList, function(obj, index) {
+            if(obj.tileId == boxId) {
+                return index;
+            }
+        });
+
+        var newObj = this.productTree.categoryList[categoryIndex].subCategoryList[subcategoryIndex].productsList[productIndex];
+        
+        // Updates Model
+        $scope.imageGalleryList = $scope.imageGalleryList || {};
+        $scope.imageGalleryList[boxId] = newObj.productImageGallery;
+        $scope.layout[layout].tilesList[index].productTileDetails = newObj;
+    };
+
+    $scope.swapImage = function(event, boxId, imgSrc, layout) {
+        // Find which box needs a update
+        var index = $.map(this.layout[layout].tilesList, function(obj, index) {
+            if(obj.tileId == boxId) {
+                return index;
+            }
+        });
+        $scope.layout[layout].tilesList[index].productTileDetails.productImage.thumbImagePath = imgSrc;
+        $(event.target).parents("ul").find("li").removeClass("active");
+        $(event.target).parents("li").addClass("active");
     };
 
     $scope.logout = function() {

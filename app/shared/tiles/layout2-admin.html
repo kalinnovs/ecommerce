@@ -1,0 +1,25 @@
+<div class="item-box-layout layout-2">
+    <div class="wrapper row">
+        <div class="span_6_of_12 col" ng-repeat="(key, value) in layout.layout2.tilesList">
+            <div class="tile wide-full-tile {{value.tileType | lowercase}} {{value.imageBackground}}">
+                <figure>
+                    <img alt="" ng-src="{{value.tileCategory.tileImagePath}}">
+                </figure>
+                <div class="detail">
+                    <h4>{{value.tileCategory.categoryName}}</h4>
+                </div>
+                <div class="admin chooseItem">
+                    <select name="category" ng-model="productRootCategoryId[value.tileId]" ng-change="getSubCategories(productRootCategoryId[value.tileId], {{value.tileId}})" class="categoryDropdown form-control" ng-init="productRootCategoryId[value.tileId]" required >
+                        <option value="">Category</option>
+                        <option ng-repeat="category in productTree.categoryList" value="{{category.categoryId}}">{{category.categoryName}}</option>
+                    </select>
+                    <select ng-model="subCategoryId[value.tileId]" class="subcategoryDropdown form-control" ng-init="subCategoryId[value.tileId]"  ng-change="getSelectedCategory(productRootCategoryId[value.tileId], subCategoryId[value.tileId], 'layout2', {{value.tileId}})">
+                        <option value="">Sub Category</option>
+                        <option ng-repeat="subcat in subCategoryList[value.tileId]" value="{{subcat.categoryId}}"
+                        ng-selected="{{(subcat.categoryId == productRootCategoryId) ? 'selected' : false}}" >{{subcat.categoryName}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

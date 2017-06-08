@@ -1,16 +1,26 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('tileCtrl', ['$scope', '$rootScope', 'UserService', 'BASE_URI', function ($scope, $rootScope, UserService, BASE_URI) {
-    var tile = this;
+  .controller('tileCtrl', ['$scope', '$rootScope', 'UserService', 'BASE_URI', '$http', function ($scope, $rootScope, UserService, BASE_URI, $http) {
+    var tile = this,
+        object;
 
     $rootScope.$on('event:data-change', function() {
-      var object = UserService.get();
+      object = UserService.get();
       if(object.data.pageLayoutDetails) {
         tile.layout = object.data.pageLayoutDetails.layouts;
         tile.renderTemplate();
       }
-      
+    });
+
+    $rootScope.$on('event:layoutChange', function() {
+      var url = "assets/json/layouts.json";
+      $http.get(url).success( function(response) {
+          if(response.pageLayoutDetails) {
+            tile.layout = response.pageLayoutDetails.layouts;
+            tile.renderTemplate();
+          }
+      });
     });
 
     tile.renderTemplate = function() {
@@ -22,6 +32,5 @@ angular.module('eCommerce')
           $scope[layout] = 'app/shared/tiles/'+layout+'.html';
       });
     };
-
   }])
 ;
