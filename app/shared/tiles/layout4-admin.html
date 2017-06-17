@@ -35,8 +35,8 @@
                                 ng-selected="{{(product.productId == productId[layout.layout4.tilesList[2].tileId]) ? 'selected' : false}}" >{{product.productName}}</option>
                             </select>
                             <ul class="productImageSelector">
-                                <li ng-repeat="productImage in imageGalleryList[layout.layout4.tilesList[2].tileId]" ng-class="{'active': $first}">
-                                    <button data-id="{{productImage.productImageId}}" ng-click="swapImage($event, layout.layout4.tilesList[2].tileId, productImage.thumbImagePath, 'layout4')">
+                                <li ng-repeat="productImage in imageGalleryList[layout.layout4.tilesList[2].tileId]" ng-class="{'active': $last}">
+                                    <button data-id="{{productImage.productImageId}}" ng-click="swapImage($event, layout.layout4.tilesList[2].tileId, productImage.thumbImagePath, productImage.productImageId, 'layout4')">
                                         <img src="{{productImage.thumbImagePath}}" />
                                     </button>
                                 </li>
@@ -77,8 +77,8 @@
                                 ng-selected="{{(product.productId == productId[layout.layout4.tilesList[3].tileId]) ? 'selected' : false}}" >{{product.productName}}</option>
                             </select>
                             <ul class="productImageSelector">
-                                <li ng-repeat="productImage in imageGalleryList[layout.layout4.tilesList[3].tileId]" ng-class="{'active': $first}">
-                                    <button data-id="{{productImage.productImageId}}" ng-click="swapImage($event, layout.layout4.tilesList[3].tileId, productImage.thumbImagePath, 'layout4')">
+                                <li ng-repeat="productImage in imageGalleryList[layout.layout4.tilesList[3].tileId]" ng-class="{'active': $last}">
+                                    <button data-id="{{productImage.productImageId}}" ng-click="swapImage($event, layout.layout4.tilesList[3].tileId, productImage.thumbImagePath, productImage.productImageId, 'layout4')">
                                         <img src="{{productImage.thumbImagePath}}" />
                                     </button>
                                 </li>

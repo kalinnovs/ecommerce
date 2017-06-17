@@ -11,7 +11,8 @@
                 <div class="admin chooseItem">
                     <select name="category" ng-model="productRootCategoryId[value.tileId]" ng-change="getSubCategories(productRootCategoryId[value.tileId], {{value.tileId}})" class="categoryDropdown form-control" ng-init="productRootCategoryId[value.tileId]" required >
                         <option value="">Category</option>
-                        <option ng-repeat="category in productTree.categoryList" value="{{category.categoryId}}">{{category.categoryName}}</option>
+                        <option ng-repeat="category in productTree.categoryList" value="{{category.categoryId}}"
+                        ng-selected="{{(category.categoryId == value.tileCategory.categoryId) ? 'selected' : false}}">{{category.categoryName}}</option>
                     </select>
                     <select ng-model="subCategoryId[value.tileId]" class="subcategoryDropdown form-control" ng-init="subCategoryId[value.tileId]"  ng-change="getSelectedCategory(productRootCategoryId[value.tileId], subCategoryId[value.tileId], 'layout2', {{value.tileId}})">
                         <option value="">Sub Category</option>

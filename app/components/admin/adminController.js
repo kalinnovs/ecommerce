@@ -51,12 +51,13 @@ angular.module('eCommerce')
                 self.productTree = response.data;
             });
 
-            $(".layoutSelector").val("layout-2");
+            $(".layoutSelector").val("layout2");
         }
     };
 
     $scope.changeLayout = function(elSelector) {
         $(".item-box-layout").hide();
+        elSelector = elSelector.slice(0, 6) + "-" + elSelector.slice(6);
         $("."+elSelector).show();
     };
 
@@ -71,6 +72,9 @@ angular.module('eCommerce')
     };
 
     $scope.getSubCategories = function(categoryId, id) {
+        if(categoryId === "") {
+            return true;
+        };
         var categoryIndex = $.map(this.productTree.categoryList, function(obj, index) {
             if(obj.categoryId == categoryId) {
                 return index;
@@ -81,6 +85,9 @@ angular.module('eCommerce')
     };
 
     $scope.getProductList = function(categoryId, subCategoryId, id) {
+        if(categoryId === "" || subCategoryId === "") {
+            return true;
+        };
         var categoryIndex = $.map(this.productTree.categoryList, function(obj, index) {
             if(obj.categoryId == categoryId) {
                 return index;
@@ -96,6 +103,9 @@ angular.module('eCommerce')
     };
 
     $scope.getSelectedCategory = function(categoryId, subCategoryId, layout, boxId) {
+        if(categoryId === "" || subCategoryId === "") {
+            return true;
+        };
         // Finds the position of category in JSON
         var categoryIndex = $.map(this.productTree.categoryList, function(obj, index) {
             if(obj.categoryId == categoryId) {
@@ -126,6 +136,9 @@ angular.module('eCommerce')
     };
 
     $scope.getProductImageList = function(categoryId, subCategoryId, productId, layout, boxId) {
+        if(categoryId === "" || subCategoryId === "") {
+            return true;
+        };
         // Finds the position of category in JSON
         var categoryIndex = $.map(this.productTree.categoryList, function(obj, index) {
             if(obj.categoryId == categoryId) {
@@ -162,7 +175,7 @@ angular.module('eCommerce')
         $scope.layout[layout].tilesList[index].productTileDetails = newObj;
     };
 
-    $scope.swapImage = function(event, boxId, imgSrc, layout) {
+    $scope.swapImage = function(event, boxId, imgSrc, imgSrcId, layout) {
         // Find which box needs a update
         var index = $.map(this.layout[layout].tilesList, function(obj, index) {
             if(obj.tileId == boxId) {
@@ -170,6 +183,7 @@ angular.module('eCommerce')
             }
         });
         $scope.layout[layout].tilesList[index].productTileDetails.productImage.thumbImagePath = imgSrc;
+        $scope.layout[layout].tilesList[index].productTileDetails.productImage.productImageId = imgSrcId;
         $(event.target).parents("ul").find("li").removeClass("active");
         $(event.target).parents("li").addClass("active");
     };
@@ -181,6 +195,29 @@ angular.module('eCommerce')
         window.sessionStorage.setItem("checkoutState", '{"login": false, "address": false, "order": false, "payment": false }');
         window.userDetails = {"name": "Guest","imageUrl": "","user": null};
         $state.go('home');
+    };
+
+    $scope.saveLayoutModel = function() {
+        var tileList = this.layout[this.layoutId].tilesList;
+        var payload = [];
+        for(var i=0 ; i < tileList.length; i++) {
+            var tempObj = {};
+            switch(tileList[i].tileType) {
+                case "CATEGORY":
+                    tempObj.tileId = tileList[i].tileId;
+                    tempObj.categoryId = tileList[i].tileCategory.categoryId;
+                    break;
+                case "PRODUCT":
+                    tempObj.tileId = tileList[i].tileId;
+                    tempObj.productId = tileList[i].productTileDetails.productId;
+                    tempObj.productImageId = tileList[i].productTileDetails.productImage.productImageId;
+                    break;
+            }
+            payload.push(tempObj);
+        }
+        
+        // debugger;
+
     };
     
   }]
