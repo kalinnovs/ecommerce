@@ -17,7 +17,7 @@
                     <select ng-model="subCategoryId[value.tileId]" class="subcategoryDropdown form-control" ng-init="subCategoryId[value.tileId]"  ng-change="getSelectedCategory(productRootCategoryId[value.tileId], subCategoryId[value.tileId], 'layout2', {{value.tileId}})">
                         <option value="">Sub Category</option>
                         <option ng-repeat="subcat in subCategoryList[value.tileId]" value="{{subcat.categoryId}}"
-                        ng-selected="{{(subcat.categoryId == productRootCategoryId) ? 'selected' : false}}" >{{subcat.categoryName}}</option>
+                        ng-selected="{{(subcat.categoryId == value.tileCategory.categoryId) ? 'selected' : false}}" >{{subcat.categoryName}}</option>
                     </select>
                 </div>
             </div>

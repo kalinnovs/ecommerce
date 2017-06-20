@@ -216,6 +216,14 @@ angular.module('eCommerce')
             payload.push(tempObj);
         }
         
+        $http({
+            method: 'POST',
+            url: PRODUCTDATA_URL + '/admin/saveLayout',
+            data: JSON.stringify(payload),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         // debugger;
 
     };
