@@ -38,11 +38,11 @@
 				    	<div class="layout-selection">
 							<span class="layoutTitle">Choose your layout here to update: </span>
 							<select class="layoutSelector" ng-model="layoutId" ng-change="changeLayout(layoutId)">
-								<option value="layout2">Layout 2</option>
-								<option value="layout3">Layout 3</option>
-								<option value="layout4">Layout 4</option>
-								<option value="layout5">Layout 5</option>
-								<option value="layout6">Layout 6</option>
+								<option value="layout2" ng-selected="{{(layoutId === 'layout2') ? 'selected' : false}}">Layout 2</option>
+								<option value="layout3" ng-selected="{{(layoutId === 'layout3') ? 'selected' : false}}">Layout 3</option>
+								<option value="layout4" ng-selected="{{(layoutId === 'layout4') ? 'selected' : false}}">Layout 4</option>
+								<option value="layout5" ng-selected="{{(layoutId === 'layout5') ? 'selected' : false}}">Layout 5</option>
+								<option value="layout6" ng-selected="{{(layoutId === 'layout6') ? 'selected' : false}}">Layout 6</option>
 							</select>
 							<button class="btn btn-primary saveChange" ng-click="saveLayoutModel($event)"><span>Save Changes</span></button>
 						</div>

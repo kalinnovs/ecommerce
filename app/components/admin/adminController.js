@@ -40,25 +40,53 @@ angular.module('eCommerce')
             // $rootScope.$broadcast('event:layoutChange');
             var self = this;
             var url = "assets/json/layouts.json";
+            $scope.productRootCategoryId = {};
+            $scope.subCategoryId = {};
+            $scope.productId = {};
+            $scope.layoutId = "layout2";
+
+            // $scope.productRootCategoryId["1"] = '2';
+            // $scope.subCategoryId["1"] = '16';
+
             $http.get(url).success( function(response) {
-                if(response.pageLayoutDetails) {
-                    $scope.layout = response.pageLayoutDetails.layouts;
+                if(response.layouts) {
+                    $scope.layout = response.layouts;
                     $scope.renderAdminTemplate();
                 }
             });
             $http.get('assets/json/productTree.json').then(function (response) {
                 $scope.productTree = response.data;
                 self.productTree = response.data;
+                self.prePopulate(self.layoutId);
             });
-
-            $(".layoutSelector").val("layout2");
         }
+    };
+
+    $scope.prePopulate = function(selectedLayout) {
+        for(var listItem in this.layout[selectedLayout].tilesList) {
+            var list = this.layout[selectedLayout].tilesList[listItem];
+            var tileId = list.tileId;
+            var parentCatId = list.tileParentCategory.categoryId;
+            var subCatId = list.tileCategory.categoryId;
+            $scope.productRootCategoryId[tileId] = parentCatId;
+            $scope.subCategoryId[tileId] = subCatId;
+            $scope.getSubCategories(parentCatId, tileId);
+            if(list.tileType === "PRODUCT") {
+                var productId = list.productTileDetails.productId;
+                $scope.productId[tileId] = productId;
+                $scope.getProductList(parentCatId, subCatId, tileId);
+                $scope.getProductImageList(parentCatId, subCatId, productId, selectedLayout, tileId);
+            }
+        }
+        // $scope.getSubCategories('2','1');
     };
 
     $scope.changeLayout = function(elSelector) {
         $(".item-box-layout").hide();
+        var layout = elSelector;
         elSelector = elSelector.slice(0, 6) + "-" + elSelector.slice(6);
         $("."+elSelector).show();
+        $scope.prePopulate(layout);
     };
 
     $scope.renderAdminTemplate = function() {
@@ -198,6 +226,7 @@ angular.module('eCommerce')
     };
 
     $scope.saveLayoutModel = function() {
+        var self = this;
         var tileList = this.layout[this.layoutId].tilesList;
         var payload = [];
         for(var i=0 ; i < tileList.length; i++) {
@@ -223,9 +252,32 @@ angular.module('eCommerce')
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(function successCallback(data) {
+            self.generatejson();
+            if(data.data.operationStatus) {
+                $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Data Saved Successfully !"});    
+            } else {
+                $rootScope.$broadcast("updateFlash", {"alertType": "warning", "delay": 10, "message": "Something went wrong !"});
+            }
+        }, function errorCallback(response) {
+            console.log("Error in saving.");
         });
         // debugger;
 
+    };
+
+    $scope.generatejson = function(){
+        $http({
+            method: 'GET',
+            url: PRODUCTDATA_URL + '/admin/generateTileJson',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data) {
+            console.log("New JSON generated.");
+        }, function errorCallback(response) {
+            console.log("Error in saving.");
+        });
     };
     
   }]

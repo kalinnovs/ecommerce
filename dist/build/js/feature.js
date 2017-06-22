@@ -1127,25 +1127,53 @@ angular.module('eCommerce')
             // $rootScope.$broadcast('event:layoutChange');
             var self = this;
             var url = "assets/json/layouts.json";
+            $scope.productRootCategoryId = {};
+            $scope.subCategoryId = {};
+            $scope.productId = {};
+            $scope.layoutId = "layout2";
+
+            // $scope.productRootCategoryId["1"] = '2';
+            // $scope.subCategoryId["1"] = '16';
+
             $http.get(url).success( function(response) {
-                if(response.pageLayoutDetails) {
-                    $scope.layout = response.pageLayoutDetails.layouts;
+                if(response.layouts) {
+                    $scope.layout = response.layouts;
                     $scope.renderAdminTemplate();
                 }
             });
             $http.get('assets/json/productTree.json').then(function (response) {
                 $scope.productTree = response.data;
                 self.productTree = response.data;
+                self.prePopulate(self.layoutId);
             });
-
-            $(".layoutSelector").val("layout2");
         }
+    };
+
+    $scope.prePopulate = function(selectedLayout) {
+        for(var listItem in this.layout[selectedLayout].tilesList) {
+            var list = this.layout[selectedLayout].tilesList[listItem];
+            var tileId = list.tileId;
+            var parentCatId = list.tileParentCategory.categoryId;
+            var subCatId = list.tileCategory.categoryId;
+            $scope.productRootCategoryId[tileId] = parentCatId;
+            $scope.subCategoryId[tileId] = subCatId;
+            $scope.getSubCategories(parentCatId, tileId);
+            if(list.tileType === "PRODUCT") {
+                var productId = list.productTileDetails.productId;
+                $scope.productId[tileId] = productId;
+                $scope.getProductList(parentCatId, subCatId, tileId);
+                $scope.getProductImageList(parentCatId, subCatId, productId, selectedLayout, tileId);
+            }
+        }
+        // $scope.getSubCategories('2','1');
     };
 
     $scope.changeLayout = function(elSelector) {
         $(".item-box-layout").hide();
+        var layout = elSelector;
         elSelector = elSelector.slice(0, 6) + "-" + elSelector.slice(6);
         $("."+elSelector).show();
+        $scope.prePopulate(layout);
     };
 
     $scope.renderAdminTemplate = function() {
@@ -1285,6 +1313,7 @@ angular.module('eCommerce')
     };
 
     $scope.saveLayoutModel = function() {
+        var self = this;
         var tileList = this.layout[this.layoutId].tilesList;
         var payload = [];
         for(var i=0 ; i < tileList.length; i++) {
@@ -1310,9 +1339,32 @@ angular.module('eCommerce')
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(function successCallback(data) {
+            self.generatejson();
+            if(data.data.operationStatus) {
+                $rootScope.$broadcast("updateFlash", {"alertType": "success", "delay": 10, "message": "Data Saved Successfully !"});    
+            } else {
+                $rootScope.$broadcast("updateFlash", {"alertType": "warning", "delay": 10, "message": "Something went wrong !"});
+            }
+        }, function errorCallback(response) {
+            console.log("Error in saving.");
         });
         // debugger;
 
+    };
+
+    $scope.generatejson = function(){
+        $http({
+            method: 'GET',
+            url: PRODUCTDATA_URL + '/admin/generateTileJson',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function successCallback(data) {
+            console.log("New JSON generated.");
+        }, function errorCallback(response) {
+            console.log("Error in saving.");
+        });
     };
     
   }]
@@ -5325,7 +5377,7 @@ require("../../../app/components/inventory/productTreeService.js");
 require("../../../app/components/ordermanagement/orderManagementCtrl.js");
 require("../../../app/components/ordermanagement/orderManagementService.js");
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_5ee9051a.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_59af5d21.js","/")
 },{"+7ZJp0":55,"../../../app/app.routes.js":1,"../../../app/app.services.js":2,"../../../app/components/404/404Controller.js":3,"../../../app/components/aboutus/aboutService.js":4,"../../../app/components/aboutus/aboutusController.js":5,"../../../app/components/accounts/accountsController.js":6,"../../../app/components/accounts/accountsService.js":7,"../../../app/components/admin/AdminService.js":8,"../../../app/components/admin/adminController.js":9,"../../../app/components/cart/cartController.js":10,"../../../app/components/cart/cartService.js":11,"../../../app/components/category/categoryController.js":12,"../../../app/components/category/categoryCtrl.js":13,"../../../app/components/category/categoryService.js":14,"../../../app/components/checkout/checkoutController.js":15,"../../../app/components/checkout/checkoutService.js":16,"../../../app/components/contact/contactController.js":17,"../../../app/components/details/detailController.js":18,"../../../app/components/details/detailService.js":19,"../../../app/components/home/homeController.js":20,"../../../app/components/home/homeService.js":21,"../../../app/components/inventory/inventoryCtrl.js":22,"../../../app/components/inventory/productTreeCtrl.js":23,"../../../app/components/inventory/productTreeService.js":24,"../../../app/components/login/facebookAuth.js":25,"../../../app/components/login/loginController.js":26,"../../../app/components/login/loginService.js":27,"../../../app/components/orderlookup/orderlookupController.js":28,"../../../app/components/orderlookup/orderlookupService.js":29,"../../../app/components/ordermanagement/orderManagementCtrl.js":30,"../../../app/components/ordermanagement/orderManagementService.js":31,"../../../app/components/promomailgenerator/promoMailController.js":32,"../../../app/components/register/registerController.js":33,"../../../app/components/subCategory/subCategoryCtrl.js":34,"../../../app/components/subscribers/subscriberController.js":35,"../../../app/components/thankyou/thankyouController.js":36,"../../../app/directives/addToCart/addToCart-directive.js":37,"../../../app/directives/currencyChooser/currencyChooser-directive.js":38,"../../../app/directives/editOnFocus/editOnFocus-directive.js":39,"../../../app/directives/flasher/flasher-directive.js":40,"../../../app/directives/formElement/formElement-directive.js":41,"../../../app/directives/limitCharacterRender/limitCharacterRender-directive.js":42,"../../../app/directives/miniCart/miniCart-directive.js":43,"../../../app/directives/sticky/stickyMenu-directive.js":44,"../../../app/directives/validation/validation-directive.js":45,"../../../app/shared/tiles/tileController.js":46,"../../../vendor/js/angular-ui-router.min.js":56,"../../../vendor/js/ng-file-upload.js":57,"../multizoom.js":48,"../overlay.js":49,"../scripts.js":50,"../wowslider.js":51,"buffer":52}],48:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 
