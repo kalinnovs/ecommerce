@@ -1674,7 +1674,7 @@ header a.active, header a:focus {
 .chooseItem .productImageSelector li:first-child {
     margin-left: 0;
 }
-.chooseItem .productImageSelector li.active button {
+.chooseItem .productImageSelector li button.active {
     border: solid 2px red;
 }
 .chooseItem .productImageSelector li button {

@@ -2858,7 +2858,7 @@ header a:focus {
   margin-left: 0;
 }
 
-.chooseItem .productImageSelector li.active button {
+.chooseItem .productImageSelector li button.active {
   border: solid 2px red;
 }
 
