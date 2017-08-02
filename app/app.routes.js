@@ -328,7 +328,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
           '': {
             templateUrl: 'app/components/admin/adminView.html',
             controller: 'AdminCtrl',
-            controllerAs: 'admin'
+            controllerAs: 'admin',
+            resolve: {
+              user: function($stateParams, AuthenticationService) {
+                return AuthenticationService.validateToken();
+              }
+            }
           },
           'subscribers@admin': {
             templateUrl: 'app/components/subscribers/subscriberView.html',
@@ -353,7 +358,12 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
           'updateLayout@admin': {
             templateUrl: 'app/shared/tiles/tileView.html',
             controller: 'AdminCtrl',
-            controllerAs: 'admin'
+            controllerAs: 'admin',
+            resolve: {
+              user: function($stateParams, AuthenticationService) {
+                return AuthenticationService.validateToken();
+              }
+            }
           }
         }
       })

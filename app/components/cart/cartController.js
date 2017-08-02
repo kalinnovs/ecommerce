@@ -30,7 +30,7 @@ angular.module('eCommerce')
         // Cart Configuration
         $scope.cartConfig = {
             "shippingCost": 0,
-            "tax": 6.5,
+            "tax": 3,
             "discount": 0
         };
 

@@ -1,10 +1,14 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AdminCtrl', ['$scope', '$rootScope', '$http', '$state', '$timeout', '$interval', 'UserService', '$cookies', 'PRODUCTDATA_URL', 'AuthenticationService', 'OrderDetailService', 
-    function ($scope, $rootScope, $http, $state, $timeout, $interval, UserService, $cookies, PRODUCTDATA_URL, AuthenticationService, OrderDetailService) {
+  .controller('AdminCtrl', ['$scope', '$rootScope', '$http', '$state', '$timeout', '$interval', 'UserService', '$cookies', 'PRODUCTDATA_URL', 'AuthenticationService', 'OrderDetailService', 'user', 
+    function ($scope, $rootScope, $http, $state, $timeout, $interval, UserService, $cookies, PRODUCTDATA_URL, AuthenticationService, OrderDetailService, user) {
     var admin = this;
     
+    if(user.success !== true) {
+        $state.go('login');
+    }
+
     // UserService.GetAll( BASE_URI + '/eCommerce/home.json')
     UserService.GetAll( PRODUCTDATA_URL + '/admin/visitors')
         .then(function(data) {
