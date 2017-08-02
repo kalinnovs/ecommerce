@@ -4404,6 +4404,10 @@ footer .back-top .pageCounter {
   font-weight: normal;
 }
 
+.subscriptionPage h3 {
+  margin-bottom: 10px;
+}
+
 .subscriptionPage .arrowedBubble {
   position: relative;
   border: solid 1px #dedede;
@@ -4470,6 +4474,7 @@ footer .back-top .pageCounter {
   border: 1px solid #f2f1ef;
   margin: 0 auto;
   text-align: left;
+  overflow: hidden;
 }
 
 .login-container h1 {
@@ -4544,7 +4549,7 @@ footer .back-top .pageCounter {
 }
 
 .login-container .form-group {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   height: 55px;
   color: #d05715;
 }
