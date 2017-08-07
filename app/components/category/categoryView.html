@@ -9,7 +9,7 @@
 	<div class="category">
 		<h1>{{cat.data.selectedCategory.categoryName}}</h1>
 		<div class="category-banner tile noFlash" ng-hide="cat.data.categoryAttributes">
-			<img src="{{cat.data.selectedCategory.bannerImagePath}}" alt="{{cat.data.selectedCategory.categoryName}}" />
+			<img src="{{cat.data.productImage.baseImagePath}}" alt="{{cat.data.selectedCategory.categoryName}}" />
 		</div>
 		<div class="listing">
 			<div class="filters view" ng-hide="cat.data.categoryAttributes">
@@ -50,7 +50,7 @@
 							<a href="{{value.productDetailsURL}}" class="productItem">
 								<div class="wide-quarter-tile tile mobile-tile">
 									<figure>
-										<img alt="" ng-src="{{value.productImageGallery[0].baseImagePath}}" alt="categorylargeImg{{key}}">
+										<img alt="" ng-src="{{value.productImage.baseImagePath}}" alt="categorylargeImg{{key}}">
 									</figure>
 									<div class="detail">
 										<h4 limit-character-render char-length="34" model-bind="value.productName">{{value.productName}}</h4>
@@ -90,7 +90,7 @@
 									<a href="{{productItem.productDetailsURL}}">
 										<div class="wide-full-tile tile category">
 											<figure>
-												<img alt="" ng-src="{{productItem.productImageGallery[0].largeImagePath}}" alt="categorylargeImg{{key}}">
+												<img alt="" ng-src="{{productItem.productImage.largeImagePath}}" alt="categorylargeImg{{key}}">
 											</figure>
 											<div class="detail">
 												<h4>{{subC.categoryName}}</h4>
@@ -102,7 +102,7 @@
 									<a href="{{productItem.productDetailsURL}}" class="productItem">
 										<div class="wide-quarter-tile tile mobile-tile">
 											<figure>
-												<img alt="" ng-src="{{productItem.productImageGallery[0].baseImagePath}}" alt="categoryItemImg{{key}}">
+												<img alt="" ng-src="{{productItem.productImage.baseImagePath}}" alt="categoryItemImg{{key}}">
 											</figure>
 											<div class="detail">
 												<h4 limit-character-render char-length="34" model-bind="productItem.productName">{{productItem.productName}}</h4>

@@ -108,6 +108,7 @@ angular.module('eCommerce')
 
     $scope.selectDefaultProductImage = function(productId, productImageId) {
         productTreeService.setDefaultImage(productId, productImageId);
+        productTreeService.generatejson();
     };
 
     $scope.getCheckedCondition = function(actualProductImageId, selectedImageId) {
