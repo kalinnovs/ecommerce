@@ -106,6 +106,15 @@ angular.module('eCommerce')
         }
     };
 
+    $scope.selectDefaultProductImage = function(productId, productImageId) {
+        productTreeService.setDefaultImage(productId, productImageId);
+    };
+
+    $scope.getCheckedCondition = function(actualProductImageId, selectedImageId) {
+        var check = (actualProductImageId === selectedImageId) ? true : false;
+        return check;
+    };
+
     $scope.saveCategory = function(category){
         $scope.dataLoading = true;
         categoryObj = angular.copy(category);

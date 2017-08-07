@@ -77,4 +77,11 @@ angular.module('eCommerce')
         });
     }
 
+    service.setDefaultImage = function(productId, productImageId) {
+        $http({
+            method: 'GET',
+            url: PRODUCTDATA_URL + '/admin/setdefaultimage/'+productId+'/'+productImageId
+        });
+    }
+
 }]);

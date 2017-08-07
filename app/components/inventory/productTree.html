@@ -99,8 +99,20 @@
     .message span { justify-content: center; margin-top: 42px; display: block; }
     .btn-sm .fa { margin-right: 6px; }
     .fa-upload { border-radius: 50%; padding: 6px 10px; }
-    .imageSpecification span { font-weight: 700; }
-    .imageSpecification span span { display: block; }
+    .imageSpecification > span { 
+        font-weight: 700;
+        width: 22%;
+        font-size: 12px;
+        display: inline-block;
+        text-align: center;
+        float: left;
+        vertical-align: middle;
+        margin-top: 12px;
+    }
+    .imageSpecification > span:first-child {
+        width: 10%;
+    }
+    .imageSpecification span span { display: block; width: auto !important; }
     .activa { border: solid 1px red }
 </style>
 
@@ -424,22 +436,26 @@
 
                     <form-element label="Product Images" mod="category" class="productImage">
                         <div class="row text-center imageSpecification">
-                            <span class="col-sm-3">Base <span>(284 X height)</span></span>
-                            <span class="col-sm-3">Thumb <span>(108 X height)</span></span>
-                            <span class="col-sm-3">Large <span>(420 X height)</span></span>
-                            <span class="col-sm-3">X Large</span>
+                            <span>Default Image</span>
+                            <span>Base <span>(284 X height)</span></span>
+                            <span>Thumb <span>(108 X height)</span></span>
+                            <span>Large <span>(420 X height)</span></span>
+                            <span>X Large</span>
                         </div>
-                        <div class="row text-center" ng-repeat="images in node.productImageGallery">
-                            <span class="col-sm-3">
+                        <div class="row imageSpecification text-center" ng-repeat="images in node.productImageGallery">
+                            <span class="text-center">
+                                <input type="radio" name="defaultProductImage" ng-model="node.defaultImageId" value="{{images.productImageId}}" ng-checked="{{images.productImageId}} == {{node.productImage.productImageId}}" ng-click="selectDefaultProductImage(node.productId, images.productImageId);" />
+                            </span>
+                            <span>
                                 <img src="{{ images.baseImagePath }}" width="100%" /> 
                             </span>
-                            <span class="col-sm-3">
+                            <span>
                                 <img src="{{ images.thumbImagePath }}" width="100%" /> 
                             </span>
-                            <span class="col-sm-3">
+                            <span>
                                 <img src="{{ images.largeImagePath }}" width="100%" /> 
                             </span>
-                            <span class="col-sm-3">
+                            <span>
                                 <img src="{{ images.extraLargeImagePath }}" width="100%" /> 
                             </span>
                             <a class="btn btn-danger btn-xs delProductImage" ng-click="deleteProductImage(images.productImageId)"><span class="glyphicon glyphicon-remove"></span></a>
