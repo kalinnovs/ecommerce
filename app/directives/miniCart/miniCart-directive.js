@@ -72,7 +72,7 @@ angular.module('eCommerce')
 
                     
                     var computedURL =  PRODUCTDATA_URL + '/cart/viewCart',
-                        cartCount;
+                        cartCount, viewCount;
                     $http({
                         method: 'POST',
                         url: computedURL,
@@ -80,14 +80,16 @@ angular.module('eCommerce')
                     }).then(function successCallback(results) {
                         responseData = results.data.cartList || [];
                         
+                        viewCount = results.data.viewCount;
                         cartCount = ListItemCounter(responseData);
                         renderHTML(responseData);
+                        $(".pageCounter span").text(viewCount);
                         (responseData.length > 4) ? element.find(".manyItems").show() : element.find(".manyItems").hide();
                         // $(".miniKart").parents(".cart").find(".count").html(cartCount);
                         $(".miniKart").removeClass("loader");
                     }, function errorCallback(response) {
                         console.log("Error in saving.");
-                    }); 
+                    });
                 };
 
                 function ListItemCounter(itemList) {

@@ -52,7 +52,7 @@
 
                     <select ng-model="productId[layout.layout6.tilesList[1].tileId]" class="productDropdown form-control" ng-init="productId[layout.layout6.tilesList[1].tileId]"  ng-change="getProductImageList(productRootCategoryId[layout.layout6.tilesList[1].tileId], subCategoryId[layout.layout6.tilesList[1].tileId], productId[layout.layout6.tilesList[1].tileId], 'layout6', {{layout.layout6.tilesList[1].tileId}})">
                         <option value="">Products</option>
-                        <option ng-repeat="product in productList[layout.layout6.tilesList[1].tileId]" value="{{product.productId}}" ng-selected="product.productId == layout.layout6.tilesList[1].productTileDetails.productId">{{product.productName}}</option>
+                        <option ng-repeat="product in productList[layout.layout6.tilesList[1].tileId] | filter : !enabled" value="{{product.productId}}" ng-selected="product.productId == layout.layout6.tilesList[1].productTileDetails.productId">{{product.productName}}</option>
                     </select>
 
                     <ul class="productImageSelector">
@@ -95,7 +95,7 @@
 
                     <select ng-model="productId[layout.layout6.tilesList[2].tileId]" class="productDropdown form-control" ng-init="productId[layout.layout6.tilesList[2].tileId]"  ng-change="getProductImageList(productRootCategoryId[layout.layout6.tilesList[2].tileId], subCategoryId[layout.layout6.tilesList[2].tileId], productId[layout.layout6.tilesList[2].tileId], 'layout6', {{layout.layout6.tilesList[2].tileId}})">
                         <option value="">Products</option>
-                        <option ng-repeat="product in productList[layout.layout6.tilesList[2].tileId]" value="{{product.productId}}" ng-selected="product.productId == layout.layout6.tilesList[2].productTileDetails.productId">{{product.productName}}</option>
+                        <option ng-repeat="product in productList[layout.layout6.tilesList[2].tileId] | filter : !enabled" value="{{product.productId}}" ng-selected="product.productId == layout.layout6.tilesList[2].productTileDetails.productId">{{product.productName}}</option>
                     </select>
 
                     <ul class="productImageSelector">
@@ -138,7 +138,7 @@
 
                     <select ng-model="productId[layout.layout6.tilesList[3].tileId]" class="productDropdown form-control" ng-init="productId[layout.layout6.tilesList[3].tileId]"  ng-change="getProductImageList(productRootCategoryId[layout.layout6.tilesList[3].tileId], subCategoryId[layout.layout6.tilesList[3].tileId], productId[layout.layout6.tilesList[3].tileId], 'layout6', {{layout.layout6.tilesList[3].tileId}})">
                         <option value="">Products</option>
-                        <option ng-repeat="product in productList[layout.layout6.tilesList[3].tileId]" value="{{product.productId}}" ng-selected="product.productId == layout.layout6.tilesList[3].productTileDetails.productId">{{product.productName}}</option>
+                        <option ng-repeat="product in productList[layout.layout6.tilesList[3].tileId] | filter : !enabled" value="{{product.productId}}" ng-selected="product.productId == layout.layout6.tilesList[3].productTileDetails.productId">{{product.productName}}</option>
                     </select>
 
                     <ul class="productImageSelector">
@@ -201,7 +201,7 @@
 
                     <select ng-model="productId[layout.layout6.tilesList[5].tileId]" class="productDropdown form-control" ng-init="productId[layout.layout6.tilesList[5].tileId]"  ng-change="getProductImageList(productRootCategoryId[layout.layout6.tilesList[5].tileId], subCategoryId[layout.layout6.tilesList[5].tileId], productId[layout.layout6.tilesList[5].tileId], 'layout6', {{layout.layout6.tilesList[5].tileId}})">
                         <option value="">Products</option>
-                        <option ng-repeat="product in productList[layout.layout6.tilesList[5].tileId]" value="{{product.productId}}" ng-selected="product.productId == layout.layout6.tilesList[5].productTileDetails.productId">{{product.productName}}</option>
+                        <option ng-repeat="product in productList[layout.layout6.tilesList[5].tileId] | filter : !enabled" value="{{product.productId}}" ng-selected="product.productId == layout.layout6.tilesList[5].productTileDetails.productId">{{product.productName}}</option>
                     </select>
 
                     <ul class="productImageSelector">
