@@ -1574,6 +1574,7 @@ header a.active, header a:focus {
 .tile .detail h4 span {
     color: #000;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
 .detail h4 {
     white-space: nowrap;
@@ -1849,14 +1850,11 @@ header a.active, header a:focus {
 .category .spacingAdjust .wide-quarter-tile figure {
     text-align: center;
     height: 205px;
-    display: flex;
     flex-direction: column;
     justify-content: center;
 }
 .category .spacingAdjust .wide-quarter-tile figure img {
-    width: auto;
-    height: auto;
-    max-height: 203px;
+    max-width: 100%;
     max-height: 100%
 }
 .category .listView .wide-quarter-tile figure {
