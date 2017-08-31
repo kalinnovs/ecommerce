@@ -39,6 +39,7 @@ angular.module('eCommerce')
                         data: JSON.stringify(objectToSerialize)
                     }).then(function successCallback(results) {
                         responseData = results.data.cartList || [];
+                        $rootScope.pageCount = results.data.vc.totalVisitorsCount;
                         $rootScope.navigation = results.data.pageNavigation.categories;
                         window.userDetails = (results.data.loggedUser !== null) ? results.data.loggedUser : {"name": "Guest","imageUrl": "","user": null};
                         
