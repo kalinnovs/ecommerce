@@ -213,6 +213,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
         url: '/thankyou',
         controller: 'thankyouCtrl',
         templateUrl: 'app/components/thankyou/thankyouView.html', 
+        resolve: {
+          getPayUData: ['$stateParams', 'paymentService', function($stateParams, paymentService) {
+            return paymentService.getExternalData();
+          }]
+        },
         data: {
           	pageTitle: 'Haastika - Thank you !!'
         }
@@ -497,11 +502,11 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
           }
 
           // Restrict Viewers to thank you page every time.
-          var restrictedPage = $.inArray($location.path(), ['/thankyou']) != -1;
-          var isRestricted = (window.restrictView !== undefined) ? window.restrictView : true;
-          if (restrictedPage && isRestricted) {
-              $location.path('/');
-          } 
+          // var restrictedPage = $.inArray($location.path(), ['/thankyou']) != -1;
+          // var isRestricted = (window.restrictView !== undefined) ? window.restrictView : true;
+          // if (restrictedPage && isRestricted) {
+          //     $location.path('/');
+          // } 
 
       });
 

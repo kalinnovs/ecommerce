@@ -47,6 +47,7 @@ require("../../../app/components/404/404Controller.js");
 require("../../../app/components/register/registerController.js");
 
 require("../../../app/components/thankyou/thankyouController.js");
+require("../../../app/components/thankyou/thankyouService.js");
 require("../../../app/components/orderlookup/orderlookupService.js");
 require("../../../app/components/orderlookup/orderlookupController.js");
 

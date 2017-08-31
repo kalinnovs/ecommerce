@@ -533,8 +533,12 @@ angular.module('eCommerce')
                     // Broadcast cart update to mini cart
                     $rootScope.$broadcast("updateMiniCartCount");
 
-                    // Redirect to thankyou page
-                    self.location.path('/thankyou');
+                    // Create a form and submit 
+                    var data = response.data.request;
+                    for(var key in response.data.request) {
+                        $('<input>').attr({'type':'hidden', 'name': key, 'value':data[key]}).appendTo('#redirectionData');
+                    }
+                    $("#redirectionData").attr("action", data.base_url).submit();
                 }
             });
         };
