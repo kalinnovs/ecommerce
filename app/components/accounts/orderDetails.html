@@ -8,13 +8,14 @@
             <span class="ordertotal">Order Total</span>
             <span class="orderstatus">Status</span>
             <span class="ordercontrol">Action</span>
+            <span class="payment">Transaction</span>
         </li>
         <li ng-repeat="(key, val) in orderList" class="item cart-page {{val.orderState | lowercase}}">
             <span class="orderid">{{val.webOrderNumber}}</span>
             <span class="orderdate"><i class="fa fa-clock-o" aria-hidden="true"></i> {{val.orderDateConverted}}</span>
             <span class="ordershipping"><i class="fa fa-map-marker" aria-hidden="true"></i> {{val.address.city}}</span>
             <span class="ordertotal">{{val.currency.currencySymbol}}&nbsp;{{val.total}}</span>
-            <span class="orderstatus">{{val.orderState}}</span>
+            <span class="orderstatus">{{val.orderState | lowercase}}</span>
             <span class="ordercontrol">
                 <a href="javascript:void(0);" data-orderid="{{val.webOrderNumber}}" ng-click="viewOrder($event);">view</a> / 
                 <a href="javascript:void(0);" data-orderid="{{val.webOrderNumber}}" ng-click="cancelOrder($event);">close</a>
@@ -89,6 +90,43 @@
                     </div>
                 </div>
             </div>
+            <span class="payment" ng-class="{'failed': val.transactionStatus == 'failure'}">
+                <form action="{{val.base_url}}" ng-if="val.transactionStatus == 'failure'" method="post">
+                    <input type="hidden" name="address1" value="{{val.address.addressLine1}}">
+                    <input type="hidden" name="address2" value="{{val.address.addressLine2}}">
+                    <input type="hidden" name="amount" value="{{val.total}}">
+                    <input type="hidden" name="base_url" value="{{val.base_url}}">
+                    <input type="hidden" name="city" value="{{val.address.city}}">
+                    <input type="hidden" name="country" value="">
+                    <input type="hidden" name="curl" value="">
+                    <input type="hidden" name="email" value="{{val.emailId}}">
+                    <input type="hidden" name="firstname" value="{{val.address.firstName}}">
+                    <input type="hidden" name="furl" value="https://www.haastika.com/HaastikaDataService/order/thankyou">
+                    <input type="hidden" name="hash" value="{{val.hash}}">
+                    <input type="hidden" name="key" value="{{val.key}}">
+                    <input type="hidden" name="lastname" value="{{val.address.lastName}}">
+                    <input type="hidden" name="pg" value="">
+                    <input type="hidden" name="phone" value="{{val.address.phone}}">
+                    <input type="hidden" name="productinfo" value="{{val.webOrderNumber}}">
+                    <input type="hidden" name="state" value="{{val.address.state}}">
+                    <input type="hidden" name="surl" value="https://www.haastika.com/HaastikaDataService/order/thankyou">
+                    <input type="hidden" name="txnid" value="{{val.webOrderNumber}}">
+                    <input type="hidden" name="udf1" value="">
+                    <input type="hidden" name="udf2" value="">
+                    <input type="hidden" name="udf3" value="">
+                    <input type="hidden" name="udf4" value="">
+                    <input type="hidden" name="udf5" value="">
+                    <input type="hidden" name="udf6" value="">
+                    <input type="hidden" name="udf7" value="">
+                    <input type="hidden" name="udf8" value="">
+                    <input type="hidden" name="udf9" value="">
+                    <input type="hidden" name="udf10" value="">
+                    <input type="hidden" name="zipcode" value="{{val.address.zip}}">
+                    <button type="submit" title="Pay Here" class="paybutton">Pay</button>
+                </form>
+                <span class="label label-success" ng-if="val.transactionStatus == 'success'">Success</span>
+                <span class="label label-info" ng-if="val.transactionStatus == 'pending'">Pending</span>
+            </span>
         </li>
     </ul>
 </div>

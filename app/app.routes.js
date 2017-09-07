@@ -434,7 +434,7 @@ angular.module('eCommerce', ['ui.router','ui.bootstrap','ngCookies', 'ngFileUplo
         var location = window.location.pathname;
         if(window.location.pathname.indexOf("checkout/") === -1) {
           $("html, body").animate({ scrollTop: 0 }, 200);
-          window.dataLoaded = false;
+          if(window.dataLoaded) { window.dataLoaded = false; }
         }
       });
 

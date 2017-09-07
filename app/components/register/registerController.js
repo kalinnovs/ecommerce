@@ -6,6 +6,29 @@ angular.module('eCommerce')
         var scoper = $scope;
         
         $(".progress").hide();
+
+        function updateProfile() {
+          var emptyUser = {
+              "name": "Guest",
+              "imageUrl": "",
+              "user": null 
+          },
+          userDetails = (window.userDetails) ? window.userDetails : emptyUser;
+          if(userDetails.imageUrl !== "") {
+              $(".profilePicUpdate").addClass("loggedIn");
+          } else {
+              $(".profilePicUpdate").removeClass("loggedIn");
+          }
+          $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
+          $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
+          $(".social-strip ul > li > a.profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
+        };
+
+        $timeout(function () {
+            updateProfile();
+        }, 500, false);
+        
+
         this.register = function() {
             
             /* Real Time Service STARTS */
