@@ -48,7 +48,7 @@
                     <input type="hidden" name="udf9" value="">
                     <input type="hidden" name="udf10" value="">
                     <input type="hidden" name="zipcode" value="{{val.address.zip}}">
-                    <button type="submit" title="Pay Here" class="paybutton">Pay</button>
+                    <button type="submit" title="Pay Here" class="button paybutton">Pay Now</button>
                 </form>
                 <span class="label label-success" ng-if="val.transactionStatus == 'success'">Success</span>
                 <span class="label label-info" ng-if="val.transactionStatus == 'pending'">Pending</span>
@@ -99,8 +99,8 @@
                     <div class="order-tracking" ng-if="val.orderState === 'SHIPPED'">
                         <h4>Tracking Information</h4>
                         <p>Please find your order tracking details from the below Service Company</p>
-                        <span>Tracking ID : {{val.trackId || 'not updated'}}</span>
-                        <span>tracking Link: {{val.trackLink || 'not available'}}</span> </br>
+                        <span>Tracking ID : {{val.trackId || 'not updated'}}</span> </br>
+                        <span>Tracking Link: {{val.trackLink || 'not available'}}</span> 
                     </div>
                     <div class="order-delivery" ng-hide="orderLookupData.lineItems.length === 0">
                         <div class="order-address order-section">
