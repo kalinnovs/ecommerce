@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eCommerce')
-    .directive('minicart', ['$http', 'PRODUCTDATA_URL', '$state', 'AuthenticationService', '$rootScope', '$location', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
+    .directive('minicart', ['$http', '$timeout', 'PRODUCTDATA_URL', '$state', 'AuthenticationService', '$rootScope', '$location', function($http, $timeout, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
         var def = {
             restrict: 'A',
             scope:{
@@ -131,6 +131,27 @@ angular.module('eCommerce')
                     }
                     element.find(".miniKart").html("").append(ul);
                 };
+
+                function updateProfile() {
+                    var emptyUser = {
+                        "name": "Guest",
+                        "imageUrl": "",
+                        "user": null 
+                    },
+                    userDetails = (window.userDetails) ? window.userDetails : emptyUser;
+                    if(userDetails.imageUrl !== "") {
+                        $(".profilePicUpdate").addClass("loggedIn");
+                    } else {
+                        $(".profilePicUpdate").removeClass("loggedIn");
+                    }
+                    $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
+                    $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
+                    $(".social-strip ul > li > a.profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
+                };
+
+                $timeout(function () {
+                    updateProfile();
+                }, 150, false);
                 
                 // Listens to cart update
                 scope.$on("updateMiniCart", function (event, args) {

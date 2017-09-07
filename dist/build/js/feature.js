@@ -4473,28 +4473,6 @@ angular.module('eCommerce')
         
         $(".progress").hide();
 
-        function updateProfile() {
-          var emptyUser = {
-              "name": "Guest",
-              "imageUrl": "",
-              "user": null 
-          },
-          userDetails = (window.userDetails) ? window.userDetails : emptyUser;
-          if(userDetails.imageUrl !== "") {
-              $(".profilePicUpdate").addClass("loggedIn");
-          } else {
-              $(".profilePicUpdate").removeClass("loggedIn");
-          }
-          $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
-          $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
-          $(".social-strip ul > li > a.profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
-        };
-
-        $timeout(function () {
-            updateProfile();
-        }, 500, false);
-        
-
         this.register = function() {
             
             /* Real Time Service STARTS */
@@ -4703,28 +4681,7 @@ angular.module('eCommerce')
     	$scope.order = window.location.href.split("=")[1];
         $scope.statusMessage = getPayUData.statusMessage;
 
-        function updateProfile() {
-          var emptyUser = {
-              "name": "Guest",
-              "imageUrl": "",
-              "user": null 
-          },
-          userDetails = (window.userDetails) ? window.userDetails : emptyUser;
-          if(userDetails.imageUrl !== "") {
-              $(".profilePicUpdate").addClass("loggedIn");
-          } else {
-              $(".profilePicUpdate").removeClass("loggedIn");
-          }
-          $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
-          $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
-          $(".social-strip ul > li > a.profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
-        };
-
-        $timeout(function () {
-            updateProfile();
-        }, 200, false);
-
-    	if(!$.isEmptyObject(getPayUData)) {
+        if(!$.isEmptyObject(getPayUData)) {
     		window.dataLoaded = true;
     		
     		if(getPayUData.statusMessage === "UNSUCCESSFUL") {
@@ -5053,7 +5010,7 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-    .directive('minicart', ['$http', 'PRODUCTDATA_URL', '$state', 'AuthenticationService', '$rootScope', '$location', function($http, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
+    .directive('minicart', ['$http', '$timeout', 'PRODUCTDATA_URL', '$state', 'AuthenticationService', '$rootScope', '$location', function($http, $timeout, PRODUCTDATA_URL, $state, AuthenticationService, $rootScope, $location) {
         var def = {
             restrict: 'A',
             scope:{
@@ -5183,6 +5140,27 @@ angular.module('eCommerce')
                     }
                     element.find(".miniKart").html("").append(ul);
                 };
+
+                function updateProfile() {
+                    var emptyUser = {
+                        "name": "Guest",
+                        "imageUrl": "",
+                        "user": null 
+                    },
+                    userDetails = (window.userDetails) ? window.userDetails : emptyUser;
+                    if(userDetails.imageUrl !== "") {
+                        $(".profilePicUpdate").addClass("loggedIn");
+                    } else {
+                        $(".profilePicUpdate").removeClass("loggedIn");
+                    }
+                    $(".profilePicUpdate").find(".profilePic").attr("src", userDetails.imageUrl);
+                    $(".userDetailsUpdate").text((userDetails.name === "Guest") ? "Login" : userDetails.name);
+                    $(".social-strip ul > li > a.profile").attr("href", (userDetails.name === "Guest") ? "/login" : "/accounts");
+                };
+
+                $timeout(function () {
+                    updateProfile();
+                }, 150, false);
                 
                 // Listens to cart update
                 scope.$on("updateMiniCart", function (event, args) {
@@ -5498,7 +5476,7 @@ require("../../../app/components/inventory/productTreeService.js");
 require("../../../app/components/ordermanagement/orderManagementCtrl.js");
 require("../../../app/components/ordermanagement/orderManagementService.js");
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_bfc0c8d5.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_a7f5fde6.js","/")
 },{"+7ZJp0":56,"../../../app/app.routes.js":1,"../../../app/app.services.js":2,"../../../app/components/404/404Controller.js":3,"../../../app/components/aboutus/aboutService.js":4,"../../../app/components/aboutus/aboutusController.js":5,"../../../app/components/accounts/accountsController.js":6,"../../../app/components/accounts/accountsService.js":7,"../../../app/components/admin/AdminService.js":8,"../../../app/components/admin/adminController.js":9,"../../../app/components/cart/cartController.js":10,"../../../app/components/cart/cartService.js":11,"../../../app/components/category/categoryController.js":12,"../../../app/components/category/categoryCtrl.js":13,"../../../app/components/category/categoryService.js":14,"../../../app/components/checkout/checkoutController.js":15,"../../../app/components/checkout/checkoutService.js":16,"../../../app/components/contact/contactController.js":17,"../../../app/components/details/detailController.js":18,"../../../app/components/details/detailService.js":19,"../../../app/components/home/homeController.js":20,"../../../app/components/home/homeService.js":21,"../../../app/components/inventory/inventoryCtrl.js":22,"../../../app/components/inventory/productTreeCtrl.js":23,"../../../app/components/inventory/productTreeService.js":24,"../../../app/components/login/facebookAuth.js":25,"../../../app/components/login/loginController.js":26,"../../../app/components/login/loginService.js":27,"../../../app/components/orderlookup/orderlookupController.js":28,"../../../app/components/orderlookup/orderlookupService.js":29,"../../../app/components/ordermanagement/orderManagementCtrl.js":30,"../../../app/components/ordermanagement/orderManagementService.js":31,"../../../app/components/promomailgenerator/promoMailController.js":32,"../../../app/components/register/registerController.js":33,"../../../app/components/subCategory/subCategoryCtrl.js":34,"../../../app/components/subscribers/subscriberController.js":35,"../../../app/components/thankyou/thankyouController.js":36,"../../../app/components/thankyou/thankyouService.js":37,"../../../app/directives/addToCart/addToCart-directive.js":38,"../../../app/directives/currencyChooser/currencyChooser-directive.js":39,"../../../app/directives/editOnFocus/editOnFocus-directive.js":40,"../../../app/directives/flasher/flasher-directive.js":41,"../../../app/directives/formElement/formElement-directive.js":42,"../../../app/directives/limitCharacterRender/limitCharacterRender-directive.js":43,"../../../app/directives/miniCart/miniCart-directive.js":44,"../../../app/directives/sticky/stickyMenu-directive.js":45,"../../../app/directives/validation/validation-directive.js":46,"../../../app/shared/tiles/tileController.js":47,"../../../vendor/js/angular-ui-router.min.js":57,"../../../vendor/js/ng-file-upload.js":58,"../multizoom.js":49,"../overlay.js":50,"../scripts.js":51,"../wowslider.js":52,"buffer":53}],49:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 
