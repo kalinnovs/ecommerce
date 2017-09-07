@@ -99,8 +99,8 @@
                     <div class="order-tracking" ng-if="val.orderState === 'SHIPPED'">
                         <h4>Tracking Information</h4>
                         <p>Please find your order tracking details from the below Service Company</p>
-                        <span>Courier : {{val.trackLink}}</span>
-                        <span>Tracking ID : {{val.trackId}}</span>
+                        <span>Tracking ID : {{val.trackId || 'not updated'}}</span>
+                        <span>tracking Link: {{val.trackLink || 'not available'}}</span> </br>
                     </div>
                     <div class="order-delivery" ng-hide="orderLookupData.lineItems.length === 0">
                         <div class="order-address order-section">
