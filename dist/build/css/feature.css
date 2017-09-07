@@ -4848,6 +4848,17 @@ footer .back-top .pageCounter {
   width: 100%;
 }
 
+.accounts-container .orderLookupList .order-tracking {
+  display: table;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.accounts-container .orderLookupList .order-tracking h4 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 .accounts-container .orderLookupList .order-address {
   display: table-cell;
   width: 40%;
