@@ -775,8 +775,8 @@ angular.module('eCommerce')
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AccoutsCtrl', ['$scope', '$timeout', '$rootScope', 'UserService', 'PRODUCTDATA_URL', '$http', 'AccountsService', 'orderList', 'savedCart', 'getAddress', 'getAccountDetail', 
-    function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress, getAccountDetail) {
+  .controller('AccoutsCtrl', ['$scope', '$timeout', '$rootScope', 'UserService', 'PRODUCTDATA_URL', '$http', 'AccountsService', 'orderList', 'savedCart', 'getAddress', 'getAccountDetail', '$sce', 
+    function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress, getAccountDetail, $sce) {
 
   	$scope.loggedUser = window.userDetails;
   	$scope.orderList = orderList.orderList;
@@ -794,6 +794,11 @@ angular.module('eCommerce')
         $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
     }
 
+    $scope.submitPayment = function(id) {
+        var url = orderList.orderList[id].base_url;
+        $("#paymentForm-"+id).attr("action", url).submit();
+
+    };
 
   	$scope.viewOrder = function(event) {
         var orderId = $(event.currentTarget).attr("data-orderid");
@@ -5476,7 +5481,7 @@ require("../../../app/components/inventory/productTreeService.js");
 require("../../../app/components/ordermanagement/orderManagementCtrl.js");
 require("../../../app/components/ordermanagement/orderManagementService.js");
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_a7f5fde6.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_ae0c8df5.js","/")
 },{"+7ZJp0":56,"../../../app/app.routes.js":1,"../../../app/app.services.js":2,"../../../app/components/404/404Controller.js":3,"../../../app/components/aboutus/aboutService.js":4,"../../../app/components/aboutus/aboutusController.js":5,"../../../app/components/accounts/accountsController.js":6,"../../../app/components/accounts/accountsService.js":7,"../../../app/components/admin/AdminService.js":8,"../../../app/components/admin/adminController.js":9,"../../../app/components/cart/cartController.js":10,"../../../app/components/cart/cartService.js":11,"../../../app/components/category/categoryController.js":12,"../../../app/components/category/categoryCtrl.js":13,"../../../app/components/category/categoryService.js":14,"../../../app/components/checkout/checkoutController.js":15,"../../../app/components/checkout/checkoutService.js":16,"../../../app/components/contact/contactController.js":17,"../../../app/components/details/detailController.js":18,"../../../app/components/details/detailService.js":19,"../../../app/components/home/homeController.js":20,"../../../app/components/home/homeService.js":21,"../../../app/components/inventory/inventoryCtrl.js":22,"../../../app/components/inventory/productTreeCtrl.js":23,"../../../app/components/inventory/productTreeService.js":24,"../../../app/components/login/facebookAuth.js":25,"../../../app/components/login/loginController.js":26,"../../../app/components/login/loginService.js":27,"../../../app/components/orderlookup/orderlookupController.js":28,"../../../app/components/orderlookup/orderlookupService.js":29,"../../../app/components/ordermanagement/orderManagementCtrl.js":30,"../../../app/components/ordermanagement/orderManagementService.js":31,"../../../app/components/promomailgenerator/promoMailController.js":32,"../../../app/components/register/registerController.js":33,"../../../app/components/subCategory/subCategoryCtrl.js":34,"../../../app/components/subscribers/subscriberController.js":35,"../../../app/components/thankyou/thankyouController.js":36,"../../../app/components/thankyou/thankyouService.js":37,"../../../app/directives/addToCart/addToCart-directive.js":38,"../../../app/directives/currencyChooser/currencyChooser-directive.js":39,"../../../app/directives/editOnFocus/editOnFocus-directive.js":40,"../../../app/directives/flasher/flasher-directive.js":41,"../../../app/directives/formElement/formElement-directive.js":42,"../../../app/directives/limitCharacterRender/limitCharacterRender-directive.js":43,"../../../app/directives/miniCart/miniCart-directive.js":44,"../../../app/directives/sticky/stickyMenu-directive.js":45,"../../../app/directives/validation/validation-directive.js":46,"../../../app/shared/tiles/tileController.js":47,"../../../vendor/js/angular-ui-router.min.js":57,"../../../vendor/js/ng-file-upload.js":58,"../multizoom.js":49,"../overlay.js":50,"../scripts.js":51,"../wowslider.js":52,"buffer":53}],49:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 

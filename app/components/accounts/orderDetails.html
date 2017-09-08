@@ -17,7 +17,8 @@
             <span class="ordertotal">{{val.currency.currencySymbol}}&nbsp;{{val.total}}</span>
             <span class="orderstatus">{{val.orderState | lowercase}}</span>
             <span class="payment" ng-class="{'failed': val.transactionStatus == 'failure'}">
-                <form action="{{val.base_url}}" ng-if="val.transactionStatus == 'failure'" method="post">
+                <button title="Pay Here" class="button paybutton" ng-if="val.transactionStatus == 'failure'" ng-click="submitPayment(key);">Pay Now</button>
+                <form id="paymentForm-{{key}}" ng-if="val.transactionStatus == 'failure'" method="post">
                     <input type="hidden" name="address1" value="{{val.address.addressLine1}}">
                     <input type="hidden" name="address2" value="{{val.address.addressLine2}}">
                     <input type="hidden" name="amount" value="{{val.total}}">
@@ -48,7 +49,6 @@
                     <input type="hidden" name="udf9" value="">
                     <input type="hidden" name="udf10" value="">
                     <input type="hidden" name="zipcode" value="{{val.address.zip}}">
-                    <button type="submit" title="Pay Here" class="button paybutton">Pay Now</button>
                 </form>
                 <span class="label label-success" ng-if="val.transactionStatus == 'success'">Success</span>
                 <span class="label label-info" ng-if="val.transactionStatus == 'pending'">Pending</span>

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('eCommerce')
-  .controller('AccoutsCtrl', ['$scope', '$timeout', '$rootScope', 'UserService', 'PRODUCTDATA_URL', '$http', 'AccountsService', 'orderList', 'savedCart', 'getAddress', 'getAccountDetail', 
-    function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress, getAccountDetail) {
+  .controller('AccoutsCtrl', ['$scope', '$timeout', '$rootScope', 'UserService', 'PRODUCTDATA_URL', '$http', 'AccountsService', 'orderList', 'savedCart', 'getAddress', 'getAccountDetail', '$sce', 
+    function ($scope, $timeout, $rootScope, UserService, PRODUCTDATA_URL, $http, AccountsService, orderList, savedCart, getAddress, getAccountDetail, $sce) {
 
   	$scope.loggedUser = window.userDetails;
   	$scope.orderList = orderList.orderList;
@@ -20,6 +20,10 @@ angular.module('eCommerce')
         $rootScope.$broadcast("updateCurrency", window.userDetails.preferredCurrency);
     }
 
+    $scope.submitPayment = function(id) {
+        var url = orderList.orderList[id].base_url;
+        $("#paymentForm-"+id).attr("action", url).submit();
+    };
 
   	$scope.viewOrder = function(event) {
         var orderId = $(event.currentTarget).attr("data-orderid");
