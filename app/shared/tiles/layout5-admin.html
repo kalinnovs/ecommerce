@@ -9,7 +9,7 @@
                     <h4>{{layout.layout5.tilesList[0].tileCategory.categoryName}}</h4>
                 </div>
                 <div class="admin chooseItem">
-                    <select name="category" ng-model="productRootCategoryId[layout.layout5.tilesList[0].tileId]" ng-change="getSubCategories(productRootCategoryId[layout.layout5.tilesList[0].tileId], {{value.tileId}})" class="categoryDropdown form-control" ng-init="productRootCategoryId[layout.layout5.tilesList[0].tileId]" required >
+                    <select name="category" ng-model="productRootCategoryId[layout.layout5.tilesList[0].tileId]" ng-change="getSubCategories(productRootCategoryId[layout.layout5.tilesList[0].tileId], {{layout.layout5.tilesList[0].tileId}})" class="categoryDropdown form-control" ng-init="productRootCategoryId[layout.layout5.tilesList[0].tileId]" required >
                         <option value="">Category</option>
                         <option ng-repeat="category in productTree.categoryList" value="{{category.categoryId}}" ng-selected="category.categoryId == productRootCategoryId[layout.layout5.tilesList[0].tileId]">{{category.categoryName}}</option>
                     </select>

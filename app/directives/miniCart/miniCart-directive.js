@@ -151,7 +151,7 @@ angular.module('eCommerce')
 
                 $timeout(function () {
                     updateProfile();
-                }, 150, false);
+                }, 250, false);
                 
                 // Listens to cart update
                 scope.$on("updateMiniCart", function (event, args) {

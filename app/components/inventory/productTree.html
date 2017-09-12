@@ -182,7 +182,6 @@
                           <input name="categoryStatus" type="checkbox" ng-model="node.enabled"> Active
                         </label>
                     </h3>
-
                 </div>
                 <form name="category_form" ng-submit="saveCategory(node)" class="" role="form" novalidate style="margin-left: 30px;">
                     <form-element label="Name" mod="category">
@@ -363,6 +362,7 @@
                             <input name="categoryStatus" type="checkbox" ng-model="node.enabled"> Active
                         </label>
                     </h3>
+                    <span style="margin: 15px 10px;">Product ID: {{node.productId}}</span>
                 </div>
                 <form name="product_form" class="" role="form" novalidate style="margin-left: 30px;">
                     <form-element label="Category" mod="product">

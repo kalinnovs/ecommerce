@@ -81,6 +81,10 @@ angular.module('eCommerce')
         $http({
             method: 'GET',
             url: PRODUCTDATA_URL + '/admin/setdefaultimage/'+productId+'/'+productImageId
+        }).then(function (resp) {
+            if(resp.data.operationStatus) {
+                service.generatejson();    
+            }
         });
     }
 
