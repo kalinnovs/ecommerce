@@ -195,7 +195,11 @@
 
   .checkout .section.selected .container { background: #fff; margin: 10px -18px 0; padding-bottom: 15px; }
   .checkout .editAddress { top: 10px; right: 15px; }
-  .checkout .section .container > div.address-blocks, .checkout .section .container > div.address-form { margin: 60px 15px 0; }
+  .checkout .section .container > div.address-blocks { margin: 60px 15px 0; }
+  .checkout .section .container > div.address-form { margin: 60px 0 0; }
+  .address-blocks ul { position: static; overflow: auto; display: table; width: auto; }
+  .address-blocks ul li { display: table-cell; float: initial; }
+  .address-blocks .address-wraper { position: static; height: 155px; overflow: auto; margin-left: -8px; }
   .checkout .order-form .columns aside { float: none; }
   .checkout .order-form .columns aside:first-child { margin: 0 }
   .checkout .list-header { display: none; }
