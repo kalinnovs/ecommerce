@@ -10,10 +10,10 @@
                 </div>
                 <div class="admin chooseItem">
                     <select name="category" ng-model="productRootCategoryId[value.tileId]" ng-change="getSubCategories(productRootCategoryId[value.tileId], {{value.tileId}})" class="categoryDropdown form-control" ng-init="productRootCategoryId[value.tileId]" required >
-                        <option ng-repeat="category in productTree.categoryList" value="{{category.categoryId}}" ng-selected="category.categoryId == productRootCategoryId[value.tileId]">{{category.categoryName}}</option>
+                        <option ng-repeat="category in productTree.categoryList | filter : !enabled" value="{{category.categoryId}}" ng-selected="category.categoryId == productRootCategoryId[value.tileId]">{{category.categoryName}}</option>
                     </select>
                     <select ng-model="subCategoryId[value.tileId]" class="subcategoryDropdown form-control" ng-init="subCategoryId[value.tileId]"  ng-change="getSelectedCategory(productRootCategoryId[value.tileId], subCategoryId[value.tileId], 'layout2', {{value.tileId}})">
-                        <option ng-repeat="subcat in subCategoryList[value.tileId]" value="{{subcat.categoryId}}" ng-selected="subcat.categoryId == value.tileCategory.categoryId">{{subcat.categoryName}}</option>
+                        <option ng-repeat="subcat in subCategoryList[value.tileId] | filter : !enabled" value="{{subcat.categoryId}}" ng-selected="subcat.categoryId == value.tileCategory.categoryId">{{subcat.categoryName}}</option>
                     </select>
                 </div>
             </div>

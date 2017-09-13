@@ -11,11 +11,11 @@
                 <div class="admin chooseItem">
                     <select name="category" ng-model="productRootCategoryId[layout.layout3.tilesList[0].tileId]" ng-change="getSubCategories(productRootCategoryId[layout.layout3.tilesList[0].tileId], {{layout.layout3.tilesList[0].tileId}})" class="categoryDropdown form-control" ng-init="productRootCategoryId[layout.layout3.tilesList[0].tileId]" required >
                         <option value="">Category</option>
-                        <option ng-repeat="category in productTree.categoryList" value="{{category.categoryId}}" ng-selected="category.categoryId == productRootCategoryId[layout.layout3.tilesList[0].tileId]">{{category.categoryName}}</option>
+                        <option ng-repeat="category in productTree.categoryList | filter : !enabled" value="{{category.categoryId}}" ng-selected="category.categoryId == productRootCategoryId[layout.layout3.tilesList[0].tileId]">{{category.categoryName}}</option>
                     </select>
                     <select ng-model="subCategoryId[layout.layout3.tilesList[0].tileId]" class="subcategoryDropdown form-control" ng-init="subCategoryId[layout.layout3.tilesList[0].tileId]"  ng-change="getSelectedCategory(productRootCategoryId[layout.layout3.tilesList[0].tileId], subCategoryId[layout.layout3.tilesList[0].tileId], 'layout3', {{layout.layout3.tilesList[0].tileId}})">
                         <option value="">Sub Category</option>
-                        <option ng-repeat="subcat in subCategoryList[layout.layout3.tilesList[0].tileId]" value="{{subcat.categoryId}}"  ng-selected="subcat.categoryId == layout.layout3.tilesList[0].tileCategory.categoryId">{{subcat.categoryName}}</option>
+                        <option ng-repeat="subcat in subCategoryList[layout.layout3.tilesList[0].tileId] | filter : !enabled" value="{{subcat.categoryId}}"  ng-selected="subcat.categoryId == layout.layout3.tilesList[0].tileCategory.categoryId">{{subcat.categoryName}}</option>
                     </select>
                 </div>
             </div>
@@ -32,11 +32,11 @@
                     <div class="admin chooseItem">
                         <select name="category" ng-model="productRootCategoryId[layout.layout3.tilesList[1].tileId]" ng-change="getSubCategories(productRootCategoryId[layout.layout3.tilesList[1].tileId], {{layout.layout3.tilesList[1].tileId}})" class="categoryDropdown form-control" ng-init="productRootCategoryId[layout.layout3.tilesList[1].tileId]" required >
                             <option value="">Category</option>
-                            <option ng-repeat="category in productTree.categoryList" value="{{category.categoryId}}" ng-selected="category.categoryId == productRootCategoryId[layout.layout3.tilesList[1].tileId]">{{category.categoryName}}</option>
+                            <option ng-repeat="category in productTree.categoryList | filter : !enabled" value="{{category.categoryId}}" ng-selected="category.categoryId == productRootCategoryId[layout.layout3.tilesList[1].tileId]">{{category.categoryName}}</option>
                         </select>
                         <select ng-model="subCategoryId[layout.layout3.tilesList[1].tileId]" class="subcategoryDropdown form-control" ng-init="subCategoryId[layout.layout3.tilesList[1].tileId]"  ng-change="getSelectedCategory(productRootCategoryId[layout.layout3.tilesList[1].tileId], subCategoryId[layout.layout3.tilesList[1].tileId], 'layout3', {{layout.layout3.tilesList[1].tileId}})">
                             <option value="">Sub Category</option>
-                            <option ng-repeat="subcat in subCategoryList[layout.layout3.tilesList[1].tileId]" value="{{subcat.categoryId}}" ng-selected="subcat.categoryId == layout.layout3.tilesList[1].tileCategory.categoryId">{{subcat.categoryName}}</option>
+                            <option ng-repeat="subcat in subCategoryList[layout.layout3.tilesList[1].tileId] | filter : !enabled" value="{{subcat.categoryId}}" ng-selected="subcat.categoryId == layout.layout3.tilesList[1].tileCategory.categoryId">{{subcat.categoryName}}</option>
                         </select>
                     </div>
                 </div>
@@ -50,11 +50,11 @@
                     <div class="admin chooseItem">
                         <select name="category" ng-model="productRootCategoryId[layout.layout3.tilesList[2].tileId]" ng-change="getSubCategories(productRootCategoryId[layout.layout3.tilesList[2].tileId], {{layout.layout3.tilesList[2].tileId}})" class="categoryDropdown form-control" ng-init="productRootCategoryId[layout.layout3.tilesList[2].tileId]" required >
                             <option value="">Category</option>
-                            <option ng-repeat="category in productTree.categoryList" value="{{category.categoryId}}" ng-selected="category.categoryId == productRootCategoryId[layout.layout3.tilesList[2].tileId]">{{category.categoryName}}</option>
+                            <option ng-repeat="category in productTree.categoryList | filter : !enabled" value="{{category.categoryId}}" ng-selected="category.categoryId == productRootCategoryId[layout.layout3.tilesList[2].tileId]">{{category.categoryName}}</option>
                         </select>
                         <select ng-model="subCategoryId[layout.layout3.tilesList[2].tileId]" class="subcategoryDropdown form-control" ng-init="subCategoryId[layout.layout3.tilesList[2].tileId]"  ng-change="getSelectedCategory(productRootCategoryId[layout.layout3.tilesList[2].tileId], subCategoryId[layout.layout3.tilesList[2].tileId], 'layout3', {{layout.layout3.tilesList[2].tileId}})">
                             <option value="">Sub Category</option>
-                            <option ng-repeat="subcat in subCategoryList[layout.layout3.tilesList[2].tileId]" value="{{subcat.categoryId}}" ng-selected="subcat.categoryId == layout.layout3.tilesList[2].tileCategory.categoryId">{{subcat.categoryName}}</option>
+                            <option ng-repeat="subcat in subCategoryList[layout.layout3.tilesList[2].tileId] | filter : !enabled" value="{{subcat.categoryId}}" ng-selected="subcat.categoryId == layout.layout3.tilesList[2].tileCategory.categoryId">{{subcat.categoryName}}</option>
                         </select>
                     </div>
                 </div>
