@@ -192,31 +192,65 @@ angular.module('eCommerce')
 
         $scope.subTotal = function() {
             var totalCost = this.getTotal(),
+                totalTax = this.calculateTax(),
                 checkoutCartConfig = this.checkoutCartConfig,
+                totalDiscount = this.calculateDiscount(),
+                shippingCost = this.calculateShippingCharge(),
                 totalCostToUser,
                 totalCostToUserAfterDiscount,
                 priceObj,
                 currency = $("body").attr("data-currency"),
                 discount = (this.co && this.co.order && this.co.order.couponcode && this.co.user.eligibleForDiscount) ? checkoutCartConfig.discount : 0;
 
-            totalCostToUserAfterDiscount = totalCost - (discount/100*totalCost);
-            totalCostToUser = totalCostToUserAfterDiscount - checkoutCartConfig.shippingCost + (checkoutCartConfig.tax/100*totalCostToUserAfterDiscount);
+            totalCostToUserAfterDiscount = totalCost - totalDiscount;
+            totalCostToUser = totalCostToUserAfterDiscount + shippingCost + totalTax;
             
             return totalCostToUser;
         };
 
+        $scope.calculateShippingCharge = function() {
+            return 0;
+        };
+
+        // $scope.calculateTax = function() {
+        //     var totalCost = this.getTotal(),
+        //         checkoutCartConfig = this.checkoutCartConfig,
+        //         currency = $("body").attr("data-currency"),
+        //         discount = (this.co.order && this.co.order.couponcode && this.co.user.eligibleForDiscount) ? checkoutCartConfig.discount : 0;
+        //     return (this.co.user.eligibleForDiscount) ? (checkoutCartConfig.tax/100* (totalCost-discount/100*totalCost)) : (checkoutCartConfig.tax/100*totalCost);
+        // };
+
         $scope.calculateTax = function() {
-            var totalCost = this.getTotal(),
+            var cartItems = this.cartItems,
+                totalCost = this.getTotal(),
                 checkoutCartConfig = this.checkoutCartConfig,
-                currency = $("body").attr("data-currency"),
-                discount = (this.co.order && this.co.order.couponcode && this.co.user.eligibleForDiscount) ? checkoutCartConfig.discount : 0;
-            return (this.co.user.eligibleForDiscount) ? (checkoutCartConfig.tax/100* (totalCost-discount/100*totalCost)) : (checkoutCartConfig.tax/100*totalCost);
+                individualTax = 0,
+                priceObj,
+                currency = $("body").attr("data-currency");
+
+            $(cartItems).each(function(i, j) {
+                priceObj = j.productPriceOptions.filter(function(key, val) {
+                    return key.currencyCode === currency.toUpperCase();
+                });
+                individualTax += (j.tax/100 * priceObj[0].price) * j.quantity;
+            });   
+            return individualTax;
         };
 
         $scope.calculateDiscount = function() {
-            var totalCost = this.getTotal(),
+            var cartItems = this.cartItems,
                 checkoutCartConfig = this.checkoutCartConfig,
-                currency = $("body").attr("data-currency");
+                currency = $("body").attr("data-currency"),
+                priceObj,
+                totalCost = 0;
+            
+            $(cartItems).each(function(i, j) {
+                priceObj = j.productPriceOptions.filter(function(key, val) {
+                    return key.currencyCode === currency.toUpperCase();
+                });
+                totalCost += priceObj[0].price * j.quantity;
+            });
+
             return (this.co.user.eligibleForDiscount) ? (checkoutCartConfig.discount/100*totalCost) : 0;
         };
 

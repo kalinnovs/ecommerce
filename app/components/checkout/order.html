@@ -98,7 +98,7 @@
 		                <label>Tax Estimated ({{cartConfig.tax}}%): </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{calculateTax() | number:2}}</span>
 		            </div>
 		            <div class="discount">
-		                <label>Discount Eligible: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{co.order.discountPrice || 0 | number:2}}</span>
+		                <label>Discount Eligible: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{calculateDiscount() || 0 | number:2}}</span>
 		            </div>
 		            <div class="costToCheckout">
 		                <label>Sub Total: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{subTotal() | number:2}}</span>

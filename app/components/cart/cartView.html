@@ -13,8 +13,8 @@
                             <div class="item-price priceChooser">
                                 <div ng-repeat="(key, priceValue) in value.productPriceOptions">
                                     <span class="price {{priceValue.currencyCode | lowercase}}">
-                                        <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>
-                                        {{priceValue.price | number:2}}
+                                        <span class="tax">(includes {{value.tax}}% tax)</span>  
+                                        <i class="fa fa-{{priceValue.currencyCode | lowercase}}"></i>{{priceValue.price | number:2}}
                                     </span>
                                 </div>
                             </div>
@@ -55,10 +55,10 @@
                 <span><i class="fa fa-{{currency | lowercase}}"></i> {{getTotal() | number:2}}</span>
             </div>
             <div class="shipping-charges">
-                <label>Shipping Charges: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{cartConfig.shippingCost | number:2}}</span>
+                <label>Shipping Charges: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{calculateShippingCharge() | number:2}}</span>
             </div>
             <div class="tax">
-                <label>Tax Estimated ({{cartConfig.tax}}%): </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{calculateTax() | number:2}}</span>
+                <label>Tax Included (as per GST): </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{calculateTax() | number:2}}</span>
             </div>
             <div class="discount">
                 <label>Discount Eligible: </label> <span><i class="fa fa-{{currency | lowercase}}"></i> {{cartConfig.discount | number:2}}</span>

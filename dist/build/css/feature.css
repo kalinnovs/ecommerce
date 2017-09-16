@@ -4953,6 +4953,13 @@ footer .back-top .pageCounter {
   margin: 0 20px;
 }
 
+.cart-page .part-details .item-price .tax {
+  font-style: italic;
+  color: #999;
+  padding-right: 5px;
+  font-size: 10px;
+}
+
 .cart-page .part-details .item-quantity {
   display: inline-block;
   width: 40px;
@@ -5024,11 +5031,6 @@ footer .back-top .pageCounter {
 
 .cart-page .cart-summary {
   text-align: right;
-}
-
-.cart-page .cart-summary .cart-total,
-.cart-page .cart-summary .discount {
-  margin-bottom: 10px;
 }
 
 .cart-page .cart-summary > div {
@@ -5973,13 +5975,14 @@ footer .back-top .pageCounter {
 }
 
 .checkout .payment-types {
-  text-align: center;
-  margin: 40px auto 40px;
+  text-align: left;
+  margin: 20px auto 5px;
 }
 
 .checkout .payment-types li {
   display: inline-block;
   width: 200px;
+  cursor: pointer;
 }
 
 .checkout .payment-types li .form-group {
@@ -6017,6 +6020,34 @@ footer .back-top .pageCounter {
 
 .cartMailForm label {
   display: none;
+}
+
+.checkout .payment-types li.payumoney {
+  height: 110px;
+}
+
+.checkout .payment-types li.payumoney .form-group {
+  background-image: linear-gradient(126deg, #4ac5ac,#f8feb2);
+  height: 100%;
+}
+
+.checkout .payment-types li.payumoney .form-group label {
+  text-transform: uppercase;
+  color: #333;
+  font-size: 10px;
+  line-height: 10px;
+  margin-top: 30px;
+}
+
+.checkout .payment-types li.payumoney .logotitle {
+  display: inline-block;
+  margin-top: -18px;
+}
+
+.payment .order-payments .disclaimer {
+  font-size: 11px;
+  font-style: italic;
+  color: #666;
 }
 
 /* Form Input Start */
@@ -7407,6 +7438,10 @@ input.form-control:focus::-webkit-input-placeholder {
     line-height: normal;
   }
 
+  .cart-page .item-details figure {
+    width: 45%;
+  }
+
   .cart-page .item-details figure img {
     height: 110px;
   }
@@ -7419,7 +7454,7 @@ input.form-control:focus::-webkit-input-placeholder {
 
   .cart-page .part-details .item-price {
     margin: 10px 0;
-    width: 62%;
+    width: 54%;
   }
 
   .cart-page .cart-summary > div label {
@@ -7488,6 +7523,10 @@ input.form-control:focus::-webkit-input-placeholder {
     margin: 60px 0 0;
   }
 
+  .checkout .order-list figure {
+    width: 100px;
+  }
+
   .address-blocks ul {
     position: static;
     overflow: auto;
@@ -7521,6 +7560,10 @@ input.form-control:focus::-webkit-input-placeholder {
 
   .checkout .order-list {
     width: auto;
+  }
+
+  .checkout .order-list .part-details {
+    margin-left: 110px;
   }
 
   .checkout .order-list .part-details h5 {
@@ -7570,7 +7613,7 @@ input.form-control:focus::-webkit-input-placeholder {
 
   .cart-page .item-details .part-desciption,
   .cart-page .item-details .part-details {
-    width: 75%;
+    width: 55%;
     margin-left: 10px;
   }
 
@@ -7589,6 +7632,33 @@ input.form-control:focus::-webkit-input-placeholder {
 
   .orderLookupContainer h2 {
     font-weight: bold;
+  }
+
+  .checkout .payment-types {
+    display: table;
+    margin: 0 0 10px;
+  }
+
+  .checkout .payment-types li {
+    display: table-cell;
+    padding-left: 10px;
+  }
+
+  .checkout .payment-methods {
+    overflow: scroll;
+    padding-bottom: 10px;
+  }
+
+  .payment .order-payments .disclaimer {
+    padding: 0 14px;
+  }
+
+  .checkout .payment-types li.payumoney {
+    height: 90px;
+  }
+
+  .checkout .payment-types li.payumoney .form-group label {
+    margin-top: 20px;
   }
 
   .layout-3,

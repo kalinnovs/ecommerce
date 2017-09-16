@@ -177,9 +177,10 @@
   .cart-page h1 { line-height: 34px; font-size: 18px; }
   .cart-page .part-details h3 { width: 100%;  }
   .cart-page .item-details .part-details { line-height: normal; }
+  .cart-page .item-details figure { width: 45%; }
   .cart-page .item-details figure img { height: 110px; }
   .cart-page .item-details .part-details .alignRight { float: none; text-align: inherit; padding-right: 0;}
-  .cart-page .part-details .item-price { margin: 10px 0; width: 62%; }
+  .cart-page .part-details .item-price { margin: 10px 0; width: 54%; }
   .cart-page .cart-summary > div label { width: 220px; }
   .cart-page .cart-extra .extra-links { width: initial; }
   .cart-page .list-items { margin-top: 10px }
@@ -197,6 +198,8 @@
   .checkout .editAddress { top: 10px; right: 15px; }
   .checkout .section .container > div.address-blocks { margin: 60px 15px 0; }
   .checkout .section .container > div.address-form { margin: 60px 0 0; }
+  .checkout .order-list figure { width: 100px; }
+
   .address-blocks ul { position: static; overflow: auto; display: table; width: auto; }
   .address-blocks ul li { display: table-cell; float: initial; }
   .address-blocks .address-wraper { position: static; height: 155px; overflow: auto; margin-left: -8px; }
@@ -204,6 +207,7 @@
   .checkout .order-form .columns aside:first-child { margin: 0 }
   .checkout .list-header { display: none; }
   .checkout .order-list { width: auto; }
+  .checkout .order-list .part-details { margin-left: 110px; }
   .checkout .order-list .part-details h5 { width: auto; float: none; margin-bottom: 10px; padding-right: 15px; }
   .checkout .order-list .alignRight { margin: 0; line-height: 32px; }
   .checkout .order-list .part-controls { margin-right: 19px; display: block; }
@@ -212,11 +216,17 @@
   .checkout .order-address { width: auto; }
   .checkout .order-address.order-section, .checkout .order-voucher.order-section, .checkout .order-summary-price.order-section, .checkout .section .container .form-actions { margin: 0 15px 15px; }
   .checkout .order-list .quantityDown, .checkout .order-list .quantityUp, .cart-page .item-details .part-details .quantityDown, .cart-page .item-details .part-details .quantityUp { padding: 0 2px 0 4px; }
-  .cart-page .item-details .part-desciption, .cart-page .item-details .part-details { width: 75%; margin-left: 10px; }
+  .cart-page .item-details .part-desciption, .cart-page .item-details .part-details { width: 55%; margin-left: 10px; }
   .cart-page .cart-summary>div span { width: 100px; }
   .orderLookup { margin: 0 }
   .orderLookup .form-group, .orderLookup .form-actions { margin: 0; }
   .orderLookupContainer h2 { font-weight: bold; }
+  .checkout .payment-types { display: table; margin: 0 0 10px; }
+  .checkout .payment-types li { display: table-cell; padding-left: 10px; }
+  .checkout .payment-methods { overflow: scroll; padding-bottom: 10px; }
+  .payment .order-payments .disclaimer { padding: 0 14px; }
+  .checkout .payment-types li.payumoney { height: 90px; }
+  .checkout .payment-types li.payumoney .form-group label { margin-top: 20px; }
 
   .layout-3, .layout-2 { display: none; }
   .layout-4 .mobile-tile, .layout-5 .mobile-tile, .layout-6 .mobile-tile { width: 49%; }

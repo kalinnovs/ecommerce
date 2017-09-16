@@ -55,20 +55,35 @@ angular.module('eCommerce')
 
         $scope.subTotal = function() {
             var totalCost = this.getTotal(),
+                totalTax = this.calculateTax(),
                 cartConfig = this.cartConfig,
                 totalCostToUser,
                 priceObj,
                 currency = $("body").attr("data-currency");
 
-            totalCostToUser = totalCost - cartConfig.shippingCost + (cartConfig.tax/100*totalCost);
+            totalCostToUser = totalCost + totalTax + cartConfig.shippingCost;
             return totalCostToUser;
         };
 
+        $scope.calculateShippingCharge = function() {
+            return 0;
+        };
+
         $scope.calculateTax = function() {
-            var totalCost = this.getTotal(),
+            var cartItems = this.cartItems,
+                totalCost = this.getTotal(),
                 cartConfig = this.cartConfig,
+                individualTax = 0,
+                priceObj,
                 currency = $("body").attr("data-currency");
-            return (cartConfig.tax/100*totalCost);
+
+            $(cartItems).each(function(i, j) {
+                priceObj = j.productPriceOptions.filter(function(key, val) {
+                    return key.currencyCode === currency.toUpperCase();
+                });
+                individualTax += (j.tax/100 * priceObj[0].price) * j.quantity;
+            });   
+            return individualTax;
         };
         
         $scope.manipulatePrice = function(event, call) {

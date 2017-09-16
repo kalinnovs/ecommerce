@@ -13,7 +13,7 @@ angular.module('eCommerce')
 			var orderObj = {};
 			orderObj.webOrderNumber = order.webOrderNumber;
 			orderObj.trackId = order.trackId;
-			orderObj.trackLink = order.trackURL;
+			orderObj.trackLink = order.trackLink;
 			orderObj.state = order.orderState;
 
 			OrderDetailService.saveOrder(orderObj).then(function(data){
