@@ -35,8 +35,9 @@
 								<th class="orderdate">Date</th>
 								<th class="ordershipping">Ships To</th>
 								<th class="orderemail">Email Id</th>
-								<th class="ordertotal">Order Total</th>
-					 			<th class="orderstatus">Status</th>
+								<th class="ordertotal">Amount</th>
+								<th class="transactionstatus">Payment</th>
+					 			<th class="orderstatus">Order Status</th>
 								<th class="ordercontrol">Tracking Id</th>
 								<th class="ordercontrol">Tracking URL</th>
 								<th class="ordersaveth"></th>
@@ -53,6 +54,7 @@
 									{{order.emailId}}
 								</td>
 								<td class="ordertotal">{{order.currency.currencySymbol}}&nbsp;{{order.total}}</td>
+								<td class="transactionstatus">{{order.transactionStatus}}</td>
 								<td class="orderstatus">
 									<select ng-model="order.orderState">
 			                            <option value="CREATED"> Order Created </option>
