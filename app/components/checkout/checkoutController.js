@@ -251,7 +251,7 @@ angular.module('eCommerce')
                 totalCost += priceObj[0].price * j.quantity;
             });
 
-            return (this.co.user.eligibleForDiscount) ? (checkoutCartConfig.discount/100*totalCost) : 0;
+            return (this.co && this.co.user.eligibleForDiscount) ? (checkoutCartConfig.discount/100*totalCost) : 0;
         };
 
         $scope.addCouponCode = function(event) {
